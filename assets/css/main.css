@@ -65,6 +65,9 @@ button { font-family: inherit; }
 .loader { position: fixed; inset: 0; z-index: 20000; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; clip-path: inset(0 0 0 0); transition: clip-path 1s cubic-bezier(.8,0,.2,1); cursor: pointer; }
 .loader__word { font-family: var(--display); font-weight: 800; font-size: clamp(52px, 11vw, 150px); letter-spacing: -0.06em; line-height: 1; display: flex; overflow: hidden; }
 .loader__word span { display: inline-block; transform: translateY(110%); transition: transform .8s cubic-bezier(.2,.9,.2,1); }
+.loader__word { align-items: center; }
+.loader__icon { margin-right: 0.12em; }
+.loader__icon img { width: 0.82em; height: 0.82em; display: block; }
 .loader__count { position: absolute; left: 28px; bottom: 24px; font-family: var(--display); font-weight: 800; font-size: 22px; }
 .loader__tag { position: absolute; right: 28px; bottom: 24px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 
