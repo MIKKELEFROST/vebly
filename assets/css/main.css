@@ -1,4 +1,4 @@
-/* Vebly — values translated 1:1 from the Claude Design prototype (Hjemmeside v8). */
+/* Siteleads — values translated 1:1 from the Claude Design prototype (Hjemmeside v8). */
 :root {
   --bg: #fbfaf8;
   --ink: #111;
@@ -63,7 +63,7 @@ button { font-family: inherit; }
 .grain { position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: 0.05; mix-blend-mode: multiply; }
 
 .loader { position: fixed; inset: 0; z-index: 20000; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; clip-path: inset(0 0 0 0); transition: clip-path 1s cubic-bezier(.8,0,.2,1); cursor: pointer; }
-.loader__word { font-family: var(--display); font-weight: 800; font-size: clamp(80px, 18vw, 240px); letter-spacing: -0.06em; line-height: 1; display: flex; overflow: hidden; }
+.loader__word { font-family: var(--display); font-weight: 800; font-size: clamp(52px, 11vw, 150px); letter-spacing: -0.06em; line-height: 1; display: flex; overflow: hidden; }
 .loader__word span { display: inline-block; transform: translateY(110%); transition: transform .8s cubic-bezier(.2,.9,.2,1); }
 .loader__count { position: absolute; left: 28px; bottom: 24px; font-family: var(--display); font-weight: 800; font-size: 22px; }
 .loader__tag { position: absolute; right: 28px; bottom: 24px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -363,7 +363,7 @@ textarea.field { resize: vertical; }
 
 /* ---------- Wordmark + footer ---------- */
 .wm { position: relative; z-index: 1; overflow-x: clip; overflow-y: visible; padding: 110px 12px 30px; }
-.wm__word { display: flex; justify-content: center; font-family: var(--display); font-weight: 800; font-size: clamp(110px, 27vw, 400px); line-height: 0.98; letter-spacing: -0.065em; user-select: none; }
+.wm__word { display: flex; justify-content: center; font-family: var(--display); font-weight: 800; font-size: clamp(66px, 16vw, 240px); line-height: 0.98; letter-spacing: -0.065em; user-select: none; }
 .wm__word span { display: inline-block; will-change: transform; }
 .wm__word span:last-child { color: var(--accent); }
 .footer { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px 40px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }

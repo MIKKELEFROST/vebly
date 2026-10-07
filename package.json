@@ -1,8 +1,8 @@
 {
-  "name": "vebly",
+  "name": "siteleads",
   "private": true,
   "type": "module",
-  "description": "Vebly.dk — hjemmesider til servicefag",
+  "description": "Siteleads.dk — hjemmesider til servicefag",
   "scripts": {
     "dev": "npx --yes vercel dev",
     "serve": "npx --yes http-server . -p 8080 -c-1"

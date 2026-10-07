@@ -1,4 +1,4 @@
-// The Vebly front page calls window.__build(p) with the scroll progress (0–1) of
+// The Siteleads front page calls window.__build(p) with the scroll progress (0–1) of
 // "Sådan virker det". Pieces fly in with a dashed orange outline, then the page
 // scrolls itself to the bottom while the rest assembles.
 (() => {

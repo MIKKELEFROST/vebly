@@ -1,6 +1,6 @@
-# Vebly
+# Siteleads
 
-One-page website for Vebly: websites for service businesses from 3.000 kr. Built from the Claude Design handoff "Hjemmeside v8".
+One-page website for Siteleads: websites for service businesses from 3.000 kr. Built from the Claude Design handoff "Hjemmeside v8".
 
 Plain HTML, CSS and JavaScript, with no build step. Hosted on Vercel.
 
@@ -31,10 +31,10 @@ The form posts to `/api/contact`, which sends an email through [Resend](https://
 | Variable         | Required | Default                        |
 |------------------|----------|--------------------------------|
 | `RESEND_API_KEY` | yes      |                                |
-| `CONTACT_TO`     | no       | `hej@vebly.dk`                 |
-| `CONTACT_FROM`   | no       | `Vebly <onboarding@resend.dev>`|
+| `CONTACT_TO`     | no       | `hej@siteleads.dk`                 |
+| `CONTACT_FROM`   | no       | `Siteleads <onboarding@resend.dev>`|
 
-Without a key, the form shows a message asking the visitor to email instead. Resend's test sender `onboarding@resend.dev` only delivers to the email address on your Resend account; verify `vebly.dk` in Resend to send to any address.
+Without a key, the form shows a message asking the visitor to email instead. Resend's test sender `onboarding@resend.dev` only delivers to the email address on your Resend account; verify `siteleads.dk` in Resend to send to any address.
 
 ## Placeholders to replace
 
