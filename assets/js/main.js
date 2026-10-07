@@ -113,7 +113,7 @@ form.addEventListener('submit', async e => {
     form.reset(); syncAddons();
     form.hidden = true; thanks.hidden = false;
   } catch (x) {
-    err.innerHTML = 'Beskeden kunne ikke sendes. Skriv til <a href="mailto:hej@vebly.dk" style="color:#fff;text-decoration:underline">hej@vebly.dk</a> eller ring på +45 12 34 56 78.';
+    err.innerHTML = 'Beskeden kunne ikke sendes. Skriv til <a href="mailto:hej@vebly.dk" style="color:#fff;text-decoration:underline">hej@vebly.dk</a>.';
     err.hidden = false;
   } finally { btn.disabled = false; }
 });

@@ -34,11 +34,10 @@ The form posts to `/api/contact`, which sends an email through [Resend](https://
 | `CONTACT_TO`     | no       | `hej@vebly.dk`                 |
 | `CONTACT_FROM`   | no       | `Vebly <onboarding@resend.dev>`|
 
-Without a key, the form shows a message asking the visitor to email or call instead. Resend's test sender `onboarding@resend.dev` only delivers to the email address on your Resend account; verify `vebly.dk` in Resend to send to any address.
+Without a key, the form shows a message asking the visitor to email instead. Resend's test sender `onboarding@resend.dev` only delivers to the email address on your Resend account; verify `vebly.dk` in Resend to send to any address.
 
 ## Placeholders to replace
 
-- Phone `+45 12 34 56 78` (index.html, error text in main.js)
 - Team photos: "Kommer snart" placeholders in the team cards and their pop-ups
 - Demo images: empty colour blocks in `demo/index.html` marked with a comment
 - "Før og efter" numbers are labelled as a typical example
