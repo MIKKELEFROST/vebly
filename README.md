@@ -38,7 +38,7 @@ Without a key, the form shows a message asking the visitor to email or call inst
 
 ## Placeholders to replace
 
-- Phone `+45 12 34 56 78` and CVR `12345678` (index.html, api error text in main.js)
+- Phone `+45 12 34 56 78` (index.html, error text in main.js)
 - Team photos: "Kommer snart" placeholders in the team cards and their pop-ups
 - Demo images: empty colour blocks in `demo/index.html` marked with a comment
 - "Før og efter" numbers are labelled as a typical example
