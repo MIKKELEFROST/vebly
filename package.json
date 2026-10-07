@@ -1,8 +1,8 @@
 {
-  "name": "siteleads",
+  "name": "webleads",
   "private": true,
   "type": "module",
-  "description": "Siteleads.dk — hjemmesider til servicefag",
+  "description": "Webleads.dk — hjemmesider til servicefag",
   "scripts": {
     "dev": "npx --yes vercel dev",
     "serve": "npx --yes http-server . -p 8080 -c-1"

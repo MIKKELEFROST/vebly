@@ -3,8 +3,8 @@
 //
 // Environment variables (Vercel → Project → Settings → Environment Variables):
 //   RESEND_API_KEY  required
-//   CONTACT_TO      where leads go            (default: hej@siteleads.dk)
-//   CONTACT_FROM    verified sender in Resend (default: Siteleads <onboarding@resend.dev>)
+//   CONTACT_TO      where leads go            (default: hej@webleads.dk)
+//   CONTACT_FROM    verified sender in Resend (default: Webleads <onboarding@resend.dev>)
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -37,8 +37,8 @@ export default async function handler(req, res) {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: process.env.CONTACT_FROM || 'Siteleads <onboarding@resend.dev>',
-      to: [process.env.CONTACT_TO || 'hej@siteleads.dk'],
+      from: process.env.CONTACT_FROM || 'Webleads <onboarding@resend.dev>',
+      to: [process.env.CONTACT_TO || 'hej@webleads.dk'],
       reply_to: email,
       subject: `Ny henvendelse fra ${navn}`,
       text: `Navn: ${navn}\nE-mail: ${email}\nValgt: ${valgt}\n\n${besked}`,

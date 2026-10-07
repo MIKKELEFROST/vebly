@@ -113,7 +113,7 @@ form.addEventListener('submit', async e => {
     form.reset(); syncAddons();
     form.hidden = true; thanks.hidden = false;
   } catch (x) {
-    err.innerHTML = 'Beskeden kunne ikke sendes. Skriv til <a href="mailto:hej@siteleads.dk" style="color:#fff;text-decoration:underline">hej@siteleads.dk</a>.';
+    err.innerHTML = 'Beskeden kunne ikke sendes. Skriv til <a href="mailto:hej@webleads.dk" style="color:#fff;text-decoration:underline">hej@webleads.dk</a>.';
     err.hidden = false;
   } finally { btn.disabled = false; }
 });
@@ -166,7 +166,7 @@ function renderModal(keepScroll) {
       ${m.band ? '' : `<span class="m-kicker">${esc(m.kicker)}</span>`}
       <h2 class="m-title" id="m-title">${esc(m.title)}</h2>
       <p class="m-lead">${esc(m.lead)}</p>
-      ${m.stat ? `<div class="m-stat"><div class="m-stat__col"><span class="m-stat__lbl">Typisk før</span><span class="m-stat__b">${esc(m.stat.b)}</span></div><span class="m-stat__arrow" aria-hidden="true">→</span><div class="m-stat__col"><span class="m-stat__lbl">Med Siteleads</span><span class="m-stat__a">${esc(m.stat.a)}</span></div></div>` : ''}
+      ${m.stat ? `<div class="m-stat"><div class="m-stat__col"><span class="m-stat__lbl">Typisk før</span><span class="m-stat__b">${esc(m.stat.b)}</span></div><span class="m-stat__arrow" aria-hidden="true">→</span><div class="m-stat__col"><span class="m-stat__lbl">Med Webleads</span><span class="m-stat__a">${esc(m.stat.a)}</span></div></div>` : ''}
       ${m.price ? `<div class="m-price"><b>${esc(m.price.p)}</b><span>${esc(m.price.n)}</span></div>` : ''}
       ${m.list.length ? `<div class="m-list">${m.list.map(it => `<div class="m-list__item"><span class="check" aria-hidden="true">✓</span><div class="m-list__txt"><b>${esc(it.t)}</b>${it.d ? `<span>${esc(it.d)}</span>` : ''}</div></div>`).join('')}</div>` : ''}
       ${m.steps.length ? `<div class="m-steps"><span class="m-steps__lbl">Sådan foregår det</span><div class="m-steps__grid">${m.steps.map(st => `<div class="m-step"><span class="m-step__n">${st.n}</span><b>${esc(st.t)}</b><span>${esc(st.d)}</span></div>`).join('')}</div></div>` : ''}
