@@ -1,3 +1,4 @@
+import { track } from './analytics.js';
 import { trades, flipWords, included, addons, addonPages, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
@@ -9,9 +10,8 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 
 const state = { addons: [] };
 
-// Vercel Web Analytics custom events (window.va is queued in index.html)
-const track = (name, data) => { try { window.va && window.va('event', { name, ...(data && { data }) }); } catch (x) {} };
-document.addEventListener('click', e => { const el = e.target.closest && e.target.closest('[data-event]'); if (el) track('CTA klik', { knap: el.dataset.event }); });
+// Analytics (assets/js/analytics.js → /api/collect → GA4)
+document.addEventListener('click', e => { const el = e.target.closest && e.target.closest('[data-event]'); if (el) track('cta_click', { button: el.dataset.event }); });
 
 /* ------------------------------------------------------------------ */
 /* Render lists                                                         */
@@ -100,7 +100,7 @@ const syncAddons = () => {
   // Changing the selection re-opens the form, like the design
   form.hidden = false; thanks.hidden = true;
 };
-const toggleAddon = t => { const on = !state.addons.includes(t); state.addons = on ? [...state.addons, t] : state.addons.filter(x => x !== t); syncAddons(); track(on ? 'Tilvalg tilføjet' : 'Tilvalg fjernet', { tilvalg: t }); };
+const toggleAddon = t => { const on = !state.addons.includes(t); state.addons = on ? [...state.addons, t] : state.addons.filter(x => x !== t); syncAddons(); track(on ? 'addon_add' : 'addon_remove', { addon: t }); };
 document.addEventListener('click', e => { const b = e.target.closest('[data-toggle]'); if (b) toggleAddon(b.dataset.toggle); });
 syncAddons();
 
@@ -114,11 +114,11 @@ form.addEventListener('submit', async e => {
   try {
     const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    track('Kontaktformular sendt', { valgt: $('[data-chosen-input]').value || 'Hjemmeside' });
+    track('generate_lead', { selected: $('[data-chosen-input]').value || 'Hjemmeside' });
     form.reset(); syncAddons();
     form.hidden = true; thanks.hidden = false;
   } catch (x) {
-    track('Kontaktformular fejl');
+    track('form_error');
     err.innerHTML = 'Beskeden kunne ikke sendes. Skriv til <a href="mailto:hej@webleads.dk" style="color:#fff;text-decoration:underline">hej@webleads.dk</a>.';
     err.hidden = false;
   } finally { btn.disabled = false; }
@@ -187,7 +187,7 @@ function renderModal(keepScroll) {
 function openModal(key) {
   if (!modalData(key)) return;
   if (!mKey) mReturn = document.activeElement;
-  track('Popup åbnet', { popup: key });
+  track('popup_open', { popup: key });
   mKey = key;
   document.documentElement.style.overflow = 'hidden';
   mRoot.hidden = false;

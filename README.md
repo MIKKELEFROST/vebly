@@ -36,6 +36,22 @@ The form posts to `/api/contact`, which sends an email through [Resend](https://
 
 Without a key, the form shows a message asking the visitor to email instead. Resend's test sender `onboarding@resend.dev` only delivers to the email address on your Resend account; verify `webleads.dk` in Resend to send to any address.
 
+## Analytics (GA4, first-party)
+
+`assets/js/analytics.js` batches events and posts them to `/api/collect` (`api/collect.js`), which forwards them to Google Analytics 4 with the Measurement Protocol. No Google script runs in the browser, and nothing is stored on the visitor's device: the client id is a hash of IP + user agent + the current day.
+
+Set in Vercel → Settings → Environment Variables, then redeploy:
+
+| Variable              | Required | Where to find it |
+|-----------------------|----------|------------------|
+| `GA4_MEASUREMENT_ID`  | yes      | GA4 → Admin → Data streams → your web stream (`G-…`) |
+| `GA4_API_SECRET`      | yes      | Same stream → Measurement Protocol API secrets → Create |
+| `GA4_DEBUG`           | no       | `1` sends to GA4's validation endpoint and logs the result |
+
+Without the two required variables the endpoint accepts events and drops them.
+
+Events: `page_view`, `campaign_details` (from UTM tags), `scroll` (25/50/75/90 %), `user_engagement`, `cta_click` (`button`), `addon_add` / `addon_remove` (`addon`), `popup_open` (`popup`), `generate_lead` (`selected`) and `form_error`. Mark `generate_lead` as a key event in GA4. Add a CTA to `cta_click` by giving the element `data-event="Section: Label"`.
+
 ## Placeholders to replace
 
 - Team photos: "Kommer snart" placeholders in the team cards and their pop-ups
