@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webleads · Logo</title>
+<link rel="icon" href="../assets/logo-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #111; --accent: #e0552b; --bg: #fbfaf8; --muted: #6b6760; --line: #ecebe7; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+  main { max-width: 1100px; margin: 0 auto; padding: 56px 24px 80px; display: flex; flex-direction: column; gap: 20px; }
+  h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.04em; margin: 0 0 4px; }
+  .lead { margin: 0 0 20px; color: var(--muted); font-size: 17px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+  .card { border: 1px solid var(--line); border-radius: 24px; background: #fff; display: flex; flex-direction: column; overflow: hidden; }
+  .card--wide { grid-column: 1 / -1; }
+  .stage { flex: 1; min-height: 220px; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
+  .stage--dark { background: var(--ink); }
+  .stage--accent { background: var(--accent); }
+  .label { padding: 14px 20px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---------- The logo ---------- */
+  .wl { display: inline-flex; align-items: center; gap: 0.32em; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: var(--ink); text-decoration: none; }
+  .wl__icon { width: 1.12em; height: 1.12em; flex-shrink: 0; display: block; }
+  .wl__word { display: inline-flex; align-items: baseline; }
+  .wl__dot { color: var(--accent); }
+  .wl--light { color: #fff; }
+  .wl--mono .wl__dot { color: inherit; }
+
+  .sizes { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center; }
+  code { display: block; white-space: pre; overflow-x: auto; background: #f4f2ee; border-radius: 14px; padding: 18px 20px; font-size: 13px; line-height: 1.6; color: #333; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wl-icon" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="16" fill="#e0552b"/>
+    <g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="12,24 20.5,45 31,29 41.5,45 51,18"/>
+      <polyline points="42.2,24.4 51,18 53.5,28.6"/>
+    </g>
+  </symbol>
+  <symbol id="wl-icon-inv" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="16" fill="#fff"/>
+    <g fill="none" stroke="#e0552b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="12,24 20.5,45 31,29 41.5,45 51,18"/>
+      <polyline points="42.2,24.4 51,18 53.5,28.6"/>
+    </g>
+  </symbol>
+</svg>
+
+<main>
+  <h1>Webleads logo</h1>
+  <p class="lead">Et "w", hvor sidste streg bliver til en pil op: flere leads, mere vækst. Ordmærket bruger Bricolage Grotesque 800 med orange punktum.</p>
+
+  <div class="grid">
+    <div class="card card--wide">
+      <div class="stage"><a class="wl" href="#" style="font-size:96px"><svg class="wl__icon" aria-hidden="true"><use href="#wl-icon"/></svg><span class="wl__word">webleads<span class="wl__dot">.</span></span></a></div>
+      <div class="label">Primært logo</div>
+    </div>
+
+    <div class="card">
+      <div class="stage stage--dark"><a class="wl wl--light" href="#" style="font-size:42px"><svg class="wl__icon" aria-hidden="true"><use href="#wl-icon"/></svg><span class="wl__word">webleads<span class="wl__dot">.</span></span></a></div>
+      <div class="label">På mørk baggrund</div>
+    </div>
+
+    <div class="card">
+      <div class="stage stage--accent"><a class="wl wl--light wl--mono" href="#" style="font-size:42px"><svg class="wl__icon" aria-hidden="true"><use href="#wl-icon-inv"/></svg><span class="wl__word">webleads<span class="wl__dot">.</span></span></a></div>
+      <div class="label">På orange baggrund</div>
+    </div>
+
+    <div class="card">
+      <div class="stage"><span class="wl" style="font-size:52px"><span class="wl__word">webleads<span class="wl__dot">.</span></span></span></div>
+      <div class="label">Kun ordmærke</div>
+    </div>
+
+    <div class="card">
+      <div class="stage"><div class="sizes">
+        <svg width="128" height="128" aria-label="Webleads"><use href="#wl-icon"/></svg>
+        <svg width="64" height="64" aria-hidden="true"><use href="#wl-icon"/></svg>
+        <svg width="32" height="32" aria-hidden="true"><use href="#wl-icon"/></svg>
+        <svg width="16" height="16" aria-hidden="true"><use href="#wl-icon"/></svg>
+      </div></div>
+      <div class="label">Ikon · app, favicon, profilbillede</div>
+    </div>
+
+    <div class="card card--wide">
+      <div class="stage"><div class="sizes">
+        <span class="wl" style="font-size:40px"><svg class="wl__icon" aria-hidden="true"><use href="#wl-icon"/></svg><span class="wl__word">webleads<span class="wl__dot">.</span></span></span>
+        <span class="wl" style="font-size:24px"><svg class="wl__icon" aria-hidden="true"><use href="#wl-icon"/></svg><span class="wl__word">webleads<span class="wl__dot">.</span></span></span>
+        <span class="wl" style="font-size:16px"><svg class="wl__icon" aria-hidden="true"><use href="#wl-icon"/></svg><span class="wl__word">webleads<span class="wl__dot">.</span></span></span>
+      </div></div>
+      <div class="label">Små størrelser · menu, e-mailsignatur</div>
+    </div>
+
+    <div class="card card--wide">
+      <div class="stage" style="display:block;padding:24px">
+<code>&lt;!-- Logo: skaleres med font-size --&gt;
+&lt;a class="wl" href="/" style="font-size:24px"&gt;
+  &lt;svg class="wl__icon" viewBox="0 0 64 64" aria-hidden="true"&gt;
+    &lt;rect width="64" height="64" rx="16" fill="#e0552b"/&gt;
+    &lt;g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"&gt;
+      &lt;polyline points="12,24 20.5,45 31,29 41.5,45 51,18"/&gt;
+      &lt;polyline points="42.2,24.4 51,18 53.5,28.6"/&gt;
+    &lt;/g&gt;
+  &lt;/svg&gt;
+  &lt;span&gt;webleads&lt;span style="color:#e0552b"&gt;.&lt;/span&gt;&lt;/span&gt;
+&lt;/a&gt;
+
+.wl { display:inline-flex; align-items:center; gap:.32em; font-family:'Bricolage Grotesque',sans-serif;
+      font-weight:800; letter-spacing:-.045em; line-height:1; color:#111; text-decoration:none; }
+.wl__icon { width:1.12em; height:1.12em; }</code>
+      </div>
+      <div class="label">Kode</div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
