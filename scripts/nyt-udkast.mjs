@@ -43,13 +43,17 @@ const hex = h => h.replace('#', '').match(/../g).map(x => parseInt(x, 16));
 const mix = (h, w) => '#' + hex(h).map(v => Math.round(v + (255 - v) * w).toString(16).padStart(2, '0')).join('');
 const lum = h => { const [r, g, b] = hex(h).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
 const tel = k.tlf.replace(/[^\d+]/g, '');
+// Three colours the customer can try in the draft bar: their own plus two alternatives
+const ALT = ['#1f5f4a', '#b5532f', '#2b2b2b', '#1d4e89', '#7a3fd0'];
+const farver = (k.farver && k.farver.length ? k.farver : [k.farve, ...ALT.filter(c => c.toLowerCase() !== k.farve.toLowerCase())]).slice(0, 3);
+const ink = c => (lum(c) > 0.4 ? '#14140f' : '#ffffff');
 const book = k.headerKnap === 'book';
 
 const vars = {
   NAVN: k.navn, KORT: tokens.KORT, BOGSTAV: tokens.KORT[0], SLUG: k.slug, FAG: k.fag, BY: k.by,
   TLF: k.tlf, TLF_LINK: tel, EMAIL: k.email, ADRESSE: k.adresse, CVR: k.cvr, AAR: k.aar,
   OPGAVER: k.opgaver, OPGAVER_TEKST: k.opgaverTekst, ANSATTE: k.ansatte, ANSATTE_TEKST: k.ansatteTekst,
-  FARVE: k.farve, FARVE_LYS: k.farveLys || mix(k.farve, 0.86), FARVE_TEKST: lum(k.farve) > 0.4 ? '#14140f' : '#ffffff',
+  FARVE: k.farve, FARVE_LYS: k.farveLys || mix(k.farve, 0.86), FARVE_TEKST: ink(k.farve),
   OVERSKRIFT: k.overskrift, INTRO: k.intro, CTA: k.cta, CTA_KORT: k.ctaKort,
   BADGE_TITEL: k.badge[0], BADGE_TEKST: k.badge[1], TRIN_OVERSKRIFT: k.trinOverskrift,
   BAND_OVERSKRIFT: k.band[0], BAND_TEKST: k.band[1],
@@ -61,6 +65,7 @@ const vars = {
   HEADER_KNAP: book ? 'Book tid' : `Ring ${k.tlf}`
 };
 const raw = {
+  FARVER: farver.map((c, i) => `<button type="button" class="swatch${i === 0 ? ' is-on' : ''}" style="background:${c}" data-c="${c}" data-soft="${mix(c, 0.86)}" data-ink="${ink(c)}" aria-label="Farve ${i + 1}" aria-pressed="${i === 0}"></button>`).join(''),
   HEADER_LINK: book ? `/${k.slug}-kontakt` : `tel:${tel}`,
   FARVE_URL: encodeURIComponent(k.farve), KORT_URL: encodeURIComponent(tokens.KORT),
   TRUST: k.trust.map(t => `<div><i>✓</i>${esc(t)}</div>`).join(''),
