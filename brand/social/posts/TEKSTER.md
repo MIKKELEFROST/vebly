@@ -26,7 +26,7 @@ Fra 3.000 kr. Alt er med. Klar på 7 dage. Ingen binding.
 
 Responsivt design, Google-optimering, SSL, kontaktformular, kort og åbningstider, sociale medier, GDPR og cookies, Google-profil, domæne og opsætning, rettelser og du ejer siden.
 
-3.000 kr. ekskl. moms. Ingen skjulte gebyrer.
+3.000 kr. ekskl. moms. Betales én gang.
 
 ## 03 · Sådan virker det
 Klar på 7 dage. Sådan gør vi:
