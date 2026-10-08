@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Referencer · Webleads</title>
+<meta name="description" content="Hjemmesider, vi har bygget til servicevirksomheder, og hvad de har givet.">
+<!-- Hidden until it is ready: not linked, not in the sitemap, not indexed -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#fbfaf8">
+<link rel="icon" href="/assets/logo-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/referencer/referencer.css">
+<script type="module" src="/referencer/referencer.js"></script>
+</head>
+<body>
+<!-- DEMO: remove this bar when the cases below are replaced with real customers -->
+<div class="demo-bar" role="note">Demo-indhold. Kunderne, tallene og citaterne på siden er eksempler.</div>
+
+<header class="nav">
+  <a href="/" class="logo" aria-label="Webleads, til forsiden"><img src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<b>.</b></span></a>
+  <nav class="nav__links">
+    <a href="/" class="nav__back">Forside</a>
+    <a href="/#kontakt" class="btn btn--ink" data-event="Referencer: Menu Kontakt">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="kicker">Referencer</div>
+    <h1 class="h1">Det har vi lavet.<br><span class="dim">Og det virker.</span></h1>
+    <p class="lead">Rigtige hjemmesider til frisører, håndværkere, klinikker og alle de andre. Her er et udpluk, og hvad de har givet.</p>
+    <div class="stats">
+      <div><b>48</b><span>hjemmesider leveret</span></div>
+      <div><b>6,4 dage</b><span>fra opkald til online i snit</span></div>
+      <div><b>4,9 ★</b><span>i snit fra vores kunder</span></div>
+    </div>
+  </section>
+
+  <section class="cases wrap" aria-labelledby="cases-h">
+    <div class="cases__head">
+      <h2 id="cases-h" class="h2">Udvalgte kunder.</h2>
+      <div class="chips" role="group" aria-label="Vis fag">
+        <button type="button" class="chip is-on" data-filter="alle" aria-pressed="true">Alle</button>
+        <button type="button" class="chip" data-filter="haandvaerk" aria-pressed="false">Håndværk</button>
+        <button type="button" class="chip" data-filter="klinik" aria-pressed="false">Klinik</button>
+        <button type="button" class="chip" data-filter="skoenhed" aria-pressed="false">Skønhed</button>
+        <button type="button" class="chip" data-filter="service" aria-pressed="false">Service</button>
+      </div>
+    </div>
+    <div class="grid" data-grid></div>
+    <p class="empty" data-empty hidden>Ingen kunder i det fag endnu.</p>
+  </section>
+
+  <section class="quotes wrap" aria-labelledby="quotes-h">
+    <div class="kicker">Det siger de</div>
+    <h2 id="quotes-h" class="h2">Ord fra kunderne.<br><span class="dim">Ikke fra os.</span></h2>
+    <div class="quotes__grid">
+      <figure class="quote">
+        <div class="quote__stars" aria-label="5 ud af 5 stjerner">★★★★★</div>
+        <blockquote>Jeg brugte 15 minutter i telefonen, og en uge senere ringede folk fra Google. Det er første gang, en hjemmeside har givet mig kunder.</blockquote>
+        <figcaption><b>Jesper Hansen</b><span>Hansen VVS, Vejle</span></figcaption>
+      </figure>
+      <figure class="quote quote--accent">
+        <div class="quote__stars" aria-label="5 ud af 5 stjerner">★★★★★</div>
+        <blockquote>Booking direkte fra siden har sparet os for et hav af opkald. Vi har fået mere tid til patienterne.</blockquote>
+        <figcaption><b>Mette Lund</b><span>Klinik Fryd, Aarhus</span></figcaption>
+      </figure>
+      <figure class="quote quote--dark">
+        <div class="quote__stars" aria-label="5 ud af 5 stjerner">★★★★★</div>
+        <blockquote>Fast pris, ingen binding og en side, jeg selv ejer. Det burde ikke være så sjældent, men det er det.</blockquote>
+        <figcaption><b>Sara Kofoed</b><span>Salon Lys, Odense</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="cta wrap">
+    <div class="cta__box">
+      <div>
+        <h2 class="cta__h">Skal du være<br><span>den næste?</span></h2>
+        <p>Fra 3.000 kr. Alt er med. Klar på 7 dage.</p>
+      </div>
+      <a href="/#kontakt" class="btn btn--accent" data-event="Referencer: Få et gratis tilbud">Få et gratis tilbud →</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer wrap">
+  <span>© 2026 Webleads</span><a href="/privatliv">Privatlivspolitik</a><span>CVR 41826799</span>
+</footer>
+</body>
+</html>
