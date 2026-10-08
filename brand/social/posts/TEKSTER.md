@@ -113,14 +113,19 @@ Hjemmeside, SEO, Google Ads, Meta Ads, AI-annoncer, booking, CRM, dashboards, au
 
 Hvad mangler din virksomhed? Skriv det i kommentarerne.
 
-## 12 · Ingen tid
-“Jeg har ikke tid til det. Hvad skal jeg lave?”
+## 12 · Tjek din egen hjemmeside
+Fem ting. Hvor mange har din?
 
-Et opkald på 15 minutter og nogle billeder.
+☐ Virker den på mobilen?
+☐ Åbner den på under 2 sekunder?
+☐ Kan man ringe med ét tryk?
+☐ Har den hængelås i adressefeltet?
+☐ Kan du findes på Google?
 
-Resten klarer vi. Også teksterne. Om 7 dage er du online.
+Skriv dit tal i kommentarerne 👇
+Mangler der noget? Send os linket, så kigger vi gratis på din side.
 
-↓ Book opkaldet via linket i bio · hej@webleads.dk
+↓ Gratis tilbud via linket i bio · hej@webleads.dk
 
 ---
 
@@ -143,3 +148,12 @@ Covers ligger i `brand/social/highlights/` (1080 × 1920). Opret et highlight ud
 2. Tryk på sticker-ikonet → "Link" → indsæt `https://webleads.dk/?utm_source=instagram&utm_medium=story&utm_campaign=kontakt#kontakt` → skriv "Få et gratis tilbud" som tekst.
 3. Placér stickeren lige under pilen. `story-kontakt-med-guide.png` viser præcis hvor (brug ikke den version i selve storyen).
 4. Del storyen, og tilføj den til highlightet "Kontakt" med coveret `hl-kontakt.png`.
+
+## Stories i motion (9:16)
+
+Animerede udgaver af opslag 10–12 ligger i `brand/social/stories/` (1080 × 1920, MP4, 9–10 sek.):
+`story-10-alle-fag.mp4`, `story-11-alt-under-et-tag.mp4`, `story-12-tjek-din-side.mp4`.
+
+Læg dem op som stories samme dag som opslaget. Tilføj en link-sticker til
+`https://webleads.dk/?utm_source=instagram&utm_medium=story&utm_campaign=opslag#kontakt`
+lige under den sidste linje, før logoet.

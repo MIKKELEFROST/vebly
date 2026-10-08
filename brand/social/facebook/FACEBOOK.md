@@ -196,17 +196,22 @@ Se det hele → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_c
 #hjemmeside #annoncering #webleads
 ```
 
-## 12 · Ingen tid
+## 12 · Tjek din egen hjemmeside
 ```
-“Jeg har ikke tid til det. Hvad skal jeg lave?”
+Fem ting. Hvor mange har din?
 
-Et opkald på 15 minutter og nogle billeder.
+☐ Virker den på mobilen?
+☐ Åbner den på under 2 sekunder?
+☐ Kan man ringe med ét tryk?
+☐ Har den hængelås i adressefeltet?
+☐ Kan du findes på Google?
 
-Resten klarer vi. Også teksterne. Om 7 dage er du online.
+Skriv dit tal i kommentarerne 👇
+Mangler der noget? Send os linket, så kigger vi gratis på din side.
 
-Book opkaldet → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt · hej@webleads.dk
+Gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt · hej@webleads.dk
 
-#selvstændig #webleads
+#hjemmeside #lokalvirksomhed #webleads
 ```
 
 ---
