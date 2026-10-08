@@ -3,6 +3,8 @@
 // Nothing is stored in the browser: no cookies, no localStorage.
 
 const ENDPOINT = '/api/collect';
+// Visitors who ask not to be tracked (Global Privacy Control or Do Not Track) send nothing
+const optOut = navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1';
 const sessionId = String(Math.floor(Date.now() / 1000)); // GA4 expects a numeric session id
 let queue = [];
 let timer = null;
@@ -26,6 +28,7 @@ const page = () => {
 
 function flush() {
   clearTimeout(timer); timer = null;
+  if (optOut) { queue = []; return; }
   if (!queue.length) return;
   const body = JSON.stringify({
     session_id: sessionId,

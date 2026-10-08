@@ -13,6 +13,10 @@ assets/js/content.js  Copy for the lists and pop-ups (included items, add-ons, F
 assets/js/main.js     Rendering, pop-ups, contact form and all effects
 demo/                 The "Nordvik" sample site that builds itself in "Sådan virker det"
 api/contact.js        Vercel function that emails contact-form submissions via Resend
+api/collect.js        Vercel function that forwards analytics events to GA4
+privatliv/            Privacy policy (/privatliv), linked from the form and the footer
+robots.txt, sitemap.xml
+assets/og.png         Share image (1200 × 630) for Facebook, LinkedIn and messages
 ```
 
 ## Run locally
@@ -48,7 +52,7 @@ Set in Vercel → Settings → Environment Variables, then redeploy:
 | `GA4_API_SECRET`      | yes      | Same stream → Measurement Protocol API secrets → Create |
 | `GA4_DEBUG`           | no       | `1` sends to GA4's validation endpoint and logs the result |
 
-Without the two required variables the endpoint accepts events and drops them.
+Without the two required variables the endpoint accepts events and drops them. Visitors with Global Privacy Control or Do Not Track switched on send nothing. Keep `privatliv/index.html` in step if you change what is collected.
 
 Events: `page_view`, `campaign_details` (from UTM tags), `scroll` (25/50/75/90 %), `user_engagement`, `cta_click` (`button`), `addon_add` / `addon_remove` (`addon`), `popup_open` (`popup`), `generate_lead` (`selected`) and `form_error`. Mark `generate_lead` as a key event in GA4. Add a CTA to `cta_click` by giving the element `data-event="Section: Label"`.
 

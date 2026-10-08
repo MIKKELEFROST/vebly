@@ -363,6 +363,8 @@ textarea.field { resize: vertical; }
 .form__submit { border: none; cursor: pointer; background: var(--accent); color: #fff; padding: 19px 34px; border-radius: 999px; font-weight: 700; font-size: 17px; }
 .form__submit:disabled { opacity: .6; cursor: progress; }
 .form__error { margin: 0; font-size: 15px; color: #f6b8a2; }
+.form__note { margin: 4px 0 0; font-size: 13px; line-height: 1.45; color: var(--dark-muted); }
+.form__note a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .thanks { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
 .thanks[hidden] { display: none; }

@@ -1,6 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "vebly.vercel.app" }], "destination": "https://webleads.dk/$1", "permanent": true },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "webleads.vercel.app" }], "destination": "https://webleads.dk/$1", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://webleads.dk/sitemap.xml
