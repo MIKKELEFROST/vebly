@@ -74,14 +74,14 @@ Automations: fra 4.999 kr.
 Ingen binding. Du får altid en fast pris først.
 
 ## 08 · Teamet
-Rigtige mennesker.
+Dem, du taler med. Er dem, der laver det.
 
 Alexander: hjemmesider
 Malthe: Google Ads
 Anna: Meta Ads
 Mikkel: IT-udvikling
 
-Du taler altid direkte med den, der laver arbejdet. Skriv til os, vi svarer selv.
+Ingen mellemled. Du har direkte kontakt til den, der bygger din side eller kører dine annoncer. Skriv til os, vi svarer selv.
 
 ## 09 · Spørgsmål
 "Er der en månedlig betaling?"
