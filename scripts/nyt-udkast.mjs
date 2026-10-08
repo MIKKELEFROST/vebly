@@ -49,16 +49,14 @@ const farver = (k.farver && k.farver.length ? k.farver : [k.farve, ...ALT.filter
 const ink = c => (lum(c) > 0.4 ? '#14140f' : '#ffffff');
 const book = k.headerKnap === 'book';
 const garanti = k.garanti || '2 år';
-// Design 1 = Klassisk, 2 = Kraftig, 3 = Blød, 4 = Mosaik, 5 = Minimal
+// Design 1 = Klassisk, 4 = Mosaik, 5 = Minimal (2 and 3 were retired; the numbers are kept so old links still match)
 const design = String(k.design || 1);
 const DESIGNS = {
   1: '',
-  2: '\n<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-2.css">',
-  3: '\n<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-3.css">',
   4: '\n<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-4.css">',
   5: '\n<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-5.css">'
 };
-if (!(design in DESIGNS)) throw new Error('design skal være 1–5');
+if (!(design in DESIGNS)) throw new Error('design skal være 1, 4 eller 5');
 
 const vars = {
   NAVN: k.navn, KORT: tokens.KORT, BOGSTAV: tokens.KORT[0], SLUG: k.slug, FAG: k.fag, BY: k.by,
