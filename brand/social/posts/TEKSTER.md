@@ -74,7 +74,7 @@ Automations: fra 4.999 kr.
 Ingen binding. Du får altid en fast pris først.
 
 ## 08 · Teamet
-Rigtige mennesker. Ikke et callcenter.
+Rigtige mennesker.
 
 Alexander: hjemmesider
 Malthe: Google Ads
