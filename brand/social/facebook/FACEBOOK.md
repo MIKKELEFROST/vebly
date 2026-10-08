@@ -168,6 +168,47 @@ Gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm
 #hjemmeside #webleads
 ```
 
+## 10 · Til alle servicefag
+```
+Lever du af at hjælpe kunder?
+
+Frisør, tømrer, rengøring, fysioterapeut, elektriker, revisor, klinik, VVS, personlig træner eller maler. Vi bygger hjemmesider til folk, der hellere vil passe deres fag end deres hjemmeside.
+
+Står dit fag ikke på listen? Skriv alligevel. Vi kan næsten altid hjælpe.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt
+
+#servicefag #småvirksomheder #webleads
+```
+
+## 11 · Alt under ét tag
+```
+Alt, vi kan hjælpe med.
+
+Hjemmeside, SEO, Google Ads, Meta Ads, AI-annoncer, booking, CRM, dashboards, automations, webshop, chatbot, nyhedsbrev, tekster, logo, Google-profil, hosting og SSL.
+
+Én kontakt. Fast pris. Ingen binding.
+
+Hvad mangler din virksomhed? Skriv det i kommentarerne.
+
+Se det hele → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag
+
+#hjemmeside #annoncering #webleads
+```
+
+## 12 · Ingen tid
+```
+“Jeg har ikke tid til det. Hvad skal jeg lave?”
+
+Et opkald på 15 minutter og nogle billeder.
+
+Resten klarer vi. Også teksterne. Om 7 dage er du online.
+
+Book opkaldet → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt · hej@webleads.dk
+
+#selvstændig #webleads
+```
+
 ---
 
 ## Sådan poster du

@@ -91,6 +91,37 @@ Nej. Du betaler én gang for hjemmesiden. Hosting og domæne koster typisk 50–
 Har du et spørgsmål? Skriv i kommentarerne eller send en DM.
 ↓ Gratis tilbud via linket i bio · hej@webleads.dk
 
+# Opslag 10–12 (næste runde)
+
+Post dem i rækkefølgen 10, 11, 12. De lægger sig som en ny øverste række i gitteret og fortsætter farvemønstret (12 sand, 11 sort, 10 orange).
+
+## 10 · Til alle servicefag
+Lever du af at hjælpe kunder?
+
+Frisør, tømrer, rengøring, fysioterapeut, elektriker, revisor, klinik, VVS, personlig træner eller maler. Vi bygger hjemmesider til folk, der hellere vil passe deres fag end deres hjemmeside.
+
+Står dit fag ikke på listen? Skriv alligevel. Vi kan næsten altid hjælpe.
+
+↓ Gratis tilbud via linket i bio.
+
+## 11 · Alt under ét tag
+Alt, vi kan hjælpe med.
+
+Hjemmeside, SEO, Google Ads, Meta Ads, AI-annoncer, booking, CRM, dashboards, automations, webshop, chatbot, nyhedsbrev, tekster, logo, Google-profil, hosting og SSL.
+
+Én kontakt. Fast pris. Ingen binding.
+
+Hvad mangler din virksomhed? Skriv det i kommentarerne.
+
+## 12 · Ingen tid
+“Jeg har ikke tid til det. Hvad skal jeg lave?”
+
+Et opkald på 15 minutter og nogle billeder.
+
+Resten klarer vi. Også teksterne. Om 7 dage er du online.
+
+↓ Book opkaldet via linket i bio · hej@webleads.dk
+
 ---
 
 # Highlights
