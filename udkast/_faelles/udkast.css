@@ -187,3 +187,6 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 18px 30px -20px rgba(0
 }
 
 @media (max-width: 480px) { .draft__txt { display: none; } }
+
+/* The badge sits inside an image placeholder: keep its text free of the placeholder label style */
+.ph .hero__badge span { background: none; padding: 0; border-radius: 0; font-weight: 400; }

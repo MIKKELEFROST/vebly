@@ -86,7 +86,7 @@ Make a new draft:
 
 1. Copy `scripts/udkast-kunder/holms-maler-aps.json`, set `branche` to one of the files in `scripts/udkast-brancher/` and fill in the customer's details.
 2. Any field from the trade file can be overridden in the customer file, e.g. its own `ydelser` or `overskrift`.
-   Set `"design"` to `1` (Klassisk), `2` (Kraftig: dark, bold, full-screen photo) or `3` (Blød: light, serif, centred). Default is 1.
+   Set `"design"` to `1` (Klassisk), `2` (Kraftig: white, bold uppercase, edge-to-edge photo) or `3` (Blød: light, serif, centred). Default is 1.
    Set `"farver"` to three hex colours to choose what the colour picker in the draft bar offers.
 3. Run `node scripts/nyt-udkast.mjs scripts/udkast-kunder/<slug>.json` and commit `udkast/<slug>/`.
 
