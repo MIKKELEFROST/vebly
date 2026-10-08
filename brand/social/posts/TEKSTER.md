@@ -77,7 +77,8 @@ Ingen binding. Du får altid en fast pris først.
 Rigtige mennesker. Ikke et callcenter.
 
 Alexander: hjemmesider
-Malthe: annoncering
+Malthe: Google Ads
+Anna: Meta Ads
 Mikkel: IT-udvikling
 
 Du taler altid direkte med den, der laver arbejdet. Skriv til os, vi svarer selv.
@@ -89,3 +90,18 @@ Nej. Du betaler én gang for hjemmesiden. Hosting og domæne koster typisk 50–
 
 Har du et spørgsmål? Skriv i kommentarerne eller send en DM.
 ↓ Gratis tilbud via linket i bio · hej@webleads.dk
+
+---
+
+# Highlights
+
+Covers ligger i `brand/social/highlights/` (1080 × 1920). Opret et highlight ud fra en story, tryk "Rediger highlight" → "Rediger cover" og vælg det tilhørende billede fra kamerarullen.
+
+| Highlight | Cover | Indhold |
+|---|---|---|
+| Sådan | hl-saadan.png | Opslag 03 delt som story |
+| Pris | hl-pris.png | Opslag 02 og 09 |
+| Før/efter | hl-foer-efter.png | Opslag 04 |
+| Tilvalg | hl-tilvalg.png | Opslag 07 |
+| Teamet | hl-teamet.png | Opslag 08 |
+| Kontakt | hl-kontakt.png | En story med link-sticker til webleads.dk |

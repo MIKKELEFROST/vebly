@@ -50,7 +50,8 @@ export const comparisons = [
 
 export const team = [
   { n: 'Alexander', a: 'Hjemmesider', g: 'A', lead: 'Alexander designer og bygger hjemmesiderne. Han sørger for, at din side ser skarp ud og får kunderne til at tage kontakt.', l: [['Design', 'Et udtryk, der passer til din virksomhed.'], ['Opbygning', 'Struktur, tekster og billeder.'], ['Lancering', 'Rettelser, indtil du er tilfreds.']] },
-  { n: 'Malthe', a: 'Annoncering', g: 'M', lead: 'Malthe står for annoncering og SEO. Han sørger for, at de rigtige kunder finder dig, og at hver krone bliver brugt fornuftigt.', l: [['Google og Meta', 'Annoncer, der rammer de rigtige.'], ['SEO', 'Bliv fundet i dit område.'], ['Rapporter', 'Klart overblik hver måned.']] },
+  { n: 'Malthe', a: 'Google Ads', g: 'M', lead: 'Malthe står for Google Ads og SEO. Han sørger for, at du ligger øverst, når kunderne søger, og at hver krone bliver brugt fornuftigt.', l: [['Google Ads', 'Vær øverst, når kunderne søger lige nu.'], ['SEO', 'Bliv fundet i dit område.'], ['Rapporter', 'Klart overblik hver måned.']] },
+  { n: 'Anna', a: 'Meta Ads', g: 'A', lead: 'Anna står for annoncer på Facebook og Instagram. Hun laver annoncer, der fanger opmærksomheden i feedet og rammer de rigtige mennesker.', l: [['Facebook og Instagram', 'Annoncer, der fanger opmærksomheden.'], ['Målretning', 'Vis dig for de rigtige, og mind dem om dig.'], ['Rapporter', 'Klart overblik hver måned.']] },
   { n: 'Mikkel', a: 'IT-udvikling', g: 'M', lead: 'Mikkel bygger interne systemer og automations. Han gør de tunge, gentagne opgaver lette, så du får tid til det vigtige.', l: [['Interne systemer', 'Booking, CRM og dashboards.'], ['Automations', 'Mails, fakturaer og opfølgning.'], ['Integrationer', 'Får dine programmer til at tale sammen.']] }
 ];
 

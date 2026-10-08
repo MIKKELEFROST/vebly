@@ -320,7 +320,9 @@ button { font-family: inherit; }
 .team { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 120px; }
 .team .sec-head { margin-bottom: 40px; }
 .team .sec-head__lead { max-width: 360px; }
-.team__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.team__grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 600px) { .team__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .team__grid { grid-template-columns: repeat(4, 1fr); } }
 .member { background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 16px; display: flex; flex-direction: column; gap: 18px; cursor: pointer; text-align: left; color: inherit; font: inherit; }
 .member__photo { aspect-ratio: 1/1; border-radius: 18px; overflow: hidden; background: #e9e7e3; position: relative; }
 .ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: repeating-linear-gradient(135deg, #efede8 0 14px, #e9e7e3 14px 28px); }
@@ -371,6 +373,8 @@ textarea.field { resize: vertical; }
 .wm__word { display: flex; justify-content: center; font-family: var(--display); font-weight: 800; font-size: clamp(66px, 16vw, 240px); line-height: 0.98; letter-spacing: -0.065em; user-select: none; }
 .wm__word span { display: inline-block; will-change: transform; }
 .wm__word span:last-child { color: var(--accent); }
+.footer a { color: inherit; text-decoration: none; }
+.footer a:hover { color: var(--ink); }
 .footer { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px 40px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
 
 /* ---------- Modal ---------- */
