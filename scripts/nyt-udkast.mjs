@@ -48,6 +48,14 @@ const ALT = ['#1f5f4a', '#b5532f', '#2b2b2b', '#1d4e89', '#7a3fd0'];
 const farver = (k.farver && k.farver.length ? k.farver : [k.farve, ...ALT.filter(c => c.toLowerCase() !== k.farve.toLowerCase())]).slice(0, 3);
 const ink = c => (lum(c) > 0.4 ? '#14140f' : '#ffffff');
 const book = k.headerKnap === 'book';
+// Design 1 = Klassisk, 2 = Kraftig (dark, bold), 3 = Blød (light, serif)
+const design = String(k.design || 1);
+const DESIGNS = {
+  1: '',
+  2: '\n<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-2.css">',
+  3: '\n<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-3.css">'
+};
+if (!(design in DESIGNS)) throw new Error('design skal være 1, 2 eller 3');
 
 const vars = {
   NAVN: k.navn, KORT: tokens.KORT, BOGSTAV: tokens.KORT[0], SLUG: k.slug, FAG: k.fag, BY: k.by,
@@ -66,6 +74,7 @@ const vars = {
 };
 const raw = {
   FARVER: farver.map((c, i) => `<button type="button" class="swatch${i === 0 ? ' is-on' : ''}" style="background:${c}" data-c="${c}" data-soft="${mix(c, 0.86)}" data-ink="${ink(c)}" aria-label="Farve ${i + 1}" aria-pressed="${i === 0}"></button>`).join(''),
+  DESIGN_KLASSE: 'd' + design, DESIGN_LINKS: DESIGNS[design],
   HEADER_LINK: book ? `/${k.slug}-kontakt` : `tel:${tel}`,
   FARVE_URL: encodeURIComponent(k.farve), KORT_URL: encodeURIComponent(tokens.KORT),
   TRUST: k.trust.map(t => `<div><i>✓</i>${esc(t)}</div>`).join(''),
@@ -94,5 +103,5 @@ const fill = (s, page) => s
 
 mkdirSync(out, { recursive: true });
 for (const page of Object.keys(titles)) writeFileSync(join(out, `${page}.html`), fill(tpl(`${page}.html`), page));
-console.log(`Udkast klar (${k.branche}):`);
+console.log(`Udkast klar (${k.branche}, design ${design}):`);
 for (const page of Object.keys(titles)) console.log(`  https://webleads.dk/${k.slug}-${page}`);

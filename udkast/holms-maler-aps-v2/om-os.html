@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="da" class="d1" style="--c:#1d4e89; --c-soft:#dfe6ee; --c-ink:#ffffff">
+<html lang="da" class="d2" style="--c:#1d4e89; --c-soft:#dfe6ee; --c-ink:#ffffff">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kontakt · Holms Maler</title>
+<title>Om os · Holms Maler</title>
 <!-- Udkast fra Webleads: kun til kunden via direkte link. Ikke linket, ikke i sitemap, ikke indekseret. -->
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="no-referrer">
@@ -12,17 +12,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/udkast/_faelles/udkast.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/udkast/_faelles/design-2.css">
 <script type="module" src="/udkast/_faelles/udkast.js"></script>
 </head>
 <body>
 <header class="hd" data-hd>
   <div class="wrap hd__in">
-    <a href="/holms-maler-aps-forside" class="brand"><span class="brand__mark">H</span>Holms Maler</a>
+    <a href="/holms-maler-aps-v2-forside" class="brand"><span class="brand__mark">H</span>Holms Maler</a>
     <nav class="menu" data-menu aria-label="Menu">
-      <a href="/holms-maler-aps-forside">Forside</a>
-      <a href="/holms-maler-aps-ydelser">Ydelser</a>
-      <a href="/holms-maler-aps-om-os">Om os</a>
-      <a href="/holms-maler-aps-kontakt" aria-current="page">Kontakt</a>
+      <a href="/holms-maler-aps-v2-forside">Forside</a>
+      <a href="/holms-maler-aps-v2-ydelser">Ydelser</a>
+      <a href="/holms-maler-aps-v2-om-os" aria-current="page">Om os</a>
+      <a href="/holms-maler-aps-v2-kontakt">Kontakt</a>
     </nav>
     <div class="hd__cta">
       <a href="tel:12345678" class="btn btn--c btn--sm">Ring 12 34 56 78</a>
@@ -33,33 +35,38 @@
 <main>
 
 <section class="page-head">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">Om os</div>
+      <h1 class="h1">Et lokalt malerfirma med styr på detaljerne.</h1>
+      <p class="lead">Holms Maler blev startet i 2009 med en simpel idé: at gøre arbejdet ordentligt og holde, hvad vi lover. De fleste af vores opgaver kommer fra kunder, der anbefaler os videre.</p>
+    </div>
+    <div class="ph"><span>Billede af holdet</span></div>
+  </div>
+</section>
+<section>
   <div class="wrap">
-    <div class="eyebrow">Kontakt</div>
-    <h1 class="h1">Få et gratis tilbud.</h1>
-    <p class="lead">Fortæl kort om opgaven, så vender vi tilbage samme dag med en fast pris.</p>
+    <div class="stats">
+      <div><b>2009</b><span>Startet i Roskilde</span></div>
+      <div><b>1.800+</b><span>Opgaver løst</span></div>
+      <div><b>4,9 ★</b><span>På Google</span></div>
+      <div><b>6</b><span>Faglærte medarbejdere</span></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow">Det står vi for</div><h2 class="h2">Sådan arbejder vi.</h2></div></div>
+    <div class="cards">
+      <div class="card"><div class="card__ic">1</div><h3 class="h3">Ordentligt håndværk</h3><p>Vi gør det rigtigt første gang, så du ikke skal tænke på det igen.</p></div><div class="card"><div class="card__ic">2</div><h3 class="h3">Klar besked</h3><p>Fast pris, en aftalt dato og én fast kontaktperson hele vejen.</p></div><div class="card"><div class="card__ic">3</div><h3 class="h3">Respekt for dit hjem</h3><p>Vi dækker af, holder rent undervejs og rydder op, når vi går.</p></div>
+    </div>
   </div>
 </section>
 <section style="padding-top:0">
-  <div class="wrap contact">
-    <form class="form" data-draft-form novalidate>
-      <label for="k-navn">Navn</label><input id="k-navn" autocomplete="name">
-      <label for="k-tlf">Telefon</label><input id="k-tlf" type="tel" autocomplete="tel">
-      <label for="k-mail">E-mail</label><input id="k-mail" type="email" autocomplete="email">
-      <label for="k-type">Hvad drejer det sig om?</label>
-      <select id="k-type"><option>Indvendig maling</option><option>Udvendig maling</option><option>Erhverv og butik</option><option>Spartling og tapet</option><option>Gulvbehandling</option><option>Skadeservice</option><option>Andet</option></select>
-      <label for="k-besked">Beskriv opgaven</label><textarea id="k-besked" rows="5"></textarea>
-      <button type="submit" class="btn btn--c">Send forespørgsel →</button>
-      <div class="form__ok" data-ok hidden>Det her er et udkast, så formularen sender ikke endnu. På den færdige side kommer beskeden direkte i jeres indbakke.</div>
-    </form>
-    <div class="info">
-      <a href="tel:12345678"><span>Ring</span><b>12 34 56 78</b></a>
-      <a href="mailto:kontakt@holmsmaler.dk"><span>Skriv</span><b>kontakt@holmsmaler.dk</b></a>
-      <div><span>Adresse</span><b>Industrivej 12, 4000 Roskilde</b></div>
-      <div><span>Åbningstider</span>
-        <table class="hours"><tr><td>Mandag–torsdag</td><td>7–16</td></tr><tr><td>Fredag</td><td>7–14</td></tr><tr><td>Weekend</td><td>Efter aftale</td></tr></table>
-      </div>
-      <div><span>Vi kommer i</span><b style="font-size:16px;font-weight:500;line-height:1.5">Roskilde, Himmelev, Viby Sjælland, Gundsømagle, Jyllinge og Lejre.</b></div>
-      <div class="ph" style="min-height:220px"><span>Kort over Roskilde</span></div>
+  <div class="wrap">
+    <div class="band">
+      <div><h2 class="h2">Lad os tage en snak.</h2><p>Ring eller skriv, så finder vi ud af det sammen.</p></div>
+      <a href="/holms-maler-aps-v2-kontakt" class="btn btn--ink">Kontakt os →</a>
     </div>
   </div>
 </section>
@@ -68,12 +75,12 @@
   <div class="wrap">
     <div class="ft__grid">
       <div>
-        <a href="/holms-maler-aps-forside" class="brand" style="color:#fff"><span class="brand__mark">H</span>Holms Maler</a>
+        <a href="/holms-maler-aps-v2-forside" class="brand" style="color:#fff"><span class="brand__mark">H</span>Holms Maler</a>
         <p style="margin-top:14px;color:#a8a69e">Maler i Roskilde og omegn siden 2009.</p>
       </div>
       <div><h4>Kontakt</h4><a href="tel:12345678">12 34 56 78</a><a href="mailto:kontakt@holmsmaler.dk">kontakt@holmsmaler.dk</a><p>Industrivej 12, 4000 Roskilde</p></div>
       <div><h4>Åbningstider</h4><p>Mandag–torsdag: 7–16</p><p>Fredag: 7–14</p><p>Weekend: Efter aftale</p></div>
-      <div><h4>Sider</h4><a href="/holms-maler-aps-ydelser">Ydelser</a><a href="/holms-maler-aps-om-os">Om os</a><a href="/holms-maler-aps-kontakt">Kontakt</a></div>
+      <div><h4>Sider</h4><a href="/holms-maler-aps-v2-ydelser">Ydelser</a><a href="/holms-maler-aps-v2-om-os">Om os</a><a href="/holms-maler-aps-v2-kontakt">Kontakt</a></div>
     </div>
     <div class="ft__bottom"><span>© 2026 Holms Maler ApS</span><span>CVR 12345678</span></div>
   </div>
