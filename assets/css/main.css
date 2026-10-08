@@ -365,6 +365,7 @@ textarea.field { resize: vertical; }
 .form__error { margin: 0; font-size: 15px; color: #f6b8a2; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .thanks { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.thanks[hidden] { display: none; }
 .thanks__h { font-family: var(--display); font-size: 40px; font-weight: 800; letter-spacing: -0.03em; }
 .thanks p { margin: 0; font-size: 18px; color: var(--dark-muted); }
 
@@ -423,3 +424,78 @@ html:not(.motion) .loader { display: none; }
 .motion .hero h1 [data-word].is-up { transform: none; }
 .motion [data-reveal] { opacity: 0; transform: translateY(48px); }
 .motion [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ---------- Mobile ---------- */
+/* Second line of two-part headlines wraps as one balanced unit, so no single word hangs alone */
+.h2 .dim, .h2 .hot { display: inline-block; text-wrap: balance; }
+
+@media (max-width: 699px) {
+  .totop { right: 16px; bottom: 16px; width: 48px; height: 48px; font-size: 17px; }
+  .footer { padding-bottom: 88px; }
+
+  /* Sådan virker det: the demo is shown on a phone */
+  .build__fit { padding-top: 104px; gap: 22px; }
+  .build__steps { gap: 12px; }
+  .motion .step:not(.is-on) .step__body p { display: none; }
+  .build__browser-wrap { max-width: 244px; }
+  .browser { position: relative; border: 7px solid var(--ink); border-radius: 38px; overflow: hidden; }
+  .browser::before { content: ""; position: absolute; top: 7px; left: 50%; width: 64px; height: 18px; margin-left: -32px; border-radius: 999px; background: var(--ink); z-index: 2; }
+  .browser__bar { padding: 32px 10px 8px; gap: 6px; }
+  .browser__bar .dots3 { display: none; }
+  .browser__url { font-size: 11px; padding: 5px 9px; min-height: 24px; }
+  .browser__status { font-size: 10px; padding: 4px 8px; }
+  .browser__shot { aspect-ratio: 9 / 16; border-radius: 0; }
+
+  /* Før og efter: two phones, an old desktop page squeezed in and a new mobile page */
+  .ba { aspect-ratio: auto; height: 560px; min-height: 0; max-width: 300px; margin: 0 auto; border: 7px solid var(--ink); border-radius: 40px; }
+  .ba__chrome { padding: 30px 10px 7px; }
+  .ba__chrome .dots3 { display: none; }
+  .ba__addr { font-size: 10px; padding: 5px 8px; }
+  .ba::before { content: ""; position: absolute; top: 6px; left: 50%; width: 70px; height: 18px; margin-left: -35px; border-radius: 999px; background: var(--ink); z-index: 6; }
+  .old > :not(.ba__chrome) { width: 820px; flex-shrink: 0; zoom: 0.4; }
+  .old__hero { height: 300px; }
+  .old__body { flex: none; min-height: 640px; }
+  .old__hero { height: 420px; }
+  .new__head { padding: 12px 14px; }
+  .new__brand { font-size: 17px; }
+  .new__menu { display: none; }
+  .new__call { font-size: 11px; padding: 7px 11px; }
+  .new__body { grid-template-columns: 1fr; gap: 14px; padding: 6px 14px 12px; align-items: start; flex: none; }
+  .new__copy { gap: 10px; }
+  .new__kick { font-size: 10px; }
+  .new__h { font-size: 34px; }
+  .new__p { font-size: 13px; }
+  .new__btns span:first-child, .new__btns span:last-child { font-size: 12px; padding: 9px 13px; }
+  .new__stars { font-size: 11px; }
+  .new__art { min-height: 84px; height: 84px; border-radius: 16px; padding: 10px; }
+  .new__glyph { font-size: 150px; top: -30px; right: -14px; }
+  .new__pill { font-size: 11px; padding: 6px 10px; }
+  .new__cards { grid-template-columns: 1fr 1fr; padding: 0 14px 14px; gap: 8px; }
+  .new__cards div { padding: 9px 10px; border-radius: 12px; }
+  .new__cards div:nth-child(3) { display: none; }
+  .new__cards b { font-size: 12px; }
+  .new__cards span { font-size: 11px; }
+  .ba__knob { width: 48px; height: 48px; left: -24px; margin-top: -24px; font-size: 18px; }
+  .ba__drag { top: calc(50% + 36px); }
+
+  /* Price: the big number fits the box */
+  .odo { font-size: clamp(56px, 17vw, 88px); }
+  .price__amount > span:not(.odo) { font-size: 18px; }
+
+  /* Tilvalg: swipe one card at a time instead of scroll-driven sideways movement */
+  .motion .addons__sticky, .addons__sticky { position: relative; height: auto; min-height: 0; padding: 60px 0 40px; }
+  .motion .addons__wrap, .addons__wrap { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .addons__wrap::-webkit-scrollbar { display: none; }
+  .addons__track { transform: none !important; padding: 4px 24px; gap: 12px; }
+  .addon-slot { width: calc(100vw - 48px); scroll-snap-align: center; }
+  .addon { padding: 24px; }
+
+  /* Teamet: compact rows instead of four tall cards */
+  .member { flex-direction: row; align-items: center; gap: 16px; padding: 12px; border-radius: 22px; }
+  .member__photo { width: 92px; flex-shrink: 0; border-radius: 14px; }
+  .member__photo .ph { gap: 6px; }
+  .member__photo .ph__glyph { width: 46px; height: 46px; font-size: 20px; }
+  .member__photo .ph__tag { font-size: 9px; padding: 4px 7px; }
+  .member__info { padding: 0; }
+  .member__name { font-size: 24px; }
+}

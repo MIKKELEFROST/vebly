@@ -125,3 +125,38 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
 
 .ft { max-width: 1240px; margin: 0 auto; padding: 0 32px 48px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
 .ft b { color: var(--ink); font-size: 18px; letter-spacing: -0.03em; }
+
+/* Phone layout (shown in the phone frame on webleads.dk) */
+@media (max-width: 600px) {
+  .hd { padding: 16px 18px; }
+  .menu { display: none; }
+  .book { padding: 10px 16px; font-size: 14px; }
+  .hero { padding: 12px 18px 48px; gap: 28px; }
+  .hero__copy { gap: 18px; }
+  .hero h1 { font-size: 52px; }
+  .hero__copy > p { font-size: 16px; }
+  .cta { padding: 14px 20px; font-size: 15px; }
+  .call { padding: 14px 8px; font-size: 15px; }
+  .img--hero { height: 300px; border-radius: 24px; }
+  .badge { left: 12px; bottom: 16px; padding: 12px 14px; border-radius: 16px; }
+  .badge__ic { width: 36px; height: 36px; border-radius: 10px; font-size: 16px; }
+  .badge b { font-size: 16px; }
+  .logos { padding: 0 18px 48px; }
+  .logos__row { gap: 14px 22px; justify-content: flex-start; }
+  .logos__row span { font-size: 17px; }
+  .services, .process { padding: 20px 18px 56px; }
+  .services__head h2, .process__head h2 { font-size: 38px; }
+  .svc-main { min-height: 360px; padding: 24px; }
+  .svc, .pstep { padding: 22px; }
+  .about__in { padding: 56px 18px; }
+  .about h2 { font-size: 34px; margin-bottom: 32px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stats b { font-size: 40px; }
+  .quote-sec, .contact-sec { padding: 0 18px 56px; }
+  .quote { grid-template-columns: 1fr; gap: 22px; padding: 22px; }
+  .img--quote { aspect-ratio: 16/10; }
+  .quote__txt p { font-size: 26px; }
+  .contact { border-radius: 26px; padding: 28px 22px; gap: 28px; }
+  .contact h2 { font-size: 42px; }
+  .ft { padding: 0 18px 32px; }
+}

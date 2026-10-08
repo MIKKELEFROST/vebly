@@ -247,10 +247,11 @@ addEventListener('resize', fitNow); addEventListener('load', fitNow);
 new ResizeObserver(fitNow).observe(fitEl);
 if (document.fonts) document.fonts.ready.then(fitNow);
 
-// The demo renders at 1280px and is scaled into the browser frame
+// The demo renders at 1280px (390px on phones) and is scaled into the browser frame
+const isPhone = () => innerWidth < 700;
 const shot = $('[data-shot]'), demo = $('[data-demo]');
 let lastW = 0;
-const sizeFrame = force => { if (!shot.clientWidth) return; if (!force && shot.clientWidth === lastW) return; lastW = shot.clientWidth; const s = shot.clientWidth / 1280; demo.style.height = (shot.clientHeight / s) + 'px'; demo.style.transform = `scale(${s})`; };
+const sizeFrame = force => { if (!shot.clientWidth) return; if (!force && shot.clientWidth === lastW) return; lastW = shot.clientWidth; const base = isPhone() ? 390 : 1280; demo.style.width = base + 'px'; const s = shot.clientWidth / base; demo.style.height = (shot.clientHeight / s) + 'px'; demo.style.transform = `scale(${s})`; };
 sizeFrame(true);
 addEventListener('resize', () => sizeFrame(true));
 new ResizeObserver(() => sizeFrame(false)).observe(shot);
@@ -545,7 +546,7 @@ function runEffects() {
     orb: $('[data-orb]'), hero: $('[data-hero]'), h1: $('[data-hero] h1'), build: $('[data-build]'), steps: $$('[data-step]'),
     url: $('[data-url]'), caret: $('[data-caret]'), status: $('[data-status]'), track: $('[data-track]'), track2: $('[data-track2]'),
     floats: $$('[data-float]'), spin: $('[data-spin]'), mf: $('[data-manifest]'), mw: $$('[data-mw]'),
-    hs: $('[data-hs]'), ht: $('[data-htrack]'), hbar: $('[data-hbar]'), hnum: $('[data-hnum]'), cards: $$('[data-card]'),
+    hs: $('[data-hs]'), hw: $('[data-hwrap]'), ht: $('[data-htrack]'), hbar: $('[data-hbar]'), hnum: $('[data-hnum]'), cards: $$('[data-card]'),
     wm: $('[data-wm]'), wl: $$('[data-wl]')
   };
   let lastY = scrollY, vel = 0, mpos = 0, mpos2 = null, t = 0, spinA = 0;
@@ -574,7 +575,7 @@ function runEffects() {
       const active = p < 0.03 ? 0 : p < 0.9 ? 1 : 2;
       if (active !== lastStep) {
         lastStep = active;
-        el.steps.forEach((s, i) => { s.style.opacity = i === active ? 1 : 0.22; s.style.transform = i === active ? 'translateX(0)' : 'translateX(-8px)'; });
+        el.steps.forEach((s, i) => { s.classList.toggle('is-on', i === active); s.style.opacity = i === active ? 1 : 0.22; s.style.transform = i === active ? 'translateX(0)' : 'translateX(-8px)'; });
       }
       const full = el.url.dataset.full, uk = clamp((p - 0.9) / 0.07);
       el.url.textContent = full.slice(0, Math.round(full.length * uk));
@@ -613,10 +614,19 @@ function runEffects() {
 
     // Horizontal add-on scroll
     {
-      const dist = Math.max(0, el.ht.scrollWidth - innerWidth), want = Math.round(vh + dist);
-      if (Math.abs(el.hs.offsetHeight - want) > 2) el.hs.style.height = want + 'px';
-      const r = el.hs.getBoundingClientRect(), ph = dist ? clamp(-r.top / dist) : 0;
-      el.ht.style.transform = `translateX(${-dist * ph}px)`;
+      let ph;
+      if (isPhone()) {
+        // Phones swipe the cards natively; the meter follows the swipe
+        if (el.hs.style.height) el.hs.style.height = '';
+        const w = el.hw.scrollWidth - el.hw.clientWidth;
+        ph = w > 0 ? clamp(el.hw.scrollLeft / w) : 0;
+      } else {
+        const dist = Math.max(0, el.ht.scrollWidth - innerWidth), want = Math.round(vh + dist);
+        if (Math.abs(el.hs.offsetHeight - want) > 2) el.hs.style.height = want + 'px';
+        const r = el.hs.getBoundingClientRect();
+        ph = dist ? clamp(-r.top / dist) : 0;
+        el.ht.style.transform = `translateX(${-dist * ph}px)`;
+      }
       el.hbar.style.transform = `scaleX(${ph})`;
       el.hnum.textContent = '0' + Math.min(4, 1 + Math.floor(ph * 3.999));
     }
