@@ -141,12 +141,12 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 18px 30px -20px rgba(0
 .hours td:last-child { text-align: right; font-weight: 600; }
 
 /* Footer */
-.ft { background: var(--ink); color: #fff; padding: 56px 0 28px; margin-top: clamp(56px, 8vw, 104px); }
+.ft { background: var(--surface); color: var(--ink); border-top: 1px solid var(--line); padding: 56px 0 28px; margin-top: clamp(56px, 8vw, 104px); }
 .ft__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 28px; }
-.ft h4 { margin: 0 0 12px; font-size: 0.812em; letter-spacing: 0.1em; text-transform: uppercase; color: #a8a69e; }
-.ft a, .ft p { color: #fff; text-decoration: none; display: block; margin: 0 0 6px; line-height: 1.5; }
+.ft h4 { margin: 0 0 12px; font-size: 0.812em; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.ft a, .ft p { color: var(--ink); text-decoration: none; display: block; margin: 0 0 6px; line-height: 1.5; }
 .ft .brand__mark { background: var(--c); }
-.ft__bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid #2c2c26; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 0.812em; color: #a8a69e; }
+.ft__bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 0.812em; color: var(--muted); }
 
 /* Draft bar from Webleads */
 .draft { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 50; display: flex; align-items: center; gap: 12px; background: #111; color: #fff; padding: 8px 8px 8px 16px; border-radius: 999px; font-family: "DM Sans", var(--body); font-size: 14px; box-shadow: 0 20px 40px -18px rgba(0,0,0,0.5); max-width: calc(100vw - 24px); }
@@ -190,3 +190,27 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 18px 30px -20px rgba(0
 
 /* The badge sits inside an image placeholder: keep its text free of the placeholder label style */
 .ph .hero__badge span { background: none; padding: 0; border-radius: 0; font-weight: 400; }
+
+/* Front page: projects gallery, proof numbers, memberships, tax deduction */
+.more-link { margin: 1.4em 0 0; font-weight: 700; }
+.more-link a { color: var(--c); text-decoration: none; }
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.2vw, 20px); }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } .gallery .ph { min-height: 160px; } .gallery .ph span { display: none; } .gallery figcaption span { font-size: 0.8em; } }
+.gallery figure { margin: 0; display: flex; flex-direction: column; gap: 0.7em; }
+.gallery .ph { min-height: clamp(220px, 22vw, 420px); }
+.gallery figcaption { display: flex; flex-direction: column; gap: 0.15em; }
+.gallery figcaption b { font-family: var(--head); font-size: 1.1em; }
+.gallery figcaption span { color: var(--muted); font-size: 0.9em; }
+.proof { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 16px; margin-bottom: 16px; }
+.proof div { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 1.4em 1.5em; display: flex; flex-direction: column; gap: 0.2em; }
+.proof b { font-family: var(--head); font-weight: 800; font-size: clamp(28px, 2.6vw, 56px); letter-spacing: -0.03em; color: var(--c); line-height: 1.05; }
+.proof span { color: var(--muted); font-size: 0.92em; }
+.members { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.members > span { font-size: 0.85em; color: var(--muted); font-weight: 600; margin-right: 6px; }
+.members b { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 0.55em 1.1em; font-size: 0.88em; font-weight: 600; }
+.info-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 16px; align-items: stretch; }
+.fradrag { background: var(--c-soft); border-radius: 24px; padding: 1.4em 1.6em; display: flex; gap: 1em; align-items: flex-start; }
+.fradrag i { font-style: normal; font-family: var(--head); font-weight: 800; background: var(--c); color: var(--c-ink); border-radius: 12px; padding: 0.4em 0.7em; white-space: nowrap; }
+.fradrag b { display: block; margin-bottom: 0.2em; }
+.fradrag p { margin: 0; color: var(--muted); line-height: 1.55; }
+.info-row .areas { display: flex; flex-direction: column; justify-content: center; }

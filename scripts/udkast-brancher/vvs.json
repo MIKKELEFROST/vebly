@@ -148,5 +148,48 @@
       "Erik H.",
       "Varmepumpe"
     ]
+  ],
+  "schemaType": "Plumber",
+  "garanti": "2 år",
+  "projekter": [
+    [
+      "Nyt badeværelse",
+      "{{BY}}",
+      "Totalrenovering"
+    ],
+    [
+      "Varmepumpe",
+      "{{BY}}",
+      "Luft til vand"
+    ],
+    [
+      "Køkkenvask og vandhane",
+      "{{BY}}",
+      "Udskiftning"
+    ],
+    [
+      "Fjernvarmeunit",
+      "{{BY}}",
+      "Konvertering"
+    ],
+    [
+      "Gulvvarme",
+      "{{BY}}",
+      "Badeværelse og køkken"
+    ],
+    [
+      "Akut rørskade",
+      "{{BY}}",
+      "Løst samme dag"
+    ]
+  ],
+  "medlemskaber": [
+    "TEKNIQ Arbejdsgiverne",
+    "Autoriseret VVS-installatør",
+    "Byggegarantiordningen"
+  ],
+  "fradrag": [
+    "Fradrag på varmepumpe og reparationer",
+    "Installation af varmepumpe og en lang række reparationer i hjemmet giver håndværkerfradrag for arbejdslønnen."
   ]
 }

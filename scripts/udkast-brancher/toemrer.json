@@ -148,5 +148,48 @@
       "Birgit L.",
       "Reparation, {{BY}}"
     ]
+  ],
+  "schemaType": "GeneralContractor",
+  "garanti": "5 år",
+  "projekter": [
+    [
+      "Ny træterrasse",
+      "{{BY}}",
+      "Terrasse 32 m²"
+    ],
+    [
+      "Tilbygning",
+      "{{BY}}",
+      "Tilbygning 24 m²"
+    ],
+    [
+      "Nyt tag",
+      "{{BY}}",
+      "Tagrenovering"
+    ],
+    [
+      "Carport",
+      "{{BY}}",
+      "Dobbelt carport"
+    ],
+    [
+      "Køkkenmontering",
+      "{{BY}}",
+      "Køkken og skabe"
+    ],
+    [
+      "Udskiftning af vinduer",
+      "{{BY}}",
+      "12 vinduer"
+    ]
+  ],
+  "medlemskaber": [
+    "Dansk Byggeri",
+    "Byggegarantiordningen",
+    "Træ- og Møbelindustrien"
+  ],
+  "fradrag": [
+    "Brug håndværkerfradraget",
+    "Arbejdslønnen ved blandt andet efterisolering, vinduer og reparation af tag giver fradrag. Vi hjælper dig med, hvad der kan trækkes fra."
   ]
 }

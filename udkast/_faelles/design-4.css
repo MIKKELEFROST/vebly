@@ -1,0 +1,52 @@
+/* Design 4 · "Mosaik": light grey page with white tiles in a grid (bento).
+   Loaded after udkast.css and scoped to <html class="d4">. */
+html.d4 {
+  --bg: #eef0ec; --surface: #ffffff; --ink: #151a16; --muted: #626b63; --line: #e1e4de;
+  --head: "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  --tile: clamp(20px, 1.8vw, 36px);
+}
+.d4 body { background: var(--bg); }
+.d4 .h1, .d4 .h2 { font-weight: 800; letter-spacing: -0.04em; }
+.d4 .hd { background: rgba(238,240,236,0.9); }
+.d4 .menu { background: var(--surface); border-radius: 999px; padding: 0.4em 0.5em; gap: 0.2em; }
+.d4 .menu a { padding: 0.5em 1em; border-radius: 999px; }
+.d4 .menu a[aria-current="page"] { background: var(--ink); color: #fff; }
+
+/* Hero as tiles: text tile + image tile, inside the page margins */
+.d4 .hero { padding-top: clamp(16px, 2vw, 32px); padding-bottom: 0; }
+.d4 .hero__grid { padding-left: var(--gutter); padding-right: var(--gutter); max-width: none; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(12px, 1.2vw, 20px); align-items: stretch; }
+.d4 .hero__grid > div:first-child { background: var(--surface); border-radius: var(--tile); padding: clamp(28px, 4vw, 80px); display: flex; flex-direction: column; justify-content: center; }
+.d4 .hero .ph { min-height: clamp(420px, calc(100vh - 9em), 1100px); border-radius: var(--tile); }
+.d4 .hero__badge { border-radius: calc(var(--tile) * 0.7); }
+
+/* Trust row: four small tiles */
+.d4 .trust { padding-top: clamp(12px, 1.2vw, 20px); }
+.d4 .trust__row { border: 0; gap: clamp(12px, 1.2vw, 20px); }
+.d4 .trust__row div { background: var(--surface); border-radius: var(--tile); padding: 1.2em 1.4em; }
+.d4 .trust__row i { background: var(--c); color: var(--c-ink); }
+
+/* Section heads and tiles */
+.d4 section { padding-top: clamp(40px, 5vw, 88px); padding-bottom: clamp(40px, 5vw, 88px); }
+.d4 .card, .d4 .step, .d4 .review, .d4 .stats div, .d4 .info a, .d4 .info div, .d4 .form, .d4 .areas { border: 0; border-radius: var(--tile); }
+.d4 .cards, .d4 .steps, .d4 .reviews { gap: clamp(12px, 1.2vw, 20px); }
+.d4 .cards > :first-child { background: var(--c); color: var(--c-ink); }
+.d4 .cards > :first-child p, .d4 .cards > :first-child .card__more { color: inherit; opacity: 0.9; }
+.d4 .cards > :first-child .card__ic { background: rgba(255,255,255,0.2); color: inherit; }
+.d4 .card__ic { border-radius: 50%; }
+.d4 .split { background: var(--surface); border-radius: var(--tile); padding: clamp(20px, 2vw, 40px); margin: 0 var(--gutter); }
+.d4 .split.wrap { padding-left: clamp(20px, 2vw, 40px); padding-right: clamp(20px, 2vw, 40px); }
+.d4 .split .ph { border-radius: calc(var(--tile) * 0.8); }
+.d4 .step::before { width: 2.2em; height: 2.2em; border-radius: 50%; background: var(--c-soft); display: flex; align-items: center; justify-content: center; font-size: 1.2em; }
+.d4 .band { border-radius: var(--tile); }
+.d4 .ft { background: var(--surface); color: var(--ink); margin: clamp(40px, 5vw, 88px) var(--gutter) var(--gutter); border-radius: var(--tile); }
+.d4 .ft a, .d4 .ft p { color: var(--ink); }
+.d4 .ft h4, .d4 .ft__bottom { color: var(--muted); }
+.d4 .ft__bottom { border-top-color: var(--line); }
+.d4 .ft .brand { color: var(--ink) !important; }
+.d4 .ft p[style] { color: var(--muted) !important; }
+
+@media (max-width: 999px) {
+  .d4 .hero__grid { grid-template-columns: 1fr; }
+  .d4 .hero .ph { min-height: 300px; }
+  .d4 .split { margin: 0 var(--gutter); }
+}

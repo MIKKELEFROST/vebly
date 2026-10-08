@@ -1,0 +1,23 @@
+{
+  "branche": "maler",
+  "slug": "holms-maler-aps-v4",
+  "navn": "Holms Maler ApS",
+  "kort": "Holms Maler",
+  "by": "Roskilde",
+  "omraader": [
+    "Himmelev",
+    "Viby Sjælland",
+    "Gundsømagle",
+    "Jyllinge",
+    "Lejre"
+  ],
+  "tlf": "12 34 56 78",
+  "email": "kontakt@holmsmaler.dk",
+  "adresse": "Industrivej 12, 4000 Roskilde",
+  "cvr": "12345678",
+  "aar": "2009",
+  "opgaver": "1.800+",
+  "ansatte": "6",
+  "farve": "#1d4e89",
+  "design": 4
+}

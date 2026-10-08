@@ -73,6 +73,8 @@ Drafts of a website made for one prospective customer, shared by direct link onl
 They are not linked anywhere, not in the sitemap, and send `noindex` both as a meta tag and as an
 `X-Robots-Tag` header. Opening one sends a page view to GA4, so you can see when the customer looked.
 
+The front page is built for trades: hero with trade + town, trust strip, services, about, projects gallery, proof (rating, numbers, memberships, reviews), process, tax deduction, areas, FAQ and a contact form. It is SEO-ready for launch: title and meta description with trade + town, one H1, labelled images, and JSON-LD for the business (trade-specific type such as `HousePainter`, `Plumber`, `Electrician`) and the FAQ. Remove `noindex` and add `"domaene"` to the customer file when the site goes live.
+
 ```
 scripts/udkast-brancher/<branche>.json   Trade templates: services, prices, FAQ, steps, hours, button wording
 scripts/udkast-kunder/<slug>.json        One file per customer: name, town, nearby areas, phone, colour, overrides
@@ -86,7 +88,7 @@ Make a new draft:
 
 1. Copy `scripts/udkast-kunder/holms-maler-aps.json`, set `branche` to one of the files in `scripts/udkast-brancher/` and fill in the customer's details.
 2. Any field from the trade file can be overridden in the customer file, e.g. its own `ydelser` or `overskrift`.
-   Set `"design"` to `1` (Klassisk), `2` (Kraftig: white, bold uppercase, edge-to-edge photo) or `3` (Blød: light, serif, centred). Default is 1.
+   Set `"design"` to `1` (Klassisk), `2` (Kraftig: white, bold uppercase, edge-to-edge photo), `3` (Blød: light, serif, centred), `4` (Mosaik: white tiles on light grey) or `5` (Minimal: thin lines, numbered lists, timeline). Default is 1. All designs are light.
    Set `"farver"` to three hex colours to choose what the colour picker in the draft bar offers.
 3. Run `node scripts/nyt-udkast.mjs scripts/udkast-kunder/<slug>.json` and commit `udkast/<slug>/`.
 

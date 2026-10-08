@@ -148,5 +148,48 @@
       "Familien Holm",
       "Renovering"
     ]
+  ],
+  "schemaType": "Electrician",
+  "garanti": "2 år",
+  "projekter": [
+    [
+      "Ladestander til elbil",
+      "{{BY}}",
+      "Montering på 2 timer"
+    ],
+    [
+      "Ny el-tavle",
+      "{{BY}}",
+      "Moderne sikkerhed"
+    ],
+    [
+      "Spots i hele huset",
+      "{{BY}}",
+      "Belysning"
+    ],
+    [
+      "Solceller",
+      "{{BY}}",
+      "Med batteri"
+    ],
+    [
+      "Nybyggeri",
+      "{{BY}}",
+      "Hele installationen"
+    ],
+    [
+      "Udendørsbelysning",
+      "{{BY}}",
+      "Have og indkørsel"
+    ]
+  ],
+  "medlemskaber": [
+    "TEKNIQ Arbejdsgiverne",
+    "Autoriseret el-installatør",
+    "Sikkerhedsstyrelsen"
+  ],
+  "fradrag": [
+    "Fradrag på ladestander og el-arbejde",
+    "Installation af ladestander og reparation af el i hjemmet giver håndværkerfradrag for arbejdslønnen."
   ]
 }

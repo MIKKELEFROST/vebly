@@ -148,5 +148,48 @@
       "Café Bryg",
       "Erhverv, {{BY}}"
     ]
+  ],
+  "schemaType": "HousePainter",
+  "garanti": "2 år",
+  "projekter": [
+    [
+      "Facade og vinduer",
+      "Himmelev",
+      "Udvendig maling"
+    ],
+    [
+      "Stue og køkken",
+      "Roskilde",
+      "Indvendig maling"
+    ],
+    [
+      "Trappeopgang",
+      "Jyllinge",
+      "Erhverv"
+    ],
+    [
+      "Træterrasse og hegn",
+      "Lejre",
+      "Udvendig behandling"
+    ],
+    [
+      "Butikslokale",
+      "Roskilde",
+      "Malet over en weekend"
+    ],
+    [
+      "Børneværelse",
+      "Viby Sjælland",
+      "Spartling og maling"
+    ]
+  ],
+  "medlemskaber": [
+    "Danske Malermestre",
+    "Byggegarantiordningen",
+    "Garantiordningen for malerarbejde"
+  ],
+  "fradrag": [
+    "Spar på arbejdslønnen med håndværkerfradraget",
+    "Indvendig og udvendig maling af din bolig giver fradrag for arbejdslønnen. Vi skriver timerne tydeligt på fakturaen, så du nemt kan indberette dem."
   ]
 }

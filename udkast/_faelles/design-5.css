@@ -1,0 +1,79 @@
+/* Design 5 · "Minimal": Scandinavian and airy, thin lines, light large headline,
+   portrait photo with an offset colour block, services as a numbered list, steps as a timeline.
+   Loaded after udkast.css and scoped to <html class="d5">. */
+html.d5 {
+  --bg: #ffffff; --surface: #ffffff; --ink: #1a1a1a; --muted: #707070; --line: #e6e6e6;
+  --head: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+}
+.d5 body { background: var(--bg); }
+.d5 .h1 { font-weight: 300; letter-spacing: -0.045em; line-height: 1; font-size: clamp(46px, 6.2vw, 176px); }
+.d5 .h2 { font-weight: 300; letter-spacing: -0.035em; }
+.d5 .h3 { font-weight: 600; letter-spacing: -0.015em; }
+.d5 .eyebrow { color: var(--muted); letter-spacing: 0.22em; font-weight: 600; }
+.d5 .eyebrow::before { content: ""; display: inline-block; width: 2.4em; height: 1px; background: var(--c); vertical-align: middle; margin-right: 0.8em; }
+.d5 .hd { background: rgba(255,255,255,0.94); }
+.d5 .hd.is-scrolled { border-bottom-color: var(--line); }
+.d5 .menu a { font-size: 0.85em; letter-spacing: 0.04em; }
+.d5 .menu a[aria-current="page"] { font-weight: 600; box-shadow: inset 0 -1px 0 var(--c); }
+.d5 .brand { font-weight: 600; }
+.d5 .brand__mark { border-radius: 50%; }
+.d5 .btn { border-radius: 0; }
+.d5 .btn--line { border-width: 1px; }
+
+/* Hero: text left, tall portrait photo right with a colour block behind it */
+.d5 .hero { padding-top: clamp(40px, 6vw, 120px); }
+.d5 .hero__grid { padding-left: var(--gutter); padding-right: var(--gutter); max-width: none; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(40px, 6vw, 160px); align-items: center; }
+.d5 .hero .ph { min-height: clamp(420px, calc(100vh - 12em), 1000px); border-radius: 0; box-shadow: clamp(16px, 2vw, 40px) clamp(16px, 2vw, 40px) 0 0 var(--c-soft); margin-right: clamp(16px, 2vw, 40px); }
+.d5 .hero__badge { border-radius: 0; box-shadow: none; border: 1px solid var(--line); }
+.d5 .hero__badge i { border-radius: 50%; }
+.d5 .rating { border-top: 1px solid var(--line); padding-top: 1.2em; }
+
+/* Trust row: thin lines */
+.d5 .trust__row div { font-weight: 500; }
+.d5 .trust__row i { background: none; color: var(--c); }
+
+/* Services as a numbered list, not cards */
+.d5 .cards { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--ink); }
+.d5 .card { flex-direction: row; align-items: baseline; gap: clamp(16px, 3vw, 64px); background: none; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: clamp(20px, 2vw, 36px) 0; }
+.d5 a.card:hover { transform: none; box-shadow: none; padding-left: 0.6em; }
+.d5 a.card { transition: padding .3s; }
+.d5 .card__ic { background: none; color: var(--muted); width: auto; height: auto; font-weight: 300; font-size: 1em; }
+.d5 .card .h3 { flex: 0 0 30%; font-size: clamp(22px, 2vw, 40px); font-weight: 400; letter-spacing: -0.03em; }
+.d5 .card p { flex: 1; }
+.d5 .card__more { margin: 0; white-space: nowrap; font-size: 0; }
+.d5 .card__more::after { content: "→"; font-size: clamp(20px, 1.6vw, 30px); color: var(--c); }
+.d5 .card__price { margin: 0; padding: 0; white-space: nowrap; }
+
+/* Steps as a timeline */
+.d5 .steps { gap: 0; border-top: 1px solid var(--ink); }
+.d5 .step { background: none; border: 0; border-radius: 0; padding: 2em 2em 0 0; position: relative; }
+.d5 .step::after { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+.d5 .step::before { font-weight: 300; color: var(--muted); font-size: 1em; margin-bottom: 0.6em; }
+
+/* Split, reviews, areas, band */
+.d5 .split .ph { border-radius: 0; }
+.d5 .checks li::before { content: "—"; color: var(--c); font-weight: 400; }
+.d5 .reviews { gap: 0; border-top: 1px solid var(--line); }
+.d5 .review { background: none; border: 0; border-right: 1px solid var(--line); border-radius: 0; padding: 2em 2em 2em 0; }
+.d5 .review:last-child { border-right: 0; }
+.d5 .review blockquote { font-family: var(--head); font-weight: 300; font-size: 1.35em; line-height: 1.35; letter-spacing: -0.015em; }
+.d5 .areas { border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; padding-left: 0; }
+.d5 .band { background: none; color: var(--ink); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); border-radius: 0; padding-left: 0; padding-right: 0; }
+.d5 .band .h2 { font-weight: 300; }
+.d5 .band p { color: var(--muted); opacity: 1; }
+.d5 .band .btn--ink { background: var(--c); color: var(--c-ink); }
+.d5 .stats div, .d5 .info a, .d5 .info div, .d5 .form { border-radius: 0; }
+.d5 .ft { background: var(--bg); color: var(--ink); border-top: 1px solid var(--line); }
+.d5 .ft a, .d5 .ft p { color: var(--ink); }
+.d5 .ft h4, .d5 .ft__bottom { color: var(--muted); }
+.d5 .ft__bottom { border-top-color: var(--line); }
+.d5 .ft .brand { color: var(--ink) !important; }
+.d5 .ft p[style] { color: var(--muted) !important; }
+
+@media (max-width: 999px) {
+  .d5 .hero__grid { grid-template-columns: 1fr; }
+  .d5 .hero .ph { min-height: 340px; }
+  .d5 .card { flex-direction: column; gap: 0.4em; }
+  .d5 .card .h3 { flex: none; }
+  .d5 .review { border-right: 0; border-bottom: 1px solid var(--line); }
+}

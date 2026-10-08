@@ -48,14 +48,17 @@ const ALT = ['#1f5f4a', '#b5532f', '#2b2b2b', '#1d4e89', '#7a3fd0'];
 const farver = (k.farver && k.farver.length ? k.farver : [k.farve, ...ALT.filter(c => c.toLowerCase() !== k.farve.toLowerCase())]).slice(0, 3);
 const ink = c => (lum(c) > 0.4 ? '#14140f' : '#ffffff');
 const book = k.headerKnap === 'book';
-// Design 1 = Klassisk, 2 = Kraftig (dark, bold), 3 = Blød (light, serif)
+const garanti = k.garanti || '2 år';
+// Design 1 = Klassisk, 2 = Kraftig, 3 = Blød, 4 = Mosaik, 5 = Minimal
 const design = String(k.design || 1);
 const DESIGNS = {
   1: '',
   2: '\n<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-2.css">',
-  3: '\n<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-3.css">'
+  3: '\n<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-3.css">',
+  4: '\n<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-4.css">',
+  5: '\n<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-5.css">'
 };
-if (!(design in DESIGNS)) throw new Error('design skal være 1, 2 eller 3');
+if (!(design in DESIGNS)) throw new Error('design skal være 1–5');
 
 const vars = {
   NAVN: k.navn, KORT: tokens.KORT, BOGSTAV: tokens.KORT[0], SLUG: k.slug, FAG: k.fag, BY: k.by,
@@ -70,7 +73,8 @@ const vars = {
   KONTAKT_OVERSKRIFT: k.kontaktOverskrift, KONTAKT_TEKST: k.kontaktTekst,
   FORM_VALG: k.formValg, FORM_BESKED: k.formBesked, FORM_KNAP: k.formKnap,
   OMRAADER_TEKST: tokens.OMRAADER + '.',
-  HEADER_KNAP: book ? 'Book tid' : `Ring ${k.tlf}`
+  HEADER_KNAP: book ? 'Book tid' : `Ring ${k.tlf}`,
+  ANTAL_ANMELDELSER: k.antalAnmeldelser || 48, GARANTI: garanti, ERFARING: tokens.ERFARING
 };
 const raw = {
   FARVER: farver.map((c, i) => `<button type="button" class="swatch${i === 0 ? ' is-on' : ''}" style="background:${c}" data-c="${c}" data-soft="${mix(c, 0.86)}" data-ink="${ink(c)}" aria-label="Farve ${i + 1}" aria-pressed="${i === 0}"></button>`).join(''),
@@ -87,14 +91,40 @@ const raw = {
   FAQ: k.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(''),
   ANMELDELSER: k.anmeldelser.map(([t, n, s]) => `<figure class="review"><b class="stars" aria-label="5 ud af 5 stjerner">★★★★★</b><blockquote>${esc(t)}</blockquote><figcaption><strong>${esc(n)}</strong>${esc(s)}</figcaption></figure>`).join(''),
   TIDER_TABEL: k.tider.map(([d, t]) => `<tr><td>${esc(d)}</td><td>${esc(t)}</td></tr>`).join(''),
+  PROJEKTER: (k.projekter || [['Projekt', k.by, ''], ['Projekt', k.by, ''], ['Projekt', k.by, '']]).map(([t, sted, x]) => `<figure><div class="ph" role="img" aria-label="${esc(t)} i ${esc(sted)} udført af ${esc(tokens.KORT)}"><span>Billede af opgaven</span></div><figcaption><b>${esc(t)}</b><span>${esc(sted)}${x ? ' · ' + esc(x) : ''}</span></figcaption></figure>`).join(''),
+  MEDLEMSKABER: k.medlemskaber && k.medlemskaber.length ? `<div class="members"><span>Medlem af</span>${k.medlemskaber.map(m => `<b>${esc(m)}</b>`).join('')}</div>` : '',
+  FRADRAG: k.fradrag ? `<div class="fradrag"><i>Fradrag</i><div><b>${esc(k.fradrag[0])}</b><p>${esc(k.fradrag[1])}</p></div></div>` : '',
+  SCHEMA: '',
   TIDER_FOOT: k.tider.map(([d, t]) => `<p>${esc(d)}: ${esc(t)}</p>`).join('')
 };
 const titles = { forside: `${k.fag} i ${k.by}`, ydelser: 'Ydelser', 'om-os': 'Om os', kontakt: 'Kontakt' };
+// SEO: page titles and meta descriptions with trade + town (the draft itself stays noindex)
+const seo = {
+  forside: [`${k.fag} i ${k.by} · fast pris og ${garanti}s garanti | ${k.navn}`, `${k.navn} er ${k.fag.toLowerCase()} i ${k.by} og omegn. ${k.ydelser.slice(0, 3).map((y, i) => i ? y.titel.toLowerCase() : y.titel).join(', ')}. Fast pris, ${garanti}s garanti og svar samme dag. Ring ${k.tlf}.`],
+  ydelser: [`Ydelser og priser · ${k.fag} i ${k.by} | ${tokens.KORT}`, `Se ydelser og vejledende priser fra ${k.navn}: ${k.ydelser.map(y => y.titel.toLowerCase()).join(', ')}.`],
+  'om-os': [`Om ${tokens.KORT} · ${k.fag} i ${k.by} siden ${k.aar}`, `Mød ${k.navn}: ${k.fag.toLowerCase()} i ${k.by} siden ${k.aar}. ${k.fordele.slice(0, 2).join('. ')}.`],
+  kontakt: [`Kontakt ${tokens.KORT} · ${k.fag} i ${k.by}`, `Kontakt ${k.navn} på ${k.tlf} eller ${k.email}. ${k.adresse}. Vi kommer i ${tokens.OMRAADER}.`]
+};
+// Structured data for Google: the business (with its trade-specific type), and the FAQ
+const [gade, postby = ''] = k.adresse.split(',').map(s => s.trim());
+const [postnr, ...byDel] = postby.split(' ');
+const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
+const schema = ld({
+  '@context': 'https://schema.org', '@type': k.schemaType || 'LocalBusiness',
+  name: k.navn, description: k.intro, telephone: k.tlf.replace(/\s/g, ''), email: k.email, taxID: k.cvr, foundingDate: k.aar,
+  ...(k.domaene ? { url: `https://${k.domaene}/` } : {}),
+  address: { '@type': 'PostalAddress', streetAddress: gade, postalCode: postnr, addressLocality: byDel.join(' ') || k.by, addressCountry: 'DK' },
+  areaServed: omraader.map(n => ({ '@type': 'City', name: n })),
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: String(k.antalAnmeldelser || 48) },
+  makesOffer: k.ydelser.map(y => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: y.titel, description: y.tekst } }))
+}) + '\n' + ld({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: k.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
 
 const fill = (s, page) => s
   .replace('{{HEAD}}', tpl('_head.html')).replace('{{FOOT}}', tpl('_foot.html'))
   .replace(/\{\{AKTIV_([a-z-]+)\}\}/g, (_, p) => (p === page ? ' aria-current="page"' : ''))
   .replace(/\{\{TITEL\}\}/g, esc(titles[page]))
+  .replace('{{SIDETITEL}}', esc(seo[page][0])).replace('{{SIDETITEL}}', esc(seo[page][0])).replace(/\{\{META\}\}/g, esc(seo[page][1]))
+  .replace('{{SCHEMA}}', page === 'forside' ? schema : '')
   .replace(/\{\{([A-Z_]+)\}\}/g, (m, key) => {
     if (key in raw) return raw[key];
     if (vars[key] === undefined) throw new Error(`Mangler feltet for ${key} i branche- eller kundefilen`);
