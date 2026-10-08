@@ -498,4 +498,13 @@ html:not(.motion) .loader { display: none; }
   .member__photo .ph__tag { font-size: 9px; padding: 4px 7px; }
   .member__info { padding: 0; }
   .member__name { font-size: 24px; }
+
+  /* Pop-ups: kicker at the top of the band, the decorative glyph smaller below it */
+  .m-band { height: 132px; align-items: flex-start; padding: 22px 70px 0 22px; }
+  .m-band__glyph { font-size: 108px; bottom: -22px; }
+  .m-band__kicker { z-index: 1; }
+  .m-body { padding: 22px; gap: 16px; }
+  .m-lead { font-size: 16px; }
+  .m-ph { height: 200px; }
+  .m-actions > * { flex: 1 1 auto; text-align: center; }
 }
