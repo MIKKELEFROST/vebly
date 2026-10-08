@@ -104,4 +104,11 @@ Covers ligger i `brand/social/highlights/` (1080 × 1920). Opret et highlight ud
 | Før/efter | hl-foer-efter.png | Opslag 04 |
 | Tilvalg | hl-tilvalg.png | Opslag 07 |
 | Teamet | hl-teamet.png | Opslag 08 |
-| Kontakt | hl-kontakt.png | En story med link-sticker til webleads.dk |
+| Kontakt | hl-kontakt.png | `story-kontakt.png` med en link-sticker til webleads.dk |
+
+## Kontakt-story med link-sticker
+
+1. Opret en story med `highlights/story-kontakt.png` (1080 × 1920).
+2. Tryk på sticker-ikonet → "Link" → indsæt `https://webleads.dk/?utm_source=instagram&utm_medium=story&utm_campaign=kontakt#kontakt` → skriv "Få et gratis tilbud" som tekst.
+3. Placér stickeren lige under pilen. `story-kontakt-med-guide.png` viser præcis hvor (brug ikke den version i selve storyen).
+4. Del storyen, og tilføj den til highlightet "Kontakt" med coveret `hl-kontakt.png`.
