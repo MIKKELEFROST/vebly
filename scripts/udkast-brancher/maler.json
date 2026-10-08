@@ -1,0 +1,152 @@
+{
+  "cta": "Få et gratis tilbud",
+  "ctaKort": "Få et tilbud",
+  "headerKnap": "ring",
+  "badge": [
+    "Svar samme dag",
+    "Gratis tilbud uden binding"
+  ],
+  "trinOverskrift": "Tre trin. Ingen overraskelser.",
+  "trin": [
+    [
+      "Du kontakter os",
+      "Ring eller skriv, og fortæl kort hvad du har brug for."
+    ],
+    [
+      "Vi giver en fast pris",
+      "Vi kigger på opgaven og sender et klart tilbud. Ingen skjulte tillæg."
+    ],
+    [
+      "Vi går i gang",
+      "Til den aftalte tid og pris, og vi rydder op efter os."
+    ]
+  ],
+  "band": [
+    "Klar til at komme i gang?",
+    "Få et gratis tilbud. Vi svarer samme dag."
+  ],
+  "vaerdier": [
+    [
+      "Ordentligt håndværk",
+      "Vi gør det rigtigt første gang, så du ikke skal tænke på det igen."
+    ],
+    [
+      "Klar besked",
+      "Fast pris, en aftalt dato og én fast kontaktperson hele vejen."
+    ],
+    [
+      "Respekt for dit hjem",
+      "Vi dækker af, holder rent undervejs og rydder op, når vi går."
+    ]
+  ],
+  "opgaverTekst": "Opgaver løst",
+  "ansatteTekst": "Faglærte medarbejdere",
+  "kontaktOverskrift": "Få et gratis tilbud.",
+  "kontaktTekst": "Fortæl kort om opgaven, så vender vi tilbage samme dag med en fast pris.",
+  "formValg": "Hvad drejer det sig om?",
+  "formBesked": "Beskriv opgaven",
+  "formKnap": "Send forespørgsel",
+  "tider": [
+    [
+      "Mandag–torsdag",
+      "7–16"
+    ],
+    [
+      "Fredag",
+      "7–14"
+    ],
+    [
+      "Weekend",
+      "Efter aftale"
+    ]
+  ],
+  "trust": [
+    "Fast pris før vi går i gang",
+    "Faglært og forsikret",
+    "{{ERFARING}} års erfaring",
+    "Ryddet op, når vi går"
+  ],
+  "fag": "Maler",
+  "farve": "#1d4e89",
+  "overskrift": "Malet ordentligt. Første gang.",
+  "intro": "Vi maler huse, lejligheder og erhverv i {{BY}} og omegn. Fast pris, aftalt dato og et resultat, der holder i mange år.",
+  "ydelserForside": "Det maler vi.",
+  "ydelserOverskrift": "Alt inden for malerarbejde.",
+  "ydelserIntro": "Inde og ude, privat og erhverv. Vi giver altid en fast pris, før vi går i gang.",
+  "omOverskrift": "Et lokalt malerfirma med styr på detaljerne.",
+  "omKort": "{{KORT}} har malet i {{BY}} og omegn siden {{AAR}}. Vi er faglærte malere, der holder, hvad vi lover.",
+  "omLang": "{{KORT}} blev startet i {{AAR}} med en simpel idé: at gøre arbejdet ordentligt og holde, hvad vi lover. De fleste af vores opgaver kommer fra kunder, der anbefaler os videre.",
+  "ydelser": [
+    {
+      "titel": "Indvendig maling",
+      "tekst": "Vægge, lofter, døre og paneler. Vi dækker af og rydder op hver dag.",
+      "pris": "Fra 45 kr./m²"
+    },
+    {
+      "titel": "Udvendig maling",
+      "tekst": "Facader, vinduer, sternbrædder og træværk, der kan tåle det danske vejr.",
+      "pris": "Fast pris efter besigtigelse"
+    },
+    {
+      "titel": "Erhverv og butik",
+      "tekst": "Kontorer, butikker og opgange. Vi kan arbejde uden for åbningstid.",
+      "pris": "Fast pris efter besigtigelse"
+    },
+    {
+      "titel": "Spartling og tapet",
+      "tekst": "Glatte vægge, filt, glasvæv og tapet sat op, så samlingerne ikke ses.",
+      "pris": "Fra 85 kr./m²"
+    },
+    {
+      "titel": "Gulvbehandling",
+      "tekst": "Lakering og maling af trægulve og trapper, så de står som nye.",
+      "pris": "Fra 120 kr./m²"
+    },
+    {
+      "titel": "Skadeservice",
+      "tekst": "Udbedring efter vand- og fugtskader, også i samarbejde med dit forsikringsselskab.",
+      "pris": "Efter aftale"
+    }
+  ],
+  "fordele": [
+    "Faglærte malere og fast kontaktperson",
+    "Fast pris og aftalt slutdato",
+    "Vi dækker af og rydder op hver dag",
+    "2 års garanti på alt arbejde"
+  ],
+  "faq": [
+    [
+      "Hvad koster det at få malet en lejlighed?",
+      "Det afhænger af størrelse og stand. En typisk 3-værelses lejlighed ligger mellem 15.000 og 25.000 kr. Vi giver altid en fast pris efter et gratis besøg."
+    ],
+    [
+      "Hvor hurtigt kan I starte?",
+      "Som regel inden for 1–2 uger. Akutte opgaver kan vi ofte klare samme uge."
+    ],
+    [
+      "Skal jeg selv flytte møbler?",
+      "Nej, vi flytter og dækker af. Har du tunge eller skrøbelige ting, aftaler vi det på forhånd."
+    ],
+    [
+      "Kan jeg bruge håndværkerfradrag?",
+      "Ja, arbejdslønnen på maling i din bolig giver fradrag. Vi skriver timerne tydeligt på fakturaen."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "De holdt både tid og pris, og der var ryddet pænere op, end da de kom.",
+      "Louise M.",
+      "Indvendig maling, {{BY}}"
+    ],
+    [
+      "Hele facaden og vinduerne malet på en uge. Flot arbejde og søde folk.",
+      "Henrik S.",
+      "Udvendig maling"
+    ],
+    [
+      "Vi fik malet butikken over en weekend, så vi kunne holde åbent. Perfekt.",
+      "Café Bryg",
+      "Erhverv, {{BY}}"
+    ]
+  ]
+}

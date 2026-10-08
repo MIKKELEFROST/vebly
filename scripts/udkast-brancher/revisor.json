@@ -1,0 +1,152 @@
+{
+  "cta": "Book et gratis møde",
+  "ctaKort": "Book møde",
+  "headerKnap": "ring",
+  "badge": [
+    "Gratis første møde",
+    "Fast pris på årsregnskab"
+  ],
+  "trinOverskrift": "Sådan kommer du i gang.",
+  "trin": [
+    [
+      "Gratis møde",
+      "Vi tager en snak om din virksomhed og dine behov."
+    ],
+    [
+      "Fast pris",
+      "Du får et klart tilbud uden timeafregning på overraskelser."
+    ],
+    [
+      "Vi tager over",
+      "Vi sørger for frister, moms og regnskab, så du kan passe din forretning."
+    ]
+  ],
+  "band": [
+    "Skal vi tage en snak?",
+    "Det første møde er gratis og uforpligtende."
+  ],
+  "vaerdier": [
+    [
+      "Klar tale",
+      "Vi forklarer tallene, så du forstår dem."
+    ],
+    [
+      "Til tiden",
+      "Vi holder styr på frister, så du aldrig får bøder."
+    ],
+    [
+      "Personlig rådgivning",
+      "Samme faste revisor, der kender din virksomhed."
+    ]
+  ],
+  "opgaverTekst": "Kunder",
+  "ansatteTekst": "Revisorer og bogholdere",
+  "kontaktOverskrift": "Book et gratis møde.",
+  "kontaktTekst": "Fortæl kort om din virksomhed, så finder vi en tid, der passer dig.",
+  "formValg": "Hvad har du brug for?",
+  "formBesked": "Fortæl kort om din virksomhed",
+  "formKnap": "Send",
+  "tider": [
+    [
+      "Mandag–torsdag",
+      "8–16"
+    ],
+    [
+      "Fredag",
+      "8–15"
+    ],
+    [
+      "Weekend",
+      "Lukket"
+    ]
+  ],
+  "trust": [
+    "Registreret revisor",
+    "Fast pris på årsregnskab",
+    "{{ERFARING}} års erfaring",
+    "Fast kontaktperson"
+  ],
+  "fag": "Revisor",
+  "farve": "#1f2a44",
+  "overskrift": "Styr på tallene. Hele året.",
+  "intro": "Bogføring, årsregnskab og rådgivning til små og mellemstore virksomheder i {{BY}} og omegn.",
+  "ydelserForside": "Det hjælper vi med.",
+  "ydelserOverskrift": "Revision og rådgivning.",
+  "ydelserIntro": "Fra løbende bogføring til årsregnskab og skat. Altid med en fast pris.",
+  "omOverskrift": "Din lokale revisor.",
+  "omKort": "{{KORT}} har hjulpet virksomheder i {{BY}} siden {{AAR}}. Vi er tæt på og nemme at få fat i.",
+  "omLang": "{{KORT}} blev startet i {{AAR}}. Vi arbejder med små og mellemstore virksomheder, der vil have en revisor, der tager telefonen og forklarer tingene ordentligt.",
+  "ydelser": [
+    {
+      "titel": "Årsregnskab",
+      "tekst": "For ApS, A/S og personligt ejede virksomheder.",
+      "pris": "Fra 6.500 kr."
+    },
+    {
+      "titel": "Bogføring",
+      "tekst": "Løbende bogføring i dit regnskabsprogram, så du altid har overblik.",
+      "pris": "Fra 995 kr./md."
+    },
+    {
+      "titel": "Moms og løn",
+      "tekst": "Vi indberetter moms og håndterer lønkørsel.",
+      "pris": "Fra 495 kr./md."
+    },
+    {
+      "titel": "Skat og selvangivelse",
+      "tekst": "Personlig skat for ejere, også ved køb og salg af bolig.",
+      "pris": "Fra 1.500 kr."
+    },
+    {
+      "titel": "Opstart af virksomhed",
+      "tekst": "Valg af selskabsform, registrering og første budget.",
+      "pris": "Fast pris"
+    },
+    {
+      "titel": "Rådgivning",
+      "tekst": "Budget, likviditet og generationsskifte.",
+      "pris": "Efter aftale"
+    }
+  ],
+  "fordele": [
+    "Fast kontaktperson",
+    "Fast pris uden overraskelser",
+    "Vi holder styr på dine frister",
+    "Vi kommer gerne ud til dig"
+  ],
+  "faq": [
+    [
+      "Hvad koster et årsregnskab?",
+      "For et mindre ApS typisk fra 6.500 kr. Vi giver en fast pris efter første møde."
+    ],
+    [
+      "Hvilke regnskabsprogrammer bruger I?",
+      "Vi arbejder i alle de store, fx Dinero, e-conomic og Billy."
+    ],
+    [
+      "Kan I hjælpe, hvis jeg er bagud?",
+      "Ja, vi rydder op og får dig på rette spor."
+    ],
+    [
+      "Er det første møde gratis?",
+      "Ja, helt uforpligtende."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Endelig en revisor, der forklarer tingene, så jeg forstår dem.",
+      "Kasper N.",
+      "Ejer af håndværksfirma"
+    ],
+    [
+      "De holder styr på alle frister. Jeg tænker ikke på moms mere.",
+      "Line F.",
+      "Webshop, {{BY}}"
+    ],
+    [
+      "Fast pris, og de tager altid telefonen.",
+      "Morten A.",
+      "Konsulent"
+    ]
+  ]
+}

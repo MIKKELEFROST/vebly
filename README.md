@@ -65,3 +65,28 @@ Events: `page_view`, `campaign_details` (from UTM tags), `scroll` (25/50/75/90 %
 ## Accessibility and motion
 
 Visitors with "reduce motion" switched on get a static page: no intro curtain, the text is fully visible, the demo shows the finished site and the balls are a clickable grid.
+
+## Customer drafts (udkast)
+
+Drafts of a website made for one prospective customer, shared by direct link only:
+`webleads.dk/<slug>-forside`, `-ydelser`, `-om-os` and `-kontakt` (e.g. `/holms-maler-aps-forside`).
+They are not linked anywhere, not in the sitemap, and send `noindex` both as a meta tag and as an
+`X-Robots-Tag` header. Opening one sends a page view to GA4, so you can see when the customer looked.
+
+```
+scripts/udkast-brancher/<branche>.json   Trade templates: services, prices, FAQ, steps, hours, button wording
+scripts/udkast-kunder/<slug>.json        One file per customer: name, town, nearby areas, phone, colour, overrides
+scripts/udkast-skabelon/                 The page templates
+scripts/nyt-udkast.mjs                   Builds udkast/<slug>/*.html from the two files above
+udkast/_faelles/                         Shared CSS and JS for all drafts
+udkast/<slug>/                           The generated draft (plain HTML, can be edited by hand)
+```
+
+Make a new draft:
+
+1. Copy `scripts/udkast-kunder/holms-maler-aps.json`, set `branche` to one of the files in `scripts/udkast-brancher/` and fill in the customer's details.
+2. Any field from the trade file can be overridden in the customer file, e.g. its own `ydelser` or `overskrift`.
+3. Run `node scripts/nyt-udkast.mjs scripts/udkast-kunder/<slug>.json` and commit `udkast/<slug>/`.
+
+`scripts/` is listed in `.vercelignore`, so the templates and customer files are never published.
+The URL pattern lives in `vercel.json` (rewrite plus headers); add a page name there if a draft needs more pages.

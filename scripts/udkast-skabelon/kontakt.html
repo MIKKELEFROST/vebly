@@ -1,0 +1,33 @@
+{{HEAD}}
+<section class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">Kontakt</div>
+    <h1 class="h1">{{KONTAKT_OVERSKRIFT}}</h1>
+    <p class="lead">{{KONTAKT_TEKST}}</p>
+  </div>
+</section>
+<section style="padding-top:0">
+  <div class="wrap contact">
+    <form class="form" data-draft-form novalidate>
+      <label for="k-navn">Navn</label><input id="k-navn" autocomplete="name">
+      <label for="k-tlf">Telefon</label><input id="k-tlf" type="tel" autocomplete="tel">
+      <label for="k-mail">E-mail</label><input id="k-mail" type="email" autocomplete="email">
+      <label for="k-type">{{FORM_VALG}}</label>
+      <select id="k-type">{{YDELSER_VALG}}<option>Andet</option></select>
+      <label for="k-besked">{{FORM_BESKED}}</label><textarea id="k-besked" rows="5"></textarea>
+      <button type="submit" class="btn btn--c">{{FORM_KNAP}} →</button>
+      <div class="form__ok" data-ok hidden>Det her er et udkast, så formularen sender ikke endnu. På den færdige side kommer beskeden direkte i jeres indbakke.</div>
+    </form>
+    <div class="info">
+      <a href="tel:{{TLF_LINK}}"><span>Ring</span><b>{{TLF}}</b></a>
+      <a href="mailto:{{EMAIL}}"><span>Skriv</span><b>{{EMAIL}}</b></a>
+      <div><span>Adresse</span><b>{{ADRESSE}}</b></div>
+      <div><span>Åbningstider</span>
+        <table class="hours">{{TIDER_TABEL}}</table>
+      </div>
+      <div><span>Vi kommer i</span><b style="font-size:16px;font-weight:500;line-height:1.5">{{OMRAADER_TEKST}}</b></div>
+      <div class="ph" style="min-height:220px"><span>Kort over {{BY}}</span></div>
+    </div>
+  </div>
+</section>
+{{FOOT}}

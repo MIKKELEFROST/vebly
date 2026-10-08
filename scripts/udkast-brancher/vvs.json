@@ -1,0 +1,152 @@
+{
+  "cta": "Få et gratis tilbud",
+  "ctaKort": "Få et tilbud",
+  "headerKnap": "ring",
+  "badge": [
+    "Akut hjælp samme dag",
+    "Ring, så kommer vi"
+  ],
+  "trinOverskrift": "Tre trin. Ingen overraskelser.",
+  "trin": [
+    [
+      "Du kontakter os",
+      "Ring eller skriv, og fortæl kort hvad du har brug for."
+    ],
+    [
+      "Vi giver en fast pris",
+      "Vi kigger på opgaven og sender et klart tilbud. Ingen skjulte tillæg."
+    ],
+    [
+      "Vi går i gang",
+      "Til den aftalte tid og pris, og vi rydder op efter os."
+    ]
+  ],
+  "band": [
+    "Klar til at komme i gang?",
+    "Få et gratis tilbud. Vi svarer samme dag."
+  ],
+  "vaerdier": [
+    [
+      "Ordentligt håndværk",
+      "Vi gør det rigtigt første gang, så du ikke skal tænke på det igen."
+    ],
+    [
+      "Klar besked",
+      "Fast pris, en aftalt dato og én fast kontaktperson hele vejen."
+    ],
+    [
+      "Respekt for dit hjem",
+      "Vi dækker af, holder rent undervejs og rydder op, når vi går."
+    ]
+  ],
+  "opgaverTekst": "Opgaver løst",
+  "ansatteTekst": "Faglærte medarbejdere",
+  "kontaktOverskrift": "Få et gratis tilbud.",
+  "kontaktTekst": "Fortæl kort om opgaven, så vender vi tilbage samme dag med en fast pris.",
+  "formValg": "Hvad drejer det sig om?",
+  "formBesked": "Beskriv opgaven",
+  "formKnap": "Send forespørgsel",
+  "tider": [
+    [
+      "Mandag–torsdag",
+      "7–16"
+    ],
+    [
+      "Fredag",
+      "7–14"
+    ],
+    [
+      "Weekend",
+      "Efter aftale"
+    ]
+  ],
+  "trust": [
+    "Autoriseret VVS",
+    "Akut hjælp samme dag",
+    "{{ERFARING}} års erfaring",
+    "Fast pris eller klar timepris"
+  ],
+  "fag": "VVS-installatør",
+  "farve": "#0f6d7a",
+  "overskrift": "Hurtig hjælp. Fast pris.",
+  "intro": "Vi løser alt fra dryppende haner til nye badeværelser og varmepumper i {{BY}} og omegn. Akut hjælp samme dag.",
+  "ydelserForside": "Det hjælper vi med.",
+  "ydelserOverskrift": "Alt inden for VVS.",
+  "ydelserIntro": "Små reparationer, nye badeværelser og grøn varme. Altid med fast pris eller klar timepris.",
+  "omOverskrift": "Autoriseret VVS med styr på det.",
+  "omKort": "{{KORT}} har hjulpet private og erhverv i {{BY}} siden {{AAR}}. Vi er autoriserede og rydder op efter os.",
+  "omLang": "{{KORT}} blev startet i {{AAR}}. Vi er autoriserede VVS-installatører, der kører med fuldt udstyrede biler, så vi kan løse de fleste opgaver i første besøg.",
+  "ydelser": [
+    {
+      "titel": "Akut VVS",
+      "tekst": "Vandskade, stoppet afløb eller utæt rør. Vi kommer hurtigt.",
+      "pris": "Fra 695 kr. i udkald"
+    },
+    {
+      "titel": "Badeværelse",
+      "tekst": "Nyt bad fra start til slut, med fliser og el koordineret.",
+      "pris": "Fast pris efter besigtigelse"
+    },
+    {
+      "titel": "Varmepumpe",
+      "tekst": "Rådgivning og installation af luft-til-vand-varmepumper.",
+      "pris": "Fra 89.000 kr. inkl. montering"
+    },
+    {
+      "titel": "Fjernvarme og gas",
+      "tekst": "Service, udskiftning og konvertering af varmeanlæg.",
+      "pris": "Efter aftale"
+    },
+    {
+      "titel": "Køkken og vand",
+      "tekst": "Vandhaner, opvaskemaskine, vandvarmer og nye rør.",
+      "pris": "Fra 595 kr./time"
+    },
+    {
+      "titel": "Serviceaftale",
+      "tekst": "Årligt eftersyn af dit varmeanlæg, så det kører sikkert.",
+      "pris": "Fra 1.195 kr./år"
+    }
+  ],
+  "fordele": [
+    "Autoriserede VVS-installatører",
+    "Fuldt udstyrede servicebiler",
+    "Fast pris på større opgaver",
+    "Vi rydder op efter os"
+  ],
+  "faq": [
+    [
+      "Kommer I samme dag?",
+      "Ved akutte skader prøver vi altid at komme samme dag i {{BY}} og omegn."
+    ],
+    [
+      "Hvad koster et nyt badeværelse?",
+      "Et typisk bad ligger mellem 120.000 og 200.000 kr. alt inklusive. Vi giver en fast pris efter et gratis besøg."
+    ],
+    [
+      "Kan I hjælpe med tilskud til varmepumpe?",
+      "Ja, vi hjælper med ansøgning om tilskud og energimærke."
+    ],
+    [
+      "Kan jeg få håndværkerfradrag?",
+      "Ja, blandt andet på installation af varmepumpe og reparationer i hjemmet."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Ringede kl. 8 om et utæt rør, og de var her kl. 10. Super service.",
+      "Anne P.",
+      "Akut VVS, {{BY}}"
+    ],
+    [
+      "Vores nye bad blev præcis som aftalt og til den pris, vi fik.",
+      "Thomas og Line",
+      "Badeværelse"
+    ],
+    [
+      "God rådgivning om varmepumpe, og de hjalp med tilskuddet.",
+      "Erik H.",
+      "Varmepumpe"
+    ]
+  ]
+}

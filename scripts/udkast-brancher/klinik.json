@@ -1,0 +1,152 @@
+{
+  "cta": "Book en tid",
+  "ctaKort": "Book tid",
+  "headerKnap": "book",
+  "badge": [
+    "Ledige tider i denne uge",
+    "Book online på 1 minut"
+  ],
+  "trinOverskrift": "Nemt fra start til slut.",
+  "band": [
+    "Klar til at booke?",
+    "Find en tid, der passer dig."
+  ],
+  "kontaktOverskrift": "Book en tid.",
+  "kontaktTekst": "Vælg behandling og skriv, hvornår det passer dig, så bekræfter vi tiden hurtigst muligt.",
+  "formValg": "Hvad vil du booke?",
+  "formBesked": "Hvornår passer det dig?",
+  "formKnap": "Send booking",
+  "opgaverTekst": "Glade kunder",
+  "fag": "Klinik",
+  "farve": "#7a5a8c",
+  "overskrift": "Tid til dig. Og din hud.",
+  "intro": "Ansigtsbehandlinger, massage og hudpleje i rolige rammer i {{BY}}. Book online på et minut.",
+  "trust": [
+    "Uddannede behandlere",
+    "Book online døgnet rundt",
+    "Kun kvalitetsprodukter",
+    "Gratis hudkonsultation"
+  ],
+  "trin": [
+    [
+      "Vælg behandling",
+      "Eller book en gratis konsultation, hvis du er i tvivl."
+    ],
+    [
+      "Book en tid",
+      "Online døgnet rundt eller ring til os."
+    ],
+    [
+      "Slap af",
+      "Vi tager os af resten i rolige omgivelser."
+    ]
+  ],
+  "vaerdier": [
+    [
+      "Rolige rammer",
+      "En klinik, hvor du kan koble helt af."
+    ],
+    [
+      "Faglighed",
+      "Uddannede behandlere og dokumenterede metoder."
+    ],
+    [
+      "Ærlig rådgivning",
+      "Vi anbefaler kun det, du har brug for."
+    ]
+  ],
+  "ansatteTekst": "Behandlere",
+  "tider": [
+    [
+      "Mandag–fredag",
+      "9–18"
+    ],
+    [
+      "Lørdag",
+      "10–15"
+    ],
+    [
+      "Søndag",
+      "Lukket"
+    ]
+  ],
+  "ydelserForside": "Vores behandlinger.",
+  "ydelserOverskrift": "Behandlinger og priser.",
+  "ydelserIntro": "Hudpleje, massage og velvære, tilpasset dig.",
+  "omOverskrift": "En klinik med ro og faglighed.",
+  "omKort": "{{KORT}} har haft klinik i {{BY}} siden {{AAR}}. Vi er uddannede behandlere med fokus på resultater og velvære.",
+  "omLang": "{{KORT}} blev åbnet i {{AAR}}. Vi tror på, at god behandling handler om både faglighed og om at give dig en pause fra hverdagen.",
+  "ydelser": [
+    {
+      "titel": "Ansigtsbehandling",
+      "tekst": "Rens, peeling og maske tilpasset din hud.",
+      "pris": "Fra 695 kr."
+    },
+    {
+      "titel": "Massage",
+      "tekst": "Afspændende eller dybdegående massage.",
+      "pris": "Fra 545 kr."
+    },
+    {
+      "titel": "Vipper og bryn",
+      "tekst": "Farvning, løft og formning.",
+      "pris": "Fra 295 kr."
+    },
+    {
+      "titel": "Voksbehandling",
+      "tekst": "Skånsom voks til hele kroppen.",
+      "pris": "Fra 195 kr."
+    },
+    {
+      "titel": "Hudkonsultation",
+      "tekst": "Gratis vurdering og plan for din hud.",
+      "pris": "Gratis"
+    },
+    {
+      "titel": "Gavekort",
+      "tekst": "Den perfekte gave til en, der fortjener en pause.",
+      "pris": "Valgfrit beløb"
+    }
+  ],
+  "fordele": [
+    "Uddannede behandlere",
+    "Gratis hudkonsultation",
+    "Kvalitetsprodukter",
+    "Online booking"
+  ],
+  "faq": [
+    [
+      "Kan jeg booke online?",
+      "Ja, døgnet rundt. Du får en bekræftelse på sms."
+    ],
+    [
+      "Hvad hvis jeg skal aflyse?",
+      "Aflys gratis senest 24 timer før."
+    ],
+    [
+      "Er I til både mænd og kvinder?",
+      "Ja, alle er velkomne."
+    ],
+    [
+      "Kan jeg købe gavekort?",
+      "Ja, i klinikken eller på telefon."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Den mest afslappende time i lang tid.",
+      "Julie N.",
+      "Massage"
+    ],
+    [
+      "Min hud har aldrig været bedre.",
+      "Maja L.",
+      "Ansigtsbehandling"
+    ],
+    [
+      "Professionel og rar behandler.",
+      "Karina P.",
+      "Vipper og bryn"
+    ]
+  ]
+}

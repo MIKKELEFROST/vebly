@@ -1,0 +1,152 @@
+{
+  "cta": "Få et gratis tilbud",
+  "ctaKort": "Få et tilbud",
+  "headerKnap": "ring",
+  "badge": [
+    "Svar samme dag",
+    "Gratis tilbud uden binding"
+  ],
+  "trinOverskrift": "Tre trin. Ingen overraskelser.",
+  "trin": [
+    [
+      "Du kontakter os",
+      "Ring eller skriv, og fortæl kort hvad du har brug for."
+    ],
+    [
+      "Vi giver en fast pris",
+      "Vi kigger på opgaven og sender et klart tilbud. Ingen skjulte tillæg."
+    ],
+    [
+      "Vi går i gang",
+      "Til den aftalte tid og pris, og vi rydder op efter os."
+    ]
+  ],
+  "band": [
+    "Klar til at komme i gang?",
+    "Få et gratis tilbud. Vi svarer samme dag."
+  ],
+  "vaerdier": [
+    [
+      "Ordentligt håndværk",
+      "Vi gør det rigtigt første gang, så du ikke skal tænke på det igen."
+    ],
+    [
+      "Klar besked",
+      "Fast pris, en aftalt dato og én fast kontaktperson hele vejen."
+    ],
+    [
+      "Respekt for dit hjem",
+      "Vi dækker af, holder rent undervejs og rydder op, når vi går."
+    ]
+  ],
+  "opgaverTekst": "Opgaver løst",
+  "ansatteTekst": "Faglærte medarbejdere",
+  "kontaktOverskrift": "Få et gratis tilbud.",
+  "kontaktTekst": "Fortæl kort om opgaven, så vender vi tilbage samme dag med en fast pris.",
+  "formValg": "Hvad drejer det sig om?",
+  "formBesked": "Beskriv opgaven",
+  "formKnap": "Send forespørgsel",
+  "tider": [
+    [
+      "Mandag–torsdag",
+      "7–16"
+    ],
+    [
+      "Fredag",
+      "7–14"
+    ],
+    [
+      "Weekend",
+      "Efter aftale"
+    ]
+  ],
+  "trust": [
+    "Fast pris før vi går i gang",
+    "Faglært og forsikret",
+    "{{ERFARING}} års erfaring",
+    "Ryddet op, når vi går"
+  ],
+  "fag": "Tømrer",
+  "farve": "#6b4a2f",
+  "overskrift": "Bygget til at holde.",
+  "intro": "Tag, terrasser, tilbygninger og renovering i {{BY}} og omegn. Fast pris, faglærte tømrere og styr på tidsplanen.",
+  "ydelserForside": "Det bygger vi.",
+  "ydelserOverskrift": "Alt inden for tømrerarbejde.",
+  "ydelserIntro": "Fra en ny terrasse til en hel tilbygning. Vi giver en fast pris og en realistisk tidsplan.",
+  "omOverskrift": "Tømrere, der tænker sig om.",
+  "omKort": "{{KORT}} har bygget i {{BY}} og omegn siden {{AAR}}. Vi tager os af hele opgaven, også de andre håndværkere.",
+  "omLang": "{{KORT}} blev startet i {{AAR}}. Vi er faglærte tømrere, der går op i at gøre tingene rigtigt. Ved større opgaver koordinerer vi med murer, elektriker og VVS, så du kun har én at ringe til.",
+  "ydelser": [
+    {
+      "titel": "Tag og tagrenovering",
+      "tekst": "Nyt tag, efterisolering og udskiftning af undertag.",
+      "pris": "Fast pris efter besigtigelse"
+    },
+    {
+      "titel": "Terrasser",
+      "tekst": "Træ- og kompositterrasser bygget på et solidt fundament.",
+      "pris": "Fra 1.400 kr./m²"
+    },
+    {
+      "titel": "Tilbygning og carport",
+      "tekst": "Ekstra plads til familien eller bilen, fra tegning til færdig.",
+      "pris": "Fast pris efter besigtigelse"
+    },
+    {
+      "titel": "Vinduer og døre",
+      "tekst": "Udskiftning og montering af vinduer, døre og ovenlys.",
+      "pris": "Fra 4.500 kr. pr. vindue"
+    },
+    {
+      "titel": "Køkken og indretning",
+      "tekst": "Montering af køkken, skabe og lofter.",
+      "pris": "Efter aftale"
+    },
+    {
+      "titel": "Reparationer",
+      "tekst": "Små og store reparationer, også efter storm og skader.",
+      "pris": "Fra 595 kr./time"
+    }
+  ],
+  "fordele": [
+    "Faglærte tømrere",
+    "Fast pris og tidsplan",
+    "Vi koordinerer andre håndværkere",
+    "Medlem af Byggegarantiordningen"
+  ],
+  "faq": [
+    [
+      "Hvad koster en ny terrasse?",
+      "En træterrasse på 25 m² ligger typisk mellem 30.000 og 45.000 kr. inkl. fundament. Vi giver en fast pris efter et gratis besøg."
+    ],
+    [
+      "Søger I selv byggetilladelse?",
+      "Ja, vi hjælper med tegninger og ansøgning til kommunen, når det er nødvendigt."
+    ],
+    [
+      "Hvor lang ventetid er der?",
+      "Typisk 2–4 uger på mindre opgaver. Større projekter planlægger vi sammen."
+    ],
+    [
+      "Kan jeg få håndværkerfradrag?",
+      "Ja, på arbejdslønnen ved en lang række opgaver i din bolig."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Ny terrasse på fire dage. Flot arbejde og rigtig god kommunikation.",
+      "Mads K.",
+      "Terrasse, {{BY}}"
+    ],
+    [
+      "De tog sig af alt med tilbygningen, også elektrikeren. Holdt både pris og tid.",
+      "Familien Jensen",
+      "Tilbygning"
+    ],
+    [
+      "Hurtig hjælp efter stormen. Taget var tæt samme dag.",
+      "Birgit L.",
+      "Reparation, {{BY}}"
+    ]
+  ]
+}

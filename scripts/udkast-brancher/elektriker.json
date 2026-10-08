@@ -1,0 +1,152 @@
+{
+  "cta": "Få et gratis tilbud",
+  "ctaKort": "Få et tilbud",
+  "headerKnap": "ring",
+  "badge": [
+    "Akut hjælp samme dag",
+    "Autoriseret el-installatør"
+  ],
+  "trinOverskrift": "Tre trin. Ingen overraskelser.",
+  "trin": [
+    [
+      "Du kontakter os",
+      "Ring eller skriv, og fortæl kort hvad du har brug for."
+    ],
+    [
+      "Vi giver en fast pris",
+      "Vi kigger på opgaven og sender et klart tilbud. Ingen skjulte tillæg."
+    ],
+    [
+      "Vi går i gang",
+      "Til den aftalte tid og pris, og vi rydder op efter os."
+    ]
+  ],
+  "band": [
+    "Klar til at komme i gang?",
+    "Få et gratis tilbud. Vi svarer samme dag."
+  ],
+  "vaerdier": [
+    [
+      "Ordentligt håndværk",
+      "Vi gør det rigtigt første gang, så du ikke skal tænke på det igen."
+    ],
+    [
+      "Klar besked",
+      "Fast pris, en aftalt dato og én fast kontaktperson hele vejen."
+    ],
+    [
+      "Respekt for dit hjem",
+      "Vi dækker af, holder rent undervejs og rydder op, når vi går."
+    ]
+  ],
+  "opgaverTekst": "Opgaver løst",
+  "ansatteTekst": "Faglærte medarbejdere",
+  "kontaktOverskrift": "Få et gratis tilbud.",
+  "kontaktTekst": "Fortæl kort om opgaven, så vender vi tilbage samme dag med en fast pris.",
+  "formValg": "Hvad drejer det sig om?",
+  "formBesked": "Beskriv opgaven",
+  "formKnap": "Send forespørgsel",
+  "tider": [
+    [
+      "Mandag–torsdag",
+      "7–16"
+    ],
+    [
+      "Fredag",
+      "7–14"
+    ],
+    [
+      "Weekend",
+      "Efter aftale"
+    ]
+  ],
+  "trust": [
+    "Autoriseret el-installatør",
+    "Akut hjælp samme dag",
+    "{{ERFARING}} års erfaring",
+    "Fast pris på større opgaver"
+  ],
+  "fag": "Elektriker",
+  "farve": "#a87c00",
+  "overskrift": "Strøm på. Samme dag.",
+  "intro": "Autoriseret elektriker i {{BY}} og omegn. Fejlfinding, el-tavler, ladestandere og alt derimellem.",
+  "ydelserForside": "Det klarer vi.",
+  "ydelserOverskrift": "Alt inden for el.",
+  "ydelserIntro": "Fra en ny stikkontakt til hele installationen i et nyt hus. Altid sikkert og efter reglerne.",
+  "omOverskrift": "Elektrikere, du kan stole på.",
+  "omKort": "{{KORT}} har lavet el i {{BY}} siden {{AAR}}. Autoriserede, forsikrede og med styr på reglerne.",
+  "omLang": "{{KORT}} blev startet i {{AAR}}. Vi laver el til private, erhverv og boligforeninger og går op i, at alt er sikkert, pænt og dokumenteret.",
+  "ydelser": [
+    {
+      "titel": "Fejlfinding",
+      "tekst": "Sprunget HPFI eller strøm, der går. Vi finder fejlen hurtigt.",
+      "pris": "Fra 695 kr. i udkald"
+    },
+    {
+      "titel": "Ladestander",
+      "tekst": "Montering af ladeboks til elbil, klar til tilskud og afregning.",
+      "pris": "Fra 9.995 kr. inkl. montering"
+    },
+    {
+      "titel": "El-tavle",
+      "tekst": "Ny eller opdateret tavle med moderne sikkerhed.",
+      "pris": "Fra 7.500 kr."
+    },
+    {
+      "titel": "Belysning",
+      "tekst": "Spots, udendørslys og smart home, der gør hjemmet hyggeligt.",
+      "pris": "Fra 595 kr./time"
+    },
+    {
+      "titel": "Nybyg og renovering",
+      "tekst": "Hele el-installationen i nybyggeri og ombygning.",
+      "pris": "Fast pris efter tegning"
+    },
+    {
+      "titel": "Solceller",
+      "tekst": "Installation af solceller og batteri, så du bruger din egen strøm.",
+      "pris": "Efter aftale"
+    }
+  ],
+  "fordele": [
+    "Autoriseret og forsikret",
+    "Al el dokumenteret efter reglerne",
+    "Fast pris på større opgaver",
+    "Pænt arbejde, ingen ledninger hængende"
+  ],
+  "faq": [
+    [
+      "Hvad koster en ladestander?",
+      "En typisk ladeboks inkl. montering koster fra 9.995 kr. afhængigt af afstanden til tavlen."
+    ],
+    [
+      "Kommer I samme dag?",
+      "Ved strømsvigt og fejl prøver vi altid at komme samme dag."
+    ],
+    [
+      "Skal min gamle tavle skiftes?",
+      "Har du sikringer med skruer eller ingen HPFI-relæ, anbefaler vi det. Vi tjekker den gratis, når vi alligevel er ude."
+    ],
+    [
+      "Kan jeg få håndværkerfradrag?",
+      "Ja, blandt andet på installation af ladestander og reparation af el i hjemmet."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Strømmen gik fredag aften, og de var her inden for en time.",
+      "Rasmus D.",
+      "Fejlfinding, {{BY}}"
+    ],
+    [
+      "Ladestanderen sat op på to timer, og alt var forklaret.",
+      "Maria T.",
+      "Ladestander"
+    ],
+    [
+      "Ny tavle og spots i hele huset. Pænt og ryddeligt.",
+      "Familien Holm",
+      "Renovering"
+    ]
+  ]
+}

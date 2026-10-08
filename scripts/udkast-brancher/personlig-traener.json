@@ -1,0 +1,152 @@
+{
+  "cta": "Book en gratis prøvetime",
+  "ctaKort": "Book prøvetime",
+  "headerKnap": "book",
+  "badge": [
+    "Gratis prøvetime",
+    "Ingen binding"
+  ],
+  "trinOverskrift": "Nemt fra start til slut.",
+  "band": [
+    "Klar til at komme i gang?",
+    "Book en gratis prøvetime i dag."
+  ],
+  "kontaktOverskrift": "Book en gratis prøvetime.",
+  "kontaktTekst": "Vælg behandling og skriv, hvornår det passer dig, så bekræfter vi tiden hurtigst muligt.",
+  "formValg": "Hvad er du interesseret i?",
+  "formBesked": "Fortæl kort om dit mål",
+  "formKnap": "Send booking",
+  "opgaverTekst": "Klienter trænet",
+  "fag": "Personlig træner",
+  "farve": "#5b3fd0",
+  "overskrift": "Stærkere på 12 uger.",
+  "intro": "Personlig træning og små hold i {{BY}}. En plan, der passer til din hverdag, og en træner, der holder dig til ilden.",
+  "trust": [
+    "Gratis prøvetime",
+    "Uddannet personlig træner",
+    "Plan tilpasset dig",
+    "Ingen binding"
+  ],
+  "trin": [
+    [
+      "Gratis prøvetime",
+      "Vi snakker mål og tester, hvor du er i dag."
+    ],
+    [
+      "Din plan",
+      "Du får en plan til træning og kost, der passer til din hverdag."
+    ],
+    [
+      "Resultater",
+      "Vi følger op hver uge, så du når dit mål."
+    ]
+  ],
+  "vaerdier": [
+    [
+      "Realistiske mål",
+      "Planer, der passer til et travlt liv."
+    ],
+    [
+      "Opfølgning",
+      "Vi tjekker ind hver uge, så du holder fast."
+    ],
+    [
+      "Glæde ved træning",
+      "Træning skal være noget, du ser frem til."
+    ]
+  ],
+  "ansatteTekst": "Trænere",
+  "tider": [
+    [
+      "Mandag–fredag",
+      "6–20"
+    ],
+    [
+      "Lørdag",
+      "8–14"
+    ],
+    [
+      "Søndag",
+      "Efter aftale"
+    ]
+  ],
+  "ydelserForside": "Sådan træner vi.",
+  "ydelserOverskrift": "Forløb og priser.",
+  "ydelserIntro": "Alene, med en ven eller på små hold.",
+  "omOverskrift": "Træning, der passer til livet.",
+  "omKort": "{{KORT}} har trænet klienter i {{BY}} siden {{AAR}}. Uddannede trænere med fokus på holdbare resultater.",
+  "omLang": "{{KORT}} blev startet i {{AAR}}. Vi hjælper travle mennesker med at blive stærkere og få mere energi, uden at træning tager over.",
+  "ydelser": [
+    {
+      "titel": "Personlig træning",
+      "tekst": "1:1 træning med fuldt fokus på dig.",
+      "pris": "Fra 595 kr. pr. time"
+    },
+    {
+      "titel": "12-ugers forløb",
+      "tekst": "Træning, kostplan og ugentlig opfølgning.",
+      "pris": "6.995 kr."
+    },
+    {
+      "titel": "Træning for to",
+      "tekst": "Træn sammen med en ven og del prisen.",
+      "pris": "Fra 395 kr. pr. person"
+    },
+    {
+      "titel": "Små hold",
+      "tekst": "Max 6 personer, så du stadig får vejledning.",
+      "pris": "Fra 695 kr./md."
+    },
+    {
+      "titel": "Online coaching",
+      "tekst": "Program og opfølgning i app, træn hvor du vil.",
+      "pris": "Fra 495 kr./md."
+    },
+    {
+      "titel": "Kostvejledning",
+      "tekst": "Enkel kost, der passer til din hverdag.",
+      "pris": "Fra 995 kr."
+    }
+  ],
+  "fordele": [
+    "Gratis prøvetime",
+    "Ugentlig opfølgning",
+    "Plan til træning og kost",
+    "Ingen binding"
+  ],
+  "faq": [
+    [
+      "Skal jeg være i form for at starte?",
+      "Nej, vi starter, hvor du er."
+    ],
+    [
+      "Hvor træner vi?",
+      "I vores studie i {{BY}}, udendørs eller hjemme hos dig."
+    ],
+    [
+      "Er der binding?",
+      "Nej, du kan stoppe, når du vil."
+    ],
+    [
+      "Hvad koster et forløb?",
+      "Et 12-ugers forløb koster 6.995 kr. inkl. kostplan."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Tabt 9 kilo og har mere energi end i årevis.",
+      "Jakob R.",
+      "12-ugers forløb"
+    ],
+    [
+      "Endelig en træner, der forstår en travl hverdag.",
+      "Mette B.",
+      "Personlig træning"
+    ],
+    [
+      "Små hold med god stemning og masser af hjælp.",
+      "Anders K.",
+      "Holdtræning"
+    ]
+  ]
+}

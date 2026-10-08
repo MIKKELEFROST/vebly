@@ -60,6 +60,38 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/:kunde([a-z0-9]+(?:-[a-z0-9]+)*)-:side(forside|ydelser|om-os|kontakt|priser|galleri|booking|faq|tilbud)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    },
+    {
+      "source": "/udkast/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/:kunde([a-z0-9]+(?:-[a-z0-9]+)*)-:side(forside|ydelser|om-os|kontakt|priser|galleri|booking|faq|tilbud)",
+      "destination": "/udkast/:kunde/:side"
     }
   ]
 }

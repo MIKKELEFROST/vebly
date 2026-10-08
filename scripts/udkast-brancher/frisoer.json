@@ -1,0 +1,152 @@
+{
+  "cta": "Book en tid",
+  "ctaKort": "Book tid",
+  "headerKnap": "book",
+  "badge": [
+    "Ledige tider i denne uge",
+    "Book online på 1 minut"
+  ],
+  "trinOverskrift": "Nemt fra start til slut.",
+  "band": [
+    "Klar til at booke?",
+    "Find en tid, der passer dig."
+  ],
+  "kontaktOverskrift": "Book en tid.",
+  "kontaktTekst": "Vælg behandling og skriv, hvornår det passer dig, så bekræfter vi tiden hurtigst muligt.",
+  "formValg": "Hvad vil du booke?",
+  "formBesked": "Hvornår passer det dig?",
+  "formKnap": "Send booking",
+  "opgaverTekst": "Glade kunder",
+  "fag": "Frisør",
+  "farve": "#9c3d5a",
+  "overskrift": "Hår, der holder hele ugen.",
+  "intro": "Klip, farve og styling i hjertet af {{BY}}. Book online på et minut.",
+  "trust": [
+    "Book online døgnet rundt",
+    "Erfarne frisører",
+    "Kun kvalitetsprodukter",
+    "Gratis konsultation"
+  ],
+  "trin": [
+    [
+      "Vælg behandling",
+      "Klip, farve eller noget helt nyt."
+    ],
+    [
+      "Book en tid",
+      "Online døgnet rundt eller ring til os."
+    ],
+    [
+      "Læn dig tilbage",
+      "Vi tager os af resten, med kaffe på huset."
+    ]
+  ],
+  "vaerdier": [
+    [
+      "Tid til dig",
+      "Vi tager os god tid til at forstå, hvad du ønsker."
+    ],
+    [
+      "Kvalitet",
+      "Vi bruger kun produkter, vi selv ville bruge."
+    ],
+    [
+      "Hyggelig salon",
+      "En rolig salon, hvor du kan slappe af."
+    ]
+  ],
+  "ansatteTekst": "Frisører",
+  "tider": [
+    [
+      "Mandag–fredag",
+      "9–18"
+    ],
+    [
+      "Lørdag",
+      "9–14"
+    ],
+    [
+      "Søndag",
+      "Lukket"
+    ]
+  ],
+  "ydelserForside": "Det kan vi.",
+  "ydelserOverskrift": "Behandlinger og priser.",
+  "ydelserIntro": "Klip, farve og styling til hele familien.",
+  "omOverskrift": "En salon med tid til dig.",
+  "omKort": "{{KORT}} har klippet i {{BY}} siden {{AAR}}. Vi er et lille hold af erfarne frisører.",
+  "omLang": "{{KORT}} blev åbnet i {{AAR}}. Vi tror på, at et godt resultat starter med en god snak, og at du skal gå herfra og have det godt.",
+  "ydelser": [
+    {
+      "titel": "Dameklip",
+      "tekst": "Inkl. vask, klip og føn.",
+      "pris": "495 kr."
+    },
+    {
+      "titel": "Herreklip",
+      "tekst": "Klip med saks eller maskine, inkl. vask.",
+      "pris": "345 kr."
+    },
+    {
+      "titel": "Børneklip",
+      "tekst": "For børn under 12 år.",
+      "pris": "245 kr."
+    },
+    {
+      "titel": "Farve og striber",
+      "tekst": "Helfarve, striber eller balayage.",
+      "pris": "Fra 795 kr."
+    },
+    {
+      "titel": "Styling",
+      "tekst": "Opsætning til fest, bryllup eller konfirmation.",
+      "pris": "Fra 495 kr."
+    },
+    {
+      "titel": "Skæg",
+      "tekst": "Trimning og formning af skæg.",
+      "pris": "195 kr."
+    }
+  ],
+  "fordele": [
+    "Online booking døgnet rundt",
+    "Erfarne frisører",
+    "Kvalitetsprodukter",
+    "Gratis konsultation før farve"
+  ],
+  "faq": [
+    [
+      "Kan jeg booke online?",
+      "Ja, døgnet rundt. Du får en bekræftelse på sms."
+    ],
+    [
+      "Hvad hvis jeg skal aflyse?",
+      "Aflys gratis senest 24 timer før."
+    ],
+    [
+      "Tager I imod drop-in?",
+      "Ja, når der er ledige tider. Ring gerne først."
+    ],
+    [
+      "Kan jeg købe gavekort?",
+      "Ja, i salonen eller på telefon."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Bedste klip jeg har fået i årevis. Hun lyttede virkelig.",
+      "Sofie K.",
+      "Dameklip"
+    ],
+    [
+      "Hyggelig salon og altid til tiden.",
+      "Martin J.",
+      "Herreklip"
+    ],
+    [
+      "Farven blev præcis som jeg ønskede.",
+      "Camilla H.",
+      "Balayage"
+    ]
+  ]
+}

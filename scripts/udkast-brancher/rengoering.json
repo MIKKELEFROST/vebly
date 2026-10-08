@@ -1,0 +1,152 @@
+{
+  "cta": "Få et gratis tilbud",
+  "ctaKort": "Få et tilbud",
+  "headerKnap": "ring",
+  "badge": [
+    "Fast pris pr. besøg",
+    "Samme person hver gang"
+  ],
+  "trinOverskrift": "Tre trin. Ingen overraskelser.",
+  "trin": [
+    [
+      "Fortæl om dit hjem",
+      "Størrelse, ønsker og hvor ofte. Det tager 2 minutter."
+    ],
+    [
+      "Få en fast pris",
+      "Du får en pris pr. besøg uden overraskelser."
+    ],
+    [
+      "Vi kommer",
+      "Til den aftalte tid, med eget udstyr og miljøvenlige midler."
+    ]
+  ],
+  "band": [
+    "Klar til at komme i gang?",
+    "Få et gratis tilbud. Vi svarer samme dag."
+  ],
+  "vaerdier": [
+    [
+      "Faste folk",
+      "Samme person hver gang, så du ved, hvem der er i dit hjem."
+    ],
+    [
+      "Grundighed",
+      "Vi følger en fast tjekliste, så intet bliver glemt."
+    ],
+    [
+      "Miljøvenligt",
+      "Vi bruger svanemærkede midler og eget udstyr."
+    ]
+  ],
+  "opgaverTekst": "Rengøringer om måneden",
+  "ansatteTekst": "Faste medarbejdere",
+  "kontaktOverskrift": "Få en fast pris.",
+  "kontaktTekst": "Fortæl kort om dit hjem eller kontor, så sender vi en fast pris samme dag.",
+  "formValg": "Hvad drejer det sig om?",
+  "formBesked": "Fortæl om dit hjem eller kontor (m², hvor ofte)",
+  "formKnap": "Send forespørgsel",
+  "tider": [
+    [
+      "Mandag–fredag",
+      "7–17"
+    ],
+    [
+      "Lørdag",
+      "8–13"
+    ],
+    [
+      "Søndag",
+      "Lukket"
+    ]
+  ],
+  "trust": [
+    "Fast pris pr. besøg",
+    "Samme faste person",
+    "Forsikret og screenet personale",
+    "Ingen binding"
+  ],
+  "fag": "Rengøring",
+  "farve": "#2f7d8c",
+  "overskrift": "Rent hjem. Uden besvær.",
+  "intro": "Fast rengøring, flytterengøring og erhverv i {{BY}} og omegn. Samme faste person hver gang og fast pris.",
+  "ydelserForside": "Det gør vi rent.",
+  "ydelserOverskrift": "Rengøring, der passer til dig.",
+  "ydelserIntro": "Hver uge, hver anden uge eller bare én gang. Du vælger, vi klarer resten.",
+  "omOverskrift": "Rengøring med omtanke.",
+  "omKort": "{{KORT}} har gjort rent i {{BY}} siden {{AAR}}. Vores faste folk er screenet, uddannede og forsikrede.",
+  "omLang": "{{KORT}} blev startet i {{AAR}}. Vi tror på faste aftaler med faste folk, så du altid ved, hvem der kommer, og hvad der bliver gjort.",
+  "ydelser": [
+    {
+      "titel": "Fast privat rengøring",
+      "tekst": "Hver uge eller hver anden uge, med samme faste person.",
+      "pris": "Fra 349 kr. pr. besøg"
+    },
+    {
+      "titel": "Flytterengøring",
+      "tekst": "Grundig rengøring, så du får dit depositum tilbage.",
+      "pris": "Fra 2.995 kr."
+    },
+    {
+      "titel": "Erhvervsrengøring",
+      "tekst": "Kontorer, klinikker og butikker, også uden for åbningstid.",
+      "pris": "Fast månedspris"
+    },
+    {
+      "titel": "Hovedrengøring",
+      "tekst": "En ekstra grundig gang, fx før jul eller efter renovering.",
+      "pris": "Fra 1.495 kr."
+    },
+    {
+      "titel": "Vinduespudsning",
+      "tekst": "Pudsning ude og inde, også rammer og karme.",
+      "pris": "Fra 295 kr."
+    },
+    {
+      "titel": "Trappevask",
+      "tekst": "Faste aftaler med boligforeninger og ejerforeninger.",
+      "pris": "Efter aftale"
+    }
+  ],
+  "fordele": [
+    "Samme faste person hver gang",
+    "Forsikret og screenet personale",
+    "Eget udstyr og svanemærkede midler",
+    "Ingen binding"
+  ],
+  "faq": [
+    [
+      "Skal jeg være hjemme?",
+      "Nej, mange giver os en nøgle. Vi opbevarer den sikkert og uden adresse på."
+    ],
+    [
+      "Kan jeg få servicefradrag?",
+      "Ja, rengøring i hjemmet giver servicefradrag."
+    ],
+    [
+      "Hvad hvis jeg ikke er tilfreds?",
+      "Så kommer vi tilbage og gør det om uden ekstra pris."
+    ],
+    [
+      "Er der binding?",
+      "Nej, du kan opsige med 14 dages varsel."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Samme søde dame hver gang, og huset skinner.",
+      "Pia R.",
+      "Fast rengøring, {{BY}}"
+    ],
+    [
+      "Flytterengøringen blev godkendt uden en eneste bemærkning.",
+      "Jonas B.",
+      "Flytterengøring"
+    ],
+    [
+      "Vores kontor er altid klar mandag morgen.",
+      "Revisorhuset",
+      "Erhverv, {{BY}}"
+    ]
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "cta": "Book en tid",
+  "ctaKort": "Book tid",
+  "headerKnap": "book",
+  "badge": [
+    "Ledige tider i denne uge",
+    "Book online på 1 minut"
+  ],
+  "trinOverskrift": "Nemt fra start til slut.",
+  "band": [
+    "Klar til at booke?",
+    "Find en tid, der passer dig."
+  ],
+  "kontaktOverskrift": "Book en tid.",
+  "kontaktTekst": "Vælg behandling og skriv, hvornår det passer dig, så bekræfter vi tiden hurtigst muligt.",
+  "formValg": "Hvad vil du booke?",
+  "formBesked": "Hvornår passer det dig?",
+  "formKnap": "Send booking",
+  "opgaverTekst": "Behandlinger om året",
+  "fag": "Fysioterapeut",
+  "farve": "#2b4c7e",
+  "overskrift": "Fri for smerter. Hurtigere.",
+  "intro": "Behandling af ryg, nakke, skader og genoptræning i {{BY}}. Kort ventetid og ingen henvisning nødvendig.",
+  "trust": [
+    "Ingen henvisning nødvendig",
+    "Kort ventetid",
+    "Tilskud fra Sygeforsikringen danmark",
+    "Autoriserede fysioterapeuter"
+  ],
+  "trin": [
+    [
+      "Book en tid",
+      "Online eller på telefon, uden henvisning."
+    ],
+    [
+      "Undersøgelse",
+      "Vi finder årsagen og laver en plan sammen med dig."
+    ],
+    [
+      "Behandling og træning",
+      "Målrettet behandling og øvelser, du kan lave hjemme."
+    ]
+  ],
+  "vaerdier": [
+    [
+      "Årsagen, ikke kun symptomet",
+      "Vi finder ud af, hvorfor det gør ondt."
+    ],
+    [
+      "Aktiv behandling",
+      "Du får øvelser, der virker i hverdagen."
+    ],
+    [
+      "Tid til dig",
+      "Altid hele den tid, du har booket."
+    ]
+  ],
+  "ansatteTekst": "Fysioterapeuter",
+  "tider": [
+    [
+      "Mandag–torsdag",
+      "7–19"
+    ],
+    [
+      "Fredag",
+      "7–16"
+    ],
+    [
+      "Weekend",
+      "Lukket"
+    ]
+  ],
+  "ydelserForside": "Det behandler vi.",
+  "ydelserOverskrift": "Behandlinger og priser.",
+  "ydelserIntro": "Fra akutte skader til langvarige smerter og genoptræning.",
+  "omOverskrift": "Fysioterapi med fokus på dig.",
+  "omKort": "{{KORT}} har behandlet patienter i {{BY}} siden {{AAR}}. Vi er autoriserede fysioterapeuter med speciale i ryg, nakke og idrætsskader.",
+  "omLang": "{{KORT}} blev åbnet i {{AAR}}. Vi kombinerer behandling og træning, så du ikke bare bliver smertefri, men også bliver ved med at være det.",
+  "ydelser": [
+    {
+      "titel": "Første konsultation",
+      "tekst": "Grundig undersøgelse og plan for dit forløb.",
+      "pris": "595 kr."
+    },
+    {
+      "titel": "Behandling",
+      "tekst": "Opfølgende behandling, 30 minutter.",
+      "pris": "445 kr."
+    },
+    {
+      "titel": "Ryg og nakke",
+      "tekst": "Behandling af smerter, låsninger og spændinger.",
+      "pris": "Fra 445 kr."
+    },
+    {
+      "titel": "Idrætsskader",
+      "tekst": "Knæ, ankler, skuldre og alt det andet.",
+      "pris": "Fra 445 kr."
+    },
+    {
+      "titel": "Genoptræning",
+      "tekst": "Efter operation eller længere sygdom.",
+      "pris": "Efter aftale"
+    },
+    {
+      "titel": "Holdtræning",
+      "tekst": "Træning på små hold med instruktion.",
+      "pris": "Fra 995 kr. for 8 gange"
+    }
+  ],
+  "fordele": [
+    "Ingen henvisning nødvendig",
+    "Kort ventetid",
+    "Tilskud fra Sygeforsikringen danmark",
+    "Øvelser du kan lave hjemme"
+  ],
+  "faq": [
+    [
+      "Skal jeg have en henvisning?",
+      "Nej, du kan booke direkte. Med henvisning fra lægen får du tilskud fra det offentlige."
+    ],
+    [
+      "Giver Sygeforsikringen danmark tilskud?",
+      "Ja, du får tilskud til behandlinger, afhængigt af din gruppe."
+    ],
+    [
+      "Hvor lang tid er der til en tid?",
+      "Typisk få dage. Akutte tider samme uge."
+    ],
+    [
+      "Hvad skal jeg have på?",
+      "Behageligt tøj, du kan bevæge dig i."
+    ]
+  ],
+  "anmeldelser": [
+    [
+      "Efter tre behandlinger var min ryg som ny.",
+      "Peter V.",
+      "Rygsmerter"
+    ],
+    [
+      "God forklaring og øvelser, der faktisk virker.",
+      "Hanne S.",
+      "Nakke"
+    ],
+    [
+      "Fik mig tilbage på banen efter en knæskade.",
+      "Oliver T.",
+      "Idrætsskade"
+    ]
+  ]
+}
