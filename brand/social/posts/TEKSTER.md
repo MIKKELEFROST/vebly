@@ -127,7 +127,7 @@ Mangler der noget? Send os linket, så kigger vi gratis på din side.
 
 ↓ Gratis tilbud via linket i bio · hej@webleads.dk
 
-# Opslag 13–15 (postes automatisk 19., 21. og 23. oktober)
+# Opslag 13–15 (13 er postet, 14 og 15 postes automatisk 19. og 21. oktober)
 
 Ligger i indholdskalenderen. Reels med samme budskab ligger i `brand/social/stories/`.
 
@@ -157,6 +157,74 @@ Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi vis
 Og siden er din. Ingen binding og intet abonnement på selve hjemmesiden.
 
 ↓ Gratis tilbud via linket i bio.
+
+# Opslag 16–19 (postes automatisk 23., 26., 28. og 30. oktober)
+
+Ligger i indholdskalenderen med reels samme dag kl. 20.00. Hashtags ligger i kolonnen "Første kommentar", så Make sætter dem i første kommentar i stedet for i teksten.
+17 og 19 er karruseller: slides ligger som JPG i `brand/social/karruseller/`.
+
+## 16 · Vi laver også content
+Vi laver også content.
+
+Video, billeder og alt derimellem. Til dine reels, stories, opslag, annoncer og din hjemmeside.
+
+Du passer dit fag. Vi sørger for, at du bliver set.
+
+↓ Skriv til os via linket i bio.
+
+Første kommentar: #content #indhold #video #billeder #reels #socialemedier #småvirksomheder #lokalvirksomhed #webleads
+
+## 17 · Alt det her er med i prisen (karrusel, 5 slides)
+Alt det her er med i prisen.
+
+12 ting, du ikke skal betale ekstra for. Fra responsivt design og Google-optimering til SSL, GDPR og din Google-profil.
+
+Fra 3.000 kr. ekskl. moms. Betales én gang. Klar på 7 dage.
+
+Swipe og se det hele.
+
+↓ Gratis tilbud via linket i bio.
+
+Første kommentar: #hjemmeside #webdesign #seo #småvirksomheder #selvstændig #servicefag #lokalvirksomhed #danskvirksomhed #webleads
+
+## 18 · Du ejer din hjemmeside
+Hvem ejer din hjemmeside?
+
+Hos os gør du. Ingen binding og intet abonnement på selve siden. Siden og indholdet er dit.
+
+Du betaler én gang. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.
+
+Har du en gammel side, flytter vi den.
+
+↓ Gratis tilbud via linket i bio.
+
+Første kommentar: #hjemmeside #ingenbinding #webdesign #selvstændig #småvirksomheder #iværksætter #lokalvirksomhed #webleads
+
+## 19 · Mere end en hjemmeside (karrusel, 6 slides)
+Mere end en hjemmeside.
+
+Vi kan også hjælpe med:
+SEO fra 999 kr./md.
+Annoncering fra 999 kr./md. pr. kanal
+Interne systemer fra 14.999 kr.
+Automations fra 4.999 kr.
+
+Vælg det, du har brug for. Så giver vi dig en fast pris. Alle priser er ekskl. moms.
+
+Swipe og se, hvad der er med.
+
+↓ Gratis tilbud via linket i bio.
+
+Første kommentar: #seo #googleads #annoncering #automation #hjemmeside #småvirksomheder #selvstændig #lokalvirksomhed #webleads
+
+## Reels 16–19 (kl. 20.00 samme dag, Instagram og Facebook)
+
+| Reel | Video | Instagram-tekst |
+|---|---|---|
+| 16 | `story-content.mp4` | Video, billeder og alt derimellem. Vi laver content til dine reels, stories og opslag. ↓ Skriv til os via linket i bio. |
+| 17 | `story-17-alt-er-med.mp4` | Responsivt design, Google-optimering, SSL, GDPR, Google-profil og meget mere. Alt er med fra 3.000 kr. ↓ Gratis tilbud via linket i bio. |
+| 18 | `story-18-du-ejer-siden.mp4` | Ingen binding. Intet abonnement på selve siden. Din hjemmeside er din. ↓ Gratis tilbud via linket i bio. |
+| 19 | `story-19-mere-end-en-hjemmeside.mp4` | SEO, annoncering, interne systemer og automations. Vælg det, du har brug for, og få en fast pris. ↓ Gratis tilbud via linket i bio. |
 
 ---
 

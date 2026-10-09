@@ -253,6 +253,67 @@ Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=soc
 #hjemmeside #småvirksomheder #webleads
 ```
 
+## 16 · Vi laver også content
+```
+Vi laver også content.
+
+Video, billeder og alt derimellem. Til dine reels, stories, opslag, annoncer og din hjemmeside.
+
+Du passer dit fag. Vi sørger for, at du bliver set.
+
+Skriv til os → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt
+
+#content #socialemedier #webleads
+```
+
+## 17 · Alt det her er med i prisen (5 billeder)
+```
+Alt det her er med i prisen.
+
+12 ting, du ikke skal betale ekstra for. Fra responsivt design og Google-optimering til SSL, GDPR og din Google-profil. Se dem alle på billederne.
+
+Fra 3.000 kr. ekskl. moms. Betales én gang. Klar på 7 dage.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#pris
+
+#hjemmeside #webdesign #webleads
+```
+
+## 18 · Du ejer din hjemmeside
+```
+Hvem ejer din hjemmeside?
+
+Hos os gør du. Ingen binding og intet abonnement på selve siden. Siden og indholdet er dit.
+
+Du betaler én gang. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.
+
+Har du en gammel side, flytter vi den.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#pris
+
+#hjemmeside #selvstændig #webleads
+```
+
+## 19 · Mere end en hjemmeside (6 billeder)
+```
+Mere end en hjemmeside.
+
+Vi kan også hjælpe med:
+SEO fra 999 kr./md.
+Annoncering fra 999 kr./md. pr. kanal
+Interne systemer fra 14.999 kr.
+Automations fra 4.999 kr.
+
+Vælg det, du har brug for. Så giver vi dig en fast pris. Alle priser er ekskl. moms. Se, hvad der er med, på billederne.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#tilvalg
+
+#seo #annoncering #webleads
+```
+
+## Reels 16–19
+Samme tekst som på Instagram, men med link: `https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=reel` + `#kontakt` (16), `#pris` (17 og 18) eller `#tilvalg` (19). Teksterne står i kalenderen.
+
 ---
 
 ## Sådan poster du
