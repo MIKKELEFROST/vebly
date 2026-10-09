@@ -48,9 +48,9 @@ export function metaLeadFields() {
   return on ? { meta_consent: 'yes', meta_event_id: uid() } : {};
 }
 
-// Events from analytics.js that also go to Meta
+// Events from analytics.js that also go to Meta (a mapping may return nothing to skip one)
 const FROM_GA = {
-  scroll: p => ['Scroll', { percent: p.percent_scrolled }, true],
+  scroll: p => ([25, 50, 75, 90].includes(p.percent_scrolled) ? ['Scroll', { percent: p.percent_scrolled }, true] : null),
   cta_click: p => ['CTAClick', { button: p.button }, true],
   addon_add: p => ['CustomizeProduct', { content_name: p.addon }, false],
   addon_remove: p => ['RemoveAddon', { content_name: p.addon }, true],
@@ -64,9 +64,12 @@ const FROM_GA = {
 export function fromAnalytics(name, params = {}) {
   const map = FROM_GA[name];
   if (!map || !on) return;
-  const [event, p, custom] = map(params);
-  metaTrack(event, p, { custom });
+  const m = map(params);
+  if (m) metaTrack(m[0], m[1], { custom: m[2] });
 }
+
+// The banner's own statistics go to GA4 through analytics.js (no import, so no loop between the files)
+const ga = (name, params) => document.dispatchEvent(new CustomEvent('wl:track', { detail: { name, params } }));
 
 /* -------- Consent -------- */
 
@@ -116,8 +119,10 @@ const CSS = `
 @media (max-width:380px),(max-height:700px){.cc{left:10px;right:10px;bottom:10px;padding:16px 16px 14px;border-radius:20px;font-size:14px;line-height:1.45}.cc__t{font-size:19px}.cc__b{margin-top:12px}}
 @media (prefers-reduced-motion:reduce){.cc{transition:none}}`;
 
-function ask() {
+function ask(trigger = 'automatisk') {
   if (document.querySelector('.cc')) return;
+  const shown = performance.now();
+  ga('consent_view', { trigger });
   if (!document.querySelector('style[data-cc]')) {
     const st = document.createElement('style'); st.dataset.cc = ''; st.textContent = CSS; document.head.appendChild(st);
   }
@@ -130,6 +135,7 @@ function ask() {
     + '<div class="cc__b"><button type="button" data-v="denied">Nej tak</button><button type="button" data-v="granted">Ja tak</button></div>';
   el.addEventListener('click', e => {
     const b = e.target.closest('button[data-v]'); if (!b) return;
+    ga('consent_choice', { choice: b.dataset.v === 'granted' ? 'ja' : 'nej', trigger, seconds: Math.round((performance.now() - shown) / 1000) });
     save(b.dataset.v);
     if (b.dataset.v === 'granted') grant(); else revoke();
     el.classList.remove('is-in');
@@ -148,7 +154,7 @@ else if (!choice && !optOut) setTimeout(ask, document.querySelector('[data-loade
 
 document.addEventListener('click', e => {
   const t = e.target.closest && e.target.closest('[data-consent-open]');
-  if (t) { e.preventDefault(); ask(); return; }
+  if (t) { e.preventDefault(); ask('link'); return; }
   // Someone reaching out by text, e-mail or phone
   if (e.target.closest && e.target.closest('[data-ping], a[href^="sms:"], a[href^="mailto:"], a[href^="tel:"]')) metaTrack('Contact');
 });

@@ -75,8 +75,6 @@ chips.forEach(ch => ch.addEventListener('click', () => {
   let n = 0;
   grid.querySelectorAll('.case').forEach(el => { const show = f === 'alle' || el.dataset.group === f; el.hidden = !show; if (show) { n++; el.classList.add('is-in'); } });
   empty.hidden = n > 0;
-  track('cta_click', { button: `Referencer: Filter ${ch.textContent}` });
+  track('reference_filter', { filter: f, results: n });
 }));
-
-// CTA clicks
-document.addEventListener('click', e => { const el = e.target.closest && e.target.closest('[data-event]'); if (el) track('cta_click', { button: el.dataset.event }); });
+// Clicks, scroll and time are tracked by analytics.js

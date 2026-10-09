@@ -1,6 +1,7 @@
 // Shared behaviour for customer drafts.
-// Importing analytics sends a page_view, so GA4 shows when a customer opens their draft
-// (Rapporter → Sider, filter on the draft's address).
+// Importing analytics sends a page_view (page_type udkast, with trade, design and page) and
+// tracks clicks (udkast_click), scroll, sections and time, so we can see how a customer reads
+// their draft. The events below are the draft's own (README.md → Tracking).
 import { track } from '/assets/js/analytics.js';
 
 const hd = document.querySelector('[data-hd]');
@@ -20,10 +21,11 @@ const form = document.querySelector('[data-draft-form]');
 if (form) form.addEventListener('submit', e => {
   e.preventDefault();
   form.querySelector('[data-ok]').hidden = false;
+  track('udkast_form_try');
 });
 
 // Colour picker in the draft bar. The choice follows the customer to the other pages
-// and is sent to GA4 (cta_click, button "Udkast farve: #…") so we can see what they liked.
+// and is sent to GA4 (udkast_farve) so we can see what they liked.
 const swatches = [...document.querySelectorAll('[data-c]')];
 // One key per customer: the address without its page name
 const colourKey = 'udkast-farve:' + location.pathname.replace(/-(forside|ydelser|om-os|kontakt|priser|galleri|booking|faq|tilbud)$/, '').replace(/\/[a-z-]+(\.html)?$/, '');
@@ -39,7 +41,7 @@ const applyColour = (sw, save) => {
   const sw = swatches.find(s => s.dataset.c === saved);
   if (sw) applyColour(sw, false);
 }
-swatches.forEach(sw => sw.addEventListener('click', () => { applyColour(sw, true); track('cta_click', { button: 'Udkast farve: ' + sw.dataset.c }); }));
+swatches.forEach(sw => sw.addEventListener('click', () => { applyColour(sw, true); track('udkast_farve', { colour: sw.dataset.c, colour_index: swatches.indexOf(sw) + 1 }); }));
 
 // Webleads draft bar (can be hidden for this visit)
 const bar = document.querySelector('[data-draft]');
@@ -47,5 +49,8 @@ if (bar) {
   let hidden = false;
   try { hidden = sessionStorage.getItem('udkast-bar') === '0'; } catch (x) {}
   bar.hidden = hidden;
-  bar.querySelector('[data-draft-close]').addEventListener('click', () => { bar.hidden = true; try { sessionStorage.setItem('udkast-bar', '0'); } catch (x) {} });
+  bar.querySelector('[data-draft-close]').addEventListener('click', () => { bar.hidden = true; track('udkast_bar_close'); try { sessionStorage.setItem('udkast-bar', '0'); } catch (x) {} });
+  // The way back to us: "Gør den færdig" (or "Giv feedback" on hand-made drafts)
+  const go = bar.querySelector('a');
+  if (go) go.addEventListener('click', () => track('udkast_faerdig_click', { link_text: go.textContent.trim().slice(0, 60) }));
 }

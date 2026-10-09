@@ -8,24 +8,50 @@
 //
 // Visitors are counted without cookies: the client id is a hash of IP + browser
 // + the current day, so it cannot follow anyone across days. The IP itself is
-// only passed on for country/city lookup.
+// only passed on for country/city lookup. A session is the same visitor within
+// the same clock hour, so the pages of one visit are tied together.
+//
+// Only the events below are passed on (the list in README.md → Tracking).
 
 import crypto from 'node:crypto';
 
-const EVENTS = new Set(['page_view', 'user_engagement', 'scroll', 'campaign_details', 'cta_click', 'addon_add', 'addon_remove', 'popup_open', 'generate_lead', 'form_error', 'section_view', 'form_start', 'bestil_open', 'bestil_step', 'bestil_close']);
+const EVENTS = new Set([
+  // Pages and time
+  'page_view', 'preview_view', 'page_not_found', 'campaign_details', 'user_engagement', 'time_on_page', 'tab_return', 'exit_intent',
+  'scroll', 'section_view', 'section_time', 'text_copy',
+  // Clicks
+  'cta_click', 'nav_click', 'outbound_click', 'contact_click', 'ui_click', 'rage_click', 'dead_click',
+  // Forms and leads
+  'form_start', 'form_field', 'form_field_done', 'form_submit', 'form_invalid', 'form_abandon', 'form_error', 'generate_lead',
+  // Quality
+  'js_error', 'resource_error', 'web_vitals', 'consent_view', 'consent_choice',
+  // Front page
+  'addon_add', 'addon_remove', 'addon_view', 'price_view', 'popup_open', 'popup_close', 'popup_action', 'faq_open', 'faq_close',
+  'ba_mode', 'ba_drag', 'pit_shake', 'pit_ball_throw', 'intro_skip', 'demo_step', 'demo_live', 'reference_filter',
+  // "Bestil en hjemmeside"
+  'bestil_open', 'bestil_step_view', 'bestil_step', 'bestil_1_fag', 'bestil_2_virksomhed', 'bestil_3_behov', 'bestil_4_stil', 'bestil_5_kontakt',
+  'bestil_choice', 'bestil_field', 'bestil_back', 'bestil_submit', 'bestil_error', 'bestil_udkast_vist', 'bestil_result_change',
+  'bestil_draft_open', 'bestil_link_copy', 'bestil_close',
+  // Customer drafts
+  'udkast_click', 'udkast_farve', 'udkast_bar_close', 'udkast_faerdig_click', 'udkast_form_try'
+]);
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|uptime/i;
 
 const str = (v, max = 100) => (typeof v === 'string' ? v.slice(0, max) : '');
+// GA4 takes 25 parameters per event; 5 are ours (session and page), so 20 are left
 const cleanParams = p => {
   const out = {};
   if (!p || typeof p !== 'object') return out;
-  for (const [k, v] of Object.entries(p).slice(0, 25)) {
+  for (const [k, v] of Object.entries(p).slice(0, 20)) {
     if (!/^[a-z][a-z0-9_]{0,39}$/.test(k)) continue;
     if (typeof v === 'number' && Number.isFinite(v)) out[k] = v;
     else if (typeof v === 'string') out[k] = v.slice(0, 100);
+    else if (typeof v === 'boolean') out[k] = String(v);
   }
   return out;
 };
+// A customer draft's link carries the visitor's answers (?d=…): they never go to GA4
+const noAnswers = u => u.replace(/([?&]d=)[^&#]*/g, '$1-');
 const deviceCategory = ua => (/iPad|Tablet/i.test(ua) ? 'tablet' : /Mobi|Android|iPhone/i.test(ua) ? 'mobile' : 'desktop');
 
 export default async function handler(req, res) {
@@ -49,10 +75,10 @@ export default async function handler(req, res) {
 
   const page = body.page || {};
   const common = {
-    session_id: str(body.session_id, 20),
-    page_location: str(page.location, 1000),
+    session_id: String(Math.floor(Date.now() / 3600000) * 3600),
+    page_location: noAnswers(str(page.location, 1000)),
     page_title: str(page.title, 300),
-    page_referrer: str(page.referrer, 420)
+    page_referrer: noAnswers(str(page.referrer, 420))
   };
 
   const events = body.events

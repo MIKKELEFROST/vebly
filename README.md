@@ -56,9 +56,48 @@ Set in Vercel → Settings → Environment Variables, then redeploy:
 | `GA4_API_SECRET`      | yes      | Same stream → Measurement Protocol API secrets → Create |
 | `GA4_DEBUG`           | no       | `1` sends to GA4's validation endpoint and logs the result |
 
-Without the API secret the endpoint accepts events and drops them. Visitors with Global Privacy Control or Do Not Track switched on send nothing. Keep `privatliv/index.html` in step if you change what is collected.
+Without the API secret the endpoint accepts events and drops them. Visitors with Global Privacy Control or Do Not Track switched on send nothing. Keep `privatliv/index.html` in step if you change what is collected. A session is the same visitor in the same clock hour (set by `api/collect.js`), so the pages of a visit belong together without cookies. Only events on the list in `api/collect.js` are passed on; add new ones there.
 
-Events: `page_view`, `campaign_details` (from UTM tags), `scroll` (25/50/75/90 %), `user_engagement`, `cta_click` (`button`), `addon_add` / `addon_remove` (`addon`), `popup_open` (`popup`), `generate_lead` (`selected`), `form_error`, `section_view` (`section`) and `form_start`. Mark `generate_lead` as a key event in GA4. Add a CTA to `cta_click` by giving the element `data-event="Section: Label"`.
+**Debug:** open any page with `?wl_debug=1`. Every event is logged in the browser console and shows up live in GA4 → Admin → DebugView.
+
+## Tracking
+
+Every event carries `page_type` (`forside`, `bestil`, `privatliv`, `referencer`, `udkast`, `udkast_preview`, `404`). Nothing the visitor types is ever sent: not names, e-mails, phone numbers, company names or messages. A draft's `?d=…` (the visitor's answers) is replaced with `d=-` before anything leaves the browser, and again on the server.
+
+**Automatic on every page** (`assets/js/analytics.js`):
+
+| Event | When | Parameters |
+|---|---|---|
+| `page_view` | A page opens (`preview_view` for the draft preview inside the order flow) | `viewport`, `orientation`, `input` (touch/mus), `color_scheme`, `reduced_motion`, `connection`, `ad_click` (google/meta/nej), `entry_hash`, `meta_consent`; on drafts also `fag`, `design`, `draft_page`, `draft_kind` |
+| `campaign_details` | The address has UTM tags | `source`, `medium`, `campaign`, `term`, `content` |
+| `cta_click` | A button we named with `data-event` | `button`, `link_text`, `link_url`, `section` |
+| `nav_click` | An internal link or anchor | `link_text`, `link_url`, `section` |
+| `outbound_click` | A link to another site | `link_text`, `link_url`, `link_domain`, `outbound` |
+| `contact_click` | A phone, sms or mail link | `method` (telefon/sms/mail), `link_text`, `button`, `section` |
+| `ui_click` | Any other button (chips, tabs, close, toggles …) | `link_text`, `element_type`, `section` |
+| `udkast_click` | Any click on a customer draft | `click_type` (cta/nav/outbound/contact/ui), `link_text`, `section` |
+| `rage_click` | 3 clicks within 0.8 s on the same spot | `link_text`, `element_type`, `section` |
+| `dead_click` | A click on something that is not a button or link | `link_text`, `element_type`, `section` |
+| `scroll` | 10, 25, 50, 75, 90 and 100 % of the page | `percent_scrolled`, `seconds` |
+| `section_view` | A section reaches the middle of the screen | `section`, `section_index`, `seconds` |
+| `section_time` | Leaving a section after 2+ seconds | `section`, `seconds` |
+| `time_on_page` | 10, 30, 60, 120, 180, 300 and 600 active seconds | `seconds` |
+| `user_engagement` | Leaving the page or switching tab | `seconds` |
+| `tab_return` | Back after 5+ seconds in another tab | `seconds_away` |
+| `exit_intent` | Computer: the mouse leaves through the top of the window | `seconds`, `max_scroll` |
+| `text_copy` | Text is copied | `copied_type` (mail/telefon/pris/tekst), `chars`, `section` |
+| `form_start` · `form_field` · `form_field_done` · `form_submit` · `form_invalid` · `form_abandon` | The contact form: first field, each field used, each field filled, send pressed, stopped by a missing field, left without sending | `form_name`, `field_name`, `field_index`, `chars` (1-10/11-50/51-200/200+), `fields_filled`, `seconds` |
+| `js_error` · `resource_error` | A script on our site fails, or an image/file does not load | `error_message`, `source`, `line`, `link_domain` |
+| `web_vitals` | Loading speed: TTFB, FCP, LCP, CLS, INP | `metric_name`, `metric_value` (ms, CLS as a number), `metric_rating` (god/forbedres/daarlig) |
+| `page_not_found` | The 404 page | `link_url` (the missing address) |
+
+**Front page** (`assets/js/main.js`): `generate_lead` (`form_name`, `value`, `currency`, `addons_total`, `receipt`), `form_error`, `addon_add` / `addon_remove` (`addon`, `addons_total`, `source` kort/popup), `addon_view` (a card was on screen), `price_view` (the price was on screen), `popup_open` (`popup`, `popup_type` cmp/inc/addon/ball/team, `popup_name`), `popup_close` (`action` kryds/baggrund/escape/luk-knap/til-kontakt/til-pris, `seconds`), `popup_action`, `faq_open` / `faq_close` (`faq_question`, `faq_index`), `ba_mode` (før/begge/efter), `ba_drag` (`position`), `pit_shake`, `pit_ball_throw` (`ball`), `intro_skip`, `demo_step` (2, 3), `demo_live`.
+
+**Bestil en hjemmeside** (`assets/js/bestil.js`): `bestil_open` (`from`, `resumed`), `bestil_step_view` (`step`, `step_name`, `direction`), one event per finished step: `bestil_1_fag` (`fag`), `bestil_2_virksomhed` (`has_year`, `team_size`), `bestil_3_behov` (`functions`, `functions_count`, `has_site`), `bestil_4_stil` (`design`, `colour`, `colour_changed`), `bestil_5_kontakt` (`has_phone`, `has_message`), all with `seconds`; plus `bestil_step` (the same, as one event), `bestil_choice` (`choice_group`, `choice`, `choice_action` valgt/fravalgt), `bestil_field` (`field_name`, filled), `bestil_back`, `bestil_submit`, `generate_lead` (`form_name` bestil), `bestil_error`, `bestil_udkast_vist` (`fag`, `design`, `view`, `receipt`, `seconds_total`), `bestil_result_change` (`change_type` visning/design/farve), `bestil_draft_open`, `bestil_link_copy`, `bestil_close` (`step` 1–6, `finished`, `seconds_total`).
+
+**Customer drafts** (`udkast/_faelles/udkast.js`): `udkast_farve` (`colour`), `udkast_faerdig_click` (back to webleads.dk), `udkast_bar_close`, `udkast_form_try`. **Cookie box** (`meta-pixel.js`, through a `wl:track` DOM event): `consent_view` (`trigger` automatisk/link), `consent_choice` (`choice` ja/nej, `seconds`). **Referencer:** `reference_filter` (`filter`, `results`).
+
+**In GA4:** mark `generate_lead` (both forms; `form_name` tells them apart) and `contact_click` as key events. Register the parameters you want in reports under Admin → Custom definitions (event scope): `page_type`, `section`, `button`, `element_type`, `method`, `click_type`, `popup`, `popup_type`, `popup_name`, `addon`, `faq_question`, `step`, `step_name`, `choice_group`, `choice`, `choice_action`, `field_name`, `form_name`, `fag`, `design`, `metric_name`, `metric_rating`, `copied_type`, `input`, `ad_click`, `meta_consent`, and the metrics `seconds` (seconds) and `metric_value`. `link_text`, `link_url`, `link_domain`, `outbound` and `percent_scrolled` are built in.
 
 ## Meta Pixel and Conversions API (only with consent)
 

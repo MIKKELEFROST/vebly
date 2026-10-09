@@ -12,8 +12,8 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 
 const state = { addons: [] };
 
-// Analytics (assets/js/analytics.js → /api/collect → GA4)
-document.addEventListener('click', e => { const el = e.target.closest && e.target.closest('[data-event]'); if (el) track('cta_click', { button: el.dataset.event }); });
+// Analytics: analytics.js tracks every click, scroll, section and second by itself.
+// The events below say what happened on this page (README.md → Tracking).
 
 /* ------------------------------------------------------------------ */
 /* Render lists                                                         */
@@ -95,6 +95,7 @@ $('[data-faq]').addEventListener('click', e => {
   const item = btn.parentElement, wasOpen = item.classList.contains('is-open');
   $$('.faq__item').forEach(it => { it.classList.remove('is-open'); $('.faq__q', it).setAttribute('aria-expanded', 'false'); });
   if (!wasOpen) { item.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); }
+  track(wasOpen ? 'faq_close' : 'faq_open', { faq_question: btn.firstChild.textContent.trim().slice(0, 100), faq_index: $$('.faq__item').indexOf(item) + 1 });
 });
 
 // Odometer price
@@ -127,9 +128,22 @@ const syncAddons = () => {
   // Changing the selection re-opens the form, like the design
   form.hidden = false; thanks.hidden = true;
 };
-const toggleAddon = t => { const on = !state.addons.includes(t); state.addons = on ? [...state.addons, t] : state.addons.filter(x => x !== t); syncAddons(); track(on ? 'addon_add' : 'addon_remove', { addon: t }); };
+const toggleAddon = (t, source = 'kort') => { const on = !state.addons.includes(t); state.addons = on ? [...state.addons, t] : state.addons.filter(x => x !== t); syncAddons(); track(on ? 'addon_add' : 'addon_remove', { addon: t, addons_total: state.addons.length, source }); };
 document.addEventListener('click', e => { const b = e.target.closest('[data-toggle]'); if (b) toggleAddon(b.dataset.toggle); });
 syncAddons();
+
+// Which add-on cards were actually seen (swiped to on phones, scrolled past on computers)
+if ('IntersectionObserver' in window) {
+  const seen = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    seen.unobserve(e.target);
+    track('addon_view', { addon: e.target.dataset.addon, addon_index: $$('[data-addon]').indexOf(e.target) + 1 });
+  }), { threshold: 0.6 });
+  $$('[data-addon]').forEach(c => seen.observe(c));
+  // The price: seen when the big number is on screen
+  const priceSeen = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { priceSeen.disconnect(); track('price_view', { seconds: Math.round(performance.now() / 1000) }); } }, { threshold: 0.6 });
+  priceSeen.observe($('[data-odo]'));
+}
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
@@ -148,12 +162,12 @@ form.addEventListener('submit', async e => {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json().catch(() => ({}));
     $('[data-thanks-mail]').hidden = !data.kvittering;
-    track('generate_lead', { selected: chosen });
+    track('generate_lead', { selected: chosen, form_name: 'kontakt', addons_total: state.addons.length, value, currency: 'DKK', receipt: data.kvittering ? 'ja' : 'nej' });
     metaTrack('Lead', { content_name: chosen, value, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
     form.reset(); syncAddons();
     form.hidden = true; thanks.hidden = false;
   } catch (x) {
-    track('form_error');
+    track('form_error', { form_name: 'kontakt', error_message: String(x.message || x).slice(0, 100) });
     err.innerHTML = 'Beskeden kunne ikke sendes. Skriv til <a href="mailto:hej@webleads.dk" style="color:#fff;text-decoration:underline">hej@webleads.dk</a>.';
     err.hidden = false;
   } finally { btn.disabled = false; }
@@ -194,7 +208,7 @@ function modalData(key) {
 }
 
 const mRoot = $('[data-modal-root]'), mBox = $('[data-modal-box]'), mScroll = $('[data-modal-scroll]');
-let mKey = null, mReturn = null;
+let mKey = null, mReturn = null, mOpened = 0;
 
 function renderModal(keepScroll) {
   const m = modalData(mKey); if (!m) return closeModal();
@@ -220,17 +234,19 @@ function renderModal(keepScroll) {
 }
 
 function openModal(key) {
-  if (!modalData(key)) return;
+  const m = modalData(key);
+  if (!m) return;
   if (!mKey) mReturn = document.activeElement;
-  track('popup_open', { popup: key });
-  mKey = key;
+  track('popup_open', { popup: key, popup_type: key.split('-')[0], popup_name: m.title.slice(0, 100), source: mKey ? 'popup' : 'side' });
+  mKey = key; mOpened = performance.now();
   document.documentElement.style.overflow = 'hidden';
   mRoot.hidden = false;
   renderModal(false);
   $('[data-modal-close]').focus({ preventScroll: true });
 }
 
-function closeModal() {
+function closeModal(how = 'luk') {
+  if (mKey) track('popup_close', { popup: mKey, popup_type: mKey.split('-')[0], action: how, seconds: Math.round((performance.now() - mOpened) / 1000) });
   mKey = null;
   mRoot.hidden = true;
   document.documentElement.style.overflow = '';
@@ -243,9 +259,10 @@ function scrollToId(id) {
 }
 
 function act(a) {
-  if (!a || a === 'close') return closeModal();
-  if (a === 'contact' || a === 'pris') { closeModal(); return scrollToId(a === 'pris' ? 'pris' : 'kontakt'); }
-  if (a.startsWith('toggle:')) { toggleAddon(a.slice(7)); return renderModal(true); }
+  if (mKey) track('popup_action', { popup: mKey, popup_type: mKey.split('-')[0], action: (a || 'close').split(':')[0] });
+  if (!a || a === 'close') return closeModal('luk-knap');
+  if (a === 'contact' || a === 'pris') { closeModal(a === 'pris' ? 'til-pris' : 'til-kontakt'); return scrollToId(a === 'pris' ? 'pris' : 'kontakt'); }
+  if (a.startsWith('toggle:')) { toggleAddon(a.slice(7), 'popup'); return renderModal(true); }
   if (a.startsWith('open:')) openModal(a.slice(5));
 }
 
@@ -254,13 +271,13 @@ document.addEventListener('click', e => {
   if (el && !el.closest('[data-modal-root]')) { e.preventDefault(); openModal(el.dataset.modal); }
 });
 mRoot.addEventListener('click', e => {
-  if (e.target === mRoot) return closeModal();
-  if (e.target.closest('[data-modal-close]')) return closeModal();
+  if (e.target === mRoot) return closeModal('baggrund');
+  if (e.target.closest('[data-modal-close]')) return closeModal('kryds');
   const b = e.target.closest('[data-act]'); if (b) act(b.dataset.act);
 });
 document.addEventListener('keydown', e => {
   if (!mKey) return;
-  if (e.key === 'Escape') return closeModal();
+  if (e.key === 'Escape') return closeModal('escape');
   if (e.key === 'Tab') { // keep focus inside the pop-up
     const f = $$('button, a[href], input, textarea', mBox).filter(x => !x.disabled && x.offsetParent !== null);
     if (!f.length) return;
@@ -344,13 +361,14 @@ const baSet = v => {
   baOld.forEach(e => { e.style.opacity = 0.35 + 0.65 * (1 - pn); });
   baGo.forEach(b => b.classList.toggle('is-on', Math.abs(+b.dataset.baGo - baPos) < 8));
 };
-baGo.forEach(b => b.addEventListener('click', () => { baTouched = true; if (motion) baTarget = +b.dataset.baGo; else baSet(+b.dataset.baGo); }));
+baGo.forEach(b => b.addEventListener('click', () => { baTouched = true; if (motion) baTarget = +b.dataset.baGo; else baSet(+b.dataset.baGo); track('ba_mode', { mode: { 100: 'foer', 50: 'begge', 0: 'efter' }[b.dataset.baGo] }); }));
 {
-  let drag = false;
+  let drag = false, drags = 0;
   const fromEv = e => { const r = ba.getBoundingClientRect(); baSet((e.clientX - r.left) / r.width * 100); };
   ba.addEventListener('pointerdown', e => { drag = true; baTouched = true; baTarget = null; baKnob.classList.add('is-drag'); try { ba.setPointerCapture(e.pointerId); } catch (x) {} fromEv(e); });
   ba.addEventListener('pointermove', e => { if (drag || (motion && e.pointerType === 'mouse')) { baTouched = true; baTarget = null; fromEv(e); } });
-  const up = () => { drag = false; baKnob.classList.remove('is-drag'); };
+  // Where the slider was left: 0 shows only the new page, 100 only the old one
+  const up = () => { if (drag && drags++ < 5) track('ba_drag', { position: Math.round(baPos / 10) * 10 }); drag = false; baKnob.classList.remove('is-drag'); };
   ba.addEventListener('pointerup', up); ba.addEventListener('pointercancel', up);
 }
 baSet(50);
@@ -380,10 +398,11 @@ function runEffects() {
   {
     const Ld = $('[data-loader]'), lc = $('[data-lc]'), t0 = performance.now();
     requestAnimationFrame(() => requestAnimationFrame(() => $$('.loader__word span', Ld).forEach(s => s.style.transform = 'none')));
-    const lift = () => { Ld.style.clipPath = 'inset(0 0 100% 0)'; setTimeout(() => Ld.remove(), 1100); };
+    let lifted = false;
+    const lift = () => { if (lifted) return; lifted = true; Ld.style.clipPath = 'inset(0 0 100% 0)'; setTimeout(() => Ld.remove(), 1100); };
     const lt = n => { const k = Math.min(1, (n - t0) / 1100); lc.textContent = String(Math.round(ease(k) * 100)).padStart(3, '0'); if (k < 1) requestAnimationFrame(lt); else setTimeout(lift, 150); };
     requestAnimationFrame(lt);
-    Ld.addEventListener('click', lift);
+    Ld.addEventListener('click', () => { if (!lifted) track('intro_skip', { seconds: Math.round((performance.now() - t0) / 100) / 10 }); lift(); });
   }
 
   // Film grain
@@ -538,7 +557,7 @@ function runEffects() {
   }
 
   // Ball pit
-  const pitBalls = []; let pitOn = false, grab = null, pmx = -999, pmy = -999, pIn = false;
+  const pitBalls = []; let pitOn = false, grab = null, pmx = -999, pmy = -999, pIn = false, throws = 0, shakes = 0;
   const initPit = () => {
     const W = pit.clientWidth, narrow = W < 600, s = narrow ? clamp(W / 800, 0.6, 1) : clamp(W / 1150, 0.7, 1);
     (narrow ? balls.slice(0, 12) : balls).forEach((lab, i) => {
@@ -586,13 +605,14 @@ function runEffects() {
       if (grab) {
         const clk = (grab.mv || 0) < 6 && performance.now() - grab.t0 < 400, lab = grab.el.textContent;
         if (clk) setTimeout(() => openModal('ball-' + lab), 0);
+        else if (throws++ < 10) track('pit_ball_throw', { ball: lab });
         grab.vx = clamp(grab.vx, -30, 30); grab.vy = clamp(grab.vy, -30, 30); grab.el.style.zIndex = ''; grab = null;
       }
       pit.style.cursor = 'grab';
     };
     pit.addEventListener('pointerup', rel); pit.addEventListener('pointercancel', rel);
     pit.addEventListener('pointerleave', () => { pIn = false; if (!grab) pmx = pmy = -999; });
-    $('[data-shake]').addEventListener('click', () => pitBalls.forEach(b => { b.vy -= 10 + Math.random() * 10; b.vx += (Math.random() - .5) * 16; }));
+    $('[data-shake]').addEventListener('click', () => { shakes++; track('pit_shake', { count: shakes }); pitBalls.forEach(b => { b.vy -= 10 + Math.random() * 10; b.vx += (Math.random() - .5) * 16; }); });
   }
 
   // Dotted hero background
@@ -602,7 +622,7 @@ function runEffects() {
   sizeCv(); addEventListener('resize', sizeCv);
 
   // Demo build-up driven by scroll
-  let needBuild = true, lastBuild = -1, lastStep = -1, live = null;
+  let needBuild = true, lastBuild = -1, lastStep = -1, live = null, demoMax = 0, liveSeen = false;
   demo.addEventListener('load', () => { needBuild = true; sizeFrame(true); setTimeout(() => { needBuild = true; }, 600); });
 
   // Cached elements for the frame loop
@@ -638,6 +658,8 @@ function runEffects() {
       }
       const active = p < 0.03 ? 0 : p < 0.9 ? 1 : 2;
       if (active !== lastStep) {
+        // How far people follow the demo: step 2 (we build it) and 3 (online)
+        if (active > demoMax) { demoMax = active; track('demo_step', { step: active + 1 }); }
         lastStep = active;
         el.steps.forEach((s, i) => { s.classList.toggle('is-on', i === active); s.style.opacity = i === active ? 1 : 0.22; s.style.transform = i === active ? 'translateX(0)' : 'translateX(-8px)'; });
       }
@@ -645,7 +667,10 @@ function runEffects() {
       el.url.textContent = full.slice(0, Math.round(full.length * uk));
       el.caret.style.opacity = (t >> 5) % 2 ? 1 : 0;
       const isLive = uk >= 1;
-      if (isLive !== live) { live = isLive; el.status.textContent = isLive ? '● Live' : 'Kladde'; el.status.classList.toggle('is-live', isLive); }
+      if (isLive !== live) {
+        if (isLive && !liveSeen) { liveSeen = true; track('demo_live'); }
+        live = isLive; el.status.textContent = isLive ? '● Live' : 'Kladde'; el.status.classList.toggle('is-live', isLive);
+      }
     }
 
     // Marquees (speed and skew follow scroll velocity)
