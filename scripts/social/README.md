@@ -1,6 +1,6 @@
 # Sociale medier: automatisk indhold
 
-Hver uge laves 3 opslag (mandag, onsdag, fredag kl. 19.00) og 3 reels (samme dage kl. 20.00).
+Der postes hver anden dag: et opslag kl. 10.00 og en reel samme dag kl. 20.00. Rytmen fortsætter fra den seneste dato i kalenderen (9., 11., 13. oktober osv.).
 
 **Regel: Vi poster kun mellem kl. 08.00 og 21.00, og kun på hele timer.** Make tjekker kalenderen hver hele time i det tidsrum, så et opslag sat til fx 19.10 ville først gå ud kl. 20.00.
 Indholdet lægges i indholdskalenderen i Google Sheets, og Make poster det på Instagram og Facebook.
@@ -39,8 +39,8 @@ node scripts/social/render-reel.mjs scripts/social/reels/story-13-navn.html 9  #
 ## Emner: gentag aldrig noget, der er postet
 
 Læs overskrifterne i `brand/social/posts/TEKSTER.md` og kalenderen, før du vælger et emne. Et nyt opslag, en karrusel eller en reel må ikke have samme emne eller budskab som noget, der er postet eller planlagt.
-Brugt: intro, alt er med i prisen, sådan virker det (3 trin), før/efter, vores løfte, hvorfor Webleads, tilvalg med priser, teamet, månedlig betaling, alle fag, alt under ét tag, tjek din side, ingen tid (15 min.), findes på Google, ret selv i siden, content, automations, rettelser før lancering, annoncering.
-Ikke brugt endnu: interne systemer (CRM, booking, dashboards), SEO som månedligt tilvalg, mail på eget domæne og flytning af den gamle side, webshop og gavekort, logo, AI-chatbot, de enkelte i teamet.
+Brugt: intro, alt er med i prisen, sådan virker det (3 trin), før/efter, vores løfte, hvorfor Webleads, tilvalg med priser, teamet, månedlig betaling, alle fag, alt under ét tag, tjek din side, ingen tid (15 min.), findes på Google, ret selv i siden, content, automations, rettelser før lancering, annoncering, flytning af gammel side (domæne og mail), kontaktformular/kort/åbningstider, interne systemer, Instagram-feed og sociale medier på siden, webshop og gavekort.
+Ikke brugt endnu: SEO som månedligt tilvalg (lokal SEO, søgeord, månedlig rapport), logo og farver, AI-chatbot alene, de enkelte i teamet (Alexander, Malthe, Anna, Mikkel), GDPR og cookies.
 
 ## Fakta: brug kun det, der står på webleads.dk
 

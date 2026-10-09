@@ -127,7 +127,7 @@ Mangler der noget? Send os linket, så kigger vi gratis på din side.
 
 ↓ Gratis tilbud via linket i bio · hej@webleads.dk
 
-# Opslag 13–15 (13 er postet, 14 og 15 postes automatisk 19. og 21. oktober)
+# Opslag 13–15 (13 er postet 9. oktober, 14 og 15 postes automatisk 11. og 13. oktober kl. 10.00)
 
 Ligger i indholdskalenderen. Reels med samme budskab ligger i `brand/social/stories/`.
 
@@ -158,10 +158,10 @@ Og siden er din. Ingen binding og intet abonnement på selve hjemmesiden.
 
 ↓ Gratis tilbud via linket i bio.
 
-# Opslag 16–19 (postes automatisk 23., 26., 28. og 30. oktober)
+# Opslag 16–24 (postes automatisk hver anden dag kl. 10.00, 15.–31. oktober)
 
 Ligger i indholdskalenderen med reels samme dag kl. 20.00. Hashtags ligger i kolonnen "Første kommentar", så Make sætter dem i første kommentar i stedet for i teksten.
-17 og 19 er karruseller: slides ligger som JPG i `brand/social/karruseller/`. Emnerne er valgt, så de ikke gentager det, der allerede er på profilen (01–13) eller planlagt (14–15).
+17, 19 og 22 er karruseller: slides ligger som JPG i `brand/social/karruseller/`. Emnerne er valgt, så de ikke gentager det, der allerede er på profilen (01–13) eller planlagt (14–15).
 
 ## 16 · Vi laver også content
 Vi laver også content.
@@ -211,7 +211,62 @@ Swipe og se, hvad der er med.
 
 Første kommentar: #annoncering #googleads #facebookannoncer #markedsføring #småvirksomheder #selvstændig #servicefag #lokalvirksomhed #webleads
 
-## Reels 16–19 (kl. 20.00 samme dag, Instagram og Facebook)
+## 20 · Vi flytter den for dig
+Har du allerede en hjemmeside?
+
+Så flytter vi din gamle side, sætter domænet op og hjælper med mail på dit eget domæne. Vi klarer det tekniske for dig.
+
+Fra 3.000 kr. Klar på 7 dage. Ingen binding.
+
+↓ Gratis tilbud via linket i bio.
+
+Første kommentar: #hjemmeside #nyhjemmeside #webdesign #domæne #selvstændig #småvirksomheder #servicefag #lokalvirksomhed #webleads
+
+## 21 · Nemt at finde, nemt at skrive til
+Kan kunderne nemt finde dig og skrive til dig?
+
+En kontaktformular med beskeder direkte i din indbakke og spamfilter. Kort med din adresse og rutevejledning med ét klik. Åbningstider, der er nemme at opdatere.
+
+Det hele er med i prisen fra 3.000 kr.
+
+↓ Gratis tilbud via linket i bio.
+
+Første kommentar: #hjemmeside #kontaktformular #webdesign #selvstændig #småvirksomheder #servicefag #lokalvirksomhed #webleads
+
+## 22 · Slip for regneark og post-its (karrusel, 4 slides)
+Slip for regneark og post-its.
+
+Vi bygger systemer, der passer til din måde at arbejde på: kundesystem, booking og kalender, dashboards, medarbejderportal og meget mere.
+
+Fra 14.999 kr. ekskl. moms som engangsbeløb. Større systemer får en fast pris efter en snak.
+
+Swipe og se eksemplerne.
+
+↓ Skriv til os via linket i bio.
+
+Første kommentar: #crm #booking #it #digitalisering #småvirksomheder #selvstændig #servicefag #lokalvirksomhed #webleads
+
+## 23 · Dit Instagram på din side
+Dit Instagram-feed på din hjemmeside.
+
+Hvis du vil, viser vi dit feed direkte på siden. Du får også links til dine profiler, og siden ser pæn ud, når nogen deler den.
+
+Det er med i prisen fra 3.000 kr.
+
+↓ Gratis tilbud via linket i bio.
+
+Første kommentar: #instagram #hjemmeside #socialemedier #webdesign #selvstændig #småvirksomheder #lokalvirksomhed #webleads
+
+## 24 · Sælg gavekort direkte fra din hjemmeside
+Sælg gavekort direkte fra din hjemmeside.
+
+Med en webshop kan dine kunder købe gavekort eller produkter direkte på din side.
+
+↓ Skriv til os via linket i bio, så finder vi en løsning, der passer til dig.
+
+Første kommentar: #gavekort #webshop #hjemmeside #frisør #massage #småvirksomheder #selvstændig #lokalvirksomhed #webleads
+
+## Reels 16–24 (kl. 20.00 samme dag, Instagram og Facebook)
 
 | Reel | Video | Instagram-tekst |
 |---|---|---|
@@ -219,6 +274,11 @@ Første kommentar: #annoncering #googleads #facebookannoncer #markedsføring #sm
 | 17 | `story-17-automations.mp4` | Bekræftelser, påmindelser, fakturaer og rykkere. Lad rutinerne klare sig selv. ↓ Skriv til os via linket i bio. |
 | 18 | `story-18-se-siden-foerst.mp4` | Udkast på få dage. Rettelser, indtil du er glad. Du ser siden, før den går live. ↓ Gratis tilbud via linket i bio. |
 | 19 | `story-19-annoncering.mp4` | Google Ads, Facebook og Instagram. Fra 999 kr./md. pr. kanal, og opsætningen er gratis. ↓ Skriv til os via linket i bio. |
+| 20 | `story-20-vi-flytter-den.mp4` | Har du allerede en hjemmeside? Vi flytter den, hjælper med domænet og klarer det tekniske. ↓ Gratis tilbud via linket i bio. |
+| 21 | `story-21-nemt-at-finde.mp4` | Kontaktformular, rutevejledning med ét klik og åbningstider, der er nemme at opdatere. Med i prisen. ↓ Gratis tilbud via linket i bio. |
+| 22 | `story-22-interne-systemer.mp4` | Kundesystem, booking, dashboards og medarbejderportal. Skræddersyet til din virksomhed, fra 14.999 kr. ↓ Skriv til os via linket i bio. |
+| 23 | `story-23-instagram-paa-siden.mp4` | Dit Instagram-feed på siden, links til dine profiler og pæn visning, når siden deles. Med i prisen. ↓ Gratis tilbud via linket i bio. |
+| 24 | `story-24-gavekort.mp4` | Gavekort og produkter direkte fra din hjemmeside. Vi kan lave webshoppen. ↓ Skriv til os via linket i bio. |
 
 ---
 

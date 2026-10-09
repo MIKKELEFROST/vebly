@@ -305,8 +305,71 @@ Skriv til os → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_
 #annoncering #googleads #webleads
 ```
 
-## Reels 16–19
-Samme tekst som på Instagram, men med link: `https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=reel` + `#kontakt` (16 og 18) eller `#tilvalg` (17 og 19). Teksterne står i kalenderen.
+## 20 · Vi flytter den for dig
+```
+Har du allerede en hjemmeside?
+
+Så flytter vi din gamle side, sætter domænet op og hjælper med mail på dit eget domæne. Vi klarer det tekniske for dig.
+
+Fra 3.000 kr. Klar på 7 dage. Ingen binding.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt
+
+#hjemmeside #webdesign #webleads
+```
+
+## 21 · Nemt at finde, nemt at skrive til
+```
+Kan kunderne nemt finde dig og skrive til dig?
+
+En kontaktformular med beskeder direkte i din indbakke og spamfilter. Kort med din adresse og rutevejledning med ét klik. Åbningstider, der er nemme at opdatere.
+
+Det hele er med i prisen fra 3.000 kr.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#pris
+
+#hjemmeside #lokalvirksomhed #webleads
+```
+
+## 22 · Slip for regneark og post-its (4 billeder)
+```
+Slip for regneark og post-its.
+
+Vi bygger systemer, der passer til din måde at arbejde på: kundesystem, booking og kalender, dashboards, medarbejderportal og meget mere. Se eksemplerne på billederne.
+
+Fra 14.999 kr. ekskl. moms som engangsbeløb. Større systemer får en fast pris efter en snak.
+
+Skriv til os → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#tilvalg
+
+#digitalisering #småvirksomheder #webleads
+```
+
+## 23 · Dit Instagram på din side
+```
+Dit Instagram-feed på din hjemmeside.
+
+Hvis du vil, viser vi dit feed direkte på siden. Du får også links til dine profiler, og siden ser pæn ud, når nogen deler den.
+
+Det er med i prisen fra 3.000 kr.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#pris
+
+#hjemmeside #socialemedier #webleads
+```
+
+## 24 · Sælg gavekort direkte fra din hjemmeside
+```
+Sælg gavekort direkte fra din hjemmeside.
+
+Med en webshop kan dine kunder købe gavekort eller produkter direkte på din side.
+
+Skriv til os → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt
+
+#gavekort #webshop #webleads
+```
+
+## Reels 16–24
+Samme tekst som på Instagram, men med link: `https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=reel` + `#kontakt` (16, 18, 20 og 24), `#pris` (21 og 23) eller `#tilvalg` (17, 19 og 22). Teksterne står i kalenderen.
 
 ---
 
