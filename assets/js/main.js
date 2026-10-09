@@ -298,7 +298,8 @@ addEventListener('scroll', onScroll, { passive: true }); onScroll();
   const ping = $('[data-ping]');
   if (ping) {
     const { phone, email, msg } = ping.dataset;
-    const sms = matchMedia('(pointer: coarse)').matches && innerWidth < 1000;
+    // A touch screen whose short side is phone-sized (tablets get the e-mail button)
+    const sms = matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) < 700;
     if (sms) {
       // iOS reads the body after "&", Android after "?"
       const sep = /iPhone|iPad|iPod/.test(navigator.userAgent) ? '&' : '?';
