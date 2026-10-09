@@ -56,6 +56,19 @@ $('[data-htrack]').innerHTML = addons.map((a, i) => `
     </div>
   </div>`).join('');
 
+// Review badges: only shown when a real score is filled in (data-rating, data-reviews, href)
+$$('[data-review]').forEach(el => {
+  const r = parseFloat(String(el.dataset.rating).replace(',', '.'));
+  if (!(r > 0 && r <= 5)) return;
+  const n = +el.dataset.reviews || 0;
+  $('[data-score]', el).textContent = r.toLocaleString('da-DK', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  $('[data-num]', el).textContent = n.toLocaleString('da-DK');
+  $('[data-stars]', el).innerHTML = [0, 1, 2, 3, 4].map(i => `<i style="--f:${Math.round(Math.max(0, Math.min(1, r - i)) * 100)}%"></i>`).join('');
+  el.setAttribute('aria-label', `${r.toLocaleString('da-DK')} ud af 5 stjerner, ${n} anmeldelser`);
+  el.hidden = false;
+  el.closest('[data-trust]').hidden = false;
+});
+
 // FAQ (first one open, as in the design)
 $('[data-faq]').innerHTML = faqs.map(([q, a], i) => `
   <div class="faq__item${i === 0 ? ' is-open' : ''}" data-reveal="${i}">

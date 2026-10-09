@@ -112,6 +112,28 @@ button { font-family: inherit; }
 .hero h1 .dim { color: var(--faint); }
 .hero__lead { font-size: clamp(18px, 2vw, 21px); line-height: 1.55; color: var(--muted); max-width: 520px; margin: 0 0 40px; text-wrap: pretty; }
 .hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+/* Review badges under the hero buttons (Google and Trustpilot) */
+.trust { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.trust[hidden], .trust__item[hidden] { display: none; }
+.trust__item { display: inline-flex; align-items: center; gap: 12px; padding: 10px 16px 10px 12px; background: #fff; border: 1px solid var(--line-strong); border-radius: 14px; box-shadow: 0 1px 2px rgba(17,17,17,.04); color: var(--ink); text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.trust__item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(17,17,17,.08); border-color: var(--faint); }
+.trust__logo { width: 28px; height: 28px; flex-shrink: 0; }
+.trust__txt { display: flex; flex-direction: column; gap: 3px; line-height: 1.1; }
+.trust__top { display: flex; align-items: center; gap: 8px; }
+.trust__top > b { font-size: 17px; font-weight: 700; }
+.trust__tpname { font-family: Helvetica, Arial, sans-serif; letter-spacing: -.02em; }
+.trust__sub { font-size: 12.5px; color: var(--muted); }
+.trust__sub b { color: var(--ink); font-weight: 700; }
+.trust__stars { display: inline-flex; gap: 2px; }
+.trust__stars i { position: relative; display: block; width: 15px; height: 15px; }
+.trust__stars--google i { background: #dadce0; -webkit-mask: var(--star) center / contain no-repeat; mask: var(--star) center / contain no-repeat; }
+.trust__stars--google i::after { content: ''; position: absolute; inset: 0; width: var(--f); background: #fbbc04; }
+.trust__stars--tp { gap: 2px; }
+.trust__stars--tp i { width: 17px; height: 17px; background: #dcdce6; overflow: hidden; }
+.trust__stars--tp i::before { content: ''; position: absolute; inset: 0; width: var(--f); background: #00b67a; }
+.trust__stars--tp i::after { content: ''; position: absolute; inset: 2.5px; background: #fff; -webkit-mask: var(--star) center / contain no-repeat; mask: var(--star) center / contain no-repeat; }
+.trust { --star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.5l2.68 8.25h8.67l-7.01 5.1 2.68 8.25L12 18l-7.02 5.1 2.68-8.25-7.01-5.1h8.67z'/%3E%3C/svg%3E"); }
+@media (max-width: 520px) { .trust { gap: 8px; } .trust__item { padding: 8px 12px 8px 10px; gap: 10px; } .trust__logo { width: 24px; height: 24px; } .trust__stars i { width: 13px; height: 13px; } .trust__stars--tp i { width: 15px; height: 15px; } }
 .hero__more { padding: 19px 22px; font-weight: 500; font-size: 17px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
 .hero__more span { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line-strong); align-items: center; justify-content: center; font-size: 14px; }
 
