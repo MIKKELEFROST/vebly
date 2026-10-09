@@ -4,7 +4,7 @@ Hver uge laves 3 opslag (mandag, onsdag, fredag kl. 19.00) og 3 reels (samme dag
 Indholdet lægges i indholdskalenderen i Google Sheets, og Make poster det på Instagram og Facebook.
 
 - Kalender: [Webleads indholdskalender](https://docs.google.com/spreadsheets/d/1Xym5aLyCBlyNdFeZIep-lNPaBD5qZ_40oFXPjhtgQGI/edit), fanen `Kalender`
-- Make: scenariet "Webleads | Indholdskalender → Instagram + Facebook" kører hvert 15. minut
+- Make: scenariet "Webleads | Indholdskalender → Instagram + Facebook" tjekker kalenderen hver time kl. :00 mellem 08.00 og 21.00 (14 tjek om dagen, 1 credit pr. tjek)
 - Medier: skal ligge i repoet under `brand/social/` og være pushet til `main`, så de er offentlige på `https://webleads.dk/brand/social/...` (Instagram kan kun hente fra en offentlig URL)
 
 ## Filer
