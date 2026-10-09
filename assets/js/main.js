@@ -61,6 +61,8 @@ $$('[data-review]').forEach(el => {
   const r = parseFloat(String(el.dataset.rating).replace(',', '.'));
   if (!(r > 0 && r <= 5)) return;
   const n = +el.dataset.reviews || 0;
+  // No profile link yet: show the badge, but not as a link
+  if (!el.getAttribute('href')) ['href', 'target', 'rel'].forEach(a => el.removeAttribute(a));
   $('[data-score]', el).textContent = r.toLocaleString('da-DK', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   $('[data-num]', el).textContent = n.toLocaleString('da-DK');
   $('[data-stars]', el).innerHTML = [0, 1, 2, 3, 4].map(i => `<i style="--f:${Math.round(Math.max(0, Math.min(1, r - i)) * 100)}%"></i>`).join('');
