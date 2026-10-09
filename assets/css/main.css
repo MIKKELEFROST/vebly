@@ -108,7 +108,7 @@ button { font-family: inherit; }
 .float .trust__item { border-color: transparent; box-shadow: 0 22px 44px -20px rgba(17,17,17,.35); padding: 12px 18px 12px 14px; border-radius: 18px; }
 @media (min-width: 1000px) { .hero__in .trust { display: none; } }
 @media (max-width: 999px) { .float { display: none !important; } }
-.float--d text { font-family: var(--body); font-weight: 700; font-size: 17px; letter-spacing: 4px; fill: var(--ink); }
+.float--d text { font-family: var(--body); font-weight: 700; font-size: 15px; letter-spacing: 3px; fill: var(--ink); }
 
 .hero__in { position: relative; z-index: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 120px 24px 80px; transform-origin: 0 0; }
 .hero__badge { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 32px; }
