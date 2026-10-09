@@ -1,4 +1,5 @@
 import { track } from './analytics.js';
+import { metaTrack } from './meta-pixel.js';
 import { trades, flipWords, included, addons, addonPages, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
@@ -140,6 +141,7 @@ form.addEventListener('submit', async e => {
     const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     track('generate_lead', { selected: $('[data-chosen-input]').value || 'Hjemmeside' });
+    metaTrack('Lead', { content_name: $('[data-chosen-input]').value || 'Hjemmeside' });
     form.reset(); syncAddons();
     form.hidden = true; thanks.hidden = false;
   } catch (x) {

@@ -56,6 +56,12 @@ Without the two required variables the endpoint accepts events and drops them. V
 
 Events: `page_view`, `campaign_details` (from UTM tags), `scroll` (25/50/75/90 %), `user_engagement`, `cta_click` (`button`), `addon_add` / `addon_remove` (`addon`), `popup_open` (`popup`), `generate_lead` (`selected`) and `form_error`. Mark `generate_lead` as a key event in GA4. Add a CTA to `cta_click` by giving the element `data-event="Section: Label"`.
 
+## Meta Pixel (only with consent)
+
+`assets/js/meta-pixel.js` asks the visitor once (a small box, bottom left) whether we may use Meta Pixel `2323320305173396`. Nothing is loaded from Meta and no cookies are set until they say yes. The answer is kept in `localStorage` (`wl-meta-consent`); any element with `data-consent-open` (the "Cookies" link in the footer, the button in the privacy policy) opens the question again, and saying no revokes the pixel and deletes `_fbp`/`_fbc`. Visitors with Global Privacy Control or Do Not Track are not asked.
+
+Events: `PageView`, `Lead` (contact form sent, `content_name` = the chosen package) and `Contact` (the floating sms/mail button, `sms:`, `mailto:` and `tel:` links). Use `metaTrack(event, params)` from the module for new events. The pixel runs on the front page and `/privatliv`; keep `privatliv/index.html` in step if you change what is sent.
+
 ## Placeholders to replace
 
 - Team photos: "Kommer snart" placeholders in the team cards and their pop-ups

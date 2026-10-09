@@ -46,6 +46,10 @@
   li { margin-bottom: 6px; }
   .box { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px 22px; }
   .box p { margin: 4px 0; }
+  code { font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+  .btn { display: inline-block; background: var(--ink); color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; border-radius: 999px; padding: 12px 20px; }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  footer a { color: inherit; }
   footer { max-width: 760px; margin: 0 auto; padding: 0 24px 40px; font-size: 14px; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
 </style>
 </head>
@@ -58,7 +62,7 @@
 <main>
   <div class="kicker">Privatlivspolitik</div>
   <h1>Sådan passer vi på dine oplysninger.</h1>
-  <p class="lead">Vi indsamler så lidt som muligt. Siden bruger ingen cookies, og vi sælger aldrig dine oplysninger.</p>
+  <p class="lead">Vi indsamler så lidt som muligt, og vi sælger aldrig dine oplysninger. Siden sætter kun cookies, hvis du siger ja til Meta Pixel.</p>
   <p class="date">Senest opdateret 9. oktober 2026</p>
 
   <h2>Hvem er ansvarlig?</h2>
@@ -81,7 +85,7 @@
   <h2>Statistik over besøg</h2>
   <p>Vi vil gerne vide, hvor mange der besøger siden, hvor de kommer fra, og hvilke knapper de bruger. Derfor sender siden besøgsstatistik til Google Analytics. Vi gør det på en måde, der skåner dit privatliv:</p>
   <ul>
-    <li>Der bliver <strong>ikke</strong> sat cookies, og der bliver ikke gemt noget på din computer eller telefon.</li>
+    <li>Statistikken sætter <strong>ikke</strong> cookies og gemmer ikke noget på din computer eller telefon.</li>
     <li>Data sendes først til vores egen server og derfra videre til Google. Der kører ikke kode fra Google i din browser.</li>
     <li>I stedet for et fast bruger-id laver vi et tilfældigt nummer ud fra din IP-adresse og browser. Nummeret skifter hver dag, så vi kan ikke følge dig fra dag til dag.</li>
     <li>Din IP-adresse sendes til Google, så de kan vise et omtrentligt land og en by. Google gemmer ikke selve IP-adressen i statistikken.</li>
@@ -92,6 +96,17 @@
     <li><strong>Hvor længe:</strong> Google gemmer statistikken i 14 måneder.</li>
     <li><strong>Fravalg:</strong> har du slået "Global Privacy Control" eller "Do Not Track" til i din browser, sender siden ingen statistik. Du kan også skrive til os.</li>
   </ul>
+
+  <h2 id="meta">Meta Pixel, kun hvis du siger ja</h2>
+  <p>Vi annoncerer på Facebook og Instagram. Når du besøger siden første gang, spørger vi, om vi må bruge Meta Pixel fra Meta Platforms Ireland. Siger du ja, bruger vi den til at måle, om vores annoncer virker, og til at vise vores annoncer til folk, der har besøgt siden. Siger du nej, bliver Meta Pixel slet ikke hentet.</p>
+  <ul>
+    <li><strong>Hvad sendes til Meta:</strong> hvilke sider du ser, om du sender kontaktformularen eller klikker for at skrive eller ringe til os, din IP-adresse og oplysninger om din browser. Meta kan koble det med din Facebook- eller Instagram-konto, hvis du har en.</li>
+    <li><strong>Cookies:</strong> Meta Pixel sætter cookien <code>_fbp</code>, som holder i op til 90 dage, og Meta kan læse sine egne cookies i din browser.</li>
+    <li><strong>Grundlag:</strong> dit samtykke (artikel 6, stk. 1, litra a). Vi og Meta er fælles dataansvarlige for indsamlingen og overførslen til Meta. Meta er selv ansvarlig for, hvad de bruger oplysningerne til bagefter. Læs mere i <a href="https://www.facebook.com/privacy/policy" rel="noopener">Metas privatlivspolitik</a>.</li>
+    <li><strong>Overførsel:</strong> Meta kan behandle oplysningerne i USA på grundlag af EU-US Data Privacy Framework.</li>
+    <li><strong>Dit valg:</strong> vi gemmer dit ja eller nej i din browser, så vi ikke spørger igen. Du kan altid ændre det, og siger du nej, sletter vi Meta Pixels cookies på siden.</li>
+  </ul>
+  <p><a href="#meta" class="btn" data-consent-open>Skift dit valg</a></p>
 
   <h2>Drift af siden</h2>
   <p>Siden ligger hos Vercel. Som alle webservere registrerer Vercel teknisk information som IP-adresse og tidspunkt i en kort periode for at holde siden sikker og kørende.</p>
@@ -107,6 +122,7 @@
     <li><strong>Simply.com</strong>: vores e-mail og domæne (Danmark).</li>
   </ul>
   <p>Når oplysninger sendes til USA, sker det på grundlag af EU-US Data Privacy Framework eller EU-Kommissionens standardkontraktbestemmelser.</p>
+  <p>Siger du ja til Meta Pixel, deler vi også oplysninger med Meta. Meta er ikke databehandler for os, men selv ansvarlig (se afsnittet om Meta Pixel).</p>
 
   <h2>Dine rettigheder</h2>
   <p>Du har ret til at få indsigt i de oplysninger, vi har om dig, og til at få dem rettet eller slettet. Du kan også gøre indsigelse mod vores behandling, bede om at få den begrænset og få dine oplysninger udleveret i et almindeligt format. Skriv til <a href="mailto:hej@webleads.dk">hej@webleads.dk</a>, så svarer vi inden for en måned.</p>
@@ -114,7 +130,8 @@
 </main>
 
 <footer>
-  <span>© 2026 Webleads</span><span>CVR 45737632</span>
+  <span>© 2026 Webleads</span><a href="#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>
 </footer>
+<script type="module" src="/assets/js/meta-pixel.js"></script>
 </body>
 </html>
