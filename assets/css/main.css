@@ -68,6 +68,10 @@ button { font-family: inherit; }
 .loader__word { align-items: center; }
 .loader__icon { margin-right: 0.12em; }
 .loader__icon img { width: 0.82em; height: 0.82em; display: block; }
+.loader { flex-direction: column; }
+.loader .loader__trust { margin-top: clamp(24px, 4vw, 40px); justify-content: center; padding: 0 20px; opacity: 0; transform: translateY(16px); animation: loaderTrust .5s cubic-bezier(.2,.9,.2,1) .25s forwards; }
+.loader__trust .trust__item { border-color: transparent; box-shadow: 0 10px 30px rgba(0,0,0,.12); pointer-events: none; }
+@keyframes loaderTrust { to { opacity: 1; transform: none; } }
 .loader__count { position: absolute; left: 28px; bottom: 24px; font-family: var(--display); font-weight: 800; font-size: 22px; }
 .loader__tag { position: absolute; right: 28px; bottom: 24px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 

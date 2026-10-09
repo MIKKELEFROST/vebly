@@ -67,6 +67,13 @@ $$('[data-review]').forEach(el => {
   el.setAttribute('aria-label', `${r.toLocaleString('da-DK')} ud af 5 stjerner, ${n} anmeldelser`);
   el.hidden = false;
   el.closest('[data-trust]').hidden = false;
+  // Same badge under the logo on the intro curtain (not a link there; a click lifts the curtain)
+  const lt = $('[data-loader-trust]');
+  if (lt) {
+    const c = el.cloneNode(true);
+    ['href', 'target', 'rel', 'data-event'].forEach(a => c.removeAttribute(a));
+    lt.append(c); lt.hidden = false;
+  }
 });
 
 // FAQ (first one open, as in the design)
