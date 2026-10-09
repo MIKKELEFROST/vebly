@@ -51,6 +51,8 @@
   .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   footer a { color: inherit; }
   footer { max-width: 760px; margin: 0 auto; padding: 0 24px 40px; font-size: 14px; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
+  /* Phones: bigger tap areas without moving anything */
+  @media (max-width: 699px) { .back, footer a { display: inline-block; padding: 12px 0; margin: -12px 0; } }
 </style>
 </head>
 <body>

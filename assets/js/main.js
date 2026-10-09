@@ -323,6 +323,10 @@ addEventListener('scroll', onScroll, { passive: true }); onScroll();
       ping.dataset.event = 'Flydende knap: Mail';
     }
     setTimeout(() => ping.classList.add('is-in'), 1800);
+    // On phones it waits until the visitor scrolls, so it does not cover the top of the page
+    const small = matchMedia('(max-width: 699px)');
+    const away = () => ping.classList.toggle('is-away', small.matches && scrollY < innerHeight * 0.35);
+    addEventListener('scroll', away, { passive: true }); addEventListener('resize', away); away();
   }
 }
 
