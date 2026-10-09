@@ -2,7 +2,7 @@
 // and forwards them to Google Analytics 4 with the Measurement Protocol.
 //
 // Environment variables (Vercel → Project → Settings → Environment Variables):
-//   GA4_MEASUREMENT_ID  required, e.g. G-ABC123XYZ
+//   GA4_MEASUREMENT_ID  optional, default G-RMB6GL0B9C (the webleads.dk stream)
 //   GA4_API_SECRET      required, GA4 → Admin → Data streams → (stream) → Measurement Protocol API secrets
 //   GA4_DEBUG           optional, "1" sends to GA4's validation endpoint and logs the response
 //
@@ -12,7 +12,7 @@
 
 import crypto from 'node:crypto';
 
-const EVENTS = new Set(['page_view', 'user_engagement', 'scroll', 'campaign_details', 'cta_click', 'addon_add', 'addon_remove', 'popup_open', 'generate_lead', 'form_error']);
+const EVENTS = new Set(['page_view', 'user_engagement', 'scroll', 'campaign_details', 'cta_click', 'addon_add', 'addon_remove', 'popup_open', 'generate_lead', 'form_error', 'section_view', 'form_start']);
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|uptime/i;
 
 const str = (v, max = 100) => (typeof v === 'string' ? v.slice(0, max) : '');
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'POST');
     return res.status(405).end();
   }
-  const id = process.env.GA4_MEASUREMENT_ID;
+  const id = process.env.GA4_MEASUREMENT_ID || 'G-RMB6GL0B9C';
   const secret = process.env.GA4_API_SECRET;
   const ua = String(req.headers['user-agent'] || '');
   if (!id || !secret || BOT.test(ua)) return res.status(204).end();

@@ -5,6 +5,9 @@
 //   RESEND_API_KEY  required
 //   CONTACT_TO      where leads go            (default: hej@webleads.dk)
 //   CONTACT_FROM    verified sender in Resend (default: Webleads <onboarding@resend.dev>)
+//   META_CAPI_TOKEN optional, sends the Lead to Meta too (see api/_meta.js)
+
+import { sendToMeta, userData } from './_meta.js';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -49,6 +52,21 @@ export default async function handler(req, res) {
   if (!r.ok) {
     console.error('contact: Resend error', r.status, await r.text());
     return res.status(502).json({ error: 'Beskeden kunne ikke sendes.' });
+  }
+
+  // Meta Conversions API: the same Lead as the browser pixel (same event id), with e-mail and
+  // name hashed so Meta can match it to an ad. Only when the visitor said yes to Meta Pixel.
+  // The message itself is never sent to Meta.
+  if (body.meta_consent === 'yes' && typeof body.meta_event_id === 'string') {
+    await sendToMeta([{
+      event_name: 'Lead',
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: body.meta_event_id.slice(0, 64),
+      action_source: 'website',
+      event_source_url: 'https://webleads.dk/',
+      user_data: userData(req, { email, name: navn }),
+      custom_data: { content_name: valgt.slice(0, 100), value: Math.min(Math.max(Number(body.meta_value) || 0, 0), 100000), currency: 'DKK' }
+    }]);
   }
   return res.status(200).json({ ok: true });
 }

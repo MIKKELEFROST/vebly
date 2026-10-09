@@ -3,6 +3,10 @@
 // localStorage so we only ask once; any link with data-consent-open opens the question
 // again so the choice can be changed. Visitors with Global Privacy Control or Do Not Track
 // are not asked, but can still say yes through the link.
+//
+// Every event goes to Meta twice with the same event id: from the browser (fbq) and from
+// our server through /api/meta (Conversions API), so ad blockers do not lose it and Meta
+// counts it once. The Lead is sent from /api/contact instead, with e-mail and name hashed.
 
 const PIXEL_ID = '2323320305173396';
 const KEY = 'wl-meta-consent';
@@ -10,9 +14,61 @@ const optOut = navigator.globalPrivacyControl === true || navigator.doNotTrack =
 
 const read = () => { try { return localStorage.getItem(KEY); } catch (x) { return null; } };
 const save = v => { try { localStorage.setItem(KEY, v); } catch (x) { /* private mode: we ask again next time */ } };
+const uid = () => (window.crypto && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
 
 let on = false;
 
+/* -------- Server copy (Conversions API) -------- */
+
+let queue = [];
+let timer = null;
+function flush() {
+  clearTimeout(timer); timer = null;
+  if (!queue.length) return;
+  const body = JSON.stringify({ events: queue.splice(0, 20) });
+  const sent = navigator.sendBeacon && navigator.sendBeacon('/api/meta', new Blob([body], { type: 'application/json' }));
+  if (!sent) fetch('/api/meta', { method: 'POST', body, headers: { 'Content-Type': 'application/json' }, keepalive: true }).catch(() => {});
+  if (queue.length) flush();
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
+
+// Standard events (Lead, Contact, ViewContent …) or custom ones ({ custom: true }).
+// Sends nothing without consent.
+export function metaTrack(event, params = {}, { custom = false, id = uid(), mirror = true } = {}) {
+  if (!on || !window.fbq) return;
+  try { window.fbq(custom ? 'trackCustom' : 'track', event, params, { eventID: id }); } catch (x) { /* tracking must never break the page */ }
+  if (mirror) {
+    queue.push({ event_name: event, event_id: id, custom_data: params, url: location.href.split('#')[0] });
+    if (!timer) timer = setTimeout(flush, 1000);
+  }
+}
+
+// Extra fields for the contact form, so /api/contact can send the Lead with the same id
+export function metaLeadFields() {
+  return on ? { meta_consent: 'yes', meta_event_id: uid() } : {};
+}
+
+// Events from analytics.js that also go to Meta
+const FROM_GA = {
+  scroll: p => ['Scroll', { percent: p.percent_scrolled }, true],
+  cta_click: p => ['CTAClick', { button: p.button }, true],
+  addon_add: p => ['CustomizeProduct', { content_name: p.addon }, false],
+  addon_remove: p => ['RemoveAddon', { content_name: p.addon }, true],
+  popup_open: p => ['ViewContent', { content_name: p.popup, content_category: String(p.popup || '').split('-')[0] }, false],
+  section_view: p => ['SectionView', { section: p.section }, true],
+  form_start: () => ['FormStart', {}, true],
+  form_error: () => ['FormError', {}, true]
+};
+export function fromAnalytics(name, params = {}) {
+  const map = FROM_GA[name];
+  if (!map || !on) return;
+  const [event, p, custom] = map(params);
+  metaTrack(event, p, { custom });
+}
+
+/* -------- Consent -------- */
+
+let started = false;
 function grant() {
   on = true;
   if (window.fbq) { window.fbq('consent', 'grant'); return; }
@@ -21,23 +77,29 @@ function grant() {
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   /* eslint-enable */
   window.fbq('init', PIXEL_ID);
-  window.fbq('track', 'PageView');
+  metaTrack('PageView');
+  if (started) return;
+  started = true;
+  // Active time on the page: 30 s, 1, 2 and 5 minutes while the tab is visible
+  const marks = [30, 60, 120, 300];
+  let seconds = 0;
+  const tick = setInterval(() => {
+    if (document.visibilityState !== 'visible') return;
+    seconds++;
+    if (seconds >= marks[0]) metaTrack('EngagedVisit', { seconds: marks.shift() }, { custom: true });
+    if (!marks.length) clearInterval(tick);
+  }, 1000);
 }
 
 function revoke() {
   on = false;
+  queue = [];
   if (window.fbq) window.fbq('consent', 'revoke');
   // Remove the cookies Meta Pixel sets on our own domain
   const host = location.hostname.replace(/^www\./, '');
   for (const name of ['_fbp', '_fbc']) {
     for (const domain of ['', host, '.' + host]) document.cookie = `${name}=; Max-Age=0; path=/${domain ? '; domain=' + domain : ''}`;
   }
-}
-
-// Standard Meta events (Lead, Contact …). Sends nothing without consent.
-export function metaTrack(event, params = {}) {
-  if (!on || !window.fbq) return;
-  try { window.fbq('track', event, params); } catch (x) { /* tracking must never break the page */ }
 }
 
 const CSS = `
@@ -61,7 +123,7 @@ function ask() {
   el.setAttribute('role', 'dialog');
   el.setAttribute('aria-labelledby', 'cc-t');
   el.innerHTML = '<p class="cc__t" id="cc-t">Må vi måle vores annoncer?</p>'
-    + '<p class="cc__p">Vi vil gerne bruge Meta Pixel til at måle vores annoncer på Facebook og Instagram og vise dem til folk, der har besøgt siden. Den sætter cookies og sender data til Meta. Siden virker lige godt uden. <a href="/privatliv#meta">Læs mere</a></p>'
+    + '<p class="cc__p">Vi vil gerne bruge Meta Pixel til at måle vores annoncer på Facebook og Instagram og vise dem til folk, der har besøgt siden. Den sætter cookies og sender data om dit besøg til Meta. Siden virker lige godt uden. <a href="/privatliv#meta">Læs mere</a></p>'
     + '<div class="cc__b"><button type="button" data-v="denied">Nej tak</button><button type="button" data-v="granted">Ja tak</button></div>';
   el.addEventListener('click', e => {
     const b = e.target.closest('button[data-v]'); if (!b) return;

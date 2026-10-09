@@ -48,19 +48,44 @@ Set in Vercel → Settings → Environment Variables, then redeploy:
 
 | Variable              | Required | Where to find it |
 |-----------------------|----------|------------------|
-| `GA4_MEASUREMENT_ID`  | yes      | GA4 → Admin → Data streams → your web stream (`G-…`) |
+| `GA4_MEASUREMENT_ID`  | no       | Defaults to `G-RMB6GL0B9C`, the webleads.dk stream |
 | `GA4_API_SECRET`      | yes      | Same stream → Measurement Protocol API secrets → Create |
 | `GA4_DEBUG`           | no       | `1` sends to GA4's validation endpoint and logs the result |
 
-Without the two required variables the endpoint accepts events and drops them. Visitors with Global Privacy Control or Do Not Track switched on send nothing. Keep `privatliv/index.html` in step if you change what is collected.
+Without the API secret the endpoint accepts events and drops them. Visitors with Global Privacy Control or Do Not Track switched on send nothing. Keep `privatliv/index.html` in step if you change what is collected.
 
-Events: `page_view`, `campaign_details` (from UTM tags), `scroll` (25/50/75/90 %), `user_engagement`, `cta_click` (`button`), `addon_add` / `addon_remove` (`addon`), `popup_open` (`popup`), `generate_lead` (`selected`) and `form_error`. Mark `generate_lead` as a key event in GA4. Add a CTA to `cta_click` by giving the element `data-event="Section: Label"`.
+Events: `page_view`, `campaign_details` (from UTM tags), `scroll` (25/50/75/90 %), `user_engagement`, `cta_click` (`button`), `addon_add` / `addon_remove` (`addon`), `popup_open` (`popup`), `generate_lead` (`selected`), `form_error`, `section_view` (`section`) and `form_start`. Mark `generate_lead` as a key event in GA4. Add a CTA to `cta_click` by giving the element `data-event="Section: Label"`.
 
-## Meta Pixel (only with consent)
+## Meta Pixel and Conversions API (only with consent)
 
 `assets/js/meta-pixel.js` asks the visitor once (a small box, bottom left) whether we may use Meta Pixel `2323320305173396`. Nothing is loaded from Meta and no cookies are set until they say yes. The answer is kept in `localStorage` (`wl-meta-consent`); any element with `data-consent-open` (the "Cookies" link in the footer, the button in the privacy policy) opens the question again, and saying no revokes the pixel and deletes `_fbp`/`_fbc`. Visitors with Global Privacy Control or Do Not Track are not asked.
 
-Events: `PageView`, `Lead` (contact form sent, `content_name` = the chosen package) and `Contact` (the floating sms/mail button, `sms:`, `mailto:` and `tel:` links). Use `metaTrack(event, params)` from the module for new events. The pixel runs on the front page and `/privatliv`; keep `privatliv/index.html` in step if you change what is sent.
+Every event is sent twice with the same `event_id`, so Meta counts it once: from the browser (`fbq`) and from our server through `/api/meta` (`api/meta.js` → `api/_meta.js`, the Conversions API). The Lead is sent by `/api/contact` instead, with the e-mail and name hashed (SHA-256). The message itself is never sent to Meta.
+
+| Event | When |
+|---|---|
+| `PageView` | Every page view |
+| `ViewContent` | A pop-up opens (`content_name` = pop-up key, e.g. `addon-seo`) |
+| `CustomizeProduct` / `RemoveAddon` | An add-on is added to or removed from the package |
+| `Lead` | The contact form is sent (`content_name` = chosen package, `value` = start prices, monthly add-ons count one month, `DKK`) |
+| `Contact` | The floating sms/mail button, `sms:`, `mailto:` and `tel:` links |
+| `SectionView` | A section reaches the upper half of the screen (`section` = its id) |
+| `Scroll` | 25, 50, 75 and 90 % of the page |
+| `CTAClick` | Any element with `data-event` (`button` = its label) |
+| `FormStart` / `FormError` | First focus in the contact form / sending failed |
+| `EngagedVisit` | 30 s, 1, 2 and 5 minutes of active time |
+
+The custom events come from `analytics.js` (`fromAnalytics`), so a new GA4 event can be passed on to Meta by adding it to `FROM_GA` in `meta-pixel.js`. Use `metaTrack(event, params)` for anything else. The pixel runs on the front page and `/privatliv`; keep `privatliv/index.html` in step if you change what is sent.
+
+Set in Vercel → Settings → Environment Variables, then redeploy:
+
+| Variable | Required | Where to find it |
+|---|---|---|
+| `META_CAPI_TOKEN` | for the server copy | Events Manager → the pixel → Settings → Conversions API → Generate access token |
+| `META_TEST_EVENT_CODE` | no | Events Manager → Test events; remove it again after testing |
+| `META_PIXEL_ID` | no | Defaults to `2323320305173396` |
+
+Without the token the browser pixel still works; only the server copy is skipped.
 
 ## Placeholders to replace
 

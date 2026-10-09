@@ -1,5 +1,5 @@
 import { track } from './analytics.js';
-import { metaTrack } from './meta-pixel.js';
+import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { trades, flipWords, included, addons, addonPages, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
@@ -138,10 +138,15 @@ form.addEventListener('submit', async e => {
   const btn = $('.form__submit', form);
   btn.disabled = true;
   try {
-    const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+    // For Meta: the start price of what was chosen (monthly add-ons count one month), and an
+    // event id shared with /api/contact, which sends the same Lead with the e-mail hashed
+    const chosen = $('[data-chosen-input]').value || 'Hjemmeside';
+    const value = 3000 + state.addons.reduce((sum, t) => sum + (+String(addons.find(a => a.t === t)?.price || '').replace(/\D/g, '') || 0), 0);
+    const meta = metaLeadFields();
+    const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), ...meta, meta_value: value }) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    track('generate_lead', { selected: $('[data-chosen-input]').value || 'Hjemmeside' });
-    metaTrack('Lead', { content_name: $('[data-chosen-input]').value || 'Hjemmeside' });
+    track('generate_lead', { selected: chosen });
+    metaTrack('Lead', { content_name: chosen, value, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
     form.reset(); syncAddons();
     form.hidden = true; thanks.hidden = false;
   } catch (x) {

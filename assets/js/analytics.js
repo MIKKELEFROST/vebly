@@ -1,6 +1,9 @@
 // First-party analytics. Events are batched and sent to our own /api/collect,
 // which forwards them to GA4 with the Measurement Protocol.
 // Nothing is stored in the browser: no cookies, no localStorage.
+// The same events also go to Meta (meta-pixel.js), but only for visitors who said yes there.
+
+import { fromAnalytics } from './meta-pixel.js';
 
 const ENDPOINT = '/api/collect';
 // Visitors who ask not to be tracked (Global Privacy Control or Do Not Track) send nothing
@@ -43,6 +46,7 @@ function flush() {
 
 export function track(name, params = {}) {
   try {
+    fromAnalytics(name, params);
     queue.push({ name, params: { ...params, engagement_time_msec: takeEngagement() } });
     if (!timer) timer = setTimeout(flush, 1500);
   } catch (x) { /* analytics must never break the page */ }
@@ -68,6 +72,19 @@ export function track(name, params = {}) {
   };
   addEventListener('scroll', onScroll, { passive: true });
 }
+
+// Sections seen: fires once per section, when it reaches the upper half of the screen
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    track('section_view', { section: e.target.id });
+  }), { rootMargin: '0px 0px -50% 0px' });
+  document.querySelectorAll('section[id]').forEach(s => io.observe(s));
+}
+
+// First time someone starts filling in the contact form (nothing they type is sent)
+document.querySelector('[data-form]')?.addEventListener('focusin', () => track('form_start'), { once: true });
 
 // Send what we have when the visitor leaves or switches tab
 document.addEventListener('visibilitychange', () => {
