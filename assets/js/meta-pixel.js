@@ -136,8 +136,11 @@ function ask() {
   requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));
 }
 
+// Not on customer drafts (/udkast): they are the customer's site, not ours
+const draft = !!document.querySelector('[data-draft]');
 const choice = read();
-if (choice === 'granted') grant();
+if (draft) { /* no pixel and no question */ }
+else if (choice === 'granted') grant();
 else if (!choice && !optOut) setTimeout(ask, document.querySelector('[data-loader]') ? 2800 : 600);
 
 document.addEventListener('click', e => {
