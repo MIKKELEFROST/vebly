@@ -1,0 +1,19 @@
+*{margin:0;box-sizing:border-box}
+body{width:1080px;height:1920px;overflow:hidden;font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+.orange{background:#e0552b;color:#fff}.black{background:#111;color:#fff}.sand{background:#f2ede4;color:#111}
+.in{position:absolute;left:96px;right:96px;top:270px;bottom:290px;display:flex;flex-direction:column}
+.k{font-size:34px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.orange .k{color:#111}.black .k,.sand .k{color:#e0552b}
+.d{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.045em;line-height:.95}
+.line{display:block;overflow:hidden;padding-bottom:.06em}.line>span{display:block}
+.wm{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:34px;font-weight:500}
+.wm .l{display:flex;align-items:center;gap:14px;font-family:'Bricolage Grotesque';font-weight:800;font-size:46px;letter-spacing:-.045em}
+.wm svg{width:52px;height:52px}.wm b{color:#e0552b}.orange .wm b{color:#111}
+.cta{display:inline-block;border-radius:999px;padding:22px 36px;font-weight:700;font-size:36px}
+@keyframes up{from{transform:translateY(110%)}to{transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.4)}70%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.a-up{animation:up .7s cubic-bezier(.2,.8,.2,1) both}
+.a-fade{animation:fade .6s cubic-bezier(.2,.8,.2,1) both}
+.a-pop{animation:pop .5s cubic-bezier(.2,.8,.2,1) both}
