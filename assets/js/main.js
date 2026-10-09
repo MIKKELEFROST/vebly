@@ -69,6 +69,9 @@ $$('[data-review]').forEach(el => {
   el.setAttribute('aria-label', `${r.toLocaleString('da-DK')} ud af 5 stjerner, ${n} anmeldelser`);
   el.hidden = false;
   el.closest('[data-trust]').hidden = false;
+  // Same badge floating in the hero on desktop
+  const fl = $(`[data-float-review="${el.classList.contains('trust__item--google') ? 'google' : 'tp'}"]`);
+  if (fl) { fl.append(el.cloneNode(true)); fl.hidden = false; }
   // Same badge under the logo on the intro curtain (not a link there; a click lifts the curtain)
   const lt = $('[data-loader-trust]');
   if (lt) {
