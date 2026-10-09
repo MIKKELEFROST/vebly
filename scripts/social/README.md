@@ -1,6 +1,8 @@
 # Sociale medier: automatisk indhold
 
-Hver uge laves 3 opslag (mandag, onsdag, fredag kl. 19.00) og 3 reels (samme dage kl. 19.10).
+Hver uge laves 3 opslag (mandag, onsdag, fredag kl. 19.00) og 3 reels (samme dage kl. 20.00).
+
+**Regel: Vi poster kun mellem kl. 08.00 og 21.00, og kun på hele timer.** Make tjekker kalenderen hver hele time i det tidsrum, så et opslag sat til fx 19.10 ville først gå ud kl. 20.00.
 Indholdet lægges i indholdskalenderen i Google Sheets, og Make poster det på Instagram og Facebook.
 
 - Kalender: [Webleads indholdskalender](https://docs.google.com/spreadsheets/d/1Xym5aLyCBlyNdFeZIep-lNPaBD5qZ_40oFXPjhtgQGI/edit), fanen `Kalender`
@@ -47,7 +49,7 @@ Reels: kortere tekst end opslaget samme dag, samme CTA som Instagram.
 
 Kolonner: `ID | Dato | Tid | Type | Kanal | Medie-URL | Tekst Instagram | Tekst Facebook | Status | Postet | Post-ID | Note | Tidspunkt (auto)`
 
-- `Dato` som `2026-10-19`, `Tid` som `19:00`.
+- `Dato` som `2026-10-19`, `Tid` som `19:00`. `Tid` skal være en hel time fra `08:00` til `21:00` (kolonnen har en rulleliste med de tilladte tider).
 - `Type`: `Opslag` eller `Reel`. `Kanal`: `Instagram + Facebook` for opslag, `Instagram` for reels.
 - `Status`: `Klar` (Make poster, når tidspunktet er nået) · `Sender` (Make er i gang, eller det fejlede midtvejs) · `Postet` · `Fejl` · `Pause` (springes over).
 - Skriv aldrig i kolonne M. Den er en formel.
