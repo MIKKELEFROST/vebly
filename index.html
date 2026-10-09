@@ -101,11 +101,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/main.css?v=20261009">
+<link rel="stylesheet" href="assets/css/bestil.css?v=1">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
 </script>
-<script type="module" src="assets/js/main.js?v=20261009c"></script>
+<script type="module" src="assets/js/main.js?v=20261009d"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -166,7 +167,7 @@
         </h1>
         <p class="hero__lead" data-reveal="3">Til dig, der lever af at hjælpe kunder. En hjemmeside, der får telefonen til at ringe og kalenderen til at blive fyldt, uden at du skal bruge en aften på det.</p>
         <div class="hero__ctas" data-reveal="4">
-          <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få et gratis tilbud">Få et gratis tilbud</a>
+          <a href="/bestil" class="btn btn--dark" data-bestil="hero" data-magnet data-burst data-roll data-event="Hero: Bestil en hjemmeside">Bestil en hjemmeside</a>
           <a href="#saadan" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
@@ -353,7 +354,7 @@
           <h2>Én pris.<br><span>Alt er med.</span></h2>
           <div class="price__amount"><span>fra</span><span class="odo" data-odo>3.000</span><span>kr.</span></div>
           <div class="price__vat">Ekskl. moms · engangsbeløb</div>
-          <div class="price__cta"><a href="#kontakt" class="btn btn--accent" data-magnet data-burst data-event="Pris: Kom i gang">Kom i gang →</a></div>
+          <div class="price__cta"><a href="/bestil" class="btn btn--accent" data-bestil="pris" data-magnet data-burst data-event="Pris: Kom i gang">Kom i gang →</a></div>
         </div>
         <div class="incl" data-incl></div>
       </div>
@@ -430,6 +431,7 @@
           <p class="contact__lead">Skriv til os. Vi svarer inden for 24 timer med en fast pris.</p>
           <div class="contact__links">
             <a href="mailto:hej@webleads.dk" data-event="Kontakt: E-mail">hej@webleads.dk</a>
+            <a href="/bestil" data-bestil="kontakt" data-event="Kontakt: Bestil udkast">Se dit gratis udkast først →</a>
           </div>
         </div>
         <form class="form" data-form novalidate>

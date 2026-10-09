@@ -4,7 +4,7 @@
 
 import { sendToMeta, userData } from './_meta.js';
 
-const EVENTS = new Set(['PageView', 'ViewContent', 'CustomizeProduct', 'Contact', 'Scroll', 'CTAClick', 'RemoveAddon', 'SectionView', 'FormStart', 'FormError', 'EngagedVisit']);
+const EVENTS = new Set(['PageView', 'ViewContent', 'CustomizeProduct', 'Contact', 'Scroll', 'CTAClick', 'RemoveAddon', 'SectionView', 'FormStart', 'FormError', 'EngagedVisit', 'InitiateCheckout', 'BestilStep']);
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|uptime/i;
 const SITE = 'https://webleads.dk/';
 

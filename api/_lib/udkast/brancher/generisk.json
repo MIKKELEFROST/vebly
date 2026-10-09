@@ -1,0 +1,74 @@
+{
+  "cta": "Kontakt os",
+  "ctaKort": "Kontakt os",
+  "headerKnap": "ring",
+  "badge": [
+    "Svar samme dag",
+    "Ring eller skriv til os"
+  ],
+  "trinOverskrift": "Nemt fra start til slut.",
+  "trin": [
+    ["Fortæl, hvad du har brug for", "Ring eller skriv. Det tager to minutter."],
+    ["Få en fast pris", "Du ved, hvad det koster, før vi går i gang."],
+    ["Vi klarer resten", "Til den aftalte tid og med styr på detaljerne."]
+  ],
+  "band": [
+    "Klar til at komme i gang?",
+    "Skriv eller ring. Vi svarer samme dag."
+  ],
+  "vaerdier": [
+    ["Ordentlighed", "Vi holder, hvad vi lover, og siger det, hvis noget ændrer sig."],
+    ["Kvalitet", "Vi gør det ordentligt første gang."],
+    ["Tæt på", "Vi kender {{BY}} og har kort vej til dig."]
+  ],
+  "opgaverTekst": "Glade kunder",
+  "ansatteTekst": "Medarbejdere",
+  "kontaktOverskrift": "Skriv til os.",
+  "kontaktTekst": "Fortæl kort, hvad du har brug for, så vender vi tilbage samme dag.",
+  "formValg": "Hvad drejer det sig om?",
+  "formBesked": "Fortæl kort om opgaven",
+  "formKnap": "Send besked",
+  "tider": [
+    ["Mandag–fredag", "8–17"],
+    ["Lørdag", "Efter aftale"],
+    ["Søndag", "Lukket"]
+  ],
+  "trust": [
+    "Fast pris",
+    "Svar samme dag",
+    "Lokalt i {{BY}}",
+    "Ingen skjulte gebyrer"
+  ],
+  "fag": "Service",
+  "farve": "#1d4e89",
+  "overskrift": "Service, du kan regne med.",
+  "intro": "Vi hjælper privatkunder og virksomheder i {{BY}} og omegn. Fast pris, klare aftaler og svar samme dag.",
+  "ydelserForside": "Det kan vi hjælpe med.",
+  "ydelserOverskrift": "Ydelser og priser.",
+  "ydelserIntro": "Her kommer jeres egne ydelser. Vi skriver teksterne sammen med dig.",
+  "omOverskrift": "Et lokalt firma med tid til dig.",
+  "omKort": "{{KORT}} har hjulpet kunder i {{BY}} siden {{AAR}}.",
+  "omLang": "{{KORT}} blev startet i {{AAR}}. Vi tror på ordentligt arbejde, klare aftaler og på at være til at få fat på.",
+  "ydelser": [
+    { "titel": "Rådgivning", "tekst": "Vi hjælper dig med at finde den rigtige løsning.", "pris": "Gratis første snak" },
+    { "titel": "Opgaver for private", "tekst": "Store og små opgaver, med fast pris før vi starter.", "pris": "Efter aftale" },
+    { "titel": "Opgaver for erhverv", "tekst": "Faste aftaler for virksomheder i {{BY}} og omegn.", "pris": "Efter aftale" }
+  ],
+  "fordele": [
+    "Fast pris, før vi går i gang",
+    "Svar samme dag",
+    "Lokalt kendskab",
+    "Ingen binding"
+  ],
+  "faq": [
+    ["Hvad koster det?", "Du får altid en fast pris, før vi går i gang."],
+    ["Hvor hurtigt kan I hjælpe?", "Som regel inden for få dage. Skriv, så finder vi en tid."],
+    ["Hvor kommer I?", "I {{BY}} og omegn."]
+  ],
+  "anmeldelser": [
+    ["Hurtigt svar og en fast pris. Præcis som lovet.", "Mette K.", "{{BY}}"],
+    ["Ordentligt arbejde fra start til slut.", "Lars P.", "Privatkunde"],
+    ["Nemme at have med at gøre. Kan varmt anbefales.", "Thomas H.", "Erhverv, {{BY}}"]
+  ],
+  "schemaType": "LocalBusiness"
+}
