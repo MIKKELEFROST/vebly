@@ -161,7 +161,7 @@ Og siden er din. Ingen binding og intet abonnement på selve hjemmesiden.
 # Opslag 16–19 (postes automatisk 23., 26., 28. og 30. oktober)
 
 Ligger i indholdskalenderen med reels samme dag kl. 20.00. Hashtags ligger i kolonnen "Første kommentar", så Make sætter dem i første kommentar i stedet for i teksten.
-17 og 19 er karruseller: slides ligger som JPG i `brand/social/karruseller/`.
+17 og 19 er karruseller: slides ligger som JPG i `brand/social/karruseller/`. Emnerne er valgt, så de ikke gentager det, der allerede er på profilen (01–13) eller planlagt (14–15).
 
 ## 16 · Vi laver også content
 Vi laver også content.
@@ -174,57 +174,51 @@ Du passer dit fag. Vi sørger for, at du bliver set.
 
 Første kommentar: #content #indhold #video #billeder #reels #socialemedier #småvirksomheder #lokalvirksomhed #webleads
 
-## 17 · Alt det her er med i prisen (karrusel, 5 slides)
-Alt det her er med i prisen.
+## 17 · Lad rutinerne klare sig selv (karrusel, 4 slides)
+Hvor meget af din uge går med det samme igen og igen?
 
-12 ting, du ikke skal betale ekstra for. Fra responsivt design og Google-optimering til SSL, GDPR og din Google-profil.
+Bekræftelser, påmindelser, fakturaer, rykkere og opfølgning kan klare sig selv. Vi sætter det op, tester det og holder øje med, at det kører.
 
-Fra 3.000 kr. ekskl. moms. Betales én gang. Klar på 7 dage.
+Fra 4.999 kr. pr. automatisering. Drift 499 kr./md. Ekskl. moms.
 
-Swipe og se det hele.
+Swipe og se eksemplerne.
 
-↓ Gratis tilbud via linket i bio.
+↓ Skriv til os via linket i bio.
 
-Første kommentar: #hjemmeside #webdesign #seo #småvirksomheder #selvstændig #servicefag #lokalvirksomhed #danskvirksomhed #webleads
+Første kommentar: #automation #automatisering #småvirksomheder #selvstændig #servicefag #iværksætter #lokalvirksomhed #webleads
 
-## 18 · Du ejer din hjemmeside
-Hvem ejer din hjemmeside?
+## 18 · Du ser siden, før den går live
+Du ser siden, før den går live.
 
-Hos os gør du. Ingen binding og intet abonnement på selve siden. Siden og indholdet er dit.
+Du får et udkast på få dage. Så retter vi til, indtil du er glad.
 
-Du betaler én gang. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.
-
-Har du en gammel side, flytter vi den.
+Og små ændringer efter lancering er også med i prisen.
 
 ↓ Gratis tilbud via linket i bio.
 
-Første kommentar: #hjemmeside #ingenbinding #webdesign #selvstændig #småvirksomheder #iværksætter #lokalvirksomhed #webleads
+Første kommentar: #hjemmeside #webdesign #nyhjemmeside #selvstændig #småvirksomheder #servicefag #lokalvirksomhed #webleads
 
-## 19 · Mere end en hjemmeside (karrusel, 6 slides)
-Mere end en hjemmeside.
+## 19 · Flere kunder fra Google og sociale medier (karrusel, 4 slides)
+Flere kunder fra Google og sociale medier.
 
-Vi kan også hjælpe med:
-SEO fra 999 kr./md.
-Annoncering fra 999 kr./md. pr. kanal
-Interne systemer fra 14.999 kr.
-Automations fra 4.999 kr.
+Vi laver annoncerne færdige, viser dem for de rigtige og holder øje med hver krone. På Google, Facebook, Instagram og LinkedIn.
 
-Vælg det, du har brug for. Så giver vi dig en fast pris. Alle priser er ekskl. moms.
+Fra 999 kr./md. pr. kanal. Opsætning gratis. Annoncebudgettet betaler du direkte til Google eller Meta.
 
 Swipe og se, hvad der er med.
 
-↓ Gratis tilbud via linket i bio.
+↓ Skriv til os via linket i bio.
 
-Første kommentar: #seo #googleads #annoncering #automation #hjemmeside #småvirksomheder #selvstændig #lokalvirksomhed #webleads
+Første kommentar: #annoncering #googleads #facebookannoncer #markedsføring #småvirksomheder #selvstændig #servicefag #lokalvirksomhed #webleads
 
 ## Reels 16–19 (kl. 20.00 samme dag, Instagram og Facebook)
 
 | Reel | Video | Instagram-tekst |
 |---|---|---|
-| 16 | `story-content.mp4` | Video, billeder og alt derimellem. Vi laver content til dine reels, stories og opslag. ↓ Skriv til os via linket i bio. |
-| 17 | `story-17-alt-er-med.mp4` | Responsivt design, Google-optimering, SSL, GDPR, Google-profil og meget mere. Alt er med fra 3.000 kr. ↓ Gratis tilbud via linket i bio. |
-| 18 | `story-18-du-ejer-siden.mp4` | Ingen binding. Intet abonnement på selve siden. Din hjemmeside er din. ↓ Gratis tilbud via linket i bio. |
-| 19 | `story-19-mere-end-en-hjemmeside.mp4` | SEO, annoncering, interne systemer og automations. Vælg det, du har brug for, og få en fast pris. ↓ Gratis tilbud via linket i bio. |
+| 16 | `story-16-content.mp4` | Video, billeder, stories, opslag og annoncer. Du passer dit fag. Vi sørger for, at du bliver set. ↓ Skriv til os via linket i bio. |
+| 17 | `story-17-automations.mp4` | Bekræftelser, påmindelser, fakturaer og rykkere. Lad rutinerne klare sig selv. ↓ Skriv til os via linket i bio. |
+| 18 | `story-18-se-siden-foerst.mp4` | Udkast på få dage. Rettelser, indtil du er glad. Du ser siden, før den går live. ↓ Gratis tilbud via linket i bio. |
+| 19 | `story-19-annoncering.mp4` | Google Ads, Facebook og Instagram. Fra 999 kr./md. pr. kanal, og opsætningen er gratis. ↓ Skriv til os via linket i bio. |
 
 ---
 

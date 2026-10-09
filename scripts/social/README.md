@@ -36,6 +36,12 @@ node scripts/social/render-reel.mjs scripts/social/reels/story-13-navn.html 9  #
 - Reels: overskriften står der fra første billede (ingen animation på `.line`), resten animerer ind (`a-fade`, `a-pop`), slut med CTA og logo. 8–10 sek.
 - Korte sætninger, dansk, du-form. Ingen tankestreger som pynt. Ingen emojis i billederne.
 
+## Emner: gentag aldrig noget, der er postet
+
+Læs overskrifterne i `brand/social/posts/TEKSTER.md` og kalenderen, før du vælger et emne. Et nyt opslag, en karrusel eller en reel må ikke have samme emne eller budskab som noget, der er postet eller planlagt.
+Brugt: intro, alt er med i prisen, sådan virker det (3 trin), før/efter, vores løfte, hvorfor Webleads, tilvalg med priser, teamet, månedlig betaling, alle fag, alt under ét tag, tjek din side, ingen tid (15 min.), findes på Google, ret selv i siden, content, automations, rettelser før lancering, annoncering.
+Ikke brugt endnu: interne systemer (CRM, booking, dashboards), SEO som månedligt tilvalg, mail på eget domæne og flytning af den gamle side, webshop og gavekort, logo, AI-chatbot, de enkelte i teamet.
+
 ## Fakta: brug kun det, der står på webleads.dk
 
 Læs `index.html` før du skriver. Fakta der må bruges: hjemmeside fra 3.000 kr. ekskl. moms, betales én gang, klar på 7 dage, ingen binding, du ejer siden, hvad der er med i prisen, tilvalg og priser (SEO og annoncering fra 999 kr./md., interne systemer fra 14.999 kr., automations fra 4.999 kr.), teamet (Alexander, Malthe, Anna, Mikkel), processen i 3 trin, FAQ-svarene.

@@ -266,53 +266,47 @@ Skriv til os → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_
 #content #socialemedier #webleads
 ```
 
-## 17 · Alt det her er med i prisen (5 billeder)
+## 17 · Lad rutinerne klare sig selv (4 billeder)
 ```
-Alt det her er med i prisen.
+Hvor meget af din uge går med det samme igen og igen?
 
-12 ting, du ikke skal betale ekstra for. Fra responsivt design og Google-optimering til SSL, GDPR og din Google-profil. Se dem alle på billederne.
+Bekræftelser, påmindelser, fakturaer, rykkere og opfølgning kan klare sig selv. Vi sætter det op, tester det og holder øje med, at det kører. Se eksemplerne på billederne.
 
-Fra 3.000 kr. ekskl. moms. Betales én gang. Klar på 7 dage.
+Fra 4.999 kr. pr. automatisering. Drift 499 kr./md. Ekskl. moms.
 
-Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#pris
+Skriv til os → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#tilvalg
+
+#automation #småvirksomheder #webleads
+```
+
+## 18 · Du ser siden, før den går live
+```
+Du ser siden, før den går live.
+
+Du får et udkast på få dage. Så retter vi til, indtil du er glad.
+
+Og små ændringer efter lancering er også med i prisen.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt
 
 #hjemmeside #webdesign #webleads
 ```
 
-## 18 · Du ejer din hjemmeside
+## 19 · Flere kunder fra Google og sociale medier (4 billeder)
 ```
-Hvem ejer din hjemmeside?
+Flere kunder fra Google og sociale medier.
 
-Hos os gør du. Ingen binding og intet abonnement på selve siden. Siden og indholdet er dit.
+Vi laver annoncerne færdige, viser dem for de rigtige og holder øje med hver krone. På Google, Facebook, Instagram og LinkedIn. Se, hvad der er med, på billederne.
 
-Du betaler én gang. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.
+Fra 999 kr./md. pr. kanal. Opsætning gratis. Annoncebudgettet betaler du direkte til Google eller Meta.
 
-Har du en gammel side, flytter vi den.
+Skriv til os → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#tilvalg
 
-Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#pris
-
-#hjemmeside #selvstændig #webleads
-```
-
-## 19 · Mere end en hjemmeside (6 billeder)
-```
-Mere end en hjemmeside.
-
-Vi kan også hjælpe med:
-SEO fra 999 kr./md.
-Annoncering fra 999 kr./md. pr. kanal
-Interne systemer fra 14.999 kr.
-Automations fra 4.999 kr.
-
-Vælg det, du har brug for. Så giver vi dig en fast pris. Alle priser er ekskl. moms. Se, hvad der er med, på billederne.
-
-Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#tilvalg
-
-#seo #annoncering #webleads
+#annoncering #googleads #webleads
 ```
 
 ## Reels 16–19
-Samme tekst som på Instagram, men med link: `https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=reel` + `#kontakt` (16), `#pris` (17 og 18) eller `#tilvalg` (19). Teksterne står i kalenderen.
+Samme tekst som på Instagram, men med link: `https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=reel` + `#kontakt` (16 og 18) eller `#tilvalg` (17 og 19). Teksterne står i kalenderen.
 
 ---
 
