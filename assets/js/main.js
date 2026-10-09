@@ -293,6 +293,30 @@ const onScroll = () => {
 };
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+// Contact button: phones get a pre-filled text message, everything else a pre-filled e-mail
+{
+  const ping = $('[data-ping]');
+  if (ping) {
+    const { phone, email, msg } = ping.dataset;
+    const sms = matchMedia('(pointer: coarse)').matches && innerWidth < 1000;
+    if (sms) {
+      // iOS reads the body after "&", Android after "?"
+      const sep = /iPhone|iPad|iPod/.test(navigator.userAgent) ? '&' : '?';
+      ping.href = `sms:${phone}${sep}body=${encodeURIComponent(msg)}`;
+      ping.classList.add('is-sms');
+      $('[data-ping-label]', ping).textContent = 'Sms os';
+      ping.setAttribute('aria-label', 'Send os en sms');
+      ping.dataset.event = 'Flydende knap: SMS';
+    } else {
+      ping.href = `mailto:${email}?subject=${encodeURIComponent('Møde om hjemmeside')}&body=${encodeURIComponent(msg)}`;
+      $('[data-ping-label]', ping).textContent = 'Skriv til os';
+      ping.setAttribute('aria-label', 'Send os en e-mail');
+      ping.dataset.event = 'Flydende knap: Mail';
+    }
+    setTimeout(() => ping.classList.add('is-in'), 1800);
+  }
+}
+
 // Before/after slider
 const ba = $('[data-ba]'), baNew = $('[data-ba-new]'), baH = $('[data-ba-h]'), baKnob = $('[data-ba-knob]');
 const baOld = $$('[data-ba-old]'), baNewV = $$('[data-ba-newv]'), baGo = $$('[data-ba-go]');
