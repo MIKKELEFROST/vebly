@@ -113,6 +113,7 @@ const CSS = `
 .cc__b{display:flex;gap:10px;margin-top:16px}
 .cc__b button{flex:1;-webkit-appearance:none;appearance:none;border:0;border-radius:999px;padding:13px 16px;background:#fff;color:#111;font:700 15px/1 "DM Sans","Helvetica Neue",Arial,sans-serif;cursor:pointer}
 .cc__b button:focus-visible,.cc__p a:focus-visible{outline:2px solid #e0552b;outline-offset:3px}
+@media (max-width:380px),(max-height:700px){.cc{left:10px;right:10px;bottom:10px;padding:16px 16px 14px;border-radius:20px;font-size:14px;line-height:1.45}.cc__t{font-size:19px}.cc__b{margin-top:12px}}
 @media (prefers-reduced-motion:reduce){.cc{transition:none}}`;
 
 function ask() {

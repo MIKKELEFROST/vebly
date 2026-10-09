@@ -53,7 +53,7 @@ const chip = (val, label, on, act, extra = '') => `<button type="button" class="
 const field = (key, label, attrs = '', opt = false, area = false) => {
   const [grp, k] = key.split('.');
   const v = esc(S[grp][k]);
-  const input = area ? `<textarea class="bx__in" data-f="${key}" ${attrs}>${v}</textarea>` : `<input class="bx__in" data-f="${key}" value="${v}" ${attrs}>`;
+  const input = area ? `<textarea class="bx__in" data-f="${key}" ${attrs}>${v}</textarea>` : `<input class="bx__in" data-f="${key}" value="${v}" enterkeyhint="next" ${attrs}>`;
   return `<label class="bx__field"><span>${label}${opt ? ' <em>(valgfri)</em>' : ''}</span>${input}</label>`;
 };
 const head = (n, h, sub) => `<div class="bx__k">Trin ${n} af 5</div><h2 class="bx__h" id="bx-h" tabindex="-1">${h}</h2><p class="bx__sub">${sub}</p>`;
@@ -64,7 +64,7 @@ const VIEWS = [
     + `<div class="bx__other" data-other${S.svar.b === 'generisk' ? '' : ' hidden'}>${field('svar.f', 'Hvad laver du?', 'placeholder="Fx murer, dyrlæge eller hundefrisør" maxlength="40" autocomplete="off"')}</div>`,
 
   () => head(2, 'Fortæl lidt om virksomheden.', 'Navn og by kommer med på dit udkast.')
-    + `<div class="bx__row">${field('svar.n', 'Virksomhedens navn', 'placeholder="Fx Holms Maler ApS" maxlength="60" autocomplete="organization"')}${field('svar.by', 'By', 'placeholder="Fx Roskilde" maxlength="40" autocomplete="address-level2"')}</div>`
+    + `<div class="bx__row">${field('svar.n', 'Virksomhedens navn', 'placeholder="Fx Holms Maler ApS" maxlength="60" autocomplete="organization" autocapitalize="words"')}${field('svar.by', 'By', 'placeholder="Fx Roskilde" maxlength="40" autocomplete="address-level2" autocapitalize="words"')}</div>`
     + `<div class="bx__row">${field('svar.a', 'Startet i år', 'placeholder="Fx 2015" inputmode="numeric" maxlength="4"', true)}<div></div></div>`
     + `<span class="bx__lbl">Hvor mange er I? <em>(valgfri)</em></span><div class="bx__chips" role="group" aria-label="Antal">${ANTAL.map(([v, l]) => chip(v, l, S.svar.m === v, 'antal')).join('')}</div>`,
 
@@ -72,14 +72,14 @@ const VIEWS = [
     + `<div class="bx__tiles" role="group" aria-label="Funktioner">${FUNKTIONER.map(([v, l, d]) => { const on = S.svar.x.includes(v); return `<button type="button" class="bx__tile${on ? ' is-on' : ''}" data-act="funk" data-v="${v}" aria-pressed="${on}"><b>${l}</b><span>${d}</span></button>`; }).join('')}</div>`
     + `<p class="bx__always">Altid med: <b>kontaktformular, Google-optimering, mobilvenligt design og SSL.</b></p>`
     + `<span class="bx__lbl">Har du en hjemmeside i dag?</span><div class="bx__chips" role="group" aria-label="Har du en hjemmeside i dag?">${chip('nej', 'Nej', S.kontakt.side === 'nej', 'side')}${chip('ja', 'Ja', S.kontakt.side === 'ja', 'side')}</div>`
-    + `<div class="bx__other" data-url-field${S.kontakt.side === 'ja' ? '' : ' hidden'}>${field('kontakt.url', 'Adressen på din nuværende side', 'placeholder="Fx minside.dk" maxlength="200" inputmode="url" autocomplete="url"', true)}<p class="bx__note">Vi flytter den gerne for dig.</p></div>`,
+    + `<div class="bx__other" data-url-field${S.kontakt.side === 'ja' ? '' : ' hidden'}>${field('kontakt.url', 'Adressen på din nuværende side', 'placeholder="Fx minside.dk" maxlength="200" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false"', true)}<p class="bx__note">Vi flytter den gerne for dig.</p></div>`,
 
   () => head(4, 'Vælg et udtryk.', 'Du kan altid ændre det bagefter.')
     + `<div class="bx__designs" role="group" aria-label="Design">${DESIGNS.map(([v, l, d]) => { const on = S.svar.s === v; return `<button type="button" class="bx__design${on ? ' is-on' : ''}" data-act="design" data-v="${v}" aria-pressed="${on}"><img src="/assets/bestil/design-${v}.jpg" alt="" width="640" height="400" loading="lazy"><b>${l}</b><span>${d}</span></button>`; }).join('')}</div>`
     + `<span class="bx__lbl">Vælg en farve</span><div class="bx__colors" role="group" aria-label="Farve">${colours().map((c, i) => { const on = (S.svar.c || colours()[0]) === c; return `<button type="button" class="bx__sw${on ? ' is-on' : ''}" style="background:${c}" data-act="farve" data-v="${c}" aria-label="Farve ${i + 1}" aria-pressed="${on}"></button>`; }).join('')}</div>`,
 
   () => head(5, 'Hvor skal vi sende dit udkast?', 'Du ser udkastet med det samme, og vi kontakter dig for at gøre det færdigt.')
-    + `<div class="bx__row">${field('kontakt.navn', 'Dit navn', 'maxlength="100" autocomplete="name"')}${field('kontakt.email', 'Din e-mail', 'type="email" maxlength="200" autocomplete="email" inputmode="email"')}</div>`
+    + `<div class="bx__row">${field('kontakt.navn', 'Dit navn', 'maxlength="100" autocomplete="name" autocapitalize="words"')}${field('kontakt.email', 'Din e-mail', 'type="email" maxlength="200" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"')}</div>`
     + field('kontakt.tlf', 'Telefon', 'type="tel" maxlength="30" autocomplete="tel"', true)
     + field('kontakt.besked', 'Noget, vi skal vide?', 'rows="3" maxlength="2000" placeholder="Fx hvad du særligt gerne vil have med"', true, true)
     + `<input class="bx__hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">`
@@ -104,12 +104,17 @@ function ensure() {
       <button type="button" class="bx__x" data-act="close" aria-label="Luk">✕</button>
     </div>
     <div class="bx__body"></div>
-    <div class="bx__bar"><div class="bx__bar-in"><button type="button" class="bx__back" data-act="back">← Tilbage</button><button type="button" class="bx__next" data-act="next">Næste →</button></div></div>`;
+    <div class="bx__bar"><div class="bx__bar-in"><button type="button" class="bx__back" data-act="back" aria-label="Tilbage"><span aria-hidden="true">←</span><span class="bx__back-t">Tilbage</span></button><button type="button" class="bx__next" data-act="next">Næste →</button></div></div>`;
   body = root.querySelector('.bx__body');
   root.addEventListener('click', onClick);
   root.addEventListener('input', onInput);
   root.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && e.target.matches('input.bx__in') && S.step < 5) { e.preventDefault(); next(); }
+    if (e.key !== 'Enter' || !e.target.matches('input.bx__in') || S.step >= 5) return;
+    e.preventDefault();
+    if (STEPS[S.step].ok()) return next();
+    // Not done yet: the keyboard's "Næste" key moves on to the next field
+    const fields = [...body.querySelectorAll('input.bx__in')].filter(f => f.offsetParent);
+    fields[fields.indexOf(e.target) + 1]?.focus();
   });
   document.addEventListener('keydown', e => { if (opened && e.key === 'Escape' && !document.querySelector('.cc')) close(); });
   addEventListener('resize', fit);
@@ -249,15 +254,18 @@ async function submit() {
 let device = 'desktop';
 function showResult() {
   const kort = S.svar.n.trim().replace(/\s+(ApS|A\/S|IVS|I\/S|K\/S|P\/S)\.?$/i, '');
+  // On a phone the draft is shown as a phone; the computer version would be too small to read
+  device = matchMedia('(max-width: 600px)').matches ? 'mobile' : 'desktop';
+  const on = v => (device === v ? ' class="is-on"' : '');
   body.innerHTML = `<div class="bx__step bx__step--res">
     <div class="bx__res-head"><div><div class="bx__k">Dit gratis udkast</div><h2 class="bx__h" id="bx-h" tabindex="-1">Her er ${esc(kort)}${/[sxz]$/i.test(kort) ? '\'' : 's'} nye hjemmeside.</h2>
       <p class="bx__sub">Lavet ud fra dine svar. Billeder og anmeldelser er eksempler, og teksterne gør vi færdige sammen med dig.</p></div></div>
     <div class="bx__tools">
-      <div class="bx__seg" role="group" aria-label="Visning"><button type="button" data-act="device" data-v="desktop" class="is-on">Computer</button><button type="button" data-act="device" data-v="mobile">Mobil</button></div>
+      <div class="bx__seg bx__seg--device" role="group" aria-label="Visning"><button type="button" data-act="device" data-v="desktop"${on('desktop')}>Computer</button><button type="button" data-act="device" data-v="mobile"${on('mobile')}>Mobil</button></div>
       <div class="bx__seg" role="group" aria-label="Design">${DESIGNS.map(([v, l]) => `<button type="button" data-act="rdesign" data-v="${v}"${S.svar.s === v ? ' class="is-on"' : ''}>${l}</button>`).join('')}</div>
       <div class="bx__colors" role="group" aria-label="Farve">${colours().map((c, i) => `<button type="button" class="bx__sw${(S.svar.c || colours()[0]) === c ? ' is-on' : ''}" style="background:${c}" data-act="rfarve" data-v="${c}" aria-label="Farve ${i + 1}"></button>`).join('')}</div>
     </div>
-    <div class="bx__frame"><div class="bx__chrome"><i></i><i></i><i></i><span data-url></span></div><div class="bx__view"><iframe title="Dit udkast" loading="eager"></iframe></div></div>
+    <div class="bx__frame${device === 'mobile' ? ' is-mobile' : ''}"><div class="bx__chrome"><i></i><i></i><i></i><span data-url></span></div><div class="bx__view"><iframe title="Dit udkast" loading="eager"></iframe></div></div>
     <div class="bx__acts"><a class="bx__btn bx__btn--dark" data-open target="_blank" rel="noopener">Åbn udkastet ↗</a><button type="button" class="bx__btn" data-act="copy">Kopiér link</button></div>
     <div class="bx__next-steps">
       <div><span>01</span><b>Vi ringer dig op</b><p>Vi kigger på dine svar og kontakter dig hurtigst muligt.</p></div>

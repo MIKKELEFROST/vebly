@@ -87,7 +87,7 @@ textarea.bx__in { resize: vertical; min-height: 96px; }
 /* Bottom bar: back and next */
 .bx__bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 24px calc(18px + env(safe-area-inset-bottom)); background: linear-gradient(rgba(251, 250, 248, 0), var(--bg) 35%); pointer-events: none; }
 .bx__bar-in { max-width: 760px; margin: 0 auto; display: flex; align-items: center; gap: 12px; pointer-events: auto; }
-.bx__back { -webkit-appearance: none; appearance: none; border: 0; background: none; color: var(--muted); font-weight: 700; font-size: 16px; padding: 14px 6px; cursor: pointer; }
+.bx__back { -webkit-appearance: none; appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; background: none; color: var(--muted); font-weight: 700; font-size: 16px; padding: 14px 6px; cursor: pointer; }
 .bx__back:hover { color: var(--ink); }
 .bx__next { -webkit-appearance: none; appearance: none; margin-left: auto; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 700; font-size: 17px; line-height: 1; padding: 19px 30px; cursor: pointer; transition: background .2s, opacity .2s, transform .15s; }
 .bx__next:hover { background: var(--accent); }
@@ -156,9 +156,28 @@ textarea.bx__in { resize: vertical; min-height: 96px; }
   .bx__design img { border-radius: 9px; }
   .bx__design b { font-size: 15px; margin: 8px 4px 0; }
   .bx__design span { display: none; }
-  .bx__next { padding: 18px 24px; }
   .bx__next-steps { grid-template-columns: 1fr; }
   .bx__view { height: 58vh; }
+
+  /* Bottom bar: a round back button and a wide next button that never wraps */
+  .bx__bar-in { gap: 10px; }
+  .bx__back { width: 56px; height: 56px; flex-shrink: 0; padding: 0; border: 1.5px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); font-size: 20px; }
+  .bx__back-t { display: none; }
+  .bx__next { flex: 1; min-width: 0; margin-left: 0; padding: 19px 16px; white-space: nowrap; text-align: center; }
+}
+@media (max-width: 600px) {
+  /* The draft is shown as a phone here (bestil.js), so the computer/phone switch is not needed */
+  .bx__seg--device { display: none; }
+  .bx__step--res .bx__sub { font-size: 15px; }
+  .bx__tools { margin-top: 18px; gap: 10px; }
+  .bx__frame { margin-top: 14px; }
+  .bx__frame.is-mobile { border-width: 6px; border-radius: 30px; }
+  .bx__frame.is-mobile .bx__view { height: min(64vh, 600px); }
+}
+@media (max-width: 380px) {
+  .bx__colors { gap: 8px; }
+  .bx__sw { width: 40px; height: 40px; }
+  .bx__next { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .bx, .bx__step, .bx__prog i::after, .bx__frame { animation: none; transition: none; }
