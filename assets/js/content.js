@@ -79,6 +79,7 @@ export const ballInfo = {
   'Mobile-first': ['Designet til telefonen først og skarp på alle skærme.', 'inc-Responsivt design']
 };
 
+// Keep in sync with the FAQPage structured data in index.html
 export const faqs = [
   ['Er der en månedlig betaling?', 'Nej, du betaler én gang for hjemmesiden. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.'],
   ['Jeg har ikke tid til det. Hvad skal jeg lave?', 'Et opkald på 15 minutter og nogle billeder. Resten klarer vi, også teksterne.'],

@@ -1,0 +1,14 @@
+{
+  "name": "Webleads · Hjemmesider til servicefag",
+  "short_name": "Webleads",
+  "lang": "da",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fbfaf8",
+  "theme_color": "#e0552b",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
