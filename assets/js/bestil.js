@@ -2,7 +2,7 @@
 // Opens as a full-screen layer from any [data-bestil] link (and on #bestil), and on its own at /bestil.
 // The answers go to /api/bestil, which e-mails them to us and returns the link to the draft
 // (/mit-udkast?d=…, rendered by api/udkast.js from the same templates as hand-made drafts).
-import { track } from './analytics.js';
+import { track, DESIGN_NAMES } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 
 // [template in api/_lib/udkast/brancher, label, default colour]
@@ -46,6 +46,26 @@ const STEPS = [
   { name: 'stil', ok: () => true },
   { name: 'kontakt', ok: () => S.kontakt.navn.trim() && EMAIL.test(S.kontakt.email.trim()) }
 ];
+
+/* -------- Tracking (README.md → Tracking) -------- */
+
+// What each step chose, for its own event (never names, e-mails or other text the visitor typed)
+const DETAILS = [
+  () => ({ fag: S.svar.b === 'generisk' ? 'andet' : S.svar.b }),
+  () => ({ has_year: S.svar.a ? 'ja' : 'nej', team_size: S.svar.m || 'ikke-valgt' }),
+  () => ({ functions: S.svar.x.join(',') || 'ingen', functions_count: S.svar.x.length, has_site: S.kontakt.side || 'ikke-valgt' }),
+  () => ({ design: DESIGN_NAMES[S.svar.s], colour: S.svar.c || colours()[0], colour_changed: S.svar.c && S.svar.c !== colours()[0] ? 'ja' : 'nej' }),
+  () => ({ has_phone: S.kontakt.tlf.trim() ? 'ja' : 'nej', has_message: S.kontakt.besked.trim() ? 'ja' : 'nej' })
+];
+const CHOICE_GROUPS = { fag: 'fag', antal: 'antal', funk: 'funktion', side: 'hjemmeside', design: 'design', farve: 'farve' };
+const FIELD_NAMES = { 'svar.n': 'firmanavn', 'svar.by': 'by', 'svar.a': 'startaar', 'svar.f': 'andet_fag', 'kontakt.navn': 'navn', 'kontakt.email': 'email', 'kontakt.tlf': 'telefon', 'kontakt.besked': 'besked', 'kontakt.url': 'nuvaerende_side' };
+const filledFields = new Set();
+let tOpen = 0, tStep = 0;
+const secs = t => Math.round((performance.now() - t) / 1000);
+const stepView = dir => {
+  tStep = performance.now();
+  track('bestil_step_view', { step: S.step + 1, step_name: STEPS[S.step].name, direction: dir > 0 ? 'frem' : dir < 0 ? 'tilbage' : 'start' });
+};
 
 /* -------- Steps -------- */
 
@@ -108,6 +128,13 @@ function ensure() {
   body = root.querySelector('.bx__body');
   root.addEventListener('click', onClick);
   root.addEventListener('input', onInput);
+  // A field filled in (once per field; what was written is not sent)
+  root.addEventListener('focusout', e => {
+    const f = e.target.dataset && e.target.dataset.f;
+    if (!f || !e.target.value.trim() || filledFields.has(f)) return;
+    filledFields.add(f);
+    track('bestil_field', { step: S.step + 1, field_name: FIELD_NAMES[f] || f });
+  });
   root.addEventListener('keydown', e => {
     if (e.key !== 'Enter' || !e.target.matches('input.bx__in') || S.step >= 5) return;
     e.preventDefault();
@@ -150,12 +177,15 @@ function focusStep() {
 }
 
 function go(step, dir) {
-  S.step = step; S.error = ''; save(); render(dir); focusStep();
+  S.step = step; S.error = ''; save(); render(dir); focusStep(); stepView(dir);
 }
 
 function next() {
   if (!STEPS[S.step].ok()) return;
-  track('bestil_step', { step: S.step + 1, name: STEPS[S.step].name });
+  const n = S.step + 1, name = STEPS[S.step].name, seconds = secs(tStep);
+  track('bestil_step', { step: n, name, seconds });
+  // One event per step (bestil_1_fag … bestil_5_kontakt), so each step can be read on its own
+  track(`bestil_${n}_${name}`, { seconds, ...DETAILS[S.step]() });
   if (S.step < 4) go(S.step + 1, 1);
   else submit();
 }
@@ -166,7 +196,9 @@ function onClick(e) {
   const v = t.dataset.v;
   switch (t.dataset.act) {
     case 'close': return close();
-    case 'back': return S.step > 0 && go(S.step - 1, -1);
+    case 'back':
+      if (S.step > 0) { track('bestil_back', { step: S.step + 1, step_name: STEPS[S.step].name, seconds: secs(tStep) }); go(S.step - 1, -1); }
+      return;
     case 'next': return next();
     case 'fag': {
       S.svar.b = v; S.svar.c = '';
@@ -186,14 +218,28 @@ function onClick(e) {
     }
     case 'design': S.svar.s = Number(v); break;
     case 'farve': S.svar.c = v; break;
-    case 'device': return setDevice(v);
-    case 'rdesign': S.svar.s = Number(v); save(); return refreshDraft();
-    case 'rfarve': S.svar.c = v; save(); return refreshDraft();
+    case 'device':
+      track('bestil_result_change', { change_type: 'visning', choice: v === 'mobile' ? 'mobil' : 'computer' });
+      return setDevice(v);
+    case 'rdesign':
+      S.svar.s = Number(v); save();
+      track('bestil_result_change', { change_type: 'design', choice: DESIGN_NAMES[v] });
+      return refreshDraft();
+    case 'rfarve':
+      S.svar.c = v; save();
+      track('bestil_result_change', { change_type: 'farve', choice: v });
+      return refreshDraft();
     case 'copy': return copyLink(t);
     case 'restart': S = blank(); save(); return go(0, -1);
     default: return;
   }
   save();
+  {
+    // Every choice, also the ones taken back again
+    const a = t.dataset.act;
+    const on = a === 'funk' ? S.svar.x.includes(v) : a === 'antal' ? S.svar.m === v : true;
+    track('bestil_choice', { step: S.step + 1, choice_group: CHOICE_GROUPS[a], choice: a === 'design' ? DESIGN_NAMES[v] : v === 'generisk' ? 'andet' : v, choice_action: on ? 'valgt' : 'fravalgt' });
+  }
   // Re-render only the pressed group, so the step does not animate again
   const group = t.parentElement;
   group.querySelectorAll('[data-act]').forEach(el => {
@@ -230,6 +276,7 @@ async function submit() {
   const items = [...body.querySelectorAll('.bx__build li')];
   const anim = (async () => { for (const li of items) { li.classList.add('is-busy'); await wait(620); li.classList.replace('is-busy', 'is-done'); } })();
   const meta = metaLeadFields();
+  track('bestil_submit', { seconds_total: secs(tOpen), fag: DETAILS[0]().fag, design: DESIGN_NAMES[S.svar.s] });
   try {
     const r = await fetch('/api/bestil', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -240,16 +287,18 @@ async function submit() {
     S.result = data.link || draftLink();
     S.mailed = !!data.kvittering;
   } catch (x) {
-    track('form_error');
+    track('form_error', { form_name: 'bestil', error_message: String(x.message || x).slice(0, 100) });
+    track('bestil_error', { error_message: String(x.message || x).slice(0, 100) });
     S.error = 'Det lykkedes ikke at sende. Prøv igen, eller skriv til <a href="mailto:hej@webleads.dk">hej@webleads.dk</a>.';
     S.step = 4; render(-1);
     return;
   }
-  track('generate_lead', { selected: 'Bestil: ' + fagLabel() });
+  track('generate_lead', { selected: 'Bestil: ' + fagLabel(), form_name: 'bestil', fag: DETAILS[0]().fag, value: 3000, currency: 'DKK', receipt: S.mailed ? 'ja' : 'nej' });
   metaTrack('Lead', { content_name: 'Bestil: ' + fagLabel(), value: 3000, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
   await anim;
   await wait(250);
   showResult();
+  track('bestil_udkast_vist', { fag: DETAILS[0]().fag, design: DESIGN_NAMES[S.svar.s], view: device === 'mobile' ? 'mobil' : 'computer', receipt: S.mailed ? 'ja' : 'nej', seconds_total: secs(tOpen) });
   try { sessionStorage.removeItem(KEY); } catch (x) { /* fine */ }
 }
 
@@ -278,6 +327,7 @@ function showResult() {
   </div>`;
   refreshDraft();
   focusStep();
+  body.querySelector('[data-open]').addEventListener('click', () => track('bestil_draft_open', { design: DESIGN_NAMES[S.svar.s] }));
 }
 
 function refreshDraft() {
@@ -313,7 +363,7 @@ function fit() {
 
 async function copyLink(btn) {
   const url = location.origin + draftLink();
-  try { await navigator.clipboard.writeText(url); btn.textContent = 'Kopieret ✓'; } catch (x) { prompt('Kopiér linket:', url); }
+  try { await navigator.clipboard.writeText(url); btn.textContent = 'Kopieret ✓'; track('bestil_link_copy', { result: 'kopieret' }); } catch (x) { track('bestil_link_copy', { result: 'manuelt' }); prompt('Kopiér linket:', url); }
   setTimeout(() => { btn.textContent = 'Kopiér link'; }, 2000);
 }
 
@@ -330,14 +380,17 @@ export function openBestil({ from = 'link', alone = false } = {}) {
   document.documentElement.style.overflow = 'hidden';
   if (!standalone && location.hash !== '#bestil') history.pushState({ bestil: 1 }, '', '#bestil');
   setTimeout(focusStep, 50);
-  track('bestil_open', { from });
+  tOpen = performance.now();
+  track('bestil_open', { from, resumed: S.step > 0 ? 'ja' : 'nej' });
+  stepView(0);
 }
 
 function close() {
   if (!opened) return;
+  // Where people leave: the step (6 = after seeing the draft) and how long they had spent
+  track('bestil_close', { step: S.result ? 6 : S.step + 1, step_name: S.result ? 'resultat' : STEPS[Math.min(S.step, 4)].name, finished: S.result ? 'ja' : 'nej', seconds_total: secs(tOpen) });
   if (standalone) { location.href = '/'; return; }
   opened = false;
-  if (!S.result) track('bestil_close', { step: S.step + 1 });
   root.classList.remove('is-open');
   document.documentElement.style.overflow = '';
   if (S.result) { S = blank(); }
