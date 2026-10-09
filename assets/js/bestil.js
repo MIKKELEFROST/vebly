@@ -236,7 +236,9 @@ async function submit() {
       body: JSON.stringify({ svar: { ...S.svar, c: S.svar.c || colours()[0] }, kontakt: S.kontakt, _gotcha: hp, ...meta })
     });
     if (!r.ok) throw new Error('HTTP ' + r.status);
-    S.result = (await r.json()).link || draftLink();
+    const data = await r.json();
+    S.result = data.link || draftLink();
+    S.mailed = !!data.kvittering;
   } catch (x) {
     track('form_error');
     S.error = 'Det lykkedes ikke at sende. Prøv igen, eller skriv til <a href="mailto:hej@webleads.dk">hej@webleads.dk</a>.';
@@ -259,7 +261,7 @@ function showResult() {
   const on = v => (device === v ? ' class="is-on"' : '');
   body.innerHTML = `<div class="bx__step bx__step--res">
     <div class="bx__res-head"><div><div class="bx__k">Dit gratis udkast</div><h2 class="bx__h" id="bx-h" tabindex="-1">Her er ${esc(kort)}${/[sxz]$/i.test(kort) ? '\'' : 's'} nye hjemmeside.</h2>
-      <p class="bx__sub">Lavet ud fra dine svar. Billeder og anmeldelser er eksempler, og teksterne gør vi færdige sammen med dig.</p></div></div>
+      <p class="bx__sub">Lavet ud fra dine svar. Billeder og anmeldelser er eksempler, og teksterne gør vi færdige sammen med dig.${S.mailed ? ' Vi har også sendt linket til din e-mail.' : ''}</p></div></div>
     <div class="bx__tools">
       <div class="bx__seg bx__seg--device" role="group" aria-label="Visning"><button type="button" data-act="device" data-v="desktop"${on('desktop')}>Computer</button><button type="button" data-act="device" data-v="mobile"${on('mobile')}>Mobil</button></div>
       <div class="bx__seg" role="group" aria-label="Design">${DESIGNS.map(([v, l]) => `<button type="button" data-act="rdesign" data-v="${v}"${S.svar.s === v ? ' class="is-on"' : ''}>${l}</button>`).join('')}</div>

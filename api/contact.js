@@ -1,15 +1,14 @@
 // Vercel serverless function for the contact form.
-// Sends the message by email through Resend (https://resend.com).
+// Sends the message to us by e-mail through Resend, and a short receipt to the visitor (api/_mail.js).
 //
 // Environment variables (Vercel → Project → Settings → Environment Variables):
 //   RESEND_API_KEY  required
-//   CONTACT_TO      where leads go            (default: hej@webleads.dk)
-//   CONTACT_FROM    verified sender in Resend (default: Webleads <onboarding@resend.dev>)
+//   CONTACT_TO      where leads go (default: hej@webleads.dk)
+//   CONTACT_FROM    sender (default: Webleads <hej@webleads.dk>, see api/_mail.js)
 //   META_CAPI_TOKEN optional, sends the Lead to Meta too (see api/_meta.js)
 
 import { sendToMeta, userData } from './_meta.js';
-
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+import { sendMail, receipt, esc, TO, SITE } from './_mail.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -30,29 +29,34 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Navn og en gyldig e-mail er påkrævet.' });
   }
 
-  const key = process.env.RESEND_API_KEY;
-  if (!key) {
+  if (!process.env.RESEND_API_KEY) {
     console.error('contact: RESEND_API_KEY is not set');
     return res.status(503).json({ error: 'Formularen er ikke sat op endnu.' });
   }
 
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: process.env.CONTACT_FROM || 'Webleads <onboarding@resend.dev>',
-      to: [process.env.CONTACT_TO || 'hej@webleads.dk'],
-      reply_to: email,
-      subject: `Ny henvendelse fra ${navn}`,
-      text: `Navn: ${navn}\nE-mail: ${email}\nValgt: ${valgt}\n\n${besked}`,
-      html: `<p><b>Navn:</b> ${esc(navn)}<br><b>E-mail:</b> ${esc(email)}<br><b>Valgt:</b> ${esc(valgt)}</p><p style="white-space:pre-wrap">${esc(besked)}</p>`
-    })
-  });
+  const ok = await sendMail({
+    to: [TO],
+    reply_to: email,
+    subject: `Ny henvendelse fra ${navn}`,
+    text: `Navn: ${navn}\nE-mail: ${email}\nValgt: ${valgt}\n\n${besked}`,
+    html: `<p><b>Navn:</b> ${esc(navn)}<br><b>E-mail:</b> ${esc(email)}<br><b>Valgt:</b> ${esc(valgt)}</p><p style="white-space:pre-wrap">${esc(besked)}</p>`
+  }, { toUs: true, tag: 'contact' });
+  if (!ok) return res.status(502).json({ error: 'Beskeden kunne ikke sendes.' });
 
-  if (!r.ok) {
-    console.error('contact: Resend error', r.status, await r.text());
-    return res.status(502).json({ error: 'Beskeden kunne ikke sendes.' });
-  }
+  // Receipt to the visitor. If it fails, the message has still reached us.
+  const kvittering = await sendMail({
+    to: [email],
+    reply_to: TO,
+    subject: 'Tak for din besked',
+    ...receipt({
+      navn,
+      paras: [
+        'Tak for din besked. Vi har fået den og vender tilbage inden for 24 timer med en fast pris.',
+        'Vil du se din nye hjemmeside allerede nu? Svar på fem korte spørgsmål, så får du et gratis udkast med det samme.'
+      ],
+      button: { label: 'Se dit gratis udkast', href: `${SITE}/bestil?utm_source=kvittering&utm_medium=email&utm_campaign=kontakt` }
+    })
+  }, { tag: 'contact' });
 
   // Meta Conversions API: the same Lead as the browser pixel (same event id), with e-mail and
   // name hashed so Meta can match it to an ad. Only when the visitor said yes to Meta Pixel.
@@ -68,7 +72,7 @@ export default async function handler(req, res) {
       custom_data: { content_name: valgt.slice(0, 100), value: Math.min(Math.max(Number(body.meta_value) || 0, 0), 100000), currency: 'DKK' }
     }]);
   }
-  return res.status(200).json({ ok: true });
+  return res.status(200).json({ ok: true, kvittering });
 }
 
 function safeJson(s) { try { return JSON.parse(s); } catch { return {}; } }

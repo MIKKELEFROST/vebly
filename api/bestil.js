@@ -3,16 +3,17 @@
 // api/udkast.js from the answers in the link, so nothing is stored here.
 //
 // Environment variables (same as api/contact.js):
-//   RESEND_API_KEY  required to get the e-mail; without it the visitor still gets the draft
+//   RESEND_API_KEY  required to get the e-mails; without it the visitor still gets the draft
 //   CONTACT_TO      where orders go (default: hej@webleads.dk)
-//   CONTACT_FROM    verified sender in Resend. When set, the visitor also gets the link by e-mail
+//   CONTACT_FROM    sender (default: Webleads <hej@webleads.dk>, see api/_mail.js)
 //   META_CAPI_TOKEN optional, sends the Lead to Meta too (api/_meta.js)
+//
+// The visitor also gets the link to the draft by e-mail (once webleads.dk is verified in Resend).
 
 import { cleanAnswers, encode, summary } from './_lib/udkast/bestilling.js';
 import { sendToMeta, userData } from './_meta.js';
+import { sendMail, receipt, esc, TO, SITE } from './_mail.js';
 
-const SITE = 'https://webleads.dk';
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const clip = (v, n) => String(v ?? '').trim().slice(0, n);
 
 export default async function handler(req, res) {
@@ -34,36 +35,32 @@ export default async function handler(req, res) {
   }
 
   const rows = [...summary(a), ['Har en side i dag', harSide], ['Kontakt', navn], ['E-mail', email], ['Telefon', tlf || '–']];
-  const key = process.env.RESEND_API_KEY;
-  let sent = false;
-  if (!key) console.error('bestil: RESEND_API_KEY is not set, the order was not e-mailed');
+  let sent = false, kvittering = false;
+  if (!process.env.RESEND_API_KEY) console.error('bestil: RESEND_API_KEY is not set, the order was not e-mailed');
   else {
-    const from = process.env.CONTACT_FROM || 'Webleads <onboarding@resend.dev>';
-    const mail = (payload) => fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from, ...payload }),
-      signal: AbortSignal.timeout(8000)
-    }).then(async r => { if (!r.ok) console.error('bestil: Resend error', r.status, (await r.text()).slice(0, 300)); return r.ok; }).catch(x => { console.error('bestil: Resend failed', x.message); return false; });
-
-    sent = await mail({
-      to: [process.env.CONTACT_TO || 'hej@webleads.dk'],
+    sent = await sendMail({
+      to: [TO],
       reply_to: email,
       subject: `Ny bestilling: ${a.n} (${rows[0][1]} i ${a.by})`,
       text: `${rows.map(([t, v]) => `${t}: ${v}`).join('\n')}\n\nUdkast: ${SITE}${link}\n\n${besked}`,
       html: `<p><b>Ny bestilling via "Bestil en hjemmeside"</b></p><table cellpadding="4">${rows.map(([t, v]) => `<tr><td><b>${esc(t)}</b></td><td>${esc(v)}</td></tr>`).join('')}</table>`
         + `<p><a href="${SITE}${link}">Se udkastet</a></p>${besked ? `<p style="white-space:pre-wrap">${esc(besked)}</p>` : ''}`
-    });
-    // A copy of the link to the visitor, only with a verified sender (onboarding@resend.dev can only mail us)
-    if (process.env.CONTACT_FROM) {
-      await mail({
-        to: [email],
-        reply_to: process.env.CONTACT_TO || 'hej@webleads.dk',
-        subject: `Dit gratis udkast til ${a.n}`,
-        text: `Hej ${navn}\n\nTak, fordi du bestilte et udkast. Her er det:\n${SITE}${link}\n\nVi kontakter dig hurtigst muligt, så vi kan gøre siden færdig sammen med dig.\n\nVenlig hilsen\nWebleads\nhej@webleads.dk`,
-        html: `<p>Hej ${esc(navn)}</p><p>Tak, fordi du bestilte et udkast. Her er det:</p><p><a href="${SITE}${link}"><b>Se dit udkast til ${esc(a.n)}</b></a></p><p>Vi kontakter dig hurtigst muligt, så vi kan gøre siden færdig sammen med dig.</p><p>Venlig hilsen<br>Webleads<br><a href="mailto:hej@webleads.dk">hej@webleads.dk</a></p>`
-      });
-    }
+    }, { toUs: true, tag: 'bestil' });
+
+    // The link to the draft for the visitor, so it is easy to find again
+    kvittering = await sendMail({
+      to: [email],
+      reply_to: TO,
+      subject: 'Dit gratis udkast fra Webleads',
+      ...receipt({
+        navn,
+        paras: [
+          'Tak, fordi du bestilte et udkast. Her er linket til det, så du altid kan finde det igen.',
+          'Billeder og anmeldelser i udkastet er eksempler. Vi kontakter dig hurtigst muligt, så vi kan gøre siden færdig sammen med dig, med dine egne billeder, tekster og ydelser. Klar på 7 dage, fra 3.000 kr. og ingen binding.'
+        ],
+        button: { label: 'Se dit udkast', href: `${SITE}${link}` }
+      })
+    }, { tag: 'bestil' });
   }
 
   // Meta Conversions API: the same Lead as the browser pixel, only with consent
@@ -76,7 +73,7 @@ export default async function handler(req, res) {
     }]);
   }
 
-  return res.status(200).json({ ok: true, link, sent });
+  return res.status(200).json({ ok: true, link, sent, kvittering });
 }
 
 function safeJson(s) { try { return JSON.parse(s); } catch { return {}; } }
