@@ -127,6 +127,37 @@ Mangler der noget? Send os linket, så kigger vi gratis på din side.
 
 ↓ Gratis tilbud via linket i bio · hej@webleads.dk
 
+# Opslag 13–15 (postes automatisk 19., 21. og 23. oktober)
+
+Ligger i indholdskalenderen. Reels med samme budskab ligger i `brand/social/stories/`.
+
+## 13 · Ingen tid til en ny hjemmeside?
+Ingen tid til en ny hjemmeside?
+
+Det kræver 15 minutter af dig. Et opkald og nogle billeder. Resten klarer vi, også teksterne.
+
+Fra 3.000 kr. Klar på 7 dage. Ingen binding.
+
+↓ Gratis tilbud via linket i bio.
+
+## 14 · Bliv fundet på Google
+Kan kunderne finde dig på Google?
+
+Når nogen søger på "tømrer Vejle" eller "frisør Roskilde", skal det være dig, de finder.
+
+Vi sætter din hjemmeside op, så du kan findes på dit fag og dit område, og vi opretter din Google-profil. Det er med i prisen.
+
+↓ Gratis tilbud via linket i bio.
+
+## 15 · Ret selv i siden
+Kan jeg selv rette i siden?
+
+Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi viser dig hvordan.
+
+Og siden er din. Ingen binding og intet abonnement på selve hjemmesiden.
+
+↓ Gratis tilbud via linket i bio.
+
 ---
 
 # Highlights

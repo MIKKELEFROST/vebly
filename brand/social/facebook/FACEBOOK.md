@@ -214,6 +214,45 @@ Gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm
 #hjemmeside #lokalvirksomhed #webleads
 ```
 
+## 13 · Ingen tid til en ny hjemmeside?
+```
+Ingen tid til en ny hjemmeside?
+
+Det kræver 15 minutter af dig. Et opkald og nogle billeder. Resten klarer vi, også teksterne.
+
+Fra 3.000 kr. Klar på 7 dage. Ingen binding.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#kontakt
+
+#hjemmeside #selvstændig #webleads
+```
+
+## 14 · Bliv fundet på Google
+```
+Kan kunderne finde dig på Google?
+
+Når nogen søger på "tømrer Vejle" eller "frisør Roskilde", skal det være dig, de finder.
+
+Vi sætter din hjemmeside op, så du kan findes på dit fag og dit område, og vi opretter din Google-profil. Det er med i prisen.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag#pris
+
+#hjemmeside #seo #webleads
+```
+
+## 15 · Ret selv i siden
+```
+Kan jeg selv rette i siden?
+
+Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi viser dig hvordan.
+
+Og siden er din. Ingen binding og intet abonnement på selve hjemmesiden.
+
+Få et gratis tilbud → https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag
+
+#hjemmeside #småvirksomheder #webleads
+```
+
 ---
 
 ## Sådan poster du
