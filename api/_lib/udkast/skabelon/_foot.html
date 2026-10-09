@@ -3,12 +3,12 @@
   <div class="wrap">
     <div class="ft__grid">
       <div>
-        <a href="/{{SLUG}}-forside" class="brand"><span class="brand__mark">{{BOGSTAV}}</span>{{KORT}}</a>
+        <a href="{{LINK_forside}}" class="brand"><span class="brand__mark">{{BOGSTAV}}</span>{{KORT}}</a>
         <p class="muted" style="margin-top:14px">{{FAG}} i {{BY}} og omegn siden {{AAR}}.</p>
       </div>
       <div><h4>Kontakt</h4><a href="tel:{{TLF_LINK}}">{{TLF}}</a><a href="mailto:{{EMAIL}}">{{EMAIL}}</a><p>{{ADRESSE}}</p></div>
       <div><h4>Åbningstider</h4>{{TIDER_FOOT}}</div>
-      <div><h4>Sider</h4><a href="/{{SLUG}}-ydelser">Ydelser</a><a href="/{{SLUG}}-om-os">Om os</a><a href="/{{SLUG}}-kontakt">Kontakt</a></div>
+      <div><h4>Sider</h4><a href="{{LINK_ydelser}}">Ydelser</a><a href="{{LINK_om-os}}">Om os</a><a href="{{LINK_kontakt}}">Kontakt</a></div>
     </div>
     <div class="ft__bottom"><span>© 2026 {{NAVN}}</span><span>CVR {{CVR}}</span></div>
   </div>
@@ -17,7 +17,7 @@
   <img src="/assets/logo-icon.svg" alt="" width="20" height="20">
   <span class="draft__txt">Udkast fra Webleads<span> til {{KORT}}</span></span>
   <div class="draft__colors" role="group" aria-label="Vælg farve">{{FARVER}}</div>
-  <a href="mailto:hej@webleads.dk?subject=Udkast%20til%20{{KORT_URL}}">Giv feedback</a>
+  {{UDKAST_KNAP}}
   <button type="button" class="draft__close" data-draft-close aria-label="Skjul">✕</button>
 </div>
 </body>

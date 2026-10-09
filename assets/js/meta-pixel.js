@@ -57,7 +57,9 @@ const FROM_GA = {
   popup_open: p => ['ViewContent', { content_name: p.popup, content_category: String(p.popup || '').split('-')[0] }, false],
   section_view: p => ['SectionView', { section: p.section }, true],
   form_start: () => ['FormStart', {}, true],
-  form_error: () => ['FormError', {}, true]
+  form_error: () => ['FormError', {}, true],
+  bestil_open: () => ['InitiateCheckout', { content_name: 'Bestil en hjemmeside' }, false],
+  bestil_step: p => ['BestilStep', { step: p.step, name: p.name }, true]
 };
 export function fromAnalytics(name, params = {}) {
   const map = FROM_GA[name];

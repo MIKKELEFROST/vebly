@@ -1,6 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "functions": {
+    "api/udkast.js": {
+      "includeFiles": "api/_lib/udkast/**"
+    },
+    "api/bestil.js": {
+      "includeFiles": "api/_lib/udkast/**"
+    }
+  },
   "redirects": [
     {
       "source": "/(.*)",
@@ -23,6 +31,11 @@
       ],
       "destination": "https://webleads.dk/$1",
       "permanent": true
+    },
+    {
+      "source": "/api/_lib/:path*",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "headers": [
@@ -107,6 +120,14 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/mit-udkast",
+      "destination": "/api/udkast"
+    },
+    {
+      "source": "/mit-udkast/:side(ydelser|om-os|kontakt)",
+      "destination": "/api/udkast?side=:side"
+    },
     {
       "source": "/:kunde([a-z0-9]+(?:-[a-z0-9]+)*)-:side(forside|ydelser|om-os|kontakt|priser|galleri|booking|faq|tilbud)",
       "destination": "/udkast/:kunde/:side"

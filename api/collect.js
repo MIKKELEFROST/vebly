@@ -12,7 +12,7 @@
 
 import crypto from 'node:crypto';
 
-const EVENTS = new Set(['page_view', 'user_engagement', 'scroll', 'campaign_details', 'cta_click', 'addon_add', 'addon_remove', 'popup_open', 'generate_lead', 'form_error', 'section_view', 'form_start']);
+const EVENTS = new Set(['page_view', 'user_engagement', 'scroll', 'campaign_details', 'cta_click', 'addon_add', 'addon_remove', 'popup_open', 'generate_lead', 'form_error', 'section_view', 'form_start', 'bestil_open', 'bestil_step', 'bestil_close']);
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|uptime/i;
 
 const str = (v, max = 100) => (typeof v === 'string' ? v.slice(0, max) : '');

@@ -14,6 +14,10 @@ assets/js/main.js     Rendering, pop-ups, contact form and all effects
 demo/                 The "Nordvik" sample site that builds itself in "Sådan virker det"
 api/contact.js        Vercel function that emails contact-form submissions via Resend
 api/collect.js        Vercel function that forwards analytics events to GA4
+api/meta.js           Vercel function that passes Meta events on with the Conversions API
+api/bestil.js         Vercel function for "Bestil en hjemmeside" (e-mails the order, returns the draft link)
+api/udkast.js         Vercel function that renders instant drafts at /mit-udkast
+bestil/               "Bestil en hjemmeside" as its own page (/bestil)
 privatliv/            Privacy policy (/privatliv), linked from the form and the footer
 robots.txt, sitemap.xml
 assets/og.png         Share image (1200 × 630) for Facebook, LinkedIn and messages
@@ -102,26 +106,37 @@ Visitors with "reduce motion" switched on get a static page: no intro curtain, t
 Drafts of a website made for one prospective customer, shared by direct link only:
 `webleads.dk/<slug>-forside`, `-ydelser`, `-om-os` and `-kontakt` (e.g. `/holms-maler-aps-forside`).
 They are not linked anywhere, not in the sitemap, and send `noindex` both as a meta tag and as an
-`X-Robots-Tag` header. Opening one sends a page view to GA4, so you can see when the customer looked.
+`X-Robots-Tag` header. Opening one sends a page view to GA4, so you can see when the customer looked. Meta Pixel never runs on drafts.
 
 The front page is built for trades: hero with trade + town, trust strip, services, about, projects gallery, proof (rating, numbers, memberships, reviews), process, tax deduction, areas, FAQ and a contact form. It is SEO-ready for launch: title and meta description with trade + town, one H1, labelled images, and JSON-LD for the business (trade-specific type such as `HousePainter`, `Plumber`, `Electrician`) and the FAQ. Remove `noindex` and add `"domaene"` to the customer file when the site goes live.
 
 ```
-scripts/udkast-brancher/<branche>.json   Trade templates: services, prices, FAQ, steps, hours, button wording
-scripts/udkast-kunder/<slug>.json        One file per customer: name, town, nearby areas, phone, colour, overrides
-scripts/udkast-skabelon/                 The page templates
-scripts/nyt-udkast.mjs                   Builds udkast/<slug>/*.html from the two files above
-udkast/_faelles/                         Shared CSS and JS for all drafts
-udkast/<slug>/                           The generated draft (plain HTML, can be edited by hand)
+api/_lib/udkast/brancher/<branche>.json   Trade templates: services, prices, FAQ, steps, hours, button wording (generisk = "Andet")
+api/_lib/udkast/skabelon/                 The page templates
+api/_lib/udkast/render.js                 Renders one page from a trade template + customer data (shared with api/udkast.js)
+scripts/udkast-kunder/<slug>.json         One file per customer: name, town, nearby areas, phone, colour, overrides
+scripts/nyt-udkast.mjs                    Builds udkast/<slug>/*.html from the two files above
+udkast/_faelles/                          Shared CSS and JS for all drafts
+udkast/<slug>/                            The generated draft (plain HTML, can be edited by hand)
 ```
 
 Make a new draft:
 
-1. Copy `scripts/udkast-kunder/holms-maler-aps.json`, set `branche` to one of the files in `scripts/udkast-brancher/` and fill in the customer's details.
+1. Copy `scripts/udkast-kunder/holms-maler-aps.json`, set `branche` to one of the files in `api/_lib/udkast/brancher/` and fill in the customer's details.
 2. Any field from the trade file can be overridden in the customer file, e.g. its own `ydelser` or `overskrift`.
    Set `"design"` to `1` (Klassisk), `4` (Mosaik: white tiles on light grey) or `5` (Minimal: thin lines, numbered lists, timeline). Default is 1. All designs are light.
    Set `"farver"` to three hex colours to choose what the colour picker in the draft bar offers.
+   Trades with a `"garanti"` (maler, tømrer, el, VVS) promise it in the title and the proof numbers; the others lead with their first trust point and show the number of people.
 3. Run `node scripts/nyt-udkast.mjs scripts/udkast-kunder/<slug>.json` and commit `udkast/<slug>/`.
 
-`scripts/` is listed in `.vercelignore`, so the templates and customer files are never published.
-The URL pattern lives in `vercel.json` (rewrite plus headers); add a page name there if a draft needs more pages.
+`scripts/` is listed in `.vercelignore`, so customer files are never published. The URL pattern lives in `vercel.json` (rewrite plus headers); add a page name there if a draft needs more pages.
+
+## Bestil en hjemmeside (free instant draft)
+
+`assets/js/bestil.js` + `assets/css/bestil.css`: a full-screen flow in five steps (trade, company, what the site should do, design and colour, contact), then the visitor's own draft right away. It opens from any `[data-bestil]` link (hero, price, contact), on `/#bestil`, and as its own page at `/bestil` (`bestil/index.html`, for ads). The answers are kept in `sessionStorage` until sent, so a reload does not lose them.
+
+- `api/bestil.js` checks the answers, e-mails them to `CONTACT_TO` with a link to the draft, sends the Lead to Meta (with consent), and returns the link. With `CONTACT_FROM` set (a sender verified in Resend), the visitor also gets the link by e-mail. Without `RESEND_API_KEY` the visitor still gets the draft, but the order is only in the function log.
+- `api/udkast.js` renders the draft at `/mit-udkast?d=…` (and `/mit-udkast/ydelser|om-os|kontakt?d=…`). The answers about the business are in `d` (base64url JSON, see `api/_lib/udkast/bestilling.js`); nothing is stored, and the link holds no personal contact details. Unknown details get the same placeholders as hand-made drafts (phone 12 34 56 78, CVR 12345678). Pages send `noindex`.
+- Choices change the draft: online booking gives a "Book tid" button, without "Priser" the prices are left out, and the sections for pictures and reviews are hidden unless chosen (when nothing is chosen, everything is shown). Design and colour can be changed on the result screen.
+- Tracking: GA4 `bestil_open` (`from`), `bestil_step` (`step`, `name`), `bestil_close` (`step`) and `generate_lead` (`selected` = "Bestil: <fag>"); Meta `InitiateCheckout`, `BestilStep` and `Lead` (3.000 kr.).
+- The three design pictures in step 4 are `assets/bestil/design-1|4|5.jpg` (screenshots of a draft at 1280 × 800, 640 px wide).

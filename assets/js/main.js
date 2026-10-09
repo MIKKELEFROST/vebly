@@ -1,5 +1,6 @@
 import { track } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
+import './bestil.js';
 import { trades, flipWords, included, addons, addonPages, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
