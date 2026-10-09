@@ -171,7 +171,15 @@ Covers ligger i `brand/social/highlights/` (1080 × 1920). Opret et highlight ud
 | Før/efter | hl-foer-efter.png | Opslag 04 |
 | Tilvalg | hl-tilvalg.png | Opslag 07 |
 | Teamet | hl-teamet.png | Opslag 08 |
+| Content | hl-content.png | `stories/story-content.mp4` (animeret) eller `highlights/story-content.png` (stillbillede), og senere eksempler på content, I har lavet til kunder |
 | Kontakt | hl-kontakt.png | `story-kontakt.png` med en link-sticker til webleads.dk |
+
+## Content-highlight
+
+1. Læg `stories/story-content.mp4` op som story (eller `highlights/story-content.png`, hvis du vil have et stillbillede).
+2. Tilføj evt. en link-sticker til `https://webleads.dk/?utm_source=instagram&utm_medium=story&utm_campaign=content#kontakt` med teksten "Skriv til os", under de fire felter.
+3. Opret highlightet "Content" ud fra storyen, og vælg coveret `hl-content.png`.
+4. Fyld highlightet op med rigtige eksempler på video, billeder og opslag, I har lavet til kunder. Spørg kunden først, og vis kun materiale, I må bruge.
 
 ## Kontakt-story med link-sticker
 
