@@ -34,15 +34,15 @@ The demo is loaded in an iframe and controlled from the parent page, so open the
 
 ## Contact form
 
-The form posts to `/api/contact`, which sends an email through [Resend](https://resend.com). Set these in Vercel → Project → Settings → Environment Variables:
+The form posts to `/api/contact`, which emails the message to us through [Resend](https://resend.com) and sends the visitor a short receipt (with a link to `/bestil`). The mail code is shared with "Bestil en hjemmeside" in `api/_mail.js`. Set these in Vercel → Project → Settings → Environment Variables:
 
 | Variable         | Required | Default                        |
 |------------------|----------|--------------------------------|
 | `RESEND_API_KEY` | yes      |                                |
 | `CONTACT_TO`     | no       | `hej@webleads.dk`                 |
-| `CONTACT_FROM`   | no       | `Webleads <onboarding@resend.dev>`|
+| `CONTACT_FROM`   | no       | `Webleads <hej@webleads.dk>`      |
 
-Without a key, the form shows a message asking the visitor to email instead. Resend's test sender `onboarding@resend.dev` only delivers to the email address on your Resend account; verify `webleads.dk` in Resend to send to any address.
+Without a key, the form shows a message asking the visitor to email instead. Mail goes out from `hej@webleads.dk`, which Resend only accepts once `webleads.dk` is verified there (Resend → Domains, DNS records at Simply.com). Until then, mail to us is resent from Resend's test sender `onboarding@resend.dev` (it can only deliver to the address on the Resend account), and receipts to visitors are skipped and logged. The receipt never repeats the visitor's message, and greets by first name only, so the form cannot be used to send other text to someone else's inbox.
 
 ## Analytics (GA4, first-party)
 
@@ -135,7 +135,7 @@ Make a new draft:
 
 `assets/js/bestil.js` + `assets/css/bestil.css`: a full-screen flow in five steps (trade, company, what the site should do, design and colour, contact), then the visitor's own draft right away. It opens from any `[data-bestil]` link (hero, price, contact), on `/#bestil`, and as its own page at `/bestil` (`bestil/index.html`, for ads). The answers are kept in `sessionStorage` until sent, so a reload does not lose them.
 
-- `api/bestil.js` checks the answers, e-mails them to `CONTACT_TO` with a link to the draft, sends the Lead to Meta (with consent), and returns the link. With `CONTACT_FROM` set (a sender verified in Resend), the visitor also gets the link by e-mail. Without `RESEND_API_KEY` the visitor still gets the draft, but the order is only in the function log.
+- `api/bestil.js` checks the answers, e-mails them to `CONTACT_TO` with a link to the draft, sends the Lead to Meta (with consent), and returns the link. The visitor also gets the link by e-mail once `webleads.dk` is verified in Resend (see Contact form); the result screen says so only when that mail went out. Without `RESEND_API_KEY` the visitor still gets the draft, but the order is only in the function log.
 - `api/udkast.js` renders the draft at `/mit-udkast?d=…` (and `/mit-udkast/ydelser|om-os|kontakt?d=…`). The answers about the business are in `d` (base64url JSON, see `api/_lib/udkast/bestilling.js`); nothing is stored, and the link holds no personal contact details. Unknown details get the same placeholders as hand-made drafts (phone 12 34 56 78, CVR 12345678). Pages send `noindex`.
 - Choices change the draft: online booking gives a "Book tid" button, without "Priser" the prices are left out, and the sections for pictures and reviews are hidden unless chosen (when nothing is chosen, everything is shown). Design and colour can be changed on the result screen.
 - Tracking: GA4 `bestil_open` (`from`), `bestil_step` (`step`, `name`), `bestil_close` (`step`) and `generate_lead` (`selected` = "Bestil: <fag>"); Meta `InitiateCheckout`, `BestilStep` and `Lead` (3.000 kr.).

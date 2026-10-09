@@ -146,6 +146,8 @@ form.addEventListener('submit', async e => {
     const meta = metaLeadFields();
     const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), ...meta, meta_value: value }) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json().catch(() => ({}));
+    $('[data-thanks-mail]').hidden = !data.kvittering;
     track('generate_lead', { selected: chosen });
     metaTrack('Lead', { content_name: chosen, value, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
     form.reset(); syncAddons();
