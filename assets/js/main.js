@@ -19,14 +19,6 @@ const state = { addons: [] };
 /* Render lists                                                         */
 /* ------------------------------------------------------------------ */
 
-// Manifest: one span per word, last N words in the accent colour
-{
-  const p = $('[data-split]');
-  const words = p.textContent.trim().split(/\s+/);
-  const hot = +p.dataset.accentLast || 0;
-  p.innerHTML = words.map((w, i) => `<span data-mw${i >= words.length - hot ? ' class="hot"' : ''}>${esc(w)}</span>`).join(' ');
-}
-
 // Trades marquee (two copies so the loop is seamless)
 {
   const items = [...trades, ...trades].map(t => `<div class="track__item">${esc(t)}<i></i></div>`).join('');
@@ -629,7 +621,7 @@ function runEffects() {
   const el = {
     orb: $('[data-orb]'), hero: $('[data-hero]'), h1: $('[data-hero] h1'), build: $('[data-build]'), steps: $$('[data-step]'),
     url: $('[data-url]'), caret: $('[data-caret]'), status: $('[data-status]'), track: $('[data-track]'), track2: $('[data-track2]'),
-    floats: $$('[data-float]'), spin: $('[data-spin]'), mf: $('[data-manifest]'), mw: $$('[data-mw]'),
+    floats: $$('[data-float]'), spin: $('[data-spin]'),
     hs: $('[data-hs]'), hw: $('[data-hwrap]'), ht: $('[data-htrack]'), hbar: $('[data-hbar]'), hnum: $('[data-hnum]'), cards: $$('[data-card]'),
     wm: $('[data-wm]'), wl: $$('[data-wl]')
   };
@@ -697,9 +689,6 @@ function runEffects() {
     // Floating badges
     if (innerWidth >= 1000) el.floats.forEach(f => { const dp = +f.dataset.float, br = +(f.dataset.rot || 0); f.style.transform = `translate(${(ox - innerWidth / 2) * dp * 0.035}px,${(oy - innerHeight / 2) * dp * 0.035 - sy * dp * 0.3}px) rotate(${br + Math.sin(t * 0.02 + dp * 3) * 3}deg)`; });
     spinA += 0.25 + Math.abs(vel) * 0.35; el.spin.style.transform = `rotate(${spinA}deg)`;
-
-    // Manifest words light up
-    { const r = el.mf.getBoundingClientRect(); if (r.top < vh && r.bottom > 0) { const pm = clamp((vh * 0.85 - r.top) / (r.height * 0.85)), n = el.mw.length; el.mw.forEach((w, i) => { w.style.opacity = 0.14 + 0.86 * clamp(pm * n * 1.15 - i); }); } }
 
     // Horizontal add-on scroll
     {
