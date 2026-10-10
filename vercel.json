@@ -1,6 +1,24 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "images": {
+    "sizes": [
+      480,
+      800,
+      1200
+    ],
+    "formats": [
+      "image/avif",
+      "image/webp"
+    ],
+    "minimumCacheTTL": 2678400,
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "d8j0ntlcm91z4.cloudfront.net"
+      }
+    ]
+  },
   "functions": {
     "api/udkast.js": {
       "includeFiles": "api/_lib/udkast/**"
