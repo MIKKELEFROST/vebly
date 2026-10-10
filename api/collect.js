@@ -31,7 +31,7 @@ const EVENTS = new Set([
   // "Bestil en hjemmeside"
   'bestil_open', 'bestil_step_view', 'bestil_step', 'bestil_1_fag', 'bestil_2_virksomhed', 'bestil_3_behov', 'bestil_4_stil', 'bestil_5_kontakt',
   'bestil_choice', 'bestil_field', 'bestil_back', 'bestil_submit', 'bestil_error', 'bestil_udkast_vist', 'bestil_result_change',
-  'bestil_draft_open', 'bestil_link_copy', 'bestil_close',
+  'bestil_draft_open', 'bestil_link_copy', 'bestil_close', 'bestil_forslag', 'bestil_forslag_nav', 'bestil_favorit', 'bestil_oensker_sendt',
   // Customer drafts
   'udkast_click', 'udkast_farve', 'udkast_bar_close', 'udkast_faerdig_click', 'udkast_form_try'
 ]);

@@ -69,6 +69,10 @@
   "fag": "Elektriker",
   "farve": "#a87c00",
   "overskrift": "Strøm på. Samme dag.",
+  "overskrifter": [
+    "Sikker el. Fast pris.",
+    "Fejlfinding, tavler og ladestandere."
+  ],
   "intro": "Autoriseret elektriker i {{BY}} og omegn. Fejlfinding, el-tavler, ladestandere og alt derimellem.",
   "ydelserForside": "Det klarer vi.",
   "ydelserOverskrift": "Alt inden for el.",

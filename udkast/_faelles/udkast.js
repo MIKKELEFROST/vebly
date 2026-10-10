@@ -42,15 +42,21 @@ const applyColour = (sw, save) => {
   if (sw) applyColour(sw, false);
 }
 swatches.forEach(sw => sw.addEventListener('click', () => { applyColour(sw, true); track('udkast_farve', { colour: sw.dataset.c, colour_index: swatches.indexOf(sw) + 1 }); }));
+// Instant drafts offer colour themes instead: links to the same page in other colours
+const themes = [...document.querySelectorAll('[data-tema]')];
+themes.forEach((a, i) => a.addEventListener('click', () => track('udkast_farve', { theme: a.dataset.tema, colour_index: i + 1 })));
 
-// Webleads draft bar (can be hidden for this visit)
+// Webleads draft bar (can be hidden for this visit). Not shown when the draft is the preview inside
+// "Bestil en hjemmeside", which has its own colour and design choices around it.
 const bar = document.querySelector('[data-draft]');
+let framed = false;
+try { framed = window.top !== window.self; } catch (x) { framed = true; }
 if (bar) {
-  let hidden = false;
-  try { hidden = sessionStorage.getItem('udkast-bar') === '0'; } catch (x) {}
+  let hidden = framed;
+  try { hidden = hidden || sessionStorage.getItem('udkast-bar') === '0'; } catch (x) {}
   bar.hidden = hidden;
   bar.querySelector('[data-draft-close]').addEventListener('click', () => { bar.hidden = true; track('udkast_bar_close'); try { sessionStorage.setItem('udkast-bar', '0'); } catch (x) {} });
   // The way back to us: "Gør den færdig" (or "Giv feedback" on hand-made drafts)
-  const go = bar.querySelector('a');
+  const go = bar.querySelector(':scope > a');
   if (go) go.addEventListener('click', () => track('udkast_faerdig_click', { link_text: go.textContent.trim().slice(0, 60) }));
 }

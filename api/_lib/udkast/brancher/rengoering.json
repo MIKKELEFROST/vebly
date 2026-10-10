@@ -69,6 +69,10 @@
   "fag": "Rengøring",
   "farve": "#2f7d8c",
   "overskrift": "Rent hjem. Uden besvær.",
+  "overskrifter": [
+    "Samme faste person hver gang.",
+    "Mere tid til det, du kan lide."
+  ],
   "intro": "Fast rengøring, flytterengøring og erhverv i {{BY}} og omegn. Samme faste person hver gang og fast pris.",
   "ydelserForside": "Det gør vi rent.",
   "ydelserOverskrift": "Rengøring, der passer til dig.",

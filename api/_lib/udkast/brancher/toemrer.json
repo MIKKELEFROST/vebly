@@ -69,6 +69,10 @@
   "fag": "Tømrer",
   "farve": "#6b4a2f",
   "overskrift": "Bygget til at holde.",
+  "overskrifter": [
+    "Håndværk med styr på detaljerne.",
+    "Fra terrasse til tilbygning."
+  ],
   "intro": "Tag, terrasser, tilbygninger og renovering i {{BY}} og omegn. Fast pris, faglærte tømrere og styr på tidsplanen.",
   "ydelserForside": "Det bygger vi.",
   "ydelserOverskrift": "Alt inden for tømrerarbejde.",

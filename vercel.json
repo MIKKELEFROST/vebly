@@ -7,6 +7,9 @@
     },
     "api/bestil.js": {
       "includeFiles": "api/_lib/udkast/**"
+    },
+    "api/oensker.js": {
+      "includeFiles": "api/_lib/udkast/**"
     }
   },
   "redirects": [

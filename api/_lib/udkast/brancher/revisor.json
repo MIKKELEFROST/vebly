@@ -69,6 +69,10 @@
   "fag": "Revisor",
   "farve": "#1f2a44",
   "overskrift": "Styr på tallene. Hele året.",
+  "overskrifter": [
+    "Regnskab uden bekymringer.",
+    "Mere tid til din forretning."
+  ],
   "intro": "Bogføring, årsregnskab og rådgivning til små og mellemstore virksomheder i {{BY}} og omegn.",
   "ydelserForside": "Det hjælper vi med.",
   "ydelserOverskrift": "Revision og rådgivning.",

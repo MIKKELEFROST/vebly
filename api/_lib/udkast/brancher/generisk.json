@@ -42,6 +42,10 @@
   "fag": "Service",
   "farve": "#1d4e89",
   "overskrift": "Service, du kan regne med.",
+  "overskrifter": [
+    "Fast pris. Klare aftaler.",
+    "Vi klarer det for dig."
+  ],
   "intro": "Vi hjælper privatkunder og virksomheder i {{BY}} og omegn. Fast pris, klare aftaler og svar samme dag.",
   "ydelserForside": "Det kan vi hjælpe med.",
   "ydelserOverskrift": "Ydelser og priser.",
