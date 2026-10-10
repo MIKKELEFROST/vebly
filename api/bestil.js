@@ -15,6 +15,10 @@ import { sendToMeta, userData } from './_meta.js';
 import { sendMail, receipt, esc, TO, SITE } from './_mail.js';
 
 const clip = (v, n) => String(v ?? '').trim().slice(0, n);
+// How and when the visitor wants us to get in touch (step 5)
+const KANAL = { ring: ['Ring', 'ringer vi dig op', 'vil ringes op'], sms: ['Sms', 'sender vi dig en sms', 'vil have en sms'], mail: ['Mail', 'skriver vi til dig', 'vil have en mail'] };
+const TID = { hurtigst: 'hurtigst muligt', formiddag: 'formiddag', eftermiddag: 'eftermiddag', aften: 'aften' };
+const pickKey = (map, v) => (typeof v === 'string' && Object.hasOwn(map, v) ? v : '');
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -26,6 +30,8 @@ export default async function handler(req, res) {
   const k = body.kontakt || {};
   const navn = clip(k.navn, 100), email = clip(k.email, 200), tlf = clip(k.tlf, 30), besked = clip(k.besked, 2000);
   const harSide = k.side === 'ja' ? `Ja${k.url ? ': ' + clip(k.url, 200) : ''}` : k.side === 'nej' ? 'Nej' : '–';
+  const kanal = pickKey(KANAL, k.kanal), tid = pickKey(TID, k.tid);
+  const kontaktes = [kanal && KANAL[kanal][0], tid && TID[tid]].filter(Boolean).join(', ') || '–';
 
   const link = `/mit-udkast?d=${encode(a)}`;
   // Honeypot: bots fill the hidden field. Pretend success.
@@ -34,31 +40,31 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Navn, e-mail, virksomhed og by er påkrævet.' });
   }
 
-  const rows = [...summary(a), ['Har en side i dag', harSide], ['Kontakt', navn], ['E-mail', email], ['Telefon', tlf || '–']];
+  const rows = [...summary(a), ['Har en side i dag', harSide], ['Kontakt', navn], ['E-mail', email], ['Telefon', tlf || '–'], ['Vil kontaktes', kontaktes]];
   let sent = false, kvittering = false;
   if (!process.env.RESEND_API_KEY) console.error('bestil: RESEND_API_KEY is not set, the order was not e-mailed');
   else {
     sent = await sendMail({
       to: [TO],
       reply_to: email,
-      subject: `Ny bestilling: ${a.n} (${rows[0][1]} i ${a.by})`,
+      subject: `Ny bestilling: ${a.n} (${rows[0][1]} i ${a.by})${kanal ? ` · ${KANAL[kanal][2]}` : ''}`,
       text: `${rows.map(([t, v]) => `${t}: ${v}`).join('\n')}\n\nUdkast: ${SITE}${link}\n\n${besked}`,
       html: `<p><b>Ny bestilling via "Bestil en hjemmeside"</b></p><table cellpadding="4">${rows.map(([t, v]) => `<tr><td><b>${esc(t)}</b></td><td>${esc(v)}</td></tr>`).join('')}</table>`
         + `<p><a href="${SITE}${link}">Se udkastet</a></p>${besked ? `<p style="white-space:pre-wrap">${esc(besked)}</p>` : ''}`
     }, { toUs: true, tag: 'bestil' });
 
-    // The link to the draft for the visitor, so it is easy to find again
+    // The link to the sketch for the visitor, so it is easy to find again
     kvittering = await sendMail({
       to: [email],
       reply_to: TO,
-      subject: 'Dit gratis udkast fra Webleads',
+      subject: 'Din gratis skitse fra Webleads',
       ...receipt({
         navn,
         paras: [
-          'Tak, fordi du bestilte et udkast. Her er linket til det, så du altid kan finde det igen.',
-          'Billeder og anmeldelser i udkastet er eksempler. Vi kontakter dig hurtigst muligt, så vi kan gøre siden færdig sammen med dig, med dine egne billeder, tekster og ydelser. Klar på 7 dage, fra 3.000 kr. og ingen binding.'
+          'Tak, fordi du bestilte en skitse til din nye hjemmeside. Her er linket til den, så du altid kan finde den igen.',
+          `Skitsen er et udgangspunkt, og billeder og anmeldelser i den er eksempler. Inden for få timer på hverdage ${kanal ? KANAL[kanal][1] : 'kontakter vi dig'}, og så laver vi et færdigt udkast med dine egne billeder, tekster og ønsker. Klar på 7 dage, fra 3.000 kr. og ingen binding.`
         ],
-        button: { label: 'Se dit udkast', href: `${SITE}${link}` }
+        button: { label: 'Se din skitse', href: `${SITE}${link}` }
       })
     }, { tag: 'bestil' });
   }

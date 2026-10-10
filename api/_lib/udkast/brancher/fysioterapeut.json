@@ -20,6 +20,10 @@
   "fag": "Fysioterapeut",
   "farve": "#2b4c7e",
   "overskrift": "Fri for smerter. Hurtigere.",
+  "overskrifter": [
+    "Kom tilbage i bevægelse.",
+    "Kort ventetid. Ingen henvisning."
+  ],
   "intro": "Behandling af ryg, nakke, skader og genoptræning i {{BY}}. Kort ventetid og ingen henvisning nødvendig.",
   "trust": [
     "Ingen henvisning nødvendig",

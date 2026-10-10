@@ -69,6 +69,10 @@
   "fag": "Maler",
   "farve": "#1d4e89",
   "overskrift": "Malet ordentligt. Første gang.",
+  "overskrifter": [
+    "Flotte vægge. Fast pris.",
+    "Farve på hele huset."
+  ],
   "intro": "Vi maler huse, lejligheder og erhverv i {{BY}} og omegn. Fast pris, aftalt dato og et resultat, der holder i mange år.",
   "ydelserForside": "Det maler vi.",
   "ydelserOverskrift": "Alt inden for malerarbejde.",

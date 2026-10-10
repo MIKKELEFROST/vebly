@@ -7,7 +7,10 @@
 // 2. The customer data holds what is unique: name, town, nearby areas, phone, colour, and
 //    any field from the trade file it wants to override (e.g. its own list of services).
 // Text in both may use {{KORT}}, {{NAVN}}, {{BY}}, {{AAR}}, {{ERFARING}} and {{OMRAADER}}.
+// Colours: either one main colour (farve, as in the hand-made drafts) or a theme from
+// assets/js/temaer.js (tema, or tema "eget" with farve + accent), plus a background tone.
 import { readFileSync, readdirSync } from 'node:fs';
+import { palette, mix, ink } from '../../../assets/js/temaer.js';
 
 const dir = new URL('./', import.meta.url);
 const cache = {};
@@ -21,11 +24,7 @@ export const branche = name => {
 };
 
 export const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const hex = h => h.replace('#', '').match(/../g).map(x => parseInt(x, 16));
-export const mix = (h, w) => '#' + hex(h).map(v => Math.round(v + (255 - v) * w).toString(16).padStart(2, '0')).join('');
-const lum = h => { const [r, g, b] = hex(h).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
-const ink = c => (lum(c) > 0.4 ? '#14140f' : '#ffffff');
-// Alternatives offered in the colour picker next to the customer's own colour
+// Alternatives offered in the colour picker of a hand-made draft, next to the customer's own colour
 export const ALT = ['#1f5f4a', '#b5532f', '#2b2b2b', '#1d4e89', '#7a3fd0'];
 // Design 1 = Klassisk, 4 = Mosaik, 5 = Minimal (2 and 3 were retired; the numbers are kept so old links still match)
 const DESIGNS = {
@@ -37,8 +36,10 @@ export const DESIGN_NUMRE = Object.keys(DESIGNS).map(Number);
 
 // data: the customer fields (branche, slug, navn, kort, by, omraader, tlf, email, adresse, cvr, aar,
 //       opgaver, ansatte, farve, design, …) plus optional overrides of any trade field.
+//       Optional: tema, accent and tone (colours), billedsaet (which set of example photos).
 // opts.link(page): the address of a page in this draft (default /<slug>-<page>)
 // opts.knap: HTML for the button in the Webleads bar at the bottom (default: "Giv feedback" by e-mail)
+// opts.farver(page): HTML for the colour choices in that bar (default: the customer's colour and ALT)
 // opts.head: extra HTML at the end of <head> (e.g. a <style> that hides sections)
 export function renderDraft(data, page, opts = {}) {
   if (!PAGES.includes(page)) throw new Error(`Ukendt side: ${page}`);
@@ -60,12 +61,17 @@ export function renderDraft(data, page, opts = {}) {
   const loefte = garanti ? `fast pris og ${garanti}s garanti` : k.trust[0].toLowerCase();
   const design = String(k.design || 1);
   if (!(design in DESIGNS)) throw new Error('design skal være 1, 4 eller 5');
+  const pal = palette({ t: k.tema, c: k.farve, ac: k.accent, g: k.tone }, Number(design), k.farve);
+
+  // Example photos for the trade (billeder in the trade file), else a placeholder for the customer's own
+  const saet = (k.billeder || [])[Number(k.billedsaet) || 0] || (k.billeder || [])[0] || {};
+  const foto = (src, label) => (src ? `<img src="${esc(src)}" alt="" loading="lazy" decoding="async"><span class="ph__ex">Eksempel på billede</span>` : `<span>${esc(label)}</span>`);
 
   const vars = {
     NAVN: k.navn, KORT: tokens.KORT, BOGSTAV: tokens.KORT[0], SLUG: k.slug, FAG: k.fag, BY: k.by,
     TLF: k.tlf, TLF_LINK: tel, EMAIL: k.email, ADRESSE: k.adresse, CVR: k.cvr, AAR: k.aar,
     OPGAVER: k.opgaver, OPGAVER_TEKST: k.opgaverTekst, ANSATTE: k.ansatte, ANSATTE_TEKST: k.ansatteTekst,
-    FARVE: k.farve, FARVE_LYS: k.farveLys || mix(k.farve, 0.86), FARVE_TEKST: ink(k.farve),
+    FARVE: pal.c, FARVE_LYS: k.farveLys || pal.cSoft, FARVE_TEKST: pal.cInk,
     OVERSKRIFT: k.overskrift, INTRO: k.intro, CTA: k.cta, CTA_KORT: k.ctaKort,
     BADGE_TITEL: k.badge[0], BADGE_TEKST: k.badge[1], TRIN_OVERSKRIFT: k.trinOverskrift,
     BAND_OVERSKRIFT: k.band[0], BAND_TEKST: k.band[1],
@@ -79,10 +85,13 @@ export function renderDraft(data, page, opts = {}) {
     BEVIS_TAL: garanti || k.ansatte, BEVIS_TEKST: garanti ? 'Garanti på arbejdet' : k.ansatteTekst
   };
   const raw = {
-    FARVER: farver.map((c, i) => `<button type="button" class="swatch${i === 0 ? ' is-on' : ''}" style="background:${c}" data-c="${c}" data-soft="${mix(c, 0.86)}" data-ink="${ink(c)}" aria-label="Farve ${i + 1}" aria-pressed="${i === 0}"></button>`).join(''),
+    FARVER: opts.farver ? opts.farver(page) : farver.map((c, i) => `<button type="button" class="swatch${i === 0 ? ' is-on' : ''}" style="background:${c}" data-c="${c}" data-soft="${mix(c, 0.86)}" data-ink="${ink(c)}" aria-label="Farve ${i + 1}" aria-pressed="${i === 0}"></button>`).join(''),
+    // The accent, readable text versions of both colours, and the background tone
+    TEMA_VARS: `; --c-text:${pal.cText}; --a:${pal.a}; --a-soft:${pal.aSoft}; --a-ink:${pal.aInk}; --a-text:${pal.aText}${pal.tone === 'lys' ? '' : `; --bg:${pal.bg}`}`,
     DESIGN_KLASSE: 'd' + design, DESIGN_LINKS: DESIGNS[design],
     HEADER_LINK: book ? esc(link('kontakt')) : `tel:${tel}`,
-    FARVE_URL: encodeURIComponent(k.farve), KORT_URL: encodeURIComponent(tokens.KORT),
+    FARVE_URL: encodeURIComponent(pal.c), KORT_URL: encodeURIComponent(tokens.KORT),
+    HERO_FOTO: foto(saet.hero, 'Jeres billede her'), OM_FOTO: foto(saet.om, 'Billede af jer'), HOLD_FOTO: foto(saet.hold || saet.om, 'Billede af holdet'),
     EKSTRA_HEAD: opts.head || '',
     UDKAST_KNAP: opts.knap || `<a href="mailto:hej@webleads.dk?subject=Udkast%20til%20${encodeURIComponent(tokens.KORT)}">Giv feedback</a>`,
     TRUST: k.trust.map(t => `<div><i>✓</i>${esc(t)}</div>`).join(''),
@@ -95,7 +104,7 @@ export function renderDraft(data, page, opts = {}) {
     FAQ: k.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(''),
     ANMELDELSER: k.anmeldelser.map(([t, n, s]) => `<figure class="review"><b class="stars" aria-label="5 ud af 5 stjerner">★★★★★</b><blockquote>${esc(t)}</blockquote><figcaption><strong>${esc(n)}</strong>${esc(s)}</figcaption></figure>`).join(''),
     TIDER_TABEL: k.tider.map(([d, t]) => `<tr><td>${esc(d)}</td><td>${esc(t)}</td></tr>`).join(''),
-    PROJEKTER: (k.projekter || [['Projekt', k.by, ''], ['Projekt', k.by, ''], ['Projekt', k.by, '']]).map(([t, sted, x]) => `<figure><div class="ph" role="img" aria-label="${esc(t)} i ${esc(sted)} udført af ${esc(tokens.KORT)}"><span>Billede af opgaven</span></div><figcaption><b>${esc(t)}</b><span>${esc(sted)}${x ? ' · ' + esc(x) : ''}</span></figcaption></figure>`).join(''),
+    PROJEKTER: (k.projekter || [['Projekt', k.by, ''], ['Projekt', k.by, ''], ['Projekt', k.by, '']]).map(([t, sted, x], i) => `<figure><div class="ph" role="img" aria-label="${esc(t)} i ${esc(sted)} udført af ${esc(tokens.KORT)}">${foto((saet.galleri || [])[i], 'Billede af opgaven')}</div><figcaption><b>${esc(t)}</b><span>${esc(sted)}${x ? ' · ' + esc(x) : ''}</span></figcaption></figure>`).join(''),
     MEDLEMSKABER: k.medlemskaber && k.medlemskaber.length ? `<div class="members"><span>Medlem af</span>${k.medlemskaber.map(m => `<b>${esc(m)}</b>`).join('')}</div>` : '',
     FRADRAG: k.fradrag ? `<div class="fradrag"><i>Fradrag</i><div><b>${esc(k.fradrag[0])}</b><p>${esc(k.fradrag[1])}</p></div></div>` : '',
     SCHEMA: '',

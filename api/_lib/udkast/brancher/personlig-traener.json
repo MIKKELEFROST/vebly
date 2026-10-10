@@ -20,6 +20,10 @@
   "fag": "Personlig træner",
   "farve": "#5b3fd0",
   "overskrift": "Stærkere på 12 uger.",
+  "overskrifter": [
+    "Træning, der passer til din hverdag.",
+    "Din plan. Din træner."
+  ],
   "intro": "Personlig træning og små hold i {{BY}}. En plan, der passer til din hverdag, og en træner, der holder dig til ilden.",
   "trust": [
     "Gratis prøvetime",

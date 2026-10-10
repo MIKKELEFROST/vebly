@@ -7,7 +7,7 @@ html.d4 {
 }
 .d4 body { background: var(--bg); }
 .d4 .h1, .d4 .h2 { font-weight: 800; letter-spacing: -0.04em; }
-.d4 .hd { background: rgba(238,240,236,0.9); }
+.d4 .hd { background: color-mix(in srgb, var(--bg) 90%, transparent); }
 .d4 .menu { background: var(--surface); border-radius: 999px; padding: 0.4em 0.5em; gap: 0.2em; }
 .d4 .menu a { padding: 0.5em 1em; border-radius: 999px; }
 .d4 .menu a[aria-current="page"] { background: var(--ink); color: #fff; }
@@ -23,7 +23,7 @@ html.d4 {
 .d4 .trust { padding-top: clamp(12px, 1.2vw, 20px); }
 .d4 .trust__row { border: 0; gap: clamp(12px, 1.2vw, 20px); }
 .d4 .trust__row div { background: var(--surface); border-radius: var(--tile); padding: 1.2em 1.4em; }
-.d4 .trust__row i { background: var(--c); color: var(--c-ink); }
+.d4 .trust__row i { background: var(--a); color: var(--a-ink); }
 
 /* Section heads and tiles */
 .d4 section { padding-top: clamp(40px, 5vw, 88px); padding-bottom: clamp(40px, 5vw, 88px); }
@@ -36,7 +36,7 @@ html.d4 {
 .d4 .split { background: var(--surface); border-radius: var(--tile); padding: clamp(20px, 2vw, 40px); margin: 0 var(--gutter); }
 .d4 .split.wrap { padding-left: clamp(20px, 2vw, 40px); padding-right: clamp(20px, 2vw, 40px); }
 .d4 .split .ph { border-radius: calc(var(--tile) * 0.8); }
-.d4 .step::before { width: 2.2em; height: 2.2em; border-radius: 50%; background: var(--c-soft); display: flex; align-items: center; justify-content: center; font-size: 1.2em; }
+.d4 .step::before { width: 2.2em; height: 2.2em; border-radius: 50%; background: var(--a-soft); display: flex; align-items: center; justify-content: center; font-size: 1.2em; }
 .d4 .band { border-radius: var(--tile); }
 .d4 .ft { background: var(--surface); color: var(--ink); margin: clamp(40px, 5vw, 88px) var(--gutter) var(--gutter); border-radius: var(--tile); }
 .d4 .ft a, .d4 .ft p { color: var(--ink); }

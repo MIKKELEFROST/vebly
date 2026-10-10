@@ -20,6 +20,10 @@
   "fag": "Klinik",
   "farve": "#7a5a8c",
   "overskrift": "Tid til dig. Og din hud.",
+  "overskrifter": [
+    "Ro, pleje og god tid.",
+    "Behandlinger i rolige rammer."
+  ],
   "intro": "Ansigtsbehandlinger, massage og hudpleje i rolige rammer i {{BY}}. Book online på et minut.",
   "trust": [
     "Uddannede behandlere",

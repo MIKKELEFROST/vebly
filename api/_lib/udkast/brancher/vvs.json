@@ -69,6 +69,10 @@
   "fag": "VVS-installatør",
   "farve": "#0f6d7a",
   "overskrift": "Hurtig hjælp. Fast pris.",
+  "overskrifter": [
+    "Fra dryppende hane til nyt bad.",
+    "Varme, vand og badeværelser."
+  ],
   "intro": "Vi løser alt fra dryppende haner til nye badeværelser og varmepumper i {{BY}} og omegn. Akut hjælp samme dag.",
   "ydelserForside": "Det hjælper vi med.",
   "ydelserOverskrift": "Alt inden for VVS.",

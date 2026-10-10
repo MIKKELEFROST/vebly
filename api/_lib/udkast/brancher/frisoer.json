@@ -20,6 +20,10 @@
   "fag": "Frisør",
   "farve": "#9c3d5a",
   "overskrift": "Hår, der holder hele ugen.",
+  "overskrifter": [
+    "Klip, farve og god tid.",
+    "Book din tid på et minut."
+  ],
   "intro": "Klip, farve og styling i hjertet af {{BY}}. Book online på et minut.",
   "trust": [
     "Book online døgnet rundt",
