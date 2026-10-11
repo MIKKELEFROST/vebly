@@ -27,7 +27,8 @@ const EVENTS = new Set([
   'js_error', 'resource_error', 'web_vitals', 'consent_view', 'consent_choice',
   // Front page
   'addon_add', 'addon_remove', 'addon_view', 'price_view', 'popup_open', 'popup_close', 'popup_action', 'faq_open', 'faq_close',
-  'ba_mode', 'ba_drag', 'pit_shake', 'pit_ball_throw', 'intro_skip', 'demo_step', 'demo_live', 'reference_filter',
+  'ba_mode', 'ba_drag', 'pit_shake', 'pit_ball_throw', 'intro_skip', 'demo_step', 'demo_live', 'demo_personalize', 'reference_filter',
+  'video_start', 'video_progress', 'video_complete',
   // "Bestil en hjemmeside"
   'bestil_open', 'bestil_step_view', 'bestil_step', 'bestil_1_fag', 'bestil_2_virksomhed', 'bestil_3_behov', 'bestil_4_stil', 'bestil_5_kontakt',
   'bestil_choice', 'bestil_field', 'bestil_back', 'bestil_submit', 'bestil_error', 'bestil_udkast_vist', 'bestil_result_change',

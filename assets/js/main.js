@@ -1,6 +1,6 @@
 import { track } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
-import './bestil.js';
+import { openBestil, FAG } from './bestil.js';
 import { trades, flipWords, included, addons, addonPages, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
@@ -284,8 +284,9 @@ document.addEventListener('keydown', e => {
 /* ------------------------------------------------------------------ */
 
 // Scale the "Sådan virker det" block down on short screens so nothing is cut off
-const fitEl = $('[data-fit]');
-const fitNow = () => { fitEl.style.transform = ''; const s = Math.min(1, innerHeight / fitEl.scrollHeight); fitEl.style.transform = s < 1 ? `scale(${s})` : ''; };
+// (the room under the menu is padding on the pinned frame, so it is never scaled away)
+const fitEl = $('[data-fit]'), fitTop = fitEl.parentElement;
+const fitNow = () => { fitEl.style.transform = ''; if (!motion) return; const s = Math.min(1, (innerHeight - parseFloat(getComputedStyle(fitTop).paddingTop)) / fitEl.scrollHeight); fitEl.style.transform = s < 1 ? `scale(${s})` : ''; };
 fitNow();
 addEventListener('resize', fitNow); addEventListener('load', fitNow);
 new ResizeObserver(fitNow).observe(fitEl);
@@ -299,6 +300,78 @@ const sizeFrame = force => { if (!shot.clientWidth) return; if (!force && shot.c
 sizeFrame(true);
 addEventListener('resize', () => sizeFrame(true));
 new ResizeObserver(() => sizeFrame(false)).observe(shot);
+
+// "Prøv med din egen virksomhed": the visitor's trade, town and company name go into the
+// example site, the address bar and the search in step 04–05, and on into "Bestil" from the
+// button in step 05. Nothing leaves the browser; analytics only hears which field was used.
+const egen = (() => {
+  const KEY = 'wl-egen', DEF = { fag: 'Tømrer', by: 'København', navn: 'Nordvik' };
+  const box = $('[data-egen-box]'), f = Object.fromEntries($$('[data-egen]').map(i => [i.dataset.egen, i]));
+  const ALIAS = { massage: 'klinik', klinik: 'klinik', fysioterapi: 'fysioterapeut', fysio: 'fysioterapeut', 'el-installatør': 'elektriker', elinstallatør: 'elektriker', blikkenslager: 'vvs', rengøringsfirma: 'rengoering', pt: 'personlig-traener', træner: 'personlig-traener', bogholder: 'revisor' };
+  $('[data-egen-fag]').innerHTML = FAG.filter(([id]) => id !== 'generisk').map(([, l]) => `<option value="${esc(l)}"></option>`).join('');
+  try { const v = JSON.parse(sessionStorage.getItem(KEY) || 'null'); if (v) Object.keys(f).forEach(k => { if (typeof v[k] === 'string') f[k].value = v[k].slice(0, 60); }); } catch (x) { /* fine */ }
+
+  const cap = t => t.charAt(0).toLocaleUpperCase('da-DK') + t.slice(1);
+  const clean = k => f[k].value.replace(/\s+/g, ' ').trim();
+  // The trade as Bestil knows it: one of its templates, else "Andet" with the typed trade
+  const fagId = t => { const l = t.toLocaleLowerCase('da-DK'); const row = FAG.find(([id, lab]) => id !== 'generisk' && (lab.toLocaleLowerCase('da-DK') === l || id === l)); return row ? row[0] : ALIAS[l] || (t ? 'generisk' : ''); };
+  // "Jensen & Søn ApS" → jensen-og-soen.dk
+  const domain = n => {
+    let d = n.toLocaleLowerCase('da-DK').replace(/\s+(aps|a\/s|ivs|i\/s|k\/s|p\/s|amba|smba)\.?$/i, '').replace(/&/g, ' og ')
+      .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    if (d.length > 30) d = d.slice(0, 30).replace(/-[^-]*$/, '') || d.slice(0, 30);
+    return (d || 'nordvik') + '.dk';
+  };
+  const values = () => {
+    const raw = { fag: clean('fag'), by: clean('by'), navn: clean('navn') };
+    const fag = cap(raw.fag || DEF.fag), by = cap(raw.by || DEF.by), navn = raw.navn || DEF.navn;
+    // What people actually type: "massage", not "klinik og massage"
+    const term = (fagId(fag) === 'klinik' ? 'massage' : fag).toLocaleLowerCase('da-DK');
+    return { raw, fag, by, navn, domain: domain(navn), q: `${term} ${by.toLocaleLowerCase('da-DK')}`, egen: !!(raw.fag || raw.by || raw.navn) };
+  };
+  const put = (sel, text) => $$(sel).forEach(el => { el.textContent = text; });
+  const apply = () => {
+    const v = values();
+    $('[data-url]').dataset.full = v.domain;
+    if (!motion) $('[data-url]').textContent = v.domain;
+    put('[data-egen-q]', v.q); put('[data-serp-navn]', v.navn); put('[data-serp-domain]', v.domain);
+    put('[data-serp-ini]', v.navn.charAt(0).toLocaleUpperCase('da-DK'));
+    put('[data-serp-title]', `${v.fag} i ${v.by} | ${v.navn}`); put('[data-serp-sted]', `${v.fag} i ${v.by}`);
+    put('[data-serp-snip]', `${v.fag} i ${v.by} og omegn. Ring eller skriv direkte til ${v.navn}.`);
+    $('[data-demo]').title = `Eksempel på en hjemmeside: ${v.navn}`;
+    box.classList.toggle('is-filled', v.egen);
+    try { demo.contentWindow.__set({ navn: v.navn, fag: v.fag, by: v.by, domain: v.domain, egen: v.egen }); } catch (x) { /* the example page is still loading */ }
+    return v;
+  };
+  let tm = 0;
+  box.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { apply(); try { sessionStorage.setItem(KEY, JSON.stringify(values().raw)); } catch (x) { /* fine */ } }, 120); });
+  // Which fields people use (once each), and the trade as one of our ids; never the typed text
+  const told = new Set();
+  box.addEventListener('change', e => {
+    const k = e.target.dataset.egen; if (!k || told.has(k) || !clean(k)) return;
+    told.add(k);
+    const id = fagId(clean('fag'));
+    track('demo_personalize', { field: { fag: 'branche', by: 'by', navn: 'firmanavn' }[k], fag: id === 'generisk' ? 'andet' : id || 'ikke-valgt' });
+  });
+  // Enter moves on to the next field, and closes the keyboard after the last one
+  box.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' || !e.target.dataset.egen) return;
+    e.preventDefault();
+    const order = ['fag', 'by', 'navn'], next = f[order[order.indexOf(e.target.dataset.egen) + 1]];
+    if (next) next.focus(); else e.target.blur();
+  });
+  demo.addEventListener('load', apply);
+  apply();
+  // Step 05: Bestil opens with the trade, name and town already filled in
+  $('[data-egen-cta]').addEventListener('click', e => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
+    e.preventDefault();
+    const v = values(), b = fagId(v.raw.fag);
+    openBestil({ from: 'saadan', svar: v.egen ? { b, f: b === 'generisk' ? v.raw.fag : '', n: v.raw.navn, by: v.raw.by ? cap(v.raw.by) : '' } : null });
+  });
+  return { values };
+})();
 
 // Nav background, progress bar and to-top button
 const nav = $('[data-nav]'), bar = $('[data-bar]'), totop = $('[data-totop]'), totopRing = $('[data-totop-ring]');
@@ -366,6 +439,26 @@ baGo.forEach(b => b.addEventListener('click', () => { baTouched = true; if (moti
 baSet(50);
 
 const pit = $('[data-pit]');
+
+// Explainer video (switched on in index.html once the file is in place): plays on click only, so
+// nothing is downloaded before that. Start, 25/50/75 % and the end go to analytics.
+{
+  const sec = $('[data-vid]');
+  if (sec && !sec.hidden) {
+    const box = $('.vid', sec), v = $('[data-vid-video]', sec), play = $('[data-vid-play]', sec), marks = [25, 50, 75];
+    const tid = $('[data-vid-tid]', sec);
+    v.poster = v.dataset.poster; $$('[data-src]', v).forEach(s => { s.src = s.dataset.src; });
+    if (sec.dataset.varighed) tid.textContent = ` · ${sec.dataset.varighed}`;
+    play.setAttribute('aria-label', `Afspil videoen${sec.dataset.varighed ? ` (${sec.dataset.varighed})` : ''}`);
+    const info = pct => ({ video_title: v.title || 'Explainer', video_provider: 'webleads', video_duration: Math.round(v.duration || 0), video_current_time: Math.round(v.currentTime), video_percent: pct });
+    let started = false, done = false;
+    play.addEventListener('click', () => { play.hidden = true; box.classList.add('is-playing'); v.controls = true; v.load(); v.play().catch(() => {}); });
+    v.addEventListener('playing', () => { if (!started) { started = true; track('video_start', info(0)); } });
+    v.addEventListener('timeupdate', () => { if (!v.duration) return; const pct = v.currentTime / v.duration * 100; while (marks.length && pct >= marks[0]) track('video_progress', info(marks.shift())); });
+    v.addEventListener('ended', () => { if (!done) { done = true; track('video_complete', info(100)); } });
+    v.addEventListener('error', () => { play.hidden = false; box.classList.remove('is-playing'); }, true);
+  }
+}
 
 /* ------------------------------------------------------------------ */
 /* Reduced motion: everything is shown, nothing animates                 */
@@ -614,13 +707,14 @@ function runEffects() {
   sizeCv(); addEventListener('resize', sizeCv);
 
   // Demo build-up driven by scroll
-  let needBuild = true, lastBuild = -1, lastStep = -1, live = null, demoMax = 0, liveSeen = false;
+  let needBuild = true, lastBuild = -1, lastStep = -1, live = null, demoMax = 0, liveSeen = false, serpOn = null, you = null, atStart = null;
   demo.addEventListener('load', () => { needBuild = true; sizeFrame(true); setTimeout(() => { needBuild = true; }, 600); });
 
   // Cached elements for the frame loop
   const el = {
     orb: $('[data-orb]'), hero: $('[data-hero]'), h1: $('[data-hero] h1'), build: $('[data-build]'), steps: $$('[data-step]'),
     url: $('[data-url]'), caret: $('[data-caret]'), status: $('[data-status]'), track: $('[data-track]'), track2: $('[data-track2]'),
+    serp: $('[data-serp]'), sq: $('[data-serp-q]'), scaret: $('[data-serp-caret]'), sres: $$('[data-serp-hit], [data-serp-card], .serp__ph'), egq: $('[data-egen-q]'), egen: $('[data-egen-box]'),
     floats: $$('[data-float]'), spin: $('[data-spin]'),
     hs: $('[data-hs]'), hw: $('[data-hwrap]'), ht: $('[data-htrack]'), hbar: $('[data-hbar]'), hnum: $('[data-hnum]'), cards: $$('[data-card]'),
     wm: $('[data-wm]'), wl: $$('[data-wl]')
@@ -640,29 +734,46 @@ function runEffects() {
     el.hero.style.opacity = 1 - hp * 1.1;
     if (sy < vh) el.h1.style.transform = `perspective(1000px) rotateX(${(oy / vh - 0.5) * -7}deg) rotateY(${(ox / innerWidth - 0.5) * 9}deg)`;
 
-    // Sådan virker det
+    // Sådan virker det: the site is built (01–02) and goes live on its own address (03),
+    // then a customer searches for the trade and town (04) and finds it (05)
     sizeFrame(false);
     {
       const r = el.build.getBoundingClientRect();
-      const p = clamp(-r.top / (r.height - vh));
-      if (Math.abs(p - lastBuild) > 0.0005 || needBuild) {
-        try { if (demo.contentWindow && demo.contentWindow.__build) { demo.contentWindow.__build(p); lastBuild = p; needBuild = false; } } catch (x) {}
+      const p = clamp(-r.top / (r.height - vh)), pb = clamp(p / 0.58);
+      if (Math.abs(pb - lastBuild) > 0.0005 || needBuild) {
+        try { if (demo.contentWindow && demo.contentWindow.__build) { demo.contentWindow.__build(pb); lastBuild = pb; needBuild = false; } } catch (x) {}
       }
-      const active = p < 0.03 ? 0 : p < 0.9 ? 1 : 2;
+      const active = p < 0.02 ? 0 : p < 0.52 ? 1 : p < 0.62 ? 2 : p < 0.78 ? 3 : 4;
       if (active !== lastStep) {
-        // How far people follow the demo: step 2 (we build it) and 3 (online)
+        // How far people follow the demo: 2 we build it, 3 online, 4 the search, 5 found
         if (active > demoMax) { demoMax = active; track('demo_step', { step: active + 1 }); }
         lastStep = active;
         el.steps.forEach((s, i) => { s.classList.toggle('is-on', i === active); s.style.opacity = i === active ? 1 : 0.22; s.style.transform = i === active ? 'translateX(0)' : 'translateX(-8px)'; });
       }
-      const full = el.url.dataset.full, uk = clamp((p - 0.9) / 0.07);
-      el.url.textContent = full.slice(0, Math.round(full.length * uk));
+      // The search fades in over the live site, and the address bar follows
+      const sk = clamp((p - 0.62) / 0.03), full = el.url.dataset.full, uk = clamp((p - 0.52) / 0.04);
+      const urlText = sk > 0.5 ? 'google.dk' : full.slice(0, Math.round(full.length * uk));
+      if (el.url.textContent !== urlText) el.url.textContent = urlText;
       el.caret.style.opacity = (t >> 5) % 2 ? 1 : 0;
       const isLive = uk >= 1;
       if (isLive !== live) {
         if (isLive && !liveSeen) { liveSeen = true; track('demo_live'); }
         live = isLive; el.status.textContent = isLive ? '● Live' : 'Kladde'; el.status.classList.toggle('is-live', isLive);
       }
+      if (sk > 0 || serpOn) {
+        serpOn = sk > 0;
+        el.serp.style.opacity = sk; el.serp.style.visibility = serpOn ? 'visible' : 'hidden';
+        const q = el.egq.textContent, qk = clamp((p - 0.65) / 0.09), qt = q.slice(0, Math.round(q.length * qk));
+        if (el.sq.textContent !== qt) el.sq.textContent = qt;
+        el.scaret.style.opacity = qk < 1 || (t >> 5) % 2 ? 1 : 0;
+        // Your site first, then your Google profile, then everyone else
+        el.sres.forEach((x, i) => { const k = ease(clamp((p - 0.75 - i * 0.012) / 0.03)); x.style.opacity = k; x.style.transform = k < 1 ? `translateY(${(1 - k) * 14}px)` : ''; });
+        const isYou = p >= 0.82;
+        if (isYou !== you) { you = isYou; el.serp.classList.toggle('is-you', isYou); }
+      }
+      // A nudge to scroll once something is typed, until the build starts
+      const start = p < 0.06;
+      if (start !== atStart) { atStart = start; el.egen.classList.toggle('is-start', start); }
     }
 
     // Marquees (speed and skew follow scroll velocity)

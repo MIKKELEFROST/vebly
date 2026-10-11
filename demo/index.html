@@ -13,7 +13,7 @@
 <body>
 <div class="pg">
   <header class="hd" data-b>
-    <a href="#" class="logo"><span class="logo__mark"><i></i></span>Nordvik</a>
+    <a href="#" class="logo"><span class="logo__mark"><i></i></span><span data-navn>Nordvik</span></a>
     <nav class="menu">
       <a href="#ydelser">Ydelser</a><a href="#om">Om os</a><a href="#kunder">Kunder</a><a href="#kontakt">Kontakt</a>
     </nav>
@@ -22,16 +22,16 @@
 
   <section class="hero">
     <div class="hero__copy">
-      <span class="pill" data-b><span>Nyt</span>Ledige tider allerede denne uge</span>
+      <span class="pill" data-b><span class="pill__tag" data-kun-demo>Nyt</span><span data-pill>Ledige tider allerede denne uge</span></span>
       <h1 data-b>Service, du kan <em>regne med.</em></h1>
-      <p data-b>Vi hjælper private og virksomheder med hurtig, grundig og ærlig service. Fast pris, faste aftaler og svar inden for en time.</p>
+      <p data-b>Vi hjælper private og virksomheder<span data-i-by></span> med hurtig, grundig og ærlig service. Fast pris, faste aftaler og svar inden for en time.</p>
       <div class="hero__ctas" data-b>
         <a href="#kontakt" class="cta">Få et uforpligtende tilbud <span>→</span></a>
         <a href="tel:70203040" class="call">Ring 70 20 30 40</a>
       </div>
       <div class="proof" data-b>
         <div class="faces"><i></i><i></i><i></i><i>600+</i></div>
-        <div class="proof__txt"><b>★★★★★ 4,9 på Google</b><span>fra over 600 tilfredse kunder</span></div>
+        <div class="proof__txt"><b>★★★★★ 4,9 på Google <i class="ex" data-ex>Eksempel</i></b><span>fra over 600 tilfredse kunder</span></div>
       </div>
     </div>
     <div class="hero__art">
@@ -45,7 +45,7 @@
     </div>
   </section>
 
-  <section class="logos" data-b>
+  <section class="logos" data-b data-kun-demo>
     <div class="logos__row">
       <span class="logos__lbl">Betroet af virksomheder i hele landet</span>
       <span>Halvorsen</span><span class="serif" style="font-style:italic">Kvist &amp; Co</span><span>MARKØ</span><span class="serif">Fjordhus</span><span>bølge.</span>
@@ -79,8 +79,8 @@
 
   <section id="om" class="about">
     <div class="about__in">
-      <h2 data-b>Siden 2012 har vi gjort én ting: <em>holdt hvad vi lover.</em></h2>
-      <div class="stats">
+      <h2 data-b><span data-siden>Siden 2012 har vi</span> gjort én ting: <em>holdt hvad vi lover.</em></h2>
+      <div class="stats"><i class="ex ex--stats" data-ex>Eksempler</i>
         <div data-b><b>600+</b><span>tilfredse kunder</span></div>
         <div data-b><b>4,9★</b><span>gennemsnit på Google</span></div>
         <div data-b><b>&lt; 1 t</b><span>svartid i åbningstiden</span></div>
@@ -105,8 +105,8 @@
     <div class="quote" data-b>
       <div class="img img--quote"></div>
       <div class="quote__txt">
-        <span class="quote__stars">★★★★★</span>
-        <p>“Hurtige, grundige og altid venlige. Vi har brugt Nordvik i fem år, og de har aldrig været en dag forsinket.”</p>
+        <span class="quote__stars">★★★★★ <i class="ex" data-ex>Eksempel</i></span>
+        <p>“Hurtige, grundige og altid venlige. De har aldrig været en dag forsinket.”</p>
         <div><b>Camilla Holm</b><span>Kunde siden 2020</span></div>
       </div>
     </div>
@@ -118,7 +118,7 @@
       <div class="contact__info">
         <h2>Lad os tage <em>en snak.</em></h2>
         <p>Skriv et par linjer, så vender vi tilbage inden for en time i åbningstiden.</p>
-        <div class="contact__links"><a href="tel:70203040">70 20 30 40</a><a href="mailto:hej@nordvik.dk">hej@nordvik.dk</a></div>
+        <div class="contact__links"><a href="tel:70203040">70 20 30 40</a><a href="mailto:hej@nordvik.dk" data-mail>hej@nordvik.dk</a></div>
       </div>
       <form class="form" onsubmit="event.preventDefault();this.hidden=true;this.nextElementSibling.hidden=false">
         <input required placeholder="Navn" aria-label="Navn">
@@ -131,7 +131,7 @@
   </section>
 
   <footer class="ft" data-b>
-    <b>Nordvik</b><span>Havnegade 14, 1058 København K</span><span>Man–fre 8–17</span><span>CVR 34 56 78 90</span>
+    <b data-navn>Nordvik</b><span data-adr>Havnegade 14, 1058 København K</span><span>Man–fre 8–17</span><span data-kun-demo>CVR 34 56 78 90</span>
   </footer>
 </div>
 <script src="demo.js"></script>
