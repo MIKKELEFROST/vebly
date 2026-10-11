@@ -21,7 +21,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
 .hero { max-width: 1240px; margin: 0 auto; padding: 36px 32px 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 56px; align-items: center; }
 .hero__copy { display: flex; flex-direction: column; gap: 28px; }
 .pill { align-self: flex-start; display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--line); padding: 7px 14px 7px 8px; border-radius: 999px; font-size: 14px; font-weight: 500; }
-.pill span { background: var(--lime); border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700; }
+.pill__tag { background: var(--lime); border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700; }
 .hero h1 { font-weight: 600; font-size: clamp(60px, 7.4vw, 108px); line-height: 0.95; letter-spacing: -0.055em; margin: 0; }
 .hero h1 em { letter-spacing: -0.03em; }
 .hero__copy > p { font-size: 20px; line-height: 1.55; color: var(--muted); margin: 0; max-width: 480px; text-wrap: pretty; }
@@ -160,3 +160,11 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
   .contact h2 { font-size: 42px; }
   .ft { padding: 0 18px 32px; }
 }
+
+/* The visitor's own name, trade and town (window.__set from the Webleads front page):
+   the made-up numbers and the review are marked as examples, the logo row is left out */
+.ex { display: none; font-family: 'Geist', sans-serif; font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; vertical-align: middle; }
+.is-egen .ex { display: inline-block; }
+.ex--stats { grid-column: 1 / -1; justify-self: start; color: #0e1a14; }
+.is-egen [data-kun-demo] { display: none; }
+.is-egen .pill { padding-left: 14px; }

@@ -30,4 +30,20 @@
     });
     if (sp >= 1) window.scrollTo({ top: Math.max(0, de.scrollHeight - vh), behavior: 'instant' });
   };
+
+  // The front page calls window.__set({ navn, fag, by, domain, egen }) with the visitor's own
+  // company name, trade and town. Without them the page stays Nordvik.
+  const all = s => Array.from(document.querySelectorAll(s));
+  const keep = new Map(all('[data-pill], [data-adr], [data-siden]').map(el => [el, el.textContent]));
+  window.__set = v => {
+    const egen = !!(v && v.egen);
+    document.documentElement.classList.toggle('is-egen', egen);
+    all('[data-navn]').forEach(el => { el.textContent = (egen && v.navn) || 'Nordvik'; });
+    all('[data-i-by]').forEach(el => { el.textContent = egen && v.by ? ` i ${v.by}` : ''; });
+    all('[data-pill]').forEach(el => { el.textContent = egen && v.fag && v.by ? `${v.fag} i ${v.by}` : keep.get(el); });
+    all('[data-adr]').forEach(el => { el.textContent = egen && v.by ? v.by : keep.get(el); });
+    all('[data-siden]').forEach(el => { el.textContent = egen ? 'Vi har' : keep.get(el); });
+    all('[data-mail]').forEach(el => { const m = `hej@${(egen && v.domain) || 'nordvik.dk'}`; el.textContent = m; el.href = `mailto:${m}`; });
+    document.title = `${(egen && v.navn) || 'Nordvik'} · Eksempel på en Webleads-hjemmeside`;
+  };
 })();

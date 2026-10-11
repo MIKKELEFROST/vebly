@@ -8,8 +8,8 @@ import { track, DESIGN_NAMES } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { THEMES, TEMA_IDS, TONER, temaerFor, preview, palette } from './temaer.js';
 
-// [template in api/_lib/udkast/brancher, label]
-const FAG = [
+// [template in api/_lib/udkast/brancher, label]. Also used by "Prøv med din egen virksomhed" on the front page
+export const FAG = [
   ['frisoer', 'Frisør'], ['toemrer', 'Tømrer'], ['maler', 'Maler'],
   ['elektriker', 'Elektriker'], ['vvs', 'VVS'], ['rengoering', 'Rengøring'],
   ['klinik', 'Klinik og massage'], ['fysioterapeut', 'Fysioterapeut'],
@@ -615,19 +615,32 @@ async function copyLink(btn) {
 
 /* -------- Open and close -------- */
 
-export function openBestil({ from = 'link', alone = false } = {}) {
+// Answers the visitor already gave on the page (trade b/f, name n, town by): a new trade
+// starts from its own colours and headline, as when the chip is picked in step 1
+function prefill(v) {
+  if (v.b && v.b !== S.svar.b) Object.assign(S.svar, { b: v.b, t: '', c: '', ac: '', g: '', o: 0, i: 0 });
+  if (v.b) S.svar.f = v.b === 'generisk' ? String(v.f || '').slice(0, 40) : '';
+  if (v.n) S.svar.n = String(v.n).slice(0, 60);
+  if (v.by) S.svar.by = String(v.by).slice(0, 40);
+  if (STEPS[0].ok()) S.step = Math.max(S.step, 1);
+  save();
+}
+
+export function openBestil({ from = 'link', alone = false, svar = null } = {}) {
   standalone = alone;
   ensure();
   if (opened) return;
   opened = true;
   if (S.step >= 5) S.step = 4;
+  const resumed = S.step > 0;
+  if (svar) prefill(svar);
   render(0);
   root.classList.add('is-open');
   document.documentElement.style.overflow = 'hidden';
   if (!standalone && location.hash !== '#bestil') history.pushState({ bestil: 1 }, '', '#bestil');
   setTimeout(focusStep, 50);
   tOpen = performance.now();
-  track('bestil_open', { from, resumed: S.step > 0 ? 'ja' : 'nej' });
+  track('bestil_open', { from, resumed: resumed ? 'ja' : 'nej', prefilled: svar ? 'ja' : 'nej' });
   stepView(0);
 }
 

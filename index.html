@@ -100,13 +100,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=20261010a">
+<link rel="stylesheet" href="assets/css/main.css?v=20261011a">
 <link rel="stylesheet" href="assets/css/bestil.css?v=3">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
 </script>
-<script type="module" src="assets/js/main.js?v=20261010b"></script>
+<script type="module" src="assets/js/main.js?v=20261011a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -187,6 +187,16 @@
     <section id="saadan" class="build" data-build data-sec="saadan">
       <div class="build__sticky">
         <div class="build__fit" data-fit>
+          <!-- The visitor's own trade, town and company name go into the example site and the search below -->
+          <div class="egen" role="group" aria-labelledby="egen-lbl" data-egen-box>
+            <span class="egen__lbl"><span id="egen-lbl">Prøv med din egen virksomhed</span><span class="egen__hint" aria-hidden="true">Scroll videre, og se din side blive bygget ↓</span></span>
+            <div class="egen__row">
+              <label class="egen__f"><span class="sr-only">Branche</span><input data-egen="fag" list="egen-fag" placeholder="Branche" maxlength="40" autocomplete="off" autocapitalize="sentences" enterkeyhint="next"></label>
+              <label class="egen__f"><span class="sr-only">By</span><input data-egen="by" placeholder="By" maxlength="40" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next"></label>
+              <label class="egen__f"><span class="sr-only">Firmanavn</span><input data-egen="navn" placeholder="Firmanavn" maxlength="60" autocomplete="organization" autocapitalize="words" enterkeyhint="done"></label>
+            </div>
+            <datalist id="egen-fag" data-egen-fag></datalist>
+          </div>
           <div class="build__steps">
             <div class="kicker">Sådan virker det</div>
             <div class="step" data-step>
@@ -199,7 +209,16 @@
             </div>
             <div class="step" data-step>
               <div class="step__n">03</div>
-              <div class="step__body"><h3>Du er online</h3><p>Kunderne finder dig på Google og booker eller ringer direkte.</p></div>
+              <div class="step__body"><h3>Du er online</h3><p>Siden går live på dit eget domæne og er sat op til Google fra dag ét.</p></div>
+            </div>
+            <div class="step" data-step>
+              <div class="step__n">04</div>
+              <div class="step__body"><h3>Kunden søger</h3><p>En kunde søger på Google efter »<span data-egen-q>tømrer københavn</span>«.</p></div>
+            </div>
+            <div class="step" data-step>
+              <div class="step__n">05</div>
+              <div class="step__body"><h3>Du bliver fundet</h3><p>Din side og din Google-profil er sat op til dit fag og din by. Kunden finder dig og ringer direkte.</p>
+                <a href="/bestil" class="step__cta" data-egen-cta data-event="Sådan virker det: Se din egen skitse">Se din egen skitse gratis →</a></div>
             </div>
           </div>
           <div class="build__browser-wrap">
@@ -211,6 +230,30 @@
               </div>
               <div class="browser__shot" data-shot>
                 <iframe data-demo src="demo/" tabindex="-1" title="Eksempel på en hjemmeside: Nordvik" loading="eager"></iframe>
+                <!-- Step 04–05: an example search. Only shown while scrolling with motion on -->
+                <div class="serp" data-serp aria-hidden="true">
+                  <div class="serp__box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span data-serp-q></span><i class="serp__caret" data-serp-caret></i></div>
+                  <div class="serp__tabs"><b>Alle</b><span>Kort</span><span>Billeder</span><span>Nyheder</span></div>
+                  <div class="serp__res" data-serp-res>
+                    <div class="serp__list">
+                      <div class="serp__hit" data-serp-hit>
+                        <div class="serp__site"><i data-serp-ini>N</i><span><b data-serp-navn>Nordvik</b><small data-serp-domain>nordvik.dk</small></span></div>
+                        <div class="serp__title" data-serp-title>Tømrer i København | Nordvik</div>
+                        <p data-serp-snip>Tømrer i København og omegn. Ring eller skriv direkte til Nordvik.</p>
+                        <span class="serp__you">Din side</span>
+                      </div>
+                      <div class="serp__ph"><i></i><i></i><i></i></div>
+                      <div class="serp__ph"><i></i><i></i><i></i></div>
+                    </div>
+                    <div class="serp__card" data-serp-card>
+                      <div class="serp__map"><i></i></div>
+                      <b data-serp-navn>Nordvik</b>
+                      <span data-serp-sted>Tømrer i København</span>
+                      <div class="serp__btns"><span class="is-call">Ring</span><span>Rutevejledning</span><span>Hjemmeside</span></div>
+                      <span class="serp__you">Din Google-profil</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -248,6 +291,26 @@
       <div class="track" data-track aria-hidden="true"></div>
       <div class="track track--outline" data-track2 aria-hidden="true"></div>
       <p class="sr-only">Frisør, tømrer, rengøring, fysioterapeut, elektriker, revisor, klinik, VVS, personlig træner og maler.</p>
+    </section>
+
+    <!-- Explainer video: ready, not switched on. It replaces "Før og efter" below once the video
+         is in assets/video/ (README.md → Explainer-video): remove "hidden" here and add it to "Før og efter" -->
+    <section class="vid-sec" id="video" data-sec="video" data-vid data-varighed="" hidden>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Se videoen</div>
+          <h2 class="h2">Fra første snak.<br><span class="hot">Til første kunde.</span></h2>
+        </div>
+        <p class="sec-head__lead vid-sec__lead">Se, hvordan vi bygger din hjemmeside, og hvordan kunderne finder dig bagefter.</p>
+      </div>
+      <div class="vid" data-reveal="1" style="--ar: 16 / 9">
+        <!-- The file paths are set by main.js only when the section is switched on, so nothing is fetched before -->
+        <video data-vid-video preload="none" playsinline data-poster="/assets/video/explainer.jpg" title="Sådan virker Webleads">
+          <source data-src="/assets/video/explainer.mp4" type="video/mp4">
+          <!-- Danish subtitles, when there is a file: <track kind="captions" srclang="da" label="Dansk" data-src="/assets/video/explainer.da.vtt"> -->
+        </video>
+        <button type="button" class="vid__play" data-vid-play data-event="Video: Afspil"><span class="vid__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><span class="vid__lbl">Se videoen<span data-vid-tid></span></span></button>
+      </div>
     </section>
 
     <section class="ba-sec" data-sec="foer-efter">

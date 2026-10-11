@@ -158,15 +158,34 @@ a.trust__item[href]:hover { transform: translateY(-2px); box-shadow: 0 8px 24px 
 .hero__more span { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line-strong); align-items: center; justify-content: center; font-size: 14px; }
 
 /* ---------- Sådan virker det (build) ---------- */
-.build { position: relative; z-index: 1; height: 320vh; }
-.build__sticky { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
-.build__fit { max-width: 1200px; width: 100%; margin: 0 auto; padding: 72px 24px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(24px, 5vw, 80px); align-items: center; transform-origin: 50% 50%; }
-.build__steps { display: flex; flex-direction: column; gap: clamp(14px, 2.6vh, 30px); }
+.build { position: relative; z-index: 1; height: 480vh; }
+.build__sticky { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; padding-top: 92px; }
+.build__fit { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 24px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(18px, 3.6vh, 40px) clamp(24px, 5vw, 80px); align-items: center; transform-origin: 50% 50%; }
+/* Without motion nothing is pinned or animated: the section simply flows */
+html:not(.motion) .build { height: auto; }
+html:not(.motion) .build__sticky { position: relative; height: auto; padding-bottom: 64px; }
+.build__steps { display: flex; flex-direction: column; gap: clamp(10px, 2vh, 24px); }
 .step { display: flex; gap: 20px; align-items: baseline; transition: opacity .4s, transform .4s cubic-bezier(.2,.8,.2,1); }
 .step__n { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--accent); min-width: 28px; }
 .step__body { display: flex; flex-direction: column; gap: 4px; }
 .step h3 { font-family: var(--display); font-size: clamp(22px, 2.6vw, 32px); letter-spacing: -0.025em; line-height: 1.05; font-weight: 700; margin: 0; }
 .step p { font-size: 16px; line-height: 1.5; color: var(--muted); margin: 0; max-width: 380px; }
+.step__cta { align-self: flex-start; margin-top: 10px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; padding: 12px 20px; border-radius: 999px; transition: opacity .35s, background .2s; }
+.step__cta:hover { color: #fff; background: var(--accent); }
+.motion .step:not(.is-on) .step__cta:not(:focus-visible) { opacity: 0; pointer-events: none; }
+
+/* "Prøv med din egen virksomhed": trade, town and name go into the example site and the search */
+.egen { grid-column: 1 / -1; justify-self: start; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 6px 6px 6px 20px; box-shadow: 0 16px 34px -24px rgba(17,17,17,0.4); max-width: 100%; }
+.egen__lbl { font-size: 14px; font-weight: 700; white-space: nowrap; }
+.egen__hint { display: none; color: var(--accent); }
+.motion .egen.is-filled.is-start .egen__hint { display: inline; }
+.motion .egen.is-filled.is-start #egen-lbl { display: none; }
+.egen__row { display: flex; gap: 6px; flex-wrap: wrap; min-width: 0; }
+.egen__f { display: block; min-width: 0; }
+.egen__f input { display: block; width: 168px; max-width: 100%; min-height: 42px; font: inherit; font-size: 15px; color: var(--ink); background: #f4f2ee; border: 1.5px solid transparent; border-radius: 999px; padding: 9px 16px; transition: border-color .2s, background .2s, box-shadow .2s; }
+.egen__f input::placeholder { color: var(--muted); opacity: 1; }
+.egen__f input:hover { border-color: var(--line-strong); }
+.egen__f input:focus { outline: none; background: #fff; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,85,43,0.14); }
 .build__browser-wrap { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 620px; justify-self: center; }
 .browser { background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 40px 80px -30px rgba(17,17,17,0.18); width: 100%; }
 .browser__bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
@@ -176,7 +195,7 @@ a.trust__item[href]:hover { transform: translateY(-2px); box-shadow: 0 8px 24px 
 .browser__caret { width: 1px; height: 14px; background: var(--ink); display: block; flex-shrink: 0; }
 .browser__status { font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: #f4f2ee; color: var(--muted); transition: background .4s, color .4s; white-space: nowrap; }
 .browser__status.is-live { background: #e3f4ea; color: var(--green); }
-.browser__shot { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #fff; border-radius: 0 0 18px 18px; }
+.browser__shot { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #fff; border-radius: 0 0 18px 18px; container-type: inline-size; }
 .browser__shot iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 880px; border: 0; transform-origin: 0 0; pointer-events: none; }
 
 /* ---------- Løfte (stacked cards) ---------- */
@@ -206,6 +225,19 @@ a.trust__item[href]:hover { transform: translateY(-2px); box-shadow: 0 8px 24px 
 .trail { position: fixed; z-index: 65; pointer-events: none; padding: 16px 24px; border-radius: 18px; font-family: var(--display); font-weight: 800; font-size: 24px; letter-spacing: -0.02em; white-space: nowrap; opacity: 0; transition: transform .45s cubic-bezier(.2,1.4,.4,1), opacity .3s; box-shadow: 0 20px 40px -20px rgba(17,17,17,0.4); }
 
 /* ---------- Før og efter ---------- */
+/* ---------- Explainer video (replaces "Før og efter" once the video file is in place) ---------- */
+.vid-sec { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
+.vid-sec .sec-head { margin-bottom: 32px; }
+.vid-sec__lead { max-width: 360px; }
+.vid { position: relative; aspect-ratio: var(--ar, 16 / 9); max-height: 82vh; margin: 0 auto; overflow: hidden; border-radius: 24px; border: 1px solid var(--line); background: var(--ink); box-shadow: 0 50px 100px -50px rgba(17,17,17,0.45); }
+.vid video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--ink); }
+.vid.is-playing video { object-fit: contain; }
+.vid__play { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; border: 0; padding: 0; cursor: pointer; color: #fff; background: linear-gradient(180deg, rgba(17,17,17,0) 40%, rgba(17,17,17,0.45)); font: inherit; }
+.vid__btn { display: flex; align-items: center; justify-content: center; width: clamp(72px, 9vw, 104px); aspect-ratio: 1; border-radius: 50%; background: var(--accent); box-shadow: 0 20px 40px -14px rgba(224,85,43,0.7); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.vid__btn svg { width: 40%; height: 40%; margin-left: 6%; fill: #fff; }
+.vid__lbl { font-size: 17px; font-weight: 700; text-shadow: 0 1px 12px rgba(17,17,17,0.5); }
+.vid__play:hover .vid__btn, .vid__play:focus-visible .vid__btn { transform: scale(1.08); }
+.vid__play[hidden] { display: none; }
 .ba-sec { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
 .ba-sec .sec-head { margin-bottom: 32px; }
 .ba-sec__side { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
@@ -463,6 +495,98 @@ html:not(.motion) .loader { display: none; }
 .motion [data-reveal] { opacity: 0; transform: translateY(48px); }
 .motion [data-reveal].is-in { opacity: 1; transform: none; }
 
+/* Step 04–05: an example search for the trade and town, laid over the live site.
+   No search engine's logo or colours, and no stars or numbers for the visitor's business */
+.serp { position: absolute; inset: 0; z-index: 2; background: #fff; visibility: hidden; opacity: 0; pointer-events: none; overflow: hidden; display: flex; flex-direction: column; gap: 2.4cqw; padding: 4cqw 5cqw; font-size: 2.2cqw; line-height: 1.4; color: #202124; }
+html:not(.motion) .serp { display: none; }
+.serp__box { display: flex; align-items: center; gap: 1.6cqw; min-height: 6.6cqw; padding: 1.4cqw 2.8cqw; border: 1px solid #dcdad5; border-radius: 999px; box-shadow: 0 1px 6px rgba(17,17,17,0.12); font-size: 2.5cqw; }
+.serp__box svg { width: 2.6cqw; height: 2.6cqw; flex-shrink: 0; fill: none; stroke: var(--muted); stroke-width: 2.4; stroke-linecap: round; }
+.serp__caret { display: inline-block; width: 1px; height: 1.15em; margin-left: 1px; background: var(--ink); }
+.serp__tabs { display: flex; gap: 3.2cqw; padding: 0 1.2cqw 1.3cqw; border-bottom: 1px solid var(--line); font-size: 1.9cqw; color: var(--muted); }
+.serp__tabs b { color: var(--ink); font-weight: 600; box-shadow: 0 1.4cqw 0 -1.05cqw var(--ink); }
+.serp__res { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3.2cqw; align-items: start; }
+.serp__list { display: flex; flex-direction: column; gap: 3.4cqw; }
+.serp__hit, .serp__card { position: relative; border-radius: 1.8cqw; transition: box-shadow .45s, background .45s; }
+.serp__hit { margin: -1.4cqw; padding: 1.4cqw; }
+.serp__site { display: flex; align-items: center; gap: 1.4cqw; padding-right: 13cqw; }
+.serp__site i { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 3.8cqw; height: 3.8cqw; border-radius: 50%; background: #0f3d2e; color: #d4f36b; font-style: normal; font-size: 1.9cqw; font-weight: 700; }
+.serp__site span { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.serp__site b, .serp__site small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.serp__site b { font-size: 1.9cqw; font-weight: 600; }
+.serp__site small { font-size: 1.7cqw; color: var(--muted); }
+.serp__title { margin-top: 1cqw; font-size: 2.9cqw; line-height: 1.25; color: #1f45b0; }
+.serp__hit p { margin: 0.8cqw 0 0; font-size: 1.95cqw; line-height: 1.5; color: #4d4a45; }
+.serp__ph { display: flex; flex-direction: column; gap: 1.2cqw; }
+.serp__ph i { display: block; height: 1.5cqw; border-radius: 999px; background: #efede9; }
+.serp__ph i:nth-child(1) { width: 32%; }
+.serp__ph i:nth-child(2) { width: 70%; height: 2.3cqw; }
+.serp__ph i:nth-child(3) { width: 92%; }
+.serp__card { display: flex; flex-direction: column; gap: 0.6cqw; padding-bottom: 2cqw; border: 1px solid var(--line); overflow: hidden; background: #fff; }
+.serp__card > b, .serp__card > span:not(.serp__you), .serp__btns { margin: 0 2cqw; }
+.serp__card > b { margin-top: 1.4cqw; font-size: 2.6cqw; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+.serp__card > span:not(.serp__you) { font-size: 1.8cqw; color: var(--muted); }
+.serp__map { position: relative; height: 13cqw; background: linear-gradient(118deg, transparent 47%, #fff 47.4%, #fff 50%, transparent 50.4%), linear-gradient(24deg, transparent 62%, #fff 62.4%, #fff 64.6%, transparent 65%), linear-gradient(90deg, transparent 22%, #f3f1ea 22.3%, #f3f1ea 24%, transparent 24.3%), #e4ece1; }
+.serp__map i { position: absolute; left: 50%; top: 52%; width: 3.4cqw; height: 3.4cqw; margin: -3.4cqw 0 0 -1.7cqw; border-radius: 50% 50% 50% 0; background: var(--accent); transform: rotate(-45deg); box-shadow: 0 2px 5px rgba(17,17,17,0.25); }
+.serp__map i::after { content: ""; position: absolute; inset: 32%; border-radius: 50%; background: #fff; }
+.serp__btns { display: flex; flex-wrap: wrap; gap: 0.9cqw; margin-top: 1cqw; }
+.serp__btns span { padding: 0.6cqw 1.5cqw; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 1.6cqw; font-weight: 600; color: #1f45b0; }
+.serp__btns .is-call { background: #1f45b0; border-color: #1f45b0; color: #fff; }
+.serp__you { position: absolute; top: 1.2cqw; right: 1.2cqw; z-index: 1; padding: 0.5cqw 1.4cqw; border-radius: 999px; background: var(--accent); color: #fff; font-size: 1.6cqw; font-weight: 700; white-space: nowrap; opacity: 0; transform: translateY(0.8cqw) scale(0.9); transition: opacity .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
+.serp.is-you .serp__you { opacity: 1; transform: none; }
+.serp.is-you .serp__hit, .serp.is-you .serp__card { box-shadow: 0 0 0 2px var(--accent); }
+.serp.is-you .serp__hit { background: #fff6f2; }
+/* A narrow computer frame (tablets): larger text and fewer details */
+@container (min-width: 301px) and (max-width: 520px) {
+  .serp { gap: 3.2cqw; padding: 4.6cqw; font-size: 2.8cqw; }
+  .serp__box { min-height: 8.4cqw; gap: 2cqw; padding: 1.8cqw 3.4cqw; font-size: 3.2cqw; }
+  .serp__box svg { width: 3.3cqw; height: 3.3cqw; }
+  .serp__tabs { display: none; }
+  .serp__res { grid-template-columns: 1.2fr 1fr; gap: 3.6cqw; }
+  .serp__site { gap: 1.8cqw; padding-right: 0; }
+  .serp__site i { width: 5cqw; height: 5cqw; font-size: 2.6cqw; }
+  .serp__site b { font-size: 2.5cqw; }
+  .serp__site small { font-size: 2.2cqw; }
+  .serp__title { margin-top: 1.4cqw; font-size: 3.7cqw; }
+  .serp__hit { margin: -1.8cqw; padding: 1.8cqw; padding-top: 6.2cqw; }
+  .serp__hit p { font-size: 2.6cqw; }
+  .serp__ph:last-child { display: none; }
+  .serp__card > b { font-size: 3.4cqw; }
+  .serp__card > span:not(.serp__you) { font-size: 2.5cqw; }
+  .serp__map { height: 12cqw; }
+  .serp__btns span { padding: 0.8cqw 2cqw; font-size: 2.3cqw; }
+  .serp__btns span:nth-child(2) { display: none; }
+  .serp__you { top: 1.4cqw; right: 1.4cqw; padding: 0.6cqw 1.8cqw; font-size: 2.3cqw; }
+}
+/* In the phone frame: one column, the business profile on top as on a phone */
+@container (max-width: 300px) {
+  .serp { gap: 3.6cqw; padding: 5cqw; font-size: 4.2cqw; }
+  .serp__box { min-height: 11.5cqw; gap: 2.6cqw; padding: 2.4cqw 4cqw; font-size: 4.4cqw; }
+  .serp__box svg { width: 4.4cqw; height: 4.4cqw; }
+  .serp__tabs { gap: 5cqw; padding: 0 1cqw 2.2cqw; font-size: 3.5cqw; }
+  .serp__tabs b { box-shadow: 0 2.4cqw 0 -1.8cqw var(--ink); }
+  .serp__res { grid-template-columns: 1fr; gap: 5cqw; }
+  .serp__card { order: -1; gap: 1cqw; padding-bottom: 3.6cqw; border-radius: 3cqw; }
+  .serp__card > b, .serp__card > span:not(.serp__you), .serp__btns { margin: 0 3.6cqw; }
+  .serp__card > b { margin-top: 2.4cqw; font-size: 4.8cqw; }
+  .serp__card > span:not(.serp__you) { font-size: 3.4cqw; }
+  .serp__map { height: 22cqw; }
+  .serp__map i { width: 6cqw; height: 6cqw; margin: -6cqw 0 0 -3cqw; }
+  .serp__btns { gap: 1.6cqw; margin-top: 1.6cqw; }
+  .serp__btns span { padding: 1cqw 2.4cqw; font-size: 3cqw; }
+  .serp__list { gap: 5cqw; }
+  .serp__hit { margin: -2.4cqw; padding: 2.4cqw; border-radius: 3cqw; }
+  .serp__site { gap: 2.4cqw; padding-right: 20cqw; }
+  .serp__site i { width: 7cqw; height: 7cqw; font-size: 3.4cqw; }
+  .serp__site b { font-size: 3.5cqw; }
+  .serp__site small { font-size: 3.1cqw; }
+  .serp__title { margin-top: 1.6cqw; font-size: 5cqw; }
+  .serp__hit p { margin-top: 1.4cqw; font-size: 3.5cqw; }
+  .serp__ph { gap: 2cqw; }
+  .serp__ph i { height: 2.6cqw; }
+  .serp__ph i:nth-child(2) { height: 3.8cqw; }
+  .serp__you { top: 2.2cqw; right: 2.2cqw; padding: 0.9cqw 2.4cqw; font-size: 3cqw; }
+}
+
 /* ---------- Mobile ---------- */
 /* Second line of two-part headlines wraps as one balanced unit, so no single word hangs alone */
 .h2 .dim, .h2 .hot { display: inline-block; text-wrap: balance; }
@@ -483,17 +607,35 @@ html:not(.motion) .loader { display: none; }
   .contact__links a:not([data-bestil]) { padding: 8px 0; }
 
   /* Sådan virker det: the demo is shown on a phone */
-  .build__fit { padding-top: 104px; gap: 22px; }
+  .build__sticky { padding-top: 90px; }
+  .build__fit { padding: 0 20px 12px; gap: 14px; }
   .build__steps { gap: 12px; }
-  .motion .step:not(.is-on) .step__body p { display: none; }
-  .build__browser-wrap { max-width: 244px; }
+  /* With motion: the five steps as numbers, and only the current one written out */
+  .motion .build__steps { display: grid; grid-template-columns: repeat(5, auto) 1fr; gap: 10px 6px; align-items: center; }
+  .motion .build__steps .kicker { grid-column: 1 / -1; }
+  .motion .step { display: contents; }
+  .motion .step__n { grid-row: 2; width: 36px; height: 28px; min-width: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 13px; color: var(--muted); transition: background .3s, border-color .3s, color .3s; }
+  .motion .step.is-on .step__n { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .motion .step__body { grid-row: 3; grid-column: 1 / -1; min-height: 152px; }
+  .motion .step:not(.is-on) .step__body { display: none; }
+  .step__cta { margin-top: 8px; padding: 11px 18px; }
+  .egen { width: 100%; justify-self: stretch; padding: 10px; border-radius: 20px; gap: 8px; }
+  .egen__lbl { padding: 0 6px; font-size: 12.5px; line-height: 1.3; }
+  .egen__row { width: 100%; flex-wrap: nowrap; }
+  .egen__f { flex: 1 1 0; }
+  .egen__f input { width: 100%; min-height: 40px; padding: 8px 12px; font-size: 16px; }
+  .build__browser-wrap { max-width: 212px; }
   .browser { position: relative; border: 7px solid var(--ink); border-radius: 38px; overflow: hidden; }
   .browser::before { content: ""; position: absolute; top: 7px; left: 50%; width: 64px; height: 18px; margin-left: -32px; border-radius: 999px; background: var(--ink); z-index: 2; }
   .browser__bar { padding: 32px 10px 8px; gap: 6px; }
   .browser__bar .dots3 { display: none; }
   .browser__url { font-size: 11px; padding: 5px 9px; min-height: 24px; }
   .browser__status { font-size: 10px; padding: 4px 8px; }
-  .browser__shot { aspect-ratio: 9 / 16; border-radius: 0; }
+  .browser__shot { aspect-ratio: 9 / 15; border-radius: 0; }
+
+  /* Explainer video: full width, softer corners */
+  .vid { border-radius: 18px; }
+  .vid__lbl { font-size: 15px; }
 
   /* Før og efter: two phones, an old desktop page squeezed in and a new mobile page */
   .ba { aspect-ratio: auto; height: 560px; min-height: 0; max-width: 300px; margin: 0 auto; border: 7px solid var(--ink); border-radius: 40px; }
@@ -563,6 +705,11 @@ html:not(.motion) .loader { display: none; }
   .hero h1 { font-size: min(52px, 13.4vw); }
 }
 /* Short phones: less air in the hero, so the button is on the first screen */
+@media (max-width: 699px) and (max-height: 720px) {
+  .build__sticky { padding-top: 86px; }
+  .build__fit { gap: 12px; }
+  .browser__shot { aspect-ratio: 9 / 14; }
+}
 @media (max-width: 699px) and (max-height: 700px) {
   .hero__in { padding-top: 100px; padding-bottom: 56px; }
   .hero__badge { margin-bottom: 22px; }

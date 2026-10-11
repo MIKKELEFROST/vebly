@@ -11,7 +11,7 @@ index.html            The page
 assets/css/main.css   All styles (colours and type as CSS variables at the top)
 assets/js/content.js  Copy for the lists and pop-ups (included items, add-ons, FAQ, team …)
 assets/js/main.js     Rendering, pop-ups, contact form and all effects
-demo/                 The "Nordvik" sample site that builds itself in "Sådan virker det"
+demo/                 The "Nordvik" sample site that builds itself in "Sådan virker det" (window.__build, window.__set)
 api/contact.js        Vercel function that emails contact-form submissions via Resend
 api/collect.js        Vercel function that forwards analytics events to GA4
 api/meta.js           Vercel function that passes Meta events on with the Conversions API
@@ -93,9 +93,9 @@ Every event carries `page_type` (`forside`, `bestil`, `privatliv`, `referencer`,
 | `web_vitals` | Loading speed: TTFB, FCP, LCP, CLS, INP | `metric_name`, `metric_value` (ms, CLS as a number), `metric_rating` (god/forbedres/daarlig) |
 | `page_not_found` | The 404 page | `link_url` (the missing address) |
 
-**Front page** (`assets/js/main.js`): `generate_lead` (`form_name`, `value`, `currency`, `addons_total`, `receipt`), `form_error`, `addon_add` / `addon_remove` (`addon`, `addons_total`, `source` kort/popup), `addon_view` (a card was on screen), `price_view` (the price was on screen), `popup_open` (`popup`, `popup_type` cmp/inc/addon/ball/team, `popup_name`), `popup_close` (`action` kryds/baggrund/escape/luk-knap/til-kontakt/til-pris, `seconds`), `popup_action`, `faq_open` / `faq_close` (`faq_question`, `faq_index`), `ba_mode` (før/begge/efter), `ba_drag` (`position`), `pit_shake`, `pit_ball_throw` (`ball`), `intro_skip`, `demo_step` (2, 3), `demo_live`.
+**Front page** (`assets/js/main.js`): `generate_lead` (`form_name`, `value`, `currency`, `addons_total`, `receipt`), `form_error`, `addon_add` / `addon_remove` (`addon`, `addons_total`, `source` kort/popup), `addon_view` (a card was on screen), `price_view` (the price was on screen), `popup_open` (`popup`, `popup_type` cmp/inc/addon/ball/team, `popup_name`), `popup_close` (`action` kryds/baggrund/escape/luk-knap/til-kontakt/til-pris, `seconds`), `popup_action`, `faq_open` / `faq_close` (`faq_question`, `faq_index`), `ba_mode` (før/begge/efter), `ba_drag` (`position`), `pit_shake`, `pit_ball_throw` (`ball`), `intro_skip`, `demo_step` (2–5: we build it, online, the search, found), `demo_live`, `demo_personalize` (a field in "Prøv med din egen virksomhed" was used, once per field: `field` branche/by/firmanavn, `fag` as our trade id or andet; never what was typed), `video_start` / `video_progress` (25, 50, 75) / `video_complete` (`video_title`, `video_percent`, `video_duration`, `video_current_time`; only once the explainer video is switched on).
 
-**Bestil en hjemmeside** (`assets/js/bestil.js`): `bestil_open` (`from`, `resumed`), `bestil_step_view` (`step`, `step_name`, `direction`), one event per finished step: `bestil_1_fag` (`fag`), `bestil_2_virksomhed` (`has_year`, `team_size`), `bestil_3_behov` (`functions`, `functions_count`, `has_site`), `bestil_4_stil` (`design`, `theme`, `theme_changed`), `bestil_5_kontakt` (`has_phone`, `has_message`, `contact_method` ring/sms/mail, `contact_time`), all with `seconds`; plus `bestil_step` (the same, as one event), `bestil_choice` (`choice_group` incl. farvetema/kontaktform/kontakttid, `choice`, `choice_action` valgt/fravalgt), `bestil_field` (`field_name`, filled), `bestil_back`, `bestil_submit`, `generate_lead` (`form_name` bestil), `bestil_error`, `bestil_udkast_vist` (`fag`, `design`, `theme`, `view`, `receipt`, `seconds_total`), `bestil_result_change` (`change_type` visning/design/farvetema/baggrund/egne_farver), `bestil_forslag` (a new suggestion: `trigger` knap/mere-farve/mere-enkel/mere-moderne/mere-klassisk/anden-tekst/andre-billeder, `number`, `design`, `theme`), `bestil_forslag_nav` (`direction` frem/tilbage, `number`), `bestil_favorit` (`action` gemt/fjernet, `number`, `design`, `theme`), `bestil_oensker_sendt` (`result`, `has_text`, `favourites`, `suggestions`, `nudges`; never the text), `bestil_draft_open`, `bestil_link_copy`, `bestil_close` (`step` 1–6, `finished`, `seconds_total`).
+**Bestil en hjemmeside** (`assets/js/bestil.js`): `bestil_open` (`from` incl. saadan, `resumed`, `prefilled` ja when trade, name and town came from "Sådan virker det"), `bestil_step_view` (`step`, `step_name`, `direction`), one event per finished step: `bestil_1_fag` (`fag`), `bestil_2_virksomhed` (`has_year`, `team_size`), `bestil_3_behov` (`functions`, `functions_count`, `has_site`), `bestil_4_stil` (`design`, `theme`, `theme_changed`), `bestil_5_kontakt` (`has_phone`, `has_message`, `contact_method` ring/sms/mail, `contact_time`), all with `seconds`; plus `bestil_step` (the same, as one event), `bestil_choice` (`choice_group` incl. farvetema/kontaktform/kontakttid, `choice`, `choice_action` valgt/fravalgt), `bestil_field` (`field_name`, filled), `bestil_back`, `bestil_submit`, `generate_lead` (`form_name` bestil), `bestil_error`, `bestil_udkast_vist` (`fag`, `design`, `theme`, `view`, `receipt`, `seconds_total`), `bestil_result_change` (`change_type` visning/design/farvetema/baggrund/egne_farver), `bestil_forslag` (a new suggestion: `trigger` knap/mere-farve/mere-enkel/mere-moderne/mere-klassisk/anden-tekst/andre-billeder, `number`, `design`, `theme`), `bestil_forslag_nav` (`direction` frem/tilbage, `number`), `bestil_favorit` (`action` gemt/fjernet, `number`, `design`, `theme`), `bestil_oensker_sendt` (`result`, `has_text`, `favourites`, `suggestions`, `nudges`; never the text), `bestil_draft_open`, `bestil_link_copy`, `bestil_close` (`step` 1–6, `finished`, `seconds_total`).
 
 **Customer drafts** (`udkast/_faelles/udkast.js`): `udkast_farve` (`colour` on hand-made drafts, `theme` on instant drafts), `udkast_faerdig_click` (back to webleads.dk), `udkast_bar_close`, `udkast_form_try`. **Cookie box** (`meta-pixel.js`, through a `wl:track` DOM event): `consent_view` (`trigger` automatisk/link), `consent_choice` (`choice` ja/nej, `seconds`). **Referencer:** `reference_filter` (`filter`, `results`).
 
@@ -136,11 +136,29 @@ Without the token the browser pixel still works; only the server copy is skipped
 
 - Team photos: "Kommer snart" placeholders in the team cards and their pop-ups
 - Demo images: empty colour blocks in `demo/index.html` marked with a comment
-- "Før og efter" numbers are labelled as a typical example
+- "Før og efter" numbers are labelled as a typical example (the section is to be replaced by the explainer video)
 
 ## Accessibility and motion
 
-Visitors with "reduce motion" switched on get a static page: no intro curtain, the text is fully visible, the demo shows the finished site and the balls are a clickable grid.
+Visitors with "reduce motion" switched on get a static page: no intro curtain, the text is fully visible, the demo shows the finished site, "Sådan virker det" is not pinned (and has no search animation) and the balls are a clickable grid.
+
+## Sådan virker det
+
+A pinned section (480vh with motion) where scrolling drives five steps: 01 Du fortæller, 02 Vi bygger den (the Nordvik demo in `demo/` builds itself), 03 Du er online (the address is typed and the status goes to Live), 04 Kunden søger (an example search for the trade and town is typed) and 05 Du bliver fundet (the visitor's site and Google profile are marked, with a button to Bestil). Phones get the steps as numbers with only the current one written out, and the demo in a phone frame.
+
+"Prøv med din egen virksomhed" at the top takes a trade (with the Bestil trades as suggestions), a town and a company name. They go straight into the demo (`window.__set` in `demo/demo.js`: name, trade and town; made-up numbers and the review are then marked "Eksempel"), the address bar (a domain made from the name: "Jensen & Søn ApS" → jensen-og-soen.dk), the search and the result. Empty fields fall back to Tømrer, København and Nordvik. The values stay in this browser tab only (sessionStorage `wl-egen`), and the step 05 button opens Bestil with the trade, name and town already filled in. The search page has no search engine logo, and no stars or numbers for the visitor's business.
+
+## Explainer-video
+
+The front page is ready for an explainer video that replaces "Før og efter". It is switched off until there is a video: the section `#video` in `index.html` has `hidden`, and nothing is fetched while it does. To switch it on:
+
+1. Put the files in `assets/video/`: `explainer.mp4` (H.264 and AAC, 1920 × 1080 or 1280 × 720, ideally under 30 MB) and `explainer.jpg` (a still for before it plays, 1600 × 900). For example:
+   `ffmpeg -i input.mov -c:v libx264 -crf 23 -preset slow -vf scale=1920:-2 -c:a aac -b:a 128k -movflags +faststart assets/video/explainer.mp4`
+   `ffmpeg -ss 3 -i assets/video/explainer.mp4 -frames:v 1 -q:v 3 -vf scale=1600:-2 assets/video/explainer.jpg`
+2. In `index.html`: remove `hidden` from `<section class="vid-sec" …>`, set `data-varighed` to the length (e.g. `1:30`, shown on the play button), and add `hidden` to `<section class="ba-sec" …>` ("Før og efter") or delete it.
+3. Optional: Danish subtitles as `assets/video/explainer.da.vtt`, and the `<track>` line in the section un-commented. A vertical video needs `--ar: 9 / 16` on `.vid`.
+
+The video loads and plays on click only (with the browser's own controls after that). Start, 25/50/75 % and the end are tracked (see Tracking).
 
 ## Customer drafts (udkast)
 
