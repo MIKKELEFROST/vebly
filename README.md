@@ -135,7 +135,7 @@ Without the token the browser pixel still works; only the server copy is skipped
 ## Placeholders to replace
 
 - Team photos: "Kommer snart" placeholders in the team cards and their pop-ups
-- Demo images: empty colour blocks in `demo/index.html` marked with a comment
+- Demo images: the trade's example photos from the drafts (`udkast/_faelles/billeder`); a trade without photos shows colour blocks
 - "Før og efter" numbers are labelled as a typical example (the section is to be replaced by the explainer video)
 
 ## Accessibility and motion
@@ -146,7 +146,21 @@ Visitors with "reduce motion" switched on get a static page: no intro curtain, t
 
 A pinned section (480vh with motion) where scrolling drives five steps: 01 Du fortæller, 02 Vi bygger den (the Nordvik demo in `demo/` builds itself), 03 Du er online (the address is typed and the status goes to Live), 04 Kunden søger (an example search for the trade and town is typed) and 05 Du bliver fundet (the visitor's site and Google profile are marked, with a button to Bestil). Phones get the steps as numbers with only the current one written out, and the demo in a phone frame.
 
-"Prøv med din egen virksomhed" at the top takes a trade (with the Bestil trades as suggestions), a town and a company name. They go straight into the demo (`window.__set` in `demo/demo.js`: name, trade and town; made-up numbers and the review are then marked "Eksempel"), the address bar (a domain made from the name: "Jensen & Søn ApS" → jensen-og-soen.dk), the search and the result. Empty fields fall back to Tømrer, København and Nordvik. The values stay in this browser tab only (sessionStorage `wl-egen`), and the step 05 button opens Bestil with the trade, name and town already filled in. The search page has no search engine logo, and no stars or numbers for the visitor's business.
+"Prøv med din egen virksomhed" at the top takes a trade (with the Bestil trades as suggestions), a town and a company name. They go straight into the demo, the address bar (a domain made from the name: "Jensen & Søn ApS" → jensen-og-soen.dk), the search and the result. Empty fields fall back to Tømrer, København and Nordvik. The values stay in this browser tab only (sessionStorage `wl-egen`), and the step 05 button opens Bestil with the trade, name and town already filled in. The search page has no search engine logo, and no stars or numbers for the visitor's business.
+
+The demo is a local business. Without input it is Nordvik, a carpenter in Copenhagen (the static content of `demo/index.html`). With the visitor's own trade, town and name (`window.__set` in `demo/demo.js`) it becomes their local site:
+
+- "Din lokale tømrer i Aarhus", with "på" where Danish says so (på Frederiksberg, på Bornholm)
+- the trade's intro, services, steps, review, opening hours, button texts and example photos, from the draft templates
+- the town throughout, up to six nearby postal districts in the same municipality ("Vi kører i Aarhus og omegn: Brabrand, Åbyhøj, Risskov …"), a review from one of them, and the postal district in the address (8000 Aarhus C)
+- made-up numbers, the review and the photos marked "Eksempel"
+
+The search in step 04–05 uses the same areas: where the customer searches from, the address on the Google profile and the areas in the result. An unknown town gets the town without areas.
+
+The data is fetched the first time someone types, not before:
+
+- `demo/fag.json`, made from `api/_lib/udkast/brancher` by `node scripts/demo/data.mjs`. Run it again after changing a template.
+- `demo/postnumre.json`, Danish postal districts with their municipalities, from PostNord's postal code file as packaged in the npm package dk-postals: `node scripts/demo/data.mjs path/to/postals.csv`.
 
 ## Explainer-video
 

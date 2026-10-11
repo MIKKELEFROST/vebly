@@ -106,7 +106,7 @@
   // Turn on the motion layer before first paint so revealed content never flashes.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
 </script>
-<script type="module" src="assets/js/main.js?v=20261011b"></script>
+<script type="module" src="assets/js/main.js?v=20261011c"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -213,7 +213,7 @@
             </div>
             <div class="step" data-step>
               <div class="step__n">04</div>
-              <div class="step__body"><h3>Kunden søger</h3><p>En kunde søger på Google efter »<span data-egen-q>tømrer københavn</span>«.</p></div>
+              <div class="step__body"><h3>Kunden søger</h3><p>En kunde<span data-egen-sted> på Frederiksberg</span> søger på Google efter »<span data-egen-q>tømrer københavn</span>«.</p></div>
             </div>
             <div class="step" data-step>
               <div class="step__n">05</div>
@@ -239,7 +239,7 @@
                       <div class="serp__hit" data-serp-hit>
                         <div class="serp__site"><i data-serp-ini>N</i><span><b data-serp-navn>Nordvik</b><small data-serp-domain>nordvik.dk</small></span></div>
                         <div class="serp__title" data-serp-title>Tømrer i København | Nordvik</div>
-                        <p data-serp-snip>Tømrer i København og omegn. Ring eller skriv direkte til Nordvik.</p>
+                        <p data-serp-snip>Tømrer i København og omegn, bl.a. Frederiksberg, Nordhavn og Valby. Ring eller skriv direkte til Nordvik.</p>
                         <span class="serp__you">Din side</span>
                       </div>
                       <div class="serp__ph"><i></i><i></i><i></i></div>
@@ -249,6 +249,7 @@
                       <div class="serp__map"><i></i></div>
                       <b data-serp-navn>Nordvik</b>
                       <span data-serp-sted>Tømrer i København</span>
+                      <span data-serp-adr>Havnegade 14, 1058 København K</span>
                       <div class="serp__btns"><span class="is-call">Ring</span><span>Rutevejledning</span><span>Hjemmeside</span></div>
                       <span class="serp__you">Din Google-profil</span>
                     </div>

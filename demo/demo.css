@@ -6,7 +6,9 @@ a { color: var(--ink); text-decoration: none; }
 a:hover { color: var(--green); }
 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--green); }
 .pg { background: var(--bg); min-height: 100vh; overflow-x: clip; }
-.img { width: 100%; height: 100%; }
+.img { position: relative; width: 100%; height: 100%; }
+.img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.img img[hidden] { display: none; }
 
 .hd { max-width: 1240px; margin: 0 auto; padding: 22px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; display: flex; align-items: center; gap: 8px; }
@@ -21,13 +23,16 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
 .hero { max-width: 1240px; margin: 0 auto; padding: 36px 32px 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 56px; align-items: center; }
 .hero__copy { display: flex; flex-direction: column; gap: 28px; }
 .pill { align-self: flex-start; display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--line); padding: 7px 14px 7px 8px; border-radius: 999px; font-size: 14px; font-weight: 500; }
-.pill__tag { background: var(--lime); border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700; }
-.hero h1 { font-weight: 600; font-size: clamp(60px, 7.4vw, 108px); line-height: 0.95; letter-spacing: -0.055em; margin: 0; }
+.pill__tag { display: flex; align-items: center; background: var(--lime); border-radius: 999px; padding: 4px 7px; }
+.pill__tag svg, .badge__ic svg { width: 14px; height: 14px; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; display: block; }
+.badge__ic svg { width: 22px; height: 22px; }
+.hero h1 { font-weight: 600; font-size: clamp(52px, 6.2vw, 96px); line-height: 0.95; letter-spacing: -0.055em; margin: 0; overflow-wrap: break-word; hyphens: auto; }
 .hero h1 em { letter-spacing: -0.03em; }
 .hero__copy > p { font-size: 20px; line-height: 1.55; color: var(--muted); margin: 0; max-width: 480px; text-wrap: pretty; }
 .hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 .cta { background: var(--green); color: #fff; padding: 18px 28px; border-radius: 999px; font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 10px; }
 .cta:hover { background: var(--ink); color: #fff; }
+.cta b { font-weight: inherit; }
 .cta span { width: 24px; height: 24px; border-radius: 50%; background: var(--lime); color: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 13px; }
 .call { padding: 18px 20px; font-weight: 600; font-size: 16px; }
 .proof { display: flex; align-items: center; gap: 14px; padding-top: 6px; }
@@ -49,11 +54,13 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
 .open { position: absolute; right: 24px; top: 24px; background: var(--ink); color: #fff; border-radius: 999px; padding: 10px 16px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
 .open i { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); display: block; }
 
-.logos { max-width: 1240px; margin: 0 auto; padding: 0 32px 90px; }
-.logos__row { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 26px 0; display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; }
-.logos__row span { font-size: 22px; font-weight: 700; letter-spacing: -0.04em; color: #9aa39d; }
-.logos__row .serif { font-family: var(--serif); }
-.logos__row .logos__lbl { font-size: 14px; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+/* The areas around the town (nearby postal districts) */
+.areas { max-width: 1240px; margin: 0 auto; padding: 0 32px 90px; }
+.areas__row { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 0; display: flex; align-items: center; gap: 14px 28px; flex-wrap: wrap; }
+.areas__lbl { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.areas__list { display: flex; flex-wrap: wrap; gap: 8px; }
+.areas__list[hidden] { display: none; }
+.areas__list span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 15px; font-size: 15px; font-weight: 500; }
 
 .services { max-width: 1240px; margin: 0 auto; padding: 20px 32px 100px; }
 .services__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
@@ -133,7 +140,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
   .book { padding: 10px 16px; font-size: 14px; }
   .hero { padding: 12px 18px 48px; gap: 28px; }
   .hero__copy { gap: 18px; }
-  .hero h1 { font-size: 52px; }
+  .hero h1 { font-size: 44px; }
   .hero__copy > p { font-size: 16px; }
   .cta { padding: 14px 20px; font-size: 15px; }
   .call { padding: 14px 8px; font-size: 15px; }
@@ -141,9 +148,10 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
   .badge { left: 12px; bottom: 16px; padding: 12px 14px; border-radius: 16px; }
   .badge__ic { width: 36px; height: 36px; border-radius: 10px; font-size: 16px; }
   .badge b { font-size: 16px; }
-  .logos { padding: 0 18px 48px; }
-  .logos__row { gap: 14px 22px; justify-content: flex-start; }
-  .logos__row span { font-size: 17px; }
+  .areas { padding: 0 18px 48px; }
+  .areas__row { gap: 12px; padding: 18px 0; }
+  .areas__lbl { font-size: 15px; }
+  .areas__list span { font-size: 13px; padding: 6px 11px; }
   .services, .process { padding: 20px 18px 56px; }
   .services__head h2, .process__head h2 { font-size: 38px; }
   .svc-main { min-height: 360px; padding: 24px; }
@@ -167,4 +175,6 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var
 .is-egen .ex { display: inline-block; }
 .ex--stats { grid-column: 1 / -1; justify-self: start; color: #0e1a14; }
 .is-egen [data-kun-demo] { display: none; }
-.is-egen .pill { padding-left: 14px; }
+/* Photos are the trade's example photos: marked on the visitor's own page */
+.ex--foto { position: absolute; left: 14px; bottom: 14px; color: var(--ink); }
+.is-egen .img:not(.has-foto) .ex--foto { display: none; }
