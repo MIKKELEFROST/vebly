@@ -105,8 +105,8 @@
     put('areas', areas.map(a => `<span>${esc(a)}</span>`).join(''));
     L.areas.hidden = !areas.length;
     put('svch', esc(t.ydelserOverskrift)); put('svcby', t.ud ? `I hele ${esc(v.by)}.` : `Lokalt ${by}.`);
-    t.ydelser.forEach(([titel, tekst], n) => { put(`s${n}t`, esc(titel)); put(`s${n}p`, esc(tekst)); });
-    t.trin.forEach(([titel, tekst], n) => { put(`t${n}t`, esc(titel)); put(`t${n}p`, esc(tekst)); });
+    t.ydelser.forEach(([titel, tekst], n) => { put(`s${n}t`, esc(titel)); put(`s${n}p`, fill(tekst)); });
+    t.trin.forEach(([titel, tekst], n) => { put(`t${n}t`, esc(titel)); put(`t${n}p`, fill(tekst)); });
     put('omh', `Vi er lokale ${by},`);
     put('stat1', `kunder ${by}`);
     const [qt, qn, qs] = t.anmeldelse;

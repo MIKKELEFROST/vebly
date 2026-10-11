@@ -35,14 +35,16 @@ for (const file of readdirSync(dir).filter(f => f.endsWith('.json')).sort()) {
     cta: t.cta,
     ctaKort: t.ctaKort,
     ydelserOverskrift: t.ydelserOverskrift,
-    ydelser: t.ydelser.slice(0, 3).map(y => [y.titel, y.tekst]),
-    trin: t.trin.slice(0, 3),
+    ydelser: t.ydelser.slice(0, 3).map(y => [y.titel, by(y.tekst)]),
+    trin: t.trin.slice(0, 3).map(([a, b]) => [a, by(b)]),
     anmeldelse: t.anmeldelser[0].map(by),
     // "Mandag–torsdag 7–16" → "Man–tor 7–16"
     tider: t.tider.slice(0, 2).map(([d, h]) => `${d.replace(/(man|tirs|ons|tors|fre|lør|søn)dag/gi, m => m.slice(0, 3))} ${h.replace(/^E/, 'e')}`).join(' · '),
     billeder: b.hero ? { hero: small(b.hero), svc: small((b.galleri || [])[0] || b.om), quote: small(b.om) } : null
   };
 }
+const left = JSON.stringify(fag).match(/\{\{[A-Z_]+\}\}/);
+if (left) throw new Error(`${left[0]} in a template field the demo shows: add it to scripts/demo/data.mjs`);
 writeFileSync(new URL('demo/fag.json', root), JSON.stringify(fag) + '\n');
 console.log('demo/fag.json:', Object.keys(fag).length, 'trades');
 
