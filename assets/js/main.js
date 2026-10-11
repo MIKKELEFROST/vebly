@@ -312,6 +312,9 @@ const egen = (() => {
   try { const v = JSON.parse(sessionStorage.getItem(KEY) || 'null'); if (v) Object.keys(f).forEach(k => { if (typeof v[k] === 'string') f[k].value = v[k].slice(0, 60); }); } catch (x) { /* fine */ }
 
   const cap = t => t.charAt(0).toLocaleUpperCase('da-DK') + t.slice(1);
+  // "på Frederiksberg", "på Bornholm", but "i Aarhus" (the same list as in demo/demo.js)
+  const PAA = new Set(['frederiksberg', 'amager', 'nørrebro', 'østerbro', 'vesterbro', 'christianshavn', 'islands brygge', 'bornholm', 'fanø', 'mors', 'als', 'ærø', 'samsø', 'langeland', 'lolland', 'falster', 'møn', 'fyn', 'sjælland', 'djursland', 'læsø', 'anholt', 'tåsinge', 'thurø', 'rømø', 'femø', 'fejø', 'orø', 'omø', 'fur', 'venø', 'endelave', 'tunø', 'manø', 'mandø']);
+  const i = by => (PAA.has(by.toLocaleLowerCase('da-DK').trim().replace(/\s+(c|k|n|s|v|ø|nv|nø|sv|sø)$/, '')) ? 'på' : 'i');
   const clean = k => f[k].value.replace(/\s+/g, ' ').trim();
   // The trade as Bestil knows it: one of its templates, else "Andet" with the typed trade
   const fagId = t => { const l = t.toLocaleLowerCase('da-DK'); const row = FAG.find(([id, lab]) => id !== 'generisk' && (lab.toLocaleLowerCase('da-DK') === l || id === l)); return row ? row[0] : ALIAS[l] || (t ? 'generisk' : ''); };
@@ -337,12 +340,23 @@ const egen = (() => {
     if (!motion) $('[data-url]').textContent = v.domain;
     put('[data-egen-q]', v.q); put('[data-serp-navn]', v.navn); put('[data-serp-domain]', v.domain);
     put('[data-serp-ini]', v.navn.charAt(0).toLocaleUpperCase('da-DK'));
-    put('[data-serp-title]', `${v.fag} i ${v.by} | ${v.navn}`); put('[data-serp-sted]', `${v.fag} i ${v.by}`);
-    put('[data-serp-snip]', `${v.fag} i ${v.by} og omegn. Ring eller skriv direkte til ${v.navn}.`);
+    put('[data-serp-title]', `${v.fag} ${i(v.by)} ${v.by} | ${v.navn}`); put('[data-serp-sted]', `${v.fag} ${i(v.by)} ${v.by}`);
     $('[data-demo]').title = `Eksempel på en hjemmeside: ${v.navn}`;
     box.classList.toggle('is-filled', v.egen);
-    try { demo.contentWindow.__set({ navn: v.navn, fag: v.fag, by: v.by, domain: v.domain, egen: v.egen }); } catch (x) { /* the example page is still loading */ }
+    // The example page becomes their local business and answers with the districts around the town,
+    // which the search uses: where the customer searches from, the address and the areas in the result
+    const my = ++seq;
+    let lokal = null;
+    try { lokal = demo.contentWindow.__set({ navn: v.navn, fag: v.fag, fagId: fagId(v.fag), by: v.by, domain: v.domain, egen: v.egen }); } catch (x) { /* the example page is still loading */ }
+    Promise.resolve(lokal).then(l => { if (my === seq) near(v, l); }, () => {});
     return v;
+  };
+  let seq = 0;
+  const near = (v, l) => {
+    const a = (l && l.areas) || [];
+    put('[data-egen-sted]', a[0] ? ` ${i(a[0])} ${a[0]}` : '');
+    put('[data-serp-adr]', (l && l.adr) || v.by);
+    put('[data-serp-snip]', `${v.fag} ${i(v.by)} ${v.by} og omegn${a.length > 2 ? `, bl.a. ${a[0]}, ${a[1]} og ${a[2]}` : ''}. Ring eller skriv direkte til ${v.navn}.`);
   };
   let tm = 0;
   box.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { apply(); try { sessionStorage.setItem(KEY, JSON.stringify(values().raw)); } catch (x) { /* fine */ } }, 120); });
