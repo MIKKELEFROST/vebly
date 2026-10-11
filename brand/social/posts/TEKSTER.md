@@ -160,7 +160,7 @@ Og siden er din. Ingen binding og intet abonnement på selve hjemmesiden.
 
 # Opslag 16–24 (postes automatisk hver anden dag kl. 10.00, 15.–31. oktober)
 
-Ligger i indholdskalenderen med reels samme dag kl. 20.00. Hashtags ligger i kolonnen "Første kommentar", så Make sætter dem i første kommentar i stedet for i teksten.
+Ligger i indholdskalenderen med reels samme dag, også kl. 10.00. Hashtags ligger i kolonnen "Første kommentar", så Make sætter dem i første kommentar i stedet for i teksten.
 17, 19 og 22 er karruseller: slides ligger som JPG i `brand/social/karruseller/`. Emnerne er valgt, så de ikke gentager det, der allerede er på profilen (01–13) eller planlagt (14–15).
 
 ## 16 · Vi laver også content
@@ -266,7 +266,7 @@ Med en webshop kan dine kunder købe gavekort eller produkter direkte på din si
 
 Første kommentar: #gavekort #webshop #hjemmeside #frisør #massage #småvirksomheder #selvstændig #lokalvirksomhed #webleads
 
-## Reels 16–24 (kl. 20.00 samme dag, Instagram og Facebook)
+## Reels 16–24 (kl. 10.00 samme dag som opslaget, Instagram og Facebook)
 
 | Reel | Video | Instagram-tekst |
 |---|---|---|

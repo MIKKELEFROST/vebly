@@ -1,12 +1,12 @@
 # Sociale medier: automatisk indhold
 
-Der postes hver anden dag: et opslag kl. 10.00 og en reel samme dag kl. 20.00. Rytmen fortsætter fra den seneste dato i kalenderen (9., 11., 13. oktober osv.).
+Der postes hver anden dag: et opslag og en reel, begge kl. 10.00. Rytmen fortsætter fra den seneste dato i kalenderen (9., 11., 13. oktober osv.).
 
-**Regel: Vi poster kun mellem kl. 08.00 og 21.00, og kun på hele timer.** Make tjekker kalenderen hver hele time i det tidsrum, så et opslag sat til fx 19.10 ville først gå ud kl. 20.00.
+**Regel: Alt står til kl. 10.00.** Make tjekker kalenderen én gang om dagen kl. 10.00, så noget sat til fx kl. 14.00 ville først gå ud næste dag kl. 10.00. Opslaget står i rækken over reelen, så det går ud først.
 Indholdet lægges i indholdskalenderen i Google Sheets, og Make poster det på Instagram og Facebook.
 
 - Kalender: [Webleads indholdskalender](https://docs.google.com/spreadsheets/d/1Xym5aLyCBlyNdFeZIep-lNPaBD5qZ_40oFXPjhtgQGI/edit), fanen `Kalender`
-- Make: scenariet "Webleads | Indholdskalender → Instagram + Facebook" tjekker kalenderen hver time kl. :00 mellem 08.00 og 21.00 (14 tjek om dagen, 1 credit pr. tjek)
+- Make: scenariet "Webleads | Indholdskalender → Instagram + Facebook" tjekker kalenderen hver dag kl. 10.00 (1 credit for tjekket, plus credits for det, der bliver postet)
 - Medier: skal ligge i repoet under `brand/social/` og være pushet til `main`, så de er offentlige på `https://webleads.dk/brand/social/...` (Instagram kan kun hente fra en offentlig URL)
 
 ## Filer
@@ -59,7 +59,7 @@ Karruseller: skriv "Swipe og se det hele." på Instagram. På Facebook bliver bi
 
 Kolonner: `ID | Dato | Tid | Type | Kanal | Medie-URL | Tekst Instagram | Tekst Facebook | Status | Postet | Post-ID | Note | Tidspunkt (auto) | Første kommentar`
 
-- `Dato` som `2026-10-19`, `Tid` som `19:00`. `Tid` skal være en hel time fra `08:00` til `21:00` (kolonnen har en rulleliste med de tilladte tider).
+- `Dato` som `2026-10-19`, `Tid` som `10:00`. `Tid` skal altid være `10:00`, også for reels (kolonnen har en rulleliste med kun den tid). Skriv den som tekst: `'10:00`.
 - `Type`: `Opslag`, `Karrusel` eller `Reel`. `Kanal`: `Instagram + Facebook` (også for reels; de går ud som reel på begge). `Instagram` eller `Facebook` alene virker også.
 - `Medie-URL`: ét link til et opslag (PNG/JPG) eller en reel (MP4). For en karrusel: 2–10 JPG-links, ét pr. linje i samme celle (Instagram tager kun JPG i karruseller).
 - `Første kommentar` (N): hashtags, som Make poster som første kommentar på Instagram. Lad den være tom, hvis der ikke skal være en kommentar.
