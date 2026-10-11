@@ -10,7 +10,7 @@ import { sendMail, esc, TO, SITE } from './_mail.js';
 const clip = (v, n) => String(v ?? '').trim().slice(0, n);
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // The buttons under "Hvad skal være anderledes?"
-const RETNINGER = { 'mere-farve': 'Mere farve', 'mere-enkel': 'Mere enkel', 'mere-moderne': 'Mere moderne', 'mere-klassisk': 'Mere klassisk', 'anden-tekst': 'Anden tekst' };
+const RETNINGER = { 'mere-farve': 'Mere farve', 'mere-enkel': 'Mere enkel', 'mere-moderne': 'Mere moderne', 'mere-klassisk': 'Mere klassisk', 'anden-tekst': 'Anden tekst', 'andre-billeder': 'Andre billeder' };
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   const a = cleanAnswers(body.svar);
   if (!a.n || !navn || !EMAIL.test(email)) return res.status(400).json({ error: 'Navn, e-mail og virksomhed mangler.' });
   const favoritter = (Array.isArray(body.favoritter) ? body.favoritter : []).slice(0, 6).map(cleanAnswers).filter(f => f.n);
-  const valg = (Array.isArray(body.valg) ? body.valg : []).filter(v => typeof v === 'string' && Object.hasOwn(RETNINGER, v)).slice(0, 5);
+  const valg = (Array.isArray(body.valg) ? body.valg : []).filter(v => typeof v === 'string' && Object.hasOwn(RETNINGER, v)).slice(0, 6);
   const set = Math.min(99, Math.max(1, Number.parseInt(body.forslag, 10) || 1));
 
   const beskriv = f => `${DESIGN_NAVNE[f.s]} · ${colours(f)} · "${headline(f)}"`;

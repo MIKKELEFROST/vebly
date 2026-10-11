@@ -153,5 +153,39 @@
       "Konsulent"
     ]
   ],
-  "schemaType": "AccountingService"
+  "schemaType": "AccountingService",
+  "projekter": [
+    [
+      "Årsregnskab",
+      "{{BY}}",
+      "ApS"
+    ],
+    [
+      "Bogføring",
+      "{{BY}}",
+      "Løbende"
+    ],
+    [
+      "Rådgivning",
+      "{{BY}}",
+      "Opstart af virksomhed"
+    ]
+  ],
+  "billeder": [
+    {
+      "hero": "/udkast/_faelles/billeder/revisor/hero-1.webp",
+      "om": "/udkast/_faelles/billeder/revisor/om-1.webp",
+      "hold": "/udkast/_faelles/billeder/revisor/om-2.webp",
+      "galleri": [
+        "/udkast/_faelles/billeder/revisor/projekt-1.webp",
+        "/udkast/_faelles/billeder/revisor/projekt-2.webp",
+        "/udkast/_faelles/billeder/revisor/projekt-3.webp"
+      ]
+    },
+    {
+      "hero": "/udkast/_faelles/billeder/revisor/hero-2.webp",
+      "om": "/udkast/_faelles/billeder/revisor/om-2.webp",
+      "hold": "/udkast/_faelles/billeder/revisor/om-1.webp"
+    }
+  ]
 }
