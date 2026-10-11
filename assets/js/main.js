@@ -352,7 +352,7 @@ const egen = (() => {
     const k = e.target.dataset.egen; if (!k || told.has(k) || !clean(k)) return;
     told.add(k);
     const id = fagId(clean('fag'));
-    track('demo_personalize', { field: { fag: 'branche', by: 'by', navn: 'firmanavn' }[k], fag: id === 'generisk' ? 'andet' : id || 'ikke-valgt' });
+    track('demo_personalize', { field_name: { fag: 'branche', by: 'by', navn: 'firmanavn' }[k], fag: id === 'generisk' ? 'andet' : id || 'ikke-valgt' });
   });
   // Enter moves on to the next field, and closes the keyboard after the last one
   box.addEventListener('keydown', e => {
