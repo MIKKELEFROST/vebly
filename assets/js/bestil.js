@@ -152,7 +152,7 @@ const VIEWS = [
     + `<div class="bx__other" data-url-field${S.kontakt.side === 'ja' ? '' : ' hidden'}>${field('kontakt.url', 'Adressen på din nuværende side', 'placeholder="Fx minside.dk" maxlength="200" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false"', true)}<p class="bx__note">Vi flytter den gerne for dig.</p></div>`,
 
   () => head(4, 'Vælg et udtryk.', 'Det er kun et udgangspunkt. Du kan prøve andre farver og design, når du ser din skitse.')
-    + `<div class="bx__designs" role="group" aria-label="Design">${DESIGNS.map(([v, l, d]) => { const on = S.svar.s === v; return `<button type="button" class="bx__design${on ? ' is-on' : ''}" data-act="design" data-v="${v}" aria-pressed="${on}"><img src="/assets/bestil/design-${v}.jpg?v=2" alt="" width="640" height="400" loading="lazy"><b>${l}</b><span>${d}</span></button>`; }).join('')}</div>`
+    + `<div class="bx__designs" role="group" aria-label="Design">${DESIGNS.map(([v, l, d]) => { const on = S.svar.s === v; return `<button type="button" class="bx__design${on ? ' is-on' : ''}" data-act="design" data-v="${v}" aria-pressed="${on}"><img src="/assets/bestil/design-${v}.jpg?v=3" alt="" width="640" height="400" loading="lazy"><b>${l}</b><span>${d}</span></button>`; }).join('')}</div>`
     + `<span class="bx__lbl">Vælg farver</span>${farveVaelger('trin')}`,
 
   () => head(5, 'Hvor skal vi sende din skitse?', 'Du ser den med det samme. Bagefter kontakter vi dig og gør den færdig sammen med dig.')
