@@ -153,5 +153,39 @@
       "Idrætsskade"
     ]
   ],
-  "schemaType": "Physiotherapy"
+  "schemaType": "Physiotherapy",
+  "projekter": [
+    [
+      "Genoptræning af knæ",
+      "{{BY}}",
+      "Efter operation"
+    ],
+    [
+      "Behandling af ryg",
+      "{{BY}}",
+      "Manuel behandling"
+    ],
+    [
+      "Træningssal",
+      "{{BY}}",
+      "Hold og individuel træning"
+    ]
+  ],
+  "billeder": [
+    {
+      "hero": "/udkast/_faelles/billeder/fysioterapeut/hero-1.webp",
+      "om": "/udkast/_faelles/billeder/fysioterapeut/om-1.webp",
+      "hold": "/udkast/_faelles/billeder/fysioterapeut/om-2.webp",
+      "galleri": [
+        "/udkast/_faelles/billeder/fysioterapeut/projekt-1.webp",
+        "/udkast/_faelles/billeder/fysioterapeut/projekt-2.webp",
+        "/udkast/_faelles/billeder/fysioterapeut/projekt-3.webp"
+      ]
+    },
+    {
+      "hero": "/udkast/_faelles/billeder/fysioterapeut/hero-2.webp",
+      "om": "/udkast/_faelles/billeder/fysioterapeut/om-2.webp",
+      "hold": "/udkast/_faelles/billeder/fysioterapeut/om-1.webp"
+    }
+  ]
 }

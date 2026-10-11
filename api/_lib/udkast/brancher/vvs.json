@@ -195,5 +195,25 @@
   "fradrag": [
     "Fradrag på varmepumpe og reparationer",
     "Installation af varmepumpe og en lang række reparationer i hjemmet giver håndværkerfradrag for arbejdslønnen."
+  ],
+  "billeder": [
+    {
+      "hero": "/udkast/_faelles/billeder/vvs/hero-1.webp",
+      "om": "/udkast/_faelles/billeder/vvs/om-1.webp",
+      "hold": "/udkast/_faelles/billeder/vvs/om-2.webp",
+      "galleri": [
+        "/udkast/_faelles/billeder/vvs/projekt-1.webp",
+        "/udkast/_faelles/billeder/vvs/projekt-2.webp",
+        "/udkast/_faelles/billeder/vvs/projekt-3.webp",
+        "/udkast/_faelles/billeder/vvs/projekt-4.webp",
+        "/udkast/_faelles/billeder/vvs/projekt-5.webp",
+        "/udkast/_faelles/billeder/vvs/projekt-6.webp"
+      ]
+    },
+    {
+      "hero": "/udkast/_faelles/billeder/vvs/hero-2.webp",
+      "om": "/udkast/_faelles/billeder/vvs/om-2.webp",
+      "hold": "/udkast/_faelles/billeder/vvs/om-1.webp"
+    }
   ]
 }

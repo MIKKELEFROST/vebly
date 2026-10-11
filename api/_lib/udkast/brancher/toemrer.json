@@ -195,5 +195,25 @@
   "fradrag": [
     "Brug håndværkerfradraget",
     "Arbejdslønnen ved blandt andet efterisolering, vinduer og reparation af tag giver fradrag. Vi hjælper dig med, hvad der kan trækkes fra."
+  ],
+  "billeder": [
+    {
+      "hero": "/udkast/_faelles/billeder/toemrer/hero-1.webp",
+      "om": "/udkast/_faelles/billeder/toemrer/om-1.webp",
+      "hold": "/udkast/_faelles/billeder/toemrer/om-2.webp",
+      "galleri": [
+        "/udkast/_faelles/billeder/toemrer/projekt-1.webp",
+        "/udkast/_faelles/billeder/toemrer/projekt-2.webp",
+        "/udkast/_faelles/billeder/toemrer/projekt-3.webp",
+        "/udkast/_faelles/billeder/toemrer/projekt-4.webp",
+        "/udkast/_faelles/billeder/toemrer/projekt-5.webp",
+        "/udkast/_faelles/billeder/toemrer/projekt-6.webp"
+      ]
+    },
+    {
+      "hero": "/udkast/_faelles/billeder/toemrer/hero-2.webp",
+      "om": "/udkast/_faelles/billeder/toemrer/om-2.webp",
+      "hold": "/udkast/_faelles/billeder/toemrer/om-1.webp"
+    }
   ]
 }

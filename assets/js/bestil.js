@@ -27,14 +27,14 @@ const DESIGNS = [[1, 'Klassisk', 'Tydelig og tryg'], [4, 'Mosaik', 'Bløde felte
 const KANALER = [['ring', 'Ring til mig'], ['sms', 'Send en sms'], ['mail', 'Skriv en mail']];
 const TIDER = [['hurtigst', 'Hurtigst muligt'], ['formiddag', 'Formiddag'], ['eftermiddag', 'Eftermiddag'], ['aften', 'Aften']];
 // "Hvad skal være anderledes?": each steers the next suggestion
-const RETNINGER = [['mere-farve', 'Mere farve'], ['mere-enkel', 'Mere enkel'], ['mere-moderne', 'Mere moderne'], ['mere-klassisk', 'Mere klassisk'], ['anden-tekst', 'Anden tekst']];
+const RETNINGER = [['mere-farve', 'Mere farve'], ['mere-enkel', 'Mere enkel'], ['mere-moderne', 'Mere moderne'], ['mere-klassisk', 'Mere klassisk'], ['anden-tekst', 'Anden tekst'], ['andre-billeder', 'Andre billeder']];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const KEY = 'wl-bestil';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const wait = ms => new Promise(r => setTimeout(r, ms));
 // t colour theme ("eget" = own colours c and ac), g background tone, o headline (0–2)
-const blank = () => ({ step: 0, svar: { b: '', f: '', n: '', by: '', a: '', m: '', x: [], s: 1, t: '', c: '', ac: '', g: '', o: 0 }, kontakt: { navn: '', email: '', tlf: '', besked: '', side: '', url: '', kanal: '', tid: '' } });
+const blank = () => ({ step: 0, svar: { b: '', f: '', n: '', by: '', a: '', m: '', x: [], s: 1, t: '', c: '', ac: '', g: '', o: 0, i: 0 }, kontakt: { navn: '', email: '', tlf: '', besked: '', side: '', url: '', kanal: '', tid: '' } });
 
 let S = blank();
 try {
@@ -268,7 +268,7 @@ function onClick(e) {
     case 'next': return next();
     case 'fag': {
       // A new trade starts from its own colours and headline
-      Object.assign(S.svar, { b: v, t: '', c: '', ac: '', g: '', o: 0 });
+      Object.assign(S.svar, { b: v, t: '', c: '', ac: '', g: '', o: 0, i: 0 });
       const other = body.querySelector('[data-other]');
       other.hidden = v !== 'generisk';
       if (v !== 'generisk') { S.svar.f = ''; other.querySelector('input').value = ''; }
@@ -451,10 +451,10 @@ const KONTAKT = {
 const TID_TEKST = { formiddag: 'om formiddagen', eftermiddag: 'om eftermiddagen', aften: 'om aftenen' };
 const contactWhen = () => `Inden for få timer på hverdage.${TID_TEKST[S.kontakt.tid] ? ` Du har bedt om at blive kontaktet ${TID_TEKST[S.kontakt.tid]}.` : ''}`;
 
-// The suggestions shown so far: each is a design, colours and a headline
-const snap = () => ({ s: S.svar.s, t: tema(), c: S.svar.c, ac: S.svar.ac, g: S.svar.g, o: S.svar.o || 0 });
+// The suggestions shown so far: each is a design, colours, a headline and a set of example photos
+const snap = () => ({ s: S.svar.s, t: tema(), c: S.svar.c, ac: S.svar.ac, g: S.svar.g, o: S.svar.o || 0, i: S.svar.i || 0 });
 const keep = () => { S.forslag[S.fi] = snap(); };
-const same = (x, y) => ['s', 't', 'g', 'o'].every(k => (x[k] || '') === (y[k] || '')) && (x.t !== 'eget' || (x.c === y.c && x.ac === y.ac));
+const same = (x, y) => ['s', 't', 'g', 'o', 'i'].every(k => (x[k] || '') === (y[k] || '')) && (x.t !== 'eget' || (x.c === y.c && x.ac === y.ac));
 const pick = a => a[Math.floor(Math.random() * a.length)];
 const tagged = tag => TEMA_IDS.filter(id => THEMES[id].tags.includes(tag));
 
@@ -462,6 +462,8 @@ function newSuggestion(dir) {
   const cur = snap();
   let f = null;
   if (dir === 'anden-tekst') f = { ...cur, o: (cur.o + 1) % 3 };
+  // Every trade with example photos has two sets of them
+  else if (dir === 'andre-billeder') f = { ...cur, i: (cur.i + 1) % 2 };
   else {
     for (let i = 0; i < 30; i++) {
       // Mostly the trade's own themes; "Mere …" steers the design, the colours and the background
@@ -469,8 +471,8 @@ function newSuggestion(dir) {
         : dir === 'mere-enkel' ? { s: 5, t: pick(tagged('rolig')), g: 'lys' }
         : dir === 'mere-moderne' ? { s: pick([4, 5]), t: pick(tagged('moderne')), g: '' }
         : dir === 'mere-klassisk' ? { s: 1, t: pick(tagged('klassisk')), g: '' }
-        : { s: pick([1, 4, 5]), t: pick(Math.random() < 0.65 ? rec() : TEMA_IDS), g: '', o: pick([0, 1, 2]) };
-      f = { c: '', ac: '', o: cur.o, ...f };
+        : { s: pick([1, 4, 5]), t: pick(Math.random() < 0.65 ? rec() : TEMA_IDS), g: '', o: pick([0, 1, 2]), i: S.svar.b === 'generisk' ? 0 : pick([0, 1]) };
+      f = { c: '', ac: '', o: cur.o, i: cur.i, ...f };
       if (!S.forslag.some(x => same(x, f))) break;
     }
   }
@@ -515,7 +517,7 @@ function showResult() {
       <button type="button" class="bx__btn bx__fav" data-act="fav" aria-pressed="false"><span data-heart aria-hidden="true">♡</span> <span data-fav-t>Gem som favorit</span></button>
     </div>
     <div class="bx__nudge"><span class="bx__lbl bx__lbl--sm">Hvad skal være anderledes?</span>
-      <div class="bx__chips bx__chips--sm" role="group" aria-label="Hvad skal være anderledes?">${RETNINGER.map(([v, l]) => `<button type="button" class="bx__chip" data-act="nyt" data-v="${v}">${esc(l)}</button>`).join('')}</div>
+      <div class="bx__chips bx__chips--sm" role="group" aria-label="Hvad skal være anderledes?">${RETNINGER.filter(([v]) => v !== 'andre-billeder' || S.svar.b !== 'generisk').map(([v, l]) => `<button type="button" class="bx__chip" data-act="nyt" data-v="${v}">${esc(l)}</button>`).join('')}</div>
     </div>
     <div class="bx__links"><a data-open target="_blank" rel="noopener">Åbn i nyt vindue ↗</a><button type="button" data-act="copy">Kopiér link</button></div>
     <section class="bx__wish" aria-labelledby="bx-wish">

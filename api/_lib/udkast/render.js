@@ -33,10 +33,19 @@ const DESIGNS = {
   5: '\n<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">\n<link rel="stylesheet" href="/udkast/_faelles/design-5.css">'
 };
 export const DESIGN_NUMRE = Object.keys(DESIGNS).map(Number);
+// Example photos made for the trades: <navn>.webp (large, width below) and <navn>-480.webp.
+// sizes follows the layout: hero and about photo take half the screen from ~920 px, the gallery a third.
+const EGNE_FOTOS = '/udkast/_faelles/billeder/';
+const FOTO = {
+  hero: { w: 896, sizes: '(min-width: 920px) 50vw, 100vw' },
+  om: { w: 960, sizes: '(min-width: 920px) 50vw, 100vw' },
+  galleri: { w: 960, sizes: '(min-width: 861px) 33vw, 50vw' }
+};
 
 // data: the customer fields (branche, slug, navn, kort, by, omraader, tlf, email, adresse, cvr, aar,
 //       opgaver, ansatte, farve, design, …) plus optional overrides of any trade field.
-//       Optional: tema, accent and tone (colours), billedsaet (which set of example photos).
+//       Optional: tema, accent and tone (colours), billedsaet (which set of example photos;
+//       counts round, so any number picks one of the sets).
 // opts.link(page): the address of a page in this draft (default /<slug>-<page>)
 // opts.knap: HTML for the button in the Webleads bar at the bottom (default: "Giv feedback" by e-mail)
 // opts.farver(page): HTML for the colour choices in that bar (default: the customer's colour and ALT)
@@ -63,9 +72,16 @@ export function renderDraft(data, page, opts = {}) {
   if (!(design in DESIGNS)) throw new Error('design skal være 1, 4 eller 5');
   const pal = palette({ t: k.tema, c: k.farve, ac: k.accent, g: k.tone }, Number(design), k.farve);
 
-  // Example photos for the trade (billeder in the trade file), else a placeholder for the customer's own
-  const saet = (k.billeder || [])[Number(k.billedsaet) || 0] || (k.billeder || [])[0] || {};
-  const foto = (src, label) => (src ? `<img src="${esc(src)}" alt="" loading="lazy" decoding="async"><span class="ph__ex">Eksempel på billede</span>` : `<span>${esc(label)}</span>`);
+  // Example photos for the trade (billeder in the trade file), else a placeholder for the customer's own.
+  // billedsaet picks a set; what that set leaves out (e.g. the gallery) comes from the first set.
+  const saet = { ...(k.billeder || [])[0], ...(k.billeder || [])[(Number(k.billedsaet) || 0) % ((k.billeder || []).length || 1)] };
+  const foto = (src, label, slot) => {
+    if (!src) return `<span>${esc(label)}</span>`;
+    // Our own example photos (udkast/_faelles/billeder/) also exist 480 px wide, for phones
+    const s = String(src), own = s.startsWith(EGNE_FOTOS) && s.endsWith('.webp');
+    const srcset = own ? ` srcset="${esc(s.replace(/\.webp$/, '-480.webp'))} 480w, ${esc(s)} ${FOTO[slot].w}w" sizes="${FOTO[slot].sizes}"` : '';
+    return `<img src="${esc(s)}"${srcset} alt="" ${slot === 'hero' ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"><span class="ph__ex">Eksempel på billede</span>`;
+  };
 
   const vars = {
     NAVN: k.navn, KORT: tokens.KORT, BOGSTAV: tokens.KORT[0], SLUG: k.slug, FAG: k.fag, BY: k.by,
@@ -91,7 +107,7 @@ export function renderDraft(data, page, opts = {}) {
     DESIGN_KLASSE: 'd' + design, DESIGN_LINKS: DESIGNS[design],
     HEADER_LINK: book ? esc(link('kontakt')) : `tel:${tel}`,
     FARVE_URL: encodeURIComponent(pal.c), KORT_URL: encodeURIComponent(tokens.KORT),
-    HERO_FOTO: foto(saet.hero, 'Jeres billede her'), OM_FOTO: foto(saet.om, 'Billede af jer'), HOLD_FOTO: foto(saet.hold || saet.om, 'Billede af holdet'),
+    HERO_FOTO: foto(saet.hero, 'Jeres billede her', 'hero'), OM_FOTO: foto(saet.om, 'Billede af jer', 'om'), HOLD_FOTO: foto(saet.hold || saet.om, 'Billede af holdet', 'om'),
     EKSTRA_HEAD: opts.head || '',
     UDKAST_KNAP: opts.knap || `<a href="mailto:hej@webleads.dk?subject=Udkast%20til%20${encodeURIComponent(tokens.KORT)}">Giv feedback</a>`,
     TRUST: k.trust.map(t => `<div><i>✓</i>${esc(t)}</div>`).join(''),
@@ -104,7 +120,7 @@ export function renderDraft(data, page, opts = {}) {
     FAQ: k.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(''),
     ANMELDELSER: k.anmeldelser.map(([t, n, s]) => `<figure class="review"><b class="stars" aria-label="5 ud af 5 stjerner">★★★★★</b><blockquote>${esc(t)}</blockquote><figcaption><strong>${esc(n)}</strong>${esc(s)}</figcaption></figure>`).join(''),
     TIDER_TABEL: k.tider.map(([d, t]) => `<tr><td>${esc(d)}</td><td>${esc(t)}</td></tr>`).join(''),
-    PROJEKTER: (k.projekter || [['Projekt', k.by, ''], ['Projekt', k.by, ''], ['Projekt', k.by, '']]).map(([t, sted, x], i) => `<figure><div class="ph" role="img" aria-label="${esc(t)} i ${esc(sted)} udført af ${esc(tokens.KORT)}">${foto((saet.galleri || [])[i], 'Billede af opgaven')}</div><figcaption><b>${esc(t)}</b><span>${esc(sted)}${x ? ' · ' + esc(x) : ''}</span></figcaption></figure>`).join(''),
+    PROJEKTER: (k.projekter || [['Projekt', k.by, ''], ['Projekt', k.by, ''], ['Projekt', k.by, '']]).map(([t, sted, x], i) => `<figure><div class="ph" role="img" aria-label="${esc(t)} i ${esc(sted)} udført af ${esc(tokens.KORT)}">${foto((saet.galleri || [])[i], 'Billede af opgaven', 'galleri')}</div><figcaption><b>${esc(t)}</b><span>${esc(sted)}${x ? ' · ' + esc(x) : ''}</span></figcaption></figure>`).join(''),
     MEDLEMSKABER: k.medlemskaber && k.medlemskaber.length ? `<div class="members"><span>Medlem af</span>${k.medlemskaber.map(m => `<b>${esc(m)}</b>`).join('')}</div>` : '',
     FRADRAG: k.fradrag ? `<div class="fradrag"><i>Fradrag</i><div><b>${esc(k.fradrag[0])}</b><p>${esc(k.fradrag[1])}</p></div></div>` : '',
     SCHEMA: '',
