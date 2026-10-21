@@ -1,8 +1,10 @@
 # Sociale medier: automatisk indhold
 
-Der postes hver anden dag: et opslag og en reel, begge kl. 10.00. Rytmen fortsætter fra den seneste dato i kalenderen (9., 11., 13. oktober osv.).
+Der postes én gang om ugen, tirsdag kl. 10.00, og opslag og reel skiftes. Opslagsugerne er hver anden tirsdag regnet fra 27. oktober 2026 (27/10, 10/11, 24/11 osv.), og reel-ugerne er tirsdagene imellem.
+Hvert nummer har et opslag (eller en karrusel) og en reel med samme budskab. Opslag-NN går ud i en opslagsuge, og reel-NN går ud 3 uger (21 dage) senere. Så kommer samme emne aldrig to uger i træk, og opslagene går ud i nummerorden, så farverne i gitteret passer.
+En reel-uge uden reel springes over. Det gælder 12. januar 2027, fordi reel 24 om gavekort er rykket frem til 3. november, så den kommer før jul.
 
-**Regel: Alt står til kl. 10.00.** Make tjekker kalenderen én gang om dagen kl. 10.00, så noget sat til fx kl. 14.00 ville først gå ud næste dag kl. 10.00. Opslaget står i rækken over reelen, så det går ud først.
+**Regel: Alt står til kl. 10.00.** Make tjekker kalenderen én gang om dagen kl. 10.00, så noget sat til fx kl. 14.00 ville først gå ud næste dag kl. 10.00.
 Indholdet lægges i indholdskalenderen i Google Sheets, og Make poster det på Instagram og Facebook.
 
 - Kalender: [Webleads indholdskalender](https://docs.google.com/spreadsheets/d/1Xym5aLyCBlyNdFeZIep-lNPaBD5qZ_40oFXPjhtgQGI/edit), fanen `Kalender`
@@ -32,7 +34,7 @@ node scripts/social/render-reel.mjs scripts/social/reels/story-13-navn.html 9  #
 - Byg altid videre på en eksisterende skabelon: samme CSS, fonte (Bricolage Grotesque 800 til overskrifter, DM Sans til tekst), logo og bundlinje med `webleads.dk`.
 - Farver: orange `#e0552b`, sort `#111`, sand `#f2ede4`. Aldrig andre baggrunde.
 - Farverækkefølge (gitteret danner diagonaler): opslag nr. `n` får farven `["orange","black","sand"][((n-1)%3 - floor((n-1)/3)) mod 3]`.
-  13 sand, 14 orange, 15 sort · 16 sort, 17 sand, 18 orange · 19 orange, 20 sort, 21 sand · og så forfra.
+  13 sand, 14 orange, 15 sort · 16 sort, 17 sand, 18 orange · 19 orange, 20 sort, 21 sand · og så forfra. Derfor skal opslagene gå ud i nummerorden.
 - Reels: overskriften står der fra første billede (ingen animation på `.line`), resten animerer ind (`a-fade`, `a-pop`), slut med CTA og logo. 8–10 sek.
 - Korte sætninger, dansk, du-form. Ingen tankestreger som pynt. Ingen emojis i billederne.
 
@@ -52,14 +54,15 @@ Opfind aldrig kunder, anmeldelser, resultater, tal eller cases. Referencesiden e
 Instagram: krog i første linje, 3–6 korte linjer og CTA "↓ Gratis tilbud via linket i bio." Ingen hashtags i teksten.
 Første kommentar (kolonne N): 5–9 hashtags (altid `#webleads`). Make sætter dem som første kommentar på Instagram, lige efter opslaget.
 Facebook: samme tekst, men CTA med klikbart link `https://webleads.dk/?utm_source=facebook&utm_medium=social&utm_campaign=opslag` (+ `#kontakt`, `#pris`, `#tilvalg` eller `#teamet`) og 2–3 hashtags i selve teksten.
-Reels: kortere tekst end opslaget samme dag, samme CTA som Instagram. Facebook-teksten bruger `utm_campaign=reel`.
+Reels: kortere tekst end opslaget med samme nummer, samme CTA som Instagram. Facebook-teksten bruger `utm_campaign=reel`.
 Karruseller: skriv "Swipe og se det hele." på Instagram. På Facebook bliver billederne vist som et album, så skriv "Se dem alle på billederne." i stedet.
 
 ## Kalenderen
 
 Kolonner: `ID | Dato | Tid | Type | Kanal | Medie-URL | Tekst Instagram | Tekst Facebook | Status | Postet | Post-ID | Note | Tidspunkt (auto) | Første kommentar`
 
-- `Dato` som `2026-10-19`, `Tid` som `10:00`. `Tid` skal altid være `10:00`, også for reels (kolonnen har en rulleliste med kun den tid). Skriv den som tekst: `'10:00`.
+- Én ting pr. tirsdag. Et nyt nummer giver to rækker: `opslag-NN` på opslagsugens tirsdag og `reel-NN` 21 dage senere.
+- `Dato` som `2026-11-10` (altid en tirsdag, uden apostrof, så den bliver en dato, som kolonne M regner med), `Tid` som `10:00`. `Tid` skal altid være `10:00`, også for reels (kolonnen har en rulleliste med kun den tid). Skriv den som tekst: `'10:00`.
 - `Type`: `Opslag`, `Karrusel` eller `Reel`. `Kanal`: `Instagram + Facebook` (også for reels; de går ud som reel på begge). `Instagram` eller `Facebook` alene virker også.
 - `Medie-URL`: ét link til et opslag (PNG/JPG) eller en reel (MP4). For en karrusel: 2–10 JPG-links, ét pr. linje i samme celle (Instagram tager kun JPG i karruseller).
 - `Første kommentar` (N): hashtags, som Make poster som første kommentar på Instagram. Lad den være tom, hvis der ikke skal være en kommentar.

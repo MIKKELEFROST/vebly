@@ -158,9 +158,9 @@ Og siden er din. Ingen binding og intet abonnement på selve hjemmesiden.
 
 ↓ Gratis tilbud via linket i bio.
 
-# Opslag 16–24 (postes automatisk hver anden dag kl. 10.00, 15.–31. oktober)
+# Opslag 16–24 (16–19 er postet 15.–21. oktober, 20–24 postes automatisk om tirsdagen kl. 10.00 frem til 22. december)
 
-Ligger i indholdskalenderen med reels samme dag, også kl. 10.00. Hashtags ligger i kolonnen "Første kommentar", så Make sætter dem i første kommentar i stedet for i teksten.
+Ligger i indholdskalenderen. 16–19 gik ud sammen med deres reel samme dag. Fra 27. oktober går der én ting ud om ugen, og opslag og reel skiftes (se `scripts/social/README.md`). Hashtags ligger i kolonnen "Første kommentar", så Make sætter dem i første kommentar i stedet for i teksten.
 17, 19 og 22 er karruseller: slides ligger som JPG i `brand/social/karruseller/`. Emnerne er valgt, så de ikke gentager det, der allerede er på profilen (01–13) eller planlagt (14–15).
 
 ## 16 · Vi laver også content
@@ -266,7 +266,9 @@ Med en webshop kan dine kunder købe gavekort eller produkter direkte på din si
 
 Første kommentar: #gavekort #webshop #hjemmeside #frisør #massage #småvirksomheder #selvstændig #lokalvirksomhed #webleads
 
-## Reels 16–24 (kl. 10.00 samme dag som opslaget, Instagram og Facebook)
+## Reels 16–24 (kl. 10.00, Instagram og Facebook)
+
+16–19 gik ud samme dag som opslaget. 20–23 går ud om tirsdagen 3 uger efter opslaget. 24 om gavekort går ud 3. november, før opslaget, så den kommer før jul.
 
 | Reel | Video | Instagram-tekst |
 |---|---|---|
