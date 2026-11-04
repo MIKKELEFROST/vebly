@@ -10,7 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Sans:opsz,wght@9..40,500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <!--
-  Animated desktop background: the Webleads app icon as a glossy tile floating in warm light.
+  Animated desktop background: the Webleads app icon as a glossy tile. It hops and spins, lands with
+  ripples, redraws its arrow, and sparks rise past it while dots circle it.
   Made for a 16" MacBook Pro (3456 × 2234) and scaled to fill any screen. Show it with an app that
   uses a web page as the wallpaper, such as Plash.
   It follows the Mac's light or dark mode. In the address: ?tema=lys or ?tema=moerk fixes the look,
@@ -20,24 +21,27 @@
 <style>
   :root {
     --bg: linear-gradient(to bottom right, #ffe3d4 0%, #f6ece3 50%, #efd9c9 100%);
-    --b1: rgba(255,255,255,.75); --b2: rgba(240,120,80,.30); --b3: rgba(224,85,43,.18);
+    --b1: rgba(255,255,255,.80); --b2: rgba(240,120,80,.34); --b3: rgba(224,85,43,.22);
     --sh1: rgba(120,45,20,.42); --sh2: rgba(110,35,15,.30);
     --ink: #111111; --sub: rgba(17,17,17,.62); --small: rgba(17,17,17,.42);
     --edge: #b43a18; --glow: 0 0 0 transparent;
+    --p1: #e0552b; --p2: #ffffff; --ring: rgba(224,85,43,.30); --rp: rgba(224,85,43,.45);
   }
   @media (prefers-color-scheme: dark) { :root:not([data-tema="lys"]) {
     --bg: linear-gradient(to bottom right, #1d1714 0%, #120f0e 55%, #0c0b0a 100%);
-    --b1: rgba(255,170,130,.10); --b2: rgba(224,85,43,.30); --b3: rgba(224,85,43,.12);
+    --b1: rgba(255,170,130,.12); --b2: rgba(224,85,43,.34); --b3: rgba(224,85,43,.16);
     --sh1: rgba(224,85,43,.38); --sh2: rgba(0,0,0,.55);
     --ink: #f4efe8; --sub: rgba(244,239,232,.62); --small: rgba(244,239,232,.40);
     --edge: #9e3214; --glow: 0 0 160px rgba(224,85,43,.35);
+    --p1: #ff7a48; --p2: #f2ede4; --ring: rgba(255,140,100,.30); --rp: rgba(255,120,80,.50);
   } }
   :root[data-tema="moerk"] {
     --bg: linear-gradient(to bottom right, #1d1714 0%, #120f0e 55%, #0c0b0a 100%);
-    --b1: rgba(255,170,130,.10); --b2: rgba(224,85,43,.30); --b3: rgba(224,85,43,.12);
+    --b1: rgba(255,170,130,.12); --b2: rgba(224,85,43,.34); --b3: rgba(224,85,43,.16);
     --sh1: rgba(224,85,43,.38); --sh2: rgba(0,0,0,.55);
     --ink: #f4efe8; --sub: rgba(244,239,232,.62); --small: rgba(244,239,232,.40);
     --edge: #9e3214; --glow: 0 0 160px rgba(224,85,43,.35);
+    --p1: #ff7a48; --p2: #f2ede4; --ring: rgba(255,140,100,.30); --rp: rgba(255,120,80,.50);
   }
 
   html, body { margin: 0; height: 100%; overflow: hidden; background: #f6ece3; }
@@ -45,93 +49,201 @@
   html[data-tema="moerk"], html[data-tema="moerk"] body { background: #120f0e; }
 
   /* The design is drawn at 3456 × 2234 and scaled to cover the screen */
-  .stage { position: absolute; left: 50%; top: 50%; width: 3456px; height: 2234px; transform: translate(-50%, -50%) scale(var(--s, 1)); transform-origin: 50% 50%; background: var(--bg); overflow: hidden; }
-
-  /* Layout with the name (default) and without it */
+  .stage { position: absolute; left: 50%; top: 50%; width: 3456px; height: 2234px; transform: translate(-50%, -50%) scale(var(--s, 1)); background: var(--bg); overflow: hidden; }
   .stage { --cx: 1260px; --cy: 1020px; --S: 840px; --k: 1; }
   .uden-tekst .stage { --cx: 1728px; --cy: 1000px; --S: 980px; --k: 1.1667; }
   .uden-tekst .word { display: none; }
 
-  .blob { position: absolute; border-radius: 50%; will-change: transform; }
-  .blob--1 { width: 3000px; height: 3000px; left: calc(var(--cx) - 560px - 1500px); top: calc(500px - 1500px); background: radial-gradient(closest-side, var(--b1), transparent); animation: drift1 12s ease-in-out infinite; }
-  .blob--2 { width: 2600px; height: 2600px; left: calc(var(--cx) - 10px - 1300px); top: calc(var(--cy) + 480px - 1300px); background: radial-gradient(closest-side, var(--b2), transparent); animation: drift2 12s ease-in-out infinite; }
-  .blob--3 { width: 2800px; height: 2800px; left: calc(3000px - 1400px); top: calc(1900px - 1400px); background: radial-gradient(closest-side, var(--b3), transparent); animation: drift1 12s ease-in-out -6s infinite; }
+  .blob { position: absolute; border-radius: 50%; }
+  .blob--1 { width: 3000px; height: 3000px; left: calc(var(--cx) - 2060px); top: -1000px; background: radial-gradient(closest-side, var(--b1), transparent); animation: drift1 12s ease-in-out infinite; }
+  .blob--2 { width: 2600px; height: 2600px; left: calc(var(--cx) - 1310px); top: calc(var(--cy) - 820px); background: radial-gradient(closest-side, var(--b2), transparent); animation: drift2 12s ease-in-out infinite; }
+  .blob--3 { width: 2800px; height: 2800px; left: 1600px; top: 500px; background: radial-gradient(closest-side, var(--b3), transparent); animation: drift3 12s ease-in-out infinite; }
 
-  /* The shadow on the floor shrinks and fades as the tile rises */
-  .floor { position: absolute; left: var(--cx); top: calc(var(--cy) + var(--S) * .83); width: 0; height: 0; animation: shadow 6s ease-in-out infinite; }
+  /* Sparks rising over the whole screen: small ones behind the tile, a few big ones in front */
+  .sparks { position: absolute; inset: 0; pointer-events: none; }
+  .p { position: absolute; left: var(--x); top: 0; width: var(--sz); height: var(--sz); animation: rise var(--d) linear var(--dl) infinite; }
+  .p b { display: block; width: 100%; height: 100%; border-radius: 50%; background: var(--c); opacity: var(--o); animation: wob var(--wd) ease-in-out var(--wdl) infinite; }
+  .p.sq b { border-radius: 28%; }
+  .p.big b { box-shadow: 0 0 calc(var(--sz) * .9) var(--c); }
+
+  /* A ring around the tile with dots running along it */
+  .orbit { position: absolute; transform: rotate(-13deg); pointer-events: none; }
+  .orbit svg { position: absolute; inset: 0; overflow: visible; }
+  .orbit ellipse { fill: none; stroke: var(--ring); stroke-width: 5; stroke-dasharray: 3 17; stroke-linecap: round; animation: ringturn 12s linear infinite; }
+  .orbit--2 ellipse { animation-direction: reverse; stroke-dasharray: 1 26; }
+  .od { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: var(--p1); box-shadow: 0 0 44px var(--p1), 0 0 12px var(--p1); offset-rotate: 0deg; animation: orbit 6s linear infinite; }
+  .od--2 { animation-delay: -2s; width: 28px; height: 28px; margin: -14px 0 0 -14px; background: var(--p2); box-shadow: 0 0 30px var(--p1); }
+  .od--3 { animation-delay: -4s; width: 34px; height: 34px; margin: -17px 0 0 -17px; }
+  .orbit--2 .od { animation-duration: 12s; animation-direction: reverse; }
+  .orbit--2 .od--2 { animation-delay: -4s; } .orbit--2 .od--3 { animation-delay: -8s; }
+
+  /* The shadow on the floor: small and faint while the tile is up, ripples when it lands */
+  .floor { position: absolute; left: var(--cx); top: calc(var(--cy) + var(--S) * .83); width: 0; height: 0; animation: shadow 12s ease-in-out infinite; }
   .floor i { position: absolute; border-radius: 50%; transform: rotate(-4.6deg); }
   .floor i:nth-child(1) { width: calc(1120px * var(--k)); height: calc(240px * var(--k)); left: calc(-560px * var(--k)); top: calc(-120px * var(--k)); background: var(--sh1); filter: blur(90px); }
   .floor i:nth-child(2) { width: calc(720px * var(--k)); height: calc(120px * var(--k)); left: calc(-380px * var(--k)); top: calc(-80px * var(--k)); background: var(--sh2); filter: blur(30px); }
+  .ripples { position: absolute; left: var(--cx); top: calc(var(--cy) + var(--S) * .83); width: 0; height: 0; transform: rotate(-4.6deg); }
+  .ripples i { position: absolute; width: calc(1000px * var(--k)); height: calc(220px * var(--k)); left: calc(-500px * var(--k)); top: calc(-110px * var(--k)); border-radius: 50%; border: 5px solid var(--rp); opacity: 0; animation: ripple 12s ease-out infinite; }
+  .ripples i:nth-child(2) { animation-delay: .22s; }
+  .ripples i:nth-child(3) { animation-delay: .44s; }
 
-  /* The tile: 28 layers make the edge, the face has a gloss and a light sweep, the arrow floats above it */
+  /* The tile: hop, bob, spin and sway are separate layers, so they add up */
   .scene { position: absolute; left: calc(var(--cx) - var(--S) / 2); top: calc(var(--cy) - var(--S) / 2); width: var(--S); height: var(--S); perspective: calc(2600px * var(--k)); }
-  .bob { position: absolute; inset: 0; transform-style: preserve-3d; animation: float 6s ease-in-out infinite; }
-  .tile { position: absolute; inset: 0; transform-style: preserve-3d; animation: sway 12s ease-in-out infinite; }
+  .scene > div, .scene div div { transform-style: preserve-3d; }
+  .hop, .bob, .spin, .tile { position: absolute; inset: 0; }
+  .hop { animation: hop 12s infinite; transform-origin: 50% 100%; }
+  .bob { animation: bob 4s ease-in-out infinite; }
+  .spin { animation: spin 12s infinite; }
+  .tile { animation: sway 12s ease-in-out infinite; }
   .l { position: absolute; inset: 0; border-radius: calc(var(--S) / 4); background: var(--edge); transform: translateZ(calc(var(--z) * -3px * var(--k))); }
-  .l:nth-child(-n+3) { background: #d04a22; }
-  .face { position: absolute; inset: 0; border-radius: calc(var(--S) / 4); overflow: hidden;
+  .l.near { background: #d04a22; }
+  .face, .back { position: absolute; inset: 0; border-radius: calc(var(--S) / 4); overflow: hidden; backface-visibility: hidden;
     background: linear-gradient(150deg, #ff875a 0%, #e85d31 38%, #d94e25 70%, #c9441e 100%);
     box-shadow: inset 0 calc(14px * var(--k)) calc(28px * var(--k)) rgba(255,235,225,.55), inset 0 calc(-26px * var(--k)) calc(46px * var(--k)) rgba(120,30,10,.35), var(--glow); }
+  .back { transform: translateZ(calc(-87px * var(--k))) rotateY(180deg); }
   .gloss { position: absolute; inset: 0; background: radial-gradient(120% 80% at 18% 8%, rgba(255,255,255,.55), rgba(255,255,255,0) 45%); }
-  .sheen { position: absolute; top: -40%; bottom: -40%; width: 26%; left: 0; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.38), rgba(255,255,255,0)); animation: sheen 12s ease-in-out infinite; }
-  .arrow { position: absolute; inset: 0; animation: lift 6s ease-in-out -1.5s infinite; }
-  .arrow svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 calc(18px * var(--k)) calc(18px * var(--k)) rgba(110,25,5,.45)); }
+  .sheen { position: absolute; top: -40%; bottom: -40%; width: 26%; left: 0; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.45), rgba(255,255,255,0)); animation: sheen 6s ease-in-out infinite; }
+  .arrow { position: absolute; inset: 0; backface-visibility: hidden; animation: lift 4s ease-in-out -1s infinite; }
+  .arrow svg, .back svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 calc(18px * var(--k)) calc(18px * var(--k)) rgba(110,25,5,.45)); }
+  .arrow .ln { stroke-dasharray: 100 100; animation: draw 12s ease-in-out infinite; }
+  .arrow .hd { transform-box: view-box; transform-origin: 51px 18px; animation: pop 12s ease-out infinite; }
 
-  .word { position: absolute; inset: 0; width: 3456px; height: 2234px; }
+  .word { position: absolute; inset: 0; width: 3456px; height: 2234px; overflow: visible; }
+  .ch { transform-box: fill-box; transform-origin: 50% 100%; animation: wave 12s ease-in-out infinite; animation-delay: calc(var(--i) * .07s); }
+  .dotc { transform-box: fill-box; transform-origin: 50% 100%; animation: dotb 12s ease-in-out infinite; }
 
   .grain { position: absolute; inset: 0; mix-blend-mode: overlay; opacity: .55; pointer-events: none; }
 
-  @keyframes float { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -36px, 0); } }
-  @keyframes sway { 0%, 100% { transform: rotateX(18deg) rotateY(-24deg) rotateZ(-7deg); } 50% { transform: rotateX(14deg) rotateY(-17deg) rotateZ(-4.5deg); } }
-  @keyframes lift { 0%, 100% { transform: translateZ(calc(26px * var(--k))); } 50% { transform: translateZ(calc(46px * var(--k))); } }
-  @keyframes shadow { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.86); opacity: .72; } }
-  @keyframes sheen { 0%, 58% { transform: translateX(-160%) skewX(-18deg); } 80%, 100% { transform: translateX(520%) skewX(-18deg); } }
-  @keyframes drift1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(140px, -90px); } }
-  @keyframes drift2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-110px, 70px); } }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+  @keyframes hop {
+    0% { transform: translateY(0) scale(1, 1); animation-timing-function: ease-out; }
+    2% { transform: translateY(18px) scale(1.05, .93); animation-timing-function: cubic-bezier(.2, .7, .3, 1); }
+    6.5% { transform: translateY(-260px) scale(.98, 1.03); animation-timing-function: cubic-bezier(.6, 0, .9, .4); }
+    11% { transform: translateY(0) scale(1, 1); animation-timing-function: ease-out; }
+    12% { transform: translateY(14px) scale(1.07, .9); animation-timing-function: ease-out; }
+    13.6% { transform: translateY(-34px) scale(.98, 1.03); animation-timing-function: ease-in-out; }
+    15.4% { transform: translateY(0) scale(1, 1); }
+    100% { transform: translateY(0) scale(1, 1); }
+  }
+  @keyframes spin {
+    0%, 2.4% { transform: rotateY(0deg); animation-timing-function: cubic-bezier(.35, .1, .25, 1); }
+    11%, 100% { transform: rotateY(360deg); }
+  }
+  @keyframes bob { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -40px, 0); } }
+  @keyframes sway { 0%, 100% { transform: rotateX(18deg) rotateY(-24deg) rotateZ(-7deg); } 35% { transform: rotateX(10deg) rotateY(-6deg) rotateZ(-1deg); } 70% { transform: rotateX(22deg) rotateY(-32deg) rotateZ(-10deg); } }
+  @keyframes lift { 0%, 100% { transform: translateZ(calc(26px * var(--k))); } 50% { transform: translateZ(calc(54px * var(--k))); } }
+  @keyframes shadow { 0%, 2% { transform: scale(1.05); opacity: 1; } 6.5% { transform: scale(.5); opacity: .35; } 11% { transform: scale(1); opacity: 1; } 12% { transform: scale(1.12); opacity: 1; } 15.4%, 100% { transform: scale(1); opacity: 1; } }
+  @keyframes ripple { 0%, 10.8% { transform: scale(.3); opacity: 0; } 11.4% { transform: scale(.4); opacity: .9; } 26% { transform: scale(1.8); opacity: 0; } 100% { transform: scale(1.8); opacity: 0; } }
+  @keyframes sheen { 0%, 30% { transform: translateX(-160%) skewX(-18deg); } 55%, 100% { transform: translateX(520%) skewX(-18deg); } }
+  @keyframes draw { 0%, 48% { stroke-dashoffset: 0; } 52% { stroke-dashoffset: -100; } 52.01% { stroke-dashoffset: 100; } 58% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+  @keyframes pop { 0%, 49% { transform: scale(1); } 51.5%, 57% { transform: scale(0); } 59.5% { transform: scale(1.4); } 61.5%, 100% { transform: scale(1); } }
+  @keyframes wave { 0%, 57% { transform: translateY(0); } 60% { transform: translateY(-34px); } 63%, 100% { transform: translateY(0); } }
+  @keyframes dotb { 0%, 62% { transform: translateY(0) scale(1, 1); } 64.5% { transform: translateY(-90px) scale(.95, 1.05); } 67% { transform: translateY(0) scale(1.4, .65); } 68.5% { transform: translateY(-16px) scale(.95, 1.05); } 70% { transform: translateY(0) scale(1, 1); } 100% { transform: translateY(0) scale(1, 1); } }
+  @keyframes rise { from { transform: translateY(2400px); } to { transform: translateY(-180px); } }
+  @keyframes wob { 0%, 100% { transform: translateX(calc(var(--a) * -1)) rotate(0deg); } 50% { transform: translateX(var(--a)) rotate(var(--r)); } }
+  @keyframes orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+  @keyframes ringturn { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -400; } }
+  @keyframes drift1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(360px, -220px); } }
+  @keyframes drift2 { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(-260px, 160px); } 66% { transform: translate(220px, 120px); } }
+  @keyframes drift3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-420px, -260px); } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } .p { display: none; } }
 </style>
 </head>
 <body>
 <div class="stage" id="stage">
   <div class="blob blob--1"></div><div class="blob blob--2"></div><div class="blob blob--3"></div>
+  <div class="sparks" id="back"></div>
+  <div class="orbit" id="orbit"></div><div class="orbit orbit--2" id="orbit2"></div>
   <div class="floor"><i></i><i></i></div>
-  <svg class="word" viewBox="0 0 3456 2234" aria-label="webleads. Hjemmesider, der får telefonen til at ringe.">
-    <text x="1980" y="1150" font-family="'Bricolage Grotesque', sans-serif" font-weight="800" font-size="250" letter-spacing="-11.25" style="fill:var(--ink)">webleads<tspan fill="#e0552b">.</tspan></text>
+  <div class="ripples"><i></i><i></i><i></i></div>
+  <svg class="word" id="word" viewBox="0 0 3456 2234" aria-label="webleads. Hjemmesider, der får telefonen til at ringe.">
+    <text id="measure" x="1980" y="1150" font-family="'Bricolage Grotesque', sans-serif" font-weight="800" font-size="250" letter-spacing="-11.25" style="fill:var(--ink)">webleads<tspan fill="#e0552b">.</tspan></text>
     <text x="1990" y="1250" font-family="'DM Sans', sans-serif" font-weight="500" font-size="46" style="fill:var(--sub)">Hjemmesider, der får telefonen til at ringe.</text>
     <text x="1990" y="1330" font-family="'DM Mono', monospace" font-size="34" style="fill:var(--small)">webleads.dk</text>
   </svg>
-  <div class="scene"><div class="bob"><div class="tile" id="tile">
+  <div class="scene"><div class="hop"><div class="bob"><div class="spin"><div class="tile" id="tile">
+    <div class="back"><div class="gloss"></div><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><polyline points="12,24 20.5,45 31,29 41.5,45 51,18"/><polyline points="42.2,24.4 51,18 53.5,28.6"/></g></svg></div>
     <div class="face"><div class="gloss"></div><div class="sheen"></div></div>
-    <div class="arrow"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><polyline points="12,24 20.5,45 31,29 41.5,45 51,18"/><polyline points="42.2,24.4 51,18 53.5,28.6"/></g></svg></div>
-  </div></div></div>
+    <div class="arrow"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><polyline class="ln" pathLength="100" points="12,24 20.5,45 31,29 41.5,45 51,18"/><polyline class="hd" points="42.2,24.4 51,18 53.5,28.6"/></g></svg></div>
+  </div></div></div></div></div>
+  <div class="sparks" id="front"></div>
   <canvas class="grain" id="grain" width="3456" height="2234"></canvas>
 </div>
 <script>
-(() => {
+window.__ready = (async () => {
   const q = new URLSearchParams(location.search);
   const root = document.documentElement;
   if (q.get('tema') === 'lys' || q.get('tema') === 'moerk') root.dataset.tema = q.get('tema');
-  if (q.get('tekst') === 'nej') root.classList.add('uden-tekst');
+  const tekst = q.get('tekst') !== 'nej';
+  if (!tekst) root.classList.add('uden-tekst');
+  const cx = tekst ? 1260 : 1728, cy = tekst ? 1020 : 1000, S = tekst ? 840 : 980;
 
-  // The edge of the tile: 28 layers behind the face
+  // The edge of the tile: 28 layers behind the face, the three nearest a little lighter
   const tile = document.getElementById('tile');
   for (let i = 28; i >= 1; i--) {
     const l = document.createElement('div');
-    l.className = 'l'; l.style.setProperty('--z', i);
+    l.className = 'l' + (i <= 3 ? ' near' : ''); l.style.setProperty('--z', i);
     tile.prepend(l);
   }
+
+  // Sparks, from a fixed seed so every load (and the recording) looks the same.
+  // Each one rises in 4, 6 or 12 seconds, so the whole picture repeats every 12 seconds
+  let seed = 42;
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  const spark = (big) => {
+    const p = document.createElement('i'), d = big ? [4, 6][rnd() * 2 | 0] : [6, 12][rnd() * 2 | 0], wd = [3, 4, 6][rnd() * 3 | 0];
+    p.className = 'p' + (big ? ' big' : '') + (rnd() < .35 ? ' sq' : '');
+    const sz = big ? 26 + rnd() * 34 : 8 + rnd() * 18;
+    Object.entries({ '--x': rnd() * 3456 + 'px', '--sz': sz + 'px', '--d': d + 's', '--dl': -rnd() * d + 's', '--wd': wd + 's', '--wdl': -rnd() * wd + 's',
+      '--a': 20 + rnd() * 70 + 'px', '--r': (rnd() * 180 - 90) + 'deg', '--o': (big ? .55 : .3) + rnd() * .4, '--c': rnd() < .62 ? 'var(--p1)' : 'var(--p2)' })
+      .forEach(([k, v]) => p.style.setProperty(k, v));
+    p.appendChild(document.createElement('b'));
+    return p;
+  };
+  for (let i = 0; i < 110; i++) document.getElementById('back').appendChild(spark(false));
+  for (let i = 0; i < 14; i++) document.getElementById('front').appendChild(spark(true));
+
+  // The ring around the tile, and the dots that run along it
+  const ring = (id, rx, ry, turn) => {
+    const o = document.getElementById(id);
+    Object.assign(o.style, { left: cx - rx + 'px', top: cy - ry + 'px', width: 2 * rx + 'px', height: 2 * ry + 'px', transform: `rotate(${turn}deg)` });
+    const path = `path("M 0 ${ry} A ${rx} ${ry} 0 1 0 ${2 * rx} ${ry} A ${rx} ${ry} 0 1 0 0 ${ry}")`;
+    o.innerHTML = `<svg viewBox="0 0 ${2 * rx} ${2 * ry}"><ellipse cx="${rx}" cy="${ry}" rx="${rx}" ry="${ry}"/></svg>` +
+      [1, 2, 3].map(n => `<i class="od od--${n}" style="offset-path:${path}"></i>`).join('');
+  };
+  ring('orbit', S * .8, S * .26, -13);
+  ring('orbit2', S * .66, S * .44, 24);
 
   // Fine grain, drawn once, so the gradients do not band
   const g = document.getElementById('grain'), x = g.getContext('2d');
   const img = x.createImageData(g.width, g.height), d = img.data;
-  let seed = 7;
-  const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
-  for (let i = 0; i < d.length; i += 4) { const v = 128 + (rnd() + rnd() - 1) * 40; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
+  let gs = 7;
+  const gr = () => (gs = (gs * 1664525 + 1013904223) >>> 0) / 4294967296;
+  for (let i = 0; i < d.length; i += 4) { const v = 128 + (gr() + gr() - 1) * 40; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
   x.putImageData(img, 0, 0);
 
   // Fill the screen whatever its size
   const fit = () => document.getElementById('stage').style.setProperty('--s', Math.max(innerWidth / 3456, innerHeight / 2234));
   fit(); addEventListener('resize', fit);
+
+  // The name as one letter per element, so the letters can wave and the full stop can bounce
+  if (tekst) {
+    await document.fonts.load("800 250px 'Bricolage Grotesque'");
+    await document.fonts.ready;
+    const m = document.getElementById('measure'), svg = document.getElementById('word');
+    const word = 'webleads.';
+    const xs = [...word].map((_, i) => m.getStartPositionOfChar(i).x);
+    m.remove();
+    [...word].forEach((c, i) => {
+      const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', xs[i]); t.setAttribute('y', 1150);
+      t.setAttribute('font-family', "'Bricolage Grotesque', sans-serif"); t.setAttribute('font-weight', '800'); t.setAttribute('font-size', '250');
+      t.setAttribute('class', c === '.' ? 'dotc' : 'ch');
+      t.style.fill = c === '.' ? '#e0552b' : 'var(--ink)';
+      t.style.setProperty('--i', i);
+      t.textContent = c;
+      svg.appendChild(t);
+    });
+  }
 })();
 </script>
 </body>
