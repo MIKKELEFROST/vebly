@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { SITE, services, pages, front } from './data.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const V = { css: '20261104b', js: '20261104b' };
+export const V = { css: '20261104c', js: '20261104c' };
 export const GENERATED = '<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->';
 
 export const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -309,13 +309,16 @@ export function price(p) {
     </section>`;
 }
 
+// An optional third element on a question, [href, text], adds a link after the answer (not in the structured data)
+const faqLink = l => l ? ` <a class="faq__more" href="${esc(l[0])}" data-event="Spørgsmål: ${esc(l[1])}">${esc(l[1])} →</a>` : '';
+
 export function faq(list) {
   return `<section id="faq" class="faq" data-sec="faq">
       <h2 class="h2" data-reveal="0">Spørgsmål?</h2>
       <div class="faq__list" data-faq>
-        ${list.map(([q, a], i) => `<div class="faq__item${i === 0 ? ' is-open' : ''}" data-reveal="${i}">
+        ${list.map(([q, a, l], i) => `<div class="faq__item${i === 0 ? ' is-open' : ''}" data-reveal="${i}">
           <button type="button" class="faq__q" aria-expanded="${i === 0}" aria-controls="faq-${i}">${esc(q)}<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-${i}"><div><p>${esc(a)}</p></div></div>
+          <div class="faq__a" id="faq-${i}"><div><p>${esc(a)}${faqLink(l)}</p></div></div>
         </div>`).join('\n        ')}
       </div>
     </section>`;
@@ -579,9 +582,9 @@ export function faqSplit(list, o = {}) {
         <span class="sx-fq__glyph" aria-hidden="true">?</span>
       </div>
       <div class="faq__list sx-fq__list" data-faq>
-        ${list.map(([q, a], i) => `<div class="faq__item${i === 0 ? ' is-open' : ''}" data-reveal="${i}">
+        ${list.map(([q, a, l], i) => `<div class="faq__item${i === 0 ? ' is-open' : ''}" data-reveal="${i}">
           <button type="button" class="faq__q" aria-expanded="${i === 0}" aria-controls="faq-${i}">${esc(q)}<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-${i}"><div><p>${esc(a)}</p></div></div>
+          <div class="faq__a" id="faq-${i}"><div><p>${esc(a)}${faqLink(l)}</p></div></div>
         </div>`).join('\n        ')}
       </div>
     </section>`;

@@ -145,6 +145,14 @@
             "@type": "Answer",
             "text": "Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan klikket blive billigere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ofte, ja. Går dine Shopping-annoncer gennem en CSS-partner i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn."
+          }
         }
       ]
     }
@@ -154,19 +162,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261104b">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261104c">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261104b">
-<link rel="stylesheet" href="/assets/css/show/google-shopping-ads.css?v=20261104b">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104c">
+<link rel="stylesheet" href="/assets/css/show/google-shopping-ads.css?v=20261104c">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
-<script type="module" src="/assets/js/main.js?v=20261104b"></script>
-<script type="module" src="/assets/js/sections.js?v=20261104b"></script>
-<script type="module" src="/assets/js/show/google-shopping-ads.js?v=20261104b"></script>
+<script type="module" src="/assets/js/main.js?v=20261104c"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104c"></script>
+<script type="module" src="/assets/js/show/google-shopping-ads.js?v=20261104c"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -295,6 +303,7 @@
                       <span class="gsa-card__s"><i style="--i:#8b5e3c" aria-hidden="true">K</i>Krus &amp; Kande</span>
                       <span class="gsa-card__d">+ 39,00 kr. i fragt</span>
                       <span class="gsa-card__r"><b>4,6</b><span style="--f:92%" aria-hidden="true">★★★★★</span>(41)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card gsa-card--you is-tilbud" data-gsa-card data-gsa-you>
                       <span class="gsa-you">Din annonce</span>
@@ -303,6 +312,7 @@
                       <span class="gsa-card__p" data-gsa-y="tilbud"><b class="is-sale">249,00 kr.</b><s>329,00 kr.</s></span>
                       <span class="gsa-card__s"><i style="--i:#4d6b50" aria-hidden="true">L</i>Lerværk</span>
                       <span class="gsa-card__d" data-gsa-y="fragt">Gratis fragt</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#2f4d80;--gd:#223a61;--c:#d3b68e;--g2:#a8c2dc;--b:.92;--r:#b9d0e5;--gl:1;--s:#e2eaf4;--so:.22"/></svg></span>
@@ -311,6 +321,7 @@
                       <span class="gsa-card__s"><i style="--i:#2d4a7a" aria-hidden="true">G</i>Glasurhuset</span>
                       <span class="gsa-card__d">Hent i dag · 2,1 km</span>
                       <span class="gsa-card__r"><b>4,9</b><span style="--f:98%" aria-hidden="true">★★★★★</span>(128)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card is-tilbud" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#c56a43;--gd:#a6532f;--c:#bc8e67;--gl:.3;--s:#4a2516;--so:.3"/></svg><span class="gsa-tag">Tilbud</span></span>
@@ -318,6 +329,7 @@
                       <span class="gsa-card__p"><b class="is-sale">159,00 kr.</b><s>199,00 kr.</s></span>
                       <span class="gsa-card__s"><i style="--i:#b0532c" aria-hidden="true">D</i>Drejeskiven</span>
                       <span class="gsa-card__d">+ 49,00 kr. i fragt</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#3b3a38;--gd:#292826;--c:#d2b48c;--gl:.24;--s:#e6e0d7;--so:.34"/></svg></span>
@@ -326,6 +338,7 @@
                       <span class="gsa-card__s"><i style="--i:#2b2b2b" aria-hidden="true">B</i>Bordkunst</span>
                       <span class="gsa-card__d">Gratis fragt over 499 kr.</span>
                       <span class="gsa-card__r"><b>4,5</b><span style="--f:90%" aria-hidden="true">★★★★★</span>(17)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#f1eee7;--gd:#dcd6ca;--c:#d4bc98;--g2:#2f4d80;--b:1;--r:#2f4d80;--gl:.7;--s:#7d7466;--so:.16"/></svg></span>
@@ -334,6 +347,7 @@
                       <span class="gsa-card__s"><i style="--i:#3d5c8a" aria-hidden="true">O</i>Ovnfrisk</span>
                       <span class="gsa-card__d">Levering i morgen</span>
                       <span class="gsa-card__r"><b>4,4</b><span style="--f:88%" aria-hidden="true">★★★★★</span>(23)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(200 0) scale(-1 1)" style="--g:#e4b5a9;--gd:#cc988b;--c:#ddbd99;--gl:.85;--s:#6b4a40;--so:.2"/></svg></span>
@@ -342,6 +356,7 @@
                       <span class="gsa-card__s"><i style="--i:#a35d6a" aria-hidden="true">K</i>Køkkenkrogen</span>
                       <span class="gsa-card__d">+ 39,00 kr. i fragt</span>
                       <span class="gsa-card__r"><b>4,7</b><span style="--f:94%" aria-hidden="true">★★★★★</span>(9)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#d49d3c;--gd:#b3802a;--c:#cfb38c;--gl:.62;--s:#5a3d12;--so:.24"/></svg></span>
@@ -350,6 +365,7 @@
                       <span class="gsa-card__s"><i style="--i:#8a6a2a" aria-hidden="true">S</i>Stentøjsstuen</span>
                       <span class="gsa-card__d">+ 45,00 kr. i fragt</span>
                       <span class="gsa-card__r"><b>4,8</b><span style="--f:96%" aria-hidden="true">★★★★★</span>(52)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(4 25) scale(.66)" style="--g:#3f5e4a;--gd:#2d4637;--c:#cdb08a;--gl:.5;--s:#d9e3d6;--so:.2"/><use href="#gsa-mug" transform="translate(48 36) scale(.74)" style="--g:#3f5e4a;--gd:#2d4637;--c:#cdb08a;--gl:.5;--s:#d9e3d6;--so:.2"/></svg></span>
@@ -358,6 +374,7 @@
                       <span class="gsa-card__s"><i style="--i:#3f5e4a" aria-hidden="true">H</i>Hverdagsler</span>
                       <span class="gsa-card__d">Gratis fragt</span>
                       <span class="gsa-card__r"><b>4,6</b><span style="--f:92%" aria-hidden="true">★★★★★</span>(31)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card is-tilbud" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#a99bc7;--gd:#8a7caa;--c:#d6bd9a;--gl:.8;--s:#4b3f63;--so:.2"/></svg><span class="gsa-tag">Tilbud</span></span>
@@ -366,6 +383,7 @@
                       <span class="gsa-card__s"><i style="--i:#6d5f99" aria-hidden="true">T</i>Tetid</span>
                       <span class="gsa-card__d">+ 29,00 kr. i fragt</span>
                       <span class="gsa-card__r"><b>4,3</b><span style="--f:86%" aria-hidden="true">★★★★★</span>(14)</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                     <button type="button" class="gsa-card" data-gsa-card>
                       <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#a8c2dc;--gd:#88a4c0;--c:#d8c09e;--g2:#f4f1ea;--b:1;--r:#f4f1ea;--gl:.75;--s:#3d5470;--so:.2"/></svg></span>
@@ -373,6 +391,7 @@
                       <span class="gsa-card__p"><b>199,00 kr.</b></span>
                       <span class="gsa-card__s"><i style="--i:#5b7da3" aria-hidden="true">K</i>Kopkompagniet</span>
                       <span class="gsa-card__d">Levering 2–3 dage</span>
+                      <span class="gsa-card__by">Af Google</span>
                     </button>
                   </div>
                 </div>
@@ -565,6 +584,10 @@
         <div class="faq__item" data-reveal="3">
           <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-3">Hvad er forskellen på Shopping og almindelige Google Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
           <div class="faq__a" id="faq-3"><div><p>Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="4">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-4">Kan klikket blive billigere?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-4"><div><p>Ofte, ja. Går dine Shopping-annoncer gennem en CSS-partner i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn. <a class="faq__more" href="/services/google-css" data-event="Spørgsmål: Læs om Google CSS">Læs om Google CSS →</a></p></div></div>
         </div>
       </div>
     </section>

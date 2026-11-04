@@ -130,6 +130,8 @@
 .show--google-shopping-ads .gsa-pan__stock { gap: 6px; }
 .show--google-shopping-ads .gsa-pan__stock::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(47,158,91,.15); }
 .show--google-shopping-ads .gsa-card__r:empty { display: none; }
+/* The last line of every Shopping ad: which CSS placed it */
+.show--google-shopping-ads .gsa-card__by { margin-top: auto; padding-top: 4px; color: #70757a; font-size: .84em; text-decoration: underline; text-decoration-color: #dadce0; text-underline-offset: 2px; }
 .show--google-shopping-ads .gsa-go { align-self: stretch; height: 46px; margin-top: 8px; overflow: hidden; border-radius: 999px; background: #1f45b0; color: #fff; font-size: 1.15em; font-weight: 700; transition: background .35s; }
 .show--google-shopping-ads .gsa-go span { display: flex; align-items: center; justify-content: center; height: 100%; transition: transform .55s cubic-bezier(.2,.9,.3,1.25); }
 .show--google-shopping-ads .gsa-go:is(.is-done, .is-nope) span { transform: translateY(-100%); }

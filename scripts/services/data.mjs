@@ -173,7 +173,8 @@ export const pages = [
       ['Hvad koster Google Shopping Ads?', 'Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.'],
       ['Hvad er et produktfeed?', 'En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.'],
       ['Virker det med min webshop?', 'De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.'],
-      ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.']
+      ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.'],
+      ['Kan klikket blive billigere?', 'Ofte, ja. Går dine Shopping-annoncer gennem en CSS-partner i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn.', ['/services/google-css', 'Læs om Google CSS']]
     ],
     contact: 'Fortæl os om din webshop, så svarer vi inden for 24 timer med en fast pris.',
     placeholder: 'Hvilken webshop har du, og hvad sælger du?',

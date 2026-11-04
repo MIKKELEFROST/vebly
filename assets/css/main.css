@@ -410,6 +410,7 @@ html:not(.motion) .build__sticky { position: relative; height: auto; padding-bot
 .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
 .faq__a > div { overflow: hidden; }
 .faq__a p { margin: 0 0 24px; font-size: 17px; line-height: 1.6; color: var(--muted); text-wrap: pretty; max-width: 560px; }
+.faq__a .faq__more { color: var(--ink); font-weight: 700; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
 
 /* ---------- Kontakt ---------- */
 .contact-sec { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px 100px; }
