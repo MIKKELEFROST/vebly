@@ -62,7 +62,7 @@ export default async function handler(req, res) {
         navn,
         paras: [
           'Tak, fordi du bestilte en skitse til din nye hjemmeside. Her er linket til den, så du altid kan finde den igen.',
-          `Skitsen er et udgangspunkt, og billeder og anmeldelser i den er eksempler. Inden for få timer på hverdage ${kanal ? KANAL[kanal][1] : 'kontakter vi dig'}, og så laver vi et færdigt udkast med dine egne billeder, tekster og ønsker. Klar på 7 dage, fra 2.995 kr. og ingen binding.`
+          `Skitsen er et udgangspunkt, og billeder og anmeldelser i den er eksempler. Inden for få timer på hverdage ${kanal ? KANAL[kanal][1] : 'kontakter vi dig'}, og så laver vi et færdigt udkast med dine egne billeder, tekster og ønsker. Fra 2.995 kr., en one page er klar på 7 dage, og der er ingen binding.`
         ],
         button: { label: 'Se din skitse', href: `${SITE}${link}` }
       })

@@ -20,7 +20,7 @@ export const included = [
 ];
 
 export const addons = [
-  { t: 'SEO', id: 'seo', price: 'fra 999 kr./md.', d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'], band: ['#e0552b', '#fff'] },
+  { t: 'SEO', id: 'seo', price: '995 kr./time', d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'], band: ['#e0552b', '#fff'] },
   { t: 'Google Ads', id: 'google-ads', price: '8.000 kr./md.', d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'], band: ['#111', '#fff'] },
   { t: 'Meta Ads', id: 'meta-ads', price: '8.000 kr./md.', d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'], band: ['#2f9e5b', '#fff'] },
   { t: 'Interne systemer', id: 'systemer', price: 'fra 14.999 kr.', d: 'Skræddersyede værktøjer til din drift.', ex: ['Kunde- og bookingsystemer', 'Dashboards og overblik', 'Portaler til medarbejdere'], band: ['#f2c14e', '#111'] },
@@ -37,6 +37,9 @@ export const pakker = [
 // Advertising: the first channel costs `first` a month, every extra channel `extra`
 export const KANAL = { first: 8000, extra: 5000 };
 
+// SEO hours a month in the calculator: where it starts, and the range
+export const SEO_TIMER = { start: 4, min: 1, max: 40 };
+
 // What each thing costs, by the name used on the cards and in the form.
 // once = one-off, md = a month, kanal = an advertising channel (priced with KANAL), fra = a "from" price
 export const priser = {
@@ -48,15 +51,16 @@ export const priser = {
   'Google Ads': { kanal: true },
   'Meta Ads': { kanal: true },
   'Google Shopping Ads': { kanal: true },
-  'SEO': { md: 999, fra: true },
+  // SEO is sold by the hour; the calculator lets the visitor choose hours a month (SEO_TIMER)
+  'SEO': { time: 995 },
   'Automations': { once: 4999, md: 499, fra: true },
   'Interne systemer': { once: 14999, fra: true }
 };
 
 export const addonPages = {
-  seo: { price: 'Fra 999 kr./md.', priceNote: 'Ingen binding · ekskl. moms', label: 'SEO', h1: 'Bliv fundet først, når kunderne søger.', intro: 'Vi sørger for, at din virksomhed dukker op på Google, når nogen søger efter det, du laver, der hvor du holder til.',
+  seo: { price: '995 kr./time', priceNote: 'Timepris · du bestemmer antal timer · ingen binding · ekskl. moms', label: 'SEO', h1: 'Bliv fundet først, når kunderne søger.', intro: 'Vi sørger for, at din virksomhed dukker op på Google, når nogen søger efter det, du laver, der hvor du holder til.',
     items: [['Lokal SEO', 'Bliv fundet i dit område, fx “frisør Roskilde”.'], ['Google-profil', 'Opsætning og pleje af din virksomhedsprofil med anmeldelser.'], ['Søgeord', 'Vi finder de ord, dine kunder faktisk søger på.'], ['Tekster', 'Indhold, der både Google og dine kunder forstår.'], ['Teknisk SEO', 'Hastighed, struktur og alt det bag kulisserne.'], ['Månedlig rapport', 'Kort og klart overblik over, hvad der virker.']],
-    steps: [['Analyse', 'Vi ser på din side, dine konkurrenter og dine søgeord.'], ['Plan', 'Du får en klar plan og en fast månedspris.'], ['Løbende arbejde', 'Vi optimerer hver måned og viser dig resultaterne.']] },
+    steps: [['Analyse', 'Vi ser på din side, dine konkurrenter og dine søgeord.'], ['Plan', 'Du får en klar plan, og vi aftaler, hvor mange timer der skal bruges.'], ['Løbende arbejde', 'Vi optimerer hver måned og viser dig resultaterne.']] },
   'google-ads': { price: '8.000 kr./md.', priceNote: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · annoncebudget betales direkte til Google', label: 'Google Ads', h1: 'Øverst på Google, når kunderne søger.', intro: 'Vi bygger og styrer dine annoncer på Google, så du bliver vist, når nogen søger efter det, du laver, der hvor du holder til. Og vi holder øje med hver krone.',
     items: [['Søgeordsanalyse', 'Vi finder de ord, dine kunder faktisk søger på.'], ['Kampagner og annoncer', 'Vi bygger kampagnerne og skriver annoncerne færdige.'], ['Lokal målretning', 'Vis dig for kunder i dit område.'], ['Sporing', 'Opkald og henvendelser bliver målt.'], ['Løbende optimering', 'Vi justerer bud, søgeord og annoncer hver måned.'], ['Månedlig rapport', 'Kort og klart overblik over, hvad du får for pengene.']],
     steps: [['Mål og budget', 'Vi aftaler, hvad du vil opnå, og hvad det må koste.'], ['Opsætning', 'Vi bygger kampagner, annoncer og sporing.'], ['Optimering', 'Vi justerer løbende og sender en månedlig rapport.']] },
@@ -118,6 +122,7 @@ export const ballInfo = {
 export const faqs = [
   ['Hvilken pakke skal jeg vælge?', 'Simpel one page er nok, hvis kunderne bare skal kunne finde og kontakte dig. Har du flere ydelser, er Normal hjemmeside det rigtige. Vil du findes på Google på mange ydelser eller i flere byer, så vælg SEO hjemmeside. Er du i tvivl, så skriv til os.'],
   ['Er der en månedlig betaling?', 'Nej, du betaler én gang for hjemmesiden. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.'],
+  ['Hvor hurtigt er siden klar?', 'En Simpel one page er klar på 7 dage. En Normal hjemmeside og en SEO hjemmeside tager længere tid, og du får en fast tidsplan, før vi går i gang.'],
   ['Jeg har ikke tid til det. Hvad skal jeg lave?', 'Et opkald på 15 minutter og nogle billeder. Resten klarer vi, også teksterne.'],
   ['Kan kunderne finde mig på Google?', 'Ja. Vi sætter siden op, så du kan findes på dit fag og dit område, fx “frisør Roskilde” eller “tømrer Vejle”, og opretter din Google-profil.'],
   ['Kan jeg selv rette i siden?', 'Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi viser dig hvordan.']

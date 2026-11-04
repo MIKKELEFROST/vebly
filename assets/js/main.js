@@ -1,7 +1,7 @@
 import { track } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { openBestil, FAG } from './bestil.js';
-import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
+import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, SEO_TIMER, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
 const $ = (s, r = document) => r.querySelector(s);
@@ -118,15 +118,22 @@ state.pakke = pakkeEl || calcEl ? pakker[0].id : null;
 const pakke = () => pakker.find(p => p.id === state.pakke);
 const base = () => state.pakke ? pakke().t : form ? (form.dataset.base ?? 'Hjemmeside') : '';
 const chosenNames = () => [base(), ...state.addons].filter(Boolean);
+// Things sold by the hour (SEO): the calculator counts the hours a month chosen there; elsewhere
+// they are shown with their hourly price
+state.timer = SEO_TIMER.start;
+const hours = () => calcEl ? state.timer : 0;
+const timerTxt = h => `${h} ${h === 1 ? 'time' : 'timer'}/md.`;
+const label = n => priser[n] && priser[n].time && hours() ? `${n} · ${timerTxt(hours())}` : n;
 // Start price when nothing chosen has a known price (data-value on the form)
 const fallbackValue = form && form.dataset.value !== undefined ? (+form.dataset.value || 0) : 2995;
 
 // The price of a list of names (content.js → priser): one-off, a month, and the advertising
 // channels, where the first costs KANAL.first and each extra KANAL.extra a month
 const beregn = names => {
-  const r = { once: 0, md: 0, kanaler: 0, fraOnce: false, fraMd: false };
+  const r = { once: 0, md: 0, kanaler: 0, fraOnce: false, fraMd: false, timepris: [] };
   names.forEach(n => {
     const p = priser[n]; if (!p) return;
+    if (p.time) { if (hours()) r.md += p.time * hours(); else r.timepris.push([n, kr(p.time) + '/time']); return; }
     if (p.kanal) r.kanaler++;
     r.once += p.once || 0; r.md += p.md || 0;
     if (p.fra && p.once) r.fraOnce = true;
@@ -135,12 +142,14 @@ const beregn = names => {
   if (r.kanaler) r.md += KANAL.first + KANAL.extra * (r.kanaler - 1);
   return r;
 };
-const priceText = r => [r.once ? (r.fraOnce ? 'fra ' : '') + kr(r.once) : '', r.md ? (r.fraMd ? 'fra ' : '') + kr(r.md) + '/md.' : ''].filter(Boolean).join(' + ');
+const priceText = (r, alone) => [r.once ? (r.fraOnce ? 'fra ' : '') + kr(r.once) : '', r.md ? (r.fraMd ? 'fra ' : '') + kr(r.md) + '/md.' : '',
+  ...r.timepris.map(([n, t]) => alone ? t : `${n} ${t}`)].filter(Boolean).join(' + ');
 // One line per thing chosen; channels in the order they were picked (first full price, then extra)
 const priceLines = names => {
   let k = 0;
   return names.map(n => {
     const p = priser[n]; if (!p) return [n, 'Pris efter en snak'];
+    if (p.time) return hours() ? [`${n} · ${timerTxt(hours())}`, kr(p.time * hours()) + '/md.'] : [n, kr(p.time) + '/time'];
     if (p.kanal) return [n, kr(k++ ? KANAL.extra : KANAL.first) + '/md.'];
     return [n, (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ')];
   });
@@ -169,7 +178,12 @@ if (calcEl) {
         <div class="calc__row">${CALC.kanaler.map(n => opt('data-toggle', n, n)).join('')}</div>
         <p class="calc__hint" data-calc-hint></p></div>
       <div class="calc__group"><span class="calc__lbl">3 · Tilvalg</span>
-        <div class="calc__row">${CALC.tilvalg.map(n => opt('data-toggle', n, n)).join('')}</div></div>
+        <div class="calc__row">${CALC.tilvalg.map(n => opt('data-toggle', n, n)).join('')}</div>
+        <div class="calc__timer" data-calc-timer hidden>
+          <span>SEO-timer om måneden</span>
+          <span class="calc__step"><button type="button" data-timer="-1" aria-label="Færre timer">−</button><b data-timer-val aria-live="polite">${SEO_TIMER.start}</b><button type="button" data-timer="1" aria-label="Flere timer">+</button></span>
+          <span class="calc__timer-p" data-timer-p></span>
+        </div></div>
     </div>
     <div class="spot calc__sum" data-spot>
       <span class="kicker">Din pris</span>
@@ -179,6 +193,13 @@ if (calcEl) {
       <p class="calc__note">Alle priser er ekskl. moms. Hosting og domæne koster typisk 50–100 kr. om måneden. Annoncebudgettet betaler du direkte til Google eller Meta.</p>
       <button type="button" class="btn btn--accent" data-calc-go data-magnet data-burst>Få et tilbud på det her →</button>
     </div>`;
+  calcEl.addEventListener('click', e => {
+    const b = e.target.closest('[data-timer]'); if (!b) return;
+    const next = clamp(state.timer + +b.dataset.timer, SEO_TIMER.min, SEO_TIMER.max);
+    if (next === state.timer) return;
+    state.timer = next; syncAddons();
+    track('calc_change', { field: 'seo_timer', value: state.timer });
+  });
   $('[data-calc-go]', calcEl).addEventListener('click', () => {
     const r = beregn(chosenNames());
     track('calc_cta', { package: state.pakke, addons_total: state.addons.length, value: r.once + r.md, currency: 'DKK' });
@@ -202,10 +223,14 @@ const syncCalc = () => {
     const id = b.dataset.pakke, n = b.dataset.toggle, sel = id ? id === state.pakke : on.has(n);
     b.classList.toggle('is-on', sel); b.setAttribute('aria-pressed', String(sel));
     const p = id ? { once: pakker.find(x => x.id === id).price } : priser[n];
-    let txt = (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ');
+    let txt = p.time ? kr(p.time) + '/time' : (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ');
     if (p.kanal) txt = sel ? priceLines(names).find(l => l[0] === n)[1] : (kanaler ? '+' + kr(KANAL.extra) : kr(KANAL.first)) + '/md.';
     $('[data-calc-p]', b).textContent = txt;
   });
+  const timer = $('[data-calc-timer]', calcEl);
+  timer.hidden = !on.has('SEO');
+  $('[data-timer-val]', timer).textContent = state.timer;
+  $('[data-timer-p]', timer).textContent = `${state.timer} × ${kr(priser.SEO.time)} = ${kr(priser.SEO.time * state.timer)}/md.`;
   $('[data-calc-lines]', calcEl).innerHTML = priceLines(names).map(([t, v]) => `<div class="calc__line"><span>${esc(t)}</span><span>${esc(v)}</span></div>`).join('');
   $('[data-calc-hint]', calcEl).innerHTML = kanaler === 0 ? `Første kanal ${kr(KANAL.first)}/md. Hver ekstra kanal kun ${kr(KANAL.extra)}/md.`
     : kanaler === 1 ? `Tag en kanal mere for kun <b>${kr(KANAL.extra)}/md.</b>`
@@ -232,7 +257,7 @@ const syncAddons = () => {
   });
   syncCalc();
   if (!form) return;
-  const names = chosenNames(), chosen = names.join(' + '), pt = priceText(beregn(names));
+  const names = chosenNames(), chosen = names.map(label).join(' + '), pt = priceText(beregn(names), names.length === 1);
   $('[data-chosen]').hidden = !state.pakke && state.addons.length === 0;
   $('[data-chosen-val]').textContent = chosen + (pt ? ` · ${pt}` : '');
   $('[data-chosen-input]').value = (chosen || 'Generel henvendelse') + (pt ? ` (${pt}, ekskl. moms)` : '');
