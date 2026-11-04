@@ -57,7 +57,8 @@ change is really needed, say so in your result.
 
 ## Truth rules (never break these)
 
-- Everything inside the mockup is an example. Mark it visibly with a small "Eksempel" pill.
+- Everything inside the mockup is an example. Mark it visibly with the shared tag
+  `<span class="tag-eks">Eksempel</span>` (yellow pill from `main.css`; use it as is, do not restyle it).
 - Fictional businesses only (default: Nordvik, a carpenter in København; other made-up local names are
   fine). Never real businesses, people, products or reviews.
 - No third-party logos, wordmarks or icons (no Google, Meta, Facebook, Instagram, ChatGPT, Gemini, Shopify

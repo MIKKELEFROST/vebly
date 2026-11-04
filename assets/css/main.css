@@ -783,3 +783,7 @@ div.incl__item:hover { padding-left: 0; }
 /* ---------- Udkast-sider (p.bar i scripts/services/pages/*.mjs) ---------- */
 .draft-bar { position: fixed; top: 82px; left: 50%; transform: translateX(-50%); z-index: 60; max-width: calc(100vw - 32px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--yellow); color: var(--ink); font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 999px; box-shadow: 0 10px 30px -12px rgba(17,17,17,.35); pointer-events: none; }
 @media (max-width: 699px) { .draft-bar { top: 74px; font-size: 12px; padding: 7px 13px; } }
+
+/* ---------- "Eksempel": the same small tag on every example (showcases, demo pages) ---------- */
+.tag-eks { display: inline-flex; align-items: center; gap: 6px; font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; color: var(--ink); background: var(--yellow); padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+.tag-eks::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .55; }
