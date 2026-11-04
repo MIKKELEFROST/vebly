@@ -1,52 +1,50 @@
-/* Showcase: e-mail marketing (scripts/services/showcase/email-marketing.html): Nordvik's mails land on a lock screen and
-   open with a zoom; the envelopes are the automatic flow. Our own drawing, no real app's marks. In the phone all sizes
-   are em of 4.2cqw, so the screen scales as one piece. Motion: assets/js/show/email-marketing.js */
+/* Showcase: e-mail marketing (scripts/services/showcase/email-marketing.html). Our own drawing of a phone and a mail
+   app, no real marks. In the phone all sizes are em of 4.2cqw, so the screen scales as one piece. */
 .show--email-marketing{position:relative;z-index:1;scroll-margin-top:48px;--nv:#0f3d2e;--lime:#d4f36b;--paper:#f6f0e4;--out:cubic-bezier(.2,.8,.2,1);--pop:cubic-bezier(.3,1.45,.5,1);--pw:clamp(270px,calc((100svh - 170px)*.462),330px);--bz:calc(var(--pw)*.032)}
 .show--email-marketing .em-wrap{position:relative;max-width:1200px;margin:0 auto;padding:40px 24px 100px;display:grid;grid-template:"ph copy" auto "ph did" auto "ph cue" 1fr "ph flow" auto/var(--pw) minmax(0,1fr);gap:26px clamp(48px,7vw,104px)}
 .show--email-marketing svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.show--email-marketing :is(.em-isl,.em-sb,.em-home,.em-lock,.em-clock,.em-hint,.em-dock,.em-stack,.em-note,.em-rip,.em-app,.em-stk,.em-toast,.em-env__ltr,.em-env__bd,.em-env__flap,.em-env__seal,.em-env__pm,.em-ghost){position:absolute}
+.show--email-marketing :is(.em-isl,.em-sb,.em-home,.em-lock,.em-clock,.em-dock,.em-stack,.em-note,.em-rip,.em-app,.em-stk,.em-toast,.em-env__ltr,.em-env__bd,.em-env__flap,.em-env__seal,.em-env__pm,.em-ghost){position:absolute}
 .show--email-marketing :is(.em-dock i,.em-btn i,.em-env__pm,.em-fest),.show--email-marketing .em-env+.em-env::before{display:grid;place-items:center}
 
-/* Copy, chips and the hand-drawn cues */
+/* Copy, chips, cues */
 .show--email-marketing .em-copy{grid-area:copy;flex-direction:column;align-items:flex-start;gap:18px;padding-top:14px}
 .show--email-marketing .sec-head__lead{max-width:470px}
 .show--email-marketing .em-bz{display:inline-block;transform-origin:20% 90%}
-.show--email-marketing .em-bz.is-buzz{animation:emBuzz .55s linear}
 .show--email-marketing .em-did{grid-area:did;display:flex;flex-direction:column;gap:10px}
 .show--email-marketing .em-did__l{font-size:13px;font-weight:700;color:var(--muted)}
 .show--email-marketing .em-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
 .show--email-marketing .em-chips li{display:flex;align-items:center;gap:7px;padding:8px 15px 8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:14px;font-weight:700}
-.show--email-marketing .em-chips svg{width:15px;height:15px;color:var(--accent)}
+.show--email-marketing .em-chips svg{width:15px;height:15px}
+.show--email-marketing :is(.em-chips,.em-cue) svg{color:var(--accent)}
 .show--email-marketing .is-hit{animation:emHit .75s var(--out)}
 @keyframes emHit{30%{transform:translateY(-5px) scale(1.06);border-color:var(--accent);box-shadow:0 12px 22px -12px #e0552bb3}}
 .show--email-marketing .em-cue{grid-area:cue;align-self:center;display:flex;align-items:center;gap:10px;margin:0;font-size:16px;font-weight:700;transform:rotate(-2deg);opacity:0;transition:opacity .4s}
-.show--email-marketing .em-cue svg{color:var(--accent);stroke-width:2.4}
-.show--email-marketing .em-cue__a{width:86px;height:40px;margin-left:-34px}
-.show--email-marketing .em-cue__b{width:28px;height:46px;margin-top:30px}
+.show--email-marketing .em-cue__a{width:86px;height:40px;margin-left:-34px;stroke-width:2.4}
+.show--email-marketing .em-cue__b{width:28px;height:46px;margin-top:30px;stroke-width:2.4}
 .show--email-marketing :is(.em-cue__b,.em-cue__2),.show--email-marketing.is-cue2 :is(.em-cue__a,.em-cue__1){display:none}
 .show--email-marketing.is-cue2 :is(.em-cue__b,.em-cue__2){display:block}
 .show--email-marketing:is(.is-hint,.is-cue2) .em-cue{opacity:1}
 
-/* The phone, its side buttons and its buzz */
+/* The phone, its buttons and its buzz */
 .show--email-marketing .em-ph{grid-area:ph;position:relative;width:var(--pw)}
 .show--email-marketing .em-tag{position:absolute;top:-11px;right:16px;z-index:3}
 .show--email-marketing .em-phone{position:relative;container-type:inline-size;border:var(--bz) solid #111;border-radius:calc(var(--pw)*.155);background:#111;box-shadow:0 50px 90px -40px #1111118c,0 0 0 1px #2c2c2c}
 .show--email-marketing .em-phone::before{content:"";position:absolute;left:calc(-3px - var(--bz));top:17%;width:3px;height:8%;border-radius:2px;background:#222;box-shadow:0 calc(var(--pw)*.2) #222,calc(var(--pw) + 3px) calc(var(--pw)*.15) #222}
-.show--email-marketing .is-buzz .em-phone{animation:emBuzz .45s linear}
-@keyframes emBuzz{15%{transform:translateX(-2px) rotate(-1.4deg)}30%{transform:translateX(2px) rotate(1.4deg)}45%{transform:translateX(-2px) rotate(-1deg)}60%{transform:translateX(2px) rotate(.7deg)}80%{transform:translateX(-1px) rotate(-.3deg)}}
+.show--email-marketing :is(.is-buzz .em-phone,.em-bz.is-buzz){animation:emBuzz .5s linear}
+@keyframes emBuzz{20%{transform:translateX(-2px) rotate(-1.4deg)}40%{transform:translateX(2px) rotate(1.3deg)}60%{transform:translateX(-2px) rotate(-.8deg)}80%{transform:translateX(1px) rotate(.4deg)}}
 .show--email-marketing .em-ph::before,.show--email-marketing .em-ph::after{content:"";position:absolute;top:46%;right:-24px;width:16px;height:34px;border:2.5px solid #0000;border-right-color:var(--accent);border-radius:50%;opacity:0}
 .show--email-marketing .em-ph::before{right:auto;left:-24px;transform:scaleX(-1)}
 .show--email-marketing .is-buzz::before,.show--email-marketing .is-buzz::after{animation:emVib .55s ease-out}
 @keyframes emVib{25%,60%{opacity:1}}
 .show--email-marketing .em-scr{position:relative;aspect-ratio:9/19.5;overflow:hidden;border-radius:calc(var(--pw)*.123);background:#262a52;font-size:4.2cqw;line-height:1.3;color:#111;isolation:isolate;transform:translateZ(0)}
 .show--email-marketing .em-isl{top:.62em;left:50%;z-index:9;width:6.4em;height:1.8em;margin-left:-3.2em;border-radius:999px;background:#000}
-.show--email-marketing .em-sb{inset:0 0 auto;z-index:8;display:flex;align-items:center;justify-content:space-between;height:3.55em;padding:0 2em 0 2.4em;font-size:.86em;font-weight:700;color:#fff;transition:color .3s}
-.show--email-marketing .em-sb time{opacity:0;transition:opacity .3s}
+.show--email-marketing .em-sb{inset:0 0 auto;z-index:8;display:flex;align-items:center;justify-content:space-between;height:3.55em;padding:0 2em 0 2.4em;font-size:.86em;font-weight:700}
 .show--email-marketing .em-sb svg{width:4.9em;height:.88em;fill:currentColor;stroke:none}
-.show--email-marketing .em-home{bottom:.55em;left:50%;z-index:9;width:8.4em;height:.3em;margin-left:-4.2em;border-radius:999px;background:#fff;transition:background .3s}
-.show--email-marketing.is-mail .em-sb{color:#111}
+.show--email-marketing .em-home{bottom:.55em;left:50%;z-index:9;width:8.4em;height:.3em;margin-left:-4.2em;border-radius:999px;background:currentColor}
+.show--email-marketing :is(.em-sb,.em-home){color:#fff;transition:color .3s}
+.show--email-marketing.is-mail :is(.em-sb,.em-home){color:#111}
+.show--email-marketing .em-sb time{opacity:0;transition:opacity .3s}
 .show--email-marketing.is-mail .em-sb time{opacity:1}
-.show--email-marketing.is-mail .em-home{background:#111}
 
 /* Lock screen */
 .show--email-marketing .em-lock{inset:0;z-index:1;color:#fff;background:radial-gradient(85% 40% at 85% 10%,#ffd6b0b3,#0000 70%),radial-gradient(100% 50% at 0 100%,#e86234d9,#0000 72%),linear-gradient(172deg,#262a52,#55447a 34%,#bd6a6e 66%,#f3ad7d);transition:transform .55s var(--out),opacity .4s var(--out)}
@@ -55,10 +53,6 @@
 .show--email-marketing .em-clock svg{width:1.05em;height:1.05em}
 .show--email-marketing .em-clock span{margin-top:.5em;font-size:.95em;font-weight:500;opacity:.92}
 .show--email-marketing .em-clock b{font:800 5.6em/.98 var(--display);letter-spacing:-.04em;opacity:.95}
-.show--email-marketing .em-hint{display:none;left:50%;top:19.3em;padding:.45em .9em .45em 1.6em;border-radius:999px;background:#ffffff38;backdrop-filter:blur(10px);font-size:.76em;font-weight:700;white-space:nowrap;transform:translateX(-50%);opacity:0;transition:opacity .4s}
-.show--email-marketing .em-hint::before{content:"";position:absolute;left:.8em;top:50%;width:.45em;height:.45em;margin-top:-.22em;border-radius:50%;background:#fff;animation:emBlink 1.2s infinite alternate}
-@keyframes emBlink{to{opacity:.25}}
-.show--email-marketing.is-hint .em-hint{opacity:1}
 .show--email-marketing .em-dock{inset:auto 2.1em 2.2em;display:flex;justify-content:space-between}
 .show--email-marketing .em-dock i{width:2.9em;height:2.9em;border-radius:50%;background:#190f2d42;backdrop-filter:blur(8px)}
 .show--email-marketing .em-dock svg{width:1.25em;height:1.25em}
@@ -115,19 +109,13 @@
 .show--email-marketing .em-nl p{margin:.5em 0 0;font-size:.88em;line-height:1.45;color:#5f6b64}
 .show--email-marketing .em-btn{align-self:flex-start;display:flex;align-items:center;gap:.7em;margin:.9em 0 1em;padding:.4em .4em .4em 1.15em;border:0;border-radius:999px;background:var(--nv);color:#fff;font:700 .88em var(--body);cursor:pointer;transition:background .3s,color .3s,scale .2s var(--out)}
 .show--email-marketing .em-btn:active{scale:.95}
-.show--email-marketing .em-btn__t{display:grid}
-.show--email-marketing .em-btn__t span{grid-area:1/1;transition:opacity .25s,transform .35s var(--out)}
-.show--email-marketing .em-btn i{width:2em;height:2em;border-radius:50%;background:var(--lime);color:var(--nv);font-style:normal;transition:background .3s,color .3s,transform .45s var(--pop)}
+.show--email-marketing .em-btn i{width:2em;height:2em;border-radius:50%;background:var(--lime);color:var(--nv);font-style:normal;transition:background .3s,color .3s,transform .5s var(--pop)}
 .show--email-marketing .em-btn i::before{content:"→"}
 .show--email-marketing .em-btn.is-done{background:var(--lime);color:var(--nv)}
 .show--email-marketing .is-done i{background:var(--nv);color:var(--lime);transform:rotate(360deg)}
 .show--email-marketing .is-done i::before{content:"✓"}
-.show--email-marketing .em-btn__t span+span{opacity:0;transform:translateY(.7em)}
-.show--email-marketing .is-done .em-btn__t span:first-child{opacity:0;transform:translateY(-.7em)}
-.show--email-marketing .is-done .em-btn__t span+span{opacity:1;transform:none}
 .show--email-marketing .em-ft{margin-top:auto;padding-top:.7em;border-top:1px solid #eeede8;font-size:.64em;line-height:1.45;color:#8a918c}
 .show--email-marketing .em-ft button{padding:0;border:0;background:none;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
-.show--email-marketing .em-ft button:hover{color:var(--nv)}
 .show--email-marketing .em-toast{inset:auto 1.1em 3.4em;z-index:7;margin:0;padding:.75em 1em;border-radius:1em;background:#111111eb;color:#fff;font-size:.78em;text-align:center;opacity:0;transform:translateY(1em);transition:opacity .3s,transform .45s var(--pop);pointer-events:none}
 .show--email-marketing.is-toast .em-toast{opacity:1;transform:none}
 .motion .show--email-marketing .is-cur .em-nl>*{animation:emUp .6s var(--out) calc(var(--d,0)*.065s) both}
@@ -145,10 +133,9 @@
 .show--email-marketing .em-env{position:relative;aspect-ratio:1.55;padding:0;border:0;background:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;perspective:520px;transform:rotate(var(--r,0deg));transition:transform .45s var(--pop)}
 .show--email-marketing .em-env:hover,.show--email-marketing .em-env.is-on{transform:translateY(-6px)}
 .show--email-marketing .is-nudge{animation:emNudge .9s var(--out)}
-@keyframes emNudge{25%{transform:translateY(-10px) rotate(-6deg)}50%{transform:translateY(-4px) rotate(3deg)}75%{transform:translateY(-2px) rotate(-1deg)}}
+@keyframes emNudge{25%{transform:translateY(-10px) rotate(-6deg)}50%{transform:translateY(-4px) rotate(3deg)}}
 .show--email-marketing .em-env+.em-env::before{content:"→";position:absolute;left:-24px;top:50%;z-index:6;width:24px;height:24px;margin-top:-12px;border:1px solid var(--line-strong);border-radius:50%;background:#fff;font-size:12px;font-weight:700;color:var(--muted)}
 .show--email-marketing .em-env__ltr{left:9%;right:9%;top:6%;height:84%;z-index:1;border-radius:4px;background:#fff linear-gradient(var(--nv),var(--nv)) 0 0/100% 20% no-repeat;box-shadow:0 2px 8px #11111124;transition:transform .5s var(--pop)}
-.show--email-marketing .em-env__ltr::before{content:"";position:absolute;left:12%;right:34%;top:31%;height:7%;border-radius:2px;background:#dcd8cf;box-shadow:0 9px #ebe8e2,30px 18px #ebe8e2}
 .show--email-marketing .em-env__bd{inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 12px 10px;border:1px solid #e4d8c3;border-radius:8px;background:var(--paper);box-shadow:0 18px 30px -18px #11111173;transition:box-shadow .3s}
 .show--email-marketing .is-on .em-env__bd{box-shadow:0 0 0 2px var(--ink),0 22px 34px -18px #11111180}
 .show--email-marketing .em-env__flap{left:0;top:0;z-index:3;width:100%;height:42%;fill:#eee4d2;stroke:#d8cab1;stroke-width:1;vector-effect:non-scaling-stroke;transform-origin:50% 0;transition:transform .45s var(--out),z-index 0s .2s}
@@ -160,10 +147,10 @@
 .show--email-marketing .em-env b{font:800 16px/1.05 var(--display);letter-spacing:-.03em}
 .show--email-marketing .em-env small{margin-top:3px;font-size:12px;line-height:1.25;color:var(--muted)}
 .show--email-marketing .em-env__pm{right:9px;top:9px;z-index:5;min-width:42px;height:22px;padding:0 6px;border:1.5px solid var(--accent);border-radius:6px;background:var(--paper);color:var(--accent);font:800 10.5px/1 var(--display);letter-spacing:.07em;text-transform:uppercase;transform:rotate(-8deg)}
-.show--email-marketing .em-env__pm svg{width:15px;height:15px;stroke-width:2.2}
-.show--email-marketing .em-ghost{left:0;top:0;z-index:20;width:46px;height:30px;margin:-15px 0 0 -23px;border:1px solid #e0d4bf;border-radius:4px;background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0l23 17L46 0' fill='%23ece3d1' stroke='%23d8cab1'/%3E%3C/svg%3E") 0 0/100% 60% no-repeat;box-shadow:0 14px 26px -10px #11111180;pointer-events:none}
+.show--email-marketing .em-env__pm svg{width:15px;height:15px}
+.show--email-marketing .em-ghost{left:0;top:0;z-index:20;width:46px;height:30px;margin:-15px 0 0 -23px;border:1px solid #e0d4bf;border-radius:4px;background:linear-gradient(to top right,#0000 50%,#ece3d1 0) 0 0/50% 60% no-repeat,linear-gradient(to top left,#0000 50%,#ece3d1 0) 100% 0/50% 60% no-repeat,var(--paper);box-shadow:0 14px 26px -10px #11111180;pointer-events:none}
 
-/* Tablets: the copy, the phone, the flow, then the chips; the hint moves into the phone */
+/* Tablets: copy, phone, flow, chips */
 @media (max-width:999px){
   .show--email-marketing{--pw:clamp(250px,calc((100svh - 190px)*.462),300px)}
   .show--email-marketing .em-wrap{grid-template:"copy" "ph" "flow" "did"/minmax(0,1fr);gap:36px}
@@ -171,7 +158,6 @@
   .show--email-marketing .em-ph{justify-self:center}
   .show--email-marketing .em-flow{width:100%;max-width:720px;justify-self:center}
   .show--email-marketing .em-cue{display:none}
-  .show--email-marketing .em-hint{display:block}
 }
 /* Phones: a shorter phone and a swipe row of smaller envelopes, so the two fit on the screen together */
 @media (max-width:699px){
@@ -179,7 +165,6 @@
   .show--email-marketing .em-wrap{gap:22px;padding:32px 20px 80px}
   .show--email-marketing .em-scr{aspect-ratio:9/16.6}
   .show--email-marketing .em-stack{top:19.4em}
-  .show--email-marketing .em-hint{top:16.9em}
   .show--email-marketing .em-flow__hd b{font-size:18px}
   .show--email-marketing .em-flow__sub{display:none}
   .show--email-marketing .em-envs{display:flex;gap:22px;margin:0 -20px;padding:38px 20px 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none}
@@ -189,5 +174,5 @@
   .show--email-marketing .em-env small{font-size:11px}
   .show--email-marketing .em-chips li{padding:7px 13px 7px 10px;font-size:13px}
 }
-/* Without motion: every change simply happens */
+/* Without motion every change simply happens */
 html:not(.motion) .show--email-marketing *,html:not(.motion) .show--email-marketing ::before,html:not(.motion) .show--email-marketing ::after{transition:none!important;animation:none!important}

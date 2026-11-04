@@ -139,7 +139,6 @@
 @media (max-width: 899px) {
   .show--google-css .gcss { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .show--google-css .gcss__head .sec-head__lead { max-width: 560px; }
-  .show--google-css :is(.gcss__stage, .gcss-panel) { max-width: 620px; }
 }
 @media (max-width: 699px) {
   .show--google-css .gcss { padding: 32px 20px 72px; gap: 24px; }
@@ -164,6 +163,7 @@
   .show--google-css .gcss-res__now { font-size: 30px; }
   .show--google-css .gcss-res__was { font-size: 22px; }
 }
+@media (max-width: 389px) { .show--google-css .gcss-note span { width: 6.4em; white-space: normal; line-height: 1.15; } }
 /* Touch: google-css.js moves the slider (drag sideways or tap); a swipe up or down only scrolls */
 @media (pointer: coarse) {
   .show--google-css .gcss-rail { margin: -6px 0; padding: 6px 0; touch-action: pan-y; cursor: pointer; -webkit-tap-highlight-color: transparent; }
