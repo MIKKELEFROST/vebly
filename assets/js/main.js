@@ -220,8 +220,9 @@ const rollTo = (el, to, suffix = '') => {
 const syncCalc = () => {
   if (!calcEl) return;
   const names = chosenNames(), r = beregn(names), on = new Set(names);
-  const groups = state.addons.filter(n => priser[n] && priser[n].kanal).map(n => priser[n].kanal), kanaler = groups.length;
-  const saved = KANAL.first * kanaler - kanalPriser(groups).reduce((a, b) => a + b, 0);
+  // Channels counted as the visitor pays for them: Google Ads and Google Shopping Ads together are one
+  const groups = state.addons.filter(n => priser[n] && priser[n].kanal).map(n => priser[n].kanal), kanaler = new Set(groups).size;
+  const saved = (KANAL.first - KANAL.extra) * Math.max(0, kanaler - 1);
   $$('.calc__opt', calcEl).forEach(b => {
     const id = b.dataset.pakke, n = b.dataset.toggle, sel = id ? id === state.pakke : on.has(n);
     b.classList.toggle('is-on', sel); b.setAttribute('aria-pressed', String(sel));

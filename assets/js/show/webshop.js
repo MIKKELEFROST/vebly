@@ -146,7 +146,7 @@ function init() {
 
   // how: '' first draw · 'slide' the slider is dragged · 'type' the number or the keys · 'user' a choice (src: what was clicked)
   const sync = (how = '', src = null) => {
-    const r = calc(), cost = r.extra * P.perProduct, k = S.ads.length, saved = P.channel.first * k - kanalPriser(S.ads.map(grp)).reduce((a, b) => a + b, 0);
+    const r = calc(), cost = r.extra * P.perProduct, k = new Set(S.ads.map(grp)).size, saved = (P.channel.first - P.channel.extra) * Math.max(0, k - 1);
     $$('.calc__opt, .ws-seg label').forEach(l => l.classList.toggle('is-on', $('input', l).checked));
     $$('[data-ws-seg]').forEach(g => { const i = ins($('input', g).name).findIndex(x => x.checked); g.dataset.on = i; g.nextElementSibling.textContent = ins($('input', g).name)[i].dataset.cap; });
     const dyn = { opret: r.extra ? '+' + kr(cost) : 'Med i prisen', tekster: '+' + kr(r.n * P.texts), sprog: S.sprog ? '+' + kr(S.sprog * P.language) : 'Kun dansk' };
