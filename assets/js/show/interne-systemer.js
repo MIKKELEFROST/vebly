@@ -227,7 +227,7 @@ function init(root) {
     cal.innerHTML = '<span class="crm__c0"></span>' + DAYS.map((n, i) => `<b class="crm__dh${i === today ? ' is-today' : ''}" aria-hidden="true">${n.slice(0, 3)}</b>`).join('')
       + `<div class="crm__hrs" aria-hidden="true">${[7, 8, 9, 10, 11, 12, 13, 14].map(h => `<span>${h}</span>`).join('')}</div>`
       + DAYS.map((n, i) => `<ul class="crm__day" aria-label="${n}">${ev.filter(e => e.d === i).sort((x, y) => x.s - y.s).map(e =>
-        `<li class="crm__ev is-${e.k}${e.n ? ' is-new' : ''}" style="--s:${e.s - 7};--h:${e.h}"><b>${e.a}</b><span>${e.b} · kl. ${e.s}–${e.s + e.h}</span>${e.n ? '<i>Ny</i>' : ''}</li>`).join('')}</ul>`).join('');
+        `<li class="crm__ev is-${e.k}${e.h < 2 ? ' is-1' : ''}${e.n ? ' is-new' : ''}" style="--s:${e.s - 7};--h:${e.h}"><b>${e.a}</b><span>${e.b} · kl. ${e.s}–${e.s + e.h}</span>${e.n ? '<i>Ny</i>' : ''}</li>`).join('')}</ul>`).join('');
     calN.textContent = ev.length + ' aftaler';
   };
   views.forEach(b => b.addEventListener('click', () => {
