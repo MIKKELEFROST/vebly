@@ -26,7 +26,7 @@ const EVENTS = new Set([
   // Quality
   'js_error', 'resource_error', 'web_vitals', 'consent_view', 'consent_choice',
   // Front page
-  'addon_add', 'addon_remove', 'addon_view', 'price_view', 'package_select', 'calc_cta', 'popup_open', 'popup_close', 'popup_action', 'faq_open', 'faq_close',
+  'addon_add', 'addon_remove', 'addon_view', 'price_view', 'package_select', 'calc_cta', 'calc_change', 'showcase_step', 'showcase_interact', 'popup_open', 'popup_close', 'popup_action', 'faq_open', 'faq_close',
   'ba_mode', 'ba_drag', 'pit_shake', 'pit_ball_throw', 'intro_skip', 'demo_step', 'demo_live', 'demo_personalize', 'reference_filter',
   'video_start', 'video_progress', 'video_complete',
   // "Bestil en hjemmeside"
