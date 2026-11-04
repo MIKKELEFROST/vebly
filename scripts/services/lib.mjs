@@ -355,6 +355,265 @@ export function contact({ h2 = 'Klar til flere kunder?', lead, base, value, plac
     </section>`;
 }
 
+/* ------------------------------------------------------------------ */
+/* More sections, so the service pages are not built the same way       */
+/* Each page puts them in its own order (layout in data.mjs). Styles:   */
+/* assets/css/sections.css, behaviour: assets/js/sections.js.           */
+/* ------------------------------------------------------------------ */
+
+// Small inline icons (our own drawings, stroke or fill in currentColor)
+const ICON = {
+  search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>',
+  spark: '<svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>',
+  cursor: '<svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M5.5 3.2 19 10.1l-6 1.7-2.5 5.9z"/></svg>'
+};
+const UNDERLINE = '<svg class="sx-u__l" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 20 C 60 6, 120 4, 170 12 S 260 26, 296 8"/></svg>';
+const lead = t => t ? `<p class="sec-head__lead">${esc(t)}</p>` : '';
+const h2 = ([a, b], dim = 'dim') => `<h2 class="h2">${esc(a)}<br><span class="${dim}">${esc(b)}</span></h2>`;
+const cap = t => t.charAt(0).toLocaleUpperCase('da-DK') + t.slice(1);
+
+// statement: one big sentence. In the text *…* is orange, _…_ is grey, {…} is a small pill
+// (the icon in pill: search, spark, cursor or mail) and | breaks the line on wider screens.
+// The words light up one by one when the sentence comes into view; the last orange word is underlined.
+export function statement(p) {
+  const st = p.statement;
+  // 1: words with their colour; a pill keeps the punctuation right after it
+  let hot = false, dim = false;
+  const words = st.text.match(/\{[^}]*\}\S*|\||\S+/g).map(w => {
+    if (w === '|') return { br: true };
+    if (w.startsWith('{')) { const [, t, rest] = w.match(/^\{([^}]*)\}(.*)$/); return { pill: t, rest }; }
+    let t = w;
+    if (t.startsWith('*')) { hot = true; t = t.slice(1); }
+    if (t.startsWith('_')) { dim = true; t = t.slice(1); }
+    const word = { t: t.replace(/[*_]([.,!?]*)$/, '$1'), cls: hot ? 'hot' : dim ? 'dim' : '' };
+    if (/\*[.,!?]*$/.test(t)) hot = false;
+    if (/_[.,!?]*$/.test(t)) dim = false;
+    return word;
+  });
+  // 2: the last orange word gets the hand-drawn line
+  const last = words.map(w => w.cls === 'hot').lastIndexOf(true);
+  let i = 0;
+  const html = words.map((w, j) => {
+    if (w.br) return '<br class="sx-br">';
+    if (w.pill !== undefined) {
+      const typed = st.pill === 'search';
+      return `<span class="sx-w sx-w--pill" style="--i:${i++}"><span class="sx-pill sx-pill--${st.pill || 'plain'}">${ICON[st.pill] || ''}<span class="sx-pill__t"${typed ? ' data-stm-type aria-hidden="true"' : ''}>${esc(w.pill)}</span>${typed ? `<span class="sr-only">${esc(w.pill)}</span><i class="sx-pill__caret" aria-hidden="true"></i>` : ''}</span>${w.rest ? `<b>${esc(w.rest)}</b>` : ''}</span>`;
+    }
+    const u = j === last;
+    return `<span class="sx-w${w.cls ? ' ' + w.cls : ''}${u ? ' sx-u' : ''}" style="--i:${i++}">${esc(w.t)}${u ? UNDERLINE : ''}</span>`;
+  }).join(' ').replace(/ <br class="sx-br"> /g, ' <br class="sx-br">');
+  return `<section class="sx sx-stm" data-sec="pointe" data-stm style="--n:${i}">
+      ${st.kicker ? `<div class="kicker sx-stm__k" data-reveal="0">${esc(st.kicker)}</div>` : ''}
+      <h2 class="sx-stm__text">${html}</h2>
+      ${st.sub ? `<p class="sx-stm__sub" data-reveal="2">${esc(st.sub)}</p>` : ''}
+    </section>`;
+}
+
+// compare: "Uden …" and "Med …" side by side, row by row. On a phone a switch shows one at a time.
+export function compare(p) {
+  const c = p.compare, n = c.rows.length;
+  const cell = (side, t, row, i) => `<div class="sx-vs__cell is-${side}" style="grid-row:${row};--i:${i}"><span class="sx-vs__mk" aria-hidden="true">${side === 'med' ? '✓' : '✕'}</span><span><span class="sr-only">${esc(side === 'med' ? c.med : c.uden)}: </span>${esc(t)}</span></div>`;
+  return `<section id="forskel" class="sx sx-vs" data-sec="uden-med" data-vs>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">${esc(c.kicker || 'Forskellen')}</div>
+          ${h2(c.h2)}
+        </div>
+        <div class="sx-vs__side">
+          ${lead(c.lead)}
+          <div class="seg sx-vs__seg" role="group" aria-label="Vis ${esc(c.uden.toLocaleLowerCase('da-DK'))} eller ${esc(c.med.toLocaleLowerCase('da-DK'))}">
+            <button type="button" data-vs-go="uden" aria-pressed="false">${esc(c.uden)}</button>
+            <button type="button" data-vs-go="med" class="is-on" aria-pressed="true">${esc(c.med)}</button>
+          </div>
+        </div>
+      </div>
+      <div class="sx-vs__board" data-vs-board data-show="med" style="grid-template-rows:repeat(${n + 1}, auto)">
+        <div class="sx-vs__bg is-uden" aria-hidden="true"></div>
+        <div class="sx-vs__bg is-med" aria-hidden="true"></div>
+        <div class="sx-vs__head is-uden" style="grid-row:1;--i:0"><span class="sx-vs__mk" aria-hidden="true">✕</span>${esc(c.uden)}</div>
+        <div class="sx-vs__head is-med" style="grid-row:1;--i:1"><img src="/assets/logo-icon.svg" alt="" width="28" height="28">${esc(c.med)}</div>
+        ${c.rows.map(([u, m], k) => cell('uden', u, k + 2, 2 * k + 2) + '\n        ' + cell('med', m, k + 2, 2 * k + 3)).join('\n        ')}
+      </div>
+    </section>`;
+}
+
+// facts: three or four big, true facts about the offer. A number at the start counts up (main.js).
+export function facts(p) {
+  const f = p.facts;
+  const big = t => esc(t).replace(/^(\d[\d.]*)/, '<span data-count>$1</span>');
+  return `<section class="sx sx-facts" data-sec="fakta" data-facts>
+      <h2 class="kicker sx-facts__k" data-reveal="0">${esc(f.kicker || 'Kort fortalt')}</h2>
+      <dl class="sx-facts__list" style="--n:${f.items.length}">
+        ${f.items.map(([l, b, t], i) => `<div class="sx-fact" style="--i:${i}">
+          <dt class="sx-fact__lbl">${esc(l)}</dt>
+          <dd class="sx-fact__big"><span>${big(b)}</span></dd>
+          <dd class="sx-fact__txt">${esc(t)}</dd>
+        </div>`).join('\n        ')}
+      </dl>
+    </section>`;
+}
+
+// The price's small print split into lines: "Pr. kanal · hver ekstra kanal … · ekskl. moms"
+const noteLines = a => a ? a.note.split(' · ').filter(x => !/moms/.test(x)).map(cap) : [];
+const priceCta = (where, cls = 'btn btn--dark') => `<a href="#kontakt" class="${cls}" data-magnet data-burst data-event="${where}: Få en fast pris">Få en fast pris →</a>`;
+
+// receipt: the price drawn as a receipt that prints when it comes into view. Every item is "inkl.",
+// the total rolls (data-odo in main.js). Without a price the total says "Fast pris efter en snak".
+export function receipt(p) {
+  const a = p.price, r = p.receipt || {};
+  const unit = !a ? 'Fast pris efter en snak' : /md\./.test(a.post) ? 'Fast pris pr. måned' : /time/.test(a.post) ? 'Timepris' : 'Fast pris';
+  const notes = [...noteLines(a), ...(r.notes || [])];
+  return `<section id="pris" class="sx sx-rcpt" data-sec="pris" data-rcpt>
+      <div class="sx-rcpt__text" data-reveal="0">
+        <div class="kicker">${esc(r.kicker || 'Det får du')}</div>
+        ${h2(r.h2 || p.priceH2)}
+      </div>
+      <div class="sx-rcpt__stage">
+        <div class="sx-rcpt__slot" aria-hidden="true"></div>
+        <div class="sx-rcpt__feed">
+          <div class="sx-rcpt__paper">
+            <div class="sx-rcpt__brand" aria-hidden="true">webleads<span>.</span></div>
+            <div class="sx-rcpt__meta"><b>${esc(p.name)}</b><span>${esc(unit)}</span></div>
+            <ul class="sx-rcpt__items">
+              ${p.items.map(([t]) => `<li><span>${esc(t)}</span><i aria-hidden="true"></i><b>inkl.</b></li>`).join('\n              ')}
+            </ul>
+            <div class="sx-rcpt__total">
+              <span class="sx-rcpt__lbl">I alt</span>
+              ${a ? `<span class="sx-rcpt__sum">${a.pre ? `<small>${esc(a.pre)}</small>` : ''}<span class="odo" data-odo>${esc(a.amount)}</span><small>${esc(a.post)}</small></span>` : '<span class="sx-rcpt__sum sx-rcpt__sum--txt">Fast pris efter en snak</span>'}
+            </div>
+            <div class="sx-rcpt__vat">${a ? 'Ekskl. moms' : 'Svar inden for 24 timer'}</div>
+            ${notes.length ? `<ul class="sx-rcpt__notes">${notes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+            <div class="sx-rcpt__bar" aria-hidden="true"></div>
+            <div class="sx-rcpt__bye" aria-hidden="true">Tak, fordi du kiggede med</div>
+          </div>
+        </div>
+      </div>
+      <div class="sx-rcpt__after" data-reveal="1">
+        <p class="sx-rcpt__lead">${esc(p.priceLead)}</p>
+        ${priceCta('Pris')}
+      </div>
+    </section>`;
+}
+
+// band: a light price band. The big number on the left, four of the included items as chips (the rest
+// opens under them), a button.
+export function band(p) {
+  const a = p.price, b = p.band || {};
+  const pick = b.chips ? b.chips.map(t => p.items.find(([x]) => x === t) || [t, '']) : p.items.slice(0, 4);
+  const rest = p.items.length - pick.length;
+  // Without a number the big text already says "Fast pris efter en snak", so the heading says the rest
+  const title = b.h2 || (a ? p.priceH2 : ['Du kender prisen,', 'før vi går i gang.']);
+  return `<section id="pris" class="sx sx-band" data-sec="pris" data-band>
+      <div class="sx-band__box" data-reveal="0">
+        <div class="sx-band__price">
+          <div class="kicker">${esc(p.name)}</div>${b.sticker ? `
+          <span class="sx-band__sticker">${esc(b.sticker)}</span>` : ''}
+          ${a ? `<div class="sx-band__amount">${a.pre ? `<span>${esc(a.pre)}</span>` : ''}<span class="odo" data-odo>${esc(a.amount)}</span><span>${esc(a.post)}</span></div>
+          <div class="sx-band__note">${esc(a.note)}</div>` : `<div class="sx-band__amount sx-band__amount--txt">Fast pris<span>efter en snak</span></div>`}
+        </div>
+        <div class="sx-band__body">
+          <h2 class="sx-band__h">${esc(title[0])} <span>${esc(title[1])}</span></h2>
+          <p class="sx-band__lead">${esc(p.priceLead)}</p>
+          <ul class="sx-band__chips">
+            ${pick.map(([t], i) => `<li class="sx-chip" style="--i:${i}"><span class="check" aria-hidden="true">✓</span>${esc(t)}</li>`).join('\n            ')}${rest > 0 ? `
+            <li style="--i:${pick.length}"><button type="button" class="sx-chip sx-chip--more" data-band-more aria-expanded="false" aria-controls="sx-band-all">Se alt, der er med <span aria-hidden="true">+</span></button></li>` : ''}
+          </ul>
+          ${rest > 0 ? `<div class="sx-band__all" id="sx-band-all" data-band-all><div><ul>
+            ${p.items.map(([t, d]) => `<li><span class="check" aria-hidden="true">✓</span><span><b>${esc(t)}</b>${esc(d)}</span></li>`).join('\n            ')}
+          </ul></div></div>` : ''}
+          <div class="sx-band__cta">${priceCta('Pris')}</div>
+        </div>
+      </div>
+    </section>`;
+}
+
+// timeline: the steps on a line that draws itself, the nodes light up as it passes (vertical on phones)
+export function timeline(p) {
+  const f = p.flow || {};
+  return `<section id="saadan" class="sx sx-tl" data-sec="saadan" data-tl>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">${esc(f.kicker || 'Sådan foregår det')}</div>
+          ${h2(f.h2 || ['Fra første snak.', 'Til det kører.'])}
+        </div>
+        ${lead(f.lead)}
+      </div>
+      <div class="sx-tl__track" style="--n:${p.steps.length}">
+        <div class="sx-tl__rail" aria-hidden="true"><i data-tl-fill></i></div>
+        <ol class="sx-tl__list">
+          ${p.steps.map(([t, d, g], i) => `<li class="sx-tl__step" style="--i:${i}"><span class="sx-tl__node" aria-hidden="true"><span>${esc(g)}</span></span><h3>${esc(/[.!?]$/.test(t) ? t : t + '.')}</h3><p>${esc(d)}</p></li>`).join('\n          ')}
+        </ol>
+        <span class="sx-tl__end" aria-hidden="true"><i></i>${esc(f.end || 'Så kører det')}</span>
+      </div>
+    </section>`;
+}
+
+// marquee: words for the service (searches, kinds of e-mails …) on two bands that move (sections.js)
+export function marquee(p) {
+  const m = p.marquee, half = Math.ceil(m.words.length / 2);
+  const pill = (t, i) => `<span class="sx-q${i % 3 === 1 ? ' is-hot' : ''}">${ICON[m.icon] || ''}${esc(t)}</span>`;
+  const row = (list, dir, k) => `<div class="sx-mq__row" data-mq-row data-dir="${dir}"><div class="sx-mq__set">${list.map((t, i) => pill(t, i + k)).join('')}</div></div>`;
+  return `<section class="sx-mq" data-sec="${esc(m.sec || 'ord')}" data-mq>
+      <div class="sx-mq__head" data-reveal="0">
+        <h2 class="sx-mq__h">${esc(m.h2[0])} <span>${esc(m.h2[1])}</span></h2>
+        <p class="sx-mq__lead">${m.tag ? '<span class="tag-eks">Eksempel</span>' : ''}${esc(m.lead || '')}</p>
+      </div>
+      <div class="sx-mq__rows" aria-hidden="true">
+        ${row(m.words.slice(0, half), -1, 0)}
+        ${row(m.words.slice(half), 1, 1)}
+      </div>
+      <p class="sr-only">${esc(m.words.join(', '))}.</p>
+    </section>`;
+}
+
+// faqSplit: the questions on the right; on the left a big heading and a nudge to ask us directly.
+// The same data-faq markup as faq(), so main.js opens and closes the answers.
+export function faqSplit(list, o = {}) {
+  return `<section id="faq" class="sx sx-fq" data-sec="faq">
+      <div class="sx-fq__side" data-reveal="0">
+        <div class="kicker">${esc(o.kicker || 'Spørgsmål og svar')}</div>
+        ${h2(o.h2 || ['Godt spørgsmål.', 'Her er svarene.'])}
+        <p class="sx-fq__nudge">${esc(o.nudge || 'Står dit spørgsmål ikke her? Skriv til os, så svarer vi inden for 24 timer.')}</p>
+        <a href="#kontakt" class="btn btn--dark sx-fq__cta" data-magnet data-burst data-event="Spørgsmål: Stil dit spørgsmål">Stil dit spørgsmål →</a>
+        <span class="sx-fq__glyph" aria-hidden="true">?</span>
+      </div>
+      <div class="faq__list sx-fq__list" data-faq>
+        ${list.map(([q, a], i) => `<div class="faq__item${i === 0 ? ' is-open' : ''}" data-reveal="${i}">
+          <button type="button" class="faq__q" aria-expanded="${i === 0}" aria-controls="faq-${i}">${esc(q)}<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-${i}"><div><p>${esc(a)}</p></div></div>
+        </div>`).join('\n        ')}
+      </div>
+    </section>`;
+}
+
+// grid: "Andre services" as small cards in a grid (instead of the sideways track). Same data-addon and
+// data-toggle as the track, so main.js adds them to the contact form.
+export function grid({ id, kicker, h2: title, lead: text, list }) {
+  return `<section id="${id}" class="sx sx-grid" data-sec="${id}" data-grid>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">${esc(kicker)}</div>
+          <h2 class="h2">${title}</h2>
+        </div>
+        <div class="sx-grid__side">
+          ${lead(text)}
+          <a href="#kontakt" class="sx-grid__sum" data-grid-sum hidden><span>I din forespørgsel</span><b data-grid-sum-txt></b><i aria-hidden="true">→</i></a>
+        </div>
+      </div>
+      <div class="sx-grid__list">
+        ${list.map((s, i) => `<div class="sx-gc" data-addon="${esc(s.t)}" data-value="${s.value}" data-reveal="${i % 5}">
+          <div class="sx-gc__top"><h3>${esc(s.t)}</h3><span class="sx-gc__price">${esc(s.price)}</span></div>
+          <p>${esc(s.d)}</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="${esc(s.t)}" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/${s.slug}" aria-label="Læs mere om ${esc(s.t)}" data-event="Services: ${esc(s.t)}">Læs mere →</a>
+          </div>
+        </div>`).join('\n        ')}
+      </div>
+    </section>`;
+}
+
 export const page = (p, main) => `${head(p)}
 <body>
 ${top(p)}

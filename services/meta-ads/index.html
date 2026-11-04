@@ -156,6 +156,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/show/meta-ads.css?v=20261104a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
@@ -164,6 +165,7 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104a"></script>
 <script type="module" src="/assets/js/show/meta-ads.js?v=20261104a"></script>
 </head>
 <body>
@@ -192,8 +194,8 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
-        <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
         <a href="#kontakt" class="nav__cta" data-magnet data-roll data-event="Menu: Kontakt">Kontakt</a>
       </nav>
@@ -239,6 +241,12 @@
           </a>
         </div>
       </div>
+    </section>
+
+    <section class="sx sx-stm" data-sec="pointe" data-stm style="--n:14">
+      <div class="kicker sx-stm__k" data-reveal="0">Kort sagt</div>
+      <h2 class="sx-stm__text"><span class="sx-w" style="--i:0">Dine</span> <span class="sx-w" style="--i:1">næste</span> <span class="sx-w" style="--i:2">kunder</span> <span class="sx-w" style="--i:3">søger</span> <span class="sx-w" style="--i:4">ikke</span> <span class="sx-w" style="--i:5">efter</span> <span class="sx-w" style="--i:6">dig.</span> <br class="sx-br"><span class="sx-w dim" style="--i:7">De</span> <span class="sx-w dim" style="--i:8">scroller.</span> <span class="sx-w" style="--i:9">Mød</span> <span class="sx-w" style="--i:10">dem,</span> <span class="sx-w hot" style="--i:11">før</span> <span class="sx-w hot" style="--i:12">de</span> <span class="sx-w hot sx-u" style="--i:13">søger.<svg class="sx-u__l" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 20 C 60 6, 120 4, 170 12 S 260 26, 296 8"/></svg></span></h2>
+      <p class="sx-stm__sub" data-reveal="2">På Facebook og Instagram møder du dem med et tilbud eller et godt eksempel på dit arbejde.</p>
     </section>
 
     <section id="eksempel" class="show show--meta-ads" data-sec="eksempel">
@@ -416,6 +424,38 @@
       </svg>
     </section>
 
+    <section id="forskel" class="sx sx-vs" data-sec="uden-med" data-vs>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Forskellen</div>
+          <h2 class="h2">Et boostet opslag.<br><span class="dim">Eller en plan.</span></h2>
+        </div>
+        <div class="sx-vs__side">
+          <p class="sec-head__lead">Forskellen på at trykke “Promover” og at have annoncer, der bliver styret.</p>
+          <div class="seg sx-vs__seg" role="group" aria-label="Vis uden en plan eller med webleads">
+            <button type="button" data-vs-go="uden" aria-pressed="false">Uden en plan</button>
+            <button type="button" data-vs-go="med" class="is-on" aria-pressed="true">Med Webleads</button>
+          </div>
+        </div>
+      </div>
+      <div class="sx-vs__board" data-vs-board data-show="med" style="grid-template-rows:repeat(6, auto)">
+        <div class="sx-vs__bg is-uden" aria-hidden="true"></div>
+        <div class="sx-vs__bg is-med" aria-hidden="true"></div>
+        <div class="sx-vs__head is-uden" style="grid-row:1;--i:0"><span class="sx-vs__mk" aria-hidden="true">✕</span>Uden en plan</div>
+        <div class="sx-vs__head is-med" style="grid-row:1;--i:1"><img src="/assets/logo-icon.svg" alt="" width="28" height="28">Med Webleads</div>
+        <div class="sx-vs__cell is-uden" style="grid-row:2;--i:2"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Du promoverer et opslag og håber på det bedste.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:2;--i:3"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Annoncer med et mål, lavet færdige til feedet.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:3;--i:4"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Annoncen bliver vist for alle mulige.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:3;--i:5"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Den bliver vist for de rigtige i dit område.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:4;--i:6"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Dem, der kiggede, glemmer dig igen.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:4;--i:7"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Retargeting minder dem om at vende tilbage.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:5;--i:8"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Den samme annonce kører, til den holder op med at virke.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:5;--i:9"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Flere varianter bliver testet, og budgettet flytter derhen, hvor det virker.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:6;--i:10"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Du ved ikke, hvad annoncerne giver.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:6;--i:11"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Meta Pixel og en månedlig rapport viser det.</span></div>
+      </div>
+    </section>
+
     <section id="pris" class="price-sec" data-sec="pris">
       <div class="spot price" data-reveal="0" data-spot>
         <div class="price__main">
@@ -435,27 +475,6 @@
           <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Meta Pixel og sporing</b><span>Vi sætter målingen op, så du kan se, hvad annoncerne giver.</span></span></div>
           <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Månedlig rapport</b><span>Kort og klart overblik over, hvad du får for pengene.</span></span></div>
           <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Direkte kontakt</b><span>Du taler med den, der kører dine annoncer.</span></span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="saadan" class="promise" data-sec="saadan">
-      <div class="promise__head" data-reveal="0">
-        <div class="kicker">Sådan foregår det</div>
-        <h2 class="h2">Tre trin.<br><span class="dim">Så kører det.</span></h2>
-      </div>
-      <div class="promise__list">
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">01 / 03</span><h3>Mål og budget.</h3><p>Vi aftaler, hvad du vil opnå, og hvad det må koste.</p></div>
-          <span class="pcard__g" aria-hidden="true">kr</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">02 / 03</span><h3>Annoncer og målretning.</h3><p>Vi laver annoncerne og sætter målretning og sporing op.</p></div>
-          <span class="pcard__g" aria-hidden="true">f</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">03 / 03</span><h3>Test og optimering.</h3><p>Vi tester, justerer og sender en månedlig rapport.</p></div>
-          <span class="pcard__g" aria-hidden="true">↗</span>
         </div>
       </div>
     </section>
