@@ -382,6 +382,7 @@ export const ORG = { '@type': 'ProfessionalService', '@id': `${SITE}/#virksomhed
 export const faqLd = (u, list) => ({ '@type': 'FAQPage', '@id': `${u}#faq`, mainEntity: list.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
 export const priceSpec = s => {
   if (!s.value) return null;
+  if (/time/.test(s.price)) return { '@type': 'UnitPriceSpecification', price: String(s.value), priceCurrency: 'DKK', unitCode: 'HUR', unitText: 'time', valueAddedTaxIncluded: false };
   const monthly = /md\./.test(s.price);
   return monthly
     ? { '@type': 'UnitPriceSpecification', minPrice: String(s.value), priceCurrency: 'DKK', unitText: 'måned', valueAddedTaxIncluded: false }
@@ -403,7 +404,7 @@ export function frontLd() {
         taxID: '45737632',
         areaServed: { '@type': 'Country', name: 'Danmark' },
         address: { '@type': 'PostalAddress', addressCountry: 'DK' },
-        priceRange: 'Fra 999 kr.',
+        priceRange: 'Fra 995 kr.',
         sameAs: ['https://www.instagram.com/webleads.dk/'],
         knowsAbout: [...services.map(s => s.t), 'Interne systemer'],
         hasOfferCatalog: {
