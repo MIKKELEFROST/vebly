@@ -1,7 +1,7 @@
 import { track } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { openBestil, FAG } from './bestil.js';
-import { trades, flipWords, included, addons, addonPages, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
+import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
 const $ = (s, r = document) => r.querySelector(s);
@@ -108,14 +108,114 @@ if (odo && motion) {
 /* ------------------------------------------------------------------ */
 
 const form = $('[data-form]'), thanks = $('[data-thanks]');
+const kr = n => n.toLocaleString('da-DK') + ' kr.';
+
 // What the form is about: the page's own service (data-base on the form, "Hjemmeside" when it is not
-// set, empty on the front page) plus what was added from the cards. data-value is its start price.
-const base = form ? (form.dataset.base ?? 'Hjemmeside') : '';
-const baseValue = form && form.dataset.value !== undefined ? (+form.dataset.value || 0) : 3000;
-const priceOf = t => {
-  const card = $$('[data-addon]').find(c => c.dataset.addon === t);
-  return +(card && card.dataset.value) || +String(addons.find(a => a.t === t)?.price || '').replace(/\D/g, '') || 0;
+// set, empty on the front page) plus what was added. On /services/hjemmesider it is the chosen
+// package, and the price calculator starts on the cheapest one.
+const pakkeEl = $('[data-pakker]'), calcEl = $('[data-calc]');
+state.pakke = pakkeEl || calcEl ? pakker[0].id : null;
+const pakke = () => pakker.find(p => p.id === state.pakke);
+const base = () => state.pakke ? pakke().t : form ? (form.dataset.base ?? 'Hjemmeside') : '';
+const chosenNames = () => [base(), ...state.addons].filter(Boolean);
+// Start price when nothing chosen has a known price (data-value on the form)
+const fallbackValue = form && form.dataset.value !== undefined ? (+form.dataset.value || 0) : 2995;
+
+// The price of a list of names (content.js → priser): one-off, a month, and the advertising
+// channels, where the first costs KANAL.first and each extra KANAL.extra a month
+const beregn = names => {
+  const r = { once: 0, md: 0, kanaler: 0, fraOnce: false, fraMd: false };
+  names.forEach(n => {
+    const p = priser[n]; if (!p) return;
+    if (p.kanal) r.kanaler++;
+    r.once += p.once || 0; r.md += p.md || 0;
+    if (p.fra && p.once) r.fraOnce = true;
+    if (p.fra && p.md && !p.once) r.fraMd = true;
+  });
+  if (r.kanaler) r.md += KANAL.first + KANAL.extra * (r.kanaler - 1);
+  return r;
 };
+const priceText = r => [r.once ? (r.fraOnce ? 'fra ' : '') + kr(r.once) : '', r.md ? (r.fraMd ? 'fra ' : '') + kr(r.md) + '/md.' : ''].filter(Boolean).join(' + ');
+// One line per thing chosen; channels in the order they were picked (first full price, then extra)
+const priceLines = names => {
+  let k = 0;
+  return names.map(n => {
+    const p = priser[n]; if (!p) return [n, 'Pris efter en snak'];
+    if (p.kanal) return [n, kr(k++ ? KANAL.extra : KANAL.first) + '/md.'];
+    return [n, (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ')];
+  });
+};
+
+// Website packages as cards under the price
+if (pakkeEl) pakkeEl.innerHTML = pakker.map((p, i) => `
+  <div class="addon pakke" data-tilt data-pakke-card="${p.id}" data-reveal="${i}">
+    <div class="glare" data-glare></div>
+    <span class="addon__n">0${i + 1}</span>
+    <div class="addon__head"><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p></div>
+    <div class="addon__price">${kr(p.price)}</div>
+    <ul>${p.ex.map(x => `<li><span class="check" aria-hidden="true">✓</span>${esc(x)}</li>`).join('')}</ul>
+    <div class="addon__actions"><button type="button" class="addon__toggle" data-pakke="${p.id}" data-burst aria-pressed="false">Vælg ${esc(p.t.split(' ')[0])}</button></div>
+  </div>`).join('');
+
+// Price calculator: package, advertising channels and add-ons, with the total right away
+const CALC = { kanaler: ['Google Ads', 'Meta Ads', 'Google Shopping Ads'], tilvalg: ['SEO', 'Automations', 'Interne systemer'] };
+if (calcEl) {
+  const opt = (attr, val, t) => `<button type="button" class="calc__opt" ${attr}="${esc(val)}" aria-pressed="false"><b>${esc(t)}</b><span data-calc-p></span></button>`;
+  calcEl.innerHTML = `
+    <div class="calc__opts">
+      <div class="calc__group"><span class="calc__lbl">1 · Pakke</span>
+        <div class="calc__row">${pakker.map(p => opt('data-pakke', p.id, p.t)).join('')}</div></div>
+      <div class="calc__group"><span class="calc__lbl">2 · Annoncering pr. måned</span>
+        <div class="calc__row">${CALC.kanaler.map(n => opt('data-toggle', n, n)).join('')}</div>
+        <p class="calc__hint" data-calc-hint></p></div>
+      <div class="calc__group"><span class="calc__lbl">3 · Tilvalg</span>
+        <div class="calc__row">${CALC.tilvalg.map(n => opt('data-toggle', n, n)).join('')}</div></div>
+    </div>
+    <div class="spot calc__sum" data-spot>
+      <span class="kicker">Din pris</span>
+      <div class="calc__lines" data-calc-lines></div>
+      <div class="calc__tot"><span>Engangsbeløb</span><b data-calc-once>${kr(pakker[0].price)}</b></div>
+      <div class="calc__tot calc__tot--md"><span>Pr. måned</span><b data-calc-md>0 kr.</b></div>
+      <p class="calc__note">Alle priser er ekskl. moms. Hosting og domæne koster typisk 50–100 kr. om måneden. Annoncebudgettet betaler du direkte til Google eller Meta.</p>
+      <button type="button" class="btn btn--accent" data-calc-go data-magnet data-burst>Få et tilbud på det her →</button>
+    </div>`;
+  $('[data-calc-go]', calcEl).addEventListener('click', () => {
+    const r = beregn(chosenNames());
+    track('calc_cta', { package: state.pakke, addons_total: state.addons.length, value: r.once + r.md, currency: 'DKK' });
+    scrollToId('kontakt');
+  });
+}
+// Numbers in the calculator roll to their new value
+const rollTo = (el, to, suffix = '') => {
+  if (!el) return;
+  const from = +el.dataset.n || 0; el.dataset.n = to;
+  if (!motion || from === to) { el.textContent = kr(to) + suffix; return; }
+  const t0 = performance.now();
+  const step = t => { const k = Math.min(1, (t - t0) / 600); el.textContent = kr(Math.round(from + (to - from) * ease(k))) + suffix; if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+};
+const syncCalc = () => {
+  if (!calcEl) return;
+  const names = chosenNames(), r = beregn(names), on = new Set(names);
+  const kanaler = state.addons.filter(n => priser[n] && priser[n].kanal).length;
+  $$('.calc__opt', calcEl).forEach(b => {
+    const id = b.dataset.pakke, n = b.dataset.toggle, sel = id ? id === state.pakke : on.has(n);
+    b.classList.toggle('is-on', sel); b.setAttribute('aria-pressed', String(sel));
+    const p = id ? { once: pakker.find(x => x.id === id).price } : priser[n];
+    let txt = (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ');
+    if (p.kanal) txt = sel ? priceLines(names).find(l => l[0] === n)[1] : (kanaler ? '+' + kr(KANAL.extra) : kr(KANAL.first)) + '/md.';
+    $('[data-calc-p]', b).textContent = txt;
+  });
+  $('[data-calc-lines]', calcEl).innerHTML = priceLines(names).map(([t, v]) => `<div class="calc__line"><span>${esc(t)}</span><span>${esc(v)}</span></div>`).join('');
+  $('[data-calc-hint]', calcEl).innerHTML = kanaler === 0 ? `Første kanal ${kr(KANAL.first)}/md. Hver ekstra kanal kun ${kr(KANAL.extra)}/md.`
+    : kanaler === 1 ? `Tag en kanal mere for kun <b>${kr(KANAL.extra)}/md.</b>`
+    : `Du sparer <b>${kr((KANAL.first - KANAL.extra) * (kanaler - 1))}/md.</b> ved at samle ${kanaler} kanaler hos os.`;
+  rollTo($('[data-calc-once]', calcEl), r.once);
+  rollTo($('[data-calc-md]', calcEl), r.md);
+  $('[data-calc-once]', calcEl).dataset.fra = r.fraOnce ? '1' : '';
+  $('[data-calc-md]', calcEl).dataset.fra = r.fraMd ? '1' : '';
+};
+
 const syncAddons = () => {
   $$('[data-addon]').forEach(card => {
     const on = state.addons.includes(card.dataset.addon);
@@ -124,16 +224,28 @@ const syncAddons = () => {
     b.textContent = on ? '✓ Tilføjet' : '+ Tilføj';
     b.setAttribute('aria-pressed', String(on));
   });
+  $$('[data-pakke-card]').forEach(card => {
+    const on = card.dataset.pakkeCard === state.pakke, b = $('[data-pakke]', card);
+    card.classList.toggle('is-added', on);
+    b.textContent = on ? '✓ Valgt' : 'Vælg ' + pakker.find(p => p.id === card.dataset.pakkeCard).t.split(' ')[0];
+    b.setAttribute('aria-pressed', String(on));
+  });
+  syncCalc();
   if (!form) return;
-  const chosen = [base, ...state.addons].filter(Boolean).join(' + ');
-  $('[data-chosen]').hidden = state.addons.length === 0;
-  $('[data-chosen-val]').textContent = chosen;
-  $('[data-chosen-input]').value = chosen || 'Generel henvendelse';
+  const names = chosenNames(), chosen = names.join(' + '), pt = priceText(beregn(names));
+  $('[data-chosen]').hidden = !state.pakke && state.addons.length === 0;
+  $('[data-chosen-val]').textContent = chosen + (pt ? ` · ${pt}` : '');
+  $('[data-chosen-input]').value = (chosen || 'Generel henvendelse') + (pt ? ` (${pt}, ekskl. moms)` : '');
   // Changing the selection re-opens the form, like the design
   form.hidden = false; thanks.hidden = true;
 };
 const toggleAddon = (t, source = 'kort') => { const on = !state.addons.includes(t); state.addons = on ? [...state.addons, t] : state.addons.filter(x => x !== t); syncAddons(); track(on ? 'addon_add' : 'addon_remove', { addon: t, addons_total: state.addons.length, source }); };
-document.addEventListener('click', e => { const b = e.target.closest('[data-toggle]'); if (b) toggleAddon(b.dataset.toggle); });
+const choosePakke = (id, source = 'kort') => { if (id === state.pakke || !pakker.some(p => p.id === id)) return; state.pakke = id; syncAddons(); track('package_select', { package: id, source }); };
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-toggle], [data-pakke]'); if (!b) return;
+  const source = b.closest('[data-calc]') ? 'beregner' : 'kort';
+  if (b.dataset.pakke) choosePakke(b.dataset.pakke, source); else toggleAddon(b.dataset.toggle, source);
+});
 syncAddons();
 
 // Which add-on cards were actually seen (swiped to on phones, scrolled past on computers)
@@ -159,8 +271,8 @@ if (form) form.addEventListener('submit', async e => {
   try {
     // For Meta: the start price of what was chosen (monthly add-ons count one month), and an
     // event id shared with /api/contact, which sends the same Lead with the e-mail hashed
-    const chosen = $('[data-chosen-input]').value || base || 'Generel henvendelse';
-    const value = baseValue + state.addons.reduce((sum, t) => sum + priceOf(t), 0);
+    const chosen = $('[data-chosen-input]').value || base() || 'Generel henvendelse';
+    const r = beregn(chosenNames()), value = r.once + r.md || fallbackValue;
     const meta = metaLeadFields();
     const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), ...meta, meta_value: value }) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -653,7 +765,7 @@ function runEffects() {
     }, 2200);
   }
 
-  // Hand-drawn underline under "3.000 kr."
+  // Hand-drawn underline under the marked word (or the counted price)
   {
     const mark = $('[data-hero] [data-underline]') || $('[data-hero] [data-count]'), wd = mark && mark.closest('[data-word]');
     if (wd) {

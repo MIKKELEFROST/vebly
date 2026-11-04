@@ -43,9 +43,11 @@ const line1 = h => [...h.a, h.hot].join(' ');
 const line2 = h => `${h.dim} ${h.mark}`;
 const jobs = [
   { file: 'forside', kicker: '', black: [line1(front.h1)], orange: line2(front.h1), pills: ['Hjemmesider', 'Annoncer', 'SEO og AI'] },
+  // /services/hjemmesider (and assets/og.png, the default for /bestil and /privatliv)
+  { file: 'hjemmesider', also: '../og.png', kicker: '', black: ['Hjemmesider', 'til servicefag.'], orange: 'Fra 2.995 kr.', pills: ['Alt det vigtige er med', 'Tre pakker', 'Ingen binding'] },
   ...pages.map(p => {
     const s = services.find(x => x.slug === p.slug);
-    const price = p.price ? `${p.price.pre[0].toUpperCase()}${p.price.pre.slice(1)} ${p.price.amount} ${p.price.post}` : null;
+    const price = p.price ? `${p.price.pre} ${p.price.amount} ${p.price.post}`.trim().replace(/^./, c => c.toUpperCase()) : null;
     return { file: p.slug, kicker: p.name, black: price ? [line1(p.h1), line2(p.h1)] : [line1(p.h1)], orange: price || line2(p.h1), pills: s.ex };
   })
 ];
@@ -74,5 +76,6 @@ for (const j of jobs) {
   });
   await page.screenshot({ path: join(OUT, `${j.file}.png`) });
   console.log('skrev assets/og/' + j.file + '.png');
+  if (j.also) { await page.screenshot({ path: join(OUT, j.also) }); console.log('skrev assets/og/' + j.also); }
 }
 await b.close();

@@ -21,18 +21,48 @@ export const included = [
 
 export const addons = [
   { t: 'SEO', id: 'seo', price: 'fra 999 kr./md.', d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'], band: ['#e0552b', '#fff'] },
-  { t: 'Annoncering', id: 'annoncering', price: 'fra 999 kr./md.', d: 'Flere kunder fra Google og sociale medier.', ex: ['Google Ads', 'Facebook og Instagram', 'AI-annoncering', 'Månedlig rapport'], band: ['#111', '#fff'] },
+  { t: 'Google Ads', id: 'google-ads', price: '8.000 kr./md.', d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'], band: ['#111', '#fff'] },
+  { t: 'Meta Ads', id: 'meta-ads', price: '8.000 kr./md.', d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'], band: ['#2f9e5b', '#fff'] },
   { t: 'Interne systemer', id: 'systemer', price: 'fra 14.999 kr.', d: 'Skræddersyede værktøjer til din drift.', ex: ['Kunde- og bookingsystemer', 'Dashboards og overblik', 'Portaler til medarbejdere'], band: ['#f2c14e', '#111'] },
   { t: 'Automations', id: 'automations', price: 'fra 4.999 kr.', d: 'Lad rutinerne klare sig selv.', ex: ['Automatiske mails og sms', 'Fakturaer og opfølgning', 'Kobling mellem dine systemer'], band: ['#f2ede4', '#111'] }
 ];
+
+// Website packages (/services/hjemmesider). The calculator starts on the first one.
+export const pakker = [
+  { id: 'simpel', t: 'Simpel one page', price: 2995, d: 'Én side med alt det vigtige. Til dig, der skal findes og kontaktes.', ex: ['Én side: hvem du er, hvad du laver, og hvordan man kontakter dig', 'Kontaktformular, kort og åbningstider', 'Klar på 7 dage'] },
+  { id: 'normal', t: 'Normal hjemmeside', price: 9995, d: 'En hjemmeside med undersider, så der er plads til alle dine ydelser.', ex: ['Forside og undersider, fx ydelser, om os, priser og kontakt', 'En side pr. ydelse', 'Galleri, FAQ eller booking, hvis du vil'] },
+  { id: 'seo', t: 'SEO hjemmeside', price: 29995, d: 'Bygget til at blive fundet på Google, også uden for din egen by.', ex: ['Søgeordsanalyse, før vi bygger', 'En side pr. ydelse og pr. område', 'Tekster skrevet til Google og dine kunder', 'Teknisk SEO og struktureret data'] }
+];
+
+// Advertising: the first channel costs `first` a month, every extra channel `extra`
+export const KANAL = { first: 8000, extra: 5000 };
+
+// What each thing costs, by the name used on the cards and in the form.
+// once = one-off, md = a month, kanal = an advertising channel (priced with KANAL), fra = a "from" price
+export const priser = {
+  'Simpel one page': { once: 2995 },
+  'Normal hjemmeside': { once: 9995 },
+  'SEO hjemmeside': { once: 29995 },
+  'Hjemmeside': { once: 2995, fra: true },
+  'Hjemmesider': { once: 2995, fra: true },
+  'Google Ads': { kanal: true },
+  'Meta Ads': { kanal: true },
+  'Google Shopping Ads': { kanal: true },
+  'SEO': { md: 999, fra: true },
+  'Automations': { once: 4999, md: 499, fra: true },
+  'Interne systemer': { once: 14999, fra: true }
+};
 
 export const addonPages = {
   seo: { price: 'Fra 999 kr./md.', priceNote: 'Ingen binding · ekskl. moms', label: 'SEO', h1: 'Bliv fundet først, når kunderne søger.', intro: 'Vi sørger for, at din virksomhed dukker op på Google, når nogen søger efter det, du laver, der hvor du holder til.',
     items: [['Lokal SEO', 'Bliv fundet i dit område, fx “frisør Roskilde”.'], ['Google-profil', 'Opsætning og pleje af din virksomhedsprofil med anmeldelser.'], ['Søgeord', 'Vi finder de ord, dine kunder faktisk søger på.'], ['Tekster', 'Indhold, der både Google og dine kunder forstår.'], ['Teknisk SEO', 'Hastighed, struktur og alt det bag kulisserne.'], ['Månedlig rapport', 'Kort og klart overblik over, hvad der virker.']],
     steps: [['Analyse', 'Vi ser på din side, dine konkurrenter og dine søgeord.'], ['Plan', 'Du får en klar plan og en fast månedspris.'], ['Løbende arbejde', 'Vi optimerer hver måned og viser dig resultaterne.']] },
-  annoncering: { price: 'Fra 999 kr./md.', priceNote: 'Pr. kanal · opsætning gratis · annoncebudget betales direkte til Google/Meta', label: 'Annoncering', h1: 'Flere kunder fra Google og sociale medier.', intro: 'Vi laver annoncer, der rammer de rigtige mennesker, og holder øje med hver krone, så du får mest muligt ud af budgettet.',
-    items: [['Google Ads', 'Vær øverst, når kunderne søger lige nu.'], ['Facebook og Instagram', 'Annoncer, der fanger opmærksomheden i feedet.'], ['AI-annoncering', 'AI laver og tester mange annoncevarianter og flytter budgettet derhen, hvor det virker.'], ['LinkedIn', 'Når dine kunder er andre virksomheder.'], ['Tekst og grafik', 'Vi laver annoncerne færdige, klar til at køre.'], ['Målretning', 'Vis dine annoncer for de rigtige, og mind dem om dig.'], ['Sporing og rapport', 'Se præcis, hvad du får for pengene.']],
+  'google-ads': { price: '8.000 kr./md.', priceNote: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · annoncebudget betales direkte til Google', label: 'Google Ads', h1: 'Øverst på Google, når kunderne søger.', intro: 'Vi bygger og styrer dine annoncer på Google, så du bliver vist, når nogen søger efter det, du laver, der hvor du holder til. Og vi holder øje med hver krone.',
+    items: [['Søgeordsanalyse', 'Vi finder de ord, dine kunder faktisk søger på.'], ['Kampagner og annoncer', 'Vi bygger kampagnerne og skriver annoncerne færdige.'], ['Lokal målretning', 'Vis dig for kunder i dit område.'], ['Sporing', 'Opkald og henvendelser bliver målt.'], ['Løbende optimering', 'Vi justerer bud, søgeord og annoncer hver måned.'], ['Månedlig rapport', 'Kort og klart overblik over, hvad du får for pengene.']],
     steps: [['Mål og budget', 'Vi aftaler, hvad du vil opnå, og hvad det må koste.'], ['Opsætning', 'Vi bygger kampagner, annoncer og sporing.'], ['Optimering', 'Vi justerer løbende og sender en månedlig rapport.']] },
+  'meta-ads': { price: '8.000 kr./md.', priceNote: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · annoncebudget betales direkte til Meta', label: 'Meta Ads', h1: 'Kunder fra Facebook og Instagram.', intro: 'Vi laver annoncer, der fanger opmærksomheden i feedet og rammer de rigtige mennesker, og holder øje med hver krone.',
+    items: [['Tekst og grafik', 'Vi laver annoncerne færdige, klar til at køre.'], ['Målretning', 'Vis dine annoncer for de rigtige i dit område.'], ['Retargeting', 'Mind dem, der har besøgt din side, om at vende tilbage.'], ['AI-annoncering', 'AI tester mange annoncevarianter og flytter budgettet derhen, hvor det virker.'], ['Meta Pixel og sporing', 'Vi sætter målingen op, så du kan se, hvad annoncerne giver.'], ['Månedlig rapport', 'Kort og klart overblik over, hvad du får for pengene.']],
+    steps: [['Mål og budget', 'Vi aftaler, hvad du vil opnå, og hvad det må koste.'], ['Annoncer og målretning', 'Vi laver annoncerne og sætter målretning og sporing op.'], ['Test og optimering', 'Vi tester, justerer og sender en månedlig rapport.']] },
   systemer: { price: 'Fra 14.999 kr.', priceNote: 'Engangsbeløb · større systemer får fast pris efter en snak', label: 'Interne systemer', h1: 'Værktøjer, der passer til din måde at arbejde på.', intro: 'Vi bygger systemer skræddersyet til din virksomhed, så du slipper for regneark, post-its og programmer, der næsten passer.',
     items: [['Kundesystem (CRM)', 'Samlet overblik over kunder, aftaler og historik.'], ['Booking og kalender', 'Styr tider, medarbejdere og lokaler ét sted.'], ['Dashboards', 'Se de vigtigste tal på én skærm.'], ['Medarbejderportal', 'Vagtplaner, dokumenter og beskeder samlet.'], ['Tilbud og ordrer', 'Fra tilbud til faktura uden dobbeltarbejde.'], ['Integrationer', 'Kobles til de systemer, du allerede bruger.']],
     steps: [['Vi lytter', 'Vi ser på, hvordan I arbejder i dag, og hvor det driller.'], ['Vi bygger', 'Du ser systemet undervejs og kan ønske ændringer.'], ['Vi følger op', 'Oplæring, support og videreudvikling, når I vokser.']] },
@@ -60,7 +90,7 @@ export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automation
 
 // [explanation, related: a pop-up key, 'pris', 'link:/a/page' or null]
 export const ballInfo = {
-  'Hjemmeside': ['Vores hovedprodukt. En komplet hjemmeside, hvor alt det vigtige er med.', 'pris'],
+  'Hjemmeside': ['Vores hovedprodukt. Tre pakker fra 2.995 kr., hvor alt det vigtige er med.', 'pris'],
   'SEO': ['Bliv fundet først, når kunderne søger efter det, du laver.', 'link:/services/seo'],
   'Google Ads': ['Vær øverst på Google, når kunderne søger lige nu.', 'link:/services/google-ads'],
   'Meta Ads': ['Annoncer på Facebook og Instagram, der rammer de rigtige.', 'link:/services/meta-ads'],
@@ -86,6 +116,7 @@ export const ballInfo = {
 // The questions on /services/hjemmesider. Keep in sync with the FAQPage structured data there.
 // The front page and the other service pages have their own (scripts/services/data.mjs).
 export const faqs = [
+  ['Hvilken pakke skal jeg vælge?', 'Simpel one page er nok, hvis kunderne bare skal kunne finde og kontakte dig. Har du flere ydelser, er Normal hjemmeside det rigtige. Vil du findes på Google på mange ydelser eller i flere byer, så vælg SEO hjemmeside. Er du i tvivl, så skriv til os.'],
   ['Er der en månedlig betaling?', 'Nej, du betaler én gang for hjemmesiden. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.'],
   ['Jeg har ikke tid til det. Hvad skal jeg lave?', 'Et opkald på 15 minutter og nogle billeder. Resten klarer vi, også teksterne.'],
   ['Kan kunderne finde mig på Google?', 'Ja. Vi sætter siden op, så du kan findes på dit fag og dit område, fx “frisør Roskilde” eller “tømrer Vejle”, og opretter din Google-profil.'],
