@@ -80,6 +80,8 @@ change is really needed, say so in your result.
   visitor (typing, dragging, tapping, toggling), with requestAnimationFrame, transform and opacity only.
   Never pin the section and never tie a step list to the scroll position. `html.motion` is set when motion
   is allowed. Without it (reduced motion): the finished state, static, everything readable.
+- Do not use the attribute `data-card` inside a showcase: `main.js` gives every `[data-card]` on a page a
+  scroll effect that shrinks and darkens it. Use your own name (the CRM showcase uses `data-lead`).
 - Free effects from `main.js`: `data-reveal="n"` (fades up when scrolled to; n is the delay step),
   `data-tilt` with a child `data-glare`, `data-magnet`, `data-burst` (confetti on click), `data-spot`,
   `data-roll` (only on links with plain text).
