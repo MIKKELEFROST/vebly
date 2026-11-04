@@ -159,7 +159,7 @@
   .show--interne-systemer .crm__tile--kr { grid-column: 1 / -1; padding-right: 88px; }
   .show--interne-systemer .crm__bars { right: 14px; bottom: 14px; height: 44px; }
   .show--interne-systemer .crm__hint { font-size: 12.5px; margin-bottom: 10px; }
-  .show--interne-systemer .crm__board { grid-template-columns: repeat(3, 252px); gap: 10px; margin: 0 -14px; padding: 0 14px 4px; scroll-padding: 0 14px; }
+  .show--interne-systemer .crm__board { grid-template-columns: repeat(3, 272px); gap: 10px; margin: 0 -14px; padding: 0 14px 4px; scroll-padding: 0 14px; }
   .show--interne-systemer .crm__wrap { margin: 0 -14px; padding: 0 14px; }
   .show--interne-systemer .crm__calh .crm__key { display: none; }
 }
