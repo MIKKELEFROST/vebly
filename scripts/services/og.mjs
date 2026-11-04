@@ -1,5 +1,6 @@
 // Share images (1200 × 630) for the front page and each service page, in the style of assets/og.png.
 //   node scripts/services/og.mjs          → assets/og/forside.png and assets/og/<slug>.png
+//   node scripts/services/og.mjs <slug>   → only that one
 // Needs Playwright with Chromium. Fonts come from Google Fonts.
 import { mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -60,7 +61,9 @@ if (process.env.HTTPS_PROXY) await page.route(/fonts\.(googleapis|gstatic)\.com/
   body: execFileSync('curl', ['-sSL', '-A', 'Mozilla/5.0 Chrome/120', r.request().url()]),
   contentType: r.request().url().includes('gstatic') ? 'font/woff2' : 'text/css'
 }));
+const only = process.argv[2];  // node scripts/services/og.mjs <slug> makes just that one
 for (const j of jobs) {
+  if (only && j.file !== only) continue;
   await page.setContent(html(j), { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
   // Largest headline that fits beside the big icon and above the pills; pills shrink to one row

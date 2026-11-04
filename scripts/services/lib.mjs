@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { SITE, services, pages, front } from './data.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const V = { css: '20261104a', js: '20261104a' };
+export const V = { css: '20261104b', js: '20261104b' };
 export const GENERATED = '<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->';
 
 export const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
