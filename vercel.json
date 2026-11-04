@@ -49,6 +49,56 @@
       "source": "/api/_lib/:path*",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/services/reklamevideoer",
+      "destination": "/services/video",
+      "permanent": true
+    },
+    {
+      "source": "/services/reklamevideo",
+      "destination": "/services/video",
+      "permanent": true
+    },
+    {
+      "source": "/services/explainer-video",
+      "destination": "/services/video",
+      "permanent": true
+    },
+    {
+      "source": "/services/motion-graphics",
+      "destination": "/services/video",
+      "permanent": true
+    },
+    {
+      "source": "/services/motion-graphic-videoer",
+      "destination": "/services/video",
+      "permanent": true
+    },
+    {
+      "source": "/services/crm",
+      "destination": "/services/interne-systemer",
+      "permanent": true
+    },
+    {
+      "source": "/services/crm-udvikling",
+      "destination": "/services/interne-systemer",
+      "permanent": true
+    },
+    {
+      "source": "/services/systemer",
+      "destination": "/services/interne-systemer",
+      "permanent": true
+    },
+    {
+      "source": "/services/app",
+      "destination": "/services/app-udvikling",
+      "permanent": true
+    },
+    {
+      "source": "/services/apps",
+      "destination": "/services/app-udvikling",
+      "permanent": true
     }
   ],
   "headers": [

@@ -12,14 +12,18 @@ export const SITE = 'https://webleads.dk';
 // value is the start price in kroner, used as the value of a lead for Meta (0 = no fixed price).
 export const services = [
   { slug: 'hjemmesider', t: 'Hjemmesider', price: 'fra 2.995 kr.', value: 2995, d: 'Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.', ex: ['Simpel one page: 2.995 kr.', 'Normal hjemmeside: 9.995 kr.', 'SEO hjemmeside: 29.995 kr.'] },
+  { slug: 'webshop', t: 'Webshop', price: 'fra 12.995 kr.', value: 12995, d: 'Webshop på Shopify med betaling, fragt og dine produkter. Beregn selv prisen.', ex: ['Shopify Partner', '25 produkter med i prisen', 'Beregn din pris på siden'] },
   { slug: 'google-ads', t: 'Google Ads', price: '8.000 kr./md.', value: 8000, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'meta-ads', t: 'Meta Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Sporing af salg', 'Ekstra kanal: 5.000 kr./md.'] },
-  { slug: 'google-css', t: 'Google CSS', price: 'Fast pris efter en snak', value: 0, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Skift til en CSS-partner', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
+  { slug: 'google-css', t: 'Google CSS', price: '49 kr./md.', value: 49, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Webleads som din CSS', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
+  { slug: 'video', t: 'Video', price: 'Fast pris efter en snak', value: 0, d: 'Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', ex: ['Reklamevideoer til sociale medier', 'Explainer-videoer', 'Motion graphics og logoanimation'] },
   { slug: 'seo', t: 'SEO', price: '995 kr./time', value: 995, d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'] },
   { slug: 'geo', t: 'GEO', price: 'Fast pris efter en snak', value: 0, d: 'Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.', ex: ['Tjek af din synlighed i AI', 'Indhold, AI kan citere', 'Struktureret data'] },
   { slug: 'ai', t: 'AI', price: 'Fast pris efter en snak', value: 0, d: 'Chatbots, AI-annoncer og assistenter, der sparer dig tid.', ex: ['AI-chatbot døgnet rundt', 'AI-annoncering', 'AI-assistenter til rutinerne'] },
   { slug: 'automations', t: 'Automations', price: 'fra 4.999 kr.', value: 4999, d: 'Lad rutinerne klare sig selv.', ex: ['Automatiske mails og sms', 'Fakturaer og opfølgning', 'Kobling mellem dine systemer'] },
+  { slug: 'interne-systemer', t: 'Interne systemer og CRM', price: 'fra 14.999 kr.', value: 14999, d: 'CRM, booking og dashboards, der passer til jeres måde at arbejde på.', ex: ['CRM og salgspipeline', 'Booking og kalender', 'Dashboards og portaler'] },
+  { slug: 'app-udvikling', t: 'App-udvikling', price: 'Fast pris efter en snak', value: 0, d: 'Apps til iPhone og Android, bygget til din virksomhed.', ex: ['iPhone og Android', 'Booking, medlemskab og point', 'App Store og Google Play'] },
   { slug: 'email-marketing', t: 'E-mail marketing', price: 'Fast pris efter en snak', value: 0, d: 'Nyhedsbreve og mailflows, der får kunderne til at komme igen.', ex: ['Nyhedsbreve', 'Automatiske mailflows', 'Tilmelding efter reglerne'] },
   { slug: 'cro', t: 'CRO', price: 'Fast pris efter en snak', value: 0, d: 'Flere kunder fra de besøgende, du allerede har.', ex: ['Analyse og heatmaps', 'A/B-test', 'Kortere vej til kontakt'] }
 ];
@@ -174,7 +178,7 @@ export const pages = [
       ['Hvad er et produktfeed?', 'En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.'],
       ['Virker det med min webshop?', 'De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.'],
       ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.'],
-      ['Kan klikket blive billigere?', 'Ofte, ja. Går dine Shopping-annoncer gennem en CSS-partner i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn.', ['/services/google-css', 'Læs om Google CSS']]
+      ['Kan klikket blive billigere?', 'Ofte, ja. Går dine Shopping-annoncer gennem Webleads som CSS i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn.', ['/services/google-css', 'Læs om Google CSS']]
     ],
     contact: 'Fortæl os om din webshop, så svarer vi inden for 24 timer med en fast pris.',
     placeholder: 'Hvilken webshop har du, og hvad sælger du?',
@@ -193,21 +197,21 @@ export const pages = [
   {
     // Checked against Google's help pages and the market (4 Nov 2026). The 20% is the industry's estimate of the
     // margin Google's own CSS takes from the bid: Google does not publish it, so every "20%" needs the estimate
-    // sentence on the same page. Never "rabat", "garanteret", "Ingen binding" or "Webleads er CSS-partner".
-    // price: null until Mikkel sets one.
+    // sentence on the same page. Never "rabat", "garanteret" or "Ingen binding" (no binding terms are set).
+    // Webleads is the CSS (Mikkel, 4 Nov 2026): 49 kr./md., and the ad label reads "Af Webleads".
     slug: 'google-css', name: 'Google CSS', short: 'Op til 20% billigere klik på Google Shopping',
-    description: 'Vi kobler din webshop til en CSS-partner, så hele dit bud tæller, og klik på dine Google Shopping-annoncer kan blive op til 20% billigere. Fast pris efter en kort snak.',
+    description: 'Lad dine Google Shopping-annoncer gå gennem Webleads som CSS i stedet for Googles egen. Så tæller hele dit bud, og klikket kan blive op til 20% billigere. 49 kr. om måneden.',
     serviceType: 'CSS (Comparison Shopping Service) til Google Shopping',
     words: ['webshops', 'netbutikker', 'Shopify-butikker', 'butikker med varer'],
     h1: { a: ['Op', 'til'], hot: '20%', dim: 'billigere', mark: 'klik.' },
-    lead: 'Vi kobler din webshop til en CSS-partner, så hele dit bud tæller i auktionen på Google. Det samme klik kan blive op til 20% billigere, og vi klarer skiftet.',
-    floats: ['CSS-partner', 'Hele buddet tæller', 'Op til 20% ↓'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
-    price: null,
-    priceH2: ['Fast pris.', 'Efter en snak.'],
-    priceLead: 'Vi ser på din Merchant Center, dine lande og dit Shopping-budget og giver dig en fast pris inden for 24 timer.',
+    lead: 'Lad dine Shopping-annoncer gå gennem Webleads som CSS i stedet for Googles egen. Så tæller hele dit bud i auktionen, og det samme klik kan blive op til 20% billigere. Vi klarer skiftet.',
+    floats: ['Af Webleads', 'Hele buddet tæller', '49 kr./md.'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
+    price: { amount: '49', pre: '', post: 'kr./md.', note: 'Ekskl. moms · annoncebudgettet betaler du som i dag direkte til Google' },
+    priceH2: ['49 kr. om måneden.', 'Hele buddet tæller.'],
+    priceLead: 'Du betaler 49 kr. om måneden for at have Webleads som CSS. Vi klarer skiftet, og dit annoncebudget betaler du som i dag direkte til Google.',
     items: [
       ['Tjek af din konto', 'Vi ser på din Merchant Center, dine kampagner og de lande, du sælger til.'],
-      ['Lande og placeringer', 'Vi tjekker, at CSS-partneren dækker dine lande og de steder, dine annoncer vises.'],
+      ['Lande og placeringer', 'Vi tjekker, at alle de lande, du sælger til, er med, og hvor dine annoncer bliver vist.'],
       ['Vi klarer skiftet', 'Vi sætter skiftet i gang, og du godkender det i din Merchant Center.'],
       ['Som regel samme kampagner', 'Som regel er din Google Ads-konto, dine kampagner og dit produktfeed de samme som i dag.'],
       ['Hele buddet tæller', 'Uden margin fra Googles egen CSS kommer hele dit bud med i auktionen.'],
@@ -217,33 +221,32 @@ export const pages = [
     ],
     steps: [
       ['Tjek', 'Vi ser på din konto, dine lande og dit budget og siger ærligt, om det kan betale sig.', '?'],
-      ['Skift', 'Vi kobler din Merchant Center på en CSS-partner, og du godkender skiftet.', '%'],
+      ['Skift', 'Vi kobler din Merchant Center på Webleads som CSS, og du godkender skiftet.', '%'],
       ['Opfølgning', 'Vi sammenligner klikpris, klik og salg før og efter og sender dig tallene.', '↓']
     ],
     faqs: [
-      ['Hvad er en CSS?', 'CSS står for Comparison Shopping Service, på dansk en prissammenligningstjeneste. Efter EU’s sag mod Google i 2017 bliver Shopping-annoncer i Danmark altid vist gennem en CSS. Har du ikke valgt en anden, er det Googles egen, Google Shopping.'],
-      ['Hvorfor bliver klikket billigere?', 'Googles egen CSS, Google Shopping, trækker en fast procentdel fra dit bud, før det kommer med i auktionen. Med en CSS-partner tæller hele buddet, så det samme klik kan blive billigere, eller du kan få flere klik for samme budget. Google oplyser ikke procentdelen, men branchen anslår den til op til ca. 20%.'],
-      ['Skal jeg lave mine kampagner om?', 'Som regel ikke. Vi flytter den Merchant Center-konto, du har i dag, over til CSS-partneren, så din Google Ads-konto, dine kampagner og dit feed er de samme. Kræver CSS-partneren en ny konto, siger vi det, før vi går i gang.'],
-      ['Hvilke annoncer gælder det?', 'Dine Shopping-annoncer, også produkterne i Performance Max. Almindelige tekstannoncer påvirkes ikke. Om produkterne også kan vises fx på YouTube, afhænger af CSS-partneren, og det tjekker vi før skiftet.'],
-      ['Gælder det i alle lande?', 'Det gælder i Danmark og en række andre lande i Europa, fx Sverige, Norge og Tyskland. Uden for de lande giver det ingen fordel. Sælger du til flere lande, tjekker vi, at CSS-partneren dækker dem alle.'],
-      ['Hvad koster det?', 'Du får en fast pris efter en kort snak om din webshop.']
+      ['Hvad er en CSS?', 'CSS står for Comparison Shopping Service, på dansk en prissammenligningstjeneste. Efter EU’s sag mod Google i 2017 bliver Shopping-annoncer i Danmark altid vist gennem en CSS. Har du ikke valgt en anden, er det Googles egen, Google Shopping. Webleads er en CSS, du kan vælge i stedet.'],
+      ['Hvorfor bliver klikket billigere?', 'Googles egen CSS, Google Shopping, trækker en fast procentdel fra dit bud, før det kommer med i auktionen. Med Webleads som CSS tæller hele buddet, så det samme klik kan blive billigere, eller du kan få flere klik for samme budget. Google oplyser ikke procentdelen, men branchen anslår den til op til ca. 20%.'],
+      ['Skal jeg lave mine kampagner om?', 'Som regel ikke. Vi kobler den Merchant Center-konto, du har i dag, på Webleads som CSS, så din Google Ads-konto, dine kampagner og dit feed er de samme. Kræver det en ny konto, siger vi det, før vi går i gang.'],
+      ['Hvilke annoncer gælder det?', 'Dine Shopping-annoncer, også produkterne i Performance Max. Almindelige tekstannoncer påvirkes ikke. Hvor produkterne ellers kan blive vist, fx på YouTube, gennemgår vi med dig før skiftet.'],
+      ['Gælder det i alle lande?', 'Det gælder i Danmark og en række andre lande i Europa, fx Sverige, Norge og Tyskland. Uden for de lande giver det ingen fordel. Sælger du til flere lande, tjekker vi, at de alle er med.'],
+      ['Hvad koster det?', '49 kr. om måneden, ekskl. moms. Dit annoncebudget betaler du som i dag direkte til Google.']
     ],
-    contact: 'Fortæl os om din webshop, så ser vi, om det kan betale sig, og svarer inden for 24 timer med en fast pris.',
+    contact: 'Fortæl os om din webshop, så ser vi, om det kan betale sig, og svarer inden for 24 timer.',
     placeholder: 'Hvilken webshop har du, og hvad bruger du på Google Shopping om måneden?',
-    // Layout and the copy it needs (preliminary like the rest of this page)
     layout: ['showcase', 'compare', 'band', 'faq', 'grid'],
     compare: {
       h2: ['Samme annoncer.', 'Billigere klik.'],
       lead: 'Det eneste, der skifter, er den CSS, dine annoncer bliver vist gennem.',
-      uden: 'Uden CSS-partner', med: 'Med en CSS-partner',
+      uden: 'Med Googles egen CSS', med: 'Med Webleads som CSS',
       rows: [
-        ['Google Shopping lægger en margin oven i klikprisen.', 'Gennem en anden CSS slipper du for den margin.'],
-        ['Du betaler marginen i hvert eneste klik.', 'Det samme klik kan koste op til 20% mindre.'],
-        ['Et skifte lyder som et stort arbejde.', 'Vi klarer skiftet. Dine kampagner kører videre.'],
+        ['Googles egen CSS trækker en margin fra dit bud, før det kommer med i auktionen.', 'Med Webleads som CSS tæller hele buddet.'],
+        ['Marginen er med i hvert eneste klik.', 'Det samme klik kan koste op til 20% mindre. Google oplyser ikke marginens størrelse; 20% er branchens skøn.'],
+        ['Et skifte lyder som et stort arbejde.', 'Vi klarer skiftet. Som regel kører dine kampagner videre.'],
         ['Du ved ikke, hvad du kunne spare.', 'Vi måler klikpriserne før og efter.']
       ]
     },
-    band: { chips: ['Samme annoncer', 'Shopping og Performance Max', 'Måling før og efter', 'Ingen binding'], sticker: 'Op til 20% billigere klik' }
+    band: { chips: ['Samme annoncer', 'Shopping og Performance Max', 'Måling før og efter', 'Af Webleads'], sticker: 'Hele buddet tæller' }
   },
   {
     slug: 'seo', name: 'SEO', short: 'Bliv fundet først, når kunderne søger',
@@ -435,6 +438,179 @@ export const pages = [
         ['Ugens tal skal samles i hånden.', 'Ugens tal ligger i din indbakke hver mandag.']
       ]
     }
+  },
+  {
+    // Reklamevideoer, explainer-videoer and motion graphics on one page: the same work and the same team,
+    // three formats. /services/reklamevideoer, /explainer-video and /motion-graphics redirect here (vercel.json).
+    slug: 'video', name: 'Video', short: 'Reklamevideoer, explainer-videoer og motion graphics',
+    description: 'Vi laver reklamevideoer til Facebook, Instagram, TikTok og YouTube, explainer-videoer, der forklarer din ydelse på et minut, og motion graphics. Fast pris efter en kort snak.',
+    serviceType: 'Videoproduktion',
+    words: ['lokale virksomheder', 'webshops', 'håndværkere', 'klinikker', 'servicevirksomheder'],
+    h1: { a: ['Video,', 'der'], hot: 'fanger.', dim: 'På de første', mark: 'sekunder.' },
+    lead: 'Vi laver reklamevideoer, explainer-videoer og motion graphics, der får folk til at stoppe op i feedet og forstå, hvad du tilbyder. Fra idé og manus til færdig video i de formater, du skal bruge.',
+    floats: ['Reklamevideo', 'Explainer', 'Motion graphics ▶'], ring: 'VIDEO • REKLAME • EXPLAINER • MOTION •',
+    price: null,
+    priceH2: ['Fast pris.', 'Efter en snak.'],
+    priceLead: 'Fortæl os, hvad videoen skal, og hvor den skal vises, så får du en fast pris inden for 24 timer.',
+    items: [
+      ['Idé og manus', 'Vi finder vinklen og skriver manus, så budskabet sidder på få sekunder.'],
+      ['Reklamevideoer', 'Korte videoer til Facebook, Instagram, TikTok og YouTube.'],
+      ['Explainer-videoer', 'Din ydelse forklaret enkelt på et minut, til forsiden eller salget.'],
+      ['Motion graphics', 'Animeret tekst, ikoner og grafik, og dit logo i bevægelse.'],
+      ['Speak og musik', 'Speak og musik, der passer til budskabet.'],
+      ['Undertekster', 'Mange ser video uden lyd, så teksten er med.'],
+      ['Alle formater', 'Lodret til Reels og Stories, kvadratisk til feedet og bred til YouTube.'],
+      ['Klar til annoncer', 'Vi kan sætte videoen i gang som annonce med det samme.']
+    ],
+    steps: [
+      ['Idé og manus', 'Vi aftaler budskab, målgruppe og længde, og du godkender manus.', '✎'],
+      ['Produktion', 'Vi laver videoen og sender dig et udkast.', '▶'],
+      ['Rettelser og levering', 'Du får dine rettelser med, og videoen bliver leveret i de formater, du skal bruge.', '✓']
+    ],
+    faqs: [
+      ['Hvad koster en video?', 'Det afhænger af længden, og om det er en reklamevideo, en explainer eller motion graphics. Fortæl os, hvad du har brug for, så får du en fast pris inden for 24 timer.'],
+      ['Hvad er forskellen på de tre slags?', 'En reklamevideo er kort og skal fange i feedet. En explainer-video forklarer din ydelse eller dit produkt på et minut eller to. Motion graphics er animeret grafik, tekst og ikoner, som kan bruges i dem begge.'],
+      ['Skal jeg selv filme?', 'Nej. Vi kan lave videoen med animation og grafik eller ud fra de billeder og klip, du allerede har.'],
+      ['Hvilke formater får jeg?', 'Dem, du skal bruge: lodret til Reels, Stories og TikTok, kvadratisk til feedet og bred til YouTube og din hjemmeside.'],
+      ['Hvor lang tid tager det?', 'Du får en tidsplan, før vi går i gang. En kort reklamevideo går hurtigere end en explainer.'],
+      ['Kan I også køre den som annonce?', 'Ja. Vi kan sætte videoen i gang på Facebook, Instagram og YouTube, så den bliver vist for de rigtige.', ['/services/meta-ads', 'Læs om Meta Ads']]
+    ],
+    contact: 'Fortæl os, hvad videoen skal, så svarer vi inden for 24 timer med en fast pris.',
+    placeholder: 'Hvad skal videoen fortælle, og hvor skal den vises?',
+    layout: ['marquee', 'showcase', 'compare', 'band', 'timeline', 'faq', 'grid'],
+    marquee: {
+      sec: 'ord', icon: 'spark',
+      h2: ['Fra reklame.', 'Til explainer.'],
+      lead: 'Videoer som de her kan vi lave for dig.',
+      words: ['Reklamevideo til Instagram', 'Explainer-video', 'Motion graphics', 'Produktvideo', 'Reels og TikTok', 'YouTube-annonce', 'Logoanimation', 'Video til forsiden', 'Stories', 'Kampagnevideo']
+    },
+    compare: {
+      h2: ['Uden video.', 'Og med.'],
+      lead: 'Det er det samme budskab. Forskellen er, om folk stopper op.',
+      uden: 'Uden video', med: 'Med video',
+      rows: [
+        ['Et billede og en tekst, som folk scroller forbi.', 'Bevægelse, der får folk til at stoppe op.'],
+        ['Kunderne skal læse sig frem til, hvad du laver.', 'En explainer viser det på et minut.'],
+        ['Det samme opslag alle steder.', 'Lodret, kvadratisk og bred, lavet til hvert sted.'],
+        ['Uden lyd forsvinder budskabet.', 'Undertekster, så budskabet når frem uden lyd.']
+      ]
+    },
+    band: { chips: ['Idé og manus', 'Reklamevideoer', 'Explainer-videoer', 'Motion graphics'] },
+    flow: { h2: ['Fra idé.', 'Til færdig video.'], lead: 'Du godkender manus, før vi går i gang, og får dine rettelser med.', end: 'Klar til at blive vist' }
+  },
+  {
+    slug: 'app-udvikling', name: 'App-udvikling', short: 'Apps til iPhone og Android',
+    description: 'Vi bygger apps til iPhone og Android til din virksomhed: booking, bestilling, medlemskab og point. Vi klarer design, udvikling og udgivelse i App Store og Google Play. Fast pris efter en kort snak.',
+    serviceType: 'App-udvikling',
+    words: ['klinikker', 'fitnesscentre', 'webshops', 'servicevirksomheder', 'lokale virksomheder'],
+    h1: { a: ['Din', 'egen'], hot: 'app.', dim: 'I lommen på dine', mark: 'kunder.' },
+    lead: 'Vi bygger apps til iPhone og Android, så dine kunder kan booke, bestille og samle point direkte fra telefonen. Vi klarer design, udvikling og udgivelse.',
+    floats: ['iPhone og Android', 'Push-beskeder', 'App Store ↗'], ring: 'APP • IPHONE • ANDROID • PUSH •',
+    price: null,
+    priceH2: ['Fast pris.', 'Efter en snak.'],
+    priceLead: 'Fortæl os, hvad appen skal kunne, så får du en fast pris inden for 24 timer.',
+    items: [
+      ['iPhone og Android', 'Én app, der virker på begge.'],
+      ['Design', 'Skærme, der er lette at bruge og passer til dit brand.'],
+      ['Booking og bestilling', 'Kunderne booker eller bestiller direkte i appen.'],
+      ['Login og medlemskab', 'Kundeprofiler, medlemskaber og klippekort.'],
+      ['Push-beskeder', 'Påmindelser og tilbud direkte på telefonen.'],
+      ['Kobling til dine systemer', 'Appen taler med din kalender, dit kundesystem eller din webshop.'],
+      ['Udgivelse', 'Vi klarer App Store og Google Play.'],
+      ['Opdateringer', 'Vi holder appen opdateret, når telefonerne bliver det.']
+    ],
+    steps: [
+      ['Idé og skitser', 'Vi finder ud af, hvad appen skal kunne, og viser dig skitser af skærmene.', '✎'],
+      ['Udvikling', 'Vi bygger appen, og du prøver den på din egen telefon undervejs.', '▢'],
+      ['Udgivelse', 'Vi lægger appen i App Store og Google Play og holder den opdateret.', '↗']
+    ],
+    faqs: [
+      ['Hvad koster en app?', 'Det afhænger af, hvad den skal kunne. Fortæl os om din idé, så får du en fast pris inden for 24 timer.'],
+      ['Virker den på både iPhone og Android?', 'Ja. Vi bygger én app, der virker på begge.'],
+      ['Har jeg brug for en app, eller er en hjemmeside nok?', 'Bruger kunderne dig tit, fx til booking, medlemskab eller genbestilling, giver en app mening. Skal de bare finde og kontakte dig, er en hjemmeside nok. Det siger vi ærligt.', ['/services/hjemmesider', 'Se hjemmesider']],
+      ['Kan appen tale med mine systemer?', 'Ja. Den kan kobles til fx din kalender, dit kundesystem eller din webshop, så du ikke skal holde styr på det to steder.'],
+      ['Hvor lang tid tager det?', 'Du får en tidsplan, før vi går i gang. En enkel app går hurtigere end en med login, betaling og mange skærme.'],
+      ['Står appen under mit navn?', 'Ja, det er det mest almindelige: appen bliver udgivet under din virksomheds konto i App Store og Google Play. Vi hjælper dig med at oprette kontiene.']
+    ],
+    contact: 'Fortæl os om din idé til en app, så svarer vi inden for 24 timer med en fast pris.',
+    placeholder: 'Hvad skal din app kunne?',
+    layout: ['statement', 'facts', 'showcase', 'price', 'cards', 'faqSplit', 'track'],
+    statement: {
+      kicker: 'Kort sagt', pill: 'spark',
+      text: 'Dine kunder har altid telefonen på sig. | _Giv dem din egen_ {app}',
+      sub: 'Vi bygger apps, der gør det let at booke, bestille og komme igen.'
+    },
+    facts: {
+      kicker: 'Kort fortalt',
+      items: [
+        ['Platforme', 'iPhone og Android', 'Én app, der virker på begge.'],
+        ['Udgivelse', 'App Store og Google Play', 'Vi klarer udgivelsen for dig.'],
+        ['Test', 'På din telefon', 'Du prøver appen undervejs, ikke først til sidst.'],
+        ['Svar', '24 timer', 'Fortæl os om din idé, så svarer vi inden for 24 timer.']
+      ]
+    }
+  },
+  {
+    // CRM udvikling and interne systemer on one page: a CRM is the most asked-for internal system.
+    // /services/crm, /crm-udvikling and /systemer redirect here (vercel.json). The price is the one from the
+    // "Interne systemer" pop-up on /services/hjemmesider (content.js addonPages.systemer).
+    slug: 'interne-systemer', name: 'Interne systemer og CRM', short: 'CRM, booking og dashboards bygget til jer',
+    description: 'Vi bygger interne systemer og CRM skræddersyet til din virksomhed: kundeoverblik, salgspipeline, booking, tilbud og ordrer, dashboards og medarbejderportaler. Fra 14.999 kr. som engangsbeløb.',
+    serviceType: 'Udvikling af interne systemer og CRM',
+    words: SERVICEFAG,
+    h1: { a: ['Slut', 'med'], hot: 'regneark.', dim: 'Ét system til hele', mark: 'butikken.' },
+    lead: 'Vi bygger systemer skræddersyet til din virksomhed, så kunder, aftaler, tilbud og tal er samlet ét sted, i stedet for i regneark, post-its og programmer, der næsten passer.',
+    floats: ['CRM', 'Booking', 'Dashboards ↗'], ring: 'CRM • BOOKING • DASHBOARDS • PORTALER •',
+    price: { amount: '14.999', pre: 'Fra', post: 'kr.', note: 'Engangsbeløb · større systemer får fast pris efter en snak · ekskl. moms' },
+    priceH2: ['Dit eget system.', 'Til fast pris.'],
+    priceLead: 'Du kender prisen, før vi går i gang. Mindre systemer starter ved 14.999 kr., og større systemer får en fast pris efter en snak.',
+    items: [
+      ['Kundesystem (CRM)', 'Samlet overblik over kunder, aftaler og historik.'],
+      ['Salgspipeline', 'Se hvert lead fra første henvendelse til vundet opgave.'],
+      ['Booking og kalender', 'Styr tider, medarbejdere og lokaler ét sted.'],
+      ['Tilbud og ordrer', 'Fra tilbud til faktura uden dobbeltarbejde.'],
+      ['Dashboards', 'Se de vigtigste tal på én skærm.'],
+      ['Medarbejderportal', 'Vagtplaner, dokumenter og beskeder samlet.'],
+      ['Integrationer', 'Kobles til de systemer, du allerede bruger.'],
+      ['Oplæring og support', 'Vi viser jer, hvordan det virker, og hjælper, når I vokser.']
+    ],
+    steps: [
+      ['Vi lytter', 'Vi ser på, hvordan I arbejder i dag, og hvor det driller.', '?'],
+      ['Vi bygger', 'Du ser systemet undervejs og kan ønske ændringer.', '▢'],
+      ['Vi følger op', 'Oplæring, support og videreudvikling, når I vokser.', '↗']
+    ],
+    faqs: [
+      ['Hvad koster et system?', 'Mindre systemer starter ved 14.999 kr. som et engangsbeløb. Større systemer får en fast pris efter en snak, så du ved, hvad det koster, før vi går i gang.'],
+      ['Hvorfor ikke bare købe et færdigt CRM?', 'Det kan være det rigtige, og så siger vi det. Et system bygget til jer passer til jeres måde at arbejde på, så I slipper for felter, I ikke bruger, og mangler ikke dem, I har brug for.'],
+      ['Kan det tale med mine andre programmer?', 'Ja. Vi kobler det til fx din mail, kalender, regnskab eller webshop.', ['/services/automations', 'Læs om automations']],
+      ['Kan vi bruge det på telefonen?', 'Ja. Systemet virker i browseren på computer, tablet og telefon.'],
+      ['Kan vi bygge videre på det?', 'Ja. Systemet kan vokse med jer, og vi tilføjer nye funktioner, når I får brug for dem.']
+    ],
+    contact: 'Fortæl os, hvordan I arbejder i dag, og hvad der driller, så svarer vi inden for 24 timer med en fast pris.',
+    placeholder: 'Hvad bruger I i dag, og hvad skal systemet kunne?',
+    layout: ['facts', 'compare', 'showcase', 'receipt', 'timeline', 'faq', 'track'],
+    facts: {
+      kicker: 'Kort fortalt',
+      items: [
+        ['Pris', 'Fra 14.999 kr.', 'som engangsbeløb. Større systemer får fast pris efter en snak.'],
+        ['Bygget til jer', 'Jeres måde', 'Felter, trin og rapporter, der passer til jeres arbejde.'],
+        ['Overalt', 'Computer og telefon', 'Det virker i browseren, også ude hos kunden.'],
+        ['Svar', '24 timer', 'Fortæl os, hvad der driller, så svarer vi inden for 24 timer.']
+      ]
+    },
+    compare: {
+      h2: ['Uden system.', 'Og med.'],
+      lead: 'Det er det samme arbejde. Forskellen er, hvor meget af det der klarer sig selv.',
+      uden: 'I dag', med: 'Med jeres eget system',
+      rows: [
+        ['Kunderne står i regneark, mails og post-its.', 'Alle kunder og aftaler samlet ét sted.'],
+        ['Ingen ved helt, hvor et tilbud er henne.', 'Hvert lead står i pipelinen, fra henvendelse til vundet.'],
+        ['Tallene skal samles i hånden hver måned.', 'Dashboardet viser dem, hver gang du kigger.'],
+        ['Programmer, der næsten passer.', 'Et system bygget til jeres måde at arbejde på.']
+      ]
+    },
+    receipt: { h2: ['Det hele er med.', 'Til én fast pris.'] },
+    flow: { h2: ['Fra regneark.', 'Til ét system.'], lead: 'Du ser systemet undervejs, så det passer, når det er færdigt.', end: 'Klar til brug' }
   },
   {
     slug: 'email-marketing', name: 'E-mail marketing', short: 'Nyhedsbreve og mailflows, der sælger',

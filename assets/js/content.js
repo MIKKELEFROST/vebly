@@ -90,7 +90,7 @@ export const team = [
 ];
 
 // The first 12 are the ones shown on narrow phones
-export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automations', 'AI-annoncer', 'GEO', 'Google Shopping', 'CRO', 'Nyhedsbrev', 'Booking', 'CRM', 'Dashboards', 'Google CSS', 'Google-profil', 'Webshop', 'Chatbot', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
+export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automations', 'AI-annoncer', 'GEO', 'Google Shopping', 'CRO', 'Nyhedsbrev', 'Booking', 'CRM', 'Dashboards', 'Google CSS', 'Video', 'App', 'Google-profil', 'Webshop', 'Chatbot', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
 
 // [explanation, related: a pop-up key, 'pris', 'link:/a/page' or null]
 export const ballInfo = {
@@ -105,11 +105,13 @@ export const ballInfo = {
   'CRO': ['Få flere af dem, der besøger din side, til at ringe, skrive eller købe.', 'link:/services/cro'],
   'Nyhedsbrev': ['Hold kontakten med dine kunder med nyhedsbreve og mails, der sendes automatisk.', 'link:/services/email-marketing'],
   'Booking': ['Lad kunderne booke tid direkte på siden, døgnet rundt.', 'addon-systemer'],
-  'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'addon-systemer'],
-  'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'addon-systemer'],
-  'Google CSS': ['Lad dine Shopping-annoncer gå gennem en CSS-partner, så hele dit bud tæller, og klikket kan blive billigere.', 'link:/services/google-css'],
+  'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'link:/services/interne-systemer'],
+  'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'link:/services/interne-systemer'],
+  'Google CSS': ['Lad dine Shopping-annoncer gå gennem Webleads som CSS, så hele dit bud tæller. 49 kr. om måneden.', 'link:/services/google-css'],
   'Google-profil': ['Vi opretter eller opdaterer din profil, så du ses på Google Maps.', 'inc-Google-profil'],
-  'Webshop': ['Sælg produkter eller gavekort direkte fra din hjemmeside.', null],
+  'Webshop': ['Webshop på Shopify fra 12.995 kr. Beregn selv prisen på din shop.', 'link:/services/webshop'],
+  'Video': ['Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', 'link:/services/video'],
+  'App': ['Din egen app til iPhone og Android, så kunderne kan booke og bestille fra telefonen.', 'link:/services/app-udvikling'],
   'Chatbot': ['En AI-chatbot, der svarer dine kunder døgnet rundt.', 'link:/services/ai'],
   'Tekster': ['Tekster, der sælger og kan findes på Google.', 'link:/services/seo'],
   'Logo': ['Et enkelt, genkendeligt logo og farver, der passer til dig.', null],

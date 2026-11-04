@@ -5,7 +5,7 @@ import { track } from '/assets/js/analytics.js';
 import { KANAL } from '/assets/js/content.js';
 
 // PRICES:start (scripts/services/pages/webshop.mjs reads this block, so the copy on the page says the same)
-// Our proposal, in kroner ex. VAT. Change a number here, then run: node scripts/services/build.mjs webshop
+// Our prices (approved 4 Nov 2026), in kroner ex. VAT. Change a number here, then run: node scripts/services/build.mjs webshop
 const PRICES = {
   base: 12995,        // Webshop på Shopify, one-off: up to `included` products, a theme in the brand, payment (card,
                       // MobilePay, Apple Pay), shipping, terms of trade, cookies and GDPR, Google Analytics and

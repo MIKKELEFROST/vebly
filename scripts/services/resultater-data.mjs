@@ -1,8 +1,12 @@
 // The cases and quotes on /resultater (scripts/services/pages/resultater.mjs). Build after a change:
 //   node scripts/services/build.mjs resultater
 //
-// EKSEMPEL: every case and quote below is made up (the same made-up businesses as on /referencer), to show
-// how the page will look. While any of them has eksempel: true, the page is not indexed, it shows a note at
+// LIVE since 4 Nov 2026 with no cases yet: the page shows the real review scores and the real customers
+// (partnere.mjs). The made-up cases and quotes are kept below as eksempelCases and eksempelQuotes, to show the
+// format; the page does not use them. To add a real case, put it in cases (with the customer's permission).
+//
+// EKSEMPEL: every case and quote in eksempelCases/eksempelQuotes is made up (the same made-up businesses as on
+// /referencer), to show how the page will look. While any of them has eksempel: true, the page is not indexed, it shows a note at
 // the top, and everything made up is marked "Eksempel". Replace them with real customers (with their
 // permission) and remove eksempel: true: the note and the noindex go away by themselves.
 //
@@ -22,7 +26,10 @@
 //                    from that value instead of from 0: { v: '0,9 sek.', fra: '6,8', l: '…' }.
 //   historie         on one case only: the big case spread near the top of the page (see Hansen VVS).
 //   eksempel         true while it is made up.
-export const cases = [
+export const cases = [];
+export const quotes = [];
+
+export const eksempelCases = [
   {
     id: 'hansen-vvs', navn: 'Hansen VVS', fag: 'VVS', by: 'Vejle', farve: '#1f5f4a', lys: '#e2efe9',
     overskrift: 'Hurtig hjælp. Fast pris.', knap: 'Ring nu', billede: 'vvs/hero-2',
@@ -118,7 +125,7 @@ export const cases = [
 
 // What the customers say. One quote per case (case: its id), shown on the case's card, and the featured
 // case's quote on its spread. Only real quotes, with permission; eksempel: true while made up.
-export const quotes = [
+export const eksempelQuotes = [
   { case: 'hansen-vvs', tekst: 'Jeg brugte 15 minutter i telefonen, og en uge senere ringede folk fra Google. Det er første gang, en hjemmeside har givet mig kunder.', navn: 'Jesper Hansen', rolle: 'Ejer', eksempel: true },
   { case: 'klinik-fryd', tekst: 'Booking direkte fra siden har sparet os for et hav af opkald. Vi har fået mere tid til patienterne.', navn: 'Mette Lund', rolle: 'Fysioterapeut og ejer', eksempel: true },
   { case: 'salon-lys', tekst: 'Fast pris, ingen binding og en side, jeg selv ejer. Det burde ikke være så sjældent, men det er det.', navn: 'Sara Holm', rolle: 'Frisør og ejer', eksempel: true },

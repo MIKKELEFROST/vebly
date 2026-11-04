@@ -10,7 +10,9 @@ Plain HTML, CSS and JavaScript, with no build step on Vercel. The front page and
 index.html            Front page (generated, see Pages and services)
 services/hjemmesider/ The website offer: the old front page, edited by hand
 services/<slug>/      One page per service (generated): google-ads, meta-ads, google-shopping-ads, google-css,
-                      seo, geo, ai, automations, email-marketing, cro
+                      video, seo, geo, ai, automations, interne-systemer, app-udvikling, email-marketing, cro
+services/webshop/     Webshop on Shopify with its price calculator (scripts/services/pages/webshop.mjs)
+resultater/           Customers and reviews (scripts/services/pages/resultater.mjs; customers in partnere.mjs)
 scripts/services/     data.mjs (all copy for the front page and service pages), build.mjs, og.mjs
 assets/css/main.css   All styles (colours and type as CSS variables at the top)
 assets/js/content.js  Copy for the lists and pop-ups on /services/hjemmesider (included items, add-ons, FAQ),

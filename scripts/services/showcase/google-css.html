@@ -1,6 +1,6 @@
 <section id="eksempel" class="show show--google-css" data-sec="eksempel">
       <!-- Calculator: the same Shopping ad with and without a CSS partner. Click prices in øre (data-p0 without,
-           data-p1 with); google-css.js works out the rest. The HTML is the finished state ("Med CSS-partner") -->
+           data-p1 with); google-css.js works out the rest. The HTML is the finished state ("Med Webleads") -->
       <div class="gcss is-med" data-gcss data-p0="500" data-p1="400">
         <div class="gcss__main">
           <div class="sec-head gcss__head" data-reveal="0">
@@ -8,7 +8,7 @@
             <p class="sec-head__lead">Annoncen ser ud som i dag. Kun den lille tekst under den skifter, og det samme klik kan blive op til 20% billigere.</p>
           </div>
           <div class="gcss__stage" data-reveal="1">
-            <p class="sr-only">Eksempel på Shopping-annoncer på Google, når en kunde søger efter »duftlys i glas«. Din annonce for et duftlys fra Glødværk står først. Under den står der »Af Google«. Med en CSS-partner står der »Af CSS-partner« i stedet, og resten af annoncen er den samme.</p>
+            <p class="sr-only">Eksempel på Shopping-annoncer på Google, når en kunde søger efter »duftlys i glas«. Din annonce for et duftlys fra Glødværk står først. Under den står der »Af Google«. Med Webleads som CSS står der »Af Webleads« i stedet, og resten af annoncen er den samme.</p>
             <!-- A drawing of a search page with Shopping ads: no search engine's logo, the products and shops are made up -->
             <div class="gcss-serp" data-tilt aria-hidden="true">
               <div class="glare" data-glare></div>
@@ -28,7 +28,7 @@
                     <div class="gcss-card__s"><i style="--i:#8a5a2b">G</i><span>Glødværk</span></div>
                     <div class="gcss-card__d">Gratis fragt</div>
                     <div class="gcss-card__r"><b>4,8</b><span style="--f:96%">★★★★★</span>(63)</div>
-                    <span class="gcss-by" data-gcss-by><span class="gcss-by__in"><span class="gcss-by__f">Af Google</span><span class="gcss-by__b">Af CSS-partner</span></span></span>
+                    <span class="gcss-by" data-gcss-by><span class="gcss-by__in"><span class="gcss-by__f">Af Google</span><span class="gcss-by__b">Af Webleads</span></span></span>
                   </div>
                   <div class="gcss-card">
                     <div class="gcss-img"><svg viewBox="0 0 200 200"><use href="#gcss-bd"/><g transform="matrix(1.18 0 0 1.18 -18 -21.6)"><use href="#gcss-jar" style="--gl:#c9d3cf;--ga:.3;--wx:#b8c6aa;--wt:#c9d5bc;--lb:#fbfaf6"/><text x="100" y="128" style="fill:#3c4a3a">SKOVBUND</text><text x="100" y="138" style="fill:#6b7869">EUKALYPTUS</text></g></svg></div>
@@ -69,10 +69,10 @@
 
         <div class="gcss__calc" data-reveal="2">
           <div class="gcss-panel">
-            <div class="seg gcss-seg" role="radiogroup" aria-label="Klikpris uden eller med CSS-partner" data-gcss-seg>
+            <div class="seg gcss-seg" role="radiogroup" aria-label="Klikpris med Googles egen CSS eller med Webleads som CSS" data-gcss-seg>
               <span class="gcss-seg__pill" aria-hidden="true"></span>
-              <button type="button" role="radio" aria-checked="false" tabindex="-1" data-gcss-mode="uden"><span>Uden CSS</span></button>
-              <button type="button" role="radio" aria-checked="true" tabindex="0" data-gcss-mode="med"><span>Med CSS-partner</span></button>
+              <button type="button" role="radio" aria-checked="false" tabindex="-1" data-gcss-mode="uden"><span>Googles egen</span></button>
+              <button type="button" role="radio" aria-checked="true" tabindex="0" data-gcss-mode="med"><span>Med Webleads</span></button>
             </div>
             <div class="gcss-meter" aria-hidden="true">
               <div class="gcss-meter__top"><span class="gcss-meter__lbl">Pris pr. klik</span><span class="tag-eks">Eksempel</span></div>
@@ -81,7 +81,7 @@
                 <span class="gcss-sticker" data-gcss-sticker><i></i><b>−20%</b></span>
               </div>
             </div>
-            <p class="gcss-why">Googles egen CSS trækker en margin fra dit bud, før det kommer med i auktionen. Med en CSS-partner tæller hele buddet.</p>
+            <p class="gcss-why">Googles egen CSS trækker en margin fra dit bud, før det kommer med i auktionen. Med Webleads som CSS tæller hele buddet.</p>
             <div class="gcss-budget">
               <div class="gcss-budget__row"><label for="gcss-budget">Dit Shopping-budget om måneden</label><b data-gcss-bv aria-hidden="true">10.000 kr.</b></div>
               <div class="gcss-rail" data-gcss-rail><input class="gcss-range" type="range" id="gcss-budget" min="0" max="48" step="1" value="16" aria-valuetext="10.000 kr." data-gcss-range></div>
@@ -97,8 +97,8 @@
                 <span class="gcss-res__val"><span class="gcss-res__u">op til</span><b class="gcss-res__now" data-gcss-save>2.000 kr.</b><span class="gcss-res__u">sparet om måneden</span></span>
               </div>
             </div>
-            <p class="sr-only" data-gcss-live>Med en CSS-partner: 4,00 kr. pr. klik i stedet for 5,00 kr. Med et budget på 10.000 kr. om måneden giver det op til 2.500 klik i stedet for 2.000, eller op til 2.000 kr. sparet om måneden for de samme klik.</p>
-            <p class="gcss-fine">Eksempel: klikpris 5,00 kr. uden og 4,00 kr. med en CSS-partner, hvis margenen hos Googles egen CSS er ca. 20%. Google oplyser ikke marginens størrelse; 20% er branchens skøn. Hvor meget du får ud af det, afhænger af auktionen.</p>
+            <p class="sr-only" data-gcss-live>Med Webleads som CSS: 4,00 kr. pr. klik i stedet for 5,00 kr. Med et budget på 10.000 kr. om måneden giver det op til 2.500 klik i stedet for 2.000, eller op til 2.000 kr. sparet om måneden for de samme klik.</p>
+            <p class="gcss-fine">Eksempel: klikpris 5,00 kr. uden og 4,00 kr. med Webleads som CSS, hvis margenen hos Googles egen CSS er ca. 20%. Google oplyser ikke marginens størrelse; 20% er branchens skøn. Hvor meget du får ud af det, afhænger af auktionen.</p>
           </div>
         </div>
       </div>
