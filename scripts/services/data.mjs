@@ -11,10 +11,10 @@ export const SITE = 'https://webleads.dk';
 // The cards on the front page (and "Andre services" on each service page), in this order.
 // value is the start price in kroner, used as the value of a lead for Meta (0 = no fixed price).
 export const services = [
-  { slug: 'hjemmesider', t: 'Hjemmesider', price: 'fra 3.000 kr.', value: 3000, d: 'En komplet hjemmeside, hvor alt er med. Klar på 7 dage.', ex: ['Design, tekster og billeder', 'Sat op til Google fra dag ét', 'Du ejer siden'] },
-  { slug: 'google-ads', t: 'Google Ads', price: 'fra 999 kr./md.', value: 999, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport'] },
-  { slug: 'meta-ads', t: 'Meta Ads', price: 'fra 999 kr./md.', value: 999, d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport'] },
-  { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: 'Fast pris efter en snak', value: 0, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Sporing af salg'] },
+  { slug: 'hjemmesider', t: 'Hjemmesider', price: 'fra 2.995 kr.', value: 2995, d: 'Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.', ex: ['Simpel one page: 2.995 kr.', 'Normal hjemmeside: 9.995 kr.', 'SEO hjemmeside: 29.995 kr.'] },
+  { slug: 'google-ads', t: 'Google Ads', price: '8.000 kr./md.', value: 8000, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
+  { slug: 'meta-ads', t: 'Meta Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
+  { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Sporing af salg', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'seo', t: 'SEO', price: 'fra 999 kr./md.', value: 999, d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'] },
   { slug: 'geo', t: 'GEO', price: 'Fast pris efter en snak', value: 0, d: 'Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.', ex: ['Tjek af din synlighed i AI', 'Indhold, AI kan citere', 'Struktureret data'] },
   { slug: 'ai', t: 'AI', price: 'Fast pris efter en snak', value: 0, d: 'Chatbots, AI-annoncer og assistenter, der sparer dig tid.', ex: ['AI-chatbot døgnet rundt', 'AI-annoncering', 'AI-assistenter til rutinerne'] },
@@ -32,15 +32,15 @@ const SERVICEFAG = ['servicevirksomheder', 'håndværkere', 'klinikker', 'frisø
 export const pages = [
   {
     slug: 'google-ads', name: 'Google Ads', short: 'Øverst på Google, når kunderne søger',
-    description: 'Vi opsætter og styrer dine Google Ads, så du bliver vist øverst, når kunderne søger efter det, du laver. Fra 999 kr./md. pr. kanal, opsætning gratis, og annoncebudgettet betaler du direkte til Google.',
+    description: 'Vi opsætter og styrer dine Google Ads, så du bliver vist øverst, når kunderne søger efter det, du laver. 8.000 kr./md., hver ekstra kanal 5.000 kr./md., opsætning gratis, og annoncebudgettet betaler du direkte til Google.',
     serviceType: 'Google Ads-annoncering',
     words: SERVICEFAG,
     h1: { a: ['Øverst', 'på'], hot: 'Google.', dim: 'Når de', mark: 'søger.' },
     lead: 'Vi bygger og styrer dine annoncer på Google, så du bliver vist, når nogen søger efter det, du laver, der hvor du holder til. Og vi holder øje med hver krone.',
     floats: ['Opsætning gratis', 'Månedlig rapport', 'Søgeord ↗'], ring: 'GOOGLE ADS • SØGNING • LOKAL • RAPPORT •',
-    price: { amount: '999', pre: 'fra', post: 'kr./md.', note: 'Pr. kanal · opsætning gratis · ekskl. moms' },
+    price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · ekskl. moms' },
     priceH2: ['Fast pris.', 'Ingen gætteri.'],
-    priceLead: 'Annoncebudgettet betaler du direkte til Google, så du altid kan se, hvad der bliver brugt.',
+    priceLead: 'Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google, så du altid kan se, hvad der bliver brugt.',
     items: [
       ['Søgeordsanalyse', 'Vi finder de ord, dine kunder faktisk søger på.'],
       ['Kampagner og annoncer', 'Vi bygger kampagnerne og skriver annoncerne færdige.'],
@@ -57,7 +57,7 @@ export const pages = [
       ['Optimering', 'Vi justerer løbende og sender en månedlig rapport.', '↗']
     ],
     faqs: [
-      ['Hvad koster Google Ads?', 'Vores arbejde koster fra 999 kr. om måneden, og opsætningen er gratis. Annoncebudgettet betaler du direkte til Google, og det aftaler vi sammen.'],
+      ['Hvad koster Google Ads?', 'Vores arbejde koster 8.000 kr. om måneden, og opsætningen er gratis. Tager du flere kanaler, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google, og det aftaler vi sammen.'],
       ['Hvor hurtigt kan annoncerne køre?', 'Så snart kampagnerne er sat op og godkendt af Google. Derefter justerer vi løbende, så du får mest muligt ud af budgettet.'],
       ['Skal jeg have en ny hjemmeside?', 'Ikke nødvendigvis. Annoncerne kan sende kunderne til den side, du har i dag. Spænder siden ben for resultaterne, siger vi det ærligt.'],
       ['Hvad er forskellen på Google Ads og SEO?', 'Med Google Ads betaler du for at blive vist øverst med det samme. SEO er arbejdet med at blive fundet uden at betale for hvert klik. De to kan sagtens kombineres.']
@@ -67,15 +67,15 @@ export const pages = [
   },
   {
     slug: 'meta-ads', name: 'Meta Ads', short: 'Annoncer på Facebook og Instagram',
-    description: 'Vi laver og styrer dine annoncer på Facebook og Instagram: tekst, grafik, målretning og månedlig rapport. Fra 999 kr./md. pr. kanal, opsætning gratis, og annoncebudgettet betaler du direkte til Meta.',
+    description: 'Vi laver og styrer dine annoncer på Facebook og Instagram: tekst, grafik, målretning og månedlig rapport. 8.000 kr./md., hver ekstra kanal 5.000 kr./md., opsætning gratis, og annoncebudgettet betaler du direkte til Meta.',
     serviceType: 'Annoncering på Facebook og Instagram',
     words: SERVICEFAG,
     h1: { a: ['Kunder', 'fra'], hot: 'Facebook.', dim: 'Og', mark: 'Instagram.' },
     lead: 'Vi laver annoncer, der fanger opmærksomheden i feedet og rammer de rigtige mennesker. Du får tekst, grafik, målretning og en månedlig rapport.',
     floats: ['Opsætning gratis', 'Facebook og Instagram', 'Retargeting ↗'], ring: 'META ADS • FACEBOOK • INSTAGRAM • REELS •',
-    price: { amount: '999', pre: 'fra', post: 'kr./md.', note: 'Pr. kanal · opsætning gratis · ekskl. moms' },
+    price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · ekskl. moms' },
     priceH2: ['Fast pris.', 'Ingen gætteri.'],
-    priceLead: 'Annoncebudgettet betaler du direkte til Meta, så du altid kan se, hvad der bliver brugt.',
+    priceLead: 'Tager du flere kanaler, fx også Google Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Meta, så du altid kan se, hvad der bliver brugt.',
     items: [
       ['Tekst og grafik', 'Vi laver annoncerne færdige, klar til at køre.'],
       ['Målretning', 'Vis dine annoncer for de rigtige i dit område.'],
@@ -92,7 +92,7 @@ export const pages = [
       ['Test og optimering', 'Vi tester, justerer og sender en månedlig rapport.', '↗']
     ],
     faqs: [
-      ['Hvad koster Meta Ads?', 'Vores arbejde koster fra 999 kr. om måneden pr. kanal, og opsætningen er gratis. Annoncebudgettet betaler du direkte til Meta, og det aftaler vi sammen.'],
+      ['Hvad koster Meta Ads?', 'Vores arbejde koster 8.000 kr. om måneden, og opsætningen er gratis. Tager du flere kanaler, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Meta, og det aftaler vi sammen.'],
       ['Skal jeg selv lave billeder og tekster?', 'Nej. Vi laver annoncerne færdige. Har du gode billeder fra hverdagen og dine opgaver, bruger vi gerne dem.'],
       ['Virker det for en lokal virksomhed?', 'Ja. Annoncerne kan målrettes et bestemt område, så de kun bliver vist for folk tæt på dig.'],
       ['Hvad er forskellen på Meta Ads og Google Ads?', 'På Google bliver du vist, når folk søger efter det, du laver. På Facebook og Instagram møder du dem, før de søger, fx med et tilbud eller et godt eksempel på dit arbejde.']
@@ -102,15 +102,15 @@ export const pages = [
   },
   {
     slug: 'google-shopping-ads', name: 'Google Shopping Ads', short: 'Dine produkter med billede og pris på Google',
-    description: 'Vi sætter Google Shopping op for din webshop: Merchant Center, produktfeed, kampagner og sporing af salg, så dine produkter bliver vist med billede og pris, når kunderne søger.',
+    description: 'Vi sætter Google Shopping op for din webshop: Merchant Center, produktfeed, kampagner og sporing af salg, så dine produkter bliver vist med billede og pris, når kunderne søger. 8.000 kr./md., hver ekstra kanal 5.000 kr./md.',
     serviceType: 'Google Shopping-annoncering',
     words: ['webshops', 'netbutikker', 'Shopify-butikker', 'butikker med varer'],
     h1: { a: ['Dine', 'varer'], hot: 'øverst.', dim: 'Med billede og', mark: 'pris.' },
     lead: 'Vi sætter Google Shopping op, så dine produkter bliver vist med billede og pris, når kunderne søger efter dem. Vi klarer produktfeed, Merchant Center og kampagner.',
     floats: ['Produktfeed', 'Merchant Center', 'Billede og pris ↗'], ring: 'GOOGLE SHOPPING • PRODUKTER • FEED • SALG •',
-    price: null,
-    priceH2: ['Fast pris.', 'Efter en snak.'],
-    priceLead: 'Vi ser på din webshop og dit sortiment og giver dig en fast pris inden for 24 timer. Annoncebudgettet betaler du direkte til Google.',
+    price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · ekskl. moms' },
+    priceH2: ['Fast pris.', 'Ingen gætteri.'],
+    priceLead: 'Tager du flere kanaler, fx også Google Ads eller Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.',
     items: [
       ['Merchant Center', 'Vi opretter eller rydder op i din Google Merchant Center-konto.'],
       ['Produktfeed', 'Dine produkter, priser og lagerstatus sendes automatisk til Google.'],
@@ -127,7 +127,7 @@ export const pages = [
       ['Optimering', 'Vi flytter budgettet mod det, der sælger, og sender en rapport.', '↗']
     ],
     faqs: [
-      ['Hvad koster Google Shopping Ads?', 'Du får en fast pris efter en kort snak om din webshop og dit sortiment. Annoncebudgettet betaler du direkte til Google.'],
+      ['Hvad koster Google Shopping Ads?', 'Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.'],
       ['Hvad er et produktfeed?', 'En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.'],
       ['Virker det med min webshop?', 'De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.'],
       ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.']
@@ -339,7 +339,7 @@ export const pages = [
     faqs: [
       ['Hvad er CRO?', 'Conversion Rate Optimization, på dansk konverteringsoptimering. Det handler om at få flere af dem, der allerede besøger din side, til at blive kunder.'],
       ['Hvornår giver CRO mening?', 'Når du har besøgende, men for få henvendelser eller salg. Især hvis du betaler for trafikken med annoncer, for så giver hver ekstra kunde mere for det samme budget.'],
-      ['Skal jeg have en ny hjemmeside?', 'Ikke nødvendigvis. Som regel forbedrer vi den side, du har. Er den for gammel at bygge videre på, siger vi det ærligt, og så kan vi bygge en ny fra 3.000 kr.'],
+      ['Skal jeg have en ny hjemmeside?', 'Ikke nødvendigvis. Som regel forbedrer vi den side, du har. Er den for gammel at bygge videre på, siger vi det ærligt, og så kan vi bygge en ny fra 2.995 kr.'],
       ['Hvad koster CRO?', 'Du får en fast pris efter en kort snak om din side og dine mål.']
     ],
     contact: 'Send os din side, så kigger vi på den. Vi svarer inden for 24 timer med en fast pris.',
@@ -350,7 +350,7 @@ export const pages = [
 // The front page
 export const front = {
   title: 'Webleads · Hjemmesider, Google Ads, Meta Ads, SEO og AI',
-  description: 'Webleads hjælper virksomheder med at få flere kunder online: hjemmesider fra 3.000 kr., Google Ads, Meta Ads, Google Shopping, SEO, GEO, AI, automations, e-mail marketing og CRO. Ét team og direkte kontakt.',
+  description: 'Webleads hjælper virksomheder med at få flere kunder online: hjemmesider fra 2.995 kr., Google Ads, Meta Ads, Google Shopping, SEO, GEO, AI, automations, e-mail marketing og CRO. Ét team og direkte kontakt.',
   ogAlt: 'Webleads: flere kunder online. Hjemmesider, annoncer, SEO og AI under ét tag.',
   words: ['servicevirksomheder', 'håndværkere', 'klinikker', 'webshops', 'frisører', 'lokale virksomheder'],
   h1: { a: ['Flere'], hot: 'kunder.', dim: 'Ét', mark: 'bureau.' },
@@ -363,7 +363,7 @@ export const front = {
     ['Svar inden for 24 timer.', 'Skriv til os, så vender vi tilbage med en fast pris.', '24']
   ],
   faqs: [
-    ['Hvad koster det?', 'Det afhænger af, hvad du har brug for. En hjemmeside starter ved 3.000 kr., og SEO og annoncering starter ved 999 kr. om måneden. Skriv til os, så får du en fast pris inden for 24 timer.'],
+    ['Hvad koster det?', 'Det afhænger af, hvad du har brug for. En hjemmeside starter ved 2.995 kr., og SEO starter ved 999 kr. om måneden. Annoncering koster 8.000 kr. om måneden for den første kanal og 5.000 kr. for hver ekstra. Skriv til os, så får du en fast pris inden for 24 timer.'],
     ['Skal jeg købe det hele?', 'Nej. Du vælger kun det, du har brug for. Du kan starte med én ting, fx en hjemmeside eller Google Ads, og bygge på senere.'],
     ['Hvem taler jeg med?', 'Den, der laver arbejdet. Der er ingen mellemled, så du har direkte kontakt til den, der bygger din side eller kører dine annoncer.'],
     ['Er annoncebudgettet med i prisen?', 'Nej. Annoncebudgettet betaler du direkte til Google eller Meta, så du altid kan se, hvad der bliver brugt. Opsætningen af annoncerne er gratis.'],

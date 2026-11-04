@@ -62,7 +62,7 @@ export default async function handler(req, res) {
         navn,
         paras: [
           'Tak, fordi du bestilte en skitse til din nye hjemmeside. Her er linket til den, så du altid kan finde den igen.',
-          `Skitsen er et udgangspunkt, og billeder og anmeldelser i den er eksempler. Inden for få timer på hverdage ${kanal ? KANAL[kanal][1] : 'kontakter vi dig'}, og så laver vi et færdigt udkast med dine egne billeder, tekster og ønsker. Klar på 7 dage, fra 3.000 kr. og ingen binding.`
+          `Skitsen er et udgangspunkt, og billeder og anmeldelser i den er eksempler. Inden for få timer på hverdage ${kanal ? KANAL[kanal][1] : 'kontakter vi dig'}, og så laver vi et færdigt udkast med dine egne billeder, tekster og ønsker. Klar på 7 dage, fra 2.995 kr. og ingen binding.`
         ],
         button: { label: 'Se din skitse', href: `${SITE}${link}` }
       })
@@ -75,7 +75,7 @@ export default async function handler(req, res) {
       event_name: 'Lead', event_time: Math.floor(Date.now() / 1000), event_id: body.meta_event_id.slice(0, 64),
       action_source: 'website', event_source_url: `${SITE}/`,
       user_data: userData(req, { email, name: navn }),
-      custom_data: { content_name: `Bestil: ${rows[0][1]}`.slice(0, 100), value: 3000, currency: 'DKK' }
+      custom_data: { content_name: `Bestil: ${rows[0][1]}`.slice(0, 100), value: 2995, currency: 'DKK' }
     }]);
   }
 

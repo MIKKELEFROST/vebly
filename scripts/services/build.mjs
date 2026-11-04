@@ -299,7 +299,7 @@ function price(p) {
         <div class="price__main">
           <div class="kicker">${esc(p.name)}</div>
           <h2>${esc(p.priceH2[0])}<br><span>${esc(p.priceH2[1])}</span></h2>
-          ${a ? `<div class="price__amount"><span>${esc(a.pre)}</span><span class="odo" data-odo>${esc(a.amount)}</span><span>${esc(a.post)}</span></div>
+          ${a ? `<div class="price__amount">${a.pre ? `<span>${esc(a.pre)}</span>` : ''}<span class="odo" data-odo>${esc(a.amount)}</span><span>${esc(a.post)}</span></div>
           <div class="price__vat">${esc(a.note)}</div>
           ` : ''}<p class="price__lead">${esc(p.priceLead)}</p>
           <div class="price__cta"><a href="#kontakt" class="btn btn--accent" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>

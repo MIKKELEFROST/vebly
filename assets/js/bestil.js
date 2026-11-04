@@ -434,8 +434,8 @@ async function submit() {
     S.step = 4; render(-1);
     return;
   }
-  track('generate_lead', { selected: 'Bestil: ' + fagLabel(), form_name: 'bestil', fag: DETAILS[0]().fag, value: 3000, currency: 'DKK', receipt: S.mailed ? 'ja' : 'nej' });
-  metaTrack('Lead', { content_name: 'Bestil: ' + fagLabel(), value: 3000, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
+  track('generate_lead', { selected: 'Bestil: ' + fagLabel(), form_name: 'bestil', fag: DETAILS[0]().fag, value: 2995, currency: 'DKK', receipt: S.mailed ? 'ja' : 'nej' });
+  metaTrack('Lead', { content_name: 'Bestil: ' + fagLabel(), value: 2995, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
   await anim;
   await wait(250);
   showResult();
@@ -532,7 +532,7 @@ function showResult() {
         <li class="is-done"><b>Din skitse er klar</b><p>Prøv farver, design og forslag, og send os dine ønsker.</p></li>
         <li><b>${kh}</b><p>${esc(contactWhen())}</p></li>
         <li><b>Færdigt udkast</b><p>Med jeres egne billeder, tekster og ønsker.</p></li>
-        <li><b>Du er online</b><p>Vi retter til, indtil du er glad. Klar på 7 dage, fra 3.000 kr. og ingen binding.</p></li>
+        <li><b>Du er online</b><p>Vi retter til, indtil du er glad. Klar på 7 dage, fra 2.995 kr. og ingen binding.</p></li>
       </ol>
     </section>
     <p class="bx__fine">Spørgsmål? Skriv til <a href="mailto:hej@webleads.dk">hej@webleads.dk</a> eller sms til <a href="sms:+4541826799">41 82 67 99</a>.</p>

@@ -46,7 +46,7 @@ Ikke brugt endnu: SEO som månedligt tilvalg (lokal SEO, søgeord, månedlig rap
 
 ## Fakta: brug kun det, der står på webleads.dk
 
-Læs `services/hjemmesider/index.html` (hjemmesider) og `scripts/services/data.mjs` (de andre services) før du skriver. Opslag om hjemmesider linker til `webleads.dk/services/hjemmesider`. Fakta der må bruges: hjemmeside fra 3.000 kr. ekskl. moms, betales én gang, klar på 7 dage, ingen binding, du ejer siden, hvad der er med i prisen, tilvalg og priser (SEO og annoncering fra 999 kr./md., interne systemer fra 14.999 kr., automations fra 4.999 kr.), teamet (Alexander, Malthe, Anna, Mikkel), processen i 3 trin, FAQ-svarene.
+Læs `services/hjemmesider/index.html` (hjemmesider) og `scripts/services/data.mjs` (de andre services) før du skriver. Opslag om hjemmesider linker til `webleads.dk/services/hjemmesider`. Fakta der må bruges: hjemmesider i tre pakker (Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr.) ekskl. moms, betales én gang, klar på 7 dage (Simpel one page), ingen binding, du ejer siden, hvad der er med i prisen, tilvalg og priser (SEO fra 999 kr./md., annoncering 8.000 kr./md. for første kanal og 5.000 kr./md. pr. ekstra kanal, interne systemer fra 14.999 kr., automations fra 4.999 kr.), teamet (Alexander, Malthe, Anna, Mikkel), processen i 3 trin, FAQ-svarene.
 Opfind aldrig kunder, anmeldelser, resultater, tal eller cases. Referencesiden er demodata og må ikke citeres.
 
 ## Tekster
