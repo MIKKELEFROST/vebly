@@ -17,7 +17,7 @@ polished.
 | Page | Format | What the visitor sees |
 | --- | --- | --- |
 | google-shopping-ads | Live carousel and feed editor | The "Sponsoreret · Shopping" carousel you can drag, your card in it, and a product feed row that rewrites your card |
-| google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af CSS-partner", the click price rolls down, a budget slider shows what it means |
+| google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af Webleads" (Webleads is a CSS), the click price rolls down, a budget slider shows what it means |
 | seo | Annotated anatomy | A Google business profile in the middle, labels with thin leader lines pointing at its parts |
 | google-ads | Live search loop | A big search field that types local searches; the sponsored text ad on top rewrites itself to each query |
 | meta-ads | Stories player | A phone playing a tap-through story ad, next to a panel that shows who sees it |
@@ -26,12 +26,15 @@ polished.
 | automations | Flow machine | A flow of connected nodes across the width; a pulse runs through it and each node shows its small result |
 | email-marketing | Lock screen and inbox | Notifications stack on a phone; tap one to open the e-mail; envelopes show the automatic flow |
 | cro | A/B test | Two versions side by side; visitors stream in, counters tick, B wins, a heatmap can be switched on |
+| video | Editing timeline | A video editor of our own drawing: a preview playing a short animated example video above a timeline (video, text and music tracks) with a running playhead; tabs switch Reklamevideo / Explainer / Motion graphics, format chips reframe the preview 9:16 · 1:1 · 16:9 |
+| app-udvikling | Twin devices | The same example app on an iPhone-like and an Android-like phone side by side (our own drawings); a tap on one plays on both; the app icon installs itself when the section comes into view; booking ends with a push notification |
+| interne-systemer | Drag pipeline | A CRM in a browser window: lead cards you drag (or move with buttons) from Ny henvendelse to Tilbud sendt to Vundet; the dashboard tiles above count up as cards land |
 | resultater (page) | Case spread | Big metric tiles that count up, the growth line drawing itself, a mini site; then the filterable gallery |
 
 ## Facts for Google mockups (checked 4 Nov 2026)
 
 - Every Shopping ad in Denmark ends with a small link line under shop, price, delivery and rating: »Af Google«
-  (or »Af <CSS-navn>« when another CSS placed it). Draw it on Shopping cards.
+  (or »Af <CSS-navn>« when another CSS placed it, for Webleads »Af Webleads«). Draw it on Shopping cards.
 - Never show free listings or a »populære produkter« block, and leave »Shopping« out of mock tab rows
   (use Alle, Billeder, Videoer, Nyheder): both changed in the EEA in September 2026.
 - Google CSS: the facts and the exact wording are in the scratchpad file ws/google-css/FAKTA.md.
@@ -77,6 +80,8 @@ change is really needed, say so in your result.
   visitor (typing, dragging, tapping, toggling), with requestAnimationFrame, transform and opacity only.
   Never pin the section and never tie a step list to the scroll position. `html.motion` is set when motion
   is allowed. Without it (reduced motion): the finished state, static, everything readable.
+- Do not use the attribute `data-card` inside a showcase: `main.js` gives every `[data-card]` on a page a
+  scroll effect that shrinks and darkens it. Use your own name (the CRM showcase uses `data-lead`).
 - Free effects from `main.js`: `data-reveal="n"` (fades up when scrolled to; n is the delay step),
   `data-tilt` with a child `data-glare`, `data-magnet`, `data-burst` (confetti on click), `data-spot`,
   `data-roll` (only on links with plain text).

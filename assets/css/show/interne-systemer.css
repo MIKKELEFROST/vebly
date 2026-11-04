@@ -1,0 +1,161 @@
+/* Showcase: Interne systemer, a drag pipeline (scripts/services/showcase/interne-systemer.html).
+   assets/js/show/interne-systemer.js moves the cards and counts the tiles. States: is-in, is-drag, is-demo and
+   data-view on .crm; is-over on a column; is-lift, is-press, is-won, is-ping on a card; is-new on a booking.
+   Rules with :is(.motion *) only apply when html.motion is set; without it everything shows, static. */
+.show--interne-systemer { --ez: cubic-bezier(.2,.8,.2,1); --sp: cubic-bezier(.3,1.5,.5,1); --app: #f6f4f0; --colbg: #efebe4; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 64px; }
+.show--interne-systemer [hidden] { display: none !important; }
+.show--interne-systemer .sec-head { margin-bottom: 32px; }
+.show--interne-systemer .sec-head__lead { max-width: 400px; }
+.show--interne-systemer svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* The window: the shared browser chrome, kept a browser on phones */
+.show--interne-systemer .crm-br { position: relative; overflow: visible; }
+.show--interne-systemer .crm-br .browser__url span { overflow: hidden; text-overflow: ellipsis; }
+.show--interne-systemer .crm-lock { flex: none; width: 13px; height: 13px; stroke-width: 2.4; }
+.show--interne-systemer .crm { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr); background: var(--app); border-radius: 0 0 18px 18px; }
+.show--interne-systemer .crm.is-drag { cursor: grabbing; -webkit-user-select: none; user-select: none; }
+.show--interne-systemer .crm.is-demo .crm__board { pointer-events: none; }
+
+/* The rail: our own icons, the active view is dark */
+.show--interne-systemer .crm__rail { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 22px 0; background: #fff; border-right: 1px solid var(--line); border-radius: 0 0 0 18px; }
+.show--interne-systemer .crm__rail i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; color: var(--faint); transition: background .25s, color .25s; }
+.show--interne-systemer .crm__rail svg { width: 20px; height: 20px; }
+.show--interne-systemer .crm[data-view=pipeline] .crm__ri-p, .show--interne-systemer .crm[data-view=kalender] .crm__ri-k { background: var(--ink); color: #fff; }
+.show--interne-systemer .crm__main { min-width: 0; padding: 20px 24px 24px; }
+
+/* The top bar: the business, a search field (drawn), the view switch */
+.show--interne-systemer .crm__top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.show--interne-systemer .crm__logo { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--ink); color: #fff; font: 800 19px/1 var(--display); letter-spacing: -.04em; }
+.show--interne-systemer .crm__name { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.show--interne-systemer .crm__name b { font: 800 19px/1 var(--display); letter-spacing: -.03em; }
+.show--interne-systemer .crm__name small { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.show--interne-systemer .crm__search { display: flex; align-items: center; gap: 8px; flex: 0 1 260px; min-width: 0; margin-left: auto; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--faint); font-size: 13px; white-space: nowrap; overflow: hidden; }
+.show--interne-systemer .crm__search svg { flex: none; width: 15px; height: 15px; stroke-width: 2.2; }
+.show--interne-systemer .crm__seg { flex: none; }
+.show--interne-systemer .crm__seg button { position: relative; padding: 8px 15px; font-size: 13.5px; }
+.show--interne-systemer .crm__seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.show--interne-systemer .crm__badge { position: absolute; top: -5px; right: -4px; display: grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border: 2px solid #fff; border-radius: 999px; background: var(--accent); color: #fff; font: 700 10.5px/1 var(--body); font-style: normal; }
+.show--interne-systemer:is(.motion *) .crm__badge { animation: crmPop .5s var(--sp); }
+
+/* The dashboard tiles */
+.show--interne-systemer .crm__tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0 0 18px; padding: 0; list-style: none; }
+.show--interne-systemer .crm__tile { position: relative; display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 16px 18px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(17,17,17,.04); }
+.show--interne-systemer .crm__tl { font-size: 13px; font-weight: 700; color: var(--muted); }
+.show--interne-systemer .crm__n { font: 800 38px/1 var(--display); letter-spacing: -.045em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.show--interne-systemer .crm__ts { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.show--interne-systemer .crm__tile--kr { padding-right: 92px; }
+.show--interne-systemer .crm__bars { position: absolute; right: 18px; bottom: 18px; display: flex; align-items: flex-end; gap: 5px; height: 52px; }
+.show--interne-systemer .crm__bars i { width: 9px; height: 100%; border-radius: 3px; background: #ebe7e0; transform-origin: 50% 100%; transform: scaleY(var(--v)); }
+.show--interne-systemer .crm__bars .is-now { background: var(--accent); transform: scaleY(.34); }
+.show--interne-systemer:is(.motion *) .crm__bars .is-now { transition: transform 1s var(--sp); }
+.show--interne-systemer .crm__delta { position: absolute; top: 14px; right: 14px; padding: 4px 9px; border-radius: 999px; background: #e3f4ea; color: var(--green); font-size: 12.5px; font-weight: 700; white-space: nowrap; opacity: 0; pointer-events: none; }
+.show--interne-systemer .crm__delta.is-neg { background: #f4f2ee; color: var(--muted); }
+
+/* Above the board: how to use it, and a reset once something has moved */
+.show--interne-systemer .crm__hint { display: flex; align-items: center; gap: 12px; min-height: 30px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
+.show--interne-systemer .crm__h-t { display: none; }
+@media (pointer: coarse) { .show--interne-systemer .crm__h-m { display: none; } .show--interne-systemer .crm__h-t { display: inline; } }
+.show--interne-systemer .crm__reset { flex: none; margin-left: auto; white-space: nowrap; padding: 6px 13px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; color: var(--ink); font: 700 12.5px var(--body); cursor: pointer; transition: background .2s, color .2s; }
+.show--interne-systemer .crm__reset:hover { background: var(--ink); color: #fff; }
+
+/* The board: three columns */
+.show--interne-systemer .crm__board { position: relative; display: grid; grid-template-columns: repeat(3, minmax(232px, 1fr)); gap: 14px; }
+.show--interne-systemer .crm__col { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 12px 10px 10px; border-radius: 20px; background: var(--colbg); }
+.show--interne-systemer .crm__col::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 2px var(--c); opacity: 0; transition: opacity .2s; pointer-events: none; }
+.show--interne-systemer .crm__col.is-over::after { opacity: .9; }
+.show--interne-systemer .crm__ch { display: flex; align-items: center; gap: 8px; padding: 2px 6px 12px; }
+.show--interne-systemer .crm__ch h3 { margin: 0; font: 700 14px/1.2 var(--body); white-space: nowrap; }
+.show--interne-systemer .crm__dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+.show--interne-systemer .crm__cnt { display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 7px; border-radius: 999px; background: #fff; font-size: 12px; font-weight: 700; }
+.show--interne-systemer .crm__sum { margin-left: auto; font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.show--interne-systemer .crm__list { flex: 1; display: flex; flex-direction: column; gap: 10px; min-height: 212px; margin: 0; padding: 0; list-style: none; }
+.show--interne-systemer .crm__list:not(:has(> li))::before { content: "Træk et kort hertil"; display: grid; place-items: center; height: 92px; border: 2px dashed var(--line-strong); border-radius: 14px; color: var(--faint); font-size: 13px; }
+.show--interne-systemer .crm__slot { flex: none; border: 2px dashed var(--c); border-radius: 14px; background: rgba(255,255,255,.55); }
+
+/* The cards */
+.show--interne-systemer .crm__card { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; grid-template-areas: "av who kr" "meta meta mv"; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 1px 2px rgba(17,17,17,.05); cursor: grab; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; transition: scale .2s var(--ez); }
+.show--interne-systemer .crm__card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 26px 40px -18px rgba(17,17,17,.38), 0 6px 14px -6px rgba(17,17,17,.14); opacity: 0; transition: opacity .3s; pointer-events: none; }
+.show--interne-systemer .crm__card:focus { outline: none; }
+.show--interne-systemer .crm__card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.show--interne-systemer .crm__card.is-lift { z-index: 6; cursor: grabbing; }
+.show--interne-systemer .crm__card.is-lift::after { opacity: 1; transition-duration: .15s; }
+.show--interne-systemer .crm__card.is-press { scale: .97; }
+.show--interne-systemer .crm__av { grid-area: av; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--a); font-size: 12px; font-weight: 700; }
+.show--interne-systemer .crm__who { grid-area: who; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.show--interne-systemer .crm__who b { font-size: 14.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.show--interne-systemer .crm__who span { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.show--interne-systemer .crm__kr { grid-area: kr; align-self: start; font: 800 16px/1.2 var(--display); letter-spacing: -.02em; white-space: nowrap; }
+.show--interne-systemer .crm__meta { grid-area: meta; display: flex; align-items: center; gap: 7px; min-width: 0; min-height: 28px; font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.show--interne-systemer .crm__meta::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+.show--interne-systemer .is-won .crm__meta { color: #237a46; font-weight: 700; }
+.show--interne-systemer .is-won .crm__meta::before { width: 15px; height: 15px; background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.3l2.3 2.2 4.7-5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
+.show--interne-systemer .crm__mv { grid-area: mv; display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px 6px 12px; border: 0; border-radius: 999px; background: #f2efe9; color: var(--ink); font: 700 12.5px/16px var(--body); white-space: nowrap; cursor: pointer; transition: background .2s, color .2s; }
+.show--interne-systemer .crm__mv svg { width: 14px; height: 14px; stroke-width: 2.4; transition: transform .3s var(--ez); }
+.show--interne-systemer .crm__mv:is(:hover, :focus-visible) { background: var(--ink); color: #fff; }
+.show--interne-systemer .crm__mv:is(:hover, :focus-visible) svg { transform: translateX(2px); }
+.show--interne-systemer .crm__mv:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.show--interne-systemer .crm__card.is-ping::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; box-shadow: 0 0 0 3px rgba(47,158,91,.45); pointer-events: none; animation: crmRing .9s var(--ez) forwards; }
+.show--interne-systemer:is(.motion *) .crm:not(.is-in) :is(.crm__card, .crm__tile) { opacity: 0; }
+
+/* The calendar: the week's bookings on an hour grid, won jobs land here */
+.show--interne-systemer .crm__calh { display: flex; align-items: center; gap: 10px; min-height: 30px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
+.show--interne-systemer .crm__calh b { color: var(--ink); font-size: 14px; }
+.show--interne-systemer .crm__wrap { overflow-x: auto; scrollbar-width: thin; }
+.show--interne-systemer .crm__wk { --hh: 42px; display: grid; grid-template-columns: 34px repeat(5, minmax(96px, 1fr)); min-width: 540px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+.show--interne-systemer .crm__dh { padding: 10px; border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); font-size: 13px; }
+.show--interne-systemer .crm__dh.is-today { color: var(--accent); }
+.show--interne-systemer .crm__dh.is-today::after { content: "I dag"; margin-left: 6px; font-size: 11px; font-weight: 500; }
+.show--interne-systemer .crm__c0 { border-bottom: 1px solid var(--line); }
+.show--interne-systemer .crm__hrs { display: grid; grid-auto-rows: var(--hh); padding-right: 6px; color: var(--faint); font-size: 11px; text-align: right; }
+.show--interne-systemer .crm__hrs span { transform: translateY(-1px); padding-top: 3px; }
+.show--interne-systemer .crm__day { position: relative; height: calc(8 * var(--hh)); margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--hh) - 1px), #f3f1ed calc(var(--hh) - 1px) var(--hh)); }
+.show--interne-systemer .crm__ev { position: absolute; left: 4px; right: 4px; top: calc(var(--s) * var(--hh) + 2px); height: calc(var(--h) * var(--hh) - 4px); overflow: hidden; padding: 4px 8px; border-radius: 9px; border-left: 3px solid var(--green); background: #e6f4eb; color: #2c6b45; font-size: 11.5px; line-height: 1.25; }
+.show--interne-systemer .crm__ev b { display: block; overflow: hidden; color: var(--ink); font-size: 12.5px; white-space: nowrap; text-overflow: ellipsis; }
+.show--interne-systemer .crm__ev span { display: block; overflow: hidden; }
+.show--interne-systemer .crm__ev.is-1 span { white-space: nowrap; text-overflow: ellipsis; }
+.show--interne-systemer .crm__ev.is-bes { border-color: var(--yellow); background: #fdf1d4; color: #7a5c14; }
+.show--interne-systemer .crm__ev.is-lev { border-color: var(--line-strong); background: #f3f1ed; color: var(--muted); }
+.show--interne-systemer .crm__ev.is-new { box-shadow: 0 0 0 2px var(--accent); }
+.show--interne-systemer .crm__ev i { position: absolute; bottom: 6px; left: 8px; padding: 2px 6px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 10px/1.2 var(--body); font-style: normal; }
+.show--interne-systemer:is(.motion *) .crm__ev.is-new { animation: crmPop .6s var(--sp) .25s backwards; }
+
+/* The drawn cursor of the one-time demo */
+.show--interne-systemer .crm__hand { position: absolute; left: 0; top: 0; z-index: 20; width: 28px; height: 28px; margin: -3px 0 0 -6px; opacity: 0; pointer-events: none; transform-origin: 6px 3px; will-change: transform, opacity; }
+.show--interne-systemer .crm__hand svg { width: 100%; height: 100%; fill: var(--ink); stroke: #fff; stroke-width: 1.6; filter: drop-shadow(0 4px 6px rgba(17,17,17,.3)); }
+
+@keyframes crmPop { from { opacity: 0; transform: scale(.6); } }
+@keyframes crmRing { from { opacity: 1; transform: scale(.98); } to { opacity: 0; transform: scale(1.05); } }
+
+/* Narrower: no rail, the board scrolls sideways inside the window */
+@media (max-width: 899px) {
+  .show--interne-systemer .crm { grid-template-columns: minmax(0, 1fr); }
+  .show--interne-systemer .crm__rail, .show--interne-systemer .crm__search { display: none; }
+  .show--interne-systemer .crm__seg { margin-left: auto; }
+  .show--interne-systemer .crm__board { margin: 0 -24px; padding: 0 24px 6px; overflow-x: auto; scroll-padding: 0 24px; scrollbar-width: none; }
+  .show--interne-systemer .crm__board::-webkit-scrollbar { display: none; }
+  .show--interne-systemer .crm__wrap { margin: 0 -24px; padding: 0 24px; }
+}
+@media (max-width: 699px) {
+  .show--interne-systemer { padding: 32px 20px 80px; }
+  .show--interne-systemer .crm-br { border: 1px solid var(--line); border-radius: 18px; }
+  .show--interne-systemer .crm-br::before { display: none; }
+  .show--interne-systemer .crm-br .browser__bar { padding: 10px 12px; gap: 8px; }
+  .show--interne-systemer .crm-br .tag-eks { font-size: 10.5px; padding: 5px 8px; }
+  .show--interne-systemer .crm__main { padding: 14px 14px 16px; }
+  .show--interne-systemer .crm__top { gap: 10px; margin-bottom: 14px; }
+  .show--interne-systemer .crm__logo { width: 34px; height: 34px; font-size: 17px; }
+  .show--interne-systemer .crm__name b { font-size: 17px; }
+  .show--interne-systemer .crm__name small { font-size: 11.5px; }
+  .show--interne-systemer .crm__seg { padding: 3px; }
+  .show--interne-systemer .crm__seg button { padding: 7px 11px; font-size: 12.5px; }
+  .show--interne-systemer .crm__tiles { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .show--interne-systemer .crm__tile { gap: 6px; padding: 12px 13px; border-radius: 16px; }
+  .show--interne-systemer .crm__tl { font-size: 12px; }
+  .show--interne-systemer .crm__n { font-size: 30px; }
+  .show--interne-systemer .crm__ts { font-size: 12px; }
+  .show--interne-systemer .crm__tile--kr { grid-column: 1 / -1; padding-right: 88px; }
+  .show--interne-systemer .crm__bars { right: 14px; bottom: 14px; height: 44px; }
+  .show--interne-systemer .crm__hint { font-size: 12.5px; margin-bottom: 10px; }
+  .show--interne-systemer .crm__board { grid-template-columns: repeat(3, 272px); gap: 10px; margin: 0 -14px; padding: 0 14px 4px; scroll-padding: 0 14px; }
+  .show--interne-systemer .crm__wrap { margin: 0 -14px; padding: 0 14px; }
+}

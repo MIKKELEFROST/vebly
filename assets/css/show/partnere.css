@@ -66,7 +66,9 @@
 .show--partnere .pw__cell { display: flex; min-width: 0; }
 .show--partnere .pw__cell .pt__item { flex: 1; min-width: 0; margin: 0; overflow: hidden; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 22px; min-height: 148px; padding: 22px 22px 22px; white-space: normal; background: #fff; border: 1px solid var(--line); border-radius: 24px; }
 .show--partnere .pw__cell .pt__txt { position: relative; z-index: 1; margin-top: auto; gap: 7px; }
-.show--partnere .pw__cell .pt__name { font-size: 26px; overflow-wrap: anywhere; text-wrap: balance; }
+.show--partnere .pw__cell .pt__item { container-type: inline-size; }
+/* Long names (domains) shrink to fit one line instead of breaking mid-word; --len is the number of letters */
+.show--partnere .pw__cell .pt__name { font-size: min(26px, calc((100cqi - 44px) / var(--len, 10) * 1.78)); overflow-wrap: anywhere; text-wrap: balance; }
 .show--partnere .pw__cell .pt__item--logo .pt__txt { flex: 1; margin-top: 0; justify-content: space-between; gap: 22px; }
 .show--partnere .pw__cell .pt__logo { height: calc(var(--lh, 28px) * 1.4); max-width: 100%; }
 .show--partnere .pw__glyph { position: absolute; right: -4px; bottom: -38px; font-family: var(--display); font-weight: 800; font-size: 168px; line-height: 1; letter-spacing: -0.06em; color: var(--ink); opacity: .05; pointer-events: none; transition: opacity .4s, transform .6s cubic-bezier(.2,.8,.2,1); }

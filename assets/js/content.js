@@ -21,7 +21,7 @@ export const included = [
 
 export const addons = [
   { t: 'SEO', id: 'seo', price: '995 kr./time', d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'], band: ['#e0552b', '#fff'] },
-  { t: 'Google Ads', id: 'google-ads', price: '8.000 kr./md.', d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'], band: ['#111', '#fff'] },
+  { t: 'Google Ads', id: 'google-ads', price: '8.000 kr./md.', d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Google Shopping med i prisen', 'Ekstra kanal: 5.000 kr./md.'], band: ['#111', '#fff'] },
   { t: 'Meta Ads', id: 'meta-ads', price: '8.000 kr./md.', d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'], band: ['#2f9e5b', '#fff'] },
   { t: 'Interne systemer', id: 'systemer', price: 'fra 14.999 kr.', d: 'Skræddersyede værktøjer til din drift.', ex: ['Kunde- og bookingsystemer', 'Dashboards og overblik', 'Portaler til medarbejdere'], band: ['#f2c14e', '#111'] },
   { t: 'Automations', id: 'automations', price: 'fra 4.999 kr.', d: 'Lad rutinerne klare sig selv.', ex: ['Automatiske mails og sms', 'Fakturaer og opfølgning', 'Kobling mellem dine systemer'], band: ['#f2ede4', '#111'] }
@@ -34,34 +34,42 @@ export const pakker = [
   { id: 'seo', t: 'SEO hjemmeside', price: 29995, d: 'Bygget til at blive fundet på Google, også uden for din egen by.', ex: ['Søgeordsanalyse, før vi bygger', 'En side pr. ydelse og pr. område', 'Tekster skrevet til Google og dine kunder', 'Teknisk SEO og struktureret data'] }
 ];
 
-// Advertising: the first channel costs `first` a month, every extra channel `extra`
+// Advertising: the first channel costs `first` a month, every extra channel `extra`. Channels in the same group
+// count as one: Google Ads and Google Shopping Ads together are one Google channel (Mikkel, 4 Nov 2026).
 export const KANAL = { first: 8000, extra: 5000 };
+// The price of each channel picked, in the order picked, from their groups: ['google', 'google', 'meta'] →
+// [8000, 0, 5000]. And what one more channel of group g adds a month (0 when its group is already there).
+export const kanalPriser = groups => { const seen = new Set(); return groups.map(g => seen.has(g) ? 0 : (seen.add(g), seen.size > 1 ? KANAL.extra : KANAL.first)); };
+export const kanalPlus = (groups, g) => groups.includes(g) ? 0 : groups.length ? KANAL.extra : KANAL.first;
 
 // SEO hours a month in the calculator: where it starts, and the range
 export const SEO_TIMER = { start: 4, min: 1, max: 40 };
 
 // What each thing costs, by the name used on the cards and in the form.
-// once = one-off, md = a month, kanal = an advertising channel (priced with KANAL), fra = a "from" price
+// once = one-off, md = a month, kanal = an advertising channel and its group (priced with KANAL), fra = a "from" price
 export const priser = {
   'Simpel one page': { once: 2995 },
   'Normal hjemmeside': { once: 9995 },
   'SEO hjemmeside': { once: 29995 },
   'Hjemmeside': { once: 2995, fra: true },
   'Hjemmesider': { once: 2995, fra: true },
-  'Google Ads': { kanal: true },
-  'Meta Ads': { kanal: true },
-  'Google Shopping Ads': { kanal: true },
+  'Google Ads': { kanal: 'google' },
+  'Meta Ads': { kanal: 'meta' },
+  'Google Shopping Ads': { kanal: 'google' },
+  'Google CSS': { md: 49 },
+  'Webshop': { once: 12995, fra: true },
   // SEO is sold by the hour; the calculator lets the visitor choose hours a month (SEO_TIMER)
   'SEO': { time: 995 },
   'Automations': { once: 4999, md: 499, fra: true },
-  'Interne systemer': { once: 14999, fra: true }
+  'Interne systemer': { once: 14999, fra: true },
+  'Interne systemer og CRM': { once: 14999, fra: true }
 };
 
 export const addonPages = {
   seo: { price: '995 kr./time', priceNote: 'Timepris · du bestemmer antal timer · ingen binding · ekskl. moms', label: 'SEO', h1: 'Bliv fundet først, når kunderne søger.', intro: 'Vi sørger for, at din virksomhed dukker op på Google, når nogen søger efter det, du laver, der hvor du holder til.',
     items: [['Lokal SEO', 'Bliv fundet i dit område, fx “frisør Roskilde”.'], ['Google-profil', 'Opsætning og pleje af din virksomhedsprofil med anmeldelser.'], ['Søgeord', 'Vi finder de ord, dine kunder faktisk søger på.'], ['Tekster', 'Indhold, der både Google og dine kunder forstår.'], ['Teknisk SEO', 'Hastighed, struktur og alt det bag kulisserne.'], ['Månedlig rapport', 'Kort og klart overblik over, hvad der virker.']],
     steps: [['Analyse', 'Vi ser på din side, dine konkurrenter og dine søgeord.'], ['Plan', 'Du får en klar plan, og vi aftaler, hvor mange timer der skal bruges.'], ['Løbende arbejde', 'Vi optimerer hver måned og viser dig resultaterne.']] },
-  'google-ads': { price: '8.000 kr./md.', priceNote: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · annoncebudget betales direkte til Google', label: 'Google Ads', h1: 'Øverst på Google, når kunderne søger.', intro: 'Vi bygger og styrer dine annoncer på Google, så du bliver vist, når nogen søger efter det, du laver, der hvor du holder til. Og vi holder øje med hver krone.',
+  'google-ads': { price: '8.000 kr./md.', priceNote: 'Pr. kanal · Google Shopping med uden ekstra pris · hver ekstra kanal 5.000 kr./md. · opsætning gratis · annoncebudget betales direkte til Google', label: 'Google Ads', h1: 'Øverst på Google, når kunderne søger.', intro: 'Vi bygger og styrer dine annoncer på Google, så du bliver vist, når nogen søger efter det, du laver, der hvor du holder til. Og vi holder øje med hver krone.',
     items: [['Søgeordsanalyse', 'Vi finder de ord, dine kunder faktisk søger på.'], ['Kampagner og annoncer', 'Vi bygger kampagnerne og skriver annoncerne færdige.'], ['Lokal målretning', 'Vis dig for kunder i dit område.'], ['Sporing', 'Opkald og henvendelser bliver målt.'], ['Løbende optimering', 'Vi justerer bud, søgeord og annoncer hver måned.'], ['Månedlig rapport', 'Kort og klart overblik over, hvad du får for pengene.']],
     steps: [['Mål og budget', 'Vi aftaler, hvad du vil opnå, og hvad det må koste.'], ['Opsætning', 'Vi bygger kampagner, annoncer og sporing.'], ['Optimering', 'Vi justerer løbende og sender en månedlig rapport.']] },
   'meta-ads': { price: '8.000 kr./md.', priceNote: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · annoncebudget betales direkte til Meta', label: 'Meta Ads', h1: 'Kunder fra Facebook og Instagram.', intro: 'Vi laver annoncer, der fanger opmærksomheden i feedet og rammer de rigtige mennesker, og holder øje med hver krone.',
@@ -90,7 +98,7 @@ export const team = [
 ];
 
 // The first 12 are the ones shown on narrow phones
-export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automations', 'AI-annoncer', 'GEO', 'Google Shopping', 'CRO', 'Nyhedsbrev', 'Booking', 'CRM', 'Dashboards', 'Google CSS', 'Google-profil', 'Webshop', 'Chatbot', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
+export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automations', 'AI-annoncer', 'GEO', 'Google Shopping', 'CRO', 'Nyhedsbrev', 'Booking', 'CRM', 'Dashboards', 'Google CSS', 'Video', 'App', 'Google-profil', 'Webshop', 'Chatbot', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
 
 // [explanation, related: a pop-up key, 'pris', 'link:/a/page' or null]
 export const ballInfo = {
@@ -105,11 +113,13 @@ export const ballInfo = {
   'CRO': ['Få flere af dem, der besøger din side, til at ringe, skrive eller købe.', 'link:/services/cro'],
   'Nyhedsbrev': ['Hold kontakten med dine kunder med nyhedsbreve og mails, der sendes automatisk.', 'link:/services/email-marketing'],
   'Booking': ['Lad kunderne booke tid direkte på siden, døgnet rundt.', 'addon-systemer'],
-  'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'addon-systemer'],
-  'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'addon-systemer'],
-  'Google CSS': ['Lad dine Shopping-annoncer gå gennem en CSS-partner, så hele dit bud tæller, og klikket kan blive billigere.', 'link:/services/google-css'],
+  'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'link:/services/interne-systemer'],
+  'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'link:/services/interne-systemer'],
+  'Google CSS': ['Lad dine Shopping-annoncer gå gennem Webleads som CSS, så hele dit bud tæller. 49 kr. om måneden.', 'link:/services/google-css'],
   'Google-profil': ['Vi opretter eller opdaterer din profil, så du ses på Google Maps.', 'inc-Google-profil'],
-  'Webshop': ['Sælg produkter eller gavekort direkte fra din hjemmeside.', null],
+  'Webshop': ['Webshop på Shopify fra 12.995 kr. Beregn selv prisen på din shop.', 'link:/services/webshop'],
+  'Video': ['Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', 'link:/services/video'],
+  'App': ['Din egen app til iPhone og Android, så kunderne kan booke og bestille fra telefonen.', 'link:/services/app-udvikling'],
   'Chatbot': ['En AI-chatbot, der svarer dine kunder døgnet rundt.', 'link:/services/ai'],
   'Tekster': ['Tekster, der sælger og kan findes på Google.', 'link:/services/seo'],
   'Logo': ['Et enkelt, genkendeligt logo og farver, der passer til dig.', null],

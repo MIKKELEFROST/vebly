@@ -1,5 +1,5 @@
-// /services/webshop: a DRAFT page for a webshop on Shopify, with a price calculator as its centrepiece.
-// Not linked from anywhere and not indexed (p.robots). Build: node scripts/services/build.mjs webshop
+// /services/webshop: a webshop on Shopify, with a price calculator as its centrepiece. Live since 4 Nov 2026
+// (prices approved by Mikkel); its card is in data.mjs services. Build: node scripts/services/build.mjs webshop
 //
 // Its own structure, like no other page: hero → #beregner (the calculator: drag the products and watch the example
 // shop fill up, every choice flies into the cart) → #pris (what the base price includes, as a packing slip) →
@@ -88,7 +88,7 @@ export default async function ({ lib, data, showcase, read }) {
         ${group('md', 'Hver måned, hvis du vil', `${row([
           opt('service', 'service', 'Webshop-service', 'Opdateringer, små rettelser og hjælp, når du har brug for det.', kr(P.service) + '/md.', { cls: ' ws-wide' }),
           ...ADS.map(([v, t, d]) => opt('ads', v, t, d, kr(P.channel.first) + '/md.', { pk: 'ad:' + v }))
-        ])}<p class="calc__hint" data-ws-adtip>Første kanal ${kr(P.channel.first)}/md. Hver ekstra kanal kun ${kr(P.channel.extra)}/md.</p>`)}
+        ])}<p class="calc__hint" data-ws-adtip>Første kanal ${kr(P.channel.first)}/md. Hver ekstra kanal kun ${kr(P.channel.extra)}/md. Google Ads og Google Shopping tæller som én.</p>`)}
       </div>`;
 
   const cart = `<div class="spot calc__sum" data-spot data-ws-sum data-reveal="2">
@@ -187,7 +187,6 @@ export default async function ({ lib, data, showcase, read }) {
   const p = {
     pageType: 'service_webshop', slug: 'webshop', title, description, url: u,
     og: '/assets/og/forside.png', ogAlt: `Webleads: webshop på Shopify fra ${kr(P.base)}.`,
-    robots: 'noindex, nofollow', bar: 'Udkast: priserne er et forslag og er ikke endelige.',
     tag: `Webshop fra ${kr(P.base)}`, subject: 'Møde om webshop',
     msg: 'Hej, jeg var lige inde på webleads.dk og vil gerne høre mere om en webshop. Kan vi opsætte et møde?',
     nav: [['Services', '/#services'], ['Beregn pris', '#beregner'], ['Det får du', '#pris'], ['Sådan foregår det', '#saadan'], ['Spørgsmål', '#faq']],

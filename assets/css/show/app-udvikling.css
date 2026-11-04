@@ -1,0 +1,277 @@
+/* App-udvikling showcase:twin devices (scripts/services/showcase/app-udvikling.html). The same example app for
+   Klinik Fryd on an iPhone-like and an Android-like phone, our own drawings. The state lives on .au-stage:
+   data-v (home, pick, done), is-dl / is-inst (the icon installing), is-open / is-ready (the app open), is-day,
+   is-slot, is-busy, is-push, is-stamp, is-end, and no-<feature> when a chip is off. Static (no motion or no JS):
+   the finished booking. .is-anim (app-udvikling.js, motion on) adds the movement. */
+.show--app-udvikling{--e:cubic-bezier(.2,.8,.2,1);--pop:cubic-bezier(.2,.9,.3,1.4);--fr:#17675b;--frt:#dcefe8;position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 24px 100px;scroll-margin-top:30px;}
+.show--app-udvikling .sec-head{margin-bottom:32px;}
+.show--app-udvikling .sec-head__lead{max-width:360px;}
+.show--app-udvikling .au-i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+/* The stage */
+.show--app-udvikling .au-stage{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;padding:20px 24px 26px;border:1px solid var(--line);border-radius:32px;background:radial-gradient(56% 50% at 50% 44%, #fff 35%, rgba(255,255,255,0)), linear-gradient(#f7f4ef, #f0ece4);overflow:hidden;}
+.show--app-udvikling .au-top{align-self:stretch;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:38px;}
+.show--app-udvikling .au-who{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0;font-size:14px;font-weight:500;color:var(--muted);}
+.show--app-udvikling .au-hint, .show--app-udvikling .au-again{display:none;align-items:center;gap:8px;font-size:14px;font-weight:700;}
+.show--app-udvikling .au-hint{color:var(--accent);}
+.show--app-udvikling .au-hint::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;}
+.show--app-udvikling .au-again{flex-shrink:0;padding:8px 15px 8px 12px;border:1px solid var(--line-strong);border-radius:999px;background:#fff;color:var(--ink);font-family:inherit;cursor:pointer;transition:border-color .25s, transform .3s var(--pop);}
+.show--app-udvikling .au-again:hover{border-color:var(--ink);transform:translateY(-2px);}
+.show--app-udvikling .au-again .au-i{width:16px;height:16px;stroke-width:2.2;}
+.show--app-udvikling .is-hint .au-hint, .show--app-udvikling .is-end .au-again{display:inline-flex;}
+
+.show--app-udvikling .au-pair{position:relative;display:flex;justify-content:center;gap:112px;margin-top:16px;}
+.show--app-udvikling .au-dev{--s:.92;position:relative;width:calc(272px * var(--s));height:calc(564px * var(--s));}
+.show--app-udvikling .au-dev::after{content:"";position:absolute;z-index:-1;left:4%;right:4%;bottom:-24px;height:36px;border-radius:50%;background:radial-gradient(closest-side, rgba(17,17,17,.2), rgba(17,17,17,0));}
+.show--app-udvikling .au-ph{position:absolute;top:0;left:0;width:272px;height:564px;padding:9px;border-radius:46px;background:#121212;box-shadow:inset 0 0 0 1.5px #474747, inset 0 0 0 4px #0a0a0a, 0 50px 80px -40px rgba(17,17,17,.45);transform:scale(var(--s));transform-origin:0 0;}
+.show--app-udvikling .au-ph::before, .show--app-udvikling .au-ph::after{content:"";position:absolute;width:3px;border-radius:2px;background:#2c2c2c;}
+.show--app-udvikling .au-ios .au-ph::before{left:-3px;top:104px;height:24px;box-shadow:0 42px 0 #2c2c2c, 0 80px 0 #2c2c2c;}
+.show--app-udvikling .au-ios .au-ph::after{right:-3px;top:150px;height:66px;}
+.show--app-udvikling .au-and .au-ph{padding:8px;border-radius:34px;background:#1c1d20;box-shadow:inset 0 0 0 1.5px #3f4146, 0 50px 80px -40px rgba(17,17,17,.45);}
+.show--app-udvikling .au-and .au-ph::before{right:-3px;top:96px;height:70px;}
+.show--app-udvikling .au-and .au-ph::after{right:-3px;top:190px;height:34px;}
+.show--app-udvikling .au-scr{position:relative;isolation:isolate;width:100%;height:100%;overflow:hidden;border-radius:37px;background:#fff;color:#141414;font-size:12px;line-height:1.3;}
+.show--app-udvikling .au-and .au-scr{border-radius:26px;}
+.show--app-udvikling .au-cam{position:absolute;z-index:9;top:9px;left:50%;width:76px;height:22px;margin-left:-38px;border-radius:999px;background:#000;}
+.show--app-udvikling .au-and .au-cam{width:11px;height:11px;margin-left:-5.5px;box-shadow:inset 0 0 0 2.5px #1f1f1f;}
+.show--app-udvikling .au-sb{position:absolute;z-index:8;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 22px 0 32px;font-size:13px;}
+.show--app-udvikling .au-and .au-sb{height:30px;padding:0 16px 0 18px;font-size:12px;}
+.show--app-udvikling .au-and .au-sb b{font-weight:500;}
+.show--app-udvikling .au-sb svg{width:50px;height:11px;fill:currentColor;}
+.show--app-udvikling .au-ind{position:absolute;z-index:9;bottom:7px;left:50%;width:96px;height:4px;margin-left:-48px;border-radius:4px;background:#141414;}
+.show--app-udvikling .au-and .au-ind{width:80px;height:3px;margin-left:-40px;opacity:.55;}
+
+/* The home screen, with our app installing */
+.show--app-udvikling .au-home{position:absolute;inset:0;padding:60px 12px 0;background:linear-gradient(165deg, #f6dfcc, #ebbca6 50%, #cdaacb);}
+.show--app-udvikling .au-and .au-home{padding:44px 10px 0;background:linear-gradient(172deg, #e6e8f6, #c4ccec 55%, #aab9e2);}
+.show--app-udvikling .au-date{margin:6px 8px 26px;font-size:17px;font-weight:500;letter-spacing:-.01em;color:#1d1f2c;}
+.show--app-udvikling .au-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:20px 0;justify-items:center;}
+.show--app-udvikling .au-g, .show--app-udvikling .au-lg{position:relative;display:grid;place-items:center;width:2em;height:2em;border-radius:.55em;background:var(--c, var(--fr));font-size:24px;}
+.show--app-udvikling .au-and .au-g, .show--app-udvikling .au-and .au-lg{border-radius:50%;}
+.show--app-udvikling .au-g::after{content:"";width:36%;height:36%;border-radius:3px;background:rgba(255,255,255,.6);}
+.show--app-udvikling .au-g:nth-child(3n)::after{border-radius:50%;}
+.show--app-udvikling .au-g:nth-child(3n+1)::after{width:46%;height:14%;}
+.show--app-udvikling .au-lg::before{content:"F";color:#fff;font-family:var(--display);font-size:1.1em;font-weight:800;letter-spacing:-.04em;line-height:1;}
+.show--app-udvikling .au-lg::after{content:"";position:absolute;top:.46em;right:.52em;width:.2em;height:.2em;border-radius:50%;background:var(--yellow);}
+.show--app-udvikling .au-dock{position:absolute;left:9px;right:9px;bottom:16px;display:flex;justify-content:space-around;padding:11px 4px;border-radius:30px;background:rgba(255,255,255,.3);}
+.show--app-udvikling .au-and .au-dock{left:10px;right:10px;bottom:70px;padding:0;background:none;}
+.show--app-udvikling .au-srch{position:absolute;left:16px;right:16px;bottom:20px;height:38px;border-radius:999px;background:rgba(255,255,255,.72);}
+.show--app-udvikling .au-srch::before{content:"";position:absolute;left:15px;top:12px;width:9px;height:9px;border:2px solid #4b4f63;border-radius:50%;}
+.show--app-udvikling .au-app{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.show--app-udvikling .au-ib{position:relative;display:block;}
+.show--app-udvikling .au-app em{height:13px;font-size:10.5px;font-style:normal;font-weight:500;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3);white-space:nowrap;}
+.show--app-udvikling .au-and .au-app em{color:#1d1f2c;text-shadow:none;}
+.show--app-udvikling .au-l1, .show--app-udvikling .is-dl .au-l2{display:none;}
+.show--app-udvikling .is-dl .au-l1{display:inline;}
+.show--app-udvikling .au-ring{position:absolute;top:12px;left:12px;width:24px;height:24px;fill:none;stroke-width:4.5;transform:rotate(-90deg);opacity:0;}
+.show--app-udvikling .au-ring circle{stroke:rgba(255,255,255,.35);stroke-dasharray:100;}
+.show--app-udvikling .au-ring .p{stroke:#fff;stroke-dashoffset:100;}
+.show--app-udvikling .au-and .au-ring{top:-5px;left:-5px;width:58px;height:58px;stroke-width:2.4;}
+.show--app-udvikling .au-and .au-ring circle{stroke:rgba(23,103,91,.18);}
+.show--app-udvikling .au-and .au-ring .p{stroke:var(--fr);stroke-linecap:round;}
+.show--app-udvikling .is-dl .au-ring{opacity:1;}
+.show--app-udvikling .is-dl .au-ico{filter:brightness(.5) saturate(.4);}
+.show--app-udvikling .is-dl .au-and .au-ico{filter:grayscale(1) opacity(.5);transform:scale(.8);}
+.show--app-udvikling .au-stage:not(.is-dl):not(.is-inst) .au-app{opacity:0;transform:scale(.3);}
+
+/* The app */
+.show--app-udvikling .au-appv{position:absolute;inset:0;z-index:2;background:#f3f2ee;}
+.show--app-udvikling .au-and .au-appv{background:#f3f8f5;}
+.show--app-udvikling .au-stage:not(.is-open) .au-appv{opacity:0;visibility:hidden;transform:scale(.17);}
+.show--app-udvikling .au-splash{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#fff;font-size:15px;}
+.show--app-udvikling .au-splash .au-lg{font-size:34px;}
+.show--app-udvikling .is-ready .au-splash{opacity:0;visibility:hidden;}
+.show--app-udvikling .au-vs{position:absolute;top:44px;bottom:62px;left:0;right:0;overflow:hidden;}
+.show--app-udvikling .au-and .au-vs{top:32px;bottom:66px;}
+.show--app-udvikling .au-v{position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;padding:6px 14px 12px;opacity:0;visibility:hidden;}
+.show--app-udvikling .au-hd{display:grid;grid-template-columns:minmax(0, 1fr) auto;align-items:end;gap:0 8px;padding:4px 2px 0;}
+.show--app-udvikling .au-hd__k{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8b877f;}
+.show--app-udvikling .au-hd > b{font-size:26px;letter-spacing:-.03em;line-height:1.15;}
+.show--app-udvikling .au-hd__i{grid-area:1 / 2 / 3;display:flex;gap:7px;}
+.show--app-udvikling .au-bell, .show--app-udvikling .au-av{position:relative;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#fff;color:var(--fr);font-size:13px;font-style:normal;font-weight:700;}
+.show--app-udvikling .au-av{background:var(--frt);}
+.show--app-udvikling .au-bell .au-i{width:17px;height:17px;}
+.show--app-udvikling .au-bell::after{content:"";position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px #fff;}
+.show--app-udvikling .au-and .au-hd__k{text-transform:none;letter-spacing:0;font-size:13px;font-weight:500;color:#1b3a34;}
+.show--app-udvikling .au-and .au-hd__k .au-lg{font-size:10px;}
+.show--app-udvikling .au-and .au-hd > b{margin-top:8px;font-size:22px;font-weight:500;letter-spacing:-.01em;}
+.show--app-udvikling .au-and .au-bell{background:#e1eee8;}
+.show--app-udvikling .au-and .au-bell::after{box-shadow:0 0 0 2px #e1eee8;}
+.show--app-udvikling .au-info{display:flex;align-items:center;gap:6px;margin:0 2px;font-size:11.5px;color:#66625b;}
+.show--app-udvikling .au-info::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);}
+.show--app-udvikling .au-card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 14px 13px;border-radius:16px;background:#fff;box-shadow:0 1px 2px rgba(17,17,17,.05);}
+.show--app-udvikling .au-and .au-card{border-radius:22px;background:#e1eee8;box-shadow:none;}
+.show--app-udvikling .au-card__k{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fr);}
+.show--app-udvikling .au-and .au-card__k{text-transform:none;letter-spacing:0;font-size:11.5px;font-weight:500;}
+.show--app-udvikling .au-card b{font-size:15px;letter-spacing:-.01em;}
+.show--app-udvikling .au-card small, .show--app-udvikling .au-sub, .show--app-udvikling .au-sheet small{font-size:11.5px;color:#75716a;}
+.show--app-udvikling .au-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;margin-top:8px;padding:8px 16px;border-radius:10px;background:var(--fr);color:#fff;font-size:12.5px;font-weight:700;}
+.show--app-udvikling .au-and .au-btn{border-radius:999px;font-weight:500;}
+.show--app-udvikling .au-btn--o{background:none;color:var(--fr);box-shadow:inset 0 0 0 1.5px currentColor;}
+.show--app-udvikling .au-st{display:flex;gap:5px;align-self:stretch;margin-top:8px;}
+.show--app-udvikling .au-st i{flex:1;max-width:18px;aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 1.5px #c9d5cf;}
+.show--app-udvikling .au-st .on{background:var(--fr);box-shadow:none;}
+
+/* Pick a time */
+.show--app-udvikling .au-nav{position:relative;display:flex;align-items:center;justify-content:center;height:30px;font-size:15px;}
+.show--app-udvikling .au-back{position:absolute;left:-6px;display:flex;align-items:center;color:var(--fr);font-size:14px;}
+.show--app-udvikling .au-back .au-i{width:20px;height:20px;stroke-width:2.2;}
+.show--app-udvikling .au-and .au-nav{justify-content:flex-start;gap:10px;}
+.show--app-udvikling .au-and .au-back{position:static;color:#141414;}
+.show--app-udvikling .au-and .au-nav b{font-size:17px;font-weight:500;}
+.show--app-udvikling .au-sub{margin:-2px 2px 0;}
+.show--app-udvikling .au-days{display:flex;gap:5px;}
+.show--app-udvikling .au-days span{flex:1;display:flex;flex-direction:column;align-items:center;padding:6px 0 7px;border-radius:12px;background:#fff;color:#7b776f;font-size:10px;}
+.show--app-udvikling .au-days b{font-size:16px;color:#141414;}
+.show--app-udvikling .au-slots{display:grid;grid-template-columns:repeat(3, 1fr);gap:6px;}
+.show--app-udvikling .au-slots span{padding:9px 0;border-radius:10px;background:#fff;text-align:center;font-size:12.5px;font-weight:700;}
+.show--app-udvikling .au-and .au-days span, .show--app-udvikling .au-and .au-slots span{border-radius:999px;background:none;box-shadow:inset 0 0 0 1px #c6d4ce;}
+.show--app-udvikling .au-and .au-slots span{font-weight:500;}
+.show--app-udvikling .au-stage:not(.is-day) .au-slots .x0, .show--app-udvikling .is-day .au-slots .x3{background:none;box-shadow:none;color:#bdb9b1;text-decoration:line-through;}
+.show--app-udvikling .au-stage:not(.is-day) .au-days .d0, .show--app-udvikling .is-day .au-days .d3, .show--app-udvikling .is-slot .au-slots .s2{background:var(--fr);box-shadow:none;color:rgba(255,255,255,.78);}
+.show--app-udvikling .au-stage:not(.is-day) .au-days .d0 b, .show--app-udvikling .is-day .au-days .d3 b, .show--app-udvikling .is-slot .au-slots .s2{color:#fff;}
+.show--app-udvikling .au-me, .show--app-udvikling .au-form span{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:#fff;font-size:12px;}
+.show--app-udvikling .au-me .au-av{width:24px;height:24px;font-size:11px;}
+.show--app-udvikling .au-form{display:flex;flex-direction:column;gap:6px;}
+.show--app-udvikling .au-form span{color:#a29e96;box-shadow:inset 0 0 0 1px #e4e1db;}
+.show--app-udvikling .au-and .au-me{border-radius:16px;background:#e1eee8;}
+.show--app-udvikling .au-and .au-form span{border-radius:8px;background:none;box-shadow:inset 0 0 0 1px #b9c8c1;}
+.show--app-udvikling .au-btn--w{align-self:stretch;margin-top:auto;padding:12px;font-size:13.5px;}
+.show--app-udvikling .is-busy .au-btn--w{color:transparent;}
+.show--app-udvikling .is-busy .au-btn--w::after{content:"";position:absolute;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:auSpin .7s linear infinite;}
+
+/* Booked */
+.show--app-udvikling .au-v--done{align-items:center;justify-content:center;gap:6px;padding:64px 14px 130px;text-align:center;}
+.show--app-udvikling .au-chk{display:grid;place-items:center;width:58px;height:58px;margin-bottom:8px;border-radius:50%;background:var(--fr);box-shadow:0 0 0 8px var(--frt);}
+.show--app-udvikling .au-chk svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;}
+.show--app-udvikling .au-v--done > b{font-size:20px;letter-spacing:-.02em;}
+.show--app-udvikling .au-v--done p{margin:0;font-size:12px;color:#66625b;}
+.show--app-udvikling .au-v--done .au-when{font-size:14px;font-weight:700;color:#141414;}
+.show--app-udvikling .au-v--done .au-btn{margin-top:10px;}
+.show--app-udvikling .au-stage[data-v="home"] .au-scr .au-v--home, .show--app-udvikling .au-stage[data-v="pick"] .au-scr .au-v--pick, .show--app-udvikling .au-stage[data-v="done"] .au-scr .au-v--done{opacity:1;visibility:visible;transform:none;}
+
+/* Tab bar, push notification and the stamp card */
+.show--app-udvikling .au-tabs{position:absolute;z-index:3;left:0;right:0;bottom:0;display:flex;height:62px;padding:7px 4px 0;background:rgba(249,249,247,.97);box-shadow:0 -1px 0 rgba(17,17,17,.07);}
+.show--app-udvikling .au-tabs span{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9.5px;font-weight:500;color:#94918b;}
+.show--app-udvikling .au-tabs .au-i{width:22px;height:22px;}
+.show--app-udvikling .au-and .au-tabs{height:66px;padding-top:9px;background:#e8f1ed;box-shadow:none;}
+.show--app-udvikling .au-and .au-tabs span{gap:3px;font-size:10px;color:#4a5753;}
+.show--app-udvikling .au-and .au-tabs .au-i{width:50px;height:28px;padding:3px 14px;border-radius:999px;}
+.show--app-udvikling [data-v="home"] .au-tabs .t-home, .show--app-udvikling [data-v="pick"] .au-tabs .t-book, .show--app-udvikling [data-v="done"] .au-tabs .t-book{color:var(--fr);}
+.show--app-udvikling [data-v="home"] .au-and .t-home .au-i, .show--app-udvikling [data-v="pick"] .au-and .t-book .au-i, .show--app-udvikling [data-v="done"] .au-and .t-book .au-i{background:#c4e2d6;}
+.show--app-udvikling .au-push{position:absolute;z-index:7;top:46px;left:8px;right:8px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1px 9px;padding:10px 12px 11px;border-radius:20px;background:rgba(247,246,243,.97);box-shadow:0 14px 30px -12px rgba(17,17,17,.35), 0 0 0 .5px rgba(17,17,17,.08);font-size:11.5px;opacity:0;transform:translateY(-160%);}
+.show--app-udvikling .au-push .au-lg{grid-row:span 2;font-size:16px;border-radius:9px;}
+.show--app-udvikling .au-push b{font-size:12px;}
+.show--app-udvikling .au-push small{font-size:11px;color:#8b877f;}
+.show--app-udvikling .au-push p{grid-column:2 / 4;margin:0;}
+.show--app-udvikling .au-push strong{display:block;}
+.show--app-udvikling .au-and .au-push{top:34px;grid-template-columns:1fr;gap:5px;padding:12px 14px;border-radius:24px;background:#fff;}
+.show--app-udvikling .au-and .au-push p{grid-column:auto;}
+.show--app-udvikling .au-pt{display:flex;align-items:center;gap:6px;font-size:10.5px;color:#5c625f;}
+.show--app-udvikling .au-pt .au-lg{font-size:8px;}
+.show--app-udvikling .is-push .au-push{opacity:1;transform:none;}
+.show--app-udvikling .au-sheet{position:absolute;z-index:4;left:8px;right:8px;bottom:70px;display:flex;flex-direction:column;padding:12px 14px 13px;border-radius:20px;background:#fff;box-shadow:0 18px 40px -14px rgba(17,17,17,.32), 0 0 0 .5px rgba(17,17,17,.08);opacity:0;transform:translateY(140%);}
+.show--app-udvikling .au-and .au-sheet{bottom:76px;border-radius:26px;}
+.show--app-udvikling .au-sh{display:flex;align-items:center;justify-content:space-between;font-size:14px;}
+.show--app-udvikling .au-plus{padding:3px 9px;border-radius:999px;background:var(--frt);color:var(--fr);font-size:11px;font-weight:700;}
+.show--app-udvikling .au-sheet .au-st{margin:10px 0 8px;}
+.show--app-udvikling .is-stamp .au-sheet{opacity:1;transform:none;}
+
+/* What the visitor touches:the phones, the tap mirrored on both, the chips */
+.show--app-udvikling .au-tap{position:absolute;z-index:10;top:0;left:0;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:rgba(17,17,17,.2);box-shadow:0 0 0 2px rgba(255,255,255,.8), 0 4px 12px rgba(17,17,17,.2);opacity:0;pointer-events:none;}
+.show--app-udvikling .au-hit{position:absolute;inset:0;z-index:3;width:100%;height:100%;padding:0;border:0;border-radius:42px;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.show--app-udvikling .au-hit:focus-visible{outline:3px solid var(--accent);outline-offset:5px;}
+.show--app-udvikling .au-cap{position:absolute;left:50%;bottom:-46px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:700;white-space:nowrap;transform:translateX(-50%);}
+.show--app-udvikling .au-sync{position:absolute;top:44%;left:50%;display:grid;place-items:center;width:112px;height:40px;margin:-20px 0 0 -56px;}
+.show--app-udvikling .au-sync::before{content:"";position:absolute;left:6px;right:6px;top:50%;border-top:2px dashed var(--line-strong);}
+.show--app-udvikling .au-sync b{position:relative;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--accent);box-shadow:0 10px 24px -14px rgba(17,17,17,.4);}
+.show--app-udvikling .au-sync .au-i{width:19px;height:19px;stroke-width:2;}
+.show--app-udvikling .au-sync i{position:absolute;top:50%;left:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:var(--accent);opacity:0;}
+.show--app-udvikling .au-bar{display:flex;align-items:center;gap:6px;margin-top:64px;padding:6px 6px 6px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;box-shadow:0 24px 40px -28px rgba(17,17,17,.3);}
+.show--app-udvikling .au-bar__l{margin-right:6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.show--app-udvikling .au-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px 8px 13px;border:0;border-radius:999px;background:#f3f1ec;color:var(--muted);font:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .25s, color .25s, transform .3s var(--pop);}
+.show--app-udvikling .au-chip:hover{transform:translateY(-2px);}
+.show--app-udvikling .au-chip:active{transform:scale(.96);}
+.show--app-udvikling .au-chip .au-i{width:17px;height:17px;}
+.show--app-udvikling .au-chip.is-on{background:var(--ink);color:#fff;}
+.show--app-udvikling .au-sw{position:relative;flex-shrink:0;width:28px;height:16px;margin-left:auto;border-radius:999px;background:var(--line-strong);transition:background .25s;}
+.show--app-udvikling .au-sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .3s var(--pop);}
+.show--app-udvikling .is-on .au-sw{background:var(--accent);}
+.show--app-udvikling .is-on .au-sw::after{transform:translateX(12px);}
+.show--app-udvikling .au-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 32px;margin-top:24px;padding:0 6px;}
+.show--app-udvikling .au-foot p{flex:1 1 320px;max-width:600px;margin:0;font-size:14.5px;line-height:1.5;color:var(--muted);}
+.show--app-udvikling .au-cta{display:inline-block;padding:13px 20px;border-radius:999px;background:var(--ink);color:#fff;font-size:15px;font-weight:700;transition:background .25s;}
+.show--app-udvikling .au-cta:hover{background:var(--accent);color:#fff;}
+
+/* A chip that is off takes its parts out of the app on both phones */
+.show--app-udvikling .no-book .au-f-book, .show--app-udvikling .no-card .au-f-card, .show--app-udvikling .no-push .au-f-push, .show--app-udvikling .no-login .au-f-login, .show--app-udvikling .au-stage:not(.no-book) .au-nf-book, .show--app-udvikling .au-stage:not(.no-login) .au-nf-login, .show--app-udvikling .no-book.no-card.no-push.no-login .au-tabs{display:none;}
+
+/* Motion (.is-anim from app-udvikling.js) */
+.show--app-udvikling.is-anim .au-v, .show--app-udvikling.is-anim .au-splash{transition:opacity .35s, transform .5s var(--e), visibility 0s .5s;}
+.show--app-udvikling.is-anim .au-appv{transition:opacity .3s, transform .6s cubic-bezier(.2,.9,.25,1), visibility 0s .6s;}
+.show--app-udvikling.is-anim [data-v="home"] .au-v--home, .show--app-udvikling.is-anim [data-v="pick"] .au-v--pick, .show--app-udvikling.is-anim [data-v="done"] .au-v--done, .show--app-udvikling.is-anim .is-open .au-appv{transition-delay:0s;}
+.show--app-udvikling.is-anim .au-ios .au-v--pick{transform:translateX(100%);}
+.show--app-udvikling.is-anim [data-v="pick"] .au-ios .au-v--home, .show--app-udvikling.is-anim [data-v="done"] .au-ios .au-v--home, .show--app-udvikling.is-anim [data-v="done"] .au-ios .au-v--pick{transform:translateX(-30%);}
+.show--app-udvikling.is-anim .au-v--done, .show--app-udvikling.is-anim .au-and .au-v{transform:scale(.95);}
+.show--app-udvikling.is-anim .au-push, .show--app-udvikling.is-anim .au-sheet{transition:opacity .3s, transform .6s cubic-bezier(.2,.9,.3,1.15);}
+.show--app-udvikling.is-anim .au-app, .show--app-udvikling.is-anim .au-ico{transition:opacity .3s, transform .5s var(--pop);}
+.show--app-udvikling.is-anim .is-inst .au-ib{animation:auBounce .6s var(--pop);}
+.show--app-udvikling.is-anim .au-btn, .show--app-udvikling.is-anim .au-days span, .show--app-udvikling.is-anim .au-slots span{transition:transform .2s, background-color .25s, color .25s;}
+.show--app-udvikling .is-press{transform:scale(.92);}
+.show--app-udvikling.is-anim .is-stamp .au-sheet .nw{animation:auStamp .6s var(--pop) .55s both;}
+.show--app-udvikling.is-anim [data-v="done"] .au-chk{animation:auPop .6s var(--pop) .15s both;}
+.show--app-udvikling.is-anim [data-v="done"] .au-chk svg{animation:auDraw .45s var(--e) .45s both;}
+.show--app-udvikling.is-anim .is-hint [data-au-t="book"]::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 2px var(--fr);animation:auRing 1.4s var(--e) infinite;}
+.show--app-udvikling.is-anim .au-hint{animation:auFade .5s both;}
+.show--app-udvikling.is-anim .au-dev{animation:auFloat 7s ease-in-out infinite;}
+.show--app-udvikling.is-anim .au-and{animation-delay:-3.5s;}
+.show--app-udvikling .au-chip.is-nudge{animation:auNudge .6s var(--e) 2;}
+@keyframes auBounce{40% { transform:scale(1.15);}}
+@keyframes auStamp{from { opacity:0;transform:scale(2.4) rotate(-30deg);}}
+@keyframes auPop{from { opacity:0;transform:scale(.4);}}
+@keyframes auDraw{from { stroke-dashoffset:1;}}
+@keyframes auRing{from { opacity:.9;} to { opacity:0;transform:scale(1.18, 1.5);}}
+@keyframes auFloat{50% { translate:0 -8px;}}
+@keyframes auSpin{to { transform:rotate(1turn);}}
+@keyframes auNudge{25% { transform:translateX(-4px);} 50% { transform:translateX(4px);} 75% { transform:translateX(-2px);}}
+@keyframes auFade{from { opacity:0;}}
+
+/* Wide screens:the phones at full size */
+@media (min-width:1200px) {
+  .show--app-udvikling .au-dev{--s:1;}
+  .show--app-udvikling .au-pair{gap:136px;}
+  .show--app-udvikling .au-sync{width:136px;margin-left:-68px;}
+}
+
+/* Tablets */
+@media (max-width:999px) {
+  .show--app-udvikling .au-pair{gap:72px;}
+  .show--app-udvikling .au-sync{width:72px;margin-left:-36px;}
+  .show--app-udvikling .au-dev{--s:.84;}
+}
+
+/* Phones:one phone in front, the other behind it. A tap brings a phone to the front */
+@media (max-width:699px) {
+  .show--app-udvikling{padding:32px 20px 72px;}
+  .show--app-udvikling .sec-head{margin-bottom:22px;}
+  .show--app-udvikling .au-stage{padding:12px 12px 14px;border-radius:26px;}
+  .show--app-udvikling .au-top{min-height:32px;}
+  .show--app-udvikling .au-who{gap:6px 8px;font-size:12.5px;}
+  .show--app-udvikling .is-hint .au-hint{display:none;}
+  .show--app-udvikling .au-again{padding:6px 12px 6px 10px;font-size:13px;}
+  .show--app-udvikling .au-pair{align-self:stretch;height:452px;margin-top:12px;}
+  .show--app-udvikling .au-dev{--s:.8;position:absolute;top:0;transition:transform .55s var(--e);}
+  .show--app-udvikling.is-anim .au-dev{animation:none;}
+  .show--app-udvikling .au-ios{left:0;transform-origin:0 0;}
+  .show--app-udvikling .au-and{right:0;transform-origin:100% 0;}
+  .show--app-udvikling .au-dev:not(.is-front){transform:translateY(30px) scale(.76);}
+  .show--app-udvikling .au-dev.is-front{z-index:1;}
+  .show--app-udvikling .au-dev::after{bottom:-18px;}
+  .show--app-udvikling .au-sync, .show--app-udvikling .au-cap{display:none;}
+  .show--app-udvikling .au-bar{flex-wrap:wrap;justify-content:center;align-self:stretch;gap:6px;margin-top:20px;padding:10px;border-radius:22px;}
+  .show--app-udvikling .au-bar__l{width:100%;margin:0 0 2px;font-size:11px;text-align:center;}
+  .show--app-udvikling .au-chip{flex:1 1 40%;justify-content:center;padding:10px 8px;font-size:13.5px;}
+  .show--app-udvikling .au-chip .au-sw{display:none;}
+  .show--app-udvikling .au-chip:hover{transform:none;}
+  .show--app-udvikling .au-foot{margin-top:18px;padding:0 2px;}
+}

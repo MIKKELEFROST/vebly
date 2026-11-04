@@ -22,7 +22,24 @@
 //                   short list stands still). From 10, two rows the other way round, when both rows are
 //                   still wider than the band.
 //   Reduced motion: a grid, and on phones a row you swipe.
-export const partnere = [];
+// The customers Mikkel listed on 4 Nov 2026. Their sites could not be opened from the build machine, so the
+// names are their domains and fag/by are only set where they were checked (public company listings).
+// Add logo: '/assets/partnere/<file>' when we have their logos.
+export const partnere = [
+  { navn: 'nuttetbaby.dk', url: 'https://nuttetbaby.dk' },
+  { navn: 'byminella.dk', url: 'https://byminella.dk' },
+  { navn: 'iwao.dk', url: 'https://iwao.dk' },
+  { navn: 'recoverym8.dk', url: 'https://recoverym8.dk' },
+  { navn: 'carelaxdanmark.dk', fag: 'Massagestole', by: 'Glostrup', url: 'https://carelaxdanmark.dk' },
+  { navn: 'gladteknik.dk', fag: 'IT og elektronik', by: 'Hvidovre', url: 'https://gladteknik.dk' },
+  { navn: 'uniqvvs.dk', fag: 'VVS', url: 'https://uniqvvs.dk' },
+  { navn: 'holmsmaler.dk', fag: 'Maler', url: 'https://holmsmaler.dk' },
+  { navn: 'mikkelbranth.dk', url: 'https://mikkelbranth.dk' },
+  { navn: 'raadvadkro.dk', fag: 'Kro og restaurant', by: 'Kongens Lyngby', url: 'https://raadvadkro.dk' },
+  { navn: 'fastelavnskostumer.dk', fag: 'Kostumer', url: 'https://fastelavnskostumer.dk' },
+  { navn: 'halloweenkostumer.dk', fag: 'Kostumer', url: 'https://halloweenkostumer.dk' },
+  { navn: '3match.dk', url: 'https://3match.dk' }
+];
 
 // Made-up businesses, for a local look only: PARTNERE_EKSEMPEL=1 node scripts/services/build.mjs forside
 // (the page then marks them "Eksempel"). They are not customers: never build the live page with them.

@@ -47,7 +47,7 @@ const initial = n => ([...n][0] || '').toLocaleUpperCase('da-DK');
 function item(p, wall = false) {
   // Trade · town; narrow layouts stack the two instead of breaking the line after the dot
   const meta = [p.fag, p.by].filter(Boolean).map(t => `<span>${esc(t)}</span>`).join('<span class="pt__sep" aria-hidden="true"> · </span>');
-  let brand = `<b class="pt__name">${esc(p.navn)}</b>`;
+  let brand = `<b class="pt__name" style="--len:${[...p.navn].length}">${esc(p.navn)}</b>`;
   if (p.logo) {
     // Every logo gets about the same area, so a square one is not tiny next to a wide one
     const s = logoSize(p.logo), r = s && s.w > 0 && s.h > 0 ? s.w / s.h : 0;

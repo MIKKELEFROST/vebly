@@ -184,8 +184,8 @@ export default function ({ lib, data, showcase }) {
   const wallHtml = partnerWall({ list, eksempel: !partnere.length });
   const wall = wallHtml ? `<section id="kunder" class="show show--resultater rs-wall" data-sec="kunder">
       <div class="sec-head" data-reveal="0">
-        <div class="sec-head__title"><div class="kicker">Kunder</div><h2 class="h2">Dem har vi hjulpet.<br><span class="dim">Lokale virksomheder.</span></h2></div>
-        <p class="sec-head__lead">Håndværkere, klinikker, frisører og webshops. Fra hele landet.</p>
+        <div class="sec-head__title"><div class="kicker">Kunder</div><h2 class="h2">Dem har vi hjulpet.<br><span class="dim">${partnere.length ? 'Webshops og lokale virksomheder.' : 'Lokale virksomheder.'}</span></h2></div>
+        <p class="sec-head__lead">${partnere.length ? 'Tryk på et navn for at se deres side.' : 'Håndværkere, klinikker, frisører og webshops. Fra hele landet.'}</p>
       </div>
       ${wallHtml}
     </section>` : '';
@@ -212,8 +212,11 @@ export default function ({ lib, data, showcase }) {
 
   /* ---------------- The page ---------------- */
   const SITE = data.SITE, u = `${SITE}/resultater`;
-  const title = 'Resultater · Cases og anmeldelser · Webleads';
-  const description = 'Se hvad vi har lavet for håndværkere, klinikker, frisører og webshops, og hvad det har givet. Med rigtige anmeldelser fra Google og Trustpilot.';
+  // Without cases the page is about the customers and the reviews, and promises no numbers
+  const real = cases.length > 0;
+  const title = real ? 'Resultater · Cases og anmeldelser · Webleads' : 'Resultater · Kunder og anmeldelser · Webleads';
+  const description = real ? 'Se hvad vi har lavet for håndværkere, klinikker, frisører og webshops, og hvad det har givet. Med rigtige anmeldelser fra Google og Trustpilot.'
+    : 'Se nogle af de webshops og lokale virksomheder, vi har hjulpet, og hvad kunderne skriver om os på Google og Trustpilot.';
   const pt = showcase('partnere'), me = showcase('resultater');
   const nav = [['Services', '/#services'], reviews && ['Anmeldelser', '#anmeldelser'], gallery && ['Cases', '#cases'], wall && ['Kunder', '#kunder']].filter(Boolean);
   const p = {
@@ -239,12 +242,18 @@ export default function ({ lib, data, showcase }) {
   return {
     slug: 'resultater', path: 'resultater/index.html', p,
     main: [
-      hero({
+      real ? hero({
         badge: 'Cases · til', words: ['servicevirksomheder', 'håndværkere', 'klinikker', 'frisører', 'lokale virksomheder'],
         h1: { a: ['Det', 'har', 'vi'], hot: 'lavet.', dim: 'Og det', mark: 'virker.' },
         lead: 'Hjemmesider, annoncer og SEO til håndværkere, klinikker, frisører og alle de andre. Se hvad vi har lavet, og hvad det har givet.',
         floats: ['Før → efter', 'Ingen binding', 'Fast pris ↗'], ring: 'CASES • TAL • ANMELDELSER • RESULTATER • ',
         cta: 'Få en fast pris', more: f ? ['Se en case', '#case'] : ['Se cases', '#cases']
+      }) : hero({
+        badge: 'Kunder · fra', words: ['webshops', 'håndværkere', 'lokale virksomheder'],
+        h1: { a: ['Dem', 'har', 'vi'], hot: 'hjulpet.', dim: 'Bliv den', mark: 'næste.' },
+        lead: `Webshops, håndværkere og lokale virksomheder, som vi har hjulpet.${scores.length ? ` Se hvem de er, og hvad kunderne skriver om os på ${scores.map(s => esc(s.navn)).join(' og ')}.` : ''}`,
+        floats: ['Rigtige kunder', 'Rigtige anmeldelser', 'Fast pris ↗'], ring: 'KUNDER • ANMELDELSER • WEBLEADS • ',
+        cta: 'Få en fast pris', more: wall ? ['Se kunderne', '#kunder'] : ['Se anmeldelserne', '#anmeldelser']
       }),
       reviews,
       spread,
