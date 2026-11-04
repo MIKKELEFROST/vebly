@@ -163,6 +163,7 @@
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104d">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
 <link rel="stylesheet" href="/assets/css/sections.css?v=20261104d">
+<link rel="stylesheet" href="/assets/css/show/app-udvikling.css?v=20261104d">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -171,6 +172,7 @@
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104d"></script>
 <script type="module" src="/assets/js/sections.js?v=20261104d"></script>
+<script type="module" src="/assets/js/show/app-udvikling.js?v=20261104d"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -198,6 +200,7 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -234,7 +237,7 @@
         <p class="hero__lead" data-reveal="3">Vi bygger apps til iPhone og Android, så dine kunder kan booke, bestille og samle point direkte fra telefonen. Vi klarer design, udvikling og udgivelse.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -281,6 +284,145 @@
         </div>
       </dl>
     </section>
+
+    <!-- Showcase for app-udvikling: twin devices. The same example app for Klinik Fryd (a made-up physiotherapist in
+     Aarhus) on an iPhone-like and an Android-like phone, both our own neutral drawings with no platform marks. When the
+     phones come into view the app installs itself on both home screens and opens; a tap on either phone plays the
+     booking on both (pick a time, booked, a push notification, a stamp on the klippekort). The chips switch parts of
+     the app on and off on both phones. Styles: assets/css/show/app-udvikling.css, behaviour: assets/js/show/app-udvikling.js.
+     Without motion (or JS) the finished booking is shown; the chips still work. -->
+<section id="eksempel" class="show show--app-udvikling" data-sec="eksempel">
+  <svg class="au-defs" aria-hidden="true" focusable="false">
+    <symbol id="au-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="au-cal" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></symbol>
+    <symbol id="au-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="8" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="16" cy="12" r="1.4"/></symbol>
+    <symbol id="au-bell" viewBox="0 0 24 24"><path d="M6.5 16.5V11a5.5 5.5 0 0 1 11 0v5.5l1.5 1.5H5z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="au-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="au-chev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="au-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="au-sync" viewBox="0 0 24 24"><path d="M4 9h15l-4-4M20 15H5l4 4"/></symbol>
+    <symbol id="au-redo" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.3-5.4M4.5 4.5v4.2h4.2"/></symbol>
+    <symbol id="au-sb" viewBox="0 0 60 12"><rect y="8" width="3" height="4" rx="1"/><rect x="4.5" y="5.5" width="3" height="6.5" rx="1"/><rect x="9" y="3" width="3" height="9" rx="1"/><rect x="13.5" y=".5" width="3" height="11.5" rx="1"/><path d="M22 4.4a9 9 0 0 1 12 0l-1.6 1.7a6.6 6.6 0 0 0-8.8 0zM24.7 7.3a5 5 0 0 1 6.6 0L28 11z"/><rect x="39.5" y=".8" width="17" height="10.4" rx="3" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="41.3" y="2.6" width="11.5" height="6.8" rx="1.6"/><rect x="57.7" y="4" width="1.6" height="4" rx=".8" opacity=".45"/></symbol>
+  </svg>
+
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Én app, to telefoner</div><h2 class="h2">Samme app.<br><span class="dim">På iPhone og Android.</span></h2></div>
+    <p class="sec-head__lead">Sådan kunne appen til en fysioterapeut se ud. Tryk på den ene telefon, så følger den anden med. Og slå funktionerne til og fra.</p>
+  </div>
+
+  <div class="au-stage is-open is-inst is-ready is-day is-slot is-push is-stamp is-end" data-v="done" data-au-stage data-reveal="1">
+    <div class="au-top">
+      <p class="au-who"><span class="tag-eks">Eksempel</span><span>Klinik Fryd · fysioterapeut i Aarhus</span></p>
+      <span class="au-hint" aria-hidden="true">Tryk på en af telefonerne</span>
+      <button type="button" class="au-again" data-au-again><svg class="au-i" viewBox="0 0 24 24"><use href="#au-redo"/></svg>Forfra</button>
+    </div>
+    <p class="sr-only">Eksempel: Den samme app for Klinik Fryd, en fysioterapeut i Aarhus, på en iPhone og en Android-telefon. Appen bliver installeret og åbner. Kunden vælger en tid torsdag kl. 10.30 og bekræfter. Så står der »Tiden er booket«, en push-besked kommer frem, og klippekortet får et stempel: 5 af 10. Knapperne under telefonerne slår booking, klippekort, push-beskeder og login til og fra i appen.</p>
+    <div class="au-pair">
+      <div class="au-dev au-ios is-front" data-au-dev="iphone">
+        <div class="au-ph" aria-hidden="true"><div class="au-scr">
+          <i class="au-cam"></i>
+          <div class="au-sb"><b>10.24</b><svg viewBox="0 0 60 12"><use href="#au-sb"/></svg></div>
+          <div class="au-home">
+            <div class="au-grid"><i class="au-g" style="--c:#8fa3b8"></i><i class="au-g" style="--c:#d49a8c"></i><i class="au-g" style="--c:#9db59a"></i><i class="au-g" style="--c:#c9a27e"></i><i class="au-g" style="--c:#a99cc4"></i><span class="au-app"><span class="au-ib" data-au-t="ico"><span class="au-lg au-ico"></span><svg class="au-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="p" cx="20" cy="20" r="16" pathLength="100"/></svg></span><em><span class="au-l1">Henter …</span><span class="au-l2">Klinik Fryd</span></em></span><i class="au-g" style="--c:#7fb2b8"></i><i class="au-g" style="--c:#d8c07a"></i><i class="au-g" style="--c:#b0a79c"></i><i class="au-g" style="--c:#93a7d1"></i><i class="au-g" style="--c:#c79fb5"></i><i class="au-g" style="--c:#8fbf9f"></i></div>
+            <div class="au-dock"><i class="au-g" style="--c:#7d93a8"></i><i class="au-g" style="--c:#9fbf8e"></i><i class="au-g" style="--c:#d3a07a"></i><i class="au-g" style="--c:#a59ccf"></i></div>
+          </div>
+          <div class="au-appv">
+            <div class="au-splash"><span class="au-lg"></span><b>Klinik Fryd</b></div>
+            <div class="au-vs">
+              <div class="au-v au-v--home">
+                <div class="au-hd"><span class="au-hd__k">Klinik Fryd · Aarhus</span><b><span class="au-f-login">Hej Sara</span><span class="au-nf-login">Velkommen</span></b><span class="au-hd__i"><i class="au-bell au-f-push"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-bell"/></svg></i><i class="au-av au-f-login">S</i></span></div>
+                <p class="au-info">Åbent i dag kl. 8–17 · Aarhus C</p>
+                <div class="au-card au-f-book"><span class="au-card__k">Book en tid</span><b>Behandling, 45 min</b><small>Første ledige tid: i morgen kl. 8.30</small><span class="au-btn" data-au-t="book">Book tid</span></div>
+                <div class="au-card au-nf-book"><span class="au-card__k">Book en tid</span><b>Ring og book</b><small>Hverdage kl. 8–16</small><span class="au-btn au-btn--o" data-au-t="call">Ring op</span></div>
+                <div class="au-card au-f-card"><span class="au-card__k">Klippekort</span><b>4 af 10</b><span class="au-st"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+              </div>
+              <div class="au-v au-v--pick">
+                <div class="au-nav"><span class="au-back"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-chev"/></svg>Hjem</span><b>Vælg en tid</b></div>
+                <p class="au-sub">Behandling, 45 min · hos Mette</p>
+                <div class="au-days"><span class="d0">Man<b data-au-day="0">9</b></span><span class="d1">Tir<b data-au-day="1">10</b></span><span class="d2">Ons<b data-au-day="2">11</b></span><span class="d3" data-au-t="day">Tor<b data-au-day="3">12</b></span><span class="d4">Fre<b data-au-day="4">13</b></span></div>
+                <div class="au-slots"><span class="x3">08.30</span><span class="x0">09.15</span><span class="s2" data-au-t="slot">10.30</span><span class="x0">13.00</span><span class="x3">14.30</span><span>16.00</span></div>
+                <div class="au-me au-f-login"><i class="au-av">S</i>Booker som <b>Sara Holm</b></div>
+                <div class="au-form au-nf-login"><span>Dit navn</span><span>Telefonnummer</span></div>
+                <span class="au-btn au-btn--w" data-au-t="ok">Bekræft booking</span>
+              </div>
+              <div class="au-v au-v--done">
+                <span class="au-chk"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" pathLength="1"/></svg></span>
+                <b>Tiden er booket</b>
+                <p class="au-when">Tor. <span data-au-date>12. nov.</span> kl. 10.30</p>
+                <p>Behandling, 45 min · hos Mette</p>
+                <span class="au-btn au-btn--o">Tilføj til kalender</span>
+              </div>
+            </div>
+            <div class="au-tabs"><span class="t-home"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-home"/></svg>Hjem</span><span class="t-book au-f-book"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-cal"/></svg>Book</span><span class="au-f-card"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-card"/></svg>Kort</span><span class="au-f-push"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-bell"/></svg>Beskeder</span><span class="au-f-login"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-user"/></svg>Profil</span></div>
+            <div class="au-sheet au-f-card"><div class="au-sh"><b>Klippekort</b><span class="au-plus">+1 stempel</span></div><span class="au-st"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on nw"></i><i></i><i></i><i></i><i></i><i></i></span><small>5 af 10 · den 10. behandling er gratis</small></div>
+          </div>
+          <div class="au-push au-f-push"><span class="au-lg"></span><b>Klinik Fryd</b><small>nu</small><p><strong>Din tid er booket ✓</strong>Tor. <span data-au-date>12. nov.</span> kl. 10.30. Vi minder dig om den dagen før.</p></div>
+          <i class="au-tap"></i><i class="au-ind"></i>
+        </div></div>
+        <button type="button" class="au-hit" aria-label="Tryk på iPhonen: bookingen spiller på begge telefoner"></button>
+        <span class="au-cap" aria-hidden="true">iPhone</span>
+      </div>
+      <span class="au-sync" aria-hidden="true"><i></i><b><svg class="au-i" viewBox="0 0 24 24"><use href="#au-sync"/></svg></b></span>
+      <div class="au-dev au-and" data-au-dev="android">
+        <div class="au-ph" aria-hidden="true"><div class="au-scr">
+          <i class="au-cam"></i>
+          <div class="au-sb"><b>10.24</b><svg viewBox="0 0 60 12"><use href="#au-sb"/></svg></div>
+          <div class="au-home">
+            <p class="au-date" data-au-today>Onsdag 4. november</p><div class="au-grid"><i class="au-g" style="--c:#9aa9c9"></i><i class="au-g" style="--c:#c99a8f"></i><span class="au-app"><span class="au-ib" data-au-t="ico"><span class="au-lg au-ico"></span><svg class="au-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="p" cx="20" cy="20" r="16" pathLength="100"/></svg></span><em><span class="au-l1">Henter …</span><span class="au-l2">Klinik Fryd</span></em></span><i class="au-g" style="--c:#8fb5a3"></i><i class="au-g" style="--c:#d2b57c"></i><i class="au-g" style="--c:#a79fc8"></i><i class="au-g" style="--c:#86aab8"></i><i class="au-g" style="--c:#c4a2b5"></i></div>
+            <div class="au-dock"><i class="au-g" style="--c:#8ea4c8"></i><i class="au-g" style="--c:#a6c39a"></i><i class="au-g" style="--c:#d6a68a"></i><i class="au-g" style="--c:#9d97c9"></i></div><span class="au-srch"></span>
+          </div>
+          <div class="au-appv">
+            <div class="au-splash"><span class="au-lg"></span><b>Klinik Fryd</b></div>
+            <div class="au-vs">
+              <div class="au-v au-v--home">
+                <div class="au-hd"><span class="au-hd__k"><span class="au-lg"></span>Klinik Fryd</span><b><span class="au-f-login">Hej Sara</span><span class="au-nf-login">Velkommen</span></b><span class="au-hd__i"><i class="au-bell au-f-push"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-bell"/></svg></i><i class="au-av au-f-login">S</i></span></div>
+                <p class="au-info">Åbent i dag kl. 8–17 · Aarhus C</p>
+                <div class="au-card au-f-book"><span class="au-card__k">Book en tid</span><b>Behandling, 45 min</b><small>Første ledige tid: i morgen kl. 8.30</small><span class="au-btn" data-au-t="book">Book tid</span></div>
+                <div class="au-card au-nf-book"><span class="au-card__k">Book en tid</span><b>Ring og book</b><small>Hverdage kl. 8–16</small><span class="au-btn au-btn--o" data-au-t="call">Ring op</span></div>
+                <div class="au-card au-f-card"><span class="au-card__k">Klippekort</span><b>4 af 10</b><span class="au-st"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+              </div>
+              <div class="au-v au-v--pick">
+                <div class="au-nav"><span class="au-back"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-arrow"/></svg></span><b>Vælg en tid</b></div>
+                <p class="au-sub">Behandling, 45 min · hos Mette</p>
+                <div class="au-days"><span class="d0">Man<b data-au-day="0">9</b></span><span class="d1">Tir<b data-au-day="1">10</b></span><span class="d2">Ons<b data-au-day="2">11</b></span><span class="d3" data-au-t="day">Tor<b data-au-day="3">12</b></span><span class="d4">Fre<b data-au-day="4">13</b></span></div>
+                <div class="au-slots"><span class="x3">08.30</span><span class="x0">09.15</span><span class="s2" data-au-t="slot">10.30</span><span class="x0">13.00</span><span class="x3">14.30</span><span>16.00</span></div>
+                <div class="au-me au-f-login"><i class="au-av">S</i>Booker som <b>Sara Holm</b></div>
+                <div class="au-form au-nf-login"><span>Dit navn</span><span>Telefonnummer</span></div>
+                <span class="au-btn au-btn--w" data-au-t="ok">Bekræft booking</span>
+              </div>
+              <div class="au-v au-v--done">
+                <span class="au-chk"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" pathLength="1"/></svg></span>
+                <b>Tiden er booket</b>
+                <p class="au-when">Tor. <span data-au-date>12. nov.</span> kl. 10.30</p>
+                <p>Behandling, 45 min · hos Mette</p>
+                <span class="au-btn au-btn--o">Tilføj til kalender</span>
+              </div>
+            </div>
+            <div class="au-tabs"><span class="t-home"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-home"/></svg>Hjem</span><span class="t-book au-f-book"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-cal"/></svg>Book</span><span class="au-f-card"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-card"/></svg>Kort</span><span class="au-f-push"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-bell"/></svg>Beskeder</span><span class="au-f-login"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-user"/></svg>Profil</span></div>
+            <div class="au-sheet au-f-card"><div class="au-sh"><b>Klippekort</b><span class="au-plus">+1 stempel</span></div><span class="au-st"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on nw"></i><i></i><i></i><i></i><i></i><i></i></span><small>5 af 10 · den 10. behandling er gratis</small></div>
+          </div>
+          <div class="au-push au-f-push"><span class="au-pt"><span class="au-lg"></span>Klinik Fryd · nu</span><p><strong>Din tid er booket ✓</strong>Tor. <span data-au-date>12. nov.</span> kl. 10.30. Vi minder dig om den dagen før.</p></div>
+          <i class="au-tap"></i><i class="au-ind"></i>
+        </div></div>
+        <button type="button" class="au-hit" aria-label="Tryk på Android-telefonen: bookingen spiller på begge telefoner"></button>
+        <span class="au-cap" aria-hidden="true">Android</span>
+      </div>
+    </div>
+    <div class="au-bar" role="group" aria-label="Funktioner i appen">
+      <span class="au-bar__l" aria-hidden="true">Funktioner</span>
+      <button type="button" class="au-chip is-on" data-au-f="book" aria-pressed="true"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-cal"/></svg>Booking<i class="au-sw" aria-hidden="true"></i></button>
+      <button type="button" class="au-chip is-on" data-au-f="card" aria-pressed="true"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-card"/></svg>Klippekort<i class="au-sw" aria-hidden="true"></i></button>
+      <button type="button" class="au-chip is-on" data-au-f="push" aria-pressed="true"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-bell"/></svg>Push-beskeder<i class="au-sw" aria-hidden="true"></i></button>
+      <button type="button" class="au-chip is-on" data-au-f="login" aria-pressed="true"><svg class="au-i" viewBox="0 0 24 24"><use href="#au-user"/></svg>Login<i class="au-sw" aria-hidden="true"></i></button>
+    </div>
+    <p class="sr-only" aria-live="polite" data-au-live></p>
+  </div>
+
+  <div class="au-foot">
+    <p>Klinik Fryd findes ikke. Appen er et eksempel på, hvad vi kan bygge: én app, der virker på både iPhone og Android, med de funktioner, din forretning har brug for.</p>
+    <a href="#kontakt" class="au-cta" data-magnet data-burst data-au-cta data-event="Eksempel: Fortæl os om din app-idé">Fortæl os om din app-idé →</a>
+  </div>
+</section>
 
     <section id="pris" class="price-sec" data-sec="pris">
       <div class="spot price" data-reveal="0" data-spot>

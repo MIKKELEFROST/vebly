@@ -1,0 +1,78 @@
+<section id="eksempel" class="show show--interne-systemer" data-sec="eksempel">
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title"><div class="kicker">Sådan kan det se ud</div><h2 class="h2">Træk kortet.<br><span class="dim">Tallene følger med.</span></h2></div>
+        <p class="sec-head__lead">Et eksempel på et system til tømreren Nordvik. Flyt et lead fra henvendelse til vundet, og se overblikket regne med.</p>
+      </div>
+      <!-- A CRM of our own drawing (assets/js/show/interne-systemer.js): dashboard tiles, a pipeline whose cards
+           are dragged or moved with their button, and a week calendar where won jobs show up.
+           The business, the customers and the amounts are made up. -->
+      <div class="browser crm-br" data-reveal="1">
+        <div class="browser__bar" aria-hidden="true">
+          <div class="dots3"><i></i><i></i><i></i></div>
+          <div class="browser__url"><svg class="crm-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg><span>nordvik.dk/system/<span data-crm-path>pipeline</span></span></div>
+          <span class="tag-eks">Eksempel</span>
+        </div>
+        <div class="crm" data-crm data-view="pipeline">
+          <div class="crm__rail" aria-hidden="true">
+            <i><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></i>
+            <i><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 5.6a3.2 3.2 0 0 1 0 5.8M17 14.2a5.5 5.5 0 0 1 3.5 4.8"/></svg></i>
+            <i class="crm__ri-p"><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="4.5" height="16" rx="1.6"/><rect x="9.75" y="4" width="4.5" height="11" rx="1.6"/><rect x="16" y="4" width="4.5" height="7" rx="1.6"/></svg></i>
+            <i class="crm__ri-k"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></i>
+            <i><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10.5A.5.5 0 0 1 6.5 20V4a.5.5 0 0 1 .5-.5z"/><path d="M14 3.5V8h4M9.5 12.5h5M9.5 16h5"/></svg></i>
+          </div>
+          <div class="crm__main">
+            <p class="sr-only">Eksempel på et kundesystem til tømreren Nordvik i København, med opdigtede kunder og beløb. Øverst står tre tal: åbne tilbud, vundne opgaver og omsætning denne måned. Herunder en pipeline med tre kolonner: Ny henvendelse, Tilbud sendt og Vundet. Knappen på hvert kort flytter det til næste kolonne, og tallene følger med. Knappen Kalender viser ugens aftaler.</p>
+            <div class="crm__top">
+              <span class="crm__logo" aria-hidden="true">N</span>
+              <span class="crm__name"><b>Nordvik</b><small>Tømrer · København</small></span>
+              <span class="crm__search" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>Søg kunde eller adresse</span>
+              <div class="seg crm__seg" role="group" aria-label="Visning">
+                <button type="button" class="is-on" aria-pressed="true" data-crm-view="pipeline">Pipeline</button>
+                <button type="button" aria-pressed="false" data-crm-view="kalender">Kalender<i class="crm__badge" data-crm-badge aria-hidden="true" hidden>1</i></button>
+              </div>
+            </div>
+            <ul class="crm__tiles" aria-label="Overblik">
+              <li class="crm__tile"><span class="crm__tl">Åbne tilbud</span><b class="crm__n" data-t="open">2</b><span class="crm__ts" data-t="openKr">122.000 kr. i spil</span></li>
+              <li class="crm__tile"><span class="crm__tl">Vundet denne måned</span><b class="crm__n" data-t="won">2</b><span class="crm__ts" data-crm-last>Senest: Kasper Friis</span></li>
+              <li class="crm__tile crm__tile--kr"><span class="crm__tl">Omsætning denne måned</span><b class="crm__n" data-t="wonKr">108.000 kr.</b><span class="crm__ts">Fra vundne opgaver</span>
+                <span class="crm__bars" aria-hidden="true"><i style="--v:.3"></i><i style="--v:.44"></i><i style="--v:.37"></i><i style="--v:.52"></i><i class="is-now" data-crm-bar></i></span>
+                <span class="crm__delta" data-crm-delta aria-hidden="true"></span></li>
+            </ul>
+
+            <div class="crm__pane" data-crm-pane="pipeline">
+              <div class="crm__hint"><span class="crm__h-m">Træk et kort videre, eller brug knappen på kortet.</span><span class="crm__h-t">Hold på et kort, og træk det. Eller brug knappen.</span><button type="button" class="crm__reset" data-crm-reset hidden>Nulstil <span aria-hidden="true">↺</span></button></div>
+              <div class="crm__board" data-crm-board>
+                <div class="crm__col" data-crm-col role="group" aria-labelledby="crm-h0" style="--c:var(--yellow)">
+                  <div class="crm__ch"><i class="crm__dot"></i><h3 id="crm-h0">Ny henvendelse</h3><span class="crm__cnt" data-c>2</span><span class="crm__sum" data-s>73.500 kr.</span></div>
+                  <ul class="crm__list">
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="42000" data-slot="3,7,4" data-cal="Terrasse" data-m0="Fra hjemmesiden · i dag"><span class="crm__av" aria-hidden="true" style="--a:#e6ecfb">JB</span><span class="crm__who"><b>Jonas Brandt</b><span>Terrasse i lærk</span></span><span class="crm__kr">42.000 kr.</span><span class="crm__meta" data-meta>Fra hjemmesiden · i dag</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Jonas Brandt til Tilbud sendt">Send tilbud<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="31500" data-slot="3,12,3" data-cal="Vinduer" data-m0="Besigtigelse ons. kl. 13"><span class="crm__av" aria-hidden="true" style="--a:#fbe1d6">SL</span><span class="crm__who"><b>Sara Lund</b><span>Nye vinduer</span></span><span class="crm__kr">31.500 kr.</span><span class="crm__meta" data-meta>Besigtigelse ons. kl. 13</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Sara Lund til Tilbud sendt">Send tilbud<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                  </ul>
+                </div>
+                <div class="crm__col" data-crm-col role="group" aria-labelledby="crm-h1" style="--c:var(--accent)">
+                  <div class="crm__ch"><i class="crm__dot"></i><h3 id="crm-h1">Tilbud sendt</h3><span class="crm__cnt" data-c>2</span><span class="crm__sum" data-s>122.000 kr.</span></div>
+                  <ul class="crm__list">
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="68000" data-slot="4,7,8" data-cal="Køkken" data-m1="Sendt for 2 dage siden"><span class="crm__av" aria-hidden="true" style="--a:#fde7c2">MH</span><span class="crm__who"><b>Mette Holm</b><span>Nyt køkken</span></span><span class="crm__kr">68.000 kr.</span><span class="crm__meta" data-meta>Sendt for 2 dage siden</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Mette Holm til Vundet">Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="54000" data-slot="2,7,5" data-cal="Carport" data-m1="Sendt i går"><span class="crm__av" aria-hidden="true" style="--a:#e3f4ea">PK</span><span class="crm__who"><b>Peter Krogh</b><span>Carport</span></span><span class="crm__kr">54.000 kr.</span><span class="crm__meta" data-meta>Sendt i går</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Peter Krogh til Vundet">Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                  </ul>
+                </div>
+                <div class="crm__col" data-crm-col role="group" aria-labelledby="crm-h2" style="--c:var(--green)">
+                  <div class="crm__ch"><i class="crm__dot"></i><h3 id="crm-h2">Vundet</h3><span class="crm__cnt" data-c>2</span><span class="crm__sum" data-s>108.000 kr.</span></div>
+                  <ul class="crm__list">
+                    <li class="crm__card is-won" data-lead tabindex="-1" data-kr="23000" data-slot="1,7,5" data-cal="Skur og hegn"><span class="crm__av" aria-hidden="true" style="--a:#ece7fb">KF</span><span class="crm__who"><b>Kasper Friis</b><span>Skur og hegn</span></span><span class="crm__kr">23.000 kr.</span><span class="crm__meta" data-meta>Booket tir. kl. 7</span><button type="button" class="crm__mv" data-mv hidden>Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                    <li class="crm__card is-won" data-lead tabindex="-1" data-kr="85000" data-slot="0,7,8" data-cal="Nyt tag"><span class="crm__av" aria-hidden="true" style="--a:#f2ede4">LB</span><span class="crm__who"><b>Line Bach</b><span>Nyt tag</span></span><span class="crm__kr">85.000 kr.</span><span class="crm__meta" data-meta>Booket man. kl. 7</span><button type="button" class="crm__mv" data-mv hidden>Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="crm__pane crm__cal" data-crm-pane="kalender" hidden>
+              <div class="crm__calh"><b>Denne uge</b><span data-crm-n>4 aftaler</span><span class="crm__key" aria-hidden="true"><i class="is-job"></i>Opgaver<i class="is-bes"></i>Besigtigelser</span></div>
+              <div class="crm__wrap"><div class="crm__wk" data-crm-cal></div></div>
+            </div>
+            <p class="sr-only" aria-live="polite" data-crm-live></p>
+          </div>
+          <span class="crm__hand" data-crm-hand aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 2.8v16.4l4.3-4.1 2.9 6.4 2.9-1.3-2.9-6.3 5.9-.4z"/></svg></span>
+        </div>
+      </div>
+    </section>
