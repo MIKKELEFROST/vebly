@@ -6,9 +6,9 @@
 .show--interne-systemer [hidden] { display: none !important; }
 .show--interne-systemer .sec-head { margin-bottom: 32px; }
 .show--interne-systemer .sec-head__lead { max-width: 400px; }
-.show--interne-systemer :is(svg) { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--interne-systemer svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-/* The window: the shared browser chrome, kept as a browser on phones too */
+/* The window: the shared browser chrome, kept a browser on phones */
 .show--interne-systemer .crm-br { position: relative; overflow: visible; }
 .show--interne-systemer .crm-br .browser__url span { overflow: hidden; text-overflow: ellipsis; }
 .show--interne-systemer .crm-lock { flex: none; width: 13px; height: 13px; stroke-width: 2.4; }
@@ -100,8 +100,6 @@
 /* The calendar: the week's bookings on an hour grid, won jobs land here */
 .show--interne-systemer .crm__calh { display: flex; align-items: center; gap: 10px; min-height: 30px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
 .show--interne-systemer .crm__calh b { color: var(--ink); font-size: 14px; }
-.show--interne-systemer .crm__key { display: flex; align-items: center; gap: 6px; margin-left: auto; white-space: nowrap; }
-.show--interne-systemer .crm__key i { width: 10px; height: 10px; margin-left: 8px; border-radius: 3px; }
 .show--interne-systemer .crm__wrap { overflow-x: auto; scrollbar-width: thin; }
 .show--interne-systemer .crm__wk { --hh: 42px; display: grid; grid-template-columns: 34px repeat(5, minmax(96px, 1fr)); min-width: 540px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
 .show--interne-systemer .crm__dh { padding: 10px; border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); font-size: 13px; }
@@ -114,10 +112,8 @@
 .show--interne-systemer .crm__ev { position: absolute; left: 4px; right: 4px; top: calc(var(--s) * var(--hh) + 2px); height: calc(var(--h) * var(--hh) - 4px); overflow: hidden; padding: 4px 8px; border-radius: 9px; border-left: 3px solid var(--green); background: #e6f4eb; color: #2c6b45; font-size: 11.5px; line-height: 1.25; }
 .show--interne-systemer .crm__ev b { display: block; overflow: hidden; color: var(--ink); font-size: 12.5px; white-space: nowrap; text-overflow: ellipsis; }
 .show--interne-systemer .crm__ev span { display: block; overflow: hidden; }
-.show--interne-systemer :is(.crm__ev.is-bes, .crm__key .is-bes) { border-color: var(--yellow); background: #fdf1d4; color: #7a5c14; }
+.show--interne-systemer .crm__ev.is-bes { border-color: var(--yellow); background: #fdf1d4; color: #7a5c14; }
 .show--interne-systemer .crm__ev.is-lev { border-color: var(--line-strong); background: #f3f1ed; color: var(--muted); }
-.show--interne-systemer .crm__key .is-job { background: #cfe9d9; }
-.show--interne-systemer .crm__key .is-bes { background: #f8dd97; }
 .show--interne-systemer .crm__ev.is-new { box-shadow: 0 0 0 2px var(--accent); }
 .show--interne-systemer .crm__ev i { position: absolute; bottom: 6px; left: 8px; padding: 2px 6px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 10px/1.2 var(--body); font-style: normal; }
 .show--interne-systemer:is(.motion *) .crm__ev.is-new { animation: crmPop .6s var(--sp) .25s backwards; }
@@ -161,5 +157,4 @@
   .show--interne-systemer .crm__hint { font-size: 12.5px; margin-bottom: 10px; }
   .show--interne-systemer .crm__board { grid-template-columns: repeat(3, 272px); gap: 10px; margin: 0 -14px; padding: 0 14px 4px; scroll-padding: 0 14px; }
   .show--interne-systemer .crm__wrap { margin: 0 -14px; padding: 0 14px; }
-  .show--interne-systemer .crm__calh .crm__key { display: none; }
 }
