@@ -1,10 +1,32 @@
 # Showcases: an example of the service on each service page
 
-Each service page gets one section right under the hero that shows the service the way the customer
-will meet it in real life. The Google Shopping page shows shopping cards, the SEO page shows a business
-profile, the Meta page shows a sponsored post in a feed, and so on. The section should be recognisable at
-first glance and feel like "Sådan virker det" on `/services/hjemmesider`: built in the Webleads DNA,
-scroll-driven, playful and polished.
+Each service page gets one section that shows the service the way the customer meets it in real life.
+The Google Shopping page shows shopping cards, the SEO page shows a business profile, the Meta page shows a
+story ad, and so on. It must be recognisable at first glance and built in the Webleads DNA, playful and
+polished.
+
+## The rule the owner set: every page is different
+
+- The pinned "Sådan virker det" build demo on `/services/hjemmesider` (a numbered list of steps, 01 02 03…,
+  that lights up beside a sticky stage, with the "Prøv med din egen virksomhed" box above it) is the
+  signature of that page only. Never use it anywhere else: no numbered step list beside a mockup, no sticky
+  or pinned stage, no `.egen` box.
+- No two showcases may share a format. Each page has its own (see the table). The pages around the
+  showcases also differ from page to page (order and kinds of sections), so the site never feels uniform.
+
+| Page | Format | What the visitor sees |
+| --- | --- | --- |
+| google-shopping-ads | Live carousel and feed editor | The "Sponsoreret · Shopping" carousel you can drag, your card in it, and a product feed row that rewrites your card |
+| google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af CSS-partner", the click price rolls down, a budget slider shows what it means |
+| seo | Annotated anatomy | A Google business profile in the middle, labels with thin leader lines pointing at its parts |
+| google-ads | Live search loop | A big search field that types local searches; the sponsored text ad on top rewrites itself to each query |
+| meta-ads | Stories player | A phone playing a tap-through story ad, next to a panel that shows who sees it |
+| geo | Chat with question chips | An AI chat: pick a question, the answer streams in and recommends the example business |
+| ai | Night time-lapse | A night scene where a clock runs from evening to morning while a website chatbot answers and books |
+| automations | Flow machine | A flow of connected nodes across the width; a pulse runs through it and each node shows its small result |
+| email-marketing | Lock screen and inbox | Notifications stack on a phone; tap one to open the e-mail; envelopes show the automatic flow |
+| cro | A/B test | Two versions side by side; visitors stream in, counters tick, B wins, a heatmap can be switched on |
+| resultater (page) | Case spread | Big metric tiles that count up, the growth line drawing itself, a mini site; then the filterable gallery |
 
 ## Files (one set per service, nothing else)
 
@@ -14,9 +36,9 @@ assets/css/show/<slug>.css              its styles. Every selector starts with .
 assets/js/show/<slug>.js                its behaviour: an ES module that does nothing unless .show--<slug> is on the page
 ```
 
-`node scripts/services/build.mjs <slug>` puts the section under the hero, links the CSS and JS in the
-page's `<head>`, and points the hero's second button ("Se et eksempel ↓") to `#eksempel`. Build again
-after every change to the HTML. CSS and JS are read straight from disk.
+`node scripts/services/build.mjs <slug>` puts the section on the page, links the CSS and JS in the page's
+`<head>`, and points the hero's second button ("Se et eksempel ↓") to `#eksempel`. Build again after every
+change to the HTML. CSS and JS are read straight from disk.
 
 Do not edit shared files: `assets/css/main.css`, `assets/js/main.js`, `assets/js/content.js`,
 `assets/js/analytics.js`, `scripts/services/{data,lib,build}.mjs`, `api/*`, other showcases. If a shared
@@ -31,7 +53,7 @@ change is really needed, say so in your result.
   link blue (#1f45b0 as used in `.serp*`) and greens are fine; the frame around it is Webleads.
 - Type: `var(--display)` (Bricolage Grotesque 800, letter-spacing about −0.04em, line-height ~1) for
   headlines and big numbers; `var(--body)` (DM Sans 400/500/700) for everything else.
-- Section head, exactly like the other sections:
+- Section head, like the other sections (the words and layout of the head may vary):
   ```html
   <div class="sec-head" data-reveal="0">
     <div class="sec-head__title"><div class="kicker">…</div><h2 class="h2">Første linje.<br><span class="dim">Anden linje.</span></h2></div>
@@ -39,19 +61,20 @@ change is really needed, say so in your result.
   </div>
   ```
 - Layout: `max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px` like `.ba-sec`; on phones 20–24px sides.
+  A showcase may also be full-bleed when its format asks for it.
 - Surfaces: white cards with a 1px `var(--line)` border and 18–32px radius; dark boxes with
   `class="spot" data-spot` (dark background with an orange spotlight that follows the mouse); soft shadows
   like `0 40px 80px -30px rgba(17,17,17,.18)`; pills with radius 999px; the orange used sparingly.
-- Motion: scroll-driven and physical, like the pinned build demo (a sticky stage, steps that light up,
-  text typed in, numbers that count up, cards that slide in). requestAnimationFrame, transform and opacity
-  only. `html.motion` is set when motion is allowed. Without it (reduced motion): the finished state,
-  static, everything readable, no pinning.
+- Motion: physical and playful, started when the section comes into view (IntersectionObserver) or by the
+  visitor (typing, dragging, tapping, toggling), with requestAnimationFrame, transform and opacity only.
+  Never pin the section and never tie a step list to the scroll position. `html.motion` is set when motion
+  is allowed. Without it (reduced motion): the finished state, static, everything readable.
 - Free effects from `main.js`: `data-reveal="n"` (fades up when scrolled to; n is the delay step),
   `data-tilt` with a child `data-glare`, `data-magnet`, `data-burst` (confetti on click), `data-spot`,
   `data-roll` (only on links with plain text).
 - Global classes you may reuse: `.kicker`, `.h2` (+ `.dim`, `.hot`), `.sec-head*`, `.btn .btn--dark`,
-  `.btn .btn--accent`, `.check`, `.seg` (segmented control, `.is-on`), `.egen*` (the "Prøv med din egen
-  virksomhed" box), `.browser*` and `.dots3` (browser chrome), `.serp*` (search page parts), `.sr-only`.
+  `.btn .btn--accent`, `.check`, `.seg` (segmented control, `.is-on`), `.browser*` and `.dots3` (browser
+  chrome), `.serp*` (search page parts), `.sr-only`. Not `.egen*`.
 - Copy: Danish, short and concrete, "du". Like the rest of the site: "Klar på 7 dage." not "Revolutionér
   din forretning".
 
@@ -74,14 +97,15 @@ change is really needed, say so in your result.
 
 ## Personalising (where it fits)
 
-The box on `/services/hjemmesider` saves `{ fag, by, navn }` in `sessionStorage['wl-egen']` (JSON).
-Read it to prefill your example, and offer the same `.egen` box if typing makes the example better.
-Defaults: Tømrer, København, Nordvik. Never send what is typed anywhere.
+Build it into the mockup itself (type in the mockup's own search field, edit the card in place), never as
+the `.egen` box. The box on `/services/hjemmesider` saves `{ fag, by, navn }` in `sessionStorage['wl-egen']`
+(JSON); you may read it to prefill your example. Defaults: Tømrer, København, Nordvik. Never send what is
+typed anywhere.
 
 ## Analytics
 
 `import { track } from '/assets/js/analytics.js';` and only:
-`track('showcase_step', { showcase: '<slug>', step: n })` once per step reached, and
+`track('showcase_step', { showcase: '<slug>', step: n })` once per stage of the animation reached, and
 `track('showcase_interact', { showcase: '<slug>', action: 'short-id' })` for clicks. No typed text.
 
 ## Quality bar
