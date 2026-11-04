@@ -15,7 +15,7 @@ export const services = [
   { slug: 'google-ads', t: 'Google Ads', price: '8.000 kr./md.', value: 8000, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'meta-ads', t: 'Meta Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Sporing af salg', 'Ekstra kanal: 5.000 kr./md.'] },
-  { slug: 'seo', t: 'SEO', price: 'fra 999 kr./md.', value: 999, d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'] },
+  { slug: 'seo', t: 'SEO', price: '995 kr./time', value: 995, d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'] },
   { slug: 'geo', t: 'GEO', price: 'Fast pris efter en snak', value: 0, d: 'Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.', ex: ['Tjek af din synlighed i AI', 'Indhold, AI kan citere', 'Struktureret data'] },
   { slug: 'ai', t: 'AI', price: 'Fast pris efter en snak', value: 0, d: 'Chatbots, AI-annoncer og assistenter, der sparer dig tid.', ex: ['AI-chatbot døgnet rundt', 'AI-annoncering', 'AI-assistenter til rutinerne'] },
   { slug: 'automations', t: 'Automations', price: 'fra 4.999 kr.', value: 4999, d: 'Lad rutinerne klare sig selv.', ex: ['Automatiske mails og sms', 'Fakturaer og opfølgning', 'Kobling mellem dine systemer'] },
@@ -137,15 +137,15 @@ export const pages = [
   },
   {
     slug: 'seo', name: 'SEO', short: 'Bliv fundet først, når kunderne søger',
-    description: 'Vi sørger for, at din virksomhed bliver fundet på Google, når kunderne søger efter det, du laver: lokal SEO, Google-profil, søgeord, tekster og teknisk SEO. Fra 999 kr./md., ingen binding.',
+    description: 'Vi sørger for, at din virksomhed bliver fundet på Google, når kunderne søger efter det, du laver: lokal SEO, Google-profil, søgeord, tekster og teknisk SEO. 995 kr. i timen, ingen binding.',
     serviceType: 'Søgemaskineoptimering',
     words: SERVICEFAG,
     h1: { a: ['Bliv', 'fundet'], hot: 'først.', dim: 'Uden at betale for', mark: 'klik.' },
     lead: 'Vi sørger for, at din virksomhed dukker op på Google, når nogen søger efter det, du laver, der hvor du holder til.',
     floats: ['Lokal SEO', 'Google-profil', 'Månedlig rapport ↗'], ring: 'SEO • LOKAL • GOOGLE-PROFIL • TEKSTER •',
-    price: { amount: '999', pre: 'fra', post: 'kr./md.', note: 'Ingen binding · ekskl. moms' },
-    priceH2: ['Fast pris.', 'Ingen binding.'],
-    priceLead: 'Du får en klar plan og en fast månedspris, og hver måned kan du se, hvad vi har lavet.',
+    price: { amount: '995', pre: '', post: 'kr./time', note: 'Timepris · ingen binding · ekskl. moms' },
+    priceH2: ['Én timepris.', 'Ingen binding.'],
+    priceLead: 'Du bestemmer, hvor mange timer vi bruger om måneden, og hver måned kan du se, hvad vi har lavet.',
     items: [
       ['Lokal SEO', 'Bliv fundet i dit område, fx “frisør Roskilde”.'],
       ['Google-profil', 'Opsætning og pleje af din virksomhedsprofil med anmeldelser.'],
@@ -158,11 +158,11 @@ export const pages = [
     ],
     steps: [
       ['Analyse', 'Vi ser på din side, dine konkurrenter og dine søgeord.', 'G'],
-      ['Plan', 'Du får en klar plan og en fast månedspris.', '✓'],
+      ['Plan', 'Du får en klar plan, og vi aftaler, hvor mange timer der skal bruges.', '✓'],
       ['Løbende arbejde', 'Vi optimerer hver måned og viser dig resultaterne.', '↗']
     ],
     faqs: [
-      ['Hvad koster SEO?', 'Fra 999 kr. om måneden, og der er ingen binding. Du får en fast pris, før vi går i gang.'],
+      ['Hvad koster SEO?', '995 kr. i timen ekskl. moms. Du bestemmer, hvor mange timer vi bruger om måneden, og der er ingen binding.'],
       ['Hvor lang tid tager det?', 'SEO er et sejt træk. Det tager typisk nogle måneder, før placeringerne for alvor flytter sig, men du kan følge med i rapporten hver måned.'],
       ['Kan I garantere en førsteplads?', 'Nej, og det kan ingen ærligt love. Google bestemmer rækkefølgen. Vi lover, at vi gør det rigtige arbejde og viser dig, hvad det giver.'],
       ['Hvad er lokal SEO?', 'At blive fundet på dit fag og dit område, fx “frisør Roskilde” eller “tømrer Vejle”. Det handler blandt andet om din Google-profil, dine anmeldelser og teksterne på din side.']
@@ -363,7 +363,7 @@ export const front = {
     ['Svar inden for 24 timer.', 'Skriv til os, så vender vi tilbage med en fast pris.', '24']
   ],
   faqs: [
-    ['Hvad koster det?', 'Det afhænger af, hvad du har brug for. En hjemmeside starter ved 2.995 kr., og SEO starter ved 999 kr. om måneden. Annoncering koster 8.000 kr. om måneden for den første kanal og 5.000 kr. for hver ekstra. Skriv til os, så får du en fast pris inden for 24 timer.'],
+    ['Hvad koster det?', 'Det afhænger af, hvad du har brug for. En hjemmeside starter ved 2.995 kr., og SEO koster 995 kr. i timen. Annoncering koster 8.000 kr. om måneden for den første kanal og 5.000 kr. for hver ekstra. Skriv til os, så får du en fast pris inden for 24 timer.'],
     ['Skal jeg købe det hele?', 'Nej. Du vælger kun det, du har brug for. Du kan starte med én ting, fx en hjemmeside eller Google Ads, og bygge på senere.'],
     ['Hvem taler jeg med?', 'Den, der laver arbejdet. Der er ingen mellemled, så du har direkte kontakt til den, der bygger din side eller kører dine annoncer.'],
     ['Er annoncebudgettet med i prisen?', 'Nej. Annoncebudgettet betaler du direkte til Google eller Meta, så du altid kan se, hvad der bliver brugt. Opsætningen af annoncerne er gratis.'],
