@@ -43,9 +43,11 @@ function init(root) {
   const fitNow = () => {
     fit.style.transform = '';
     if (!motion) return;
-    const cs = getComputedStyle(pin), room = pin.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-    const s = Math.min(1, room / fit.scrollHeight);
+    const cs = getComputedStyle(pin), pt = parseFloat(cs.paddingTop), room = pin.clientHeight - pt - parseFloat(cs.paddingBottom);
+    const h = fit.scrollHeight, s = Math.min(1, room / h);
     if (s < 0.995) fit.style.transform = `scale(${s.toFixed(3)})`;
+    // Until it pins, the stage sits right under the headline: the room above it slides up behind it
+    sec.style.marginTop = `${-Math.max(0, pt + Math.max(0, (room - h * s) / 2) - 24)}px`;
   };
 
   // Wires between the cards (side to side on the same row, else bottom to top) and the dot's path
@@ -124,6 +126,13 @@ function init(root) {
     if (G) { const r = G.R[k]; ripples.push({ x: r.x + r.w / 2, y: r.y + r.h / 2, t: performance.now() }); }
   };
 
+  const flash = (n, c, ms) => { n.classList.add(c); clearTimeout(n[c]); n[c] = setTimeout(() => n.classList.remove(c), ms); };
+  // All six done: one more domino wave down the flow
+  const wave = () => nodes.forEach((n, k) => setTimeout(() => {
+    flash(n, 'is-wave', 600);
+    if (G) { const r = G.R[k]; ripples.push({ x: r.x + r.w / 2, y: r.y + r.h / 2, t: performance.now() }); }
+  }, 120 + k * 90));
+
   // Hover, focus or tap a card for a short line on what it does
   let tipOpen = null, tipP = 0, ptr = 'mouse', p = 0;
   const dir = n => { const a = n.getBoundingClientRect(), b = win.getBoundingClientRect(); n.dataset.tip = a.top + a.height / 2 - b.top > b.height * 0.52 ? 'up' : 'down'; };
@@ -161,7 +170,7 @@ function init(root) {
   nodes.forEach(n => { n.classList.remove('is-built', 'is-done'); n.dataset.m = '0'; });
   lines.forEach(l => l.classList.remove('is-on'));
   steps.forEach((s, i) => s.classList.toggle('is-on', i === 0));
-  [payoff, live].forEach(e => e.classList.remove('is-on'));
+  [payoff, live, cta].forEach(e => e.classList.remove('is-on'));
   saved.textContent = '0'; clock.textContent = '';
   requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('is-init')));
 
@@ -197,8 +206,8 @@ function init(root) {
   let sD = 0, lastT = 0, vis = false, running = false, maxStep = 0, camY = 0, lastStep = -1, lastCount = -1;
   let sNow = 0, sFrom = 0, sTo = 0, sT0 = 0;
   const fired = Array(N).fill(false);
-  const PH = ['Alt gøres i hånden i dag.', 'Kobler dine programmer sammen …', 'Venter på næste henvendelse …'];
-  const STATE = ['Ikke sat op', 'Testes', 'Kører'];
+  const PH = ['Kobler dine apps sammen …', 'Venter på næste henvendelse …'];
+  const STATE = ['Ikke sat op', 'Sættes op', 'Kører'];
 
   const frame = now => {
     if (!vis) { running = false; return; }
@@ -235,12 +244,13 @@ function init(root) {
     });
 
     // Cards: mapped (01), built (02), running and done (03)
-    let count = 0, want = 0;
+    let count = 0, want = 0, hand = 0;
     nodes.forEach((n, k) => {
-      const built = k ? p >= BUILD + k * LEG : p >= BUILD - 0.01;
+      const built = k ? p >= BUILD + k * LEG : p >= BUILD - 0.01, mapped = p >= 0.012 + k * 0.014;
       const done = k ? sD >= G.I[k] - 0.5 : p >= FIRE || sD > 1;
-      const m = String(done ? 3 : built ? 2 : p >= 0.012 + k * 0.014 ? 1 : 0);
-      if (n.dataset.m !== m) n.dataset.m = m;
+      const m = String(done ? 3 : built ? 2 : mapped ? 1 : 0);
+      if (n.dataset.m !== m) { if (m === '1' && n.dataset.m === '0' && !first) flash(n, 'is-mark', 700); n.dataset.m = m; }
+      if (mapped) hand += MIN[k];
       set(n, 'is-built', built);
       set(n, 'is-run', going && sD > G.I[k] + 0.5 && sD < G.O[k] + 2);
       if (done !== fired[k]) { fired[k] = done; set(n, 'is-done', done); if (done && !first) pop(k); }
@@ -254,12 +264,14 @@ function init(root) {
       const rows = Math.round(lw.clientHeight / G.lh) || 6;
       list.style.transform = count > rows ? `translateY(${-(count - rows) * G.lh}px)` : '';
     }
-    text(ph, count ? '' : PH[step]);
+    text(ph, count ? '' : step ? PH[step - 1] : hand ? `I hånden i dag: ${hand} min pr. opgave` : 'Kortlægger dine opgaver …');
+    set(lw, 'is-ph', !count);
     text(clock, step < 2 ? '' : fired[0] ? fmt(timeAt(sD), timeAt(sD) < TS[2] + 60) : 'Man. 09:14');
     if (want !== sTo) { sFrom = sNow; sTo = want; sT0 = now; }
     sNow = lerp(sFrom, sTo, ease(clamp((now - sT0) / 700)));
     text(saved, String(Math.round(sNow)));
     const end = fired[N - 1] && p >= DONE;
+    if (end && !payoff.classList.contains('is-on') && !first) wave();
     set(payoff, 'is-on', end); set(cta, 'is-on', end);
 
     // Phones: the camera follows the dot down the flow

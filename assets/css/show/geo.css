@@ -1,6 +1,6 @@
 /* GEO showcase: a customer asks an AI assistant, and the answer is you (scripts/services/showcase/geo.html).
-   Without motion (or before geo.js runs) everything shows the finished answer, nothing is pinned. */
-.show--geo { position: relative; z-index: 1; scroll-margin-top: 56px; }
+   Without motion, or before geo.js runs: the finished answer, nothing pinned. */
+.show--geo { --e: cubic-bezier(.2,.8,.2,1); --pop: cubic-bezier(.2,.9,.3,1.5); position: relative; z-index: 1; scroll-margin-top: 56px; }
 .show--geo .geo-head { max-width: 1200px; margin: 0 auto; padding: 40px 24px 0; }
 .show--geo .geo-head .sec-head__lead { max-width: 380px; }
 .show--geo .geo-slot:not(:empty) { margin-top: 24px; }
@@ -9,87 +9,89 @@
 .show--geo .egen { grid-area: egen; margin-bottom: clamp(6px, 2vh, 22px); }
 .show--geo .egen.is-filled.is-start #geo-egen-lbl { display: none; }
 
-/* Steps: what happens in the chat, and what we do to make it happen */
+/* Steps: what happens, and what we do */
 .show--geo .geo-steps { grid-area: steps; display: flex; flex-direction: column; gap: clamp(12px, 2.6vh, 28px); }
-.show--geo .geo-step { display: flex; gap: 20px; align-items: baseline; transition: opacity .4s, transform .4s cubic-bezier(.2,.8,.2,1); }
-.show--geo .geo-step__n { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--accent); min-width: 28px; }
+.show--geo .geo-step { display: flex; gap: 20px; align-items: baseline; transition: opacity .4s, transform .4s var(--e); }
+.show--geo .geo-step__n { min-width: 28px; font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--accent); }
 .show--geo .geo-step__b { display: flex; flex-direction: column; gap: 6px; }
-.show--geo .geo-step h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(24px, 2.7vw, 34px); letter-spacing: -0.025em; line-height: 1.05; }
+.show--geo .geo-step h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(24px, 2.7vw, 34px); letter-spacing: -.025em; line-height: 1.05; }
 .show--geo .geo-step p { margin: 0; max-width: 410px; font-size: 16px; line-height: 1.5; color: var(--muted); }
 .show--geo .geo-step p b { font-weight: 500; color: var(--ink); }
-.show--geo .geo-step:not(.is-on) { opacity: 0.22; transform: translateX(-8px); }
+.show--geo .geo-step:not(.is-on) { opacity: .22; transform: translateX(-8px); }
 .show--geo .geo-cta { align-self: flex-start; margin-top: 8px; padding: 12px 20px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; transition: opacity .35s, background .2s; }
 .show--geo .geo-cta:hover { background: var(--accent); color: #fff; }
 .show--geo .geo-step:not(.is-on) .geo-cta:not(:focus-visible) { opacity: 0; pointer-events: none; }
 
 /* Før / Efter GEO */
 .show--geo .geo-seg { grid-area: seg; display: flex; align-items: center; gap: 14px; }
-.show--geo .geo-seg__hint { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--accent); opacity: 0; transform: translateX(-6px); transition: opacity .4s, transform .5s cubic-bezier(.2,.8,.2,1); }
-.show--geo .geo-seg__hint::before { content: "←"; }
+.show--geo .geo-seg__hint { font-size: 14px; font-weight: 700; color: var(--accent); opacity: 0; transform: translateX(-6px); transition: opacity .4s, transform .5s var(--e); }
+.show--geo .geo-seg__hint::before { content: "←"; display: inline-block; margin-right: 6px; }
 .show--geo .geo-seg.is-hint .geo-seg__hint { opacity: 1; transform: none; }
 
-/* The chat window (our own drawing: no product's name, logo or colours) */
-.show--geo .geo-chat { grid-area: chat; position: relative; display: flex; flex-direction: column; width: 100%; max-width: 580px; background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 40px 80px -30px rgba(17,17,17,0.18); overflow: hidden; color: var(--ink); }
-.show--geo .geo-chat__bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 14px; }
+/* The chat: our own drawing, no product's name, logo or colours. Text sizes follow its font-size */
+.show--geo .geo-chat { grid-area: chat; position: relative; display: flex; flex-direction: column; width: 100%; max-width: 580px; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 40px 80px -30px rgba(17,17,17,.18); font-size: 15px; }
+.show--geo .geo-chat__bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: .93em; }
 .show--geo .geo-chat__bar .dots3 { margin-right: 6px; }
 .show--geo .geo-chat__bar .tag-eks { margin-left: auto; }
-/* The assistant: a warm ring of our own, which turns while it thinks */
+/* The assistant: a warm ring, which turns while it thinks */
 .show--geo .geo-orb { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle, #fff 0 26%, transparent 27%), conic-gradient(from 200deg, #e0552b, #f2c14e 30%, #f6b8a2 55%, #e0552b 80%); }
+/* Fades at the top, like a real chat */
 .show--geo .geo-chat__body { position: relative; flex: 1; min-height: 0; overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 22px); mask-image: linear-gradient(transparent, #000 22px); }
-.show--geo .geo-chat__in { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 22px 24px 16px; }
+.show--geo .geo-chat__in { position: relative; display: flex; flex-direction: column; gap: .93em; padding: 22px 24px 16px; }
 .show--geo .geo-hi { display: none; }
 
 /* The question, the sources and the answer */
-.show--geo .geo-q { align-self: flex-end; max-width: 82%; padding: 11px 16px; border-radius: 20px 20px 6px 20px; background: var(--cream); font-size: 15.5px; line-height: 1.4; transform-origin: 100% 100%; }
-.show--geo .geo-think { display: flex; align-items: center; gap: 9px; margin-top: 2px; font-size: 13.5px; color: var(--muted); }
+.show--geo .geo-q { align-self: flex-end; max-width: 82%; padding: .7em 1.03em; border-radius: 20px 20px 6px 20px; background: var(--cream); font-size: 1.03em; line-height: 1.4; transform-origin: 100% 100%; }
+.show--geo .geo-think { display: flex; align-items: center; gap: 9px; margin-top: 2px; font-size: .9em; color: var(--muted); }
 .show--geo .geo-dots { display: none; gap: 3px; }
 .show--geo .geo-dots i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
 .show--geo .geo-ok { color: var(--green); }
 .show--geo .geo-src { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -4px; }
-.show--geo .geo-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px 5px 9px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 12.5px; font-weight: 500; white-space: nowrap; transition: opacity .35s, transform .45s cubic-bezier(.2,.9,.3,1.4); }
+.show--geo .geo-chip { display: inline-flex; align-items: center; gap: 6px; padding: .4em .88em .4em .72em; border: 1px solid var(--line); border-radius: 999px; font-size: .83em; font-weight: 500; white-space: nowrap; transition: opacity .35s, transform .45s var(--pop); }
 .show--geo .geo-chip i { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
-.show--geo .geo-chip i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--muted); transform: scale(0); transition: transform .35s cubic-bezier(.2,.9,.3,1.6); }
+.show--geo .geo-chip i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--muted); transform: scale(0); transition: transform .35s var(--pop); }
 .show--geo .geo-chip.is-mine i::after { background: var(--accent); }
 .show--geo .geo-chip.is-lit i::after { transform: none; }
-.show--geo .geo-ans { font-size: 15px; line-height: 1.5; }
+.show--geo .geo-ans { line-height: 1.5; }
 .show--geo .geo-ans > p { margin: 0 0 8px; }
-.show--geo .geo-ans ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.show--geo .geo-ans ol { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 0; list-style: none; }
 .show--geo .geo-it { position: relative; isolation: isolate; display: flex; gap: 12px; margin: 0 -12px; padding: 10px 12px; border-radius: 16px; }
 .show--geo .geo-it::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: #fff6f2; box-shadow: inset 0 0 0 2px var(--accent); opacity: 0; transition: opacity .5s; }
 .show--geo .geo-it.is-you.is-on::before { opacity: 1; }
-.show--geo .geo-it__n { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: #f1efea; font-size: 12px; transition: transform .45s cubic-bezier(.2,.9,.3,1.5); }
+.show--geo .geo-it__n { display: grid; place-items: center; flex-shrink: 0; width: 1.83em; height: 1.83em; margin-top: 1px; border-radius: 50%; background: #f1efea; font-size: .8em; transition: transform .45s var(--pop); }
 .show--geo .is-you .geo-it__n { background: var(--accent); color: #fff; }
-.show--geo .geo-it__name { font-weight: 700; }
-.show--geo .geo-it p { margin: 1px 0 0; font-size: 14px; line-height: 1.45; color: #4d4a45; }
-.show--geo .geo-it__you { display: inline-block; margin-left: 4px; padding: 3px 9px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 11.5px; font-weight: 700; line-height: 1.3; vertical-align: 1px; transition: opacity .3s, transform .55s cubic-bezier(.2,.9,.3,1.7); }
-.show--geo .geo-miss { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 9px 14px; border: 1.5px dashed #eab3a6; border-radius: 14px; color: var(--red); font-size: 13.5px; font-weight: 700; transition: opacity .35s, transform .5s cubic-bezier(.2,.9,.3,1.4); }
+.show--geo .geo-it p { margin: 1px 0 0; font-size: .93em; line-height: 1.45; color: #4d4a45; }
+.show--geo .geo-it__you { display: inline-block; margin-left: 4px; padding: 3px 9px; border-radius: 999px; background: var(--accent); color: #fff; font-size: .77em; font-weight: 700; line-height: 1.3; vertical-align: 1px; transition: opacity .3s, transform .55s cubic-bezier(.2,.9,.3,1.7); }
+.show--geo .geo-miss { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: .65em 1em; border: 1.5px dashed #eab3a6; border-radius: 14px; color: var(--red); font-size: .9em; font-weight: 700; transition: opacity .35s, transform .5s var(--pop); }
 
-/* The input bar at the bottom */
-.show--geo .geo-chat__input { display: flex; align-items: flex-end; gap: 10px; margin: 0 16px 16px; padding: 7px 7px 7px 18px; border: 1px solid var(--line-strong); border-radius: 24px; background: #fff; box-shadow: 0 8px 20px -14px rgba(17,17,17,0.35); }
-.show--geo .geo-field { flex: 1; min-width: 0; padding: 6px 0; font-size: 15px; line-height: 22px; overflow-wrap: anywhere; }
+/* The input bar */
+.show--geo .geo-chat__input { display: flex; align-items: flex-end; gap: 10px; margin: 0 16px 16px; padding: 7px 7px 7px 18px; border: 1px solid var(--line-strong); border-radius: 24px; box-shadow: 0 8px 20px -14px rgba(17,17,17,.35); }
+.show--geo .geo-field { flex: 1; min-width: 0; padding: 6px 0; line-height: 1.47; overflow-wrap: anywhere; }
 .show--geo .geo-ph { color: var(--faint); }
-.show--geo .geo-caret { display: none; width: 1.5px; height: 18px; margin: 0 1px; vertical-align: -4px; background: var(--ink); }
-.show--geo .geo-send { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--line-strong); transition: background .25s, transform .2s cubic-bezier(.2,.9,.3,1.5); }
-.show--geo .geo-send svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.show--geo .geo-send.is-press { transform: scale(0.8); }
+.show--geo .geo-caret { display: none; width: 1.5px; height: 1.2em; margin: 0 1px; vertical-align: -.27em; background: var(--ink); }
+.show--geo .geo-send { display: grid; place-items: center; flex-shrink: 0; width: 2.27em; height: 2.27em; border-radius: 50%; background: var(--line-strong); transition: background .25s, transform .2s var(--pop); }
+.show--geo .geo-send svg { width: 1.2em; height: 1.2em; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.show--geo .geo-send.is-press { transform: scale(.8); }
 .show--geo .is-typing .geo-send { background: var(--accent); }
 
-/* Story states, set by geo.js (.is-js): empty chat → typed and sent → reading → answer */
-.show--geo.is-js .geo-hi { position: absolute; inset: 0 0 6%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 0 24px; text-align: center; font-family: var(--display); font-size: clamp(22px, 2.2vw, 28px); letter-spacing: -0.025em; transition: opacity .45s, transform .6s cubic-bezier(.2,.8,.2,1); }
+/* Story states from geo.js (.is-js) */
+.show--geo.is-js .geo-hi { position: absolute; inset: 0 0 6%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 0 24px; text-align: center; font-family: var(--display); font-size: clamp(22px, 2.2vw, 28px); letter-spacing: -.025em; transition: opacity .45s, transform .6s var(--e); }
 .show--geo.is-js .geo-hi .geo-orb { width: 46px; height: 46px; }
-.show--geo.is-js .is-sent .geo-hi { opacity: 0; transform: translateY(-22px) scale(0.96); }
-.show--geo.is-js .geo-q { opacity: 0; transform: translateY(34px) scale(0.9); transition: opacity .3s, transform .6s cubic-bezier(.2,1,.3,1.25); }
-.show--geo.is-js .is-sent .geo-q { opacity: 1; transform: none; }
-.show--geo.is-js .geo-think, .show--geo.is-js .geo-src { opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .5s cubic-bezier(.2,.8,.2,1); }
-.show--geo.is-js .is-think .geo-think, .show--geo.is-js .is-think .geo-src { opacity: 1; transform: none; }
+.show--geo.is-js .is-sent .geo-hi { opacity: 0; transform: translateY(-22px) scale(.96); }
+.show--geo.is-js .geo-q { opacity: 0; transform: translateY(34px) scale(.9); transition: opacity .3s, transform .6s cubic-bezier(.2,1,.3,1.25); }
+.show--geo.is-js .is-sent .geo-q, .show--geo.is-js .is-think .geo-think, .show--geo.is-js .is-think .geo-src { opacity: 1; transform: none; }
+.show--geo.is-js .geo-think, .show--geo.is-js .geo-src { opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .5s var(--e); }
 .show--geo.is-js .geo-chat:not(.is-found) .geo-dots { display: inline-flex; }
 .show--geo.is-js .geo-chat:not(.is-found) .geo-ok { display: none; }
-.show--geo.is-js .geo-chip:not(.is-lit) { opacity: 0.38; transform: scale(0.95); }
+.show--geo.is-js .geo-chip:not(.is-lit) { opacity: .38; transform: scale(.95); }
 .show--geo.is-js .gw { opacity: 0; transition: opacity .3s; }
 .show--geo.is-js .gw.is-on { opacity: 1; }
+/* A dot after the newest word */
+.show--geo .gw.is-last { position: relative; }
+.show--geo .gw.is-last::after { content: ""; position: absolute; left: calc(100% + 5px); bottom: .32em; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
 .show--geo.is-js .geo-it:not(.is-on) .geo-it__n { transform: scale(0); }
-.show--geo.is-js .geo-it:not(.is-done) .geo-it__you { opacity: 0; transform: translateY(4px) scale(0.5); }
-.show--geo.is-js .geo-miss:not(.is-on) { opacity: 0; transform: translateY(8px) scale(0.97); }
+.show--geo.is-js .geo-it:not(.is-done) .geo-it__you { opacity: 0; transform: translateY(4px) scale(.5); }
+.show--geo.is-js .geo-miss:not(.is-on) { opacity: 0; transform: translateY(8px) scale(.97); }
 .show--geo.is-js .geo-chat:not(.is-sent) .geo-caret { display: inline-block; }
 .show--geo.is-js .is-typing .geo-ph { display: none; }
 
@@ -102,12 +104,13 @@
   .show--geo .geo-chat__in { will-change: transform; }
   .show--geo .geo-caret { animation: geoBlink 1.05s steps(1) infinite; }
   .show--geo .geo-dots i { animation: geoDot 1s ease-in-out infinite; }
-  .show--geo .geo-dots i:nth-child(2) { animation-delay: .15s; }
-  .show--geo .geo-dots i:nth-child(3) { animation-delay: .3s; }
+  .show--geo .geo-dots i + i { animation-delay: .15s; }
+  .show--geo .geo-dots i + i + i { animation-delay: .3s; }
   .show--geo .is-think:not(.is-found) .geo-think .geo-orb { animation: geoSpin .9s linear infinite; }
   .show--geo .geo-hi .geo-orb { animation: geoSpin 9s linear infinite; }
   .show--geo .geo-seg.is-hint .geo-seg__hint::before { animation: geoNudge 1s ease-in-out 4; }
 }
+@media (prefers-reduced-motion: reduce) { .show--geo .geo-scroll { display: none; } }
 @keyframes geoBlink { 50% { opacity: 0; } }
 @keyframes geoDot { 0%, 70%, 100% { transform: none; opacity: .35; } 35% { transform: translateY(-3px); opacity: 1; } }
 @keyframes geoSpin { to { transform: rotate(1turn); } }
@@ -121,18 +124,17 @@
   .show--geo .geo-seg__hint { display: none; }
 }
 @media (max-width: 999px) and (prefers-reduced-motion: no-preference) {
-  /* The three steps as numbers with only the current one written out; the switch sits beside the numbers */
+  /* Steps as numbers, only the current one written out; the switch beside them */
   .show--geo .geo-fit { grid-template-areas: "egen" "steps" "chat"; }
   .show--geo .geo-steps { display: grid; grid-template-columns: repeat(3, auto) 1fr; grid-template-rows: 42px auto; gap: 8px 6px; align-items: center; width: 100%; max-width: 580px; justify-self: center; }
-  .show--geo .geo-steps .kicker { display: none; }
+  .show--geo .geo-steps .kicker, .show--geo .geo-cta { display: none; }
   .show--geo .geo-step { display: contents; }
-  .show--geo .geo-step__n { grid-row: 1; display: flex; align-items: center; justify-content: center; width: 40px; height: 30px; min-width: 0; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 13px; color: var(--muted); transition: background .3s, border-color .3s, color .3s; }
+  .show--geo .geo-step__n { grid-row: 1; display: grid; place-items: center; width: 40px; height: 30px; min-width: 0; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 13px; color: var(--muted); transition: .3s; }
   .show--geo .geo-step.is-on .geo-step__n { background: var(--accent); border-color: var(--accent); color: #fff; }
   .show--geo .geo-step__b { grid-row: 2; grid-column: 1 / -1; gap: 4px; min-height: 76px; }
   .show--geo .geo-step:not(.is-on) .geo-step__b { display: none; }
   .show--geo .geo-step h3 { font-size: 24px; }
-  .show--geo .geo-step p { font-size: 15px; max-width: none; }
-  .show--geo .geo-cta { display: none; }
+  .show--geo .geo-step p { max-width: none; font-size: 15px; }
   .show--geo .geo-seg { grid-area: steps; align-self: start; justify-self: end; margin-right: max(0px, calc((100% - 580px) / 2)); }
   .show--geo .geo-seg.is-hint button:first-child { animation: geoTap 1.1s ease-in-out 3; }
 }
@@ -142,29 +144,20 @@
   .show--geo .geo-head { padding: 32px 20px 0; }
   .show--geo .geo-fit { padding: 0 20px; grid-template-areas: "steps" "seg" "chat"; }
   .show--geo .seg button { padding: 8px 13px; font-size: 13px; }
-  .show--geo .geo-chat { max-width: 420px; border: 7px solid var(--ink); border-radius: 38px; box-shadow: 0 30px 60px -30px rgba(17,17,17,0.45); }
-  /* The notch sits between the name and the tag, like a status bar */
+  .show--geo .geo-chat { max-width: 420px; border: 7px solid var(--ink); border-radius: 38px; box-shadow: 0 30px 60px -30px rgba(17,17,17,.45); font-size: 14px; }
+  /* The notch between name and tag, like a status bar */
   .show--geo .geo-chat::before { content: ""; position: absolute; top: 8px; left: 50%; z-index: 2; width: 64px; height: 20px; margin-left: -32px; border-radius: 999px; background: var(--ink); }
-  .show--geo .geo-chat__bar { gap: 8px; padding: 8px 14px 9px; font-size: 13px; }
+  .show--geo .geo-chat__bar { gap: 8px; padding: 8px 14px 9px; }
   .show--geo .geo-chat__bar .dots3 { display: none; }
   .show--geo .geo-orb { width: 18px; height: 18px; }
-  .show--geo .geo-chat__in { gap: 11px; padding: 16px 14px 12px; }
-  .show--geo .geo-q { max-width: 88%; padding: 9px 13px; font-size: 14.5px; }
-  .show--geo .geo-think { font-size: 12.5px; }
-  .show--geo .geo-src { gap: 5px; margin-top: -2px; }
-  .show--geo .geo-chip { padding: 4px 9px 4px 7px; font-size: 11.5px; }
-  .show--geo .geo-ans { font-size: 14px; line-height: 1.45; }
+  .show--geo .geo-chat__in { padding: 16px 14px 12px; }
+  .show--geo .geo-q { max-width: 88%; }
   .show--geo .geo-it { gap: 10px; margin: 0 -8px; padding: 8px; border-radius: 14px; }
-  .show--geo .geo-it p { font-size: 13px; }
-  .show--geo .geo-it__n { width: 20px; height: 20px; font-size: 11px; }
-  .show--geo .geo-miss { padding: 8px 12px; font-size: 13px; }
   .show--geo .geo-chat__input { gap: 8px; margin: 0 10px 10px; padding: 5px 5px 5px 14px; border-radius: 22px; }
-  .show--geo .geo-field { padding: 5px 0; font-size: 14px; line-height: 21px; }
-  .show--geo .geo-send { width: 31px; height: 31px; }
-  .show--geo .geo-send svg { width: 16px; height: 16px; }
+  .show--geo .geo-field { padding: 5px 0; }
 }
 @media (max-width: 699px) and (prefers-reduced-motion: no-preference) {
-  /* Room at the bottom for the fixed buttons, so they never cover the input bar */
+  /* Room for the fixed buttons below the chat */
   .show--geo .geo-stage { height: 100vh; height: 100svh; align-items: stretch; padding: 76px 0 74px; }
   .show--geo .geo-fit { height: 100%; grid-template-areas: "steps" "chat"; grid-template-rows: auto minmax(0, 1fr); gap: 10px; align-items: stretch; }
   .show--geo .geo-chat { height: auto; min-height: 0; }

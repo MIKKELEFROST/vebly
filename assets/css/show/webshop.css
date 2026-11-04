@@ -9,20 +9,24 @@
 .show--webshop .calc__opt:active { transform: translateY(-1px) scale(.985); }
 .show--webshop .calc__opt em { margin-top: auto; padding-top: 6px; font-style: normal; font-size: 14px; font-weight: 700; color: var(--ink); transition: color .25s; }
 .show--webshop .calc__opt.is-on em { color: #fff; }
-.show--webshop .ws-in { position: absolute; top: 0; left: 0; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.show--webshop .ws-in { position: absolute; top: 50%; left: 50%; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
 .show--webshop .calc__opt:has(.ws-in:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 .show--webshop .ws-row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .show--webshop .ws-wide { grid-column: 1 / -1; }
 .show--webshop .ws-sub { margin: 8px 0 -4px; font-size: 15px; font-weight: 700; }
 
-/* Products: the number (you can type in it), the slider and its marks */
-.show--webshop .ws-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px 16px; flex-wrap: wrap; }
-.show--webshop .ws-head .calc__lbl { padding-bottom: 6px; }
-.show--webshop .ws-num { display: flex; align-items: baseline; gap: 8px; cursor: text; }
-.show--webshop .ws-num input { width: 2.75em; padding: 0 0 3px; border: 0; border-bottom: 2px dashed var(--line-strong); border-radius: 0; background: none; color: var(--ink); text-align: right; font-family: var(--display); font-weight: 800; font-size: clamp(44px, 4.6vw, 60px); letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; transition: border-color .2s; }
+/* Products: the number (you can type in it; it is as wide as its digits), the slider and its marks */
+.show--webshop .ws-head { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-top: -4px; }
+.show--webshop .ws-num { display: flex; align-items: baseline; gap: 10px; cursor: text; }
+.show--webshop .ws-num__box { display: inline-grid; }
+.show--webshop .ws-num__box > * { grid-area: 1 / 1; padding: 0 2px 3px 0; font-family: var(--display); font-weight: 800; font-size: clamp(46px, 4.8vw, 62px); letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.show--webshop .ws-num__m { visibility: hidden; white-space: pre; }
+.show--webshop .ws-num input { width: 0; min-width: 100%; margin: 0; border: 0; border-bottom: 2px dashed var(--line-strong); border-radius: 0; background: none; color: var(--ink); transition: border-color .2s; }
 .show--webshop .ws-num input:hover { border-bottom-color: var(--faint); }
 .show--webshop .ws-num input:focus { outline: none; border-bottom-color: var(--accent); }
-.show--webshop .ws-num > span:last-child { font-size: 16px; font-weight: 700; color: var(--muted); }
+.show--webshop .ws-num > span:last-child { font-size: 17px; font-weight: 700; color: var(--muted); }
+.show--webshop .ws-inc { padding: 8px 14px; border-radius: 999px; background: var(--cream); font-size: 13px; font-weight: 700; transition: background .3s, color .3s; }
+.show--webshop .ws-inc.is-extra { background: #fdeee7; color: #b2401c; }
 .show--webshop .ws-range { --s: .12; display: block; width: 100%; height: 40px; margin: 0; background: none; cursor: pointer; -webkit-appearance: none; appearance: none; }
 .show--webshop .ws-range:focus { outline: none; }
 .show--webshop .ws-range::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; background: linear-gradient(90deg, var(--accent) calc(16px + (100% - 32px) * var(--s)), #ebe8e2 0); }
@@ -68,12 +72,10 @@
 .show--webshop .calc__line { align-items: baseline; padding: 11px 0; }
 .show--webshop .calc__line small { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.4; color: var(--dark-muted); }
 .show--webshop .calc__line.is-new { animation: wsIn .5s cubic-bezier(.2,.8,.2,1) both; }
-.show--webshop .calc__tot { position: relative; }
-.show--webshop .ws-delta { position: absolute; right: 0; bottom: 100%; font: 800 17px/1 var(--display); letter-spacing: -.02em; font-style: normal; color: var(--accent); white-space: nowrap; opacity: 0; pointer-events: none; }
-.show--webshop .ws-delta.is-neg { color: var(--dark-muted); }
-.show--webshop .ws-delta.is-go { animation: wsUp 1.2s cubic-bezier(.2,.8,.2,1) both; }
+.show--webshop .calc__tot b { transform-origin: 100% 60%; }
+.show--webshop .calc__tot b.is-bump { animation: wsBump .55s cubic-bezier(.2,1.6,.4,1); }
 @keyframes wsIn { from { opacity: 0; transform: translateY(10px); } }
-@keyframes wsUp { 0% { opacity: 0; transform: translateY(10px) scale(.9); } 16% { opacity: 1; transform: none; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-18px); } }
+@keyframes wsBump { 30% { transform: scale(1.05); } }
 
 /* The example shop (a drawing; sizes in container units, so it scales with its column) */
 .show--webshop .ws-shop { position: relative; margin: 0; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 40px 80px -30px rgba(17,17,17,.18); container-type: inline-size; }
@@ -190,21 +192,24 @@
   .show--webshop .calc { gap: 16px; }
   .show--webshop .ws-side { display: contents; }
   .show--webshop .ws-shop { order: -1; justify-self: center; width: 100%; max-width: 560px; }
-  .show--webshop .ws-bar { position: sticky; bottom: 96px; z-index: 4; display: flex; align-items: center; gap: 12px; margin: -96px -8px 0; padding: 10px 10px 10px 20px; border: 0; border-radius: 22px; background: var(--ink); color: #fff; box-shadow: 0 22px 44px -18px rgba(17,17,17,.6); font: inherit; text-align: left; cursor: pointer; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .show--webshop .ws-bar { position: sticky; bottom: 96px; z-index: 4; display: flex; align-items: center; gap: 12px; margin: -90px -8px 0; padding: 8px 8px 8px 18px; border: 0; border-radius: 20px; background: var(--ink); color: #fff; box-shadow: 0 22px 44px -18px rgba(17,17,17,.6); font: inherit; text-align: left; cursor: pointer; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
   .show--webshop .ws-bar.is-on { opacity: 1; transform: none; pointer-events: auto; }
   .show--webshop .ws-bar__t { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-  .show--webshop .ws-bar__t small { color: var(--dark-muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .show--webshop .ws-bar__t small { color: var(--dark-muted); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
   .show--webshop .ws-bar__t > span { font-size: 14px; color: var(--dark-muted); white-space: nowrap; }
-  .show--webshop .ws-bar__t b { color: #fff; font: 800 22px/1 var(--display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
-  .show--webshop .ws-bar__go { flex-shrink: 0; padding: 12px 16px; border-radius: 999px; background: var(--accent); font-size: 14px; font-weight: 700; }
-  .show--webshop .ws-bar .ws-delta { right: 22px; bottom: calc(100% + 6px); }
+  .show--webshop .ws-bar__t b { color: #fff; font: 800 20px/1 var(--display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .show--webshop .ws-bar__go { flex-shrink: 0; padding: 11px 15px; border-radius: 999px; background: var(--accent); font-size: 14px; font-weight: 700; }
+  .show--webshop .ws-delta { position: absolute; right: 22px; bottom: calc(100% + 8px); color: var(--accent); font: 800 18px/1 var(--display); letter-spacing: -.02em; font-style: normal; white-space: nowrap; opacity: 0; pointer-events: none; }
+  .show--webshop .ws-delta.is-neg { color: var(--muted); }
+  .show--webshop .ws-delta.is-go { animation: wsUp 1.2s cubic-bezier(.2,.8,.2,1) both; }
 }
+@keyframes wsUp { 0% { opacity: 0; transform: translateY(10px) scale(.9); } 16% { opacity: 1; transform: none; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-20px); } }
 @media (max-width: 699px) {
   .show--webshop .calc__opts { gap: 30px; }
+  .show--webshop .ws-row2 { grid-template-columns: 1fr; }
   .show--webshop .ws-bar { bottom: 76px; }
   .show--webshop .ws-step__c button { width: 38px; height: 38px; }
 }
 @media (max-width: 420px) {
   .show--webshop .ws-ticks button[data-ws-tick="1000"] { display: none; }
-  .show--webshop .ws-row2 { grid-template-columns: 1fr 1fr; }
 }

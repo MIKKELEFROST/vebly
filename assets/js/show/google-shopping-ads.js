@@ -18,7 +18,7 @@ function run(root) {
   const lerp = (a, b, t) => a + (b - a) * t;
 
   const pin = $('[data-gsa-pin]'), sticky = $('[data-gsa-sticky]'), fit = $('[data-gsa-fit]'), scr = $('[data-gsa-scr]');
-  const qbox = $('[data-gsa-qbox]'), qEl = $('[data-gsa-q]'), url = $('[data-gsa-url]'), res = $('[data-gsa-res]'), ads = $('[data-gsa-ads]'), next = $('[data-gsa-next]');
+  const qbox = $('[data-gsa-qbox]'), ac = $('[data-gsa-ac]'), acRows = [...ac.children], qEl = $('[data-gsa-q]'), url = $('[data-gsa-url]'), res = $('[data-gsa-res]'), ads = $('[data-gsa-ads]'), next = $('[data-gsa-next]');
   const dim = $('[data-gsa-dim]'), sheet = $('[data-gsa-sheet]'), buy = $('[data-gsa-buy]'), cur = $('[data-gsa-cur]'), rip = $('[data-gsa-rip]'), fx = $('[data-gsa-fx]');
   const cards = $$('[data-gsa-card]'), steps = $$('[data-gsa-step]'), box = $('[data-gsa-egen]');
   const small = matchMedia('(max-width: 699px)');
@@ -97,16 +97,16 @@ function run(root) {
   const confetti = () => {
     if (!fx.animate) return;
     const r = fx.getBoundingClientRect(), bb = buy.getBoundingClientRect(), x0 = bb.left + bb.width / 2 - r.left, y0 = bb.top + bb.height / 2 - r.top;
-    for (let i = 0; i < 26; i++) {
-      const d = document.createElement('i'), w = 5 + Math.random() * 6, a = -Math.PI / 2 + (Math.random() - .5) * 2.8, sp = 70 + Math.random() * 120, rot = (Math.random() - .5) * 900;
+    for (let i = 0; i < 32; i++) {
+      const d = document.createElement('i'), w = 6 + Math.random() * 6, a = -Math.PI / 2 + (Math.random() - .5) * 2.6, sp = 90 + Math.random() * 140, rot = (Math.random() - .5) * 900;
       d.style.cssText = `left:${x0 - w / 2}px;top:${y0 - w / 2}px;width:${w}px;height:${Math.random() < .5 ? w : w * .45}px;background:${COLS[i % 5]};border-radius:${Math.random() < .4 ? '50%' : '2px'}`;
       fx.appendChild(d);
       const dx = Math.cos(a) * sp, dy = Math.sin(a) * sp;
       d.animate([
         { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
         { transform: `translate(${dx}px,${dy}px) rotate(${rot / 2}deg)`, opacity: 1, offset: .4 },
-        { transform: `translate(${dx * 1.4}px,${dy + 150}px) rotate(${rot}deg)`, opacity: 0 }
-      ], { duration: 1000 + Math.random() * 600, easing: 'cubic-bezier(.2,.6,.4,1)' }).onfinish = () => d.remove();
+        { transform: `translate(${dx * 1.4}px,${dy + 170}px) rotate(${rot}deg)`, opacity: 0 }
+      ], { duration: 1100 + Math.random() * 700, easing: 'cubic-bezier(.2,.6,.4,1)' }).onfinish = () => d.remove();
     }
   };
 
@@ -117,7 +117,13 @@ function run(root) {
     if (a !== step) { step = a; steps.forEach((el, i) => el.classList.toggle('is-on', i === a)); }
     // 01 The query is typed, then the box glides up and the results appear
     const n = Math.round(Q.length * seg(v, .02, .13)), qt = Q.slice(0, n);
-    if (qEl.textContent !== qt) qEl.textContent = qt;
+    if (qEl.textContent !== qt) {
+      qEl.textContent = qt;
+      // Suggestions under the box: what is typed, and the rest in bold
+      const sug = [Q, ...(Q === 'keramik krus' ? [' håndlavet', ' tilbud'] : [' tilbud', ' pris']).map(t => Q + t)];
+      acRows.forEach((r, i) => { r.children[1].textContent = qt; r.children[2].textContent = sug[i].slice(qt.length); });
+    }
+    ac.style.opacity = n > 1 ? 1 - seg(v, .132, .148) : 0;
     const ty = n > 0 && n < Q.length;
     if (ty !== typing) { typing = ty; root.classList.toggle('is-typing', ty); }
     const u = v > .145 ? searchUrl() : 'google.dk';

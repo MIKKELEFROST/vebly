@@ -46,10 +46,11 @@ function init(root) {
   const MAX = SCALE[SCALE.length - 1][1];
 
   // Slider position ↔ products (whole products, then steps of 5, 10 and 25 as the numbers grow)
+  const stepOf = n => n < 100 ? 1 : n < 500 ? 5 : n < 1000 ? 10 : 25;
   const toN = s => {
     for (let i = 1; i < SCALE.length; i++) {
       const [s0, n0] = SCALE[i - 1], [s1, n1] = SCALE[i];
-      if (s <= s1) { const n = n0 + (n1 - n0) * (s - s0) / (s1 - s0), q = n < 100 ? 1 : n < 500 ? 5 : n < 1000 ? 10 : 25; return clamp(Math.round(n / q) * q, 1, MAX); }
+      if (s <= s1) { const n = n0 + (n1 - n0) * (s - s0) / (s1 - s0), q = stepOf(n); return clamp(Math.round(n / q) * q, 1, MAX); }
     }
     return MAX;
   };
@@ -60,9 +61,9 @@ function init(root) {
 
   const range = $('[data-ws-range]'), num = $('[data-ws-n]'), side = $('[data-ws-side]'), sum = $('[data-ws-sum]'), opts = $('.calc__opts');
   const shop = $('[data-ws-shop]'), bar = $('[data-ws-bar]'), lines = $('[data-ws-lines]'), stepbox = $('[data-ws-stepbox]');
-  const tip = $('[data-ws-tip]'), toastEl = $('[data-ws-toast]'), live = $('[data-ws-live]');
+  const tip = $('[data-ws-tip]'), toastEl = $('[data-ws-toast]'), live = $('[data-ws-live]'), mirror = $('[data-ws-m]'), inc = $('[data-ws-inc]');
   const T = { once: $('[data-ws-once]'), md: $('[data-ws-md]'), b1: $('[data-ws-bar1]'), b2: $('[data-ws-bar2]'), n: $('[data-ws-shopn]') };
-  const D = { once: $('[data-ws-d1]'), md: $('[data-ws-d2]'), bar: $('[data-ws-d3]') };
+  const dBar = $('[data-ws-d3]');
   const S = { n: P.included, sprog: 0, ads: [] };
   const inputs = name => $$(`input[name="${name}"]`), on = name => inputs(name).filter(i => i.checked);
   const val = name => (on(name)[0] || {}).value, has = name => on(name).length > 0;
@@ -71,17 +72,18 @@ function init(root) {
   // Everything chosen, as lines: { key, t (label), once, md, s (short, for the form), sub }
   const calc = () => {
     const n = S.n, extra = Math.max(0, n - P.included), imp = val('metode') === 'import', L = [];
-    const add = (key, t, once, md, s, sub = '') => L.push({ key, t, once: once || 0, md: md || 0, s, sub });
+    const add = (key, t, once, md, s, c = s, sub = '') => L.push({ key, t, once: once || 0, md: md || 0, s, c, sub });
     add('base', 'Webshop på Shopify', P.base, 0, 'Webshop på Shopify');
-    add('prod', stk(n) + (imp ? ', import' : extra ? `, ${fmt(extra)} oprettet ekstra` : ''), imp ? P.import : extra * P.perProduct, 0, stk(n) + (imp ? ' med import' : ''));
-    if (has('varianter')) add('var', 'Varianter', P.variants, 0, 'varianter');
-    if (has('tekster')) add('txt', `Produkttekster til ${stk(n)}`, n * P.texts, 0, 'produkttekster');
-    if (val('design') === 'unikt') add('design', 'Unikt design', P.unique, 0, 'unikt design');
-    if (S.sprog) add('sprog', `${S.sprog} ekstra sprog og ${S.sprog > 1 ? 'valutaer' : 'valuta'}`, S.sprog * P.language, 0, `${S.sprog} ekstra sprog`);
-    const ig = on('integ');
-    if (ig.length) add('integ', ig.length > 1 ? `${ig.length} integrationer` : nameOf(ig[0]), ig.length * P.integration, 0,
-      ig.length > 1 ? `${ig.length} integrationer` : nameOf(ig[0]).toLocaleLowerCase('da-DK'), ig.length > 1 ? ig.map(nameOf).join(', ') : '');
-    on('fn').forEach(i => add('fn-' + i.value, nameOf(i), P[i.value], 0, i.dataset.s || nameOf(i)));
+    add('prod', stk(n) + (imp ? ', import' : extra ? `, ${fmt(extra)} oprettet ekstra` : ''), imp ? P.import : extra * P.perProduct, 0,
+      stk(n) + (imp ? ' med import' : ''), stk(n) + (imp ? ' (import)' : extra ? ` (${fmt(extra)} oprettes)` : ''));
+    if (has('varianter')) add('var', 'Varianter', P.variants, 0, 'varianter', 'Varianter');
+    if (has('tekster')) add('txt', `Produkttekster til ${stk(n)}`, n * P.texts, 0, 'produkttekster', 'Tekster');
+    if (val('design') === 'unikt') add('design', 'Unikt design', P.unique, 0, 'unikt design', 'Unikt design');
+    if (S.sprog) add('sprog', `${S.sprog} ekstra sprog og ${S.sprog > 1 ? 'valutaer' : 'valuta'}`, S.sprog * P.language, 0, `${S.sprog} ekstra sprog`, `${S.sprog} sprog`);
+    const ig = on('integ'), many = ig.length > 1;
+    if (ig.length) add('integ', many ? `${ig.length} integrationer` : nameOf(ig[0]), ig.length * P.integration, 0,
+      many ? `${ig.length} integrationer` : nameOf(ig[0]).toLocaleLowerCase('da-DK'), ig.map(nameOf).join(' + '), many ? ig.map(nameOf).join(', ') : '');
+    on('fn').forEach(i => add('fn-' + i.value, nameOf(i), P[i.value], 0, i.dataset.s, i.dataset.c));
     if (has('service')) add('service', 'Webshop-service', 0, P.service, 'Webshop-service');
     S.ads.forEach((v, k) => { const t = nameOf(inputs('ads').find(i => i.value === v)); add('ad-' + v, t, 0, k ? P.channel.extra : P.channel.first, t); });
     return { L, n, extra, imp, once: L.reduce((a, l) => a + l.once, 0), md: L.reduce((a, l) => a + l.md, 0) };
@@ -109,12 +111,14 @@ function init(root) {
     if (!motion || now) { t.cur = to; tweens.delete(t); el.textContent = fmt(to) + sfx; return; }
     t.from = t.cur; t.t0 = performance.now(); tweens.add(t); wake();
   };
-  // "+1.995 kr." floats up from a total when it changes
-  const delta = (el, d, sfx = ' kr.') => {
-    if (!motion || !el || !d) return;
-    el.textContent = (d > 0 ? '+' : '−') + kr(Math.abs(d)) + sfx;
-    el.classList.toggle('is-neg', d < 0);
-    el.classList.remove('is-go'); void el.offsetWidth; el.classList.add('is-go');
+  // A changed total bumps; on the phone bar the change ("+1.995 kr.") floats up from it
+  const replay = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
+  const changed = (d1, d2) => {
+    if (!motion) return;
+    if (d1) replay(T.once, 'is-bump');
+    if (d2) replay(T.md, 'is-bump');
+    const d = d1 || d2;
+    if (d && dBar) { dBar.textContent = (d > 0 ? '+' : '−') + fmt(Math.abs(d)) + (d1 ? ' kr.' : ' kr./md.'); dBar.classList.toggle('is-neg', d < 0); replay(dBar, 'is-go'); }
   };
   // A small message in the example shop when something is switched on (only where it can be seen)
   const TOAST = {
@@ -135,7 +139,9 @@ function init(root) {
   const writeForm = (r, user) => {
     const ci = document.querySelector('[data-chosen-input]'), cv = document.querySelector('[data-chosen-val]'), cb = document.querySelector('[data-chosen]');
     if (!ci) return;
-    ci.value = `Webshop: ${total(r)}, ekskl. moms · ` + r.L.map(l => `${l.t}: ${lineVal(l)}`).join(' · ');
+    const md = r.L.filter(l => l.md), once = r.L.filter(l => !l.md && l.key !== 'base');
+    ci.value = `Webshop: ${total(r)} ekskl. moms` + (md.length ? ` · Pr. md.: ${md.map(l => `${l.c} ${fmt(l.md)}`).join(', ')}` : '')
+      + ` · Engang: ${once.map(l => `${l.c} ${l.once ? fmt(l.once) : '(med)'}`).join(', ')}`;
     if (cv) cv.textContent = `${r.L[0].s} med ${list(r.L.slice(1).map(l => l.s))} · ${total(r)}`;
     if (cb) cb.hidden = false;
     // Changing the choice after a sent message opens the form again (as on /services/hjemmesider)
@@ -153,6 +159,9 @@ function init(root) {
     range.style.setProperty('--s', (+range.value / 1000).toFixed(4));
     range.setAttribute('aria-valuetext', stk(r.n));
     if (document.activeElement !== num) num.value = fmt(r.n);
+    mirror.textContent = num.value || ' ';
+    inc.textContent = r.extra ? `${P.included} med i prisen + ${fmt(r.extra)} ekstra` : `Op til ${P.included} er med i prisen`;
+    inc.classList.toggle('is-extra', r.extra > 0);
     $$('[data-ws-tick]').forEach(b => b.classList.toggle('is-on', +b.dataset.wsTick === r.n));
     // Languages
     $('[data-ws-sprog]').textContent = S.sprog;
@@ -179,7 +188,7 @@ function init(root) {
     roll(T.once, r.once, ' kr.', !how); roll(T.md, r.md, ' kr.', !how);
     roll(T.b1, r.once, ' kr.', !how); roll(T.b2, r.md, ' kr./md.', !how);
     T.b2.parentNode.hidden = !r.md;
-    if (how === 'user' && prev) { delta(D.once, r.once - prev.once); delta(D.bar, r.once - prev.once); delta(D.md, r.md - prev.md, ' kr./md.'); }
+    if (how === 'user' && prev) changed(r.once - prev.once, r.md - prev.md);
     // The example shop
     if (shop) {
       const fn = on('fn').map(i => i.value);
@@ -203,12 +212,27 @@ function init(root) {
   const trackN = () => { clearTimeout(nT); nT = setTimeout(() => track('calc_change', { field: 'produkter', value: S.n }), 1200); };
   // The products: the end of a drag, or of typing, shows the change once and is tracked once
   const setN = (n, how) => { if (from === null && prev) from = prev.once; S.n = clamp(Math.round(n) || 1, 1, MAX); sync(how); };
-  const commitN = () => { if (from === null || !prev) return; delta(D.once, prev.once - from); delta(D.bar, prev.once - from); from = null; trackN(); };
+  const commitN = () => { if (from === null || !prev) return; changed(prev.once - from, 0); from = null; trackN(); };
 
   range.addEventListener('input', () => setN(toN(+range.value), 'slide'));
   range.addEventListener('change', commitN);
-  num.addEventListener('focus', () => { num.value = String(S.n); requestAnimationFrame(() => num.select()); });
-  num.addEventListener('input', () => { const v = parseInt(num.value.replace(/\D/g, ''), 10); if (v > 0) setN(v, 'type'); });
+  // Keys step the products themselves (1, 5, 10 or 25 at a time), Page Up/Down jump between the marks
+  const MARKS = SCALE.map(([, n]) => n);
+  range.addEventListener('keydown', e => {
+    const n = S.n, k = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 }[e.key];
+    let to = null;
+    if (k) { const q = stepOf(k > 0 ? n : n - 1); to = Math.round((n + k * q * (e.shiftKey ? 10 : 1)) / q) * q; }
+    else if (e.key === 'PageUp') to = MARKS.find(m => m > n) || MAX;
+    else if (e.key === 'PageDown') to = [...MARKS].reverse().find(m => m < n) || 1;
+    else if (e.key === 'Home') to = 1;
+    else if (e.key === 'End') to = MAX;
+    if (to === null) return;
+    e.preventDefault();
+    to = clamp(to, 1, MAX);
+    if (to !== n) { setN(to, 'type'); commitN(); }
+  });
+  num.addEventListener('focus', () => { num.value = mirror.textContent = String(S.n); requestAnimationFrame(() => num.select()); });
+  num.addEventListener('input', () => { const v = parseInt(num.value.replace(/\D/g, ''), 10); mirror.textContent = num.value || ' '; if (v > 0) setN(v, 'type'); });
   num.addEventListener('blur', () => { num.value = fmt(S.n); commitN(); });
   num.addEventListener('keydown', e => {
     if (e.key === 'Enter') { e.preventDefault(); num.blur(); }

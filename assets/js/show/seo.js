@@ -157,11 +157,11 @@ function init(root) {
     const k = eo(seg(p, .72, .785));
     if (L.phone) {
       sv(card, 'transform', k ? `translateY(${(k * 104).toFixed(2)}%)` : '');
-      sv(srch, 'transform', `scale(${(.94 + .06 * k).toFixed(4)})`);
+      sv(srch, 'transform', `scale(${(.94 + .06 * k).toFixed(4)})`); sv(card, '--b', '0');
     } else {
       const s = 1 - .14 * k, dx = (L.W - L.w * s) / 2 * k, dy = -(L.h - L.h * s) / 2;
       sv(card, 'transform', k ? `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${s.toFixed(4)}) rotate(${(2.5 * k).toFixed(2)}deg)` : '');
-      sv(srch, 'opacity', k.toFixed(3)); sv(card, '--b', (.42 * k).toFixed(3));
+      sv(srch, 'opacity', k.toFixed(3)); sv(card, '--b', (.3 * k).toFixed(3));
       sv(srch, 'transform', `translate(${(-22 * (1 - k)).toFixed(1)}px,${(26 * (1 - k)).toFixed(1)}px) scale(${(.95 + .05 * k).toFixed(4)})`);
     }
     // …and the profile climbs from the bottom of the list to the top

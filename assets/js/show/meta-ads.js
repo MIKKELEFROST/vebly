@@ -13,6 +13,8 @@ function init(sec) {
   const motion = document.documentElement.classList.contains('motion');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const io3 = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(2 - 2 * t, 3) / 2;
+  // The feed: an even scroll through friends' posts, then a long, soft stop on the ad
+  const glide = t => t <= 0 ? 0 : t >= 1 ? 1 : t < .45 ? t * 1.556 : .7 + .3 * (1 - Math.pow(1 - (t - .45) / .55, 3));
   const act = action => track('showcase_interact', { showcase: 'meta-ads', action });
 
   /* ---------- The ad, in the visitor's own trade, town and name ---------- */
@@ -98,9 +100,9 @@ function init(sec) {
     if (s > .002 && n + 1 > reached) { reached = n + 1; track('showcase_step', { showcase: 'meta-ads', step: reached }); }
     bars.forEach((b, i) => { b.style.transform = `scaleX(${clamp((s - AT[i]) / (AT[i + 1] - AT[i])).toFixed(3)})`; });
     // 01–02: the feed scrolls by, slows down and stops on the ad
-    feed.style.transform = `translate3d(0,${(-stopY * (1 - Math.pow(1 - clamp((s - .015) / .36), 2.4))).toFixed(1)}px,0)`;
+    feed.style.transform = `translate3d(0,${(-stopY * glide((s - .02) / .38)).toFixed(1)}px,0)`;
     pills.forEach((p, i) => p.classList.toggle('is-on', s > .06 + i * .065));
-    flag('is-liked', s > .4); flag('is-cta', s > .45);
+    flag('is-liked', s > .405); flag('is-cta', s > .455);
     // 03: Book nu, the form slides up already filled in, an answer, Send, thank you
     flag('is-book', s > .53 && s < .6);
     const k = io3(clamp((s - .545) / .06));
@@ -111,7 +113,7 @@ function init(sec) {
     const q = io3(clamp((s - .78) / .075)), wide = innerWidth >= 900;
     A.style.transform = q ? `translateX(${((wide ? -36 : -22) * q).toFixed(2)}%) rotate(${(-5 * q).toFixed(2)}deg) scale(${(1 - .08 * q).toFixed(3)})` : '';
     B.style.visibility = q ? 'visible' : '';
-    B.style.transform = q ? `translate(${((wide ? 36 : 22) * q).toFixed(2)}%,${((1 - q) * 125 + 4 * q).toFixed(2)}%) rotate(${(5 * q).toFixed(2)}deg)` : '';
+    B.style.transform = q ? `translate(${((wide ? 36 : 22) * q).toFixed(2)}%,${((1 - q) * 125 + (wide ? 4 : -2) * q).toFixed(2)}%) rotate(${(5 * q).toFixed(2)}deg)` : '';
     pills.forEach(p => p.classList.toggle('is-away', q > .05));
     flag('is-lead', s > .87);
   };

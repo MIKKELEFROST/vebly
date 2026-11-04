@@ -23,7 +23,7 @@ function init(sec) {
   const steps = $$('[data-em-step]'), pills = $$('[data-em-pill]');
   const rowsEl = $('[data-em-rows]'), auto = $('[data-em-auto]'), nl = $('[data-em-nl]'), others = $$('[data-em-o]'), count = $('[data-em-count]');
   const read = $('[data-em-read]'), empty = $('[data-em-empty]'), open = $('[data-em-open]'), view = $('[data-em-view]'), mail = $('[data-em-mail]');
-  const parts = $$('[data-em-part]'), img = $('[data-em-part] img'), btn = $('[data-em-btn]'), ok = $('[data-em-ok]'), cur = $('[data-em-cursor]');
+  const parts = $$('[data-em-part]'), img = $('[data-em-part] img'), txt = $('.em-mail p'), btn = $('[data-em-btn]'), ok = $('[data-em-ok]'), cur = $('[data-em-cursor]');
   const flow = $('[data-em-flow]'), line = $('[data-em-line]'), fdot = $('[data-em-fdot]'), nodes = $$('[data-em-node]');
   const stats = $('[data-em-stats]'), nums = $$('[data-em-n]');
 
@@ -59,9 +59,9 @@ function init(sec) {
   const measure = () => {
     phone = innerWidth < 700;
     const R = nl.offsetHeight, rows = off(rowsEl), b = off(btn), v = off(view), r = off(read), bh = btn.offsetHeight;
-    // The e-mail scrolls just far enough for the button to sit above the confirmation
-    const room = ok.offsetHeight + (phone ? 18 : 30);
-    const scroll = Math.max(0, Math.round(b.y + bh - (v.y + view.clientHeight - room)));
+    // The e-mail scrolls on: on computers until the button sits above the confirmation, on phones until
+    // the text starts at the top, under the confirmation banner
+    const scroll = Math.max(0, Math.round(phone ? off(txt).y - v.y - 4 : b.y + bh - (v.y + view.clientHeight - ok.offsetHeight - 30)));
     const ln = line.parentElement;
     L = {
       R, scroll, lineW: ln.offsetWidth,
@@ -143,7 +143,7 @@ function init(sec) {
     S.ok.t = st.pressed && (phone || !st.flow) ? 1 : 0;
     const o = go(S.ok, f);
     set(ok, 'opacity', clamp(o * 1.4).toFixed(3));
-    set(ok, 'transform', phone ? `translateY(${((1 - o) * 105).toFixed(1)}%)` : `translateY(${((1 - o) * 26).toFixed(1)}px) scale(${(0.9 + 0.1 * o).toFixed(3)})`);
+    set(ok, 'transform', phone ? `translateY(${((o - 1) * 105).toFixed(1)}%)` : `translateY(${((1 - o) * 26).toFixed(1)}px) scale(${(0.9 + 0.1 * o).toFixed(3)})`);
 
     // The pointer on computers, a tap on phones
     let T = null, vis = false;
@@ -154,7 +154,7 @@ function init(sec) {
     } else {
       vis = p >= STEP[1] - 0.04 && p < FLOW;
       T = p < OPEN ? L.row : p < STEP[2] + 0.035 ? L.rest : L.btn;
-      if (p >= PRESS + 0.035) T = { x: T.x + 34, y: T.y + 34 };
+      if (p >= PRESS + 0.035) T = { x: T.x + 150, y: T.y - 6 };
       if (S.co.x < 0.02 && !vis) { S.cx.x = L.start.x; S.cy.x = L.start.y; S.cx.v = S.cy.v = 0; }
       S.cx.t = T.x; S.cy.t = T.y;
     }

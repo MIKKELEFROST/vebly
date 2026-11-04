@@ -1,7 +1,7 @@
 // Partner scroll right under the front page hero (scripts/services/front/partnere.mjs).
 // The rows of customers drift sideways, in opposite directions. Scrolling speeds them up and leans them,
 // like the trades marquee further down the page, and they slide in from the sides as the band comes into
-// view. Hovering, a long press or keyboard focus brings them to a soft stop.
+// view. Hovering, a long press, keyboard focus or the pause button brings them to a soft stop.
 // Nothing moves with reduced motion or with 1–4 customers (data-pt-still): the CSS shows a still grid.
 const band = document.querySelector('.show--partnere [data-pt]');
 if (band && document.documentElement.classList.contains('motion') && !band.hasAttribute('data-pt-still') && band.querySelectorAll('.pt__set > li').length > 4) run(band);
@@ -50,7 +50,19 @@ function run(band) {
     });
   };
 
-  let raf = 0, last = 0, lastY = scrollY, vel = 0, k = 1, hover = false, press = false, focused = null;
+  let raf = 0, last = 0, lastY = scrollY, vel = 0, k = 1, hover = false, press = false, focused = null, stopped = false;
+
+  // A pause button at the end of the hairline, for everyone who cannot hover (keyboard, touch)
+  const head = band.closest('.show--partnere').querySelector('.pt__head');
+  if (head) {
+    const ICON = { pause: '<rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/>', play: '<path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/>' };
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'pt__pause';
+    btn.setAttribute('aria-label', 'Sæt bevægelsen på pause'); btn.setAttribute('aria-pressed', 'false');
+    const draw = () => { btn.innerHTML = `<svg viewBox="0 0 16 16" aria-hidden="true">${stopped ? ICON.play : ICON.pause}</svg>`; };
+    btn.addEventListener('click', () => { stopped = !stopped; btn.setAttribute('aria-pressed', String(stopped)); draw(); });
+    draw(); head.append(btn);
+  }
 
   const paint = () => {
     const vh = innerHeight, top = band.getBoundingClientRect().top;
@@ -71,7 +83,7 @@ function run(band) {
     const f = dt * 60, y = scrollY;
     vel += ((y - lastY) / f - vel) * (1 - Math.pow(0.88, f)); // smoothed px per frame, like main.js
     lastY = y;
-    k += ((hover || press || focused ? 0 : 1) - k) * (1 - Math.pow(0.9, f)); // eases to a stop and back
+    k += ((hover || press || focused || stopped ? 0 : 1) - k) * (1 - Math.pow(0.9, f)); // eases to a stop and back
     const speed = (BASE + Math.min(Math.abs(vel), 40) * BOOST) * k;
     rows.forEach(r => {
       if (!r.w) return;

@@ -20,9 +20,9 @@ export default async function ({ lib, data, showcase, read }) {
   /* ---------------- The calculator ---------------- */
 
   // A choice: a label with a native radio or checkbox (keyboard and screen readers for free)
-  const opt = ({ type = 'checkbox', name, value, t, d, p, pk = value, on = false, s = '', wide = false }) =>
-    `<label class="calc__opt${on ? ' is-on' : ''}${wide ? ' ws-wide' : ''}"><input class="ws-in" type="${type}" name="${name}" value="${value}"${on ? ' checked' : ''}${s ? ` data-s="${esc(s)}"` : ''}><b>${esc(t)}</b><span>${esc(d)}</span><em data-ws-p="${pk}">${esc(p)}</em></label>`;
-  const group = (n, title, body, role = 'group') => `<div class="calc__group" role="${role}" aria-labelledby="ws-g${n}"><span class="calc__lbl" id="ws-g${n}">${n} · ${esc(title)}</span>${body}</div>`;
+  const opt = ({ type = 'checkbox', name, value, t, d, p, pk = value, on = false, s = '', c = '', wide = false }) =>
+    `<label class="calc__opt${on ? ' is-on' : ''}${wide ? ' ws-wide' : ''}"><input class="ws-in" type="${type}" name="${name}" value="${value}"${on ? ' checked' : ''}${s ? ` data-s="${esc(s)}" data-c="${esc(c)}"` : ''}><b>${esc(t)}</b><span>${esc(d)}</span><em data-ws-p="${pk}">${esc(p)}</em></label>`;
+  const group = (n, title, body, role = 'group') => `<div class="calc__group" role="${role}" aria-labelledby="ws-g${n}" data-reveal="0"><span class="calc__lbl" id="ws-g${n}">${n} · ${esc(title)}</span>${body}</div>`;
   const row = (items, two) => `<div class="calc__row${two ? ' ws-row2' : ''}">${items.join('')}</div>`;
 
   const INTEG = [
@@ -36,11 +36,11 @@ export default async function ({ lib, data, showcase, read }) {
   const startS = SCALE.find(([, n]) => n === P.included)[0];
 
   const options = `<div class="calc__opts">
-        <div class="calc__group" role="group" aria-labelledby="ws-g1">
-          <div class="ws-head"><span class="calc__lbl" id="ws-g1">1 · Produkter</span><label class="ws-num"><span class="sr-only">Antal produkter, skriv et tal</span><input data-ws-n type="text" inputmode="numeric" maxlength="5" value="${fmt(P.included)}" autocomplete="off" enterkeyhint="done"><span aria-hidden="true">produkter</span></label></div>
+        <div class="calc__group" role="group" aria-labelledby="ws-g1" data-reveal="0">
+          <span class="calc__lbl" id="ws-g1">1 · Produkter</span>
+          <div class="ws-head"><label class="ws-num"><span class="sr-only">Antal produkter, skriv et tal</span><span class="ws-num__box"><span class="ws-num__m" data-ws-m aria-hidden="true">${fmt(P.included)}</span><input data-ws-n type="text" inputmode="numeric" maxlength="5" value="${fmt(P.included)}" autocomplete="off" enterkeyhint="done"></span><span aria-hidden="true">produkter</span></label><span class="ws-inc" data-ws-inc>Op til ${P.included} er med i prisen</span></div>
           <input class="ws-range" data-ws-range type="range" min="0" max="1000" step="1" value="${startS}" aria-label="Antal produkter" aria-valuetext="${P.included} produkter" style="--s:${startS / 1000}">
           <div class="ws-ticks">${SCALE.slice(1).map(([s, n]) => `<button type="button" data-ws-tick="${n}" style="--x:${s / 10}%" aria-label="${fmt(n)} produkter"${n === P.included ? ' class="is-on"' : ''}>${fmt(n)}</button>`).join('')}</div>
-          <p class="calc__hint">Op til ${P.included} produkter er med i prisen.</p>
           <span class="ws-sub" id="ws-g1b">Sådan kommer de ind</span>
           <div class="calc__row ws-row2" role="radiogroup" aria-labelledby="ws-g1b">${[
             opt({ type: 'radio', name: 'metode', value: 'opret', t: 'Vi opretter dem', d: `Ud fra dine billeder og tekster. ${P.perProduct} kr. pr. produkt over ${P.included}.`, p: 'Med i prisen', on: true }),
@@ -57,7 +57,7 @@ export default async function ({ lib, data, showcase, read }) {
           opt({ type: 'radio', name: 'design', value: 'tema', t: 'Tilpasset tema', d: 'Et gennemprøvet tema i dine farver, med dit logo og din stil.', p: 'Med i prisen', on: true }),
           opt({ type: 'radio', name: 'design', value: 'unikt', t: 'Unikt design', d: 'Designet fra bunden, så shoppen ligner ingen andre.', p: '+' + kr(P.unique) })
         ], true), 'radiogroup')}
-        <div class="calc__group"><span class="calc__lbl" id="ws-g3">3 · Sprog og valuta</span>
+        <div class="calc__group" data-reveal="0"><span class="calc__lbl" id="ws-g3">3 · Sprog og valuta</span>
           <div class="ws-step" data-ws-stepbox>
             <span class="ws-step__t"><b>Ekstra sprog og valutaer</b><span>Fx engelsk og euro. ${kr(P.language)} pr. sprog.</span><em data-ws-p="sprog">Kun dansk</em></span>
             <span class="ws-step__c" role="group" aria-labelledby="ws-g3">
@@ -66,9 +66,9 @@ export default async function ({ lib, data, showcase, read }) {
           </div></div>
         ${group(4, 'Integrationer', row(INTEG.map(([v, t, d]) => opt({ name: 'integ', value: v, t, d, p: '+' + kr(P.integration), pk: 'integ' }))))}
         ${group(5, 'Funktioner', row([
-          opt({ name: 'fn', value: 'b2b', t: 'B2B og forhandlerpriser', d: 'Egne priser og login til forhandlere.', p: '+' + kr(P.b2b), s: 'B2B-priser' }),
-          opt({ name: 'fn', value: 'subscriptions', t: 'Abonnementer', d: 'Faste leveringer, fx hver måned.', p: '+' + kr(P.subscriptions), s: 'abonnementer' }),
-          opt({ name: 'fn', value: 'migration', t: 'Flytning', d: 'Kunder, ordrer og omdirigeringer fra din gamle webshop.', p: '+' + kr(P.migration), s: 'flytning' })
+          opt({ name: 'fn', value: 'b2b', t: 'B2B og forhandlerpriser', d: 'Egne priser og login til forhandlere.', p: '+' + kr(P.b2b), s: 'B2B-priser', c: 'B2B-priser' }),
+          opt({ name: 'fn', value: 'subscriptions', t: 'Abonnementer', d: 'Faste leveringer, fx hver måned.', p: '+' + kr(P.subscriptions), s: 'abonnementer', c: 'Abonnementer' }),
+          opt({ name: 'fn', value: 'migration', t: 'Flytning', d: 'Kunder, ordrer og omdirigeringer fra din gamle webshop.', p: '+' + kr(P.migration), s: 'flytning', c: 'Flytning' })
         ]))}
         ${group(6, 'Hver måned, hvis du vil', `${row([
           opt({ name: 'service', value: 'service', t: 'Webshop-service', d: 'Opdateringer, små rettelser og hjælp, når du har brug for det.', p: kr(P.service) + '/md.', wide: true }),
@@ -89,7 +89,7 @@ export default async function ({ lib, data, showcase, read }) {
     ['a7', '#f0e6da', 'Skål i valnød', 'Drejet af én blok', '259 kr.'],
     ['a1 ws-w', '#e8ebe5', 'Skærebræt i valnød', 'Olieret valnød, 30 cm', '299 kr.']
   ];
-  const shop = `<figure class="ws-shop" data-ws-shop aria-hidden="true">
+  const shop = `<figure class="ws-shop" data-ws-shop aria-hidden="true" data-reveal="1">
           <div class="ws-shop__bar"><span class="dots3"><i></i><i></i><i></i></span><span class="ws-shop__url">🔒 nordvik.dk</span><span class="tag-eks">Eksempel</span></div>
           <div class="ws-view">
             <div class="ws-strip" data-wb>Fri fragt over 499 kr.</div>
@@ -102,11 +102,11 @@ export default async function ({ lib, data, showcase, read }) {
         </figure>
         <p class="sr-only">Eksempel på en webshop for den opdigtede virksomhed Nordvik. Den ændrer sig, når du vælger i beregneren.</p>`;
 
-  const summary = `<div class="spot calc__sum" data-spot data-ws-sum>
+  const summary = `<div class="spot calc__sum" data-spot data-ws-sum data-reveal="2">
           <span class="kicker">Din pris</span>
           <div class="calc__lines" data-ws-lines><div class="calc__line"><span>Webshop på Shopify</span><span>${kr(P.base)}</span></div><div class="calc__line"><span>${P.included} produkter</span><span>Med i prisen</span></div></div>
-          <div class="calc__tot"><span>Engangsbeløb</span><b data-ws-once>${kr(P.base)}</b><i class="ws-delta" data-ws-d1 aria-hidden="true"></i></div>
-          <div class="calc__tot calc__tot--md"><span>Pr. måned</span><b data-ws-md>0 kr.</b><i class="ws-delta" data-ws-d2 aria-hidden="true"></i></div>
+          <div class="calc__tot"><span>Engangsbeløb</span><b data-ws-once>${kr(P.base)}</b></div>
+          <div class="calc__tot calc__tot--md"><span>Pr. måned</span><b data-ws-md>0 kr.</b></div>
           <p class="calc__note">Shopify-abonnementet betaler du direkte til Shopify, og annoncebudgettet direkte til Google eller Meta. Alle priser er ekskl. moms.</p>
           <button type="button" class="btn btn--accent" data-ws-go data-magnet data-burst>Få et tilbud på det her →</button>
           <p class="sr-only" aria-live="polite" data-ws-live></p>
@@ -117,7 +117,7 @@ export default async function ({ lib, data, showcase, read }) {
         <div class="sec-head__title"><div class="kicker">Beregn din pris</div><h2 class="h2">Hvad koster din webshop?<br><span class="dim">Se det med det samme.</span></h2></div>
         <p class="sec-head__lead">Træk i antallet af produkter, og vælg det, shoppen skal kunne. Beregneren starter på det billigste.</p>
       </div>
-      <div class="calc" data-reveal="1">
+      <div class="calc">
       ${options}
       <div class="ws-side" data-ws-side>
         ${shop}
