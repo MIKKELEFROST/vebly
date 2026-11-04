@@ -186,6 +186,6 @@ function init(root) {
   ro.observe(stage); ro.observe(lanes);
 
   setFmt(fmt, false); setTab(tab); measure();
-  new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { ved.classList.add('is-near'); o.disconnect(); } }, { rootMargin: '600px 0px' }).observe(ved);
+  new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { o.disconnect(); for (const c of qa('[data-bg]')) c.style.backgroundImage = `url(/udkast/_faelles/billeder/toemrer/${c.dataset.bg}-480.webp)`; } }, { rootMargin: '600px 0px' }).observe(ved);
   new IntersectionObserver(es => { inView = es[es.length - 1].intersectionRatio >= .2; if (inView) kick(); }, { threshold: [0, .2, .5] }).observe(ved);
 }

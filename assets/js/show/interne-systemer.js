@@ -143,7 +143,7 @@ function init(root) {
     const c = P.card, br = board.getBoundingClientRect();
     clearTimeout(P.hold); c.classList.remove('is-press');
     c.getAnimations().forEach(a => a.cancel());
-    D = { c, from: colOf(c), sx: P.sx, sy: P.sy, px: P.sx, py: P.sy, lx: P.sx, ss: board.scrollLeft, bl: br.left, bt: br.top, over: -1, at: -1, tx: 0, ty: 0, rot: 0, virt };
+    D = { c, from: colOf(c), sx: P.sx, sy: P.sy, px: P.sx, py: P.sy, lx: P.sx, ss: board.scrollLeft, max: board.scrollWidth - board.clientWidth, bl: br.left, bt: br.top, over: -1, at: -1, tx: 0, ty: 0, rot: 0, virt };
     slotEl.style.height = c.offsetHeight + 'px';
     c.classList.add('is-lift'); app.classList.add('is-drag');
     if (!virt) { touched = true; try { c.setPointerCapture(P.id); } catch (e) { /* the pointer is gone */ } }
@@ -152,11 +152,12 @@ function init(root) {
   const frame = () => {
     const d = D;
     if (!d) return;
-    let br = board.getBoundingClientRect();
+    const br = board.getBoundingClientRect();
     // Near the sides of a board that scrolls, it scrolls along
-    if (!d.virt && board.scrollWidth > board.clientWidth + 1) {
+    // (up to the width it had when the drag began: the card itself must not widen it)
+    if (!d.virt && d.max > 1) {
       const z = 44, v = d.px < br.left + z ? d.px - br.left - z : d.px > br.right - z ? d.px - br.right + z : 0;
-      if (v) { board.scrollLeft += clamp(v / 2.5, -14, 14); br = board.getBoundingClientRect(); }
+      if (v) board.scrollLeft = clamp(board.scrollLeft + clamp(v / 2.5, -14, 14), 0, d.max);
     }
     d.tx = d.px - d.sx + board.scrollLeft - d.ss - (br.left - d.bl);
     d.ty = d.py - d.sy - (br.top - d.bt);

@@ -103,7 +103,7 @@
 .show--interne-systemer .crm__key { display: flex; align-items: center; gap: 6px; margin-left: auto; white-space: nowrap; }
 .show--interne-systemer .crm__key i { width: 10px; height: 10px; margin-left: 8px; border-radius: 3px; }
 .show--interne-systemer .crm__wrap { overflow-x: auto; scrollbar-width: thin; }
-.show--interne-systemer .crm__wk { --hh: 34px; display: grid; grid-template-columns: 34px repeat(5, minmax(96px, 1fr)); min-width: 540px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+.show--interne-systemer .crm__wk { --hh: 42px; display: grid; grid-template-columns: 34px repeat(5, minmax(96px, 1fr)); min-width: 540px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
 .show--interne-systemer .crm__dh { padding: 10px; border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); font-size: 13px; }
 .show--interne-systemer .crm__dh.is-today { color: var(--accent); }
 .show--interne-systemer .crm__dh.is-today::after { content: "I dag"; margin-left: 6px; font-size: 11px; font-weight: 500; }
@@ -111,7 +111,7 @@
 .show--interne-systemer .crm__hrs { display: grid; grid-auto-rows: var(--hh); padding-right: 6px; color: var(--faint); font-size: 11px; text-align: right; }
 .show--interne-systemer .crm__hrs span { transform: translateY(-1px); padding-top: 3px; }
 .show--interne-systemer .crm__day { position: relative; height: calc(8 * var(--hh)); margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--hh) - 1px), #f3f1ed calc(var(--hh) - 1px) var(--hh)); }
-.show--interne-systemer .crm__ev { position: absolute; left: 4px; right: 4px; top: calc(var(--s) * var(--hh) + 2px); height: calc(var(--h) * var(--hh) - 4px); overflow: hidden; padding: 5px 8px; border-radius: 9px; border-left: 3px solid var(--green); background: #e6f4eb; color: #2c6b45; font-size: 11.5px; line-height: 1.3; }
+.show--interne-systemer .crm__ev { position: absolute; left: 4px; right: 4px; top: calc(var(--s) * var(--hh) + 2px); height: calc(var(--h) * var(--hh) - 4px); overflow: hidden; padding: 4px 8px; border-radius: 9px; border-left: 3px solid var(--green); background: #e6f4eb; color: #2c6b45; font-size: 11.5px; line-height: 1.25; }
 .show--interne-systemer .crm__ev b { display: block; overflow: hidden; color: var(--ink); font-size: 12.5px; white-space: nowrap; text-overflow: ellipsis; }
 .show--interne-systemer .crm__ev span { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .show--interne-systemer :is(.crm__ev.is-bes, .crm__key .is-bes) { border-color: var(--yellow); background: #fdf1d4; color: #7a5c14; }
