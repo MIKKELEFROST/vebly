@@ -1,10 +1,10 @@
-// /resultater (scripts/services/pages/resultater.mjs). The review scores roll in like the price on the other
-// pages, the featured case plays as a scroll story on a pinned stage like "Sådan virker det", the cases
-// filter by service (the cards glide to their new places) and count up their results, and the cards in
-// "Skal du være den næste?" fan out. Does nothing unless .show--resultater is on the page. Without motion
-// the HTML already shows the finished state, and only the filter and the empty card's name are used.
-// Elements with data-k="from to" get --k from 0 to 1 over that part of the story's scroll; resultater.css
-// turns it into transforms and opacity.
+// /resultater (scripts/services/pages/resultater.mjs). The review scores roll in like the price odometer, the
+// featured case opens like a magazine spread (the pages swing open from the fold, the new site lands on top
+// of the old one, the result counts up while the arrow from the logo draws itself, and the numbers count
+// from before to after), the cases filter by service (the cards glide to their new places) and count up
+// their results, and the cards in "Skal du være den næste?" fan out. Does nothing unless .show--resultater
+// is on the page. Without motion the HTML already shows the finished state; only the filter and the
+// visitor's own name on the empty card are used then.
 import { track } from '/assets/js/analytics.js';
 
 if (document.querySelector('.show--resultater')) init();
@@ -13,24 +13,32 @@ function init() {
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const motion = document.documentElement.classList.contains('motion');
   const clamp = (v, a = 0, b = 1) => v < a ? a : v > b ? b : v;
-  const seg = (p, a, b) => clamp((p - a) / (b - a));
   const eo = t => 1 - (1 - t) ** 3;
   const pad = n => String(n).padStart(2, '0');
   const ev = action => track('showcase_interact', { showcase: 'resultater', action });
-  const once = (el, fn, threshold = .2) => {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); fn(e.target); } }), { threshold });
+  const seen = (el, fn, threshold = .25) => {
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); fn(); } }, { threshold });
     io.observe(el);
   };
   // "6,8 sek." → { a: '', n: 6.8, d: 1, z: ' sek.' }. Null when it does not start with a number (or a sign)
   const num = s => {
-    const m = String(s).trim().match(/^([+−×-]?)(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(.*)$/);
+    const m = String(s || '').trim().match(/^([+−×-]?)(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(.*)$/);
     return m && { a: m[1], n: parseFloat(m[2].replace(/\./g, '') + '.' + (m[3] || '0')), d: m[3] ? m[3].length : 0, z: m[4] };
   };
   const show = (f, n) => f.a + n.toLocaleString('da-DK', { minimumFractionDigits: f.d, maximumFractionDigits: f.d }) + f.z;
-  const count = (el, f, from, ms, delay) => {
-    let t0 = 0;
-    const step = t => { t0 = t0 || t; const k = clamp((t - t0) / ms); el.textContent = show(f, from + (f.n - from) * eo(k)); if (k < 1) requestAnimationFrame(step); };
-    setTimeout(() => requestAnimationFrame(step), delay);
+  // Counts the text of el from one value to its own; it always ends on the exact text from the page
+  const runs = new WeakMap();
+  const count = (el, f, from, ms, delay, done) => {
+    const id = {}, end = el.rsEnd || (el.rsEnd = el.textContent), t0 = performance.now() + delay;
+    runs.set(el, id);
+    el.textContent = show(f, from);
+    const step = t => {
+      if (runs.get(el) !== id) return;
+      const k = clamp((t - t0) / ms);
+      el.textContent = k < 1 ? show(f, from + (f.n - from) * eo(k)) : end;
+      if (k < 1) requestAnimationFrame(step); else if (done) done();
+    };
+    requestAnimationFrame(step);
   };
 
   /* ---------------- The real review scores ---------------- */
@@ -43,79 +51,72 @@ function init() {
         : `<span>${c}</span>`).join('');
     });
     const cnt = $$('[data-rs-cnt]', rev).map(el => [el, num(el.textContent)]).filter(([, f]) => f);
-    cnt.forEach(([el, f]) => { el.textContent = show(f, 0); });
-    once(rev, () => {
+    cnt.forEach(([el, f]) => { el.rsEnd = el.textContent; el.textContent = show(f, 0); });
+    rev.classList.add('rs-on');
+    seen(rev, () => {
       $$('[data-d]', rev).forEach(c => { c.style.transform = `translateY(-${+c.dataset.d + 20}em)`; });
       cnt.forEach(([el, f], i) => count(el, f, 0, 1700, 250 + i * 180));
-      setTimeout(() => rev.classList.add('is-lit'), 1100);
+      setTimeout(() => rev.classList.add('is-lit'), 1000);
     }, .35);
   }
 
-  /* ---------------- The case as a scroll story ---------------- */
-  const pin = $('[data-rs-pin]');
-  if (pin && motion) {
-    const sticky = $('[data-rs-sticky]', pin), fit = $('[data-rs-fit]', pin), br = $('[data-rs-br]', pin);
-    const steps = $$('[data-rs-step]', pin), resEl = $('[data-rs-res]', pin), card = resEl && resEl.parentElement;
-    const anim = $$('[data-k]', pin).map(el => { const [a, b] = el.dataset.k.split(' ').map(Number); return el.rsA = { el, a, b, v: -1 }; });
-    const tal = $$('[data-rs-tal]', pin).map(el => ({ el, b: $('b', el), f: num(el.dataset.fra), t: num(el.dataset.til), fra: el.dataset.fra, til: el.dataset.til, on: null }));
-    const rf = resEl && num(resEl.textContent);
-    pin.closest('.show--resultater').classList.add('rs-go');
-    let cur = -1, last = -1, step = -1, best = 0, raf = 0, near = false, isNew = null;
-
-    // Short windows: the stage is scaled down until it fits under the menu
-    const measure = () => {
-      fit.style.transform = '';
-      const cs = getComputedStyle(sticky), room = sticky.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-      const s = Math.min(1, room / fit.offsetHeight);
-      if (s < 1) fit.style.transform = `scale(${s.toFixed(3)})`;
-      last = -1;
+  /* ---------------- The featured case: a magazine spread ---------------- */
+  const sp = $('[data-rs-spread]');
+  if (sp && motion) {
+    const sec = sp.closest('.show--resultater'), replay = $('[data-rs-replay]', sec);
+    const big = $('[data-rs-big]', sp), bigF = big && num(big.textContent);
+    const tiles = $$('[data-rs-tile]', sp).map(el => {
+      const v = $('.rs-tile__v', el), f = num(v.textContent), from = num(v.dataset.fra);
+      // Only when before and after are written the same way ("6,8 sek." → "0,9 sek."); else it simply lands
+      return { el, v, f, from: f && from && from.a === f.a && from.z === f.z && from.d === f.d ? from.n : null };
+    });
+    // The three acts and when they start after the first, so a fast scroll still plays them in order
+    const acts = [
+      [$('.rs-pg--l', sp), 0, () => sp.classList.add('is-a1')],
+      [$('.rs-pg--r', sp), 0, () => {
+        sp.classList.add('is-a2');
+        if (bigF) count(big, bigF, 0, 1500, 1000);
+      }],
+      [$('.rs-tiles', sp), 1050, () => {
+        sp.classList.add('is-a3');
+        tiles.forEach((t, i) => {
+          const land = () => t.el.classList.add('is-done');
+          if (t.from !== null) count(t.v, t.f, t.from, 1500, 250 + i * 160, land); else setTimeout(land, 900 + i * 160);
+        });
+        timers.push(setTimeout(() => { if (replay) replay.hidden = false; }, 2600));
+      }]
+    ];
+    let t0 = 0, done = 0, best = 0, timers = [];
+    const play = upto => {
+      const now = performance.now();
+      if (!done) t0 = now;
+      for (; done <= upto; done++) {
+        const [, at, fn] = acts[done], n = done + 1;
+        timers.push(setTimeout(() => { fn(); while (best < n) track('showcase_step', { showcase: 'resultater', step: ++best }); }, Math.max(0, t0 + at - now)));
+      }
     };
-    const draw = p => {
-      const st = p < .2 ? 0 : p < .45 ? 1 : p < .7 ? 2 : 3;
-      if (st !== step) { step = st; steps.forEach((s, j) => s.classList.toggle('is-on', j === st)); }
-      // Each step once, when the visitor has scrolled into it
-      const reached = p > .003 ? st + 1 : 0;
-      while (best < reached) track('showcase_step', { showcase: 'resultater', step: ++best });
-      for (const a of anim) { const v = Math.round(eo(seg(p, a.a, a.b)) * 1000) / 1000; if (v !== a.v) { a.v = v; a.el.style.setProperty('--k', v); } }
-      // The address and the status follow the new site in
-      const n = p > .27;
-      if (n !== isNew) { isNew = n; br.classList.toggle('is-new', n); }
-      // The browser steps back behind the result
-      if (card) br.style.setProperty('--b', card.rsA.v);
-      // The numbers count from before to after
-      tal.forEach(x => {
-        const k = x.el.rsA.v, on = k > .01;
-        if (on !== x.on) { x.on = on; x.el.classList.toggle('is-on', on); }
-        const txt = x.f && x.t && x.f.d === x.t.d && x.f.a === x.t.a && x.f.z === x.t.z ? show(x.t, x.f.n + (x.t.n - x.f.n) * k) : k < .5 ? x.fra : x.til;
-        if (x.b.textContent !== txt) x.b.textContent = txt;
-      });
-      if (rf) { const txt = show(rf, rf.n * resEl.rsA.v); if (resEl.textContent !== txt) resEl.textContent = txt; }
+    // The start: before-values on the tiles, 0 on the result
+    const reset = () => {
+      timers.forEach(clearTimeout); timers = []; done = 0;
+      sp.classList.add('rs-snap');
+      sp.classList.remove('is-a1', 'is-a2', 'is-a3');
+      tiles.forEach(t => { t.el.classList.remove('is-done'); runs.delete(t.v); if (t.from !== null) { t.v.rsEnd = t.v.rsEnd || t.v.textContent; t.v.textContent = show(t.f, t.from); } });
+      if (bigF) { runs.delete(big); big.rsEnd = big.rsEnd || big.textContent; big.textContent = show(bigF, 0); }
+      void sp.offsetWidth;
+      sp.classList.remove('rs-snap');
     };
-    const frame = () => {
-      raf = 0;
-      const r = pin.getBoundingClientRect(), span = r.height - innerHeight;
-      const target = span > 0 ? clamp(-r.top / span) : 0;
-      // A little inertia, so wheel steps glide instead of jump
-      cur = cur < 0 ? target : cur + (target - cur) * .18;
-      if (Math.abs(target - cur) < .0004) cur = target;
-      if (cur !== last) { last = cur; draw(cur); }
-      if (near || cur !== target) raf = requestAnimationFrame(frame);
-    };
-    const go = () => { if (!raf) raf = requestAnimationFrame(frame); };
-    new IntersectionObserver(([e]) => { near = e.isIntersecting; if (near) go(); }, { rootMargin: '200px 0px' }).observe(pin);
-    addEventListener('resize', () => { measure(); go(); });
-    if (document.fonts) document.fonts.ready.then(() => { measure(); go(); });
-    measure(); draw(0);
-
-    // The step numbers jump to their step
-    const AT = [.1, .38, .62, .93];
-    steps.forEach((s, j) => s.addEventListener('click', e => {
-      if (e.target.closest('a')) return;
-      const r = pin.getBoundingClientRect();
-      scrollTo({ top: scrollY + r.top + (r.height - innerHeight) * AT[j], behavior: 'smooth' });
-      ev('trin-' + (j + 1));
-    }));
-    const cta = $('[data-rs-cta]', pin);
+    sp.classList.add('rs-go');
+    reset();
+    acts.forEach(([el], i) => new IntersectionObserver((es, io) => {
+      if (es.some(e => e.isIntersecting)) { io.disconnect(); if (done <= i) play(i); }
+    }, { threshold: .2 }).observe(el));
+    if (replay) replay.addEventListener('click', () => {
+      replay.hidden = true;
+      reset();
+      requestAnimationFrame(() => play(2));
+      ev('case-igen');
+    });
+    const cta = $('.rs-after__cta', sec);
     if (cta) cta.addEventListener('click', () => ev('case-cta'));
   }
 
@@ -132,9 +133,12 @@ function init() {
     const up = c => {
       if (c.classList.contains('is-in')) return;
       c.classList.add('is-in');
-      (nums[cards.indexOf(c)] || []).forEach((x, i) => count(x.b, x.f, x.from, 1400, 350 + i * 140));
+      if (motion) (nums[cards.indexOf(c)] || []).forEach((x, i) => count(x.b, x.f, x.from, 1400, 350 + i * 140));
     };
-    if (motion) cards.forEach((c, i) => { nums[i].forEach(x => { x.b.textContent = show(x.f, x.from); }); once(c, up, .25); });
+    if (motion) {
+      grid.classList.add('rs-on');
+      cards.forEach((c, i) => { nums[i].forEach(x => { x.b.rsEnd = x.b.textContent; x.b.textContent = show(x.f, x.from); }); seen(c, () => up(c), .2); });
+    }
 
     // Phones swipe the cases; the meter follows
     let swiped = false;
@@ -146,14 +150,17 @@ function init() {
     grid.addEventListener('scroll', () => { meter(); if (!swiped && grid.scrollLeft > 40) { swiped = true; ev('swipe'); } }, { passive: true });
     meter();
 
-    // The cards that stay glide to their new place, the others fade out and in
+    // The cards that stay glide to their new place, the others fade out and in. A card that was on the page
+    // but not seen yet (still waiting for its reveal) comes in like a new one
     let run = 0, cur = '';
+    const ez = 'cubic-bezier(.2,.8,.2,1)';
     const flip = want => {
       const me = ++run;
       cards.forEach(c => c.getAnimations().forEach(a => a.cancel()));
-      const before = new Map(cards.filter(c => !c.hidden).map(c => [c, c.getBoundingClientRect()]));
-      const out = [...before.keys()].filter(c => !want(c));
-      Promise.all(out.map(c => c.animate({ opacity: [1, 0], transform: ['none', 'scale(.94)'] }, { duration: 200, easing: 'ease-in', fill: 'forwards' }).finished.catch(() => {}))).then(() => {
+      const shown = cards.filter(c => !c.hidden);
+      const before = new Map(shown.filter(c => c.classList.contains('is-in')).map(c => [c, c.getBoundingClientRect()]));
+      const out = shown.filter(c => !want(c));
+      Promise.all(out.map(c => c.animate({ opacity: [getComputedStyle(c).opacity, 0], transform: ['none', 'scale(.94)'] }, { duration: 200, easing: 'ease-in', fill: 'forwards' }).finished.catch(() => {}))).then(() => {
         if (me !== run) return;
         cards.forEach(c => { c.hidden = !want(c); c.getAnimations().forEach(a => a.cancel()); });
         if (grid.scrollLeft) grid.scrollLeft = 0;
@@ -162,10 +169,11 @@ function init() {
           const a = before.get(c), b = c.getBoundingClientRect();
           if (a) {
             const dx = a.left - b.left, dy = a.top - b.top;
-            if (Math.abs(dx) + Math.abs(dy) > 1) c.animate({ transform: [`translate(${dx}px,${dy}px)`, 'none'] }, { duration: 620, easing: 'cubic-bezier(.2,.8,.2,1)' });
+            if (Math.abs(dx) + Math.abs(dy) > 1) c.animate({ transform: [`translate(${dx}px,${dy}px)`, 'none'] }, { duration: 620, easing: ez });
           } else {
-            up(c);
-            c.animate({ opacity: [0, 1], transform: ['translateY(36px) scale(.95)', 'none'] }, { duration: 620, delay: 60 + j++ * 70, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+            // Straight to its revealed state, so the reveal's own transition does not run on top
+            c.style.transition = 'none'; up(c); void getComputedStyle(c).opacity; c.style.transition = '';
+            c.animate({ opacity: [0, 1], transform: ['translateY(36px) scale(.95)', 'none'] }, { duration: 620, delay: 60 + j++ * 70, easing: ez, fill: 'backwards' });
           }
         });
         meter();
@@ -195,17 +203,7 @@ function init() {
       if (t('navn')) $('[data-rs-you="navn"]', fan).textContent = t('navn');
       if (t('fag') || t('by')) $('[data-rs-you="sted"]', fan).textContent = [cap(t('fag')) || 'Dit fag', cap(t('by')) || 'Din by'].join(' · ');
     } catch (e) { /* fine */ }
-    if (motion) {
-      // The cards spread out as the box comes up the screen
-      let raf = 0, near = false, lastP = -1;
-      const tick = () => {
-        raf = 0;
-        const r = fan.getBoundingClientRect(), p = Math.round(eo(seg((innerHeight - r.top) / innerHeight, .15, .75)) * 1000) / 1000;
-        if (p !== lastP) { lastP = p; fan.style.setProperty('--p', p); }
-        if (near) raf = requestAnimationFrame(tick);
-      };
-      fan.style.setProperty('--p', 0);
-      new IntersectionObserver(([e]) => { near = e.isIntersecting; if (near && !raf) raf = requestAnimationFrame(tick); }, { rootMargin: '100px 0px' }).observe(fan);
-    }
+    // The cards fan out when the box comes into view
+    if (motion) { fan.classList.add('rs-on'); seen(fan, () => fan.classList.add('is-in'), .45); }
   }
 }

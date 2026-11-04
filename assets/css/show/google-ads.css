@@ -1,0 +1,202 @@
+/* Showcase: Google Ads (/services/google-ads). A big search field docked on a results page: local searches type
+   themselves, the results reload with a soft shimmer and the sponsored text ad on top rewrites itself. Our own
+   drawing: neutral greys and link blue inside the mockup, Webleads around it. .is-m (set by the script when motion
+   is allowed) turns on the motion; without it everything is finished and still. */
+.show--google-ads{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 24px 100px;scroll-margin-top:48px;--pop:cubic-bezier(.2,1.4,.4,1);--out:cubic-bezier(.2,.8,.2,1);--blue:#1f45b0;--grey:#4d5156}
+.show--google-ads .ga-head{flex-direction:column;align-items:center;text-align:center;gap:18px;margin-bottom:48px}
+.show--google-ads .ga-head .sec-head__title{align-items:center}
+.show--google-ads .ga-head .sec-head__lead{max-width:540px;text-wrap:pretty}
+.show--google-ads .ga-stage{position:relative;max-width:880px;margin:0 auto}
+.show--google-ads .ga-ico{display:block;flex-shrink:0;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- The search field ---------- */
+.show--google-ads .ga-fwrap{position:relative;z-index:3;max-width:800px;margin:0 auto -40px;padding:0 28px}
+.show--google-ads .ga-field{position:relative;display:flex;align-items:center;gap:16px;height:80px;padding:0 12px 0 28px;background:#fff;border:1px solid var(--line-strong);border-radius:999px;box-shadow:0 30px 60px -32px rgba(17,17,17,.4),0 2px 8px rgba(17,17,17,.05);transition:border-color .25s,box-shadow .25s}
+.show--google-ads .ga-field:hover{border-color:#c8c2b8}
+.show--google-ads .ga-field:focus-within{border-color:var(--accent);box-shadow:0 0 0 5px rgba(224,85,43,.14),0 30px 60px -32px rgba(17,17,17,.4)}
+.show--google-ads .ga-field__i{width:26px;height:26px;color:var(--muted)}
+.show--google-ads .ga-field__in{flex:1;min-width:0;height:100%;padding:0;border:0;border-radius:0;outline:0;background:transparent;font:500 24px/1.2 var(--body);color:var(--ink);-webkit-appearance:none;appearance:none}
+.show--google-ads .ga-field__in::-webkit-search-cancel-button,.show--google-ads .ga-field__in::-webkit-search-decoration{display:none;-webkit-appearance:none}
+.show--google-ads .ga-field__in::placeholder{color:var(--faint);opacity:1}
+.show--google-ads .ga-field:not(:focus-within) .ga-field__in::placeholder{color:transparent}
+/* The loop's searches are drawn over the empty field; focus or the visitor's own text hides them */
+.show--google-ads .ga-field__q{position:absolute;left:70px;right:84px;top:0;bottom:0;display:flex;align-items:center;overflow:hidden;white-space:pre;pointer-events:none;font:500 24px/1.2 var(--body);color:var(--ink)}
+.show--google-ads .ga-field__qt{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.show--google-ads .ga-field:focus-within .ga-field__q,.show--google-ads .ga-field__in:not(:placeholder-shown)~.ga-field__q{opacity:0}
+.show--google-ads .ga-caret{flex-shrink:0;width:2px;height:1.1em;margin-left:2px;border-radius:2px;background:var(--accent)}
+.show--google-ads:not(.is-m) .ga-caret{display:none}
+.show--google-ads.is-m .ga-caret{animation:ga-blink 1.05s steps(1) infinite}
+.show--google-ads.is-m .is-typing .ga-caret{animation:none}
+.show--google-ads .ga-field__go{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:56px;height:56px;padding:0;border:0;border-radius:50%;background:var(--ink);color:#fff;cursor:pointer;transition:background .25s,transform .35s var(--pop)}
+.show--google-ads .ga-field__go:hover,.show--google-ads .ga-field__go.is-press{background:var(--accent)}
+.show--google-ads .ga-field__go.is-press{transform:scale(.86)}
+.show--google-ads .ga-field__go .ga-ico{stroke-width:2.6}
+.show--google-ads .ga-field.is-nudge{animation:ga-nudge .45s cubic-bezier(.3,.7,.4,1)}
+/* "Prøv din egen søgning": a sticker that steps aside once the visitor takes over */
+.show--google-ads .ga-try{position:absolute;right:84px;top:-19px;z-index:2;cursor:text;transition:opacity .3s,transform .45s var(--pop)}
+.show--google-ads .ga-try span{display:block;padding:9px 15px;border-radius:999px;background:var(--accent);color:#fff;font-size:14px;font-weight:700;line-height:1.1;white-space:nowrap;box-shadow:0 14px 26px -14px rgba(224,85,43,.85);transform:rotate(3deg)}
+.show--google-ads.is-m .ga-try span{animation:ga-bob 3.4s ease-in-out infinite}
+.show--google-ads.is-own .ga-try,.show--google-ads .ga-field:focus-within .ga-try{opacity:0;transform:translateY(10px) scale(.85);pointer-events:none}
+.show--google-ads:not(.is-m) .ga-try,.show--google-ads:not(.is-m) .ga-you span{transition:opacity .2s}
+
+/* ---------- The results page ---------- */
+.show--google-ads .ga-res{position:relative;padding:66px 40px 34px;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:0 40px 80px -30px rgba(17,17,17,.18);color:#202124}
+.show--google-ads .ga-res *{pointer-events:none}
+.show--google-ads .ga-res .ga-ad{pointer-events:auto;cursor:pointer}
+.show--google-ads .ga-tabs,.show--google-ads .ga-pane{max-width:700px;margin:0 auto}
+.show--google-ads .ga-tabs{display:flex;align-items:center;gap:26px;padding:0 2px 12px;border-bottom:1px solid var(--line);white-space:nowrap;font-size:14px;color:var(--muted)}
+.show--google-ads .ga-tabs b{position:relative;font-weight:700;color:var(--ink)}
+.show--google-ads .ga-tabs b::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-13px;height:3px;border-radius:3px 3px 0 0;background:var(--ink)}
+.show--google-ads .ga-tabs .tag-eks{margin-left:auto}
+.show--google-ads .ga-pane{position:relative;display:grid;grid-template-columns:minmax(0,1fr)}
+.show--google-ads .ga-res__bar{position:absolute;left:0;top:-2px;z-index:1;width:100%;height:3px;border-radius:3px;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;opacity:0}
+.show--google-ads .ga-body,.show--google-ads .ga-skel{grid-area:1/1;min-width:0;display:flex;flex-direction:column;transition:opacity .18s}
+.show--google-ads .ga-body{gap:26px;padding-top:22px}
+
+/* The ad */
+.show--google-ads .ga-ad{position:relative;margin:0 -18px;padding:14px 18px 18px;border-radius:22px;background:#fff7f3;box-shadow:inset 0 0 0 1.5px rgba(224,85,43,.5)}
+.show--google-ads .ga-ad__sp{display:block;margin-bottom:10px;font-size:13px;font-weight:700}
+.show--google-ads .ga-site{display:flex;align-items:center;gap:12px;min-width:0}
+.show--google-ads .ga-ini{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--c1,#0f3d2e);color:var(--c2,#d4f36b);font:normal 700 14px/1 var(--body)}
+.show--google-ads .ga-ini--o{background:#f1f1ef;color:#5f5d58}
+.show--google-ads .ga-site__t{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.show--google-ads .ga-site__t b,.show--google-ads .ga-site__t small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.show--google-ads .ga-site__t b{font-size:15px;font-weight:500}
+.show--google-ads .ga-site__t small{font-size:13px;color:var(--grey)}
+.show--google-ads .ga-dots{flex-shrink:0;width:18px;height:18px;fill:#8a8f94}
+.show--google-ads .ga-ad__h,.show--google-ads .ga-org__h{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:1.3;color:var(--blue)}
+.show--google-ads .ga-ad__h{margin-top:10px;font-size:22px}
+/* The headline in word masks, so it can rewrite itself; the searched words get a quick highlighter */
+.show--google-ads .ga-w{position:relative;z-index:0;display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+.show--google-ads .ga-w>span{display:inline-block;white-space:pre;text-underline-offset:3px;text-decoration-thickness:1.5px}
+.show--google-ads .ga-w.is-hit::before{content:"";position:absolute;z-index:-1;left:-2px;right:3px;top:.1em;bottom:.12em;border-radius:5px;background:rgba(242,193,78,.5);opacity:0;transform-origin:0 50%}
+.show--google-ads .ga-w.is-hit:last-child::before{right:-2px}
+.show--google-ads .ga-ad:hover .ga-w>span,.show--google-ads .ga-ad__h.is-hover .ga-w>span{text-decoration-line:underline}
+.show--google-ads .ga-ad__t,.show--google-ads .ga-org__t{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:6px 0 0;font-size:15px;line-height:1.55;color:var(--grey)}
+.show--google-ads .ga-ad__row{display:flex;align-items:center;gap:18px;min-width:0;margin-top:14px}
+.show--google-ads .ga-call{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 17px 0 13px;border:1px solid #c9cfd8;border-radius:999px;background:#fff;color:var(--blue);font-size:14px;font-weight:700;transition:background .2s,color .2s,border-color .2s,transform .3s var(--pop)}
+.show--google-ads .ga-call .ga-ico{width:17px;height:17px;stroke-width:2}
+.show--google-ads .ga-call.is-press{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(.95)}
+.show--google-ads .ga-links{display:flex;gap:22px;min-width:0;overflow:hidden;white-space:nowrap;font-size:15px;color:var(--blue)}
+.show--google-ads .ga-links span{position:relative;flex-shrink:0;transition:transform .3s var(--pop)}
+.show--google-ads .ga-links span+span::before{content:"·";position:absolute;left:-14px;color:#8a8f94}
+.show--google-ads .ga-links span.is-press{transform:scale(.94);text-decoration:underline;text-underline-offset:3px}
+/* "Din annonce", and on a click: "Først nu betaler du" */
+.show--google-ads .ga-you{position:absolute;top:12px;right:14px;display:grid;justify-items:end;white-space:nowrap;font-size:12.5px;font-weight:700;line-height:1}
+.show--google-ads .ga-you span{grid-area:1/1;display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:var(--accent);color:#fff;transition:opacity .25s,transform .45s var(--pop)}
+.show--google-ads .ga-you span+span{background:var(--ink);box-shadow:0 12px 24px -12px rgba(17,17,17,.7);opacity:0;transform:translateY(60%) scale(.8)}
+.show--google-ads .ga-you span+span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.show--google-ads .ga-you.is-paid span:first-child{opacity:0;transform:translateY(-60%) scale(.8)}
+.show--google-ads .ga-you.is-paid span+span{opacity:1;transform:none}
+
+/* Organic results, grey lines, and the loading lines */
+.show--google-ads .ga-org__h{margin-top:8px;font-size:19px}
+.show--google-ads .ga-org__t{font-size:14.5px}
+.show--google-ads .ga-org__t b{font-weight:700;color:#3c4043}
+.show--google-ads .ga-ph,.show--google-ads .ga-skel div{display:flex;flex-direction:column;gap:10px}
+.show--google-ads .ga-ph i,.show--google-ads .ga-skel i{display:block;height:10px;border-radius:999px;background:#efede9}
+.show--google-ads .ga-ph i:nth-child(1){width:26%}
+.show--google-ads .ga-ph i:nth-child(2){width:58%;height:15px}
+.show--google-ads .ga-ph i:nth-child(3){width:86%}
+.show--google-ads .ga-skel{position:relative;gap:34px;padding-top:30px;overflow:hidden;opacity:0}
+.show--google-ads .ga-skel div{gap:12px}
+.show--google-ads .ga-skel i:nth-child(1){width:14%}
+.show--google-ads .ga-skel i:nth-child(2){width:34%;height:14px}
+.show--google-ads .ga-skel i:nth-child(3){width:70%;height:20px}
+.show--google-ads .ga-skel i:nth-child(4){width:96%}
+.show--google-ads .ga-skel i:nth-child(5){width:58%}
+.show--google-ads .ga-skel div+div i:nth-child(1){width:30%;height:14px}
+.show--google-ads .ga-skel div+div i:nth-child(2){width:62%;height:18px}
+.show--google-ads .ga-skel div+div i:nth-child(3){width:90%}
+.show--google-ads .ga-skel::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.9) 50%,rgba(255,255,255,0) 70%);transform:translateX(-100%)}
+.show--google-ads .is-blank .ga-body,.show--google-ads .is-loading .ga-body{opacity:0}
+.show--google-ads .is-blank .ga-skel,.show--google-ads .is-loading .ga-skel{opacity:1}
+.show--google-ads.is-m .is-loading .ga-skel::after{animation:ga-sweep .9s ease-in-out infinite}
+.show--google-ads.is-m .is-loading .ga-res__bar{animation:ga-bar .55s cubic-bezier(.3,0,.2,1) forwards}
+/* The new ad assembles itself: lines rise, the initial flips, the headline rewrites word by word */
+.show--google-ads.is-m .is-new .ga-a{animation:ga-in .55s var(--out) both var(--d,0s)}
+.show--google-ads.is-m .is-new .ga-ini{animation:ga-flip .6s cubic-bezier(.2,1.3,.4,1) both .06s}
+.show--google-ads.is-m .is-new .ga-w>span{animation:ga-word .62s cubic-bezier(.2,.9,.2,1) both calc(.1s + var(--i,0)*.045s)}
+.show--google-ads.is-m .is-new .ga-w.is-hit::before{animation:ga-mark 2.8s var(--out) both calc(.6s + var(--i,0)*.05s)}
+.show--google-ads.is-m .is-new .ga-you{animation:ga-pop .5s cubic-bezier(.2,1.5,.4,1) both .62s}
+
+/* ---------- The click: a cursor (a finger on phones) and a ripple ---------- */
+.show--google-ads .ga-cur{position:absolute;left:0;top:0;z-index:5;width:26px;height:26px;opacity:0;transition:opacity .25s}
+.show--google-ads .ga-cur svg{display:block;width:26px;height:26px;margin:-3px 0 0 -5px;fill:#fff;stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round;filter:drop-shadow(0 3px 4px rgba(17,17,17,.28));transition:transform .15s}
+.show--google-ads .ga-cur i{display:none;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:rgba(17,17,17,.16);box-shadow:0 0 0 2px rgba(255,255,255,.9),0 6px 14px rgba(17,17,17,.2);transition:transform .2s}
+.show--google-ads .ga-cur.is-tap svg{display:none}
+.show--google-ads .ga-cur.is-tap i{display:block}
+.show--google-ads .ga-cur.is-on{opacity:1}
+.show--google-ads .ga-cur.is-press svg{transform:scale(.85)}
+.show--google-ads .ga-cur.is-press i{transform:scale(.78)}
+.show--google-ads .ga-rip{position:absolute;z-index:4;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;border:2px solid var(--accent);background:rgba(224,85,43,.12);opacity:0}
+.show--google-ads.is-m .ga-rip.is-go{animation:ga-rip .7s ease-out}
+
+/* ---------- Three true facts ---------- */
+.show--google-ads .ga-facts{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px;margin:30px 0 0;padding:0}
+.show--google-ads .ga-facts li{display:inline-flex;align-items:center;gap:11px;padding:7px 18px 7px 7px;background:#fff;border:1px solid var(--line);border-radius:999px;box-shadow:0 16px 30px -24px rgba(17,17,17,.4);font-size:15px;font-weight:700;line-height:1.2}
+.show--google-ads .ga-facts__i{position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff}
+.show--google-ads .ga-facts__i::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);opacity:0}
+.show--google-ads .ga-facts__i>*{position:relative;z-index:1}
+.show--google-ads .ga-facts__i .ga-ico{width:17px;height:17px;stroke-width:2.4}
+.show--google-ads .ga-facts__i b{font-family:var(--display);font-size:14px;font-weight:800;letter-spacing:-.02em}
+.show--google-ads.is-m .ga-facts li.is-ping .ga-facts__i{animation:ga-ping .7s var(--pop)}
+.show--google-ads.is-m .ga-facts li.is-ping .ga-facts__i::after{animation:ga-glow 1.4s ease-out}
+
+@keyframes ga-blink{50%{opacity:0}}
+@keyframes ga-bob{0%,100%{transform:rotate(3deg)}50%{transform:rotate(1deg) translateY(-4px)}}
+@keyframes ga-nudge{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(7px)}}
+@keyframes ga-sweep{to{transform:translateX(100%)}}
+@keyframes ga-bar{0%{opacity:1;transform:scaleX(0)}100%{opacity:1;transform:scaleX(.92)}}
+@keyframes ga-in{from{opacity:0;transform:translateY(12px)}}
+@keyframes ga-flip{from{opacity:0;transform:rotateY(90deg) scale(.5)}}
+@keyframes ga-word{from{transform:translateY(110%)}}
+@keyframes ga-mark{0%{opacity:1;transform:scaleX(0)}14%,82%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes ga-pop{from{opacity:0;transform:translateY(6px) scale(.7)}}
+@keyframes ga-rip{0%{opacity:1;transform:scale(.25)}100%{opacity:0;transform:scale(1.7)}}
+@keyframes ga-ping{40%{transform:scale(1.22) rotate(-8deg)}}
+@keyframes ga-glow{0%,60%{opacity:1}100%{opacity:0}}
+
+/* ---------- Phones: a phone-size search page ---------- */
+@media (max-width:699px){
+  .show--google-ads{padding:24px 20px 80px}
+  .show--google-ads .ga-head{gap:14px;margin-bottom:36px}
+  .show--google-ads .ga-head .sec-head__lead{font-size:16px}
+  .show--google-ads .ga-fwrap{margin-bottom:-29px;padding:0 10px}
+  .show--google-ads .ga-field{height:58px;gap:10px;padding:0 6px 0 17px}
+  .show--google-ads .ga-field__i{width:20px;height:20px}
+  .show--google-ads .ga-field__in,.show--google-ads .ga-field__q{font-size:17px}
+  .show--google-ads .ga-field__q{left:47px;right:60px}
+  .show--google-ads .ga-field__go{width:46px;height:46px}
+  .show--google-ads .ga-field__go .ga-ico{width:20px;height:20px}
+  .show--google-ads .ga-try{right:54px;top:-16px}
+  .show--google-ads .ga-try span{padding:7px 12px;font-size:12.5px}
+  .show--google-ads .ga-res{padding:46px 18px 22px;border-radius:24px}
+  .show--google-ads .ga-tabs{gap:18px;font-size:13px}
+  .show--google-ads .ga-tabs span:nth-child(n+4):not(.tag-eks){display:none}
+  .show--google-ads .ga-body{gap:20px;padding-top:16px}
+  .show--google-ads .ga-ad{margin:0 -10px;padding:12px 10px 14px;border-radius:18px}
+  .show--google-ads .ga-ad__sp{margin-bottom:8px;font-size:12.5px}
+  .show--google-ads .ga-site{gap:10px}
+  .show--google-ads .ga-ini{width:28px;height:28px;font-size:13px}
+  .show--google-ads .ga-site__t b{font-size:14px}
+  .show--google-ads .ga-site__t small{font-size:12px}
+  .show--google-ads .ga-ad__h{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;margin-top:8px;white-space:normal;font-size:18px}
+  .show--google-ads .ga-ad__t{-webkit-line-clamp:3;font-size:14px}
+  .show--google-ads .ga-ad__row{gap:8px;margin:12px -10px 0 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)}
+  .show--google-ads .ga-call{height:36px;padding:0 14px 0 11px;font-size:13px}
+  .show--google-ads .ga-links{gap:8px;overflow:visible;font-size:13px;font-weight:500}
+  .show--google-ads .ga-links span{display:flex;align-items:center;height:36px;padding:0 13px;border:1px solid #c9cfd8;border-radius:999px;background:#fff}
+  .show--google-ads .ga-links span+span::before{content:none}
+  .show--google-ads .ga-you{top:10px;right:10px;font-size:11.5px}
+  .show--google-ads .ga-you span{padding:5px 10px}
+  .show--google-ads .ga-org__h{font-size:16px}
+  .show--google-ads .ga-org__t{font-size:13.5px}
+  .show--google-ads .ga-skel{gap:26px;padding-top:22px}
+  .show--google-ads .ga-facts{flex-direction:column;align-items:center;margin-top:24px}
+  .show--google-ads .ga-facts li{font-size:14.5px}
+}
+@media (max-width:359px){
+  .show--google-ads .ga-try span{font-size:11.5px}
+  .show--google-ads .ga-tabs span:nth-child(3){display:none}
+}

@@ -1,167 +1,266 @@
-// Showcase on /services/meta-ads: your ad in a feed on a phone (scripts/services/showcase/meta-ads.html).
-// A scroll story on a pinned stage: 01 the feed scrolls, 02 it slows down and stops on your ad (a double-tap
-// heart), 03 the customer taps Book nu and sends the form in the ad, 04 your own phone gets the lead.
-// The visitor's trade, town and name (sessionStorage 'wl-egen', shared with /services/hjemmesider) go into the
-// ad; nothing typed leaves the browser. Without motion: the whole story at once, nothing pinned.
+// Showcase on /services/meta-ads (scripts/services/showcase/meta-ads.html): a story ad for Nordvik, an example
+// carpenter in København, on a phone. It plays while it is in view, about four seconds a frame: tap right or left
+// to go forward or back, hold to pause, replay at the end. Story / Feed / Reels shows the same ad in the three
+// placements, every "Book tid" opens Nordvik's booking page in the app, and the panel sets who sees it (area,
+// age, interests) with an example reach that rolls like an odometer.
+// Without motion (no html.motion): no autoplay and nothing moves by itself; tapping and the panel still work.
 import { track } from '/assets/js/analytics.js';
 
 const sec = document.querySelector('.show--meta-ads');
 if (sec) init(sec);
 
 function init(sec) {
-  const $ = s => sec.querySelector(s), $$ = s => [...sec.querySelectorAll(s)];
+  const $ = (s, r = sec) => r.querySelector(s), $$ = (s, r = sec) => [...r.querySelectorAll(s)];
   const motion = document.documentElement.classList.contains('motion');
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const io3 = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(2 - 2 * t, 3) / 2;
-  // The feed: an even scroll through friends' posts, then a long, soft stop on the ad
-  const glide = t => t <= 0 ? 0 : t >= 1 ? 1 : t < .45 ? t * 1.556 : .7 + .3 * (1 - Math.pow(1 - (t - .45) / .55, 3));
-  const act = action => track('showcase_interact', { showcase: 'meta-ads', action });
-
-  /* ---------- The ad, in the visitor's own trade, town and name ---------- */
-  // Trade: [photo, CTA headline, caption, three answers in the form (the customer picks the first), age]
-  const FAG = {
-    toemrer: ['projekt-1', 'Få et gratis tilbud', 'Drømmer du om en ny terrasse? Få et tilbud, og se hvad den koster.', 'Terrasse|Tag|Tilbygning', '30–65'],
-    frisoer: ['projekt-1', 'Book en tid', 'Klar til en ny frisure? Book din næste tid på under et minut.', 'Klip|Farve|Striber', '18–55'],
-    maler: ['projekt-1', 'Få et gratis tilbud', 'Trænger huset til ny maling? Få et tilbud på ude og inde.', 'Facade|Stue|Vinduer', '30–70'],
-    elektriker: ['projekt-1', 'Få et gratis tilbud', 'Skal elbilen have sin egen ladestander? Få et tilbud i dag.', 'Ladestander|Eltavle|Lys', '30–65'],
-    vvs: ['projekt-1', 'Få et gratis tilbud', 'Drømmer du om et nyt badeværelse? Få et tilbud, og kom i gang.', 'Badeværelse|Varmepumpe|Køkken', '30–70'],
-    rengoering: ['hero-2', 'Få et gratis tilbud', 'Kom hjem til et rent hjem. Få et tilbud på fast rengøring.', 'Privat|Erhverv|Flytning', '28–65'],
-    klinik: ['hero-2', 'Book en tid', 'Træt i skuldrene? Book en massage, når det passer dig.', 'Massage|Hot stones|Ansigt', '25–65'],
-    fysioterapeut: ['hero-1', 'Book en tid', 'Ondt i ryggen eller knæet? Book en tid, når det passer dig.', 'Ryg|Knæ|Skulder', '30–70'],
-    'personlig-traener': ['hero-1', 'Book en træning', 'Vil du i form i år? Book din første træning, og kom i gang.', 'Personlig|Hold|Løb', '25–55'],
-    revisor: ['hero-2', 'Book et møde', 'Slip for bøvlet med regnskabet. Book et møde, og hør mere.', 'Regnskab|Moms|Løn', '30–65']
-  };
-  // Any other trade gets a graphic ad with the trade and town instead of a photo from another trade
-  const OTHER = ['', 'Få et tilbud', 'Står du og mangler hjælp? Skriv til os, så vender vi hurtigt tilbage.', 'Tilbud|Spørgsmål|Andet', '25–65'];
-  const ALIAS = { tømrer: 'toemrer', snedker: 'toemrer', frisør: 'frisoer', frisor: 'frisoer', malermester: 'maler', 'el-installatør': 'elektriker', elinstallatør: 'elektriker', 'vvs-installatør': 'vvs', blikkenslager: 'vvs', rengøring: 'rengoering', rengøringsfirma: 'rengoering', 'klinik og massage': 'klinik', massage: 'klinik', massør: 'klinik', fysioterapi: 'fysioterapeut', fysio: 'fysioterapeut', 'personlig træner': 'personlig-traener', pt: 'personlig-traener', træner: 'personlig-traener', bogholder: 'revisor' };
-  const KEY = 'wl-egen', IMG = '/udkast/_faelles/billeder/';
-  const box = $('.ma-egen'), photo = $('[data-ma-photo]'), sr = $('[data-ma-sr]');
-  const f = Object.fromEntries($$('[data-ma-f]').map(i => [i.dataset.maF, i]));
-  try { const v = JSON.parse(sessionStorage.getItem(KEY) || 'null'); if (v) for (const k in f) if (typeof v[k] === 'string') f[k].value = v[k].slice(0, 60); } catch (x) { /* fine */ }
-
-  const cap = t => t.charAt(0).toLocaleUpperCase('da-DK') + t.slice(1);
-  const clean = k => f[k].value.replace(/\s+/g, ' ').trim();
-  // "Jensen & Søn ApS" → jensen-og-soen.dk (as on /services/hjemmesider)
-  const domain = n => {
-    let d = n.toLocaleLowerCase('da-DK').replace(/\s+(aps|a\/s|ivs|i\/s|k\/s|p\/s|amba|smba)\.?$/i, '').replace(/&/g, ' og ')
-      .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa').normalize('NFD').replace(/[̀-ͯ]/g, '')
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    if (d.length > 30) d = d.slice(0, 30).replace(/-[^-]*$/, '') || d.slice(0, 30);
-    return (d || 'nordvik') + '.dk';
-  };
-  const put = (k, t) => $$(`[data-t="${k}"]`).forEach(e => { if (e.textContent !== t) e.textContent = t; });
-  let shown = 'toemrer/projekt-1';
-  const apply = () => {
-    const raw = { fag: clean('fag'), by: clean('by'), navn: clean('navn') };
-    const l = raw.fag.toLocaleLowerCase('da-DK'), id = !raw.fag ? 'toemrer' : ALIAS[l] || (FAG[l] ? l : '');
-    const row = FAG[id] || OTHER, navn = raw.navn || 'Nordvik';
-    put('navn', navn); put('ini', navn.charAt(0).toLocaleUpperCase('da-DK')); put('by', cap(raw.by || 'København'));
-    put('fag', cap(raw.fag || 'Tømrer')); put('domain', domain(navn)); put('cta', row[1]); put('cap', row[2]); put('alder', row[4]);
-    row[3].split('|').forEach((c, i) => put('chip' + i, c));
-    // Their own business: no like or comment counts (README → Truth rules)
-    const egen = !!(raw.fag || raw.by || raw.navn);
-    sec.classList.toggle('is-egen', egen); box.classList.toggle('is-filled', egen); sec.classList.toggle('is-gfx', !row[0]);
-    const pic = row[0] && `${id}/${row[0]}`;
-    if (pic && pic !== shown) { shown = pic; photo.srcset = `${IMG}${pic}-480.webp 480w, ${IMG}${pic}.webp 896w`; photo.src = `${IMG}${pic}-480.webp`; }
-    sr.textContent = `Eksempel: En sponsoreret annonce fra ${navn} i et feed på en telefon. Kunden trykker Book nu, sender sit navn og nummer i en formular i annoncen, og ${navn} får med det samme besked om et nyt lead.`;
-    return raw;
-  };
-  let tm = 0;
+  const on = b => b.getAttribute('aria-pressed') === 'true';
+  const press = (b, v) => { b.setAttribute('aria-pressed', String(v)); b.classList.toggle('is-on', v); };
   const told = new Set();
-  box.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { const raw = apply(); try { sessionStorage.setItem(KEY, JSON.stringify(raw)); } catch (x) { /* fine */ } }, 120); });
-  // Which fields people use, once each; never what they type
-  box.addEventListener('change', e => { const k = e.target.dataset.maF; if (k && !told.has(k) && clean(k)) { told.add(k); act('egen-' + k); } });
-  box.addEventListener('keydown', e => {
-    const k = e.target.dataset.maF;
-    if (e.key !== 'Enter' || !k) return;
-    e.preventDefault();
-    const order = ['fag', 'by', 'navn'], next = f[order[order.indexOf(k) + 1]];
-    if (next) next.focus(); else e.target.blur();
-  });
-  apply();
-
-  // Today's date on the lock screen
-  try { const d = new Date(); $('[data-ma-date]').textContent = `${cap(d.toLocaleDateString('da-DK', { weekday: 'long' }))} ${d.getDate()}. ${d.toLocaleDateString('da-DK', { month: 'long' })}`; } catch (x) { /* fine */ }
+  const act = a => { if (!told.has(a)) { told.add(a); track('showcase_interact', { showcase: 'meta-ads', action: a }); } };
+  let reached = 0;
+  const step = n => { if (n > reached) { reached = n; track('showcase_step', { showcase: 'meta-ads', step: n }); } };
 
   /* ---------- The story ---------- */
-  const stage = $('[data-ma-stage]'), feed = $('[data-ma-feed]'), ad = $('[data-ma-ad]'), scr = $('.ma-ph--a .ma-scr');
-  const sheet = $('[data-ma-sheet]'), dim = $('[data-ma-dim]'), A = $('.ma-ph--a'), B = $('.ma-ph--b');
-  const steps = $$('.ma-step'), bars = $$('.ma-bars b'), pills = $$('.ma-pill');
-  const AT = [0, .3, .52, .78, 1]; // where the four steps start and end on the way through the stage
-  let stopY = 0;
-  const measure = () => { stopY = Math.max(0, ad.offsetTop - 2 * scr.clientWidth / 375); };
-  const flags = {};
-  const flag = (c, v) => { if (flags[c] !== v) { flags[c] = v; sec.classList.toggle(c, v); } };
-
-  let step = -1, reached = 0;
-  const render = s => {
-    const n = s < AT[1] ? 0 : s < AT[2] ? 1 : s < AT[3] ? 2 : 3;
-    if (n !== step) { step = n; steps.forEach((e, i) => e.classList.toggle('is-on', i === n)); }
-    if (s > .002 && n + 1 > reached) { reached = n + 1; track('showcase_step', { showcase: 'meta-ads', step: reached }); }
-    bars.forEach((b, i) => { b.style.transform = `scaleX(${clamp((s - AT[i]) / (AT[i + 1] - AT[i])).toFixed(3)})`; });
-    // 01–02: the feed scrolls by, slows down and stops on the ad
-    feed.style.transform = `translate3d(0,${(-stopY * glide((s - .02) / .38)).toFixed(1)}px,0)`;
-    pills.forEach((p, i) => p.classList.toggle('is-on', s > .06 + i * .065));
-    flag('is-liked', s > .405); flag('is-cta', s > .455);
-    // 03: Book nu, the form slides up already filled in, an answer, Send, thank you
-    flag('is-book', s > .53 && s < .6);
-    const k = io3(clamp((s - .545) / .06));
-    sheet.style.transform = k < 1 ? `translateY(${((1 - k) * 102).toFixed(2)}%)` : 'none';
-    dim.style.opacity = (k * .45).toFixed(3);
-    flag('is-fill', s > .6); flag('is-chip', s > .645); flag('is-send', s > .69 && s < .75); flag('is-sent', s > .705);
-    // 04: the customer's phone steps back, yours comes up, and the lead arrives
-    const q = io3(clamp((s - .78) / .075)), wide = innerWidth >= 900, bx = wide ? (innerWidth >= 1200 ? 36 : innerWidth >= 1100 ? 30 : 24) : 22;
-    A.style.transform = q ? `translateX(${((wide ? -36 : -22) * q).toFixed(2)}%) rotate(${(-5 * q).toFixed(2)}deg) scale(${(1 - .08 * q).toFixed(3)})` : '';
-    B.style.visibility = q ? 'visible' : '';
-    B.style.transform = q ? `translate(${(bx * q).toFixed(2)}%,${((1 - q) * 125 + (wide || innerHeight < 520 ? 3 : -2) * q).toFixed(2)}%) rotate(${(5 * q).toFixed(2)}deg)` : '';
-    pills.forEach(p => p.classList.toggle('is-away', q > .05));
-    flag('is-lead', s > .87);
+  const story = $('[data-ma-story]'), frs = $$('.ma-fr', story), bars = $$('.ma-bars i', story);
+  const pauseBtn = $('[data-ma-pause]'), nextBtn = $('[data-ma-next]'), again = $('[data-ma-replay]'), N = frs.length;
+  let cur = 0, ended = false;
+  // What holds the story still: io (out of view), view (another placement), hold, btn (pause), sheet, tab
+  const why = new Set(['io']);
+  const sync = () => {
+    story.classList.toggle('is-paused', !motion || why.size > 0);
+    story.classList.toggle('is-btn', why.has('btn'));
+    pauseBtn.setAttribute('aria-label', why.has('btn') ? 'Afspil' : 'Pause');
   };
+  const hold = (k, v) => { if (v) why.add(k); else why.delete(k); sync(); };
+  const restart = e => { e.classList.remove('is-on'); void e.offsetWidth; e.classList.add('is-on'); };
+  const show = i => {
+    cur = i; ended = false; story.classList.remove('is-end');
+    frs.forEach((f, k) => f.classList.toggle('is-on', k === i));
+    bars.forEach((b, k) => { b.classList.toggle('is-done', k < i); b.classList.toggle('is-on', k === i); });
+    restart(frs[i]); restart(bars[i]);
+    story.classList.toggle('is-last', i === N - 1);
+    step(i + 1);
+  };
+  const end = () => {
+    ended = true; story.classList.add('is-end');
+    bars.forEach(b => { b.classList.remove('is-on'); b.classList.add('is-done'); });
+    step(N + 1);
+    if (document.activeElement === nextBtn) again.focus();
+  };
+  const go = d => {
+    if (d > 0) { if (!ended) { if (cur < N - 1) show(cur + 1); else end(); } }
+    else show(ended ? N - 1 : Math.max(0, cur - 1));
+  };
+  bars.forEach((b, k) => b.addEventListener('animationend', e => { if (e.animationName === 'showMetaFill' && k === cur && !ended) go(1); }));
 
-  // Taps in the mockup do what they say: Book nu opens the form, Send sends it, the photo gets a heart
-  const go = s => scrollTo({ top: Math.round(stage.getBoundingClientRect().top + scrollY + s * (stage.offsetHeight - innerHeight)), behavior: 'smooth' });
-  const heart = $('.ma-pop');
-  $('[data-ma-like]').addEventListener('click', () => {
-    act('like');
-    if (!motion) return flag('is-liked', true);
-    heart.animate([{ opacity: 0, transform: 'scale(0)' }, { opacity: 1, transform: 'scale(1.22)', offset: .15 }, { transform: 'scale(.94)', offset: .3 }, { opacity: 1, transform: 'scale(1)', offset: .68 }, { opacity: 0, transform: 'translateY(-22%) scale(.7)' }], { duration: 1000, easing: 'cubic-bezier(.2,.9,.3,1.2)' });
+  // Tap: forward or back. Press and hold: pause while held (the click after a hold does nothing)
+  let held = false, ht = 0;
+  const release = () => { clearTimeout(ht); if (story.classList.contains('is-hold')) { story.classList.remove('is-hold'); hold('hold', false); } };
+  $$('.ma-zone', story).forEach(z => {
+    const d = z.hasAttribute('data-ma-next') ? 1 : -1;
+    z.addEventListener('pointerdown', e => {
+      if (e.button) return;
+      held = false; clearTimeout(ht);
+      if (motion) ht = setTimeout(() => { held = true; story.classList.add('is-hold'); hold('hold', true); act('hold'); }, 220);
+    });
+    z.addEventListener('pointerup', release);
+    z.addEventListener('pointerleave', release);
+    z.addEventListener('pointercancel', () => { release(); held = true; });
+    z.addEventListener('click', e => {
+      if (held && e.detail) { held = false; return; }
+      held = false; go(d); act(d > 0 ? 'naeste' : 'forrige');
+    });
+    z.addEventListener('contextmenu', e => e.preventDefault());
   });
-  $('[data-ma-book]').addEventListener('click', () => { act('book-nu'); if (motion) go(.63); else flag('is-form', true); });
-  $('[data-ma-send]').addEventListener('click', () => { act('send'); if (motion) go(.93); else flag('is-sent', true); });
-  dim.addEventListener('click', () => { flag('is-form', false); flag('is-sent', false); });
+  pauseBtn.addEventListener('click', () => { hold('btn', !why.has('btn')); act('pause'); });
+  again.addEventListener('click', e => { act('igen'); hold('btn', false); show(0); if (!e.detail) nextBtn.focus(); });
+  story.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault(); go(e.key === 'ArrowRight' ? 1 : -1);
+  });
 
-  if (!motion) {
-    // The finished state: the ad as the customer sees it, liked, and the lead on your phone
-    const still = () => { measure(); feed.style.transform = `translate3d(0,${-stopY}px,0)`; };
-    ['is-liked', 'is-cta', 'is-fill', 'is-chip', 'is-lead'].forEach(c => flag(c, true));
-    pills.forEach(p => p.classList.add('is-on'));
-    still(); addEventListener('resize', still); if (document.fonts) document.fonts.ready.then(still);
-    return;
-  }
+  // Plays only while the phone is in view (and the tab is open)
+  new IntersectionObserver(([e]) => {
+    const vis = e.isIntersecting && e.intersectionRect.height >= Math.min(e.boundingClientRect.height, innerHeight) * .55;
+    sec.classList.toggle('is-out', !vis);
+    if (vis) step(1);
+    hold('io', !vis);
+  }, { threshold: [0, .2, .4, .55, .7, .85, 1] }).observe($('.ma-phone'));
+  document.addEventListener('visibilitychange', () => hold('tab', document.hidden));
+  sync();
 
-  let sp = -1, raf = 0, vis = false;
-  const frame = () => {
-    raf = 0;
-    const r = stage.getBoundingClientRect(), span = r.height - innerHeight, p = span > 0 ? clamp(-r.top / span) : 0;
-    // A little inertia, so the feed moves like a thumb flicked it
-    sp = sp < 0 ? p : sp + (p - sp) * .16;
-    if (Math.abs(p - sp) < .0004) sp = p;
-    render(sp);
-    if (sp !== p) raf = requestAnimationFrame(frame);
+  /* ---------- Story / Feed / Reels ---------- */
+  const scr = $('[data-ma-scr]'), cap = $('[data-ma-cap]'), views = {};
+  $$('[data-v]').forEach(v => { views[v.dataset.v] = v; });
+  const CAP = { story: 'Story · fuld skærm, cirka fire sekunder pr. billede', feed: 'Feed · mellem opslag fra venner og familie', reels: 'Reels · mellem korte videoer, i fuld højde' };
+  const feed = $('[data-ma-feed]'), ad = $('[data-ma-ad]');
+  let view = 'story', ft = 0;
+  // The feed flicks up and stops on the ad, like a thumb did it
+  const place = flick => {
+    const y = `translateY(${-ad.offsetTop}px)`;
+    feed.style.transition = 'none';
+    if (!flick || !motion) { feed.style.transform = y; return; }
+    feed.style.transform = 'none'; void feed.offsetHeight;
+    feed.style.transition = ''; feed.style.transform = y;
   };
-  const kick = () => { if (!raf && vis) raf = requestAnimationFrame(frame); };
-  new IntersectionObserver(([e]) => { vis = e.isIntersecting; kick(); }, { rootMargin: '200px 0px' }).observe(stage);
-  addEventListener('scroll', kick, { passive: true });
-  const re = () => { measure(); sp = -1; kick(); };
-  addEventListener('resize', re); new ResizeObserver(re).observe(scr);
-  if (document.fonts) document.fonts.ready.then(re);
-  measure(); render(0);
+  const setView = v => {
+    if (v === view) return;
+    closeSheet(); view = v; act(v);
+    $$('[data-ma-view]').forEach(b => press(b, b.dataset.maView === v));
+    for (const k in views) { views[k].classList.toggle('is-on', k === v); views[k].inert = k !== v; }
+    scr.dataset.view = v; cap.textContent = CAP[v];
+    hold('view', v !== 'story');
+    clearTimeout(ft); views.feed.classList.remove('is-cta');
+    if (v === 'feed') { place(true); ft = setTimeout(() => views.feed.classList.add('is-cta'), motion ? 1700 : 0); }
+  };
+  $$('[data-ma-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.maView)));
+  new ResizeObserver(() => { if (view === 'feed') place(false); }).observe(scr);
 
-  // The targeting pills drift with the mouse, like the badges in the hero
-  const depth = [26, 40, 18];
-  sec.addEventListener('pointermove', e => {
-    if (e.pointerType !== 'mouse') return;
-    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
-    pills.forEach((p, i) => { p.style.translate = `${(x * depth[i]).toFixed(1)}px ${(y * depth[i]).toFixed(1)}px`; });
-  }, { passive: true });
+  // Likes: a heart on the photo, the count rolls one up
+  const HEART = [{ opacity: 0, transform: 'scale(0)' }, { opacity: 1, transform: 'scale(1.2)', offset: .16 }, { transform: 'scale(.94)', offset: .3 }, { opacity: 1, transform: 'scale(1)', offset: .66 }, { opacity: 0, transform: 'translateY(-20%) scale(.7)' }];
+  $$('[data-ma-like]').forEach(b => b.addEventListener('click', () => {
+    b.closest('[data-v]').classList.add('is-liked'); act('like');
+    if (!motion) return;
+    const h = $('.ma-pop', b);
+    if (h) h.animate(HEART, { duration: 1000, easing: 'cubic-bezier(.2,.9,.3,1.2)' });
+    else $('.ma-i', b).animate([{ transform: 'none' }, { transform: 'scale(1.35)' }, { transform: 'none' }], { duration: 450, easing: 'cubic-bezier(.2,.9,.3,1.4)' });
+  }));
+
+  /* ---------- Book tid: Nordvik's booking page opens in the app ---------- */
+  const sheet = $('[data-ma-sheet]'), when = $('[data-ma-when]'), slots = $$('[data-ma-slot]');
+  let from = null;
+  const focus = (el, kb) => { if (kb) setTimeout(() => el.focus({ preventScroll: true }), 80); };
+  function closeSheet() {
+    if (!sheet.classList.contains('is-open')) return;
+    const back = sheet.contains(document.activeElement);
+    sheet.classList.remove('is-open'); sheet.inert = true; scr.classList.remove('is-sheet');
+    hold('sheet', false);
+    if (back && from && !from.closest('[inert]')) from.focus({ preventScroll: true });
+  }
+  $$('[data-ma-book]').forEach(b => b.addEventListener('click', e => {
+    from = b; act('book');
+    sheet.classList.remove('is-sent'); sheet.inert = false; sheet.classList.add('is-open'); scr.classList.add('is-sheet');
+    hold('sheet', true);
+    focus($('.ma-slots .is-on', sheet), !e.detail);
+  }));
+  $$('[data-ma-close]', sheet).forEach(b => b.addEventListener('click', closeSheet));
+  sheet.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+  slots.forEach(b => b.addEventListener('click', () => slots.forEach(s => press(s, s === b))));
+  $('[data-ma-send]', sheet).addEventListener('click', e => {
+    when.textContent = `Vi ses ${$('.ma-slots .is-on', sheet).dataset.maSlot}. Nordvik sender en bekræftelse på sms.`;
+    sheet.classList.add('is-sent'); act('booket');
+    focus($('.ma-sh__back', sheet), !e.detail);
+  });
+
+  /* ---------- Who sees it ---------- */
+  // Example figures only: people (thousands) within r km of København on the Danish side, the share of each age
+  // group, and how many like each interest (interests add up: anyone with one of them)
+  const PEOPLE = [[0, 0], [5, 520], [10, 900], [15, 1160], [20, 1340], [25, 1480], [30, 1620], [35, 1800], [40, 2000]];
+  const AGE = [.105, .18, .135, .125, .105, .155], INT = [.26, .18, .14, .08];
+  const range = $('[data-ma-r]'), rv = $('[data-ma-rv]'), map = $('.ma-map svg'), km = $('[data-ma-km]'), towns = $$('.ma-tw');
+  const ages = $$('[data-ma-age] button'), ints = $$('[data-ma-int] button');
+  const odo = $('[data-ma-odo]'), sum = $('[data-ma-sum]'), live = $('[data-ma-live]');
+  const people = r => { for (let i = 1; i < PEOPLE.length; i++) { const [r0, p0] = PEOPLE[i - 1], [r1, p1] = PEOPLE[i]; if (r <= r1) return (p0 + (p1 - p0) * (r - r0) / (r1 - r0)) * 1e3; } return 2e6; };
+  const reach = () => {
+    const a = ages.reduce((s, b, i) => s + (on(b) ? AGE[i] : 0), 0);
+    const u = 1 - ints.reduce((p, b, i) => p * (on(b) ? 1 - INT[i] : 1), 1);
+    const n = people(+range.value) * a * (ints.some(on) ? u : 1);
+    return n >= 1e4 ? Math.round(n / 1e3) * 1e3 : Math.round(n / 100) * 100;
+  };
+  const join = (a, w) => a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} ${w} ${a[a.length - 1]}`;
+  const ageText = () => {
+    const g = [];
+    ages.forEach((b, i) => { if (!on(b)) return; const l = g[g.length - 1]; if (l && l[1] === i - 1) l[1] = i; else g.push([i, i]); });
+    const lo = i => ages[i].textContent.split('–')[0].replace('+', ''), hi = i => ages[i].textContent.split('–')[1];
+    return join(g.map(([a, b]) => hi(b) ? `${lo(a)}–${hi(b)}` : `${lo(a)}+`), 'og') + ' år';
+  };
+  const intText = () => { const a = ints.filter(on).map(b => b.textContent.toLocaleLowerCase('da-DK')); return a.length ? `med interesse for ${join(a, 'eller')}` : 'uanset interesser'; };
+
+  // Labels the edge of the map would cut (it zooms, and phones show less of the sides) fade out
+  const marks = $$('.ma-m__c:not(.ma-m__pin)', map).map(g => {
+    const [x, y] = g.style.getPropertyValue('--o').trim().split(/\s+/).map(parseFloat), t = $('text', g) || g;
+    return { g, x, y, t, end: t.getAttribute('text-anchor') === 'end', w: 0 };
+  });
+  const fit = () => {
+    const b = map.getBoundingClientRect(), a = b.width / b.height, z = +map.style.getPropertyValue('--z') || 1;
+    if (!b.width) return;
+    const vw = a >= 1.6 ? 240 : 150 * a, vh = a >= 1.6 ? 240 / a : 150;
+    marks.forEach(m => {
+      if (!m.w) { try { m.w = m.t.getComputedTextLength(); } catch (x) { m.w = 60; } }
+      const X = (m.x - 240) * z, Y = (m.y - 150) * z, l = m.end ? X - 8 - m.w : X - 5, r = m.end ? X + 5 : X + 8 + m.w;
+      m.g.classList.toggle('is-off', l < 4 - vw || r > vw - 4 || Math.abs(Y) > vh - 10);
+    });
+  };
+  new ResizeObserver(() => fit()).observe(map);
+
+  // The number rolls digit by digit, like the price further down the page. Each digit's window takes the width
+  // of the digit it lands on, so a 1 sits as tight as in plain text
+  const COL = `<span>${[...'0123456789'].map(d => `<b>${d}</b>`).join('')}</span>`;
+  let shown = '', W = null;
+  const widths = () => {
+    const t = document.createElement('b'), fs = parseFloat(getComputedStyle(odo).fontSize) || 1;
+    t.style.cssText = 'position:absolute;visibility:hidden';
+    odo.append(t);
+    W = [...'0123456789'].map(d => { t.textContent = d; return t.getBoundingClientRect().width / fs; });
+    odo.removeChild(t);
+  };
+  const cells = () => [...odo.children];
+  const fitDigits = () => cells().forEach((c, k) => { if (c.firstElementChild) c.style.width = `${W ? W[shown[k]].toFixed(3) : .62}em`; });
+  const roll = s => {
+    if (!motion) { odo.textContent = s; return; }
+    if (s.length !== shown.length) {
+      const was = [...shown].reverse();
+      odo.innerHTML = [...s].map(c => /\d/.test(c) ? `<i>${COL}</i>` : `<i>${c}</i>`).join('');
+      // each column starts on the digit that stood in its place (counted from the right)
+      cells().reverse().forEach((c, k) => { const col = c.firstElementChild; if (col) { col.style.transition = 'none'; col.style.transform = `translate(-50%, ${-(/\d/.test(was[k]) ? was[k] : 0)}em)`; } });
+      void odo.offsetWidth;
+      cells().forEach(c => { if (c.firstElementChild) c.firstElementChild.style.transition = ''; });
+    }
+    cells().forEach((c, k) => { if (c.firstElementChild) c.firstElementChild.style.transform = `translate(-50%, ${-s[k]}em)`; });
+    shown = s; fitDigits();
+  };
+  let ready = !motion, lt = 0, first = true;
+  const update = () => {
+    const r = +range.value, s = reach().toLocaleString('da-DK');
+    rv.textContent = `${r} km omkring København`;
+    range.setAttribute('aria-valuetext', `${r} kilometer omkring København`);
+    range.style.setProperty('--p', `${((r - 5) / 35 * 100).toFixed(1)}%`);
+    // the circle grows on the map while the map zooms out, so it always fills a good part of it
+    const R = 46 + 66 * Math.sqrt((r - 5) / 35);
+    map.style.setProperty('--s', (r / 40).toFixed(4)); map.style.setProperty('--z', (R / (3.4 * r)).toFixed(4)); km.textContent = `${r} km`;
+    // towns inside the circle light up, nearest first
+    towns.forEach(t => {
+      const d = +t.dataset.d, v = d <= r;
+      if (v !== t.classList.contains('is-in')) { t.style.setProperty('--dl', v ? `${(d / r * .3).toFixed(2)}s` : '0s'); t.classList.toggle('is-in', v); }
+    });
+    fit();
+    sum.textContent = `${ageText()}, inden for ${r} km af København, ${intText()}.`;
+    if (ready) roll(s);
+    if (!first) { clearTimeout(lt); lt = setTimeout(() => { live.textContent = `Eksempel: cirka ${s} personer kan se annoncen.`; }, 700); }
+    first = false;
+  };
+  range.addEventListener('input', update);
+  range.addEventListener('change', () => act('radius'));
+  ages.forEach(b => b.addEventListener('click', () => {
+    // at least one age group: the last one shakes its head
+    if (on(b) && ages.filter(on).length === 1) { b.classList.remove('is-no'); void b.offsetWidth; b.classList.add('is-no'); return; }
+    press(b, !on(b)); update(); act('alder');
+  }));
+  ints.forEach(b => b.addEventListener('click', () => { press(b, !on(b)); update(); act('interesse'); }));
+  if (document.fonts) document.fonts.ready.then(() => { marks.forEach(m => { m.w = 0; }); fit(); if (motion) { widths(); fitDigits(); } });
+  if (motion) {
+    widths();
+    roll(reach().toLocaleString('da-DK').replace(/\d/g, '0'));
+    new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); ready = true; setTimeout(() => roll(reach().toLocaleString('da-DK')), 300); }, { threshold: .6 }).observe(odo);
+  }
+  update();
+
+  // The hints beside the phone drift a little with the mouse, like the badges in the hero
+  if (motion) {
+    const pills = $$('.ma-pill'), depth = [22, 34];
+    sec.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+      pills.forEach((p, i) => { p.style.translate = `${(x * depth[i]).toFixed(1)}px ${(y * depth[i]).toFixed(1)}px`; });
+    }, { passive: true });
+  }
 }

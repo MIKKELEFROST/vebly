@@ -146,6 +146,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/show/ai.css?v=20261104a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -153,6 +154,7 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/show/ai.js?v=20261104a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -214,7 +216,7 @@
         <p class="hero__lead" data-reveal="3">Vi bygger AI ind, hvor det giver mening: en chatbot, der svarer kunderne døgnet rundt, AI-annoncer, der tester sig frem, og assistenter, der klarer de tunge rutiner.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -226,6 +228,101 @@
             <svg class="trust__logo" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="#00b67a" d="M12 1.5l2.68 8.25h8.67l-7.01 5.1 2.68 8.25L12 18l-7.02 5.1 2.68-8.25-7.01-5.1h8.67z"/><path fill="#005128" d="M16.1 14.7l-.6-1.86L12 18z"/></svg>
             <span class="trust__txt"><span class="trust__top"><b class="trust__tpname">Trustpilot</b><span class="trust__stars trust__stars--tp" data-stars aria-hidden="true"></span></span><span class="trust__sub">TrustScore <b data-score></b> · <span data-num></span> anmeldelser</span></span>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="eksempel" class="show show--ai" data-sec="eksempel">
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title"><div class="kicker">En nat på din hjemmeside</div><h2 class="h2">Du sover.<br><span class="dim">Chatbotten svarer.</span></h2></div>
+        <p class="sec-head__lead">Kunderne skriver, når det passer dem. Også kl.&nbsp;23.47. Se en nat hos en frisør, spolet frem fra aften til morgen.</p>
+      </div>
+
+      <!-- The night as a time-lapse (ai.js): the clock runs 18:00 → 07:00 while the website's chatbot answers and books.
+           The markup is the finished morning, so it reads the same without motion. -->
+      <div class="ai-night spot" data-spot data-reveal="1" data-ai>
+        <p class="sr-only">Eksempel: en nat på hjemmesiden hos Studio Lys, en frisør i Aarhus, fra kl. 18 til kl. 7. Kl. 21.14 spørger en kunde, om der er en tid lørdag, og chatbotten booker lørdag kl. 10.30. Kl. 23.47 spørger en kunde, hvad en herreklip koster, og får svaret 350 kr. Kl. 6.02 vil en kunde flytte sin tid til næste uge, og chatbotten flytter den fra torsdag til tirsdag kl. 16.00. Om morgenen: 3 spørgsmål besvaret og 2 tider booket.</p>
+        <div class="ai-sky" aria-hidden="true"><i class="ai-sky__dusk" data-ai-sky></i><i class="ai-sky__deep" data-ai-sky></i><i class="ai-sky__dawn" data-ai-sky></i><span class="ai-stars" data-ai-stars></span></div>
+
+        <div class="ai-time">
+          <div class="ai-top"><span class="ai-when" aria-hidden="true">Natten til onsdag</span><span class="tag-eks">Eksempel</span><button type="button" class="ai-again" data-ai-again hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5"/></svg>Se natten igen</button></div>
+          <div class="ai-dial" data-ai-dial aria-hidden="true">
+            <svg class="ai-arc" data-ai-svg></svg>
+            <div class="ai-clock" data-ai-clock>07:00</div>
+          </div>
+          <p class="ai-sum" aria-hidden="true"><span>I nat: <b data-ai-n>3</b> spørgsmål besvaret <i>·</i> <b data-ai-n>2</b> <span data-ai-tid>tider</span> booket</span></p>
+          <div class="ai-cal" aria-hidden="true">
+            <div class="ai-cal__head"><span>Din kalender</span><span class="ai-cal__key">Booket i nat</span></div>
+            <div class="ai-days">
+              <div class="ai-day"><b>ons</b><i></i><i></i><i class="s"></i></div>
+              <div class="ai-day"><b>tor</b><i></i><span class="ai-chip ai-chip--old" data-ai-old>15.00</span><i class="s"></i></div>
+              <div class="ai-day"><b>fre</b><i></i><i></i><i></i></div>
+              <div class="ai-day"><b>lør</b><i></i><span class="ai-slot is-in" data-ai-slot><span class="ai-chip">10.30</span></span></div>
+              <div class="ai-day is-off"><b>søn</b><em>Lukket</em></div>
+              <div class="ai-day"><b>man</b><i class="s"></i><i></i></div>
+              <div class="ai-day"><b>tir</b><i></i><span class="ai-slot is-in" data-ai-slot><span class="ai-chip">16.00</span></span><i class="s"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Our own drawing of an example salon's website with a chat widget: no real product's look or marks -->
+        <div class="ai-site" aria-hidden="true">
+          <div class="ai-bar"><span class="dots3"><i></i><i></i><i></i></span><span class="ai-url"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>studiolys.dk</span></div>
+          <div class="ai-page">
+            <div class="ai-nav"><span class="ai-logo"><i></i>Studio Lys</span><span class="ai-menu"><span>Priser</span><span>Om os</span><span>Book tid</span></span><span class="ai-shut">Lukket · åbner kl. 9</span></div>
+            <div class="ai-hero">
+              <img src="/udkast/_faelles/billeder/frisoer/om-1-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async">
+              <div class="ai-hero__txt"><small>Frisør i Aarhus</small><b>Klip, farve og pleje.</b><span>Book tid</span></div>
+            </div>
+            <div class="ai-prices">
+              <b>Priser</b>
+              <span>Dameklip<i>495 kr.</i></span>
+              <span data-ai-price>Herreklip<i>350 kr.</i></span>
+              <span>Børneklip<i>250 kr.</i></span>
+              <span>Farve<i>fra 695 kr.</i></span>
+            </div>
+            <div class="ai-chat">
+              <div class="ai-chat__head"><span class="ai-av"><svg viewBox="0 0 24 24"><path d="M12 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7z"/></svg></span><span class="ai-chat__who"><b>Spørg os</b><small>Chatbot · svarer døgnet rundt</small></span><span class="ai-chat__x">×</span></div>
+              <div class="ai-msgs" data-ai-msgs>
+                <div class="ai-list" data-ai-list>
+                  <p class="ai-b">Hej! Spørg løs. Jeg svarer og booker tider døgnet rundt.</p>
+                  <p class="ai-dv" data-at="1.6">Ny kunde · 21:14</p>
+                  <p class="ai-b ai-b--me" data-at="1.65">Har I en tid lørdag?</p>
+                  <p class="ai-b ai-typing" data-at="1.95" data-to="2.5" hidden><i></i><i></i><i></i></p>
+                  <p class="ai-b" data-at="2.5">Ja! Lørdag kl. 10.30 er ledig. Skal jeg booke den til dig?</p>
+                  <p class="ai-b ai-b--me" data-at="3.2">Ja tak!</p>
+                  <p class="ai-b ai-typing" data-at="3.35" data-to="3.75" hidden><i></i><i></i><i></i></p>
+                  <p class="ai-rc" data-at="3.75" data-ai-rc><i class="ai-ok"></i><b>Booket</b><span>Lørdag kl. 10.30</span><small>Du får en sms dagen før.</small></p>
+                  <p class="ai-dv" data-at="5.5">Ny kunde · 23:47</p>
+                  <p class="ai-b ai-b--me" data-at="5.55">Hvad koster en herreklip?</p>
+                  <p class="ai-b ai-typing" data-at="5.85" data-to="6.35" hidden><i></i><i></i><i></i></p>
+                  <p class="ai-b" data-at="6.35">En herreklip koster 350 kr. og tager 30 min. Vil du have en tid?</p>
+                  <p class="ai-dv" data-at="8.7">Ny kunde · 06:02</p>
+                  <p class="ai-b ai-b--me" data-at="8.75">Kan jeg flytte min tid til næste uge?</p>
+                  <p class="ai-b ai-typing" data-at="9.05" data-to="9.6" hidden><i></i><i></i><i></i></p>
+                  <p class="ai-b" data-at="9.6">Klart. Tirsdag kl. 16.00 er ledig. Skal jeg flytte din tid fra torsdag?</p>
+                  <p class="ai-b ai-b--me" data-at="10.35">Ja, gerne.</p>
+                  <p class="ai-b ai-typing" data-at="10.5" data-to="10.9" hidden><i></i><i></i><i></i></p>
+                  <p class="ai-rc" data-at="10.9"><i class="ai-ok"></i><b>Flyttet</b><span>Tirsdag kl. 16.00</span><small>Torsdag kl. 15.00 er ledig igen.</small></p>
+                </div>
+              </div>
+              <div class="ai-chat__in"><span>Skriv en besked …</span><span class="ai-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The other AI services, one line each -->
+      <div class="ai-more" data-ai-more>
+        <div class="ai-card" data-reveal="1" data-tilt>
+          <div class="glare" data-glare></div>
+          <div class="ai-card__txt"><span class="ai-card__k">Også med AI</span><h3>AI-annoncer</h3><p>Tester mange varianter og flytter budgettet til dem, der virker.</p></div>
+          <div class="ai-art ai-art--ads" aria-hidden="true"><span><i></i><u></u></span><span class="is-win"><i></i><u></u><em>✓</em></span><span><i></i><u></u></span></div>
+        </div>
+        <div class="ai-card" data-reveal="2" data-tilt>
+          <div class="glare" data-glare></div>
+          <div class="ai-card__txt"><span class="ai-card__k">Også med AI</span><h3>AI-assistenter</h3><p>Skriver udkast til tilbud, svar og opsummeringer, som du godkender.</p></div>
+          <div class="ai-art ai-art--doc" aria-hidden="true"><b>Tilbud</b><i></i><i></i><i></i><i class="s"></i><em>Godkend ✓</em></div>
         </div>
       </div>
     </section>
@@ -336,11 +433,24 @@
             </div>
           </div>
           <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="999">
+            <div class="addon" data-tilt data-addon="Google CSS" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">05</span>
+              <div class="addon__head"><h3>Google CSS</h3><p>Op til 20% billigere klik på dine Google Shopping-annoncer.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Skift til en CSS-partner</li><li><span class="check" aria-hidden="true">✓</span>Samme annoncer som i dag</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="Google CSS" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
+              </div>
+            </div>
+          </div>
+          <div class="addon-slot">
+            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">06</span>
               <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
-              <div class="addon__price">fra 999 kr./md.</div>
+              <div class="addon__price">995 kr./time</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
               <div class="addon__actions">
                 <button type="button" class="addon__toggle" data-toggle="SEO" data-burst aria-pressed="false">+ Tilføj</button>
@@ -351,7 +461,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="GEO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">06</span>
+              <span class="addon__n">07</span>
               <div class="addon__head"><h3>GEO</h3><p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Tjek af din synlighed i AI</li><li><span class="check" aria-hidden="true">✓</span>Indhold, AI kan citere</li><li><span class="check" aria-hidden="true">✓</span>Struktureret data</li></ul>
@@ -364,7 +474,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">07</span>
+              <span class="addon__n">08</span>
               <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
               <div class="addon__price">fra 4.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
@@ -377,7 +487,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">08</span>
+              <span class="addon__n">09</span>
               <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
@@ -390,7 +500,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="CRO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">09</span>
+              <span class="addon__n">10</span>
               <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
@@ -405,7 +515,7 @@
         <div class="wrap addons__meter" style="width:100%">
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
-          <span>09</span>
+          <span>10</span>
         </div>
       </div>
     </section>
@@ -470,7 +580,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" aria-current="page" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" aria-current="page" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>

@@ -1,0 +1,82 @@
+<section id="eksempel" class="show show--cro" data-sec="eksempel">
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title"><div class="kicker">A/B-test</div><h2 class="h2">Halvdelen ser A.<br><span class="dim">Halvdelen ser B.</span></h2></div>
+        <p class="sec-head__lead">Vi bygger en ny version af din side og viser den til halvdelen af de besøgende. Den version, der giver flest henvendelser, vinder.</p>
+      </div>
+      <p class="sr-only">Eksempel på en A/B-test af forsiden hos Klinik Ro, en massageklinik i Svendborg. Version A er siden, som den ser ud i dag: overskriften »Velkommen til Klinik Ro«, en lille knap, hvor der står Læs mere, og anmeldelserne langt nede. Version B har overskriften »Massage i Svendborg. Ledig tid i morgen.«, en stor knap til at ringe og booke og anmeldelserne lige under. Efter 14 dage har A fået 30 henvendelser fra 1.238 besøg, 2,4 procent, og B 67 henvendelser fra 1.231 besøg, 5,4 procent. B vinder med mere end dobbelt så mange henvendelser. Med heatmap kan du se, hvor de besøgende kigger og klikker.</p>
+      <!-- The test runs when it comes into view (assets/js/show/cro.js). All numbers are an example. -->
+      <div class="ab is-done" data-ab data-show="b" data-reveal="1">
+        <div class="ab__bar">
+          <div class="ab__status"><i class="ab__live" aria-hidden="true"></i><b data-ab-state>Testen er færdig</b><span class="ab__day">Dag <b data-ab-day>14</b> af 14</span><span class="tag-eks">Eksempel</span></div>
+          <div class="ab__ctl">
+            <button type="button" class="ab__btn" data-ab-heatbtn aria-pressed="false"><span class="ab__sw" aria-hidden="true"></span>Vis heatmap</button>
+            <button type="button" class="ab__btn ab__btn--again" data-ab-again><svg class="ab__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 13A7.5 7.5 0 1 1 17 6.6"/><path d="M18.5 3v4.5H14"/></svg>Kør testen igen</button>
+          </div>
+        </div>
+        <svg class="ab__wires" data-ab-wires aria-hidden="true" focusable="false"></svg>
+        <div class="ab__split" aria-hidden="true"><span class="ab__src" data-ab-src><i></i>Dine besøgende</span><span class="ab__pct" data-ab-pct="a">50 %</span><span class="ab__pct" data-ab-pct="b">50 %</span></div>
+        <div class="seg ab__seg" role="group" aria-label="Vis version A eller B"><button type="button" data-ab-show="a" aria-pressed="false">Version A</button><button type="button" class="is-on" data-ab-show="b" aria-pressed="true">Version B</button></div>
+        <div class="ab__wins" data-ab-wins aria-hidden="true">
+          <div class="ab__win" data-ab-win="a">
+            <div class="ab__chrome"><span class="ab__ltr">A</span><span class="ab__url" data-ab-url="a"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>klinikro.dk</span></div>
+            <div class="ab__page">
+              <div class="ab-p ab-p--a" data-ab-page="a">
+                <div class="ab-p__nav"><span class="ab-p__logo"><i></i>Klinik Ro</span><span class="ab-p__menu" data-z="3"><span>Behandlinger</span><span>Priser</span><span>Om os</span><span data-ab-cta>Kontakt</span><i class="ab-p__burger" data-ab-cta></i></span></div>
+                <div class="ab-p__hero">
+                  <div class="ab-p__copy">
+                    <span class="ab-p__h" data-z="2">Velkommen til Klinik Ro</span>
+                    <span class="ab-p__p" data-z="1.2">Vi tilbyder en bred vifte af behandlinger i rolige omgivelser i Svendborg.</span>
+                    <span class="ab-p__more" data-z="1.4">Læs mere</span>
+                  </div>
+                  <span class="ab-p__img" data-z="4"><img src="/udkast/_faelles/billeder/klinik/hero-2-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></span>
+                </div>
+                <div class="ab-p__about" data-z="1.6"><b>Om klinikken</b><i></i><i></i><i></i></div>
+                <div class="ab-p__rev" data-z=".5"><span class="ab-p__stars">★★★★★</span>4,9 · 112 anmeldelser</div>
+              </div>
+              <canvas class="ab__heat" data-ab-heat="a"></canvas>
+            </div>
+          </div>
+          <div class="ab__win" data-ab-win="b">
+            <div class="ab__chrome"><span class="ab__ltr">B</span><span class="ab__url" data-ab-url="b"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>klinikro.dk</span></div>
+            <div class="ab__page">
+              <div class="ab-p ab-p--b" data-ab-page="b">
+                <div class="ab-p__nav"><span class="ab-p__logo"><i></i>Klinik Ro</span><span class="ab-p__menu" data-z=".8"><span>Behandlinger</span><span>Priser</span><span>Om os</span><span>Kontakt</span><i class="ab-p__burger"></i></span></div>
+                <div class="ab-p__hero">
+                  <div class="ab-p__copy">
+                    <span class="ab-p__h" data-z="2.6">Massage i Svendborg. Ledig tid i morgen.</span>
+                    <span class="ab-p__p" data-z="1.4">60 min. fra 495 kr. Hjælp til nakke, skuldre og ryg.</span>
+                    <span class="ab-p__call" data-ab-cta data-z="1.6"><svg viewBox="0 0 24 24"><path d="M6.6 3.5h2.6l1.4 4.2-2 1.4a12 12 0 0 0 6.3 6.3l1.4-2 4.2 1.4v2.6a2 2 0 0 1-2.2 2A17.5 17.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg>Ring og book tid</span>
+                    <span class="ab-p__rev" data-z="2.2"><span class="ab-p__stars">★★★★★</span>4,9 · 112 anmeldelser</span>
+                  </div>
+                  <span class="ab-p__img" data-z="1.2"><img src="/udkast/_faelles/billeder/klinik/hero-2-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></span>
+                </div>
+                <div class="ab-p__cards" data-z="1.2"><span><b>Massage</b>60 min. · 495 kr.</span><span><b>Hot stone</b>75 min. · 645 kr.</span><span><b>Nakke og ryg</b>30 min. · 295 kr.</span></div>
+              </div>
+              <canvas class="ab__heat" data-ab-heat="b"></canvas>
+            </div>
+            <span class="ab__badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5l4.6 3.6L12 5l4.4 7.1L21 8.5l-1.8 10H4.8z"/></svg>Vinder</span>
+          </div>
+        </div>
+        <div class="ab__stats" data-ab-stats>
+          <div class="ab__st" data-ab-st="a">
+            <div class="ab__sth"><span class="ab__ltr">A</span><span>Den side, du har i dag</span><small>Siden i dag</small></div>
+            <div class="ab__n"><span>Besøg</span><b data-ab-n="av">1.238</b></div>
+            <div class="ab__n"><span>Henvendelser</span><b data-ab-n="ac">30</b></div>
+            <div class="ab__n ab__n--rate"><span>Konvertering</span><b data-ab-n="ar">2,4 %</b></div>
+            <div class="ab__meter" aria-hidden="true"><i data-ab-bar="a" style="transform:scaleX(.34)"></i></div>
+          </div>
+          <div class="ab__st" data-ab-st="b">
+            <div class="ab__sth"><span class="ab__ltr">B</span><span>Ny version</span><small>Ny version</small></div>
+            <div class="ab__n"><span>Besøg</span><b data-ab-n="bv">1.231</b></div>
+            <div class="ab__n"><span>Henvendelser</span><b data-ab-n="bc">67</b></div>
+            <div class="ab__n ab__n--rate"><span>Konvertering</span><b data-ab-n="br">5,4 %</b></div>
+            <div class="ab__meter" aria-hidden="true"><i data-ab-bar="b" style="transform:scaleX(.78)"></i></div>
+          </div>
+        </div>
+        <div class="ab__result">
+          <p><b>Samme trafik. Mere end dobbelt så mange henvendelser.</b>Klar overskrift, stor knap og anmeldelserne højt oppe.</p>
+          <a href="#kontakt" class="btn btn--dark ab__go" data-magnet data-burst data-event="Eksempel: Få testet din side">Få testet din side →</a>
+        </div>
+        <canvas class="ab__fx" data-ab-fx aria-hidden="true"></canvas>
+      </div>
+    </section>

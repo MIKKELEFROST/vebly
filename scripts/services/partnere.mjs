@@ -1,4 +1,4 @@
-// Partnere: the businesses Webleads has helped. Shown as a scroll right under the hero on the front page
+// Partnere: the businesses Webleads has helped. Shown as a band right under the hero on the front page
 // and as a wall on the results page (scripts/services/front/partnere.mjs).
 //
 // Only real customers, and only with their permission. One line per customer, in the order to show them:
@@ -11,13 +11,17 @@
 //   url   optional. Their own website, starting with https://. The name becomes a link that opens in a new tab.
 //   logo  optional. Their logo as an SVG or PNG under /assets/partnere/, for instance '/assets/partnere/nordvik.svg'.
 //         A wide logo in dark colours on a transparent background works best (about 4:1, at least 240 px wide
-//         for a PNG). It is shown in grey and turns to colour on hover. Without a logo the name is set as a
+//         for a PNG). It is shown in grey and turns to colour on hover. A white or very pale logo disappears
+//         on the light page: use a dark version. An SVG needs a viewBox. Without a logo the name is set as a
 //         wordmark in our own type, with its first letter as a small mark.
 //
-// The front page shows the scroll as soon as there is one customer here: node scripts/services/build.mjs forside
+// The front page shows the band as soon as there is one customer here: node scripts/services/build.mjs forside
 //   1–4 customers   a calm row that stands still
-//   5–9             one row that drifts sideways
-//   10 or more      two rows that drift in opposite directions
+//   5 or more       drifts sideways inside the page width; visitors can grab it and throw it. It only moves
+//                   when the list is wider than the band, so nobody is on screen twice (on a wide screen a
+//                   short list stands still). From 10, two rows the other way round, when both rows are
+//                   still wider than the band.
+//   Reduced motion: a grid, and on phones a row you swipe.
 export const partnere = [];
 
 // Made-up businesses, for a local look only: PARTNERE_EKSEMPEL=1 node scripts/services/build.mjs forside

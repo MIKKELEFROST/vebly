@@ -233,80 +233,94 @@
       </div>
     </section>
 
-    <section id="eksempel" class="show show--geo" data-sec="eksempel">
-      <div class="geo-head">
-        <div class="sec-head" data-reveal="0">
-          <div class="sec-head__title"><div class="kicker">Sådan ser det ud</div><h2 class="h2">Kunden spørger.<br><span class="dim">Du er svaret.</span></h2></div>
-          <p class="sec-head__lead">Sådan kan det se ud, når en kunde spørger en AI-assistent om råd.<span class="geo-scroll"> Scroll, og se svaret blive skrevet.</span></p>
-        </div>
-        <!-- Phones: the box below moves up here (geo.js), so the pinned example has room for the chat -->
-        <div class="geo-slot" data-geo-slot></div>
-      </div>
-      <div class="geo-story" data-geo-story>
-        <div class="geo-stage" data-geo-stage>
-          <div class="geo-fit" data-geo-fit>
-            <!-- The visitor's own trade, town and name go into the question and the answer. Nothing leaves the browser -->
-            <div class="egen" role="group" aria-labelledby="geo-egen-lbl" data-geo-egen>
-              <span class="egen__lbl"><span id="geo-egen-lbl">Prøv med din egen virksomhed</span><span class="egen__hint" aria-hidden="true">Scroll videre, og se svaret ↓</span></span>
-              <div class="egen__row">
-                <label class="egen__f"><span class="sr-only">Branche</span><input data-geo-f="fag" list="geo-fag" placeholder="Branche" maxlength="40" autocomplete="off" autocapitalize="sentences" enterkeyhint="next"></label>
-                <label class="egen__f"><span class="sr-only">By</span><input data-geo-f="by" placeholder="By" maxlength="40" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next"></label>
-                <label class="egen__f"><span class="sr-only">Firmanavn</span><input data-geo-f="navn" placeholder="Firmanavn" maxlength="60" autocomplete="organization" autocapitalize="words" enterkeyhint="done"></label>
-              </div>
-              <datalist id="geo-fag"><option value="Frisør"></option><option value="Tømrer"></option><option value="Maler"></option><option value="Elektriker"></option><option value="VVS"></option><option value="Rengøring"></option><option value="Klinik og massage"></option><option value="Fysioterapeut"></option><option value="Personlig træner"></option><option value="Revisor"></option></datalist>
-            </div>
+    <!-- Showcase for GEO: an AI chat with question chips. A question types itself and is sent, the answer streams in
+     and recommends the example business, and the panel shows what the AI read. Our own drawing of a generic chat:
+     no product's name, logo or colours. Styles: assets/css/show/geo.css, behaviour: assets/js/show/geo.js.
+     Without motion (or JS) the first answer is shown finished; the chips still swap the answer. -->
+<section id="eksempel" class="show show--geo" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Prøv at spørge</div><h2 class="h2">Kunden spørger AI.<br><span class="dim">Hvem bliver nævnt?</span></h2></div>
+    <p class="sec-head__lead">Vælg et spørgsmål. Se, hvad AI’en svarer, og hvor den har det fra.</p>
+  </div>
 
-            <div class="geo-steps">
-              <div class="kicker">Sådan virker det</div>
-              <div class="geo-step is-on" data-geo-step>
-                <div class="geo-step__n">01</div>
-                <div class="geo-step__b"><h3>Kunden spørger</h3><p>Vi finder de spørgsmål, dine kunder stiller, og <b>skriver svarene</b> ind på din side.</p></div>
-              </div>
-              <div class="geo-step is-on" data-geo-step>
-                <div class="geo-step__n">02</div>
-                <div class="geo-step__b"><h3>AI’en leder efter svar</h3><p>Vi markerer din side med <b>struktureret data</b> og får dig <b>nævnt</b> de steder, AI’en læser.</p></div>
-              </div>
-              <div class="geo-step is-on" data-geo-step>
-                <div class="geo-step__n">03</div>
-                <div class="geo-step__b"><h3 data-geo-h>Du bliver anbefalet</h3><p data-geo-p>Vi <b>måler løbende</b>, hvor og hvordan du bliver nævnt, og forbedrer det.</p>
-                  <a href="#kontakt" class="geo-cta" data-geo-cta data-burst data-event="Eksempel: Få en fast pris">Få en fast pris →</a></div>
-              </div>
-            </div>
-
-            <div class="geo-seg">
-              <div class="seg" role="group" aria-label="Vis svaret før eller efter GEO">
-                <button type="button" data-geo-mode="foer" aria-pressed="false">Før<span class="geo-x"> GEO</span></button>
-                <button type="button" data-geo-mode="efter" aria-pressed="true" class="is-on" data-burst>Efter<span class="geo-x"> GEO</span></button>
-              </div>
-              <span class="geo-seg__hint" aria-hidden="true">Se forskellen</span>
-            </div>
-
-            <p class="sr-only" data-geo-sr>Eksempel: En kunde spørger en AI-assistent: »Hvem er en god tømrer i København?« Assistenten anbefaler tre tømrere, med Nordvik først: Svarer samme dag og har mange gode anmeldelser.</p>
-            <!-- Our own drawing of a generic AI chat: no product's name, logo or colours -->
-            <div class="geo-chat" data-geo-chat aria-hidden="true">
-              <div class="geo-chat__bar"><span class="dots3"><i></i><i></i><i></i></span><span class="geo-orb"></span><b>AI-assistent</b><span class="tag-eks">Eksempel</span></div>
-              <div class="geo-chat__body" data-geo-body>
-                <div class="geo-hi"><span class="geo-orb"></span><b>Hvad kan jeg hjælpe med?</b></div>
-                <div class="geo-chat__in" data-geo-in>
-                  <div class="geo-q" data-geo-q>Hvem er en god tømrer i København?</div>
-                  <div class="geo-think"><span class="geo-orb"></span><span data-geo-status>Fandt 4 kilder om Nordvik</span><i class="geo-dots"><i></i><i></i><i></i></i><b class="geo-ok">✓</b></div>
-                  <div class="geo-src" data-geo-src><span class="geo-chip is-mine is-lit"><i></i>nordvik.dk</span><span class="geo-chip is-mine is-lit"><i></i>Google-profilen</span><span class="geo-chip is-mine is-lit"><i></i>Anmeldelser</span><span class="geo-chip is-mine is-lit"><i></i>Lokale portaler</span></div>
-                  <div class="geo-ans" data-geo-ans>
-                    <p>Her er tre gode bud på en tømrer i København:</p>
-                    <ol>
-                      <li class="geo-it is-you is-on is-done"><b class="geo-it__n">1</b><div><b class="geo-it__name">Nordvik</b> <span class="geo-it__you">Det er dig</span><p>Svarer samme dag og har mange gode anmeldelser.</p></div></li>
-                      <li class="geo-it is-on is-done"><b class="geo-it__n">2</b><div><b class="geo-it__name">Tømrerfirma A</b><p>Har mange års erfaring i området.</p></div></li>
-                      <li class="geo-it is-on is-done"><b class="geo-it__n">3</b><div><b class="geo-it__name">Tømrerfirma B</b><p>Bliver ofte nævnt på lokale portaler.</p></div></li>
-                    </ol>
-                  </div>
-                </div>
-              </div>
-              <div class="geo-chat__input"><span class="geo-field"><span data-geo-typed></span><i class="geo-caret"></i><span class="geo-ph">Spørg om hvad som helst</span></span><span class="geo-send" data-geo-send><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></div>
-            </div>
+  <div class="geo-wrap" data-reveal="1">
+    <div class="geo-chat" data-geo-chat>
+      <div class="geo-bar" aria-hidden="true"><span class="dots3"><i></i><i></i><i></i></span><span class="geo-av"></span><b>AI-assistent</b><span class="tag-eks">Eksempel</span></div>
+      <p class="sr-only">Eksempel på en chat med en AI-assistent. En kunde spørger, hvilken tømrer i København der er god. Assistenten anbefaler tømreren Nordvik, fordi priser og ventetid står på deres side, de svarer hurtigt, og kunderne giver dem 4,9 ud af 5. Kilderne er nordvik.dk, Google-profilen og anmeldelserne. Vælg et af spørgsmålene for at se et andet svar.</p>
+      <div class="geo-body" data-geo-body aria-hidden="true">
+        <div class="geo-hi"><span class="geo-av"></span><b>Hvad kan jeg hjælpe med?</b></div>
+        <div class="geo-thread" data-geo-thread>
+          <div class="geo-ex">
+            <p class="geo-u">Hvilken tømrer i København er god?</p>
+            <div class="geo-a"><span class="geo-av"></span><div class="geo-a__c" data-geo-first>
+              <p>Et godt bud er <strong>Nordvik</strong>:</p>
+              <ul class="geo-ul">
+                <li>Priser og ventetid står direkte på deres side<i class="geo-cite" data-src="site">1</i></li>
+                <li>De svarer typisk inden for en time<i class="geo-cite" data-src="profil">2</i></li>
+                <li>Kunderne giver dem 4,9 ud af 5 og roser, at de holder aftaler<i class="geo-cite" data-src="anm">3</i></li>
+              </ul>
+              <ul class="geo-srcs"><li data-src="site"><i>1</i>nordvik.dk</li><li data-src="profil"><i>2</i>Google-profil</li><li data-src="anm"><i>3</i>Anmeldelser</li></ul>
+            </div></div>
           </div>
         </div>
       </div>
-    </section>
+      <div class="geo-qs" role="group" aria-label="Spørg AI-assistenten" data-geo-qs>
+        <button type="button" class="geo-q is-on" data-geo-q="0" data-geo-id="tomrer" aria-pressed="true">Hvilken tømrer i København er god?</button>
+        <button type="button" class="geo-q" data-geo-q="1" data-geo-id="gulv" aria-pressed="false">Hvem kan lægge nyt gulv før jul?</button>
+        <button type="button" class="geo-q" data-geo-q="2" data-geo-id="terrasse" aria-pressed="false">Hvad koster en ny terrasse cirka?</button>
+      </div>
+      <div class="geo-comp" aria-hidden="true">
+        <span class="geo-field" data-geo-field><span class="geo-line" data-geo-line><span data-geo-typed></span><i class="geo-caret"></i></span><span class="geo-ph">Spørg om hvad som helst</span></span>
+        <span class="geo-send" data-geo-send><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span>
+      </div>
+      <p class="sr-only" aria-live="polite" data-geo-live></p>
+    </div>
+
+    <div class="geo-panel" data-geo-panel>
+      <div class="geo-top"><h3 class="geo-panel__h">Det, AI læser</h3><span class="geo-st" aria-hidden="true" data-geo-st>3 af 4 brugt</span></div>
+      <ul class="geo-rows">
+        <li class="geo-row is-lit" data-geo-row="site">
+          <span class="geo-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.2 6.8h.01"/></svg></span>
+          <span class="geo-row__t"><b><span class="geo-lg">Din hjemmeside</span><span class="geo-sh">Hjemmeside</span></b><span class="geo-row__d">Priser, ydelser og svar på det, kunderne spørger om</span></span>
+          <i class="geo-n" aria-hidden="true">1</i>
+        </li>
+        <li class="geo-row is-lit" data-geo-row="profil">
+          <span class="geo-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+          <span class="geo-row__t"><b><span class="geo-lg">Din Google-profil</span><span class="geo-sh">Google-profil</span></b><span class="geo-row__d">Adresse, åbningstider og hvor hurtigt du svarer</span></span>
+          <i class="geo-n" aria-hidden="true">2</i>
+        </li>
+        <li class="geo-row is-lit" data-geo-row="anm">
+          <span class="geo-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.55 5.2 5.7.83-4.13 4.02.98 5.68L12 16.65l-5.1 2.68.98-5.68-4.13-4.02 5.7-.83z"/></svg></span>
+          <span class="geo-row__t"><b><span class="geo-lg">Dine anmeldelser</span><span class="geo-sh">Anmeldelser</span></b><span class="geo-row__d">Det, kunderne skriver om dig</span></span>
+          <i class="geo-n" aria-hidden="true">3</i>
+        </li>
+        <li class="geo-row" data-geo-row="omtale">
+          <span class="geo-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 5.5h11v13.5H6.5a2 2 0 0 1-2-2z"/><path d="M15.5 9h3.5v8a2 2 0 0 1-2 2h-1.5M7.5 9h5M7.5 12h5M7.5 15h3"/></svg></span>
+          <span class="geo-row__t"><b><span class="geo-lg">Omtale andre steder</span><span class="geo-sh">Omtale</span></b><span class="geo-row__d">Artikler, portaler og fora, der nævner dig</span></span>
+          <i class="geo-n" aria-hidden="true"></i>
+        </li>
+      </ul>
+      <div class="geo-foot">
+        <p>Vi gør det hele klar, så AI kan læse, forstå og citere dig. <span>Svarene er eksempler. Ingen kan styre, hvad en AI svarer.</span></p>
+        <a href="#kontakt" class="geo-cta" data-magnet data-burst data-geo-cta data-event="Eksempel: Få tjekket, hvad AI siger om dig">Få tjekket, hvad AI siger om dig →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- The other answers. <strong> is the business, <i class="geo-cite"> a source the answer used (it lights the panel row),
+       .geo-srcs the source chips under the answer. Everything here is an example -->
+  <template data-geo-a="1">
+    <p><strong>Nordvik</strong> kan sandsynligvis nå det. På deres side står der, at de har ledige uger i december, og at et nyt gulv i en stue tager 2–3 dage.<i class="geo-cite" data-src="site">1</i></p>
+    <p>Ring på nummeret i deres Google-profil,<i class="geo-cite" data-src="profil">2</i> og bed om en gratis opmåling.</p>
+    <ul class="geo-srcs"><li data-src="site"><i>1</i>nordvik.dk/gulve</li><li data-src="profil"><i>2</i>Google-profil</li></ul>
+  </template>
+  <template data-geo-a="2">
+    <p>En terrasse i træ koster typisk 1.200–2.000 kr. pr. m². <strong>Nordvik</strong> viser priserne på deres side:<i class="geo-cite" data-src="site">1</i></p>
+    <div class="geo-tbl"><div class="geo-tr"><span>Lærk, 20 m²</span> <b>fra 32.000 kr.</b></div><div class="geo-tr"><span>Hårdttræ, 20 m²</span> <b>fra 46.000 kr.</b></div></div>
+    <p>Flere anmeldelser nævner, at tilbuddet holdt,<i class="geo-cite" data-src="anm">2</i> og de er med i en lokal artikel om terrasser.<i class="geo-cite" data-src="omtale">3</i></p>
+    <ul class="geo-srcs"><li data-src="site"><i>1</i>nordvik.dk/terrasse</li><li data-src="anm"><i>2</i>Anmeldelser</li><li data-src="omtale"><i>3</i>Lokal artikel</li></ul>
+  </template>
+</section>
 
     <section id="pris" class="price-sec" data-sec="pris">
       <div class="spot price" data-reveal="0" data-spot>
@@ -414,9 +428,22 @@
             </div>
           </div>
           <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+            <div class="addon" data-tilt data-addon="Google CSS" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">05</span>
+              <div class="addon__head"><h3>Google CSS</h3><p>Op til 20% billigere klik på dine Google Shopping-annoncer.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Skift til en CSS-partner</li><li><span class="check" aria-hidden="true">✓</span>Samme annoncer som i dag</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="Google CSS" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
+              </div>
+            </div>
+          </div>
+          <div class="addon-slot">
+            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">06</span>
               <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
               <div class="addon__price">995 kr./time</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
@@ -429,7 +456,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="AI" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">06</span>
+              <span class="addon__n">07</span>
               <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
@@ -442,7 +469,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">07</span>
+              <span class="addon__n">08</span>
               <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
               <div class="addon__price">fra 4.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
@@ -455,7 +482,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">08</span>
+              <span class="addon__n">09</span>
               <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
@@ -468,7 +495,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="CRO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">09</span>
+              <span class="addon__n">10</span>
               <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
@@ -483,7 +510,7 @@
         <div class="wrap addons__meter" style="width:100%">
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
-          <span>09</span>
+          <span>10</span>
         </div>
       </div>
     </section>
@@ -548,7 +575,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" aria-current="page" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" aria-current="page" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>

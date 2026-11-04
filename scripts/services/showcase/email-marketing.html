@@ -1,118 +1,148 @@
-<!-- Showcase: e-mail marketing. A newsletter lands in the customer's inbox, is opened and becomes a booking,
-     and the next mail runs by itself. Styles: assets/css/show/email-marketing.css, motion: assets/js/show/email-marketing.js.
-     The HTML is the finished state (shown as it is without motion); the script rewinds it and plays it on scroll. -->
+<!-- Showcase: e-mail marketing. Lock screen and inbox: mails from Nordvik land as notifications on a customer's
+     phone, a tap opens the e-mail with a zoom, and the envelopes are the automatic flow: a click sends that mail
+     into the phone. Styles: assets/css/show/email-marketing.css, behaviour: assets/js/show/email-marketing.js.
+     The HTML is the resting state (the lock screen with both notifications); with motion the script lands them
+     one by one when the phone comes into view and opens the newest by itself after a moment. -->
 <section id="eksempel" class="show show--email-marketing" data-sec="eksempel">
-  <div class="em-head sec-head" data-reveal="0">
-    <div class="sec-head__title">
-      <div class="kicker">Et nyhedsbrev i praksis</div>
-      <h2 class="h2">Fra indbakken.<br><span class="hot">Til kalenderen.</span></h2>
+  <div class="em-wrap" data-em-wrap>
+    <div class="em-copy sec-head" data-reveal="0">
+      <div class="sec-head__title"><div class="kicker">På kundens telefon</div><h2 class="h2"><span class="em-bz" data-em-bz>Bzzz.</span><br><span class="hot">Det er din mail.</span></h2></div>
+      <p class="sec-head__lead">Sådan lander dit nyhedsbrev hos kunden. Tryk på en notifikation, eller send en af de mails, der kører af sig selv.</p>
     </div>
-    <p class="sec-head__lead">Sådan lander et nyhedsbrev hos din kunde, bliver åbnet og ender som en booking. Bagefter kører den næste mail af sig selv.</p>
-  </div>
+    <div class="em-did" data-reveal="1">
+      <span class="em-did__l">Det klarer vi</span>
+      <ul class="em-chips">
+        <li data-em-chip="design"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg>Design</li>
+        <li data-em-chip="tekst"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h11M4 18h14"/></svg>Tekst</li>
+        <li data-em-chip="flow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.5h-4.5"/></svg>Automatiske flows</li>
+        <li data-em-chip="regler"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Tilmelding efter reglerne</li>
+      </ul>
+    </div>
+    <!-- Hand-drawn cues on computers: first to the notifications, then to the flow -->
+    <p class="em-cue" aria-hidden="true"><svg class="em-cue__a" viewBox="0 0 96 44"><path d="M92 30C70 40 34 38 10 12"/><path d="M8 27L9 10l16 2"/></svg><span class="em-cue__1">Tryk på en notifikation</span><span class="em-cue__2">Send en mail fra flowet</span><svg class="em-cue__b" viewBox="0 0 44 70"><path d="M8 4c22 10 30 30 22 60"/><path d="M18 54l12 12 9-15"/></svg></p>
 
-  <div class="em-track" data-em-track>
-    <div class="em-sticky" data-em-sticky>
-      <div class="em-fit" data-em-fit>
-        <div class="em-left">
-          <div class="kicker em-kick">Sådan virker det</div>
-          <div class="em-pills" role="group" aria-label="Gå til et trin">
-            <button type="button" data-em-pill aria-label="Trin 1: Mailen lander">01</button>
-            <button type="button" data-em-pill aria-label="Trin 2: Kunden åbner">02</button>
-            <button type="button" data-em-pill aria-label="Trin 3: Kunden booker">03</button>
-            <button type="button" data-em-pill aria-label="Trin 4: Næste mail kører selv">04</button>
-            <button type="button" data-em-pill aria-label="Trin 5: Du ser, hvad det giver">05</button>
+    <div class="em-ph" data-reveal="1">
+      <span class="tag-eks em-tag">Eksempel</span>
+      <div class="em-phone" data-em-phone>
+        <div class="em-scr" data-em-scr>
+          <i class="em-isl" aria-hidden="true"></i>
+          <div class="em-sb" aria-hidden="true"><time>08.15</time><svg viewBox="0 0 68 12"><rect y="7.5" width="3" height="4.5" rx="1"/><rect x="4.5" y="5.5" width="3" height="6.5" rx="1"/><rect x="9" y="3" width="3" height="9" rx="1"/><rect x="13.5" y=".5" width="3" height="11.5" rx="1"/><path d="M28.6 4.6a9.6 9.6 0 0 1 13.6 0M31.3 7.3a5.8 5.8 0 0 1 8.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="35.4" cy="10.4" r="1.5"/><rect x="47.5" y=".8" width="17.6" height="10.4" rx="3.2" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="49.4" y="2.7" width="11.6" height="6.6" rx="1.6"/><path d="M66.4 4.2v3.6a1.9 1.9 0 0 0 0-3.6z" fill-opacity=".45"/></svg></div>
+
+          <!-- Lock screen: soft wallpaper, time and date, the notifications (newest first) -->
+          <div class="em-lock" data-em-lock>
+            <div class="em-clock" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.6"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              <span>Tirsdag 3. november</span>
+              <b>08.15</b>
+            </div>
+            <span class="em-hint" aria-hidden="true">Tryk på en notifikation</span>
+            <div class="em-stack" data-em-stack>
+              <button type="button" class="em-note is-wait" data-em-note="terrasse" style="--i:0"><i class="em-av" aria-hidden="true"></i><span class="em-note__t"><span class="em-note__r"><b><span class="sr-only">Åbn mailen fra </span>Nordvik</b><time>nu</time></span><b class="em-note__s">Er din terrasse klar til efteråret?</b><span class="em-note__p">Vi olierer og tjekker den, før frosten kommer.</span></span></button>
+              <button type="button" class="em-note is-wait" data-em-note="gulv" style="--i:1"><i class="em-av" aria-hidden="true"></i><span class="em-note__t"><span class="em-note__r"><b><span class="sr-only">Åbn mailen fra </span>Nordvik</b><time>nu</time></span><b class="em-note__s">10&nbsp;% på gulvafslibning i november</b><span class="em-note__p">Få gulvene som nye til jul. Book inden 30. november.</span></span></button>
+            </div>
+            <div class="em-dock" aria-hidden="true"><i><svg viewBox="0 0 24 24"><path d="M8 3h8l-1.2 5H9.2z"/><path d="M9.2 8h5.6v12.2a.8.8 0 0 1-.8.8h-4a.8.8 0 0 1-.8-.8z"/><path d="M12 12v2.6"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M4 8.5h3.2l1.6-2.3h6.4l1.6 2.3H20V19H4z"/><circle cx="12" cy="13.6" r="3.1"/></svg></i></div>
           </div>
-          <ol class="em-steps">
-            <li class="em-step is-on" data-em-step><span class="em-step__n" aria-hidden="true">01</span><div class="em-step__body"><h3>Mailen lander</h3><p>Kun hos kunder, der har sagt ja. Vi sætter tilmelding og samtykke op efter reglerne.</p></div></li>
-            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">02</span><div class="em-step__body"><h3>Kunden åbner</h3><p>Vi skriver teksten og designer mailen, så den er værd at åbne. Også på mobilen.</p></div></li>
-            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">03</span><div class="em-step__body"><h3>Kunden booker</h3><p>Én tydelig knap, der fører direkte til din kalender. Uden omveje.</p></div></li>
-            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">04</span><div class="em-step__body"><h3>Næste mail kører selv</h3><p>Vi sætter automatiske flows op: velkomst, påmindelse og en mail, der beder om en anmeldelse.</p></div></li>
-            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">05</span><div class="em-step__body"><h3>Du ser, hvad det giver</h3><p>Åbninger, klik og bookinger, forklaret kort.</p><a href="#kontakt" class="em-cta" data-em-cta data-event="Eksempel: Få en fast pris">Få en fast pris →</a></div></li>
-          </ol>
-        </div>
 
-        <div class="em-stage" data-em-stage aria-hidden="true">
-          <div class="em-win" data-em-win>
+          <!-- The mail app: one e-mail at a time, designed and written for Nordvik -->
+          <div class="em-app" data-em-app inert>
             <div class="em-bar">
-              <span class="dots3"><i></i><i></i><i></i></span>
-              <span class="em-search"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>Søg i mails</span>
-              <span class="em-me">M</span>
+              <button type="button" class="em-back" data-em-back><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Tilbage</button>
+              <span class="em-bar__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
             </div>
-            <div class="em-body">
-              <div class="em-box">
-                <div class="em-box__head"><b>Indbakke</b><span class="em-count" data-em-count>1</span></div>
-                <div class="em-rows" data-em-rows>
-                  <div class="em-row em-row--auto is-unread is-yours" data-em-auto>
-                    <i class="em-dot"></i>
-                    <div class="em-row__top"><b>Nordvik</b><time>16.00</time></div>
-                    <div class="em-row__sub">Vi ses i morgen kl. 9.00</div>
-                    <div class="em-row__pre">Påmindelse om dit forårstjek. Ring, hvis tiden ikke passer.</div>
-                    <span class="em-label em-label--auto"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.5h-4.5"/></svg>Automatisk</span>
-                  </div>
-                  <div class="em-row em-row--nl is-sel" data-em-nl>
-                    <i class="em-dot"></i>
-                    <div class="em-row__top"><b>Nordvik</b><time>08.02</time></div>
-                    <div class="em-row__sub">Forårstjek af dit tag: 10 % i april</div>
-                    <div class="em-row__pre">Vinteren slider på tagsten og tagrender. Book et tjek nu.</div>
-                    <span class="em-label">Dit nyhedsbrev</span>
-                  </div>
-                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Lene Holm</b><time>I går</time></div><div class="em-row__sub">Kaffe på lørdag?</div><div class="em-row__pre">Vi tager kage med. Passer det kl. 14, eller er det for tidligt?</div></div>
-                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Boligforeningen</b><time>I går</time></div><div class="em-row__sub">Referat fra generalforsamlingen</div><div class="em-row__pre">Hermed referatet fra torsdag. Næste møde er i juni.</div></div>
-                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Fodboldklubben</b><time>Lør.</time></div><div class="em-row__sub">Træning flyttes til torsdag</div><div class="em-row__pre">Banen er lukket på tirsdag, så vi træner torsdag kl. 17.</div></div>
-                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Bageriet på hjørnet</b><time>Fre.</time></div><div class="em-row__sub">Kvittering for dit køb</div><div class="em-row__pre">Tak for dit køb. Du finder kvitteringen herunder.</div></div>
-                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Mor</b><time>Fre.</time></div><div class="em-row__sub">Søndag?</div><div class="em-row__pre">Kommer I til middag på søndag? Far laver suppe.</div></div>
+            <div class="em-mails" data-em-mails>
+              <article class="em-mail" data-mail="terrasse" data-subj="Er din terrasse klar til efteråret?" data-pre="Vi olierer og tjekker den, før frosten kommer.">
+                <div class="em-hd"><b class="em-subj">Er din terrasse klar til efteråret?</b><div class="em-from"><i class="em-av"></i><span><b>Nordvik</b> til mig</span><time>08.15</time></div></div>
+                <div class="em-nl">
+                  <div class="em-nl__top"><i class="em-av"></i>Nordvik<span>Nyhedsbrev · november</span></div>
+                  <div class="em-pic"><img src="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"><span class="em-stk">Før frosten</span></div>
+                  <span class="em-k">Efterårstjek</span>
+                  <b class="em-h">Giv terrassen en tur,<br><em>før frosten.</em></b>
+                  <p>Vi olierer, skifter løse brædder og tjekker underlaget. Til fast pris, når det passer dig.</p>
+                  <button type="button" class="em-btn" data-em-book data-burst><span class="em-btn__t"><span>Book et efterårstjek</span><span>Tak! Vi ringer i dag</span></span><i aria-hidden="true"></i></button>
+                  <small class="em-ft">Du får mailen, fordi du har sagt ja til nyheder fra Nordvik. <button type="button" data-em-unsub>Afmeld</button></small>
                 </div>
-              </div>
-
-              <div class="em-read" data-em-read>
-                <div class="em-empty" data-em-empty><svg viewBox="0 0 48 48"><rect x="6" y="11" width="36" height="26" rx="5"/><path d="M8 14l16 12 16-12"/></svg>Ingen mail valgt</div>
-                <div class="em-open" data-em-open>
-                  <span class="em-back">‹ Indbakke</span>
-                  <div class="em-meta">
-                    <b class="em-meta__sub">Forårstjek af dit tag: 10 % i april</b>
-                    <div class="em-from"><span class="em-logo"><i></i></span><span><b>Nordvik</b> hej@nordvik.dk</span><time>08.02</time></div>
-                  </div>
-                  <div class="em-view" data-em-view>
-                    <div class="em-mail" data-em-mail>
-                      <div class="em-mail__top" data-em-part><span class="em-logo"><i></i></span><b>Nordvik</b><span>Nyhedsbrev · april</span></div>
-                      <div class="em-mail__img" data-em-part><img src="/udkast/_faelles/billeder/toemrer/projekt-3-480.webp" srcset="/udkast/_faelles/billeder/toemrer/projekt-3-480.webp 480w, /udkast/_faelles/billeder/toemrer/projekt-3.webp 960w" sizes="(max-width: 699px) 230px, 380px" width="480" height="362" alt="" loading="lazy" decoding="async"><span class="em-mail__sale">−10 %</span></div>
-                      <div class="em-mail__txt" data-em-part><span class="em-mail__kick">Forårstjek</span><b class="em-mail__h">Er dit tag klar<br>til <em>foråret?</em></b><p>Vinteren slider på tagsten og tagrender. Vi tjekker hele taget på en time og giver dig en fast pris.</p></div>
-                      <div class="em-offer" data-em-part><b>10 %</b><span>på forårstjekket, når du booker i april</span></div>
-                      <div class="em-mail__cta" data-em-part><span class="em-btn" data-em-btn><span class="em-btn__t"><span>Book et tjek</span><span>Booket</span></span><i><b>→</b><b>✓</b></i></span></div>
-                      <small class="em-mail__foot" data-em-part>Du får mailen, fordi du har sagt ja til nyheder fra Nordvik. <u>Afmeld</u></small>
-                    </div>
-                  </div>
-                  <div class="em-ok" data-em-ok><span class="em-ok__ic">✓</span><span><b>Du er booket</b><small>Forårstjek · tirsdag kl. 9.00</small></span></div>
+              </article>
+              <article class="em-mail" data-mail="gulv" data-subj="10&nbsp;% på gulvafslibning i november" data-pre="Få gulvene som nye til jul. Book inden 30. november.">
+                <div class="em-hd"><b class="em-subj">10&nbsp;% på gulvafslibning i november</b><div class="em-from"><i class="em-av"></i><span><b>Nordvik</b> til mig</span><time>08.14</time></div></div>
+                <div class="em-nl">
+                  <div class="em-nl__top"><i class="em-av"></i>Nordvik<span>Tilbud · november</span></div>
+                  <div class="em-pic"><img src="/udkast/_faelles/billeder/toemrer/om-1-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"><span class="em-stk">−10&nbsp;%</span></div>
+                  <span class="em-k">Kun i november</span>
+                  <b class="em-h">Gulve som nye.<br><em>Til jul.</em></b>
+                  <p>Vi sliber, lakerer eller olierer dine trægulve. Book i november, og spar 10&nbsp;%.</p>
+                  <button type="button" class="em-btn" data-em-book data-burst><span class="em-btn__t"><span>Få en pris på dit gulv</span><span>Tak! Vi ringer i dag</span></span><i aria-hidden="true"></i></button>
+                  <small class="em-ft">Du får mailen, fordi du har sagt ja til nyheder fra Nordvik. <button type="button" data-em-unsub>Afmeld</button></small>
                 </div>
-              </div>
-              <div class="em-note" data-em-note><span class="em-logo"><i></i></span><span class="em-note__t"><b>Ny mail fra Nordvik</b>Forårstjek af dit tag: 10 % i april</span><time>nu</time></div>
+              </article>
+              <article class="em-mail" data-mail="velkommen" data-subj="Velkommen hos Nordvik" data-pre="Tak, fordi du skrev dig op. Her er, hvad du får.">
+                <div class="em-hd"><b class="em-subj">Velkommen hos Nordvik</b><div class="em-from"><i class="em-av"></i><span><b>Nordvik</b> til mig</span><time>nu</time></div></div>
+                <div class="em-nl">
+                  <div class="em-nl__top"><i class="em-av"></i>Nordvik<span>Velkommen</span></div>
+                  <div class="em-pic"><img src="/udkast/_faelles/billeder/toemrer/hero-2-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"><span class="em-stk">Hej Sofie</span></div>
+                  <span class="em-k">Godt at have dig med</span>
+                  <b class="em-h">Seks tømrere.<br><em>Én mail om måneden.</em></b>
+                  <p>Her får du gode råd om dit hus og et godt tilbud en gang imellem. Aldrig spam.</p>
+                  <button type="button" class="em-btn" data-em-book data-burst><span class="em-btn__t"><span>Se, hvad vi laver</span><span>Godt valg!</span></span><i aria-hidden="true"></i></button>
+                  <small class="em-ft">Du får mailen, fordi du skrev dig op hos Nordvik. <button type="button" data-em-unsub>Afmeld</button></small>
+                </div>
+              </article>
+              <article class="em-mail" data-mail="raad" data-subj="Et godt råd: Mærker du træk ved vinduet?" data-pre="Sådan tjekker du dine vinduer på to minutter.">
+                <div class="em-hd"><b class="em-subj">Et godt råd: Mærker du træk ved vinduet?</b><div class="em-from"><i class="em-av"></i><span><b>Nordvik</b> til mig</span><time>nu</time></div></div>
+                <div class="em-nl">
+                  <div class="em-nl__top"><i class="em-av"></i>Nordvik<span>Gode råd</span></div>
+                  <div class="em-pic"><img src="/udkast/_faelles/billeder/toemrer/projekt-6-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"><span class="em-stk">2 min.</span></div>
+                  <span class="em-k">Et godt råd</span>
+                  <b class="em-h">Træk ved vinduet?<br><em>Tag lys-testen.</em></b>
+                  <p>Hold et tændt lys ved listen. Blafrer flammen, tætner vi vinduet på en formiddag.</p>
+                  <button type="button" class="em-btn" data-em-book data-burst><span class="em-btn__t"><span>Book et vinduestjek</span><span>Tak! Vi ringer i dag</span></span><i aria-hidden="true"></i></button>
+                  <small class="em-ft">Du får mailen, fordi du skrev dig op hos Nordvik. <button type="button" data-em-unsub>Afmeld</button></small>
+                </div>
+              </article>
+              <article class="em-mail" data-mail="tilbud" data-subj="500 kr. af din første opgave" data-pre="Har du et projekt i tankerne? Tilbuddet gælder i 14 dage.">
+                <div class="em-hd"><b class="em-subj">500 kr. af din første opgave</b><div class="em-from"><i class="em-av"></i><span><b>Nordvik</b> til mig</span><time>nu</time></div></div>
+                <div class="em-nl">
+                  <div class="em-nl__top"><i class="em-av"></i>Nordvik<span>Kun til dig</span></div>
+                  <div class="em-pic"><img src="/udkast/_faelles/billeder/toemrer/projekt-2-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"><span class="em-stk">−500 kr.</span></div>
+                  <span class="em-k">Et tilbud til dig</span>
+                  <b class="em-h">Har du et projekt<br><em>i tankerne?</em></b>
+                  <p>Book en gratis snak inden for 14 dage, og få 500 kr. af din første opgave hos os.</p>
+                  <button type="button" class="em-btn" data-em-book data-burst><span class="em-btn__t"><span>Book en gratis snak</span><span>Tak! Vi ringer i dag</span></span><i aria-hidden="true"></i></button>
+                  <small class="em-ft">Du får mailen, fordi du skrev dig op hos Nordvik. <button type="button" data-em-unsub>Afmeld</button></small>
+                </div>
+              </article>
+              <article class="em-mail" data-mail="foedsel" data-subj="Tillykke med dagen, Sofie!" data-pre="Vi har en lille gave til dig.">
+                <div class="em-hd"><b class="em-subj">Tillykke med dagen, Sofie!</b><div class="em-from"><i class="em-av"></i><span><b>Nordvik</b> til mig</span><time>nu</time></div></div>
+                <div class="em-nl">
+                  <div class="em-nl__top"><i class="em-av"></i>Nordvik<span>Fødselsdag</span></div>
+                  <div class="em-pic em-fest" aria-hidden="true"><b>Tillykke!</b><span class="em-stk">En gave</span></div>
+                  <span class="em-k">Fra os alle hos Nordvik</span>
+                  <b class="em-h">Tillykke, Sofie.<br><em>En time er på os.</em></b>
+                  <p>Book en opgave i din fødselsdagsmåned, så er den første time gratis.</p>
+                  <button type="button" class="em-btn" data-em-book data-burst><span class="em-btn__t"><span>Hent din gave</span><span>Gaven er din!</span></span><i aria-hidden="true"></i></button>
+                  <small class="em-ft">Du får mailen, fordi du skrev dig op hos Nordvik. <button type="button" data-em-unsub>Afmeld</button></small>
+                </div>
+              </article>
             </div>
           </div>
-          <span class="tag-eks em-tag">Eksempel</span>
-          <span class="em-cursor" data-em-cursor><svg viewBox="0 0 24 24"><path d="M5 2.5v17.2l4.6-4.4 2.9 6.6 3-1.3-2.9-6.5h6.3z"/></svg></span>
 
-          <div class="em-flow" data-em-flow>
-            <div class="em-flow__top"><b>Automatisk flow</b><span class="tag-eks">Eksempel</span></div>
-            <div class="em-flow__row">
-              <span class="em-flow__line"><i data-em-line></i><b data-em-fdot></b></span>
-              <span class="em-node is-done" data-em-node><i>✓</i>Velkomst<small>Ved tilmelding</small></span>
-              <span class="em-node is-done" data-em-node><i>✓</i>Tilbud<small>Denne mail</small></span>
-              <span class="em-node is-now" data-em-node><i>✓</i>Påmindelse<small>Dagen før</small></span>
-              <span class="em-node" data-em-node><i>✓</i>Anmeldelse<small>Efter opgaven</small></span>
-            </div>
-          </div>
-
-          <div class="spot em-stats" data-spot data-em-stats>
-            <div class="em-stats__top"><span>Nyhedsbrev: Forårstjek</span><span class="tag-eks">Eksempel</span></div>
-            <div class="em-stats__row">
-              <div><b><span data-em-n="58">58</span><small>%</small></b><span>Åbnet</span></div>
-              <div><b><span data-em-n="14">14</span><small>%</small></b><span>Klik</span></div>
-              <div><b><span data-em-n="11">11</span></b><span>Bookinger</span></div>
-            </div>
-          </div>
+          <!-- A mail that arrives while another one is open, and small confirmations -->
+          <button type="button" class="em-note em-banner" data-em-banner inert><i class="em-av" aria-hidden="true"></i><span class="em-note__t"><span class="em-note__r"><b><span class="sr-only">Åbn mailen fra </span>Nordvik</b><time>nu</time></span><b class="em-note__s"></b><span class="em-note__p"></span></span></button>
+          <p class="em-toast" data-em-toast role="status"></p>
+          <i class="em-home" aria-hidden="true"></i>
         </div>
-        <p class="sr-only">Eksempel: Et nyhedsbrev fra tømreren Nordvik lander øverst i kundens indbakke med emnet »Forårstjek af dit tag: 10 % i april«. Kunden åbner mailen, der har et billede af et tag, en kort tekst, et tilbud på 10 % og knappen »Book et tjek«, og booker et tjek tirsdag kl. 9.00. Bagefter sender et automatisk flow en påmindelse dagen før, og rapporten viser, at 58 % åbnede mailen, 14 % klikkede, og at den gav 11 bookinger.</p>
       </div>
     </div>
+
+    <div class="em-flow" data-reveal="2">
+      <div class="em-flow__hd"><b>Automatisk flow</b><span class="em-flow__sub">Sat op én gang. Sender sig selv.</span><span class="tag-eks">Eksempel</span></div>
+      <div class="em-envs" role="group" aria-label="Mails i det automatiske flow">
+        <button type="button" class="em-env" style="--r:-2.5deg" data-em-env="velkommen" aria-pressed="false" aria-label="Dag 0, Velkommen: send mailen til telefonen"><i class="em-env__ltr"></i><span class="em-env__bd"><b>Velkommen</b><small>Når de skriver sig op</small></span><svg class="em-env__flap" viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 0L50 58 100 0"/></svg><i class="em-env__seal"></i><span class="em-env__pm">Dag 0</span></button>
+        <button type="button" class="em-env" style="--r:1.5deg" data-em-env="raad" aria-pressed="false" aria-label="Dag 3, Et godt råd: send mailen til telefonen"><i class="em-env__ltr"></i><span class="em-env__bd"><b>Et godt råd</b><small>Tre dage efter</small></span><svg class="em-env__flap" viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 0L50 58 100 0"/></svg><i class="em-env__seal"></i><span class="em-env__pm">Dag 3</span></button>
+        <button type="button" class="em-env" style="--r:-1.2deg" data-em-env="tilbud" aria-pressed="false" aria-label="Dag 30, Tilbud: send mailen til telefonen"><i class="em-env__ltr"></i><span class="em-env__bd"><b>Tilbud</b><small>Efter en måned</small></span><svg class="em-env__flap" viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 0L50 58 100 0"/></svg><i class="em-env__seal"></i><span class="em-env__pm">Dag 30</span></button>
+        <button type="button" class="em-env" style="--r:2.2deg" data-em-env="foedsel" aria-pressed="false" aria-label="Fødselsdag: send mailen til telefonen"><i class="em-env__ltr"></i><span class="em-env__bd"><b>Fødselsdag</b><small>Hvert år på dagen</small></span><svg class="em-env__flap" viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 0L50 58 100 0"/></svg><i class="em-env__seal"></i><span class="em-env__pm"><svg viewBox="0 0 24 24"><path d="M5 20v-7.5h14V20M3 20h18M5 16c1.8 1.3 3.2 1.3 4.7 0s2.9-1.3 4.6 0 3.2 1.3 4.7 0M12 12.5V9M12 5.6v.4"/></svg></span></button>
+      </div>
+    </div>
+
+    <p class="sr-only">Eksempel: En telefon med låseskærm, hvor to mails fra tømreren Nordvik lander som notifikationer: »Er din terrasse klar til efteråret?« og »10 % på gulvafslibning i november«. Tryk på en, så åbner mailen med billede, overskrift, en kort tekst, en knap og et afmeldingslink. Ved siden af ligger fire mails fra et automatisk flow: Velkommen på dag 0, Et godt råd på dag 3, Tilbud på dag 30 og en mail på fødselsdagen. Tryk på en for at sende den til telefonen.</p>
   </div>
 </section>

@@ -15,7 +15,7 @@ export const services = [
   { slug: 'google-ads', t: 'Google Ads', price: '8.000 kr./md.', value: 8000, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'meta-ads', t: 'Meta Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Sporing af salg', 'Ekstra kanal: 5.000 kr./md.'] },
-  { slug: 'google-css', t: 'Google CSS', price: 'Fast pris efter en snak', value: 0, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Skift til en CSS-partner', 'Samme annoncer som i dag', 'Shopping og Performance Max'] },
+  { slug: 'google-css', t: 'Google CSS', price: 'Fast pris efter en snak', value: 0, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Skift til en CSS-partner', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
   { slug: 'seo', t: 'SEO', price: '995 kr./time', value: 995, d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'] },
   { slug: 'geo', t: 'GEO', price: 'Fast pris efter en snak', value: 0, d: 'Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.', ex: ['Tjek af din synlighed i AI', 'Indhold, AI kan citere', 'Struktureret data'] },
   { slug: 'ai', t: 'AI', price: 'Fast pris efter en snak', value: 0, d: 'Chatbots, AI-annoncer og assistenter, der sparer dig tid.', ex: ['AI-chatbot døgnet rundt', 'AI-annoncering', 'AI-assistenter til rutinerne'] },
@@ -137,39 +137,44 @@ export const pages = [
     placeholder: 'Hvilken webshop har du, og hvad sælger du?'
   },
   {
-    // Preliminary copy: the facts are being checked (see the research notes); price: null until Mikkel sets one
+    // Checked against Google's help pages and the market (4 Nov 2026). The 20% is the industry's estimate of the
+    // margin Google's own CSS takes from the bid: Google does not publish it, so every "20%" needs the estimate
+    // sentence on the same page. Never "rabat", "garanteret", "Ingen binding" or "Webleads er CSS-partner".
+    // price: null until Mikkel sets one.
     slug: 'google-css', name: 'Google CSS', short: 'Op til 20% billigere klik på Google Shopping',
-    description: 'Vi kobler dine Google Shopping-annoncer på en CSS-partner, så de samme annoncer kan få op til 20% lavere klikpris. Dine kampagner kører videre. Fast pris efter en kort snak.',
+    description: 'Vi kobler din webshop til en CSS-partner, så hele dit bud tæller, og klik på dine Google Shopping-annoncer kan blive op til 20% billigere. Fast pris efter en kort snak.',
     serviceType: 'CSS (Comparison Shopping Service) til Google Shopping',
     words: ['webshops', 'netbutikker', 'Shopify-butikker', 'butikker med varer'],
     h1: { a: ['Op', 'til'], hot: '20%', dim: 'billigere', mark: 'klik.' },
-    lead: 'Med en CSS-partner kører dine Shopping-annoncer videre som i dag, men klikket kan blive op til 20% billigere. Vi klarer skiftet for dig.',
-    floats: ['CSS-partner', 'Samme annoncer', 'Op til 20% ↓'], ring: 'GOOGLE CSS • SHOPPING • BILLIGERE KLIK •',
+    lead: 'Vi kobler din webshop til en CSS-partner, så hele dit bud tæller i auktionen på Google. Det samme klik kan blive op til 20% billigere, og vi klarer skiftet.',
+    floats: ['CSS-partner', 'Hele buddet tæller', 'Op til 20% ↓'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
     price: null,
     priceH2: ['Fast pris.', 'Efter en snak.'],
-    priceLead: 'Vi ser på din Merchant Center og dine kampagner og giver dig en fast pris inden for 24 timer.',
+    priceLead: 'Vi ser på din Merchant Center, dine lande og dit Shopping-budget og giver dig en fast pris inden for 24 timer.',
     items: [
-      ['Tjek af din konto', 'Vi ser på din Merchant Center og dine Shopping-kampagner.'],
-      ['Skift til en CSS-partner', 'Vi kobler din Merchant Center på en CSS, så dine annoncer bliver vist gennem den.'],
-      ['Samme annoncer', 'Dine produkter, kampagner og budget kører videre.'],
-      ['Shopping og Performance Max', 'Det gælder dine Shopping-annoncer, også dem i Performance Max.'],
-      ['Lavere klikpris', 'Op til 20% billigere klik på de samme placeringer.'],
-      ['Måling før og efter', 'Vi følger klikpriserne, så du kan se forskellen.'],
-      ['Ingen binding', 'Du kan altid skifte tilbage.'],
-      ['Direkte kontakt', 'Du taler med den, der laver arbejdet.']
+      ['Tjek af din konto', 'Vi ser på din Merchant Center, dine kampagner og de lande, du sælger til.'],
+      ['Lande og placeringer', 'Vi tjekker, at CSS-partneren dækker dine lande og de steder, dine annoncer vises.'],
+      ['Vi klarer skiftet', 'Vi sætter skiftet i gang, og du godkender det i din Merchant Center.'],
+      ['Som regel samme kampagner', 'Som regel er din Google Ads-konto, dine kampagner og dit produktfeed de samme som i dag.'],
+      ['Hele buddet tæller', 'Uden margin fra Googles egen CSS kommer hele dit bud med i auktionen.'],
+      ['Shopping og Performance Max', 'Det gælder dine produktannoncer i både Shopping og Performance Max.'],
+      ['Bud og mål', 'Vi justerer bud og mål, så fordelen giver lavere klikpris, flere klik eller lidt af begge.'],
+      ['Måling før og efter', 'Fordelen står ikke på fakturaen, så vi måler klikpris, klik og salg før og efter.']
     ],
     steps: [
-      ['Tjek', 'Vi ser, om din webshop kan bruge en CSS, og hvad du kan spare.', '?'],
-      ['Skift', 'Vi kobler din Merchant Center på en CSS-partner. Dine kampagner kører videre.', '%'],
-      ['Opfølgning', 'Vi måler klikpriserne og sender dig tallene.', '↓']
+      ['Tjek', 'Vi ser på din konto, dine lande og dit budget og siger ærligt, om det kan betale sig.', '?'],
+      ['Skift', 'Vi kobler din Merchant Center på en CSS-partner, og du godkender skiftet.', '%'],
+      ['Opfølgning', 'Vi sammenligner klikpris, klik og salg før og efter og sender dig tallene.', '↓']
     ],
     faqs: [
-      ['Hvad er en CSS?', 'CSS står for Comparison Shopping Service, på dansk en prissammenligningstjeneste. I EU kan Shopping-annoncer på Google vises gennem forskellige CSS’er. Googles egen hedder Google Shopping.'],
-      ['Hvorfor bliver klikket billigere?', 'Google Shopping lægger en margin oven i klikprisen. Viser du dine annoncer gennem en anden CSS, slipper du for den, så det samme klik kan koste op til 20% mindre.'],
-      ['Skal jeg lave mine kampagner om?', 'Nej. Dine kampagner, dit budget og dine produkter kører videre. Det er kun den CSS, annoncerne bliver vist gennem, der skifter.'],
+      ['Hvad er en CSS?', 'CSS står for Comparison Shopping Service, på dansk en prissammenligningstjeneste. Efter EU’s sag mod Google i 2017 bliver Shopping-annoncer i Danmark altid vist gennem en CSS. Har du ikke valgt en anden, er det Googles egen, Google Shopping.'],
+      ['Hvorfor bliver klikket billigere?', 'Googles egen CSS, Google Shopping, trækker en fast procentdel fra dit bud, før det kommer med i auktionen. Med en CSS-partner tæller hele buddet, så det samme klik kan blive billigere, eller du kan få flere klik for samme budget. Google oplyser ikke procentdelen, men branchen anslår den til op til ca. 20%.'],
+      ['Skal jeg lave mine kampagner om?', 'Som regel ikke. Vi flytter den Merchant Center-konto, du har i dag, over til CSS-partneren, så din Google Ads-konto, dine kampagner og dit feed er de samme. Kræver CSS-partneren en ny konto, siger vi det, før vi går i gang.'],
+      ['Hvilke annoncer gælder det?', 'Dine Shopping-annoncer, også produkterne i Performance Max. Almindelige tekstannoncer påvirkes ikke. Om produkterne også kan vises fx på YouTube, afhænger af CSS-partneren, og det tjekker vi før skiftet.'],
+      ['Gælder det i alle lande?', 'Det gælder i Danmark og en række andre lande i Europa, fx Sverige, Norge og Tyskland. Uden for de lande giver det ingen fordel. Sælger du til flere lande, tjekker vi, at CSS-partneren dækker dem alle.'],
       ['Hvad koster det?', 'Du får en fast pris efter en kort snak om din webshop.']
     ],
-    contact: 'Fortæl os om din webshop, så svarer vi inden for 24 timer med en fast pris.',
+    contact: 'Fortæl os om din webshop, så ser vi, om det kan betale sig, og svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvilken webshop har du, og hvad bruger du på Google Shopping om måneden?'
   },
   {

@@ -212,7 +212,7 @@
           <span class="w"><span data-word class="dim">Fra</span></span>
           <span class="w"><span data-word class="hot"><span data-underline><span data-count>12.995</span> kr.</span></span></span>
         </h1>
-        <p class="hero__lead" data-reveal="3">Vi bygger din webshop på Shopify, klar til at sælge med betaling, fragt og alt det juridiske på plads. Træk i beregneren, og se din pris med det samme.</p>
+        <p class="hero__lead" data-reveal="3">Vi bygger din webshop på Shopify, klar til at sælge med betaling, fragt og alt det juridiske på plads. Træk i beregneren, og se prisen på din egen shop.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
           <a href="#beregner" class="hero__more" data-event="Hero: Beregn din pris">Beregn din pris <span>↓</span></a>
@@ -231,109 +231,87 @@
       </div>
     </section>
 
-    <section id="beregner" class="calc-sec show show--webshop" data-sec="beregner">
+    <section id="beregner" class="calc-sec show--webshop" data-sec="beregner">
       <div class="sec-head" data-reveal="0">
-        <div class="sec-head__title"><div class="kicker">Beregn din pris</div><h2 class="h2">Hvad koster din webshop?<br><span class="dim">Se det med det samme.</span></h2></div>
-        <p class="sec-head__lead">Træk i antallet af produkter, og vælg det, shoppen skal kunne. Beregneren starter på det billigste.</p>
+        <div class="sec-head__title"><div class="kicker">Beregn din pris</div><h2 class="h2">Byg din webshop.<br><span class="dim">Se prisen med det samme.</span></h2></div>
+        <p class="sec-head__lead">Træk i antallet af produkter, og vælg det, shoppen skal kunne. Det, du vælger, lander i kurven. Beregneren starter på det billigste.</p>
       </div>
       <div class="calc">
       <div class="calc__opts">
-        <div class="calc__group" role="group" aria-labelledby="ws-g1" data-reveal="0">
-          <span class="calc__lbl" id="ws-g1">1 · Produkter</span>
-          <div class="ws-head"><label class="ws-num"><span class="sr-only">Antal produkter, skriv et tal</span><span class="ws-num__box"><span class="ws-num__m" data-ws-m aria-hidden="true">25</span><input data-ws-n type="text" inputmode="numeric" maxlength="5" value="25" autocomplete="off" enterkeyhint="done"></span><span aria-hidden="true">produkter</span></label><span class="ws-inc" data-ws-inc>Op til 25 er med i prisen</span></div>
+        <div class="calc__group ws-prod" role="group" aria-labelledby="ws-l-prod" data-reveal="1">
+          <div class="ws-prod__top"><span class="calc__lbl" id="ws-l-prod">Produkter</span><span class="ws-inc" data-ws-inc>Op til 25 er med i prisen</span></div>
+          <figure class="ws-wall" aria-hidden="true">
+            <div class="ws-wall__bar"><span class="dots3"><i></i><i></i><i></i></span><span class="ws-wall__url">nordvik.dk/shop</span><span class="tag-eks">Eksempel</span></div>
+            <div class="ws-wall__head"><b class="ws-wall__logo">Nordvik</b><span class="ws-wall__n">Alle produkter <b data-ws-wn>25</b></span><span class="ws-wall__lang" data-ws-lang><i class="is-on">DA</i><i>EN</i><i>DE</i><i>SV</i></span><span class="ws-wall__cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span></div>
+            <canvas data-ws-wall></canvas>
+          </figure>
+          <p class="sr-only">Eksempel på en webshop, der fyldes med det antal produkter, du vælger.</p>
+          <div class="ws-num"><label class="ws-num__box"><span class="sr-only">Antal produkter, skriv et tal</span><span class="ws-num__m" data-ws-m aria-hidden="true">25</span><input data-ws-n type="text" inputmode="numeric" maxlength="5" value="25" autocomplete="off" enterkeyhint="done"></label><span class="ws-num__u" data-ws-u aria-hidden="true">produkter</span></div>
           <input class="ws-range" data-ws-range type="range" min="0" max="1000" step="1" value="120" aria-label="Antal produkter" aria-valuetext="25 produkter" style="--s:0.12">
-          <div class="ws-ticks"><button type="button" data-ws-tick="25" style="--x:12%" aria-label="25 produkter" class="is-on">25</button><button type="button" data-ws-tick="100" style="--x:40%" aria-label="100 produkter">100</button><button type="button" data-ws-tick="250" style="--x:60%" aria-label="250 produkter">250</button><button type="button" data-ws-tick="500" style="--x:75%" aria-label="500 produkter">500</button><button type="button" data-ws-tick="1000" style="--x:88%" aria-label="1.000 produkter">1.000</button><button type="button" data-ws-tick="2000" style="--x:100%" aria-label="2.000 produkter">2.000</button></div>
-          <span class="ws-sub" id="ws-g1b">Sådan kommer de ind</span>
-          <div class="calc__row ws-row2" role="radiogroup" aria-labelledby="ws-g1b"><label class="calc__opt is-on"><input class="ws-in" type="radio" name="metode" value="opret" checked><b>Vi opretter dem</b><span>Ud fra dine billeder og tekster. 35 kr. pr. produkt over 25.</span><em data-ws-p="opret">Med i prisen</em></label><label class="calc__opt"><input class="ws-in" type="radio" name="metode" value="import"><b>Import</b><span>Fra en fil eller din gamle webshop. Samme pris uanset antal.</span><em data-ws-p="import">+2.995 kr.</em></label></div>
+          <div class="ws-ticks"><button type="button" data-ws-tick="1" style="--x:0%" aria-label="1 produkt">1</button><button type="button" data-ws-tick="25" style="--x:12%" aria-label="25 produkter" class="is-on">25</button><button type="button" data-ws-tick="100" style="--x:40%" aria-label="100 produkter">100</button><button type="button" data-ws-tick="250" style="--x:60%" aria-label="250 produkter">250</button><button type="button" data-ws-tick="500" style="--x:75%" aria-label="500 produkter">500</button><button type="button" data-ws-tick="1000" style="--x:88%" aria-label="1.000 produkter">1.000</button><button type="button" data-ws-tick="2000" style="--x:100%" aria-label="2.000 produkter">2.000</button></div>
+          <span class="ws-sub" id="ws-l-metode">Sådan kommer de ind</span>
+          <div class="ws-seg" role="radiogroup" aria-labelledby="ws-l-metode" data-ws-seg data-on="0"><label class="is-on"><input type="radio" name="metode" value="opret" data-cap="Vi opretter dem ud fra dine billeder og tekster. 35 kr. pr. produkt over 25." checked><b>Vi opretter dem</b><em data-ws-p="opret">Med i prisen</em></label><label><input type="radio" name="metode" value="import" data-cap="Import fra en fil eller din gamle webshop. 2.995 kr. samlet, uanset antal."><b>Import</b><em data-ws-p="import">+2.995 kr.</em></label><i class="ws-seg__thumb" aria-hidden="true"></i></div><p class="ws-cap">Vi opretter dem ud fra dine billeder og tekster. 35 kr. pr. produkt over 25.</p>
           <p class="ws-tip" data-ws-tip hidden><span></span><button type="button" data-ws-pick=""></button></p>
-          <span class="ws-sub">Mere om produkterne</span>
-          <div class="calc__row ws-row2"><label class="calc__opt"><input class="ws-in" type="checkbox" name="varianter" value="varianter"><b>Varianter</b><span>Fx størrelser og farver på samme produkt.</span><em data-ws-p="varianter">+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="tekster" value="tekster"><b>Produkttekster</b><span>Vi skriver dem. 79 kr. pr. produkt.</span><em data-ws-p="tekster">+1.975 kr.</em></label></div>
+          <div class="calc__row ws-2"><label class="calc__opt"><input class="ws-in" type="checkbox" name="varianter" value="varianter"><b>Varianter</b><span>Fx størrelser og farver på samme produkt.</span><em>+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="tekster" value="tekster"><b>Produkttekster</b><span>Vi skriver dem. 79 kr. pr. produkt.</span><em data-ws-p="tekster">+1.975 kr.</em></label></div>
         </div>
-        <div class="calc__group" role="radiogroup" aria-labelledby="ws-g2" data-reveal="0"><span class="calc__lbl" id="ws-g2">2 · Design</span><div class="calc__row ws-row2"><label class="calc__opt is-on"><input class="ws-in" type="radio" name="design" value="tema" checked><b>Tilpasset tema</b><span>Et gennemprøvet tema i dine farver, med dit logo og din stil.</span><em data-ws-p="tema">Med i prisen</em></label><label class="calc__opt"><input class="ws-in" type="radio" name="design" value="unikt"><b>Unikt design</b><span>Designet fra bunden, så shoppen ligner ingen andre.</span><em data-ws-p="unikt">+9.995 kr.</em></label></div></div>
-        <div class="calc__group" data-reveal="0"><span class="calc__lbl" id="ws-g3">3 · Sprog og valuta</span>
-          <div class="ws-step" data-ws-stepbox>
-            <span class="ws-step__t"><b>Ekstra sprog og valutaer</b><span>Fx engelsk og euro. 2.995 kr. pr. sprog.</span><em data-ws-p="sprog">Kun dansk</em></span>
-            <span class="ws-step__c" role="group" aria-labelledby="ws-g3">
-              <button type="button" data-ws-step="-1" aria-label="Et sprog færre" disabled>−</button><output data-ws-sprog aria-live="polite">0</output><button type="button" data-ws-step="1" aria-label="Et sprog mere">+</button>
-            </span>
+        <div class="calc__group" role="group" aria-labelledby="ws-l-design" data-reveal="0"><span class="calc__lbl" id="ws-l-design">Design</span><div class="ws-seg" role="radiogroup" aria-labelledby="ws-l-design" data-ws-seg data-on="0"><label class="is-on"><input type="radio" name="design" value="tema" data-cap="Et gennemprøvet tema i dine farver, med dit logo og din stil." checked><b>Tilpasset tema</b><em data-ws-p="tema">Med i prisen</em></label><label><input type="radio" name="design" value="unikt" data-cap="Designet fra bunden til dit brand, så shoppen ligner ingen andre."><b>Unikt design</b><em data-ws-p="unikt">+9.995 kr.</em></label><i class="ws-seg__thumb" aria-hidden="true"></i></div><p class="ws-cap">Et gennemprøvet tema i dine farver, med dit logo og din stil.</p></div>
+        <div class="calc__group" role="group" aria-labelledby="ws-l-sprog" data-reveal="0"><span class="calc__lbl" id="ws-l-sprog">Sprog og valuta</span><div class="ws-lang">
+            <span class="ws-lang__t"><b>Ekstra sprog og valutaer</b><span>Fx engelsk og euro. 2.995 kr. pr. sprog.</span></span>
+            <span class="ws-lang__pills" data-ws-lang aria-hidden="true"><i class="is-on">DA</i><i>EN</i><i>DE</i><i>SV</i></span>
+            <span class="calc__step"><button type="button" data-ws-step="-1" aria-label="Et sprog færre" disabled>−</button><b data-ws-sprog aria-live="polite">0</b><button type="button" data-ws-step="1" aria-label="Et sprog mere">+</button></span>
+            <em data-ws-p="sprog">Kun dansk</em>
           </div></div>
-        <div class="calc__group" role="group" aria-labelledby="ws-g4" data-reveal="0"><span class="calc__lbl" id="ws-g4">4 · Integrationer</span><div class="calc__row"><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="fragt" data-s="fragt og labels" data-c="Fragt"><b>Fragt og labels</b><span>Fx Shipmondo. Labels og track &amp; trace.</span><em data-ws-p="integ">+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="regnskab" data-s="regnskab" data-c="Regnskab"><b>Regnskab</b><span>Fx e-conomic eller Dinero.</span><em data-ws-p="integ">+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="nyhedsbrev" data-s="nyhedsbrev" data-c="Nyhedsbrev"><b>Nyhedsbrev</b><span>Fx Klaviyo. Kunderne kan tilmelde sig.</span><em data-ws-p="integ">+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="feed" data-s="produktfeed" data-c="Produktfeed"><b>Produktfeed</b><span>Dine varer til Google Shopping og Meta.</span><em data-ws-p="integ">+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="anmeldelser" data-s="anmeldelser" data-c="Anmeldelser"><b>Anmeldelser</b><span>Fx Trustpilot.</span><em data-ws-p="integ">+1.995 kr.</em></label></div></div>
-        <div class="calc__group" role="group" aria-labelledby="ws-g5" data-reveal="0"><span class="calc__lbl" id="ws-g5">5 · Funktioner</span><div class="calc__row"><label class="calc__opt"><input class="ws-in" type="checkbox" name="fn" value="b2b" data-s="B2B-priser" data-c="B2B-priser"><b>B2B og forhandlerpriser</b><span>Egne priser og login til forhandlere.</span><em data-ws-p="b2b">+4.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="fn" value="subscriptions" data-s="abonnementer" data-c="Abonnementer"><b>Abonnementer</b><span>Faste leveringer, fx hver måned.</span><em data-ws-p="subscriptions">+2.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="fn" value="migration" data-s="flytning" data-c="Flytning"><b>Flytning</b><span>Kunder, ordrer og omdirigeringer fra din gamle webshop.</span><em data-ws-p="migration">+4.995 kr.</em></label></div></div>
-        <div class="calc__group" role="group" aria-labelledby="ws-g6" data-reveal="0"><span class="calc__lbl" id="ws-g6">6 · Hver måned, hvis du vil</span><div class="calc__row"><label class="calc__opt ws-wide"><input class="ws-in" type="checkbox" name="service" value="service"><b>Webshop-service</b><span>Opdateringer, små rettelser og hjælp, når du har brug for det.</span><em data-ws-p="service">699 kr./md.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="ads" value="gsa"><b>Google Shopping Ads</b><span>Dine varer med billede og pris på Google.</span><em data-ws-p="ad:gsa">8.000 kr./md.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="ads" value="gads"><b>Google Ads</b><span>Øverst, når kunderne søger.</span><em data-ws-p="ad:gads">8.000 kr./md.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="ads" value="meta"><b>Meta Ads</b><span>Annoncer på Facebook og Instagram.</span><em data-ws-p="ad:meta">8.000 kr./md.</em></label></div>
-          <p class="calc__hint" data-ws-adtip>Første kanal 8.000 kr./md. Hver ekstra kanal kun 5.000 kr./md.</p></div>
-        <button type="button" class="ws-bar" data-ws-bar tabindex="-1" aria-hidden="true"><span class="ws-bar__t"><small>Din pris</small><span><b data-ws-bar1>12.995 kr.</b><span class="ws-bar__md" hidden> + <span data-ws-bar2>0 kr./md.</span></span></span></span><i class="ws-delta" data-ws-d3></i><span class="ws-bar__go">Se pris ↓</span></button>
+        <div class="calc__group" role="group" aria-labelledby="ws-l-integ" data-reveal="0"><span class="calc__lbl" id="ws-l-integ">Integrationer</span><div class="calc__row"><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="fragt" data-s="fragt og labels" data-c="Fragt"><b>Fragt og labels</b><span>Fx Shipmondo. Labels og track &amp; trace.</span><em>+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="regnskab" data-s="regnskab" data-c="Regnskab"><b>Regnskab</b><span>Fx e-conomic eller Dinero.</span><em>+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="nyhedsbrev" data-s="nyhedsbrev" data-c="Nyhedsbrev"><b>Nyhedsbrev</b><span>Fx Klaviyo. Kunderne kan tilmelde sig.</span><em>+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="feed" data-s="produktfeed" data-c="Feed"><b>Produktfeed</b><span>Dine varer til Google Shopping og Meta.</span><em>+1.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="integ" value="anmeldelser" data-s="anmeldelser" data-c="Anmeldelser"><b>Anmeldelser</b><span>Fx Trustpilot.</span><em>+1.995 kr.</em></label></div></div>
+        <div class="calc__group" role="group" aria-labelledby="ws-l-fn" data-reveal="0"><span class="calc__lbl" id="ws-l-fn">Funktioner</span><div class="calc__row"><label class="calc__opt"><input class="ws-in" type="checkbox" name="fn" value="b2b" data-s="B2B-priser" data-c="B2B"><b>B2B og forhandlerpriser</b><span>Egne priser og login til forhandlere.</span><em>+4.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="fn" value="subscriptions" data-s="abonnementer" data-c="Abonnementer"><b>Abonnementer</b><span>Faste leveringer, fx hver måned.</span><em>+2.995 kr.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="fn" value="migration" data-s="flytning" data-c="Flytning"><b>Flytning</b><span>Kunder, ordrer og omdirigeringer fra en anden platform.</span><em>+4.995 kr.</em></label></div></div>
+        <div class="calc__group" role="group" aria-labelledby="ws-l-md" data-reveal="0"><span class="calc__lbl" id="ws-l-md">Hver måned, hvis du vil</span><div class="calc__row"><label class="calc__opt ws-wide"><input class="ws-in" type="checkbox" name="service" value="service"><b>Webshop-service</b><span>Opdateringer, små rettelser og hjælp, når du har brug for det.</span><em>699 kr./md.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="ads" value="gsa"><b>Google Shopping Ads</b><span>Dine varer med billede og pris på Google.</span><em data-ws-p="ad:gsa">8.000 kr./md.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="ads" value="gads"><b>Google Ads</b><span>Øverst, når kunderne søger.</span><em data-ws-p="ad:gads">8.000 kr./md.</em></label><label class="calc__opt"><input class="ws-in" type="checkbox" name="ads" value="meta"><b>Meta Ads</b><span>Annoncer på Facebook og Instagram.</span><em data-ws-p="ad:meta">8.000 kr./md.</em></label></div><p class="calc__hint" data-ws-adtip>Første kanal 8.000 kr./md. Hver ekstra kanal kun 5.000 kr./md.</p></div>
       </div>
-      <div class="ws-side" data-ws-side>
-        <figure class="ws-shop" data-ws-shop aria-hidden="true" data-reveal="1">
-          <div class="ws-shop__bar"><span class="dots3"><i></i><i></i><i></i></span><span class="ws-shop__url">🔒 nordvik.dk</span><span class="tag-eks">Eksempel</span></div>
-          <div class="ws-view">
-            <div class="ws-strip" data-wb>Fri fragt over 499 kr.</div>
-            <div class="ws-top" data-wb><b class="ws-logo">Nordvik</b><span class="ws-nav"><i>Shop</i><i>Om os</i><i>Kontakt</i><i>FAQ</i></span><span class="ws-b2b">Forhandler</span><span class="ws-langs"><i data-ws-lang>DA</i><i data-ws-lang class="is-off">EN</i><i data-ws-lang class="is-off">DE</i><i data-ws-lang class="is-off">SV</i></span><span class="ws-cart"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><i>2</i></span></div>
-            <div class="ws-hero" data-wb><div class="ws-hero__a"><small>Nyt i butikken</small><b>Skærebræt i olieret eg</b><span>Se mere →</span><i class="ws-art ws-a1" style="--t:#e8dcc8"><i></i></i></div><div class="ws-hero__b"><b>Håndlavet i træ.</b><span>Se alle varer</span></div></div>
-            <div class="ws-meta" data-wb><span>Alle produkter <b data-ws-shopn>25</b></span><span>Sortér ▾</span></div>
-            <div class="ws-grid"><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a1" style="--t:#f1e8da"><i></i></div><b>Skærebræt i eg</b><small>Olieret eg, 40 cm</small><span class="ws-tile__p"><span>349 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a2" style="--t:#ebe6dc"><i></i></div><b>Serveringsbakke</b><small>Valnød med greb</small><span class="ws-tile__p"><span>449 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a3" style="--t:#efe4d6"><i></i><span class="ws-abo">Abonnér</span></div><b>Træolie</b><small>Til bræt og borde</small><span class="ws-tile__p"><span>129 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a4" style="--t:#e9ece5"><i></i></div><b>Lysestage</b><small>Drejet i ask</small><span class="ws-tile__p"><span>199 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a5" style="--t:#f2eadf"><i></i></div><b>Opbevaringskasse</b><small>Eg med fingersamlinger</small><span class="ws-tile__p"><span>299 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a6" style="--t:#ece8e1"><i></i></div><b>Knagerække</b><small>Tre knager i eg</small><span class="ws-tile__p"><span>399 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a7" style="--t:#f0e6da"><i></i></div><b>Skål i valnød</b><small>Drejet af én blok</small><span class="ws-tile__p"><span>259 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div><div class="ws-tile" data-ws-tile data-wb><div class="ws-tile__in"><div class="ws-art ws-a1 ws-w" style="--t:#e8ebe5"><i></i></div><b>Skærebræt i valnød</b><small>Olieret valnød, 30 cm</small><span class="ws-tile__p"><span>299 kr.</span><span class="ws-dots"><i></i><i></i><i></i></span></span></div></div></div>
-            <div class="ws-toast" data-ws-toast><i></i><span></span></div>
-          </div>
-        </figure>
-        <p class="sr-only">Eksempel på en webshop for den opdigtede virksomhed Nordvik. Den ændrer sig, når du vælger i beregneren.</p>
-        <div class="spot calc__sum" data-spot data-ws-sum data-reveal="2">
-          <span class="kicker">Din pris</span>
-          <div class="calc__lines" data-ws-lines><div class="calc__line"><span>Webshop på Shopify</span><span>12.995 kr.</span></div><div class="calc__line"><span>25 produkter</span><span>Med i prisen</span></div></div>
-          <div class="calc__tot"><span>Engangsbeløb</span><b data-ws-once>12.995 kr.</b></div>
-          <div class="calc__tot calc__tot--md"><span>Pr. måned</span><b data-ws-md>0 kr.</b></div>
-          <p class="calc__note">Shopify-abonnementet betaler du direkte til Shopify, og annoncebudgettet direkte til Google eller Meta. Alle priser er ekskl. moms.</p>
-          <button type="button" class="btn btn--accent" data-ws-go data-magnet data-burst>Få et tilbud på det her →</button>
-          <p class="sr-only" aria-live="polite" data-ws-live></p>
-        </div>
+      <div class="spot calc__sum" data-spot data-ws-sum data-reveal="2">
+        <div class="ws-sum__top"><span class="kicker">Din kurv</span><span class="ws-bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><i data-ws-count>2</i></span></div>
+        <div class="calc__lines" data-ws-lines><div class="calc__line"><span>Webshop på Shopify</span><span>12.995 kr.</span></div><div class="calc__line"><span>25 produkter<small>Op til 25 er med i prisen</small></span><span>Med i prisen</span></div></div>
+        <div class="calc__tot"><span>Engangsbeløb</span><b data-ws-once>12.995 kr.</b></div>
+        <div class="calc__tot calc__tot--md"><span>Pr. måned</span><b data-ws-md>0 kr.</b></div>
+        <p class="calc__note">Shopify-abonnementet betaler du direkte til Shopify, og annoncebudgettet direkte til Google eller Meta. Alle priser er ekskl. moms.</p>
+        <button type="button" class="btn btn--accent" data-ws-go data-magnet data-burst>Få et tilbud på det her →</button>
+        <p class="sr-only" aria-live="polite" data-ws-live></p>
       </div>
       </div>
+      <button type="button" class="ws-bar" data-ws-bar tabindex="-1" aria-hidden="true"><span class="ws-bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><i data-ws-count>2</i></span><span class="ws-bar__t"><small>Din pris</small><b data-ws-b1>12.995 kr.</b><span hidden>+ <span data-ws-b2>0 kr./md.</span></span></span><span class="ws-bar__go">Se kurven ↓</span></button>
+      <div class="ws-flies" data-ws-flies aria-hidden="true"></div>
     </section>
 
-    <section id="pris" class="price-sec" data-sec="pris">
-      <div class="spot price" data-reveal="0" data-spot>
-        <div class="price__main">
-          <div class="kicker">Webshop</div>
-          <h2>Klar til at sælge.<br><span>Fra første dag.</span></h2>
-          <div class="price__amount"><span>fra</span><span class="odo" data-odo>12.995</span><span>kr.</span></div>
-          <div class="price__vat">Engangsbeløb · ekskl. moms · Shopify-abonnementet betaler du direkte til Shopify</div>
-          <p class="price__lead">Alt til højre er med i grundprisen. Har du flere end 25 produkter eller brug for mere, viser beregneren prisen med det samme.</p>
-          <div class="price__cta"><a href="#kontakt" class="btn btn--accent" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
-        </div>
-        <div class="incl">
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Webshop på Shopify</b><span>Sat op og klar til at sælge. Vi er Shopify Partner.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Tema i dit brand</b><span>Et gennemprøvet tema i dine farver, med dit logo og din stil.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>25 produkter</b><span>Vi opretter dem ud fra dine billeder og tekster.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Betaling</b><span>Kort, MobilePay og Apple Pay.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Fragt</b><span>Fragtmetoder og priser, som kunden vælger ved kassen.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Handelsbetingelser og GDPR</b><span>Handelsbetingelser, cookies og privatlivspolitik på plads.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Google Analytics og Search Console</b><span>Du kan se, hvor kunderne kommer fra, og hvad de køber.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Alle de vigtige sider</b><span>Forside, om os, kontakt og FAQ.</span></span></div>
-        </div>
+    <section id="pris" class="ws-pris show--webshop" data-sec="pris">
+      <div class="ws-pris__copy" data-reveal="0">
+        <div class="kicker">Det får du</div>
+        <h2 class="h2">Alt det her er med.<br><span class="dim">I de 12.995 kr.</span></h2>
+        <p class="sec-head__lead">En webshop, der er klar til at sælge fra første dag. Har du flere end 25 produkter eller brug for mere, viser beregneren prisen med det samme.</p>
+        <div class="ws-pris__cta"><a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Pris: Få en fast pris">Få en fast pris</a><a href="#beregner" class="hero__more" data-event="Pris: Beregn din pris">Beregn din pris <span>↑</span></a></div>
       </div>
+      <div class="ws-slip" data-reveal="1"><div class="ws-slip__paper">
+        <div class="ws-slip__head"><span><b>Følgeseddel</b><small>Webshop på Shopify · Webleads</small></span><span class="ws-stamp" data-reveal="10" aria-hidden="true">Klar til<br>at sælge</span></div>
+        <div class="ws-slip__th" aria-hidden="true"><span>Antal</span><span>Det er med</span></div>
+        <ul class="ws-slip__list">
+          <li data-reveal="2" style="--i:2"><span class="ws-slip__q">1<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Webshop på Shopify</b><small>Sat op og klar til at sælge. Vi er Shopify Partner.</small></span><span class="check" aria-hidden="true">✓</span></li>
+          <li data-reveal="3" style="--i:3"><span class="ws-slip__q">1<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Tema i dit brand</b><small>Et gennemprøvet tema i dine farver, med dit logo og din stil.</small></span><span class="check" aria-hidden="true">✓</span></li>
+          <li data-reveal="4" style="--i:4"><span class="ws-slip__q">25<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Produkter</b><small>Vi opretter dem ud fra dine billeder og tekster.</small></span><span class="check" aria-hidden="true">✓</span></li>
+          <li data-reveal="5" style="--i:5"><span class="ws-slip__q">3<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Betalingsmetoder</b><small>Kort, MobilePay og Apple Pay.</small></span><span class="check" aria-hidden="true">✓</span></li>
+          <li data-reveal="6" style="--i:6"><span class="ws-slip__q">1<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Fragt</b><small>Fragtmetoder og priser, som kunden vælger ved kassen.</small></span><span class="check" aria-hidden="true">✓</span></li>
+          <li data-reveal="7" style="--i:7"><span class="ws-slip__q">3<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Handelsbetingelser, cookies og GDPR</b><small>Betingelser, cookie-banner og privatlivspolitik.</small></span><span class="check" aria-hidden="true">✓</span></li>
+          <li data-reveal="8" style="--i:8"><span class="ws-slip__q">2<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Google Analytics og Search Console</b><small>Du kan se, hvor kunderne kommer fra, og hvad de køber.</small></span><span class="check" aria-hidden="true">✓</span></li>
+          <li data-reveal="9" style="--i:9"><span class="ws-slip__q">4<span class="sr-only"> ×</span></span><span class="ws-slip__t"><b>Sider</b><small>Forside, om os, kontakt og FAQ.</small></span><span class="check" aria-hidden="true">✓</span></li>
+        </ul>
+        <div class="ws-slip__sum"><span>I alt<small>Engangsbeløb · ekskl. moms</small></span><b>12.995 kr.</b></div>
+        <i class="ws-slip__code" aria-hidden="true"></i>
+      </div></div>
     </section>
 
-    <section id="saadan" class="promise" data-sec="saadan">
-      <div class="promise__head" data-reveal="0">
-        <div class="kicker">Sådan foregår det</div>
-        <h2 class="h2">Fire trin.<br><span class="dim">Så sælger du.</span></h2>
+    <section id="saadan" class="ws-tt show--webshop" data-sec="saadan">
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title"><div class="kicker">Sådan foregår det</div><h2 class="h2">Fra snak til salg.<br><span class="dim">Følg med hele vejen.</span></h2></div>
+        <p class="sec-head__lead">Du får en fast pris og en tidsplan, før vi går i gang.</p>
       </div>
-      <div class="promise__list">
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">01 / 04</span><h3>Vi taler sammen.</h3><p>Om dine produkter, din stil, og hvad shoppen skal kunne. Du får en fast pris.</p></div>
-          <span class="pcard__g" aria-hidden="true">kr</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">02 / 04</span><h3>Vi bygger shoppen.</h3><p>Tema, sider, betaling, fragt og dine produkter. Du kan følge med undervejs.</p></div>
-          <span class="pcard__g" aria-hidden="true">#</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">03 / 04</span><h3>Du tester og godkender.</h3><p>Du prøver at handle i din egen shop, før den går live.</p></div>
-          <span class="pcard__g" aria-hidden="true">✓</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">04 / 04</span><h3>Du sælger.</h3><p>Shoppen går live på dit eget domæne, og vi viser dig, hvordan du passer den.</p></div>
-          <span class="pcard__g" aria-hidden="true">↗</span>
-        </div>
+      <div class="ws-tt__line" data-reveal="1">
+        <div class="ws-tt__road" aria-hidden="true"><i class="ws-tt__van"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5z"/><path d="m4 7.5 8 3.5 8-3.5M12 11v9M8 5.8l8 3.6"/></svg></i></div>
+        <ol><li style="--d:0.20s"><i aria-hidden="true"></i><b>Vi taler sammen</b><span>Om dine produkter, din stil, og hvad shoppen skal kunne. Du får en fast pris.</span></li><li style="--d:1.05s"><i aria-hidden="true"></i><b>Vi bygger shoppen</b><span>Tema, sider, betaling, fragt og dine produkter. Du kan følge med undervejs.</span></li><li style="--d:1.90s"><i aria-hidden="true"></i><b>Du tester</b><span>Du prøver at handle i din egen shop, før den går live.</span></li><li style="--d:2.75s"><b>Du sælger</b><span>Shoppen går live på dit eget domæne, og vi viser dig, hvordan du passer den.</span></li></ol>
       </div>
     </section>
 

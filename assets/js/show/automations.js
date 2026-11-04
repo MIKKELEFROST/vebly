@@ -1,8 +1,10 @@
-// Showcase: Automations, a flow that runs by itself (scripts/services/showcase/automations.html).
-// Scroll drives the pinned stage: 01 each task shows the minutes it takes by hand, 02 the wires are drawn,
-// 03 a customer writes: the first three steps fall like dominoes, then scrolling moves the clock on through
-// the days to the offer, the invoice and the review. The dot has its own speed, so it runs on a moment
-// after you stop. Without html.motion the finished flow is shown, static.
+// Showcase: Automations, a flow machine (scripts/services/showcase/automations.html).
+// Each example is a small graph: nodes on a grid (columns and rows across the width, or rows and lanes
+// top to bottom when that does not fit) and wires between their ports. When the canvas comes into view
+// the nodes pop in, the wires plug in and a glowing pulse runs through: each node lights up, pops a toast
+// with its result and keeps it. The .seg control re-routes the machine (unplug, move, plug in, run) and
+// "Kør igen" runs it again. Every state is derived from the run's clock, so a run can be restarted or
+// re-routed at any moment. Without html.motion the finished run is shown, static.
 import { track } from '/assets/js/analytics.js';
 
 const root = document.querySelector('.show--automations');
@@ -11,288 +13,224 @@ if (root) init(root);
 function init(root) {
   const $ = s => root.querySelector(s), $$ = s => [...root.querySelectorAll(s)];
   const motion = document.documentElement.classList.contains('motion');
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const lerp = (a, b, t) => a + (b - a) * t;
-  const ease = t => 1 - Math.pow(1 - t, 3);
-  const sec = $('[data-aut]'), fit = $('[data-aut-fit]'), pin = fit.parentElement, win = $('[data-aut-win]'), flow = $('[data-aut-flow]');
-  const svg = $('[data-aut-wires]'), dot = $('[data-aut-dot]'), cv = $('[data-aut-grid]'), cx = cv.getContext('2d');
-  const nodes = $$('[data-aut-node]'), steps = $$('[data-aut-step]'), lines = $$('[data-aut-lines] > li'), list = $('[data-aut-lines]');
-  const lw = $('[data-aut-lw]'), ph = $('[data-aut-ph]'), live = $('[data-aut-live]'), state = $('[data-aut-state]'), clock = $('[data-aut-clock]');
-  const saved = $('[data-aut-saved]'), payoff = $('[data-aut-payoff]'), cta = $('[data-aut-cta]'), hint = $('[data-aut-hint]');
-  const N = nodes.length, MIN = nodes.map(n => +n.dataset.min || 0);
-  // The example's clock, in seconds from a Monday 00:00: 09:14:02, +1 s, +2 s, Thursday 14:30,
-  // Friday the week after 15:00 and three days later
-  const TS = [33242, 33243, 33244, 311400, 1004400, 1263600];
-  const DAY = ['Man.', 'Tir.', 'Ons.', 'Tor.', 'Fre.', 'Lør.', 'Søn.'];
-  const pad = n => String(Math.floor(n)).padStart(2, '0');
-  const fmt = (t, s) => `${DAY[Math.floor(t / 86400) % 7]} ${pad(t % 86400 / 3600)}:${pad(t % 3600 / 60)}${s ? ':' + pad(t % 60) : ''}`;
-  // Scroll map, 0–1 through the pinned stage
-  const MAP = 0.1, BUILD = 0.12, LEG = 0.028, RUN = 0.26, FIRE = 0.3, DONE = 0.9;
-  const LEGS = [[0.38, 0.52], [0.56, 0.7], [0.74, 0.88]];
-  const VL = 40; // the dot's hidden way through a card
+  const fm = $('[data-fm]'), cv = $('[data-fm-cv]'), svg = $('[data-fm-wires]'), hot = $('[data-fm-hot]');
+  const WS = $$('[data-fm-wait]'), LS = $$('[data-fm-lbl]'), PS = $$('[data-fm-pulse]'), segs = $$('[data-fm-go]');
+  const ttl = $('[data-fm-title]'), sr = $('[data-fm-sr]'), endT = $('[data-fm-end]'), runBtn = $('[data-fm-run]');
+  const NS = $$('[data-fm-node]').map(el => ({ el, use: el.querySelector('use'), b: el.querySelector('b'), s: el.querySelectorAll('.fm__sub span'), toast: el.querySelector('.fm__toast') }));
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-  let G = null, gw = 0, gh = 0, first = true;
-  const sizeGrid = (W, H) => {
-    const d = Math.min(2, devicePixelRatio || 1);
-    gw = W; gh = H; cv.width = Math.round(W * d); cv.height = Math.round(H * d); cx.setTransform(d, 0, 0, d, 0, 0);
+  // The examples, in the order of the .seg buttons (their names, what they do and the end line are there).
+  // n: [icon, name, what it does, its result, 'if' for a question]
+  // e: [from, to, { w: a wait on the wire, l: a branch label, skip: the branch not taken,
+  //     dp / mp: ports across / top to bottom (r l t b), by default right→left / bottom→top }]
+  // d: [column 0–4, row −1–1] across the width; the waits get more room, as distance is time
+  // m: [row, lane] top to bottom: lane ±1 is two nodes side by side, less is a small step to the side
+  const F = [
+    { n: [['book', 'Ny booking', 'Fra din hjemmeside', 'Mette, tir. kl. 10'], ['sms', 'SMS-bekræftelse', 'Til kunden', 'SMS sendt'], ['cal', 'I kalenderen', 'Din kalender', 'Tid lagt ind'], ['bill', 'Faktura', 'Sendes på mail', 'Faktura sendt'], ['star', 'Anmeldelse', 'Spørg kunden', 'Mail sendt']],
+      e: [[0, 1], [1, 2], [2, 3, { w: 'Dagen efter' }], [3, 4, { w: '3 dage efter' }]],
+      d: [[0, 0], [.9, 0], [1.8, 0], [2.9, 0], [4, 0]], m: [[0, -.2], [1, .2], [2, -.2], [3, .2], [4, -.2]] },
+    { n: [['done', 'Jobbet er slut', 'Fra din kalender', 'Opgave hos Mette'], ['bill', 'Faktura', 'Med det samme', 'Faktura sendt'], ['fork', 'Betalt?', 'Tjekker banken', 'Ikke betalt endnu', 'if'], ['bell', 'Venlig rykker', 'Mail til kunden', 'Rykker sendt'], ['ledger', 'Bogført', 'I dit regnskab', 'Betalt og bogført']],
+      e: [[0, 1], [1, 2, { w: '8 dage efter' }], [2, 4, { l: 'Ja', skip: 1, mp: 'rr' }], [2, 3, { l: 'Nej', dp: 'bl' }], [3, 4, { dp: 'rb' }]],
+      d: [[0, 0], [.9, 0], [2, 0], [3, 1], [4, 0]], m: [[0, -.2], [1, -.2], [2, -.2], [3, -.2], [4, -.2]] },
+    { n: [['inbox', 'Ny henvendelse', 'Fra din hjemmeside', 'Jonas, kl. 21:47'], ['sms', 'SMS til kunden', 'Med det samme', 'SMS sendt'], ['phone', 'Besked til dig', 'På din telefon', 'Sendt til dig'], ['user', 'I kundelisten', 'Dit kundesystem', 'Kunde oprettet'], ['mail', 'Opfølgning', 'Hvis intet svar', 'Mail sendt']],
+      e: [[0, 1], [0, 2], [1, 3], [2, 3], [3, 4, { w: '2 dage efter' }]],
+      d: [[0, 0], [1.15, -1], [1.15, 1], [2.3, 0], [4, 0]], m: [[0, 0], [1, -1], [1, 1], [2, 0], [3, 0]] }
+  ];
+  const ACT = ['booking', 'faktura', 'leads'];
+
+  // Layout: the positions [x, y, width] of the node centres and the canvas height, for every example
+  const SAG = 64, RH = 96, J = [2, -12, 6, -8, 4], T = 58, PROC = .4;
+  let W = 0, H = 0, V = false, nh = 64, fw = 0, L = [], R = [], E = [], cur = 0;
+  const horiz = f => {
+    const A = Math.min(1320, W - 64), w = A < 1290 ? 186 : 200, st = (A - w) / 4, x0 = (W - A + w) / 2;
+    const p = f.d.map(([c, r], i) => [x0 + c * st, r * RH + (r ? 0 : J[i]), w]);
+    let t = 1e4, b = -1e4, g = 1e4;
+    p.forEach(([, y]) => { t = Math.min(t, y - nh / 2 - 44); b = Math.max(b, y + nh / 2); });
+    f.e.forEach(([a, z, o = {}]) => {
+      if (o.w) b = Math.max(b, (p[a][1] + p[z][1]) / 2 + SAG + 16);
+      if (f.d[a][1] === f.d[z][1]) g = Math.min(g, Math.abs(p[z][0] - p[a][0]) - w);
+    });
+    fw = A;
+    return { p, t, b, g };
   };
-
-  // Scale the stage down on short screens, so nothing is cut off (the room under the menu is padding)
-  const fitNow = () => {
-    fit.style.transform = '';
-    if (!motion) return;
-    const cs = getComputedStyle(pin), pt = parseFloat(cs.paddingTop), room = pin.clientHeight - pt - parseFloat(cs.paddingBottom);
-    // Layout sizes, not scrollHeight: the reveal effect keeps the log moved down until it is seen
-    const h = Math.max(...[...fit.children].map(c => c.offsetTop + c.offsetHeight)) - fit.offsetTop, s = Math.min(1, room / h);
-    if (s < 0.995) fit.style.transform = `scale(${s.toFixed(3)})`;
-    // Until it pins, the stage sits right under the headline: the room above it slides up behind it
-    sec.style.marginTop = `${-Math.max(0, pt + Math.max(0, (room - h * s) / 2) - 24)}px`;
+  const vert = f => {
+    const A = Math.min(440, W - 40), ws = (A - 12) / 2, wm = Math.min(264, A - 84), rows = f.m[4][0] + 1, gap = Array(rows).fill(38), ys = [0];
+    const side = l => Math.abs(l) === 1;
+    f.e.forEach(([a, z, o = {}]) => { const r = f.m[a][0]; if (f.m[z][0] === r + 1) gap[r] = Math.max(gap[r], o.w ? 86 : o.l || side(f.m[a][1]) !== side(f.m[z][1]) ? 50 : 38); });
+    for (let r = 1; r < rows; r++) ys[r] = ys[r - 1] + nh + gap[r - 1];
+    fw = A;
+    return { p: f.m.map(([r, l]) => [W / 2 + (side(l) ? l * (ws / 2 + 6) : l * 80), ys[r], side(l) ? ws : wm]), t: -nh / 2 - 38, b: ys[rows - 1] + nh / 2 };
   };
-
-  // Wires between the cards (side to side on the same row, else bottom to top) and the dot's path
+  // Across the width when every pair of neighbours keeps at least 40px between them, else top to bottom
   const layout = () => {
-    const W = flow.offsetWidth, H = flow.offsetHeight;
-    if (!W) return;
-    const R = nodes.map(n => ({ x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight }));
-    const ws = [];
-    for (let i = 0; i < N - 1; i++) {
-      const a = R[i], b = R[i + 1], side = b.x >= a.x + a.w - 1 && Math.abs(b.y - a.y) < a.h;
-      let p0, p1, d;
-      if (side) {
-        p0 = [a.x + a.w, a.y + a.h / 2]; p1 = [b.x, b.y + b.h / 2];
-        const k = (p1[0] - p0[0]) * 0.55;
-        d = `M${p0}C${p0[0] + k},${p0[1]} ${p1[0] - k},${p1[1]} ${p1}`;
-      } else {
-        p0 = [a.x + a.w / 2, a.y + a.h]; p1 = [b.x + b.w / 2, b.y];
-        const k = Math.max(18, (p1[1] - p0[1]) * 0.62);
-        d = `M${p0}C${p0[0]},${p0[1] + k} ${p1[0]},${p1[1] - k} ${p1}`;
-      }
-      ws.push({ p0, p1, d });
-    }
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
-    svg.innerHTML = ws.map(w => `<path class="w-sk" d="${w.d}"/><path class="w-bd" d="${w.d}"/><path class="w-gl" d="${w.d}"/><path class="w-pr" d="${w.d}"/><circle cx="${w.p0[0]}" cy="${w.p0[1]}" r="3.6"/><circle cx="${w.p1[0]}" cy="${w.p1[1]}" r="3.6"/>`).join('');
-    const ps = svg.querySelectorAll('path'), cs = svg.querySelectorAll('circle');
-    const segs = [], I = [], O = [], mid = r => [r.x + r.w / 2, r.y + r.h / 2];
-    let s = 0;
-    ws.forEach((w, i) => {
-      w.el = [ps[i * 4 + 1], ps[i * 4 + 2], ps[i * 4 + 3]]; w.port = [cs[i * 2], cs[i * 2 + 1]];
-      w.len = w.el[2].getTotalLength(); w.off = [-1, -1, -1];
-      w.el.forEach(e => { e.style.strokeDasharray = `${w.len} ${w.len + 4}`; e.style.strokeDashoffset = w.len; });
-    });
-    for (let k = 0; k < N; k++) {
-      I[k] = s; segs.push({ s, len: VL, a: k ? ws[k - 1].p1 : mid(R[k]), b: k < N - 1 ? ws[k].p0 : mid(R[k]) }); s += VL; O[k] = s;
-      if (k < N - 1) { ws[k].s0 = s; segs.push({ s, len: ws[k].len, w: ws[k] }); s += ws[k].len; }
-    }
-    const wh = win.clientHeight, lh = parseFloat(getComputedStyle(lw).getPropertyValue('--lh')) || 25;
-    G = { W, H, R, ws, segs, I, O, END: s, wh, cam: motion && wh < H - 2, lh, rows: Math.round(lw.clientHeight / lh) || 6 };
-    if (!G.cam) flow.style.transform = '';
-    sizeGrid(W, H);
-    fitNow();
-    if (!motion) finished(); else first = true;
+    W = cv.clientWidth; nh = 64; L = F.map(horiz);
+    V = L.some(q => q.g < 40);
+    if (V) { nh = 54; L = F.map(vert); }
+    fm.classList.toggle('is-v', V); fm.classList.toggle('is-c', !V && fw < 1290);
+    cv.style.setProperty('--nh', nh + 'px'); fm.style.setProperty('--fw', fw + 'px');
+    L.forEach(q => { q.h = Math.round(q.b - q.t + (V ? 10 : 20)); q.p.forEach(a => { a[1] += (V ? 4 : 6) - q.t; }); });
+    size();
   };
-  let rq = 0;
-  const relayout = () => { cancelAnimationFrame(rq); rq = requestAnimationFrame(layout); };
-
-  // Dot grid like the hero's: the dots near the running dot glow orange, and a green wave runs out of
-  // each card as it fires
-  let ripples = [];
-  const drawGrid = (now, at) => {
-    cx.clearRect(0, 0, gw, gh);
-    const g = 24, hot = [];
-    cx.fillStyle = 'rgba(17,17,17,0.12)'; cx.beginPath();
-    for (let y = g / 2; y < gh; y += g) for (let x = g / 2; x < gw; x += g) {
-      let ox = 0, oy = motion ? Math.sin(now * 0.0018 + x * 0.02 + y * 0.015) * 1.3 : 0, h = 0, c = 0;
-      if (at) { const d = Math.hypot(x - at[0], y - at[1]); if (d < 96) h = (1 - d / 96) ** 2; }
-      for (const r of ripples) {
-        const age = (now - r.t) / 900; if (age < 0 || age >= 1) continue;
-        const d = Math.hypot(x - r.x, y - r.y) || 1, q = 1 - Math.abs(d - age * 280) / 36;
-        if (q > 0) { const k = q * (1 - age); if (k > h) { h = k; c = 1; } ox += (x - r.x) / d * k * 5; oy += (y - r.y) / d * k * 5; }
-      }
-      if (h > 0.04) hot.push([x + ox, y + oy, h, c]);
-      else { cx.moveTo(x + ox + 1.3, y + oy); cx.arc(x + ox, y + oy, 1.3, 0, 6.283); }
-    }
-    cx.fill();
-    for (const [x, y, h, c] of hot) {
-      cx.fillStyle = c ? `rgba(47,158,91,${(0.16 + h * 0.6).toFixed(3)})` : `rgba(224,85,43,${(0.16 + h * 0.6).toFixed(3)})`;
-      cx.beginPath(); cx.arc(x, y, 1.3 + h * 1.3, 0, 6.283); cx.fill();
-    }
-    ripples = ripples.filter(r => now - r.t < 900);
-  };
-
-  // A card fires: it bumps, gets its check, shows the minutes saved and sends a wave through the dots
-  const pop = k => {
-    const n = nodes[k];
-    n.classList.remove('is-pop'); void n.offsetWidth; n.classList.add('is-pop');
-    clearTimeout(n.popT); n.popT = setTimeout(() => n.classList.remove('is-pop'), 1300);
-    if (G) { const r = G.R[k]; ripples.push({ x: r.x + r.w / 2, y: r.y + r.h / 2, t: performance.now() }); }
-  };
-
-  const flash = (n, c, ms) => { n.classList.add(c); clearTimeout(n[c]); n[c] = setTimeout(() => n.classList.remove(c), ms); };
-  // All six done: one more domino wave down the flow
-  const wave = () => nodes.forEach((n, k) => setTimeout(() => {
-    flash(n, 'is-wave', 600);
-    if (G) { const r = G.R[k]; ripples.push({ x: r.x + r.w / 2, y: r.y + r.h / 2, t: performance.now() }); }
-  }, 120 + k * 90));
-
-  // Hover, focus or tap a card for a short line on what it does
-  let tipOpen = null, tipP = 0, ptr = 'mouse', p = 0;
-  const dir = n => { const a = n.getBoundingClientRect(), b = win.getBoundingClientRect(); n.dataset.tip = a.top + a.height / 2 - b.top > b.height * 0.52 ? 'up' : 'down'; };
-  const closeTip = () => { if (tipOpen) tipOpen.classList.remove('is-tip'); tipOpen = null; };
-  nodes.forEach((n, k) => {
-    const b = n.querySelector('button');
-    n.addEventListener('pointerenter', () => dir(n));
-    b.addEventListener('focus', () => dir(n));
-    b.addEventListener('pointerdown', e => { ptr = e.pointerType; });
-    b.addEventListener('click', e => {
-      dir(n);
-      if (ptr !== 'mouse' || e.detail === 0) { const on = tipOpen !== n; closeTip(); if (on) { n.classList.add('is-tip'); tipOpen = n; tipP = p; } }
-      if (n.classList.contains('is-done') && motion) pop(k);
-      track('showcase_interact', { showcase: 'automations', action: 'trin-' + n.dataset.autNode });
-      ptr = 'mouse';
-    });
+  const size = () => { H = L[cur].h; cv.style.height = H + 'px'; };
+  // Placed with the translate property, so the pop-in's scale works around each node's own centre
+  const put = (n, [x, y, w]) => { n.el.style.width = w.toFixed(1) + 'px'; n.el.style.translate = `${(x - w / 2).toFixed(1)}px ${(y - nh / 2).toFixed(1)}px`; };
+  const snap = () => L[cur].p.forEach((a, i) => { R[i] = a.slice(); put(NS[i], a); });
+  const fill = () => F[cur].n.forEach(([ic, a, b, r, k], i) => {
+    const n = NS[i];
+    n.use.setAttribute('href', '#fm-i-' + ic); n.b.textContent = a; n.s[0].textContent = b; n.s[1].textContent = r; n.toast.textContent = r;
+    n.el.classList.toggle('is-if', k === 'if'); n.el.style.setProperty('--i', i);
   });
-  document.addEventListener('pointerdown', e => { if (tipOpen && !tipOpen.contains(e.target)) closeTip(); }, { passive: true });
-  cta.addEventListener('click', () => track('showcase_interact', { showcase: 'automations', action: 'fast-pris' }));
 
-  // Reduced motion: the finished flow
-  const finished = () => {
-    G.ws.forEach(w => { w.el.forEach(e => { e.style.strokeDashoffset = 0; }); w.port.forEach(c => c.classList.add('is-b', 'is-on')); });
-    drawGrid(0, null);
+  // Wires: a curve between two ports that leaves and enters along the ports' sides. Across the width a
+  // wait hangs down under the row, with its clock at the bottom
+  const port = ([x, y, w], s) => s === 'r' ? [x + w / 2, y, 1, 0] : s === 'l' ? [x - w / 2, y, -1, 0] : s === 't' ? [x, y - nh / 2, 0, -1] : [x, y + nh / 2, 0, 1];
+  const curve = (a, b, o) => {
+    const dx = b[0] - a[0];
+    if (o.w && !V) { const c = (a[1] + b[1]) / 2 + SAG * 4 / 3, k = dx * .3; return [a, [a[0] + k, c], [b[0] - k, c], b]; }
+    const k = a[2] === b[2] && a[3] === b[3] ? 44 : clamp(Math.hypot(dx, b[1] - a[1]) * .45, 20, 130);
+    return [a, [a[0] + a[2] * k, a[1] + a[3] * k], [b[0] + b[2] * k, b[1] + b[3] * k], b];
+  };
+  const at = (el, p) => { el.style.translate = `calc(${p.x.toFixed(1)}px - 50%) calc(${p.y.toFixed(1)}px - 50%)`; };
+  const draw = (plug, d = 0) => {
+    const f = F[cur], q = L[cur].p, fx = v => v.toFixed(1);
+    svg.setAttribute('width', W); svg.setAttribute('height', H);
+    svg.classList.toggle('is-plug', !!plug); svg.style.setProperty('--d', d + 's');
+    svg.innerHTML = f.e.map(([a, z, o = {}], i) => {
+      const ps = (V ? o.mp : o.dp) || (V ? 'bt' : 'rl'), A = port(q[a], ps[0]), B = port(q[z], ps[1]);
+      const p = 'M' + curve(A, B, o).map(c => fx(c[0]) + ',' + fx(c[1])).join(' ').replace(' ', 'C');
+      return `<g style="--i:${i}"${o.skip ? ' class="is-skip"' : ''}><path class="w-b" d="${p}"/>${o.skip ? '' : `<path class="w-t" d="${p}"/><path class="w-g" d="${p}"/><path class="w-c" d="${p}"/>`}<circle cx="${fx(A[0])}" cy="${fx(A[1])}" r="4"/><circle cx="${fx(B[0])}" cy="${fx(B[1])}" r="4"/></g>`;
+    }).join('');
+    let wi = 0, li = 0;
+    E = [...svg.children].map((g, i) => {
+      const [a, z, o = {}] = f.e[i], [b, t, gl, c] = g.querySelectorAll('path'), len = b.getTotalLength();
+      const x = { g, b, t, gl, c, dots: g.querySelectorAll('circle'), len, a, z, o, p: -1 };
+      if (t) { t.style.strokeDasharray = `${len} ${len}`; gl.style.strokeDasharray = c.style.strokeDasharray = `${T} ${len + T}`; }
+      if (plug && t) { b.style.strokeDasharray = len; b.style.setProperty('--l', len + 'px'); }
+      // Top to bottom the clock sits a little higher, clear of the next node's toast
+      if (o.w) { x.wait = WS[wi++]; at(x.wait, b.getPointAtLength(len * (V ? .4 : .5))); x.wait.lastChild.textContent = o.w; }
+      if (o.l) { x.lbl = LS[li++]; at(x.lbl, b.getPointAtLength(Math.min(len / 2, 46))); x.lbl.textContent = o.l; }
+      return x;
+    });
+    WS.forEach((el, j) => el.classList.toggle('is-off', j >= wi));
+    LS.forEach((el, j) => el.classList.toggle('is-off', j >= li));
   };
 
-  new ResizeObserver(relayout).observe(flow);
-  if (motion) { new ResizeObserver(relayout).observe(win); new ResizeObserver(relayout).observe(pin); }
-  addEventListener('load', relayout);
-  if (document.fonts) document.fonts.ready.then(relayout);
-  layout();
-  if (!motion) return;
-
-  // Start state: the tasks as they are today, nothing connected yet
-  root.classList.add('is-init');
-  nodes.forEach(n => { n.classList.remove('is-built', 'is-done'); n.dataset.m = '0'; });
-  lines.forEach(l => l.classList.remove('is-on'));
-  steps.forEach((s, i) => s.classList.toggle('is-on', i === 0));
-  [payoff, live, cta].forEach(e => e.classList.remove('is-on'));
-  saved.textContent = '0'; clock.textContent = '';
-  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('is-init')));
-
+  // The run: when each node fires and when the pulse is on each wire (a wait takes longer)
+  let FI = [], S = [], U = [], END = 0, last = -1, maxStep = 0;
+  const plan = () => {
+    FI = [.3];
+    for (let n = 1; n < 5; n++) {
+      FI[n] = 0;
+      E.forEach((x, i) => { if (x.z === n && !x.o.skip) { S[i] = FI[x.a] + PROC; U[i] = x.o.w ? 2.1 : clamp(x.len / 520, .45, .9); FI[n] = Math.max(FI[n], S[i] + U[i]); } });
+    }
+    END = FI[4] + PROC + .4;
+  };
   const set = (el, c, on) => { if (el.classList.contains(c) !== on) el.classList.toggle(c, on); };
-  const text = (el, t) => { if (el.textContent !== t) el.textContent = t; };
-  const target = q => {
-    const { I, O, END } = G, rest = k => O[k] + 10;
-    if (q < FIRE) return 0;
-    let t = rest(2);
-    for (let j = 0; j < LEGS.length; j++) {
-      const [a, b] = LEGS[j], k = 2 + j;
-      if (q < a) return t;
-      if (q < b) return lerp(rest(k), I[k + 1], (q - a) / (b - a));
-      t = k + 1 < N - 1 ? rest(k + 1) : END;
-    }
-    return t;
-  };
-  const at = s => {
-    const sg = G.segs;
-    let i = 0; while (i < sg.length - 1 && s > sg[i].s + sg[i].len) i++;
-    const q = sg[i], t = clamp((s - q.s) / q.len);
-    if (q.w) { const pt = q.w.el[2].getPointAtLength(t * q.w.len); return [pt.x, pt.y]; }
-    return [lerp(q.a[0], q.b[0], t), lerp(q.a[1], q.b[1], t)];
-  };
-  const timeAt = s => {
-    const { I, O } = G;
-    let k = 0; while (k < N - 1 && s >= I[k + 1]) k++;
-    if (k === N - 1) return TS[k];
-    const r0 = O[k] + 10;
-    return lerp(TS[k], TS[k + 1], clamp((s - r0) / (I[k + 1] - r0)));
-  };
-
-  let sD = 0, lastT = 0, vis = false, running = false, maxStep = 0, camY = 0, lastStep = -1, lastCount = -1;
-  let sNow = 0, sFrom = 0, sTo = 0, sT0 = 0;
-  const fired = Array(N).fill(false);
-  const PH = ['Kobler dine apps sammen …', 'Venter på næste henvendelse …'];
-  const STATE = ['Ikke sat op', 'Sættes op', 'Kører'];
-
-  const frame = now => {
-    if (!vis) { running = false; return; }
-    requestAnimationFrame(frame);
-    const dt = Math.min(0.05, (now - (lastT || now)) / 1000); lastT = now;
-    if (!G) return;
-    const r = sec.getBoundingClientRect(), vh = innerHeight;
-    p = clamp(-r.top / Math.max(1, r.height - vh));
-    const step = p < MAP ? 0 : p < RUN ? 1 : 2;
-    if (step !== lastStep) {
-      lastStep = step;
-      steps.forEach((s, i) => set(s, 'is-on', i === step));
-      text(state, STATE[step]); set(live, 'is-on', step === 2);
-    }
-    if (tipOpen && Math.abs(p - tipP) > 0.03) closeTip();
-    set(hint, 'is-on', p < 0.02);
-
-    // The dot: the first three steps at domino speed, then it follows the scroll with a little lag
-    const tg = target(p), d = tg - sD;
-    if (first || Math.abs(d) > 1400) sD = tg;
-    else if (d > 0 && sD < G.O[2] + 10) sD += Math.min(d, 340 * dt);
-    else { sD += clamp(d * (1 - Math.pow(d > 0 ? 0.84 : 0.75, dt * 60)), -2400 * dt, 1800 * dt); if (Math.abs(tg - sD) < 0.3) sD = tg; }
-    const going = (p >= FIRE || sD > 1) && sD < G.END - 1, pos = at(sD);
-    set(dot, 'is-on', going);
-    dot.style.transform = `translate3d(${pos[0].toFixed(1)}px,${pos[1].toFixed(1)}px,0)`;
-
-    // Wires: drawn in 02, filled orange behind the dot in 03
-    G.ws.forEach((w, i) => {
-      const bf = clamp((p - BUILD - i * LEG) / LEG), f = clamp((sD - w.s0) / w.len);
-      const o = [w.len * (1 - bf), w.len * (1 - f), w.len * (1 - f)];
-      o.forEach((v, j) => { if (Math.abs(v - w.off[j]) > 0.4) { w.off[j] = v; w.el[j].style.strokeDashoffset = v.toFixed(1); } });
-      set(w.port[0], 'is-b', bf > 0); set(w.port[1], 'is-b', bf >= 1);
-      set(w.port[0], 'is-on', f > 0); set(w.port[1], 'is-on', f >= 1);
+  const step = n => { while (maxStep < n) track('showcase_step', { showcase: 'automations', step: ++maxStep }); };
+  const tick = t => {
+    let np = 0;
+    last = t;
+    E.forEach((x, i) => {
+      if (x.o.skip) return;
+      // Ease in and out; on a wait the pulse slows down inside the clock (time passes)
+      const k = clamp((t - S[i]) / U[i], 0, 1), p = x.o.w ? k + .86 * Math.sin(6.2832 * k) / 6.2832 : k * k * (3 - 2 * k), go = k > 0 && k < 1;
+      if (p !== x.p) { x.p = p; x.t.style.strokeDashoffset = x.len * (1 - p); x.gl.style.strokeDashoffset = x.c.style.strokeDashoffset = T - p * x.len; }
+      set(x.g, 'is-go', go); set(x.dots[0], 'is-on', k > 0); set(x.dots[1], 'is-on', k >= 1);
+      if (x.wait) { set(x.wait, 'is-on', k > .2 && k < .8); set(x.wait, 'is-done', k >= .8); }
+      if (x.lbl) set(x.lbl, 'is-on', k > 0);
+      if (go && np < 2) {
+        const q = x.b.getPointAtLength(p * x.len), X = q.x.toFixed(1), Y = q.y.toFixed(1);
+        PS[np].style.transform = `translate3d(${X}px,${Y}px,0)`;
+        hot.style.setProperty(np ? '--bx' : '--ax', X + 'px'); hot.style.setProperty(np ? '--by' : '--ay', Y + 'px');
+        np++;
+      }
     });
-
-    // Cards: mapped (01), built (02), running and done (03)
-    let count = 0, want = 0, hand = 0;
-    nodes.forEach((n, k) => {
-      const built = k ? p >= BUILD + k * LEG : p >= BUILD - 0.01, mapped = p >= 0.012 + k * 0.014;
-      const done = k ? sD >= G.I[k] - 0.5 : p >= FIRE || sD > 1;
-      const m = String(done ? 3 : built ? 2 : mapped ? 1 : 0);
-      if (n.dataset.m !== m) { if (m === '1' && n.dataset.m === '0' && !first) flash(n, 'is-mark', 700); n.dataset.m = m; }
-      if (mapped) hand += MIN[k];
-      set(n, 'is-built', built);
-      set(n, 'is-run', going && sD > G.I[k] + 0.5 && sD < G.O[k] + 2);
-      if (done !== fired[k]) { fired[k] = done; set(n, 'is-done', done); if (done && !first) pop(k); }
-      if (done) { count++; want += MIN[k]; }
+    PS.forEach((el, j) => set(el, 'is-on', j < np));
+    if (np < 2) hot.style.setProperty('--bx', '-999px');
+    if (!np) hot.style.setProperty('--ax', '-999px');
+    NS.forEach((n, i) => {
+      const a = t - FI[i];
+      set(n.el, 'is-run', a >= 0 && a < PROC); set(n.el, 'is-done', a >= PROC);
+      set(n.el, 'is-toast', a >= PROC * .7 && a < 2.2); set(n.el, 'is-land', a >= 2.2 && a < 2.8); set(n.el, 'is-res', a >= 2.3);
     });
-
-    // The log: one line per step that ran, the newest on top of the clock
-    if (count !== lastCount || first) {
-      lastCount = count;
-      lines.forEach((l, k) => { set(l, 'is-on', k < count); set(l, 'is-new', k === count - 1); });
-      list.style.transform = count > G.rows ? `translateY(${-(count - G.rows) * G.lh}px)` : '';
-    }
-    text(ph, count ? '' : step ? PH[step - 1] : hand ? `Du bruger ${hand} min pr. opgave` : 'Kortlægger dine opgaver …');
-    set(lw, 'is-ph', !count);
-    text(clock, step < 2 ? '' : fired[0] ? fmt(timeAt(sD), timeAt(sD) < TS[2] + 60) : 'Man. 09:14');
-    if (want !== sTo) { sFrom = sNow; sTo = want; sT0 = now; }
-    sNow = lerp(sFrom, sTo, ease(clamp((now - sT0) / 700)));
-    text(saved, String(Math.round(sNow)));
-    const end = fired[N - 1] && p >= DONE;
-    if (end && !payoff.classList.contains('is-on') && !first) wave();
-    set(payoff, 'is-on', end); set(cta, 'is-on', end);
-
-    // Phones: the camera follows the wires being drawn (02), goes back up and follows the dot (03)
-    if (G.cam) {
-      const kf = clamp((p - BUILD) / LEG - 0.5, 0, N - 1), a = G.R[Math.floor(kf)], c = G.R[Math.ceil(kf)];
-      const fy = going || sD > 1 ? pos[1] : step === 1 ? lerp(a.y + a.h / 2, c.y + c.h / 2, kf % 1) : 0;
-      const ty = clamp(G.wh * 0.46 - fy, G.wh - G.H, 0);
-      camY = first ? ty : camY + (ty - camY) * (1 - Math.pow(0.88, dt * 60));
-      flow.style.transform = `translate3d(0,${camY.toFixed(1)}px,0)`;
-    }
-    drawGrid(now, going ? pos : null);
-
-    // How far people follow it: 1 the tasks, 2 connected, 3 running, 4 all six done
-    const reached = end ? 4 : step + 1;
-    if (reached > maxStep && r.top < vh * 0.5) while (maxStep < reached) track('showcase_step', { showcase: 'automations', step: ++maxStep });
-    first = false;
+    set(fm, 'is-end', t >= END);
+    if (motion && t > 0) step(t >= END ? 3 : t >= FI[2] ? 2 : 1);
   };
 
+  // One loop for the glide and the run; it sleeps when nothing moves or the canvas is out of view
+  let raf = 0, vis = false, live = false, running = false, t0 = 0, G = null, off = 0, swT = 0;
+  const loop = now => {
+    raf = 0;
+    if (G) glide(now);
+    if (running) { const t = (now - t0) / 1000; tick(t); if (t > END + 3.5) running = false; }
+    if (vis && (G || running)) raf = requestAnimationFrame(loop);
+  };
+  const kick = () => { if (!raf && vis) raf = requestAnimationFrame(loop); };
+  const start = ms => { plan(); t0 = performance.now() + ms; running = true; kick(); };
+  // Re-route: unplug (the wires and the results go), move (the nodes glide to their new places and change
+  // what they are), plug in (the new wires draw themselves) and run
+  const glide = now => {
+    const to = L[cur].p;
+    let done = true;
+    NS.forEach((n, j) => {
+      const k = clamp((now - G.t - 140 - j * 50) / 620, 0, 1), e = k < .5 ? 4 * k * k * k : 1 - (2 - 2 * k) ** 3 / 2;
+      if (k < 1) done = false;
+      R[j] = G.from[j].map((v, m) => v + (to[j][m] - v) * e); put(n, R[j]);
+    });
+    if (done) { G = null; fm.style.setProperty('--pd', '.4s'); fm.classList.remove('is-swap'); draw(true); start(1000); }
+  };
+  const go = i => {
+    if (i === cur) return;
+    cur = i;
+    segs.forEach((b, j) => { b.classList.toggle('is-on', j === i); b.setAttribute('aria-pressed', String(j === i)); });
+    ttl.textContent = segs[i].textContent; sr.textContent = segs[i].dataset.sr; endT.textContent = segs[i].dataset.end;
+    if (!motion || !live) { size(); fill(); snap(); draw(false); plan(); tick(motion ? -1 : 1e4); return; }
+    ttl.animate([{ opacity: 0, transform: 'translateY(40%)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    running = false; tick(-1);
+    fm.classList.add('is-swap', 'is-blank'); size();
+    clearTimeout(swT); swT = setTimeout(() => { fill(); fm.classList.remove('is-blank'); }, 190);
+    G = { t: performance.now(), from: R.map(r => r.slice()) };
+    kick();
+  };
+  const enter = () => { live = true; fm.style.setProperty('--pd', '.95s'); fm.classList.add('is-live'); draw(true, .45); start(1500); };
+
+  segs.forEach((b, i) => b.addEventListener('click', () => {
+    if (i !== cur) track('showcase_interact', { showcase: 'automations', action: 'flow-' + ACT[i] });
+    go(i);
+  }));
+  runBtn.addEventListener('click', () => {
+    track('showcase_interact', { showcase: 'automations', action: 'koer-igen' });
+    if (!motion) return;
+    if (!live) enter(); else if (!G) start(380);
+  });
+
+  // The visitor's own business from "Prøv med din egen virksomhed" on /services/hjemmesider, if typed there
+  try {
+    const v = JSON.parse(sessionStorage.getItem('wl-egen') || 'null');
+    const c = (s, d) => { s = typeof s === 'string' ? s.replace(/\s+/g, ' ').trim().slice(0, 40) : ''; return s ? s.charAt(0).toLocaleUpperCase('da-DK') + s.slice(1) : d; };
+    if (v) $('[data-fm-who]').textContent = [c(v.navn, 'Nordvik'), c(v.fag, 'Tømrer'), c(v.by, 'København')].join(' · ');
+  } catch (x) { /* fine */ }
+
+  layout(); fill(); snap(); fm.classList.add('is-ready');
+  if (!motion) { fm.classList.add('is-static'); draw(false); plan(); tick(1e4); }
+
+  // A new width: lay out again and redraw; a run keeps going, its wires stay on the nodes
+  new ResizeObserver(() => {
+    if (!cv.clientWidth || cv.clientWidth === W) return;
+    layout(); snap();
+    const g = G;
+    G = null;
+    if (g) { clearTimeout(swT); fill(); fm.classList.remove('is-swap', 'is-blank'); }
+    if (live || !motion) { draw(false); if (g) start(500); else tick(motion ? last : 1e4); }
+  }).observe(cv);
+
+  if (!motion) return;
   new IntersectionObserver(es => {
-    vis = es[es.length - 1].isIntersecting;
-    if (vis && !running) { running = true; lastT = 0; requestAnimationFrame(frame); }
-  }, { rootMargin: '120px 0px' }).observe(sec);
+    const e = es[es.length - 1], now = performance.now();
+    if (e.isIntersecting && !vis && off) { t0 += now - off; if (G) G.t += now - off; off = 0; }
+    if (!e.isIntersecting && vis) off = now;
+    vis = e.isIntersecting;
+    if (vis && !live && e.intersectionRatio >= .4) enter();
+    kick();
+  }, { threshold: [0, .4] }).observe(cv);
 }

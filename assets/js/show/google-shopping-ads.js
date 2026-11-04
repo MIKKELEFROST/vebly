@@ -1,8 +1,10 @@
-// Showcase: Google Shopping Ads (/services/google-shopping-ads). A customer searches, the shopping ads
-// slide in, your product moves to the front and lights up, then a click, the cart and a sale.
-// With motion: a pinned stage driven by scroll. Without: the finished state, static (HTML and CSS).
-// "Prøv med din egen vare": the product and shop name go into your ad. They stay in this browser
-// (sessionStorage 'wl-shop') and are never sent anywhere; analytics only hears which field was used.
+// Showcase: Google Shopping Ads (/services/google-shopping-ads). A search page with the "Sponsoreret ·
+// Shopping" carousel, and above it your product as one row of a product feed. Three switches in the feed
+// (Bedre titel, Tilbudspris, Gratis fragt) rewrite your card in the carousel, live.
+// The carousel is real: drag it with the mouse (momentum, snap, a rubber band at the ends), swipe it on a
+// phone (native scroll-snap), use the arrows, and click a card to open the product like on Google.
+// With motion: when the section comes into view the query types itself, the cards cascade in and the three
+// fixes switch on one by one. Without: the finished state from the HTML, and everything still works.
 import { track } from '/assets/js/analytics.js';
 
 const root = document.querySelector('.show--google-shopping-ads');
@@ -11,194 +13,250 @@ if (root) run(root);
 function run(root) {
   const SC = 'google-shopping-ads', motion = document.documentElement.classList.contains('motion');
   const $ = s => root.querySelector(s), $$ = s => [...root.querySelectorAll(s)];
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const seg = (v, a, b) => clamp((v - a) / (b - a));
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const ease = t => 1 - (1 - t) ** 3;
-  const inout = t => t < .5 ? 4 * t ** 3 : 1 - (2 - 2 * t) ** 3 / 2;
-  const lerp = (a, b, t) => a + (b - a) * t;
+  const act = action => track('showcase_interact', { showcase: SC, action });
+  let reached = 0;
+  const stage = n => { while (reached < n) track('showcase_step', { showcase: SC, step: ++reached }); };
 
-  const pin = $('[data-gsa-pin]'), sticky = $('[data-gsa-sticky]'), fit = $('[data-gsa-fit]'), scr = $('[data-gsa-scr]');
-  const qbox = $('[data-gsa-qbox]'), ac = $('[data-gsa-ac]'), acRows = [...ac.children], qEl = $('[data-gsa-q]'), url = $('[data-gsa-url]'), res = $('[data-gsa-res]'), ads = $('[data-gsa-ads]'), next = $('[data-gsa-next]');
-  const dim = $('[data-gsa-dim]'), sheet = $('[data-gsa-sheet]'), buy = $('[data-gsa-buy]'), cur = $('[data-gsa-cur]'), rip = $('[data-gsa-rip]'), fx = $('[data-gsa-fx]');
-  const row = $('[data-gsa-row]'), cards = $$('[data-gsa-card]'), steps = $$('[data-gsa-step]'), box = $('[data-gsa-egen]');
-  const small = matchMedia('(max-width: 699px)'), flat = matchMedia('(max-height: 499px)');
-  let Q = 'keramik krus', SHOP = 'lervaerk.dk/produkt/keramik-krus-salviegroen', dirty = true, L = null, S0 = [];
-  const searchUrl = () => 'google.dk/search?q=' + Q.replace(/\s+/g, '+');
+  const box = $('[data-gsa]'), row = $('[data-gsa-row]'), trk = $('[data-gsa-trk]');
+  const cards = $$('[data-gsa-card]'), you = $('[data-gsa-you]'), arrows = $$('[data-gsa-arr]');
+  const qEl = $('[data-gsa-q]'), url = $('[data-gsa-url]'), dot = $('[data-gsa-dot]');
+  const pan = $('[data-gsa-pan]'), body = $('[data-gsa-pbody]'), go = $('[data-gsa-go]'), toast = $('[data-gsa-toast]');
+  const P = k => $(`[data-gsa-p="${k}"]`), btn = k => $(`[data-gsa-fix="${k}"]`), cell = k => $(`[data-gsa-cell="${k}"] > span`), yEl = k => $(`[data-gsa-y="${k}"]`);
+  const Q = 'keramik krus', QURL = 'google.dk/search?q=keramik+krus', KEYS = ['titel', 'tilbud', 'fragt'];
 
-  /* ---------------- Prøv med din egen vare ---------------- */
-  // "Lerværk" → lervaerk.dk, "Krus & Kande" → krus-og-kande.dk
-  const slug = (n, max) => n.toLocaleLowerCase('da-DK').replace(/\s+(aps|a\/s|ivs)\.?$/, '').replace(/&/g, ' og ').replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, max).replace(/-+$/, '');
-  const domain = n => (slug(n, 30) || 'lervaerk') + '.dk';
-  const f = { vare: $('[data-gsa-in="vare"]'), butik: $('[data-gsa-in="butik"]') }, DEF = $('[data-gsa-title]').textContent;
-  try {
-    const v = JSON.parse(sessionStorage.getItem('wl-shop') || 'null') || {}, e = JSON.parse(sessionStorage.getItem('wl-egen') || 'null') || {};
-    if (typeof v.vare === 'string') f.vare.value = v.vare.slice(0, 60);
-    // Nothing typed here yet: the company name from "Prøv med din egen virksomhed" on /services/hjemmesider
-    f.butik.value = (typeof v.butik === 'string' ? v.butik : typeof e.navn === 'string' ? e.navn : '').slice(0, 40);
-  } catch (x) { /* fine */ }
-  const clean = el => el.value.replace(/\s+/g, ' ').trim();
-  const put = (sel, t) => $$(sel).forEach(el => { el.textContent = t; });
-  const first = t => t.charAt(0).toLocaleUpperCase('da-DK');
-  const apply = () => {
-    const vare = clean(f.vare), butik = clean(f.butik), shop = butik || 'Lerværk';
-    // The customer searches for what you sell
-    Q = vare ? vare.toLocaleLowerCase('da-DK').slice(0, 32).trim() : 'keramik krus';
-    put('[data-gsa-title]', vare || DEF); put('[data-gsa-shop]', shop); put('[data-gsa-ini]', first(shop)); put('[data-gsa-pi]', first(vare) || 'V');
-    put('[data-gsa-qt]', Q); put('[data-gsa-dom]', domain(shop));
-    // Where the click lands: the product in your webshop
-    SHOP = `${domain(shop)}/produkt/${slug(vare, 40) || 'keramik-krus-salviegroen'}`;
-    // Their own product gets a placeholder instead of our mug, and their shop no stars
-    root.classList.toggle('is-own', !!vare);
-    root.classList.toggle('is-egen', !!(vare || butik));
-    box.classList.toggle('is-filled', !!(vare || butik));
-    if (motion) measure(); else { qEl.textContent = Q; url.textContent = searchUrl(); }
+  /* ---------------- The feed and your card ---------------- */
+  // What each fix writes in the feed cell [off, on], and what your card shows [off, on]
+  const FEED = { titel: ['Krus grøn', 'Keramik krus 35 cl i stentøj, salviegrøn – håndlavet i Danmark'], tilbud: ['', '249,00 kr.'], fragt: ['39,00 kr.', '0,00 kr.'] };
+  const CARD = {
+    titel: ['Krus grøn', '<mark>Keramik krus</mark> 35 cl i stentøj, salviegrøn – håndlavet i Danmark'],
+    tilbud: ['<b>329,00 kr.</b>', '<b class="is-sale">249,00 kr.</b><s>329,00 kr.</s>'],
+    fragt: ['+ 39,00 kr. i fragt', 'Gratis fragt']
   };
-  let tm = 0;
-  box.addEventListener('input', () => {
-    clearTimeout(tm);
-    tm = setTimeout(() => { apply(); try { sessionStorage.setItem('wl-shop', JSON.stringify({ vare: clean(f.vare), butik: clean(f.butik) })); } catch (x) { /* fine */ } }, 120);
+  // on = what the switches say, shown = what your card shows (it follows once the change has arrived)
+  const on = { titel: true, tilbud: true, fragt: true }, shown = { ...on }, tok = { titel: 0, tilbud: 0, fragt: 0 };
+  const paint = k => {
+    yEl(k).innerHTML = CARD[k][+shown[k]];
+    if (k === 'tilbud') you.classList.toggle('is-tilbud', shown.tilbud);
+    if (open === you) fill(you);
+  };
+  const again = (el, c) => { el.classList.remove(c); void el.offsetWidth; el.classList.add(c); };
+  // Your card is scrolled into view before it changes
+  const seeYou = async () => {
+    const r = row.getBoundingClientRect(), c = you.getBoundingClientRect();
+    if (c.left >= r.left - 1 && c.right <= r.right + 1) return;
+    glide(snapOf(you)); await wait(520);
+  };
+  // A dot carries the change from the feed down to your card, on a small arc
+  const fly = (a, b) => new Promise(res => {
+    const o = box.getBoundingClientRect(), A = a.getBoundingClientRect(), B = b.getBoundingClientRect();
+    const x0 = A.left + Math.min(A.width / 2, 70) - o.left, y0 = A.top + A.height / 2 - o.top;
+    const x1 = B.left + Math.min(B.width / 2, 46) - o.left, y1 = B.top + B.height / 2 - o.top;
+    const cx = (x0 + x1) / 2 - (y1 - y0) * .22, cy = (y0 + y1) / 2 + (x1 - x0) * .22, d = dot.cloneNode(), f = [];
+    for (let i = 0; i <= 12; i++) {
+      const t = i / 12, u = 1 - t, x = u * u * x0 + 2 * u * t * cx + t * t * x1, y = u * u * y0 + 2 * u * t * cy + t * t * y1;
+      f.push({ transform: `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${(.5 + Math.sin(Math.PI * t) * .6).toFixed(3)})`, opacity: t < .1 ? t * 10 : t > .92 ? (1 - t) * 12 : 1 });
+    }
+    box.append(d);
+    d.animate(f, { duration: 640, easing: 'cubic-bezier(.45,.05,.3,1)' }).onfinish = () => { d.remove(); res(); };
   });
-  const told = new Set();
-  box.addEventListener('change', e => { const k = e.target.dataset.gsaIn; if (k && !told.has(k) && clean(e.target)) { told.add(k); track('showcase_interact', { showcase: SC, action: 'egen-' + k }); } });
-  // Enter moves on to the shop name, and closes the keyboard after it
-  box.addEventListener('keydown', e => { if (e.key !== 'Enter' || !e.target.dataset.gsaIn) return; e.preventDefault(); if (e.target === f.vare) f.butik.focus(); else e.target.blur(); });
-  $('[data-gsa-cta]').addEventListener('click', () => track('showcase_interact', { showcase: SC, action: 'cta' }));
+  const bump = () => you.animate([{ transform: 'none' }, { transform: 'translateY(-7px) scale(1.035)', offset: .35 }, { transform: 'none' }], { duration: 620, easing: 'cubic-bezier(.3,.7,.3,1)' });
 
-  if (!motion) { apply(); return; }
-
-  /* ---------------- Layout ---------------- */
-  // Phones: the box sits above the pinned stage, so the phone gets the whole screen
-  const place = () => {
-    const out = small.matches;
-    if (out === box.classList.contains('is-out') || box.contains(document.activeElement)) return;
-    box.classList.toggle('is-out', out);
-    if (out) pin.before(box); else fit.prepend(box);
+  // Switch a fix on or off: the cell is typed anew, then the dot flies, then your card changes
+  const set = async (k, v) => {
+    on[k] = v; btn(k).setAttribute('aria-pressed', v);
+    const t = ++tok[k], live = () => t === tok[k], c = cell(k), txt = FEED[k][+v], td = c.parentNode;
+    if (!motion) { c.textContent = txt; shown[k] = v; paint(k); return; }
+    $$('.gsa-cell.is-sel').forEach(x => x !== td && x.classList.remove('is-sel'));
+    const sheet = td.offsetParent !== null;
+    if (sheet) {
+      td.classList.add('is-sel', 'is-typing'); c.textContent = '';
+      await wait(160);
+      for (let i = 1; i <= txt.length; i++) { if (!live()) return; c.textContent = txt.slice(0, i); await wait(9 + Math.random() * 14); }
+      if (!live()) return;
+      td.classList.remove('is-typing'); again(td, 'is-flash');
+    } else c.textContent = txt;
+    await seeYou(); if (!live()) return;
+    await fly(sheet ? td : btn(k), yEl(k)); if (!live()) return;
+    shown[k] = v; paint(k); again(yEl(k), 'is-hl'); bump();
+    setTimeout(() => { if (live()) td.classList.remove('is-sel'); }, 1100);
   };
-  // Layout positions inside the search page (transforms do not count)
-  const off = el => { let x = 0, y = 0; for (let e = el; e && e !== scr; e = e.offsetParent) { x += e.offsetLeft; y += e.offsetTop; } return { x, y }; };
-  function measure() {
-    place();
-    fit.style.transform = '';
-    const phone = small.matches;
-    // Short screens: scale the stage down, so nothing is cut off (the room under the menu stays)
-    if (!phone && !flat.matches) { const k = Math.min(1, (innerHeight - parseFloat(getComputedStyle(sticky).paddingTop)) / fit.offsetHeight); if (k < 1) fit.style.transform = `scale(${k})`; }
-    // Your card starts in place 4 (3 on a phone) and moves to the front
-    const Y = phone ? 2 : 3, c = off(cards[0]), b = off(buy), q = off(qbox), w = scr.clientWidth, h = scr.clientHeight;
-    S0 = cards.map((x, i) => !i ? Y : i <= Y ? i - 1 : i);
-    L = {
-      Y, pitch: cards[1].offsetLeft - cards[0].offsetLeft, sh: sheet.offsetHeight + 30,
-      t0: { x: w * .8, y: h + 30 }, t1: { x: c.x + cards[0].offsetWidth / 2, y: c.y + cards[0].offsetWidth * .5 },
-      t2: { x: b.x + buy.offsetWidth / 2, y: b.y + buy.offsetHeight / 2 },
-      qx: w / 2 - (q.x + qbox.offsetWidth / 2), qy: h * .4 - (q.y + qbox.offsetHeight / 2)
-    };
-    dirty = true;
+
+  /* ---------------- The carousel ---------------- */
+  const max = () => row.scrollWidth - row.clientWidth;
+  const snaps = () => { const o = trk.getBoundingClientRect().left + parseFloat(getComputedStyle(trk).paddingLeft); return cards.map(c => clamp(Math.round(c.getBoundingClientRect().left - o), 0, max())); };
+  const nearest = x => snaps().reduce((a, b) => Math.abs(b - x) < Math.abs(a - x) ? b : a);
+  const snapOf = c => snaps()[cards.indexOf(c)];
+  let gl = 0;
+  // Move the row to a snap point ourselves (arrows, drag release, your card): ease out, snapping off meanwhile
+  const glide = (to, v = 0) => {
+    cancelAnimationFrame(gl); gl = 0;
+    const from = row.scrollLeft, d = clamp(to, 0, max()) - from;
+    if (!motion || Math.abs(d) < 1) { row.scrollLeft = from + d; row.classList.remove('is-free'); return; }
+    row.classList.add('is-free');
+    const dur = v ? clamp(3 * Math.abs(d / v), 260, 900) : clamp(320 + Math.abs(d) * .5, 380, 760), t0 = performance.now();
+    const step = t => { const k = Math.min(1, (t - t0) / dur); row.scrollLeft = from + d * ease(k); if (k < 1) gl = requestAnimationFrame(step); else { gl = 0; row.classList.remove('is-free'); } };
+    gl = requestAnimationFrame(step);
+  };
+  const upd = () => { const s = row.scrollLeft, m = max(); arrows[0].classList.toggle('is-off', s < 4); arrows[1].classList.toggle('is-off', s > m - 4); };
+  let uq = 0;
+  row.addEventListener('scroll', () => { if (!uq) uq = requestAnimationFrame(() => { uq = 0; upd(); }); }, { passive: true });
+  addEventListener('resize', upd);
+  // An arrow moves half a screen of cards, like the real one
+  arrows.forEach(a => a.addEventListener('click', () => {
+    const dir = +a.dataset.gsaArr, s = row.scrollLeft, list = snaps(), pitch = cards[1].offsetLeft - cards[0].offsetLeft;
+    const n = Math.max(1, Math.round(row.clientWidth / pitch / 2));
+    let i = list.findIndex(x => x >= s - 2);
+    if (i < 0) i = list.length - 1;
+    glide(list[clamp(i + dir * n, 0, list.length - 1)]);
+    // An arrow that disappears hands the focus to the other one
+    setTimeout(() => { if (document.activeElement === a && a.classList.contains('is-off')) arrows[dir > 0 ? 0 : 1].focus({ preventScroll: true }); }, 820);
+    act(dir > 0 ? 'pil-frem' : 'pil-tilbage');
+  }));
+
+  // Dragging with the mouse; fingers and trackpads scroll the row natively
+  const rub = o => Math.sign(o) * 84 * (1 - Math.exp(-Math.abs(o) / 170));
+  let drag = null, eat = 0, drags = 0;
+  row.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse' || e.button) return;
+    cancelAnimationFrame(gl); gl = 0;
+    drag = { x: e.clientX, s: row.scrollLeft, id: e.pointerId, on: false, over: 0, pts: [[e.timeStamp, e.clientX]] };
+  });
+  row.addEventListener('pointermove', e => {
+    const d = drag;
+    if (!d || e.pointerId !== d.id) return;
+    const dx = e.clientX - d.x;
+    if (!d.on) { if (Math.abs(dx) < 6) return; d.on = true; row.setPointerCapture(e.pointerId); row.classList.add('is-drag', 'is-free'); }
+    const m = max(), s = d.s - dx;
+    d.over = s < 0 ? -s : s > m ? m - s : 0;
+    row.scrollLeft = clamp(s, 0, m);
+    trk.style.transform = d.over && motion ? `translate3d(${rub(d.over).toFixed(1)}px,0,0)` : '';
+    d.pts.push([e.timeStamp, e.clientX]);
+    while (d.pts.length > 2 && e.timeStamp - d.pts[0][0] > 100) d.pts.shift();
+  });
+  const drop = e => {
+    const d = drag;
+    if (!d || e.pointerId !== d.id) return;
+    drag = null;
+    if (!d.on) return;
+    eat = performance.now() + 120;
+    row.classList.remove('is-drag');
+    const tf = trk.style.transform;
+    if (tf) { trk.style.transform = ''; trk.animate([{ transform: tf }, { transform: 'none' }], { duration: 650, easing: 'cubic-bezier(.2,1.5,.4,1)' }); }
+    // Momentum: the speed of the last 100 ms carries the row on, then it settles on the nearest card
+    const [a, b] = [d.pts[0], d.pts[d.pts.length - 1]];
+    let v = e.timeStamp - b[0] > 80 || b[0] <= a[0] ? 0 : clamp((b[1] - a[1]) / (b[0] - a[0]), -4, 4);
+    if (Math.abs(v) < .25) v = 0;
+    glide(nearest(row.scrollLeft - v * 320), -v);
+    if (drags++ < 3) act('traek');
+  };
+  row.addEventListener('pointerup', drop);
+  row.addEventListener('pointercancel', drop);
+  // The click that ends a drag is not a click on a card
+  addEventListener('click', e => { if (performance.now() < eat) { eat = 0; e.stopPropagation(); e.preventDefault(); } }, true);
+
+  /* ---------------- The product panel ---------------- */
+  let open = null, tt = 0, nt = 0;
+  const fill = c => {
+    const mine = c === you, r = c.querySelector('.gsa-card__r');
+    // The photo without its square backdrop: the panel draws the backdrop across its whole width
+    const img = c.querySelector('.gsa-img svg').cloneNode(true);
+    img.firstElementChild.remove();
+    P('img').replaceChildren(img);
+    P('s').innerHTML = c.querySelector('.gsa-card__s').innerHTML + (mine ? '<span>lervaerk.dk</span>' : '');
+    P('t').textContent = c.querySelector('.gsa-card__t').textContent;
+    P('p').innerHTML = c.querySelector('.gsa-card__p').innerHTML;
+    P('d').textContent = c.querySelector('.gsa-card__d').textContent;
+    P('r').innerHTML = r ? r.innerHTML : '';
+    pan.classList.toggle('is-you', mine);
+    go.toggleAttribute('data-burst', mine && !go.classList.contains('is-done'));
+    go.lastElementChild.textContent = mine ? 'Købt ✓' : 'Kun et eksempel';
+  };
+  const show = c => {
+    open = c; go.classList.remove('is-done', 'is-nope'); clearTimeout(nt); fill(c);
+    pan.inert = false; root.classList.add('is-pan');
+  };
+  const openPan = c => {
+    show(c);
+    $('[data-gsa-close]').focus({ preventScroll: true });
+    act(c === you ? 'kort-dit' : 'kort-andet');
+  };
+  const closePan = () => {
+    if (!open) return;
+    const c = open; open = null;
+    root.classList.remove('is-pan'); pan.inert = true;
+    c.focus({ preventScroll: true });
+  };
+  cards.forEach(c => c.addEventListener('click', () => openPan(c)));
+  // Tabbing into the cards before the entrance: show them at once
+  row.addEventListener('focusin', () => { if (pre) reveal(true); });
+  $('[data-gsa-close]').addEventListener('click', closePan);
+  $('[data-gsa-dim]').addEventListener('click', closePan);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) closePan(); });
+  $('[data-gsa-mine]').addEventListener('click', () => {
+    show(you); glide(snapOf(you)); go.focus({ preventScroll: true });
+    if (motion) body.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    act('vis-dit');
+  });
+  // "Gå til butik": on your card it ends in a sale (confetti from data-burst), on the others it is only an example
+  go.addEventListener('click', () => {
+    if (go.classList.contains('is-done')) return;
+    if (open !== you) { go.classList.add('is-nope'); clearTimeout(nt); nt = setTimeout(() => go.classList.remove('is-nope'), 1700); act('butik-andet'); return; }
+    go.classList.add('is-done'); setTimeout(() => go.removeAttribute('data-burst'));
+    $('[data-gsa-sum]').textContent = on.tilbud ? '249,00 kr.' : '329,00 kr.';
+    again(toast, 'is-on'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('is-on'), 3400);
+    act('koeb');
+  });
+
+  /* ---------------- The switches ---------------- */
+  let auto = motion, pre = motion, started = false, vis = false, wake = null;
+  const seen = () => vis ? Promise.resolve() : new Promise(r => { wake = r; });
+  $$('[data-gsa-fix]').forEach(b => b.addEventListener('click', () => {
+    const k = b.dataset.gsaFix;
+    auto = false;
+    if (pre) reveal(true);
+    set(k, !on[k]);
+    act(k + (on[k] ? '-til' : '-fra'));
+  }));
+
+  /* ---------------- The entrance ---------------- */
+  // The results appear (the cards one by one, unless the visitor is already busy)
+  const reveal = fast => {
+    pre = false; qEl.textContent = Q; url.textContent = QURL;
+    root.classList.remove('is-pre', 'is-typing'); root.classList.add('is-done');
+    if (!fast) cards.forEach((c, i) => c.animate([{ opacity: 0, transform: 'translate3d(56px,12px,0) scale(.94)' }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 90 + i * 80, easing: 'cubic-bezier(.2,.9,.25,1.12)', fill: 'backwards' }));
+    upd();
+  };
+  const start = async () => {
+    started = true;
+    await wait(420);
+    if (pre) {
+      root.classList.add('is-typing');
+      for (let i = 1; i <= Q.length; i++) { if (!pre) break; qEl.textContent = Q.slice(0, i); await wait(55 + Math.random() * 65); }
+      if (pre) { await wait(280); url.textContent = QURL; stage(1); }
+      if (pre) { reveal(false); stage(2); await wait(90 + cards.length * 80 + 650); }
+    }
+    for (const [i, k] of KEYS.entries()) {
+      await seen(); if (!auto) return;
+      again(btn(k), 'is-press'); await set(k, true);
+      if (!auto) return;
+      stage(3 + i); await wait(650);
+    }
+    $('.gsa-you').animate([{ transform: 'translateX(-50%)' }, { transform: 'translate(-50%,-7px) scale(1.1)', offset: .4 }, { transform: 'translateX(-50%)' }], { duration: 700, easing: 'cubic-bezier(.3,.7,.3,1)' });
+    if (!arrows[1].classList.contains('is-off')) arrows[1].animate([{ transform: 'none' }, { transform: 'translateX(6px)', offset: .25 }, { transform: 'none', offset: .5 }, { transform: 'translateX(6px)', offset: .75 }, { transform: 'none' }], { duration: 1100, delay: 300 });
+  };
+
+  if (motion) {
+    // Before the entrance: an empty search, and your product as it is today
+    root.classList.add('is-pre'); qEl.textContent = ''; url.textContent = 'google.dk';
+    KEYS.forEach(k => { on[k] = shown[k] = false; btn(k).setAttribute('aria-pressed', 'false'); cell(k).textContent = FEED[k][0]; paint(k); });
+    new IntersectionObserver(es => {
+      vis = es[es.length - 1].isIntersecting;
+      if (vis && wake) { wake(); wake = null; }
+      if (vis && !started) start();
+    }, { threshold: .5 }).observe($('.gsa-car'));
   }
-
-  /* ---------------- Confetti from "Købt" ---------------- */
-  const COLS = ['#e0552b', '#111', '#f2c14e', '#2f9e5b', '#f6b8a2'];
-  const confetti = () => {
-    if (!fx.animate) return;
-    const r = fx.getBoundingClientRect(), bb = buy.getBoundingClientRect(), x0 = bb.left + bb.width / 2 - r.left, y0 = bb.top + bb.height / 2 - r.top;
-    for (let i = 0; i < 32; i++) {
-      const d = document.createElement('i'), w = 6 + Math.random() * 6, a = -Math.PI / 2 + (Math.random() - .5) * 2.6, sp = 90 + Math.random() * 140, rot = (Math.random() - .5) * 900;
-      d.style.cssText = `left:${x0 - w / 2}px;top:${y0 - w / 2}px;width:${w}px;height:${Math.random() < .5 ? w : w * .45}px;background:${COLS[i % 5]};border-radius:${Math.random() < .4 ? '50%' : '2px'}`;
-      fx.appendChild(d);
-      const dx = Math.cos(a) * sp, dy = Math.sin(a) * sp;
-      d.animate([
-        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
-        { transform: `translate(${dx}px,${dy}px) rotate(${rot / 2}deg)`, opacity: 1, offset: .4 },
-        { transform: `translate(${dx * 1.4}px,${dy + 170}px) rotate(${rot}deg)`, opacity: 0 }
-      ], { duration: 1100 + Math.random() * 700, easing: 'cubic-bezier(.2,.6,.4,1)' }).onfinish = () => d.remove();
-    }
-  };
-
-  /* ---------------- The story, driven by scroll ---------------- */
-  let s = 0, last = -1, step = -1, reached = 0, you = null, bought = null, sold = null, typing = null, start = null, armed = true, snap = true;
-  const render = v => {
-    const a = v < .2 ? 0 : v < .44 ? 1 : v < .66 ? 2 : 3;
-    if (a !== step) {
-      step = a; steps.forEach((el, i) => el.classList.toggle('is-on', i === a));
-      // Phones can swipe the row until your card moves to the front
-      row.classList.toggle('is-lock', a > 1);
-      if (a > 1 && row.scrollLeft) row.scrollTo({ left: 0, behavior: 'smooth' });
-    }
-    // 01 The query is typed, then the box glides up and the results appear
-    const n = Math.round(Q.length * seg(v, .02, .13)), qt = Q.slice(0, n);
-    if (qEl.textContent !== qt) {
-      qEl.textContent = qt;
-      // Suggestions under the box: what is typed, and the rest in bold
-      const sug = [Q, ...(Q === 'keramik krus' ? [' håndlavet', ' tilbud'] : [' tilbud', ' pris']).map(t => Q + t)];
-      acRows.forEach((r, i) => { r.children[1].textContent = qt; r.children[2].textContent = sug[i].slice(qt.length); });
-    }
-    ac.style.opacity = n > 1 ? 1 - seg(v, .132, .148) : 0;
-    const ty = n > 0 && n < Q.length;
-    if (ty !== typing) { typing = ty; root.classList.toggle('is-typing', ty); }
-    const u = v > .79 ? SHOP : v > .145 ? searchUrl() : 'google.dk';
-    if (url.textContent !== u) url.textContent = u;
-    const up = 1 - inout(seg(v, .14, .19));
-    qbox.style.transform = up ? `translate3d(${(L.qx * up).toFixed(1)}px,${(L.qy * up).toFixed(1)}px,0) scale(${(1 + .06 * up).toFixed(4)})` : '';
-    const rk = seg(v, .165, .2);
-    res.style.opacity = rk; res.style.transform = rk < 1 ? `translate3d(0,${((1 - rk) * 14).toFixed(1)}px,0)` : '';
-    // 02 The cards slide in one by one. 03 Yours lifts, moves to the front and lights up; the rest dim
-    const hl = seg(v, .56, .61), p1 = seg(v, .745, .77);
-    cards.forEach((c, i) => {
-      const j = S0[i], k = ease(seg(v, .19 + j * .027, .27 + j * .027));
-      const m = i ? inout(seg(v, .47 + (L.Y - i) * .01, .56 + (L.Y - i) * .01)) : inout(seg(v, .46, .58));
-      let x = (j + (i - j) * m - i) * L.pitch + (1 - k) * 80, y = 0, sc = .94 + .06 * k, o = k;
-      if (!i) { const lift = Math.sin(Math.PI * m); y = -18 * lift - 3 * hl; sc *= (1 + .05 * lift) * (1 - .035 * Math.sin(Math.PI * p1)); }
-      else o *= 1 - .45 * hl;
-      c.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) scale(${sc.toFixed(4)})`;
-      c.style.opacity = o.toFixed(3);
-    });
-    const isYou = hl > .4;
-    if (isYou !== you) { you = isYou; root.classList.toggle('is-you', isYou); }
-    next.style.opacity = seg(v, .36, .42);
-    // 04 A click on your ad, your product in your webshop, a click on "Læg i kurv" and the sale
-    const c1 = inout(seg(v, .67, .745)), shk = inout(seg(v, .77, .83)), c2 = inout(seg(v, .83, .87)), p2 = seg(v, .87, .89);
-    const T1 = { x: L.t1.x - row.scrollLeft, y: L.t1.y }, A = c2 ? T1 : L.t0, B = c2 ? L.t2 : T1, ck = c2 || c1, pr = p2 || p1, R = p2 ? L.t2 : T1;
-    const gone = ease(seg(v, .9, .97)), cx = lerp(A.x, B.x, ck) + 46 * gone, cy = lerp(A.y, B.y, ck) - 34 * Math.sin(Math.PI * ck) + 30 * gone;
-    cur.style.opacity = seg(v, .66, .69) * (1 - seg(v, .93, .97));
-    cur.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0) scale(${(1 - .2 * Math.sin(Math.PI * pr)).toFixed(4)})`;
-    rip.style.opacity = pr > 0 && pr < 1 ? (.7 * (1 - pr)).toFixed(3) : 0;
-    rip.style.transform = `translate3d(${R.x.toFixed(1)}px,${R.y.toFixed(1)}px,0) scale(${(.3 + 1.6 * pr).toFixed(3)})`;
-    sheet.style.transform = `translate3d(0,${((1 - shk) * L.sh).toFixed(1)}px,0)`;
-    dim.style.opacity = shk.toFixed(3);
-    const isB = v >= .89;
-    if (isB !== bought) { bought = isB; root.classList.toggle('is-bought', isB); if (isB && armed) { armed = false; confetti(); } }
-    if (v < .85) armed = true;
-    const isS = v >= .905;
-    if (isS !== sold) { sold = isS; root.classList.toggle('is-sold', isS); }
-    // A nudge to scroll once something is typed, until the story starts
-    const st = v < .06;
-    if (st !== start) { start = st; box.classList.toggle('is-start', st); }
-  };
-  const frame = () => {
-    // Too short for the pinned story: the moment your ad is first, with every step written out
-    if (flat.matches) {
-      if (last !== -2 || dirty) { last = -2; dirty = false; step = -1; render(.62); steps.forEach(el => el.classList.add('is-on')); row.classList.remove('is-lock'); }
-      return;
-    }
-    if (last === -2) { step = -1; snap = dirty = true; }
-    const r = pin.getBoundingClientRect(), H = pin.offsetHeight - sticky.offsetHeight, p = H > 0 ? clamp(-r.top / H) : 0;
-    // A little inertia, so wheel steps glide; no catching up after a jump
-    s = snap ? p : s + (p - s) * .16; snap = false;
-    if (Math.abs(p - s) < .0005) s = p;
-    if (s !== last || dirty) { last = s; dirty = false; render(s); }
-    if (p > .003 || s > .2) { const a = s < .2 ? 1 : s < .44 ? 2 : s < .66 ? 3 : 4; while (reached < a) track('showcase_step', { showcase: SC, step: ++reached }); }
-  };
-  // The loop only runs while the stage is near the screen
-  let on = false, raf = 0;
-  const loop = () => { frame(); raf = on ? requestAnimationFrame(loop) : 0; };
-  new IntersectionObserver(es => {
-    const was = on; on = es[es.length - 1].isIntersecting;
-    if (on && !was) { snap = true; if (!raf) raf = requestAnimationFrame(loop); }
-  }, { rootMargin: '120px 0px' }).observe(pin);
-
-  apply();
-  addEventListener('resize', measure); addEventListener('load', measure);
-  if (small.addEventListener) { small.addEventListener('change', measure); flat.addEventListener('change', measure); }
-  if (window.ResizeObserver) new ResizeObserver(() => measure()).observe(scr);
-  if (document.fonts) document.fonts.ready.then(measure);
-  frame();
+  upd();
 }

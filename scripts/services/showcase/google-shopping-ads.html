@@ -1,123 +1,167 @@
 <section id="eksempel" class="show show--google-shopping-ads" data-sec="eksempel">
-      <div class="sec-head gsa__head" data-reveal="0">
-        <div class="sec-head__title"><div class="kicker">Sådan ser det ud</div><h2 class="h2">Fra søgning.<br><span class="dim">Til salg.</span></h2></div>
-        <p class="sec-head__lead">Sådan møder kunderne dine varer på Google: med billede, pris og fragt, lige i søgningen. Scroll, og se det ske.</p>
-      </div>
-      <div class="gsa__pin" data-gsa-pin>
-        <div class="gsa__sticky" data-gsa-sticky>
-          <div class="gsa__fit" data-gsa-fit>
-            <!-- The visitor's product and shop name go into the ad. They stay in the browser (sessionStorage wl-shop) -->
-            <div class="egen gsa__egen" role="group" aria-labelledby="gsa-lbl" data-gsa-egen>
-              <span class="egen__lbl"><span id="gsa-lbl" data-gsa-lbl>Prøv med din egen vare</span><span class="egen__hint" aria-hidden="true">Scroll videre, og se din annonce ↓</span></span>
-              <div class="egen__row">
-                <label class="egen__f"><span class="sr-only">Din vare</span><input data-gsa-in="vare" placeholder="Din vare" maxlength="60" autocomplete="off" autocapitalize="sentences" enterkeyhint="next"></label>
-                <label class="egen__f"><span class="sr-only">Din webshop</span><input data-gsa-in="butik" placeholder="Din webshop" maxlength="40" autocomplete="organization" autocapitalize="words" enterkeyhint="done"></label>
-              </div>
-            </div>
-            <ol class="gsa__steps">
-              <li class="gsa-step is-on" data-gsa-step><span class="gsa-step__n">01</span><div class="gsa-step__b"><h3>Kunden søger</h3><p>Vi sender dine varer til Google i et produktfeed, der selv holder pris og lager opdateret.</p></div></li>
-              <li class="gsa-step" data-gsa-step><span class="gsa-step__n">02</span><div class="gsa-step__b"><h3>Annoncerne vises</h3><p>Billede, pris og fragt står lige i søgningen. Vi skriver titlerne med de ord, kunderne bruger.</p></div></li>
-              <li class="gsa-step" data-gsa-step><span class="gsa-step__n">03</span><div class="gsa-step__b"><h3>Din vare står først</h3><p>Vi holder øje med prisen og lægger budgettet på de varer, der sælger.</p></div></li>
-              <li class="gsa-step" data-gsa-step><span class="gsa-step__n">04</span><div class="gsa-step__b"><h3>Kunden klikker og køber</h3><p>Kunden lander lige på varen i din webshop. Vi måler hvert køb, så du ser, hvad annoncerne sælger for.</p>
-                <a href="#kontakt" class="gsa-step__cta" data-gsa-cta>Få en fast pris →</a></div></li>
-            </ol>
-            <div class="gsa__stage">
-              <p class="sr-only">Eksempel på en søgning på Google: En kunde søger efter »<span data-gsa-qt>keramik krus</span>«. Seks shoppingannoncer vises med billede, pris og fragt. Annoncen fra <span data-gsa-shop>Lerværk</span> rykker frem som den første og får en orange ramme. Kunden klikker på den, lægger varen i kurven og køber.</p>
-              <!-- A drawing of a search page with shopping ads: no search engine's logo, the products and shops are made up -->
-              <div class="browser gsa__browser" aria-hidden="true">
-                <div class="browser__bar">
-                  <div class="dots3"><i></i><i></i><i></i></div>
-                  <div class="browser__url"><span>🔒</span><span data-gsa-url>google.dk/search?q=keramik+krus</span></div>
-                  <span class="tag-eks">Eksempel</span>
-                </div>
-                <div class="gsa-scr" data-gsa-scr>
-                  <div class="gsa-qw" data-gsa-qbox>
-                    <div class="gsa-q"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span data-gsa-q>keramik krus</span><i class="gsa-q__caret"></i></div>
-                    <div class="gsa-ac" data-gsa-ac><span><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span></span><b></b></span><span><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span></span><b></b></span><span><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span></span><b></b></span></div>
-                  </div>
-                  <div class="gsa-res" data-gsa-res>
-                    <div class="gsa-tabs"><b>Alle</b><span>Shopping</span><span>Billeder</span><span>Videoer</span><span>Nyheder</span></div>
-                    <div class="gsa-ads" data-gsa-ads>
-                      <div class="gsa-ads__h"><b>Sponsoreret</b><span>· Shopping</span><i>⋮</i></div>
-                      <div class="gsa-row" data-gsa-row>
-                        <div class="gsa-card gsa-card--you" data-gsa-card>
-                          <div class="gsa-img"><svg viewBox="0 0 200 200"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#9cb79a;--gd:#7d987c;--c:#d9bb93;--gl:.9;--so:.24"/></svg><span class="gsa-ph"><b data-gsa-pi>V</b><span>Dit billede</span></span><span class="gsa-tag">Tilbud</span></div>
-                          <span class="gsa-you">Din annonce</span>
-                          <div class="gsa-card__t" data-gsa-title>Keramik krus 35 cl i stentøj, salviegrøn – håndlavet i Danmark</div>
-                          <div class="gsa-card__p"><b class="is-sale">249,00 kr.</b><s>329,00 kr.</s></div>
-                          <div class="gsa-card__s"><i style="--i:#4d6b50" data-gsa-ini>L</i><span data-gsa-shop>Lerværk</span></div>
-                          <div class="gsa-card__d">Gratis fragt</div>
-                          <div class="gsa-card__r"><b>4,8</b><span style="--f:96%">★★★★★</span>(86)</div>
-                        </div>
-                        <div class="gsa-card" data-gsa-card>
-                          <div class="gsa-img"><svg viewBox="0 0 200 200"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(4 25) scale(.66)" style="--g:#e9dfce;--gd:#d5c7af;--c:#cfae84;--gl:.55;--s:#5b4532;--so:.62"/><use href="#gsa-mug" transform="translate(48 36) scale(.74)" style="--g:#e9dfce;--gd:#d5c7af;--c:#cfae84;--gl:.55;--s:#5b4532;--so:.62"/></svg></div>
-                          <div class="gsa-card__t">Kaffekrus i stentøj, 2 stk. – sand med prikker</div>
-                          <div class="gsa-card__p"><b>299,00 kr.</b></div>
-                          <div class="gsa-card__s"><i style="--i:#8b5e3c">K</i><span>Krus &amp; Kande</span></div>
-                          <div class="gsa-card__d">+ 39,00 kr. i fragt</div>
-                          <div class="gsa-card__r"><b>4,6</b><span style="--f:92%">★★★★★</span>(41)</div>
-                        </div>
-                        <div class="gsa-card" data-gsa-card>
-                          <div class="gsa-img"><svg viewBox="0 0 200 200"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#2f4d80;--gd:#223a61;--c:#d3b68e;--g2:#a8c2dc;--b:.92;--r:#b9d0e5;--gl:1;--s:#e2eaf4;--so:.22"/></svg></div>
-                          <div class="gsa-card__t">Krus med hank, blå reaktiv glasur 40 cl</div>
-                          <div class="gsa-card__p"><b>189,95 kr.</b></div>
-                          <div class="gsa-card__s"><i style="--i:#2d4a7a">G</i><span>Glasurhuset</span></div>
-                          <div class="gsa-card__d">Hent i dag · 2,1 km</div>
-                          <div class="gsa-card__r"><b>4,9</b><span style="--f:98%">★★★★★</span>(128)</div>
-                        </div>
-                        <div class="gsa-card" data-gsa-card>
-                          <div class="gsa-img"><svg viewBox="0 0 200 200"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#c56a43;--gd:#a6532f;--c:#bc8e67;--gl:.3;--s:#4a2516;--so:.3"/></svg><span class="gsa-tag">Tilbud</span></div>
-                          <div class="gsa-card__t">Stentøjskrus i terrakotta, 30 cl</div>
-                          <div class="gsa-card__p"><b class="is-sale">159,00 kr.</b><s>199,00 kr.</s></div>
-                          <div class="gsa-card__s"><i style="--i:#b0532c">D</i><span>Drejeskiven</span></div>
-                          <div class="gsa-card__d">+ 49,00 kr. i fragt</div>
-                        </div>
-                        <div class="gsa-card" data-gsa-card>
-                          <div class="gsa-img"><svg viewBox="0 0 200 200"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#3b3a38;--gd:#292826;--c:#d2b48c;--gl:.24;--s:#e6e0d7;--so:.34"/></svg></div>
-                          <div class="gsa-card__t">Mat sort krus 45 cl i stentøj</div>
-                          <div class="gsa-card__p"><b>219,00 kr.</b></div>
-                          <div class="gsa-card__s"><i style="--i:#2b2b2b">B</i><span>Bordkunst</span></div>
-                          <div class="gsa-card__d">Gratis fragt over 499 kr.</div>
-                          <div class="gsa-card__r"><b>4,5</b><span style="--f:90%">★★★★★</span>(17)</div>
-                        </div>
-                        <div class="gsa-card" data-gsa-card>
-                          <div class="gsa-img"><svg viewBox="0 0 200 200"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(200 0) scale(-1 1)" style="--g:#e4b5a9;--gd:#cc988b;--c:#ddbd99;--gl:.85;--s:#6b4a40;--so:.2"/></svg></div>
-                          <div class="gsa-card__t">Krus i stentøj, rosa – 35 cl</div>
-                          <div class="gsa-card__p"><b>139,00 kr.</b></div>
-                          <div class="gsa-card__s"><i style="--i:#a35d6a">K</i><span>Køkkenkrogen</span></div>
-                          <div class="gsa-card__d">+ 39,00 kr. i fragt</div>
-                          <div class="gsa-card__r"><b>4,7</b><span style="--f:94%">★★★★★</span>(9)</div>
-                        </div>
-                      </div>
-                      <span class="gsa-next" data-gsa-next>›</span>
-                    </div>
-                    <div class="gsa-org"><i style="--w:24%"></i><i style="--w:56%;--c:#e8ebf5;height:1em"></i><i style="--w:90%"></i><i style="--w:72%"></i></div>
-                  </div>
-                  <div class="gsa-dim" data-gsa-dim></div>
-                  <!-- Step 04: the product in the visitor's webshop -->
-                  <div class="gsa-sheet" data-gsa-sheet>
-                    <i class="gsa-sheet__grab"></i>
-                    <div class="gsa-sheet__shop"><i style="--i:#4d6b50" data-gsa-ini>L</i><b data-gsa-shop>Lerværk</b><span data-gsa-dom>lervaerk.dk</span></div>
-                    <div class="gsa-sheet__body">
-                      <div class="gsa-img"><svg viewBox="0 0 200 200"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#9cb79a;--gd:#7d987c;--c:#d9bb93;--gl:.9;--so:.24"/></svg><span class="gsa-ph"><b data-gsa-pi>V</b><span>Dit billede</span></span></div>
-                      <div class="gsa-sheet__info">
-                        <b class="gsa-sheet__t" data-gsa-title>Keramik krus 35 cl i stentøj, salviegrøn – håndlavet i Danmark</b>
-                        <div class="gsa-sheet__p"><b>249,00 kr.</b><s>329,00 kr.</s></div>
-                        <span class="gsa-sheet__stock"><i></i>På lager · sendes i dag</span>
-                        <span class="gsa-buy" data-gsa-buy><span>Læg i kurv</span><span>Købt ✓</span></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="gsa-toast"><i>✓</i><span><b>Nyt salg</b><span class="gsa-toast__k">249,00 kr. </span>fra Google Shopping</span></div>
-                  <span class="gsa-rip" data-gsa-rip></span>
-                  <span class="gsa-cur" data-gsa-cur><svg viewBox="0 0 24 24"><path d="M4.5 2.5v16.4l4.2-4 2.8 6.3 3-1.3-2.8-6.2h6z"/></svg><i></i></span>
-                </div>
-              </div>
+      <div class="gsa" data-gsa>
+        <div class="sec-head gsa__head" data-reveal="0">
+          <div class="sec-head__title"><div class="kicker">Google Shopping i praksis</div><h2 class="h2">Samme krus.<br><span class="dim">Bedre annonce.</span></h2></div>
+          <p class="sec-head__lead">Sådan står din vare på Google. Slå rettelserne i feedet til og fra, og se, hvad de gør ved din annonce.</p>
+        </div>
+
+        <!-- Your product as one row of the product feed. The three switches rewrite your card in the carousel -->
+        <div class="gsa-feed" data-reveal="1">
+          <div class="gsa-feed__bar">
+            <span class="gsa-feed__name"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9 4.5v15"/></svg><b>Produktfeed</b><span>lervaerk.dk</span></span>
+            <div class="gsa-fix" role="group" aria-labelledby="gsa-fix-lbl">
+              <span class="gsa-feed__lbl" id="gsa-fix-lbl">Ret med ét klik</span>
+              <button type="button" class="gsa-fix__b" data-gsa-fix="titel" aria-pressed="true"><i aria-hidden="true"></i>Bedre titel</button>
+              <button type="button" class="gsa-fix__b" data-gsa-fix="tilbud" aria-pressed="true"><i aria-hidden="true"></i>Tilbudspris</button>
+              <button type="button" class="gsa-fix__b" data-gsa-fix="fragt" aria-pressed="true"><i aria-hidden="true"></i>Gratis fragt</button>
             </div>
           </div>
-          <div class="gsa__fx" data-gsa-fx aria-hidden="true"></div>
+          <div class="gsa-grid" aria-hidden="true">
+            <span class="gsa-grid__n"></span><span class="gsa-grid__l">A</span><span class="gsa-grid__l">B</span><span class="gsa-grid__l">C</span><span class="gsa-grid__l">D</span><span class="gsa-grid__l">E</span>
+            <span class="gsa-grid__n">1</span><span class="gsa-grid__h">Titel</span><span class="gsa-grid__h">Pris</span><span class="gsa-grid__h">Tilbud</span><span class="gsa-grid__h">Fragt</span><span class="gsa-grid__h">Lager</span>
+            <span class="gsa-grid__n">2</span><span class="gsa-cell" data-gsa-cell="titel"><span>Keramik krus 35 cl i stentøj, salviegrøn – håndlavet i Danmark</span></span><span class="gsa-cell"><span>329,00 kr.</span></span><span class="gsa-cell" data-gsa-cell="tilbud"><span>249,00 kr.</span></span><span class="gsa-cell" data-gsa-cell="fragt"><span>0,00 kr.</span></span><span class="gsa-cell"><span>På lager</span></span>
+            <span class="gsa-grid__n gsa-grid__x">3</span><span class="gsa-cell gsa-grid__x"><span>Krus blå</span></span><span class="gsa-cell gsa-grid__x"><span>329,00 kr.</span></span><span class="gsa-cell gsa-grid__x"></span><span class="gsa-cell gsa-grid__x"><span>39,00 kr.</span></span><span class="gsa-cell gsa-grid__x"><span>På lager</span></span>
+          </div>
         </div>
+
+        <!-- A drawing of a search page with a shopping carousel: no search engine's logo, the products and shops are made up -->
+        <div class="browser gsa-br" data-reveal="2">
+          <div class="browser__bar" aria-hidden="true">
+            <div class="dots3"><i></i><i></i><i></i></div>
+            <div class="browser__url"><svg class="gsa-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg><span data-gsa-url>google.dk/search?q=keramik+krus</span></div>
+            <span class="tag-eks">Eksempel</span>
+          </div>
+          <div class="gsa-scr" data-gsa-scr>
+            <p class="sr-only">Eksempel på en søgning på Google efter »keramik krus«. Øverst står sponsorerede shoppingannoncer med billede, pris og fragt. Din annonce fra Lerværk står som nummer to. Vælg en vare for at se den.</p>
+            <div class="gsa-q" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span data-gsa-q>keramik krus</span><i class="gsa-q__caret"></i></div>
+            <div class="gsa-tabs" aria-hidden="true"><b>Alle</b><span>Shopping</span><span>Billeder</span><span>Videoer</span><span>Nyheder</span><span>Kort</span></div>
+            <div class="gsa-ads" role="region" aria-label="Sponsorerede shoppingannoncer, eksempel">
+              <div class="gsa-ads__h" aria-hidden="true"><b>Sponsoreret</b><span>· Shopping</span><i>⋮</i></div>
+              <div class="gsa-car">
+                <div class="gsa-row" data-gsa-row>
+                  <div class="gsa-trk" data-gsa-trk>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(4 25) scale(.66)" style="--g:#e9dfce;--gd:#d5c7af;--c:#cfae84;--gl:.55;--s:#5b4532;--so:.62"/><use href="#gsa-mug" transform="translate(48 36) scale(.74)" style="--g:#e9dfce;--gd:#d5c7af;--c:#cfae84;--gl:.55;--s:#5b4532;--so:.62"/></svg></span>
+                      <span class="gsa-card__t">Kaffekrus i stentøj, 2 stk. – sand med prikker</span>
+                      <span class="gsa-card__p"><b>299,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#8b5e3c" aria-hidden="true">K</i>Krus &amp; Kande</span>
+                      <span class="gsa-card__d">+ 39,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,6</b><span style="--f:92%" aria-hidden="true">★★★★★</span>(41)</span>
+                    </button>
+                    <button type="button" class="gsa-card gsa-card--you is-tilbud" data-gsa-card data-gsa-you>
+                      <span class="gsa-you">Din annonce</span>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#9cb79a;--gd:#7d987c;--c:#d9bb93;--gl:.9;--so:.24"/></svg><span class="gsa-tag">Tilbud</span></span>
+                      <span class="gsa-card__t" data-gsa-y="titel"><mark>Keramik krus</mark> 35 cl i stentøj, salviegrøn – håndlavet i Danmark</span>
+                      <span class="gsa-card__p" data-gsa-y="tilbud"><b class="is-sale">249,00 kr.</b><s>329,00 kr.</s></span>
+                      <span class="gsa-card__s"><i style="--i:#4d6b50" aria-hidden="true">L</i>Lerværk</span>
+                      <span class="gsa-card__d" data-gsa-y="fragt">Gratis fragt</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#2f4d80;--gd:#223a61;--c:#d3b68e;--g2:#a8c2dc;--b:.92;--r:#b9d0e5;--gl:1;--s:#e2eaf4;--so:.22"/></svg></span>
+                      <span class="gsa-card__t">Krus med hank, blå reaktiv glasur 40 cl</span>
+                      <span class="gsa-card__p"><b>189,95 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#2d4a7a" aria-hidden="true">G</i>Glasurhuset</span>
+                      <span class="gsa-card__d">Hent i dag · 2,1 km</span>
+                      <span class="gsa-card__r"><b>4,9</b><span style="--f:98%" aria-hidden="true">★★★★★</span>(128)</span>
+                    </button>
+                    <button type="button" class="gsa-card is-tilbud" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#c56a43;--gd:#a6532f;--c:#bc8e67;--gl:.3;--s:#4a2516;--so:.3"/></svg><span class="gsa-tag">Tilbud</span></span>
+                      <span class="gsa-card__t">Stentøjskrus i terrakotta, 30 cl</span>
+                      <span class="gsa-card__p"><b class="is-sale">159,00 kr.</b><s>199,00 kr.</s></span>
+                      <span class="gsa-card__s"><i style="--i:#b0532c" aria-hidden="true">D</i>Drejeskiven</span>
+                      <span class="gsa-card__d">+ 49,00 kr. i fragt</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#3b3a38;--gd:#292826;--c:#d2b48c;--gl:.24;--s:#e6e0d7;--so:.34"/></svg></span>
+                      <span class="gsa-card__t">Mat sort krus 45 cl i stentøj</span>
+                      <span class="gsa-card__p"><b>219,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#2b2b2b" aria-hidden="true">B</i>Bordkunst</span>
+                      <span class="gsa-card__d">Gratis fragt over 499 kr.</span>
+                      <span class="gsa-card__r"><b>4,5</b><span style="--f:90%" aria-hidden="true">★★★★★</span>(17)</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#f1eee7;--gd:#dcd6ca;--c:#d4bc98;--g2:#2f4d80;--b:1;--r:#2f4d80;--gl:.7;--s:#7d7466;--so:.16"/></svg></span>
+                      <span class="gsa-card__t">Hvidt krus med blå kant, 25 cl</span>
+                      <span class="gsa-card__p"><b>119,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#3d5c8a" aria-hidden="true">O</i>Ovnfrisk</span>
+                      <span class="gsa-card__d">Levering i morgen</span>
+                      <span class="gsa-card__r"><b>4,4</b><span style="--f:88%" aria-hidden="true">★★★★★</span>(23)</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(200 0) scale(-1 1)" style="--g:#e4b5a9;--gd:#cc988b;--c:#ddbd99;--gl:.85;--s:#6b4a40;--so:.2"/></svg></span>
+                      <span class="gsa-card__t">Krus i stentøj, rosa – 35 cl</span>
+                      <span class="gsa-card__p"><b>139,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#a35d6a" aria-hidden="true">K</i>Køkkenkrogen</span>
+                      <span class="gsa-card__d">+ 39,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,7</b><span style="--f:94%" aria-hidden="true">★★★★★</span>(9)</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#d49d3c;--gd:#b3802a;--c:#cfb38c;--gl:.62;--s:#5a3d12;--so:.24"/></svg></span>
+                      <span class="gsa-card__t">Okkergult krus i stentøj, 35 cl</span>
+                      <span class="gsa-card__p"><b>179,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#8a6a2a" aria-hidden="true">S</i>Stentøjsstuen</span>
+                      <span class="gsa-card__d">+ 45,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,8</b><span style="--f:96%" aria-hidden="true">★★★★★</span>(52)</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(4 25) scale(.66)" style="--g:#3f5e4a;--gd:#2d4637;--c:#cdb08a;--gl:.5;--s:#d9e3d6;--so:.2"/><use href="#gsa-mug" transform="translate(48 36) scale(.74)" style="--g:#3f5e4a;--gd:#2d4637;--c:#cdb08a;--gl:.5;--s:#d9e3d6;--so:.2"/></svg></span>
+                      <span class="gsa-card__t">Krus i stentøj, mørkegrøn – 2 stk. à 30 cl</span>
+                      <span class="gsa-card__p"><b>349,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#3f5e4a" aria-hidden="true">H</i>Hverdagsler</span>
+                      <span class="gsa-card__d">Gratis fragt</span>
+                      <span class="gsa-card__r"><b>4,6</b><span style="--f:92%" aria-hidden="true">★★★★★</span>(31)</span>
+                    </button>
+                    <button type="button" class="gsa-card is-tilbud" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#a99bc7;--gd:#8a7caa;--c:#d6bd9a;--gl:.8;--s:#4b3f63;--so:.2"/></svg><span class="gsa-tag">Tilbud</span></span>
+                      <span class="gsa-card__t">Krus med hank i lavendel, 30 cl</span>
+                      <span class="gsa-card__p"><b class="is-sale">129,00 kr.</b><s>169,00 kr.</s></span>
+                      <span class="gsa-card__s"><i style="--i:#6d5f99" aria-hidden="true">T</i>Tetid</span>
+                      <span class="gsa-card__d">+ 29,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,3</b><span style="--f:86%" aria-hidden="true">★★★★★</span>(14)</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#a8c2dc;--gd:#88a4c0;--c:#d8c09e;--g2:#f4f1ea;--b:1;--r:#f4f1ea;--gl:.75;--s:#3d5470;--so:.2"/></svg></span>
+                      <span class="gsa-card__t">Lyseblåt krus med hvid kant, 35 cl</span>
+                      <span class="gsa-card__p"><b>199,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#5b7da3" aria-hidden="true">K</i>Kopkompagniet</span>
+                      <span class="gsa-card__d">Levering 2–3 dage</span>
+                    </button>
+                  </div>
+                </div>
+                <button type="button" class="gsa-arr gsa-arr--l" data-gsa-arr="-1" aria-label="Forrige varer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6 8.5 12l6 6"/></svg></button>
+                <button type="button" class="gsa-arr gsa-arr--r" data-gsa-arr="1" aria-label="Flere varer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg></button>
+              </div>
+            </div>
+            <div class="gsa-org" aria-hidden="true">
+              <div><i></i><i></i><i></i><i></i></div>
+              <div><i></i><i></i><i></i><i></i></div>
+            </div>
+
+            <!-- The product, like when you click a card on Google -->
+            <button type="button" class="gsa-dim" data-gsa-dim tabindex="-1" aria-hidden="true"></button>
+            <div class="gsa-pan" data-gsa-pan role="dialog" aria-labelledby="gsa-pan-t" inert>
+              <i class="gsa-pan__grab" aria-hidden="true"></i>
+              <div class="gsa-pan__top"><span class="gsa-pan__s" data-gsa-p="s"></span><button type="button" class="gsa-pan__x" data-gsa-close aria-label="Luk varen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+              <div class="gsa-pan__body" data-gsa-pbody>
+                <span class="gsa-img gsa-pan__img" data-gsa-p="img"></span>
+                <div class="gsa-pan__info">
+                  <b class="gsa-pan__t" id="gsa-pan-t" data-gsa-p="t"></b>
+                  <span class="gsa-pan__p" data-gsa-p="p"></span>
+                  <span class="gsa-pan__d"><span data-gsa-p="d"></span><span class="gsa-pan__stock">På lager</span></span>
+                  <span class="gsa-pan__r" data-gsa-p="r"></span>
+                  <button type="button" class="gsa-go" data-gsa-go><span>Gå til butik</span><span data-gsa-go2>Købt ✓</span></button>
+                  <button type="button" class="gsa-pan__mine" data-gsa-mine>Se din annonce →</button>
+                </div>
+              </div>
+            </div>
+            <div class="gsa-toast" data-gsa-toast aria-live="polite"><i aria-hidden="true">✓</i><span><b>Nyt salg · <span data-gsa-sum>249,00 kr.</span></b>Målt fra Google Shopping</span></div>
+          </div>
+        </div>
+
+        <div class="gsa-do" data-reveal="3"><span>Det klarer vi for dig:</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Produktfeed</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Titler</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Priser</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Sporing af salg</span></div>
+        <i class="gsa-dot" data-gsa-dot aria-hidden="true"></i>
       </div>
+
       <!-- Drawings: a stoneware mug as a studio photo. The glaze colours come from the style on each <use> -->
       <svg class="gsa__defs" width="0" height="0" aria-hidden="true" focusable="false">
         <defs>

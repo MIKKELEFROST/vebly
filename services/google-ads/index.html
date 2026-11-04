@@ -156,6 +156,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/show/google-ads.css?v=20261104a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -163,6 +164,7 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/show/google-ads.js?v=20261104a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -224,7 +226,7 @@
         <p class="hero__lead" data-reveal="3">Vi bygger og styrer dine annoncer på Google, så du bliver vist, når nogen søger efter det, du laver, der hvor du holder til. Og vi holder øje med hver krone.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -239,6 +241,84 @@
         </div>
       </div>
     </section>
+
+    <!-- Showcase for Google Ads: a big search field types local searches in a loop, and the sponsored text ad at
+     the top of the results rewrites itself to each search. The visitor can type their own search in the field.
+     Our own drawing: no logos, the icons are inline SVG. Everything in the results is an example.
+     Styles: assets/css/show/google-ads.css, behaviour: assets/js/show/google-ads.js -->
+<section id="eksempel" class="show show--google-ads" data-sec="eksempel">
+  <div class="sec-head ga-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Sådan ser det ud på Google</div>
+      <h2 class="h2">Kunden søger.<br><span class="dim">Din annonce svarer.</span></h2>
+    </div>
+    <p class="sec-head__lead">Annoncen skifter med søgningen, så kunden ser lige det, de leder efter. Prøv selv: skriv dit fag og din by i feltet.</p>
+  </div>
+
+  <div class="ga-stage" data-ga-stage>
+    <div class="ga-fwrap" data-reveal="1">
+      <!-- A real field: what is typed goes into the example ad below and never leaves the browser (no name, so nothing is submitted) -->
+      <form class="ga-field" role="search" action="#eksempel" data-ga-form>
+        <svg class="ga-ico ga-field__i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+        <label class="sr-only" for="ga-in">Prøv en søgning: skriv dit fag og din by</label>
+        <input class="ga-field__in" id="ga-in" type="search" data-ga-in maxlength="70" placeholder="fx frisør odense" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
+        <span class="ga-field__q" aria-hidden="true"><span class="ga-field__qt" data-ga-qt>tømrer københavn</span><i class="ga-caret"></i></span>
+        <button type="submit" class="ga-field__go" data-ga-go aria-label="Søg"><svg class="ga-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
+        <label class="ga-try" for="ga-in" aria-hidden="true"><span>Prøv din egen søgning</span></label>
+      </form>
+    </div>
+
+    <div class="ga-rwrap" data-reveal="2">
+      <div class="ga-res" data-ga-res aria-hidden="true" aria-label="Eksempel på en søgeside" data-event="Eksempel: Annoncen">
+        <div class="ga-tabs"><b>Alle</b><span>Kort</span><span>Billeder</span><span>Nyheder</span><span>Mere</span><span class="tag-eks">Eksempel</span></div>
+        <div class="ga-pane">
+          <i class="ga-res__bar"></i>
+          <div class="ga-body" data-ga-body>
+            <div class="ga-ad" aria-label="Eksempel på en annonce">
+              <span class="ga-ad__sp ga-a">Sponsoreret</span>
+              <div class="ga-site ga-a" style="--d:.04s">
+                <i class="ga-ini" data-ga="ini" style="--c1:#0f3d2e;--c2:#d4f36b">N</i>
+                <span class="ga-site__t"><b data-ga="navn">Nordvik</b><small data-ga="url">nordvik.dk › tomrer</small></span>
+                <svg class="ga-dots" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg>
+              </div>
+              <div class="ga-ad__h" data-ga="h">Tømrer i København | Fast pris før vi går i gang</div>
+              <p class="ga-ad__t ga-a" style="--d:.22s" data-ga="t">Terrasser, tilbygninger og nye vinduer i København og omegn. Vi svarer samme dag og giver en fast pris, før vi går i gang.</p>
+              <div class="ga-ad__row ga-a" style="--d:.3s">
+                <span class="ga-call" data-ga="call"><svg class="ga-ico" viewBox="0 0 24 24"><path d="M5.2 3.5h3.1l1.6 4.2-2.1 1.4a11 11 0 0 0 7.1 7.1l1.4-2.1 4.2 1.6v3.1c0 .9-.7 1.6-1.6 1.6C10.6 20.4 3.6 13.4 3.6 5.1c0-.9.7-1.6 1.6-1.6z"/></svg><span data-ga="callt">Ring</span></span>
+                <span class="ga-links" data-ga="links"><span>Terrasse</span><span>Tilbygning</span><span>Få et tilbud</span></span>
+              </div>
+              <!-- "Din annonce" turns into the moment you pay when the ad is clicked -->
+              <span class="ga-you" data-ga-you><span>Din annonce</span><span>Først nu betaler du</span></span>
+            </div>
+            <div class="ga-org ga-a" style="--d:.34s">
+              <div class="ga-site">
+                <i class="ga-ini ga-ini--o" data-ga="oi">T</i>
+                <span class="ga-site__t"><b data-ga="on">Tagholm Tømrer</b><small data-ga="ou">tagholm.dk › kontakt</small></span>
+                <svg class="ga-dots" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg>
+              </div>
+              <div class="ga-org__h" data-ga="oh">Tømrer i Valby og København · Tagholm</div>
+              <p class="ga-org__t" data-ga="ot">Tag, gulve og køkkener i hele <b>København</b>. Se vores projekter, og bestil en gratis besigtigelse af din opgave.</p>
+            </div>
+            <div class="ga-ph ga-a" style="--d:.4s"><i></i><i></i><i></i></div>
+          </div>
+          <!-- Shown while the results load -->
+          <div class="ga-skel"><div><i></i><i></i><i></i><i></i><i></i></div><div><i></i><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div></div>
+        </div>
+        <!-- The click: a cursor (a finger on phones) and a ripple -->
+        <span class="ga-cur" data-ga-cur><svg viewBox="0 0 24 24"><path d="M5.5 3.2v16.2l4.3-4.2 2.8 6.3 3.1-1.4-2.8-6.2h6z"/></svg><i></i></span>
+        <i class="ga-rip" data-ga-rip></i>
+      </div>
+      <p class="sr-only">Eksempel på en annonce på Google. Søgningen »tømrer københavn« viser øverst en annonce fra Nordvik: Tømrer i København, fast pris før vi går i gang, med en Ring-knap og links til Terrasse, Tilbygning og Få et tilbud. Annoncen skifter med hver søgning. Skriv dit eget fag og din by i søgefeltet for at se din egen.</p>
+      <p class="sr-only" data-ga-live aria-live="polite"></p>
+    </div>
+
+    <ul class="ga-facts" aria-label="Godt at vide om annoncer på Google">
+      <li data-reveal="3" data-ga-chip="soeg"><span class="ga-facts__i" aria-hidden="true"><svg class="ga-ico" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Vises, når de søger</li>
+      <li data-reveal="4" data-ga-chip="klik"><span class="ga-facts__i" aria-hidden="true"><svg class="ga-ico" viewBox="0 0 24 24"><path d="M6.5 4v14.2l3.8-3.7 2.5 5.6 2.7-1.2-2.5-5.5h5.3z"/></svg></span>Du betaler kun, når nogen klikker</li>
+      <li data-reveal="5" data-ga-chip="budget"><span class="ga-facts__i" aria-hidden="true"><b>kr</b></span>Du bestemmer budgettet</li>
+    </ul>
+  </div>
+</section>
 
     <section id="pris" class="price-sec" data-sec="pris">
       <div class="spot price" data-reveal="0" data-spot>
@@ -335,11 +415,24 @@
             </div>
           </div>
           <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="999">
+            <div class="addon" data-tilt data-addon="Google CSS" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">04</span>
+              <div class="addon__head"><h3>Google CSS</h3><p>Op til 20% billigere klik på dine Google Shopping-annoncer.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Skift til en CSS-partner</li><li><span class="check" aria-hidden="true">✓</span>Samme annoncer som i dag</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="Google CSS" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
+              </div>
+            </div>
+          </div>
+          <div class="addon-slot">
+            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">05</span>
               <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
-              <div class="addon__price">fra 999 kr./md.</div>
+              <div class="addon__price">995 kr./time</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
               <div class="addon__actions">
                 <button type="button" class="addon__toggle" data-toggle="SEO" data-burst aria-pressed="false">+ Tilføj</button>
@@ -350,7 +443,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="GEO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">05</span>
+              <span class="addon__n">06</span>
               <div class="addon__head"><h3>GEO</h3><p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Tjek af din synlighed i AI</li><li><span class="check" aria-hidden="true">✓</span>Indhold, AI kan citere</li><li><span class="check" aria-hidden="true">✓</span>Struktureret data</li></ul>
@@ -363,7 +456,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="AI" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">06</span>
+              <span class="addon__n">07</span>
               <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
@@ -376,7 +469,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">07</span>
+              <span class="addon__n">08</span>
               <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
               <div class="addon__price">fra 4.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
@@ -389,7 +482,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">08</span>
+              <span class="addon__n">09</span>
               <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
@@ -402,7 +495,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="CRO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">09</span>
+              <span class="addon__n">10</span>
               <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
@@ -417,7 +510,7 @@
         <div class="wrap addons__meter" style="width:100%">
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
-          <span>09</span>
+          <span>10</span>
         </div>
       </div>
     </section>
@@ -482,7 +575,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" aria-current="page" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" aria-current="page" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>

@@ -17,10 +17,10 @@
 //   tekst            one line about what we did (shown when the case has no quote).
 //   services         the services used, as in /services/<slug>: 'hjemmesider', 'google-ads', 'meta-ads',
 //                    'google-shopping-ads', 'seo', 'geo', 'ai', 'automations', 'email-marketing', 'cro'.
-//                    The filter on the page has a button for each service that is used.
+//                    The filter on the page has a button for each service that some (not all) cases use.
 //   resultater       two results: { v: '+62 %', l: 'flere opkald fra siden' }. With fra, the number counts
 //                    from that value instead of from 0: { v: '0,9 sek.', fra: '6,8', l: '…' }.
-//   historie         on one case only: the scroll story near the top of the page (see Hansen VVS).
+//   historie         on one case only: the big case spread near the top of the page (see Hansen VVS).
 //   eksempel         true while it is made up.
 export const cases = [
   {
@@ -29,26 +29,23 @@ export const cases = [
     tekst: 'Fra en side fra 2012 til en, der faktisk giver opkald.',
     services: ['hjemmesider', 'google-ads'],
     resultater: [{ v: '+62 %', l: 'flere opkald fra siden' }, { v: '0,9 sek.', fra: '6,8', l: 'at åbne siden, før 6,8 sek.' }],
-    // The story: four steps. The three numbers change in step 2, 3 and 4, and the result comes in step 4.
+    // The case spread: a headline, a short text, the old site, three numbers before → after and the result.
+    // The quote at the bottom is this case's quote further down.
     historie: {
       h2: ['Fra en side fra 2012.', 'Til en, der giver opkald.'],
-      lead: 'Et VVS-firma i Vejle fik ny hjemmeside og Google Ads. Scroll, og se hvad der skete.',
+      tekst: 'Hansen VVS havde en side fra 2012. Den var langsom, svær at bruge på mobilen, og telefonen ringede sjældent. Vi byggede en ny side med »Ring nu« øverst og satte Google Ads op på akutopgaver i Vejle og omegn.',
+      // A short caption under the drawing of the new site
+      billedtekst: 'Den nye forside: »Ring nu« øverst, faste priser og hjælp samme dag.',
+      // The old site, as a small print behind the new one
       gammel: { aar: '2012', titel: 'Velkommen til Hansen VVS ApS', under: 'VVS-arbejde i Vejle og omegn siden 1998' },
       // Three boxes on the new site in the drawing
       ydelser: [['Akut hjælp', 'Samme dag'], ['Badeværelse', 'Fast pris'], ['Varmepumpe', 'Service hele året']],
-      trin: [
-        ['Udgangspunktet', 'En side fra 2012. Langsom, svær at bruge på mobilen, og telefonen ringede sjældent.'],
-        ['Ny hjemmeside', 'Hurtig, skarp på mobilen og med »Ring nu« øverst. Kunden ringer med ét tryk.'],
-        ['Google Ads', 'Annoncer på akutopgaver i Vejle og omegn. De vises, når nogen søger efter en VVS’er.'],
-        ['Resultatet', 'Efter tre måneder ringer telefonen oftere. Og det er kunder fra lokalområdet.']
-      ],
+      // Before → after. s: a small word under the number. lavere: true when less is better (fx seconds).
       tal: [
-        { l: 'At åbne siden', fra: '6,8 sek.', til: '0,9 sek.' },
+        { l: 'At åbne siden', fra: '6,8 sek.', til: '0,9 sek.', lavere: true },
         { l: 'Besøg fra Google', fra: '140', til: '520', s: 'om måneden' },
         { l: 'Opkald fra siden', fra: '21', til: '34', s: 'om måneden' }
       ],
-      // Step 3 on the drawing: the ad (label '' for a normal search result, fx for SEO)
-      annonce: { label: 'Annonce', titel: 'VVS i Vejle | Hurtig hjælp, fast pris', tekst: 'Akut hjælp samme dag. Du får prisen, før vi går i gang.' },
       resultat: { v: '+62 %', l: 'flere opkald fra siden på tre måneder' }
     },
     eksempel: true
@@ -120,7 +117,7 @@ export const cases = [
 ];
 
 // What the customers say. One quote per case (case: its id), shown on the case's card, and the featured
-// case's quote at the end of its story. Only real quotes, with permission; eksempel: true while made up.
+// case's quote on its spread. Only real quotes, with permission; eksempel: true while made up.
 export const quotes = [
   { case: 'hansen-vvs', tekst: 'Jeg brugte 15 minutter i telefonen, og en uge senere ringede folk fra Google. Det er første gang, en hjemmeside har givet mig kunder.', navn: 'Jesper Hansen', rolle: 'Ejer', eksempel: true },
   { case: 'klinik-fryd', tekst: 'Booking direkte fra siden har sparet os for et hav af opkald. Vi har fået mere tid til patienterne.', navn: 'Mette Lund', rolle: 'Fysioterapeut og ejer', eksempel: true },

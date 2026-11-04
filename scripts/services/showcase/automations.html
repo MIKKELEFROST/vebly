@@ -1,115 +1,57 @@
 <section id="eksempel" class="show show--automations" data-sec="eksempel">
       <div class="sec-head" data-reveal="0">
-        <div class="sec-head__title"><div class="kicker">Sådan virker det</div><h2 class="h2">Du passer jobbet.<br><span class="dim">Resten passer sig selv.</span></h2></div>
-        <p class="sec-head__lead">Sådan kan det se ud hos en tømrer. Fra første besked til anmeldelsen, uden at du skal huske noget.</p>
-      </div>
-      <p class="sr-only">Eksempel på en automatisering hos en tømrer: Når en kunde skriver via hjemmesiden, får kunden en sms med det samme, og opgaven lander i kalenderen. Efter besøget sendes tilbuddet på mail. Fakturaen går ud, når jobbet er færdigt, og tre dage efter bliver kunden bedt om en anmeldelse. I eksemplet sparer det ejeren cirka 48 minutter pr. opgave.</p>
-      <!-- Scroll-driven: 01 the tasks are mapped, 02 they are connected, 03 a customer writes and the flow runs (assets/js/show/automations.js) -->
-      <div class="aut" data-aut>
-        <div class="aut__pin">
-          <div class="aut__fit" data-aut-fit>
-            <div class="aut__steps" data-reveal="1">
-              <div class="kicker aut__lbl">Det gør vi</div>
-              <div class="aut__step is-on" data-aut-step><span class="aut__n">01</span><div class="aut__sb"><h3>Kortlægning</h3><p>Vi finder de opgaver, der stjæler din tid.</p></div></div>
-              <div class="aut__step is-on" data-aut-step><span class="aut__n">02</span><div class="aut__sb"><h3>Opsætning</h3><p>Vi kobler dine apps sammen og tester det hele.</p></div></div>
-              <div class="aut__step is-on" data-aut-step><span class="aut__n">03</span><div class="aut__sb"><h3>Drift</h3><p>Den kører af sig selv, og vi holder øje med den.</p><a href="#kontakt" class="aut__cta is-on" data-aut-cta data-burst data-event="Eksempel: Få en fast pris">Få en fast pris →</a></div></div>
-            </div>
-
-            <div class="aut__board" data-reveal="2">
-              <div class="aut__bar">
-                <span class="aut__name"><b>Fra besked til anmeldelse</b><small>Nordvik · tømrer i København</small></span>
-                <span class="aut__hint" data-aut-hint aria-hidden="true">Scroll, og se den køre ↓</span>
-                <span class="tag-eks">Eksempel</span>
-              </div>
-              <div class="aut__win" data-aut-win>
-                <div class="aut__flow" data-aut-flow>
-                  <canvas class="aut__grid" data-aut-grid aria-hidden="true"></canvas>
-                  <svg class="aut__wires" data-aut-wires aria-hidden="true" focusable="false"></svg>
-                  <span class="aut__dot" data-aut-dot aria-hidden="true"></span>
-                  <ol class="aut__nodes" aria-label="Trinene i automatiseringen. Vælg et trin for at læse, hvad det gør.">
-                    <li class="aut__node is-built is-done" data-aut-node="henvendelse" data-min="5" data-m="3">
-                      <button type="button" class="aut__card" aria-describedby="aut-t1">
-                        <span class="aut__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13.5h4.2l1.6 2.5h4.4l1.6-2.5H20"/><path d="M6.6 5h10.8l2.6 8.5V18a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18v-4.5z"/></svg></span>
-                        <span class="aut__txt"><b>Ny henvendelse</b><span class="aut__meta"><span>5 min hver gang</span><span><i class="aut__ping"></i>Lytter</span><span>09:14:02</span></span></span>
-                        <span class="aut__chk" aria-hidden="true">✓</span>
-                      </button>
-                      <span class="aut__tip" id="aut-t1" role="tooltip">Flowet starter, når en kunde skriver via din hjemmeside.</span>
-                      <span class="aut__plus" aria-hidden="true">+5 min</span>
-                    </li>
-                    <li class="aut__node is-built is-done" data-aut-node="sms" data-min="3" data-m="3">
-                      <button type="button" class="aut__card" aria-describedby="aut-t2">
-                        <span class="aut__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></span>
-                        <span class="aut__txt"><b>Sms til kunden</b><span class="aut__meta"><span>3 min hver gang</span><span>Med det samme</span><span>+1 sek.</span></span></span>
-                        <span class="aut__chk" aria-hidden="true">✓</span>
-                      </button>
-                      <span class="aut__tip" id="aut-t2" role="tooltip">Kunden får svar med det samme, også mens du er ude på et job.</span>
-                      <span class="aut__plus" aria-hidden="true">+3 min</span>
-                    </li>
-                    <li class="aut__node is-built is-done" data-aut-node="kalender" data-min="5" data-m="3">
-                      <button type="button" class="aut__card" aria-describedby="aut-t3">
-                        <span class="aut__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg></span>
-                        <span class="aut__txt"><b>I kalenderen</b><span class="aut__meta"><span>5 min hver gang</span><span>Med det samme</span><span>+2 sek.</span></span></span>
-                        <span class="aut__chk" aria-hidden="true">✓</span>
-                      </button>
-                      <span class="aut__tip" id="aut-t3" role="tooltip">Opgaven lander i din kalender med navn, nummer og hvad kunden vil have lavet.</span>
-                      <span class="aut__plus" aria-hidden="true">+5 min</span>
-                    </li>
-                    <li class="aut__node is-built is-done" data-aut-node="tilbud" data-min="20" data-m="3">
-                      <button type="button" class="aut__card" aria-describedby="aut-t4">
-                        <span class="aut__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span>
-                        <span class="aut__txt"><b>Tilbud på mail</b><span class="aut__meta"><span>20 min hver gang</span><span>Efter besøget</span><span>Tor. 14:30</span></span></span>
-                        <span class="aut__chk" aria-hidden="true">✓</span>
-                      </button>
-                      <span class="aut__tip" id="aut-t4" role="tooltip">Du skriver prisen. Mailen og påmindelsen sender sig selv.</span>
-                      <span class="aut__plus" aria-hidden="true">+20 min</span>
-                    </li>
-                    <li class="aut__node is-built is-done" data-aut-node="faktura" data-min="10" data-m="3">
-                      <button type="button" class="aut__card" aria-describedby="aut-t5">
-                        <span class="aut__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5h12V20l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3L6 20z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></svg></span>
-                        <span class="aut__txt"><b>Faktura</b><span class="aut__meta"><span>10 min hver gang</span><span>Når jobbet er færdigt</span><span>Fre. 15:00</span></span></span>
-                        <span class="aut__chk" aria-hidden="true">✓</span>
-                      </button>
-                      <span class="aut__tip" id="aut-t5" role="tooltip">Du trykker »Færdig«. Fakturaen går ud, og rykkeren kommer af sig selv.</span>
-                      <span class="aut__plus" aria-hidden="true">+10 min</span>
-                    </li>
-                    <li class="aut__node is-built is-done" data-aut-node="anmeldelse" data-min="5" data-m="3">
-                      <button type="button" class="aut__card" aria-describedby="aut-t6">
-                        <span class="aut__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></span>
-                        <span class="aut__txt"><b>Anmeldelse</b><span class="aut__meta"><span>5 min hver gang</span><span>3 dage efter</span><span>Man. 15:00</span></span></span>
-                        <span class="aut__chk" aria-hidden="true">✓</span>
-                      </button>
-                      <span class="aut__tip" id="aut-t6" role="tooltip">Kunden bliver bedt om en anmeldelse, mens oplevelsen er frisk.</span>
-                      <span class="aut__plus" aria-hidden="true">+5 min</span>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-
-            <div class="aut__log spot" data-spot data-reveal="3" aria-hidden="true">
-              <div class="aut__lh">
-                <span class="aut__live is-on" data-aut-live><i></i><span data-aut-state>Kører</span></span>
-                <span class="aut__clock" data-aut-clock>Man. 15:00</span>
-                <span class="tag-eks">Eksempel</span>
-              </div>
-              <div class="aut__lw" data-aut-lw>
-                <span class="aut__ph" data-aut-ph></span>
-                <ol class="aut__lines" data-aut-lines>
-                  <li class="is-on"><time>09:14:02</time><span>Mette: »Kan I bygge en terrasse?«</span></li>
-                  <li class="is-on"><time>09:14:03</time><span>Sms: »Tak, Mette! Vi ringer i dag.«</span></li>
-                  <li class="is-on"><time>09:14:04</time><span>Lagt i kalenderen: Ring til Mette</span></li>
-                  <li class="is-on"><time>Tor. 14:30</time><span>Tilbud sendt til Mette på mail</span></li>
-                  <li class="is-on"><time>Fre. 15:00</time><span>Faktura sendt, rykker er klar</span></li>
-                  <li class="is-on"><time>Man. 15:00</time><span>Mette bedt om en anmeldelse</span></li>
-                </ol>
-              </div>
-              <div class="aut__saved">
-                <span>Tid sparet på én opgave</span>
-                <b><span data-aut-saved>48</span><small> min</small></b>
-                <em class="is-on" data-aut-payoff>Ved 5 opgaver om ugen: ca. 4 timer</em>
-              </div>
-            </div>
+        <div class="sec-head__title"><div class="kicker">Automations i praksis</div><h2 class="h2">Du passer jobbet.<br><span class="dim">Flowet klarer resten.</span></h2></div>
+        <div class="fm-side">
+          <p class="sec-head__lead">Tre flows, vi ofte sætter op. Vælg et, og se det køre.</p>
+          <!-- data-sr: what the flow does, read aloud when it is chosen; data-end: the line under the finished run -->
+          <div class="seg" role="group" aria-label="Vælg et eksempel på et flow">
+            <button type="button" class="is-on" aria-pressed="true" data-fm-go data-end="Fra booking til anmeldelse." data-sr="Eksempel på et flow: Når en kunde booker en tid på hjemmesiden, får kunden en SMS-bekræftelse, og tiden lander i kalenderen. Dagen efter går fakturaen ud, og tre dage efter bliver kunden bedt om en anmeldelse. Du skal ikke klikke på noget.">Booking</button>
+            <button type="button" aria-pressed="false" data-fm-go data-end="Fra færdigt job til betaling." data-sr="Eksempel på et flow: Når jobbet slutter i kalenderen, går fakturaen ud med det samme. Otte dage efter tjekker flowet, om den er betalt. Er den ikke det, får kunden en venlig rykker, og når kunden betaler, bliver det bogført. Du skal ikke klikke på noget.">Faktura og rykker</button>
+            <button type="button" aria-pressed="false" data-fm-go data-end="Fra første besked til opfølgning." data-sr="Eksempel på et flow: Når en kunde skriver via hjemmesiden, får kunden en SMS med det samme, og du får besked på telefonen. Kunden lander i kundelisten, og har kunden ikke svaret efter to dage, går der en opfølgning ud på mail. Du skal ikke klikke på noget.">Nye leads</button>
           </div>
         </div>
+      </div>
+      <p class="sr-only" aria-live="polite" data-fm-sr>Eksempel på et flow: Når en kunde booker en tid på hjemmesiden, får kunden en SMS-bekræftelse, og tiden lander i kalenderen. Dagen efter går fakturaen ud, og tre dage efter bliver kunden bedt om en anmeldelse. Du skal ikke klikke på noget.</p>
+      <!-- A flow machine (assets/js/show/automations.js): the nodes are placed and wired from a small spec per
+           example, a pulse runs through them, and the .seg control re-routes the machine. Icons: our own drawings -->
+      <svg class="fm__sprite" aria-hidden="true" focusable="false">
+        <symbol id="fm-i-book" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/></symbol>
+        <symbol id="fm-i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></symbol>
+        <symbol id="fm-i-done" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15l2 2 4-4"/></symbol>
+        <symbol id="fm-i-sms" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></symbol>
+        <symbol id="fm-i-bill" viewBox="0 0 24 24"><path d="M6 3.5h12V20l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3L6 20z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></symbol>
+        <symbol id="fm-i-star" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></symbol>
+        <symbol id="fm-i-fork" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="2.2"/><circle cx="18.5" cy="6" r="2.2"/><circle cx="18.5" cy="18" r="2.2"/><path d="M7.7 12H10c2.6 0 3.2-6 6.2-6M10 12c2.6 0 3.2 6 6.2 6"/></symbol>
+        <symbol id="fm-i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></symbol>
+        <symbol id="fm-i-ledger" viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3H19v15H7.5A1.5 1.5 0 0 0 6 19.5z"/><path d="M6 19.5A1.5 1.5 0 0 0 7.5 21H19v-3M10 7.5h5M10 11h3"/></symbol>
+        <symbol id="fm-i-inbox" viewBox="0 0 24 24"><path d="M4 13.5h4.2l1.6 2.5h4.4l1.6-2.5H20"/><path d="M6.6 5h10.8l2.6 8.5V18a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18v-4.5z"/></symbol>
+        <symbol id="fm-i-phone" viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="2.5"/><path d="M10.5 17.5h3"/></symbol>
+        <symbol id="fm-i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+        <symbol id="fm-i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></symbol>
+        <symbol id="fm-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 12l3.2 1.9"/></symbol>
+      </svg>
+      <div class="fm" data-fm data-reveal="1">
+        <div class="fm__bar">
+          <span class="fm__app" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7.5" height="6.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="6.5" rx="2"/><path d="M10.5 7.2h2.3a3 3 0 0 1 3 3v3.3"/></svg></span>
+          <span class="fm__name"><span class="fm__t"><b data-fm-title>Booking</b><span class="tag-eks">Eksempel</span></span><small data-fm-who>Nordvik · Tømrer · København</small></span>
+          <span class="fm__live" aria-hidden="true"><i></i>Aktiv</span>
+          <button type="button" class="fm__run" data-fm-run>Kør igen <span aria-hidden="true">↻</span></button>
+        </div>
+        <div class="fm__cv" data-fm-cv aria-hidden="true">
+          <i class="fm__dots"></i><i class="fm__hot" data-fm-hot></i>
+          <svg class="fm__wires" data-fm-wires focusable="false"></svg>
+          <i class="fm__pulse" data-fm-pulse></i><i class="fm__pulse" data-fm-pulse></i>
+          <span class="fm__wait" data-fm-wait><svg viewBox="0 0 24 24"><use href="#fm-i-clock"/><path class="fm__h" d="M12 12V7"/></svg><b>Dagen efter</b></span>
+          <span class="fm__wait" data-fm-wait><svg viewBox="0 0 24 24"><use href="#fm-i-clock"/><path class="fm__h" d="M12 12V7"/></svg><b>3 dage efter</b></span>
+          <span class="fm__lbl is-off" data-fm-lbl>Ja</span><span class="fm__lbl is-off" data-fm-lbl>Nej</span>
+          <div class="fm__nodes">
+            <div class="fm__node is-trig" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-book"/></svg></span><span class="fm__txt"><b>Ny booking</b><span class="fm__sub"><span>Fra din hjemmeside</span><span>Mette, tir. kl. 10</span></span></span></div><span class="fm__toast">Mette, tir. kl. 10</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-sms"/></svg></span><span class="fm__txt"><b>SMS-bekræftelse</b><span class="fm__sub"><span>Til kunden</span><span>SMS sendt</span></span></span></div><span class="fm__toast">SMS sendt</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-cal"/></svg></span><span class="fm__txt"><b>I kalenderen</b><span class="fm__sub"><span>Din kalender</span><span>Tid lagt ind</span></span></span></div><span class="fm__toast">Tid lagt ind</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-bill"/></svg></span><span class="fm__txt"><b>Faktura</b><span class="fm__sub"><span>Sendes på mail</span><span>Faktura sendt</span></span></span></div><span class="fm__toast">Faktura sendt</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-star"/></svg></span><span class="fm__txt"><b>Anmeldelse</b><span class="fm__sub"><span>Spørg kunden</span><span>Mail sendt</span></span></span></div><span class="fm__toast">Mail sendt</span></div>
+          </div>
+        </div>
+        <p class="fm__end"><i aria-hidden="true">✓</i><span data-fm-end>Fra booking til anmeldelse.</span><b>0 klik fra dig.</b><span class="tag-eks">Eksempel</span></p>
       </div>
     </section>

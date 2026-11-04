@@ -28,6 +28,14 @@ polished.
 | cro | A/B test | Two versions side by side; visitors stream in, counters tick, B wins, a heatmap can be switched on |
 | resultater (page) | Case spread | Big metric tiles that count up, the growth line drawing itself, a mini site; then the filterable gallery |
 
+## Facts for Google mockups (checked 4 Nov 2026)
+
+- Every Shopping ad in Denmark ends with a small link line under shop, price, delivery and rating: »Af Google«
+  (or »Af <CSS-navn>« when another CSS placed it). Draw it on Shopping cards.
+- Never show free listings or a »populære produkter« block, and leave »Shopping« out of mock tab rows
+  (use Alle, Billeder, Videoer, Nyheder): both changed in the EEA in September 2026.
+- Google CSS: the facts and the exact wording are in the scratchpad file ws/google-css/FAKTA.md.
+
 ## Files (one set per service, nothing else)
 
 ```
