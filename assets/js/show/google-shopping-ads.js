@@ -21,7 +21,7 @@ function run(root) {
   const qbox = $('[data-gsa-qbox]'), ac = $('[data-gsa-ac]'), acRows = [...ac.children], qEl = $('[data-gsa-q]'), url = $('[data-gsa-url]'), res = $('[data-gsa-res]'), ads = $('[data-gsa-ads]'), next = $('[data-gsa-next]');
   const dim = $('[data-gsa-dim]'), sheet = $('[data-gsa-sheet]'), buy = $('[data-gsa-buy]'), cur = $('[data-gsa-cur]'), rip = $('[data-gsa-rip]'), fx = $('[data-gsa-fx]');
   const row = $('[data-gsa-row]'), cards = $$('[data-gsa-card]'), steps = $$('[data-gsa-step]'), box = $('[data-gsa-egen]');
-  const small = matchMedia('(max-width: 699px)');
+  const small = matchMedia('(max-width: 699px)'), flat = matchMedia('(max-height: 499px)');
   let Q = 'keramik krus', SHOP = 'lervaerk.dk/produkt/keramik-krus-salviegroen', dirty = true, L = null, S0 = [];
   const searchUrl = () => 'google.dk/search?q=' + Q.replace(/\s+/g, '+');
 
@@ -82,7 +82,7 @@ function run(root) {
     fit.style.transform = '';
     const phone = small.matches;
     // Short screens: scale the stage down, so nothing is cut off (the room under the menu stays)
-    if (!phone) { const k = Math.min(1, (innerHeight - parseFloat(getComputedStyle(sticky).paddingTop)) / fit.offsetHeight); if (k < 1) fit.style.transform = `scale(${k})`; }
+    if (!phone && !flat.matches) { const k = Math.min(1, (innerHeight - parseFloat(getComputedStyle(sticky).paddingTop)) / fit.offsetHeight); if (k < 1) fit.style.transform = `scale(${k})`; }
     // Your card starts in place 4 (3 on a phone) and moves to the front
     const Y = phone ? 2 : 3, c = off(cards[0]), b = off(buy), q = off(qbox), w = scr.clientWidth, h = scr.clientHeight;
     S0 = cards.map((x, i) => !i ? Y : i <= Y ? i - 1 : i);
@@ -174,6 +174,12 @@ function run(root) {
     if (st !== start) { start = st; box.classList.toggle('is-start', st); }
   };
   const frame = () => {
+    // Too short for the pinned story: the moment your ad is first, with every step written out
+    if (flat.matches) {
+      if (last !== -2 || dirty) { last = -2; dirty = false; step = -1; render(.62); steps.forEach(el => el.classList.add('is-on')); row.classList.remove('is-lock'); }
+      return;
+    }
+    if (last === -2) { step = -1; snap = dirty = true; }
     const r = pin.getBoundingClientRect(), H = pin.offsetHeight - sticky.offsetHeight, p = H > 0 ? clamp(-r.top / H) : 0;
     // A little inertia, so wheel steps glide; no catching up after a jump
     s = snap ? p : s + (p - s) * .16; snap = false;
@@ -191,7 +197,7 @@ function run(root) {
 
   apply();
   addEventListener('resize', measure); addEventListener('load', measure);
-  if (small.addEventListener) small.addEventListener('change', measure);
+  if (small.addEventListener) { small.addEventListener('change', measure); flat.addEventListener('change', measure); }
   if (window.ResizeObserver) new ResizeObserver(() => measure()).observe(scr);
   if (document.fonts) document.fonts.ready.then(measure);
   frame();

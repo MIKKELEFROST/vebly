@@ -25,7 +25,7 @@ function init(sec) {
   const read = $('[data-em-read]'), empty = $('[data-em-empty]'), open = $('[data-em-open]'), view = $('[data-em-view]'), mail = $('[data-em-mail]');
   const parts = $$('[data-em-part]'), img = $('[data-em-part] img'), txt = $('.em-mail p'), btn = $('[data-em-btn]'), ok = $('[data-em-ok]'), cur = $('[data-em-cursor]');
   const flow = $('[data-em-flow]'), line = $('[data-em-line]'), fdot = $('[data-em-fdot]'), nodes = $$('[data-em-node]');
-  const stats = $('[data-em-stats]'), nums = $$('[data-em-n]');
+  const stats = $('[data-em-stats]'), nums = $$('[data-em-n]'), note = $('[data-em-note]');
 
   // Where each step starts, and when things happen, from 0 to 1 through the pinned stretch
   const STEP = [0, 0.19, 0.4, 0.6, 0.8], JUMP = [0.1, 0.32, 0.56, 0.74, 0.92];
@@ -35,7 +35,7 @@ function init(sec) {
   const sp = (k, d) => ({ x: 0, v: 0, t: 0, k, d });
   const S = {
     drop: sp(0.12, 0.74), push: sp(0.14, 0.66), drop2: sp(0.12, 0.74), push2: sp(0.14, 0.66),
-    slide: sp(0.2, 0.56), open: sp(0.06, 0.72), scroll: sp(0.14, 0.62), ok: sp(0.12, 0.72), flow: sp(0.12, 0.72), stats: sp(0.12, 0.72),
+    note: sp(0.12, 0.72), slide: sp(0.2, 0.56), open: sp(0.06, 0.72), scroll: sp(0.14, 0.62), ok: sp(0.12, 0.72), flow: sp(0.12, 0.72), stats: sp(0.12, 0.72),
     cx: sp(0.09, 0.74), cy: sp(0.09, 0.74), co: sp(0.16, 0.6)
   };
   const go = (s, f) => {
@@ -90,7 +90,7 @@ function init(sec) {
     track('showcase_interact', { showcase: SC, action: 'trin-' + (i + 1) });
   }));
 
-  let last = performance.now(), on = -1, seen = 0, dwell = -1, dwellT = 0, was = {}, t0 = 0, kn = 0;
+  let last = performance.now(), on = -1, seen = 0, dwell = -1, dwellT = 0, landT = 0, was = {}, t0 = 0, kn = 0;
   const frame = now => {
     requestAnimationFrame(frame);
     const f = Math.min(3, (now - last) / 16.667); last = now;
@@ -120,12 +120,17 @@ function init(sec) {
     set(nl, 'transform', `translateY(${(-R * (2 - a - b2)).toFixed(1)}px)`);
     const ty = `translateY(${(-R * (2 - b - b2)).toFixed(1)}px)`;
     others.forEach(o => set(o, 'transform', ty));
-    if (st.landed && !was.landed) flash(nl);
+    if (st.landed && !was.landed) { flash(nl); landT = now; }
     if (st.auto && !was.auto) flash(auto);
     cls(nl, 'is-unread', st.landed && !st.opened); cls(nl, 'is-yours', st.landed && !st.opened);
     cls(nl, 'is-hover', p >= STEP[1] && !st.opened && !phone); cls(nl, 'is-sel', st.opened && !phone);
     cls(auto, 'is-unread', st.auto); cls(auto, 'is-yours', st.auto);
     cls(count, 'is-off', !((st.landed && !st.opened) || st.auto));
+    // … with a notification until the customer goes to open it (on phones a banner that slides away)
+    S.note.t = st.landed && p < STEP[1] && !(phone && now - landT > 2400) ? 1 : 0;
+    const nn = go(S.note, f);
+    set(note, 'opacity', clamp(nn * 1.5).toFixed(3));
+    set(note, 'transform', phone ? `translateY(${((nn - 1) * 130).toFixed(1)}%)` : `translateX(${((1 - nn) * 112).toFixed(1)}%)`);
 
     // 02 It opens: in the reading pane on computers, as its own screen on phones
     // (a spring, so the parts come in one after another however fast the page is scrolled)

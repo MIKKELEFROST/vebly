@@ -1,7 +1,7 @@
 /* Showcase: Automations, a flow that runs by itself (scripts/services/showcase/automations.html).
    assets/js/show/automations.js sets the states: is-built, is-done, data-m, is-on. Rules with :is(.motion *)
    only apply when html.motion is set; without it the finished flow is shown, static and not pinned. */
-.show--automations { --ez: cubic-bezier(.2,.8,.2,1); --sh: 0 14px 28px -20px rgba(17,17,17,.3); position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
+.show--automations { --ez: cubic-bezier(.2,.8,.2,1); --sh: 0 14px 28px -20px rgba(17,17,17,.3); position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 64px; }
 .show--automations .sec-head { margin-bottom: 32px; }
 .show--automations .sec-head__lead { max-width: 380px; }
 .show--automations.is-init * { transition: none !important; }

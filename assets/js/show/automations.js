@@ -1,9 +1,8 @@
 // Showcase: Automations, a flow that runs by itself (scripts/services/showcase/automations.html).
-// The pinned stage is driven by scroll: 01 each task gets the minutes it takes by hand, 02 the wires are
-// drawn and each step gets its rule, 03 a customer writes: the first three steps fire at once like
-// dominoes, and from there scrolling moves time on (the clock runs through the days) to the offer, the
-// invoice and the review. The dot has its own speed, so it keeps running a moment after you stop.
-// Without html.motion the finished flow is shown, static.
+// Scroll drives the pinned stage: 01 each task shows the minutes it takes by hand, 02 the wires are drawn,
+// 03 a customer writes: the first three steps fall like dominoes, then scrolling moves the clock on through
+// the days to the offer, the invoice and the review. The dot has its own speed, so it runs on a moment
+// after you stop. Without html.motion the finished flow is shown, static.
 import { track } from '/assets/js/analytics.js';
 
 const root = document.querySelector('.show--automations');
@@ -21,7 +20,6 @@ function init(root) {
   const lw = $('[data-aut-lw]'), ph = $('[data-aut-ph]'), live = $('[data-aut-live]'), state = $('[data-aut-state]'), clock = $('[data-aut-clock]');
   const saved = $('[data-aut-saved]'), payoff = $('[data-aut-payoff]'), cta = $('[data-aut-cta]'), hint = $('[data-aut-hint]');
   const N = nodes.length, MIN = nodes.map(n => +n.dataset.min || 0);
-  const IDS = ['henvendelse', 'sms', 'kalender', 'tilbud', 'faktura', 'anmeldelse'];
   // The example's clock, in seconds from a Monday 00:00: 09:14:02, +1 s, +2 s, Thursday 14:30,
   // Friday the week after 15:00 and three days later
   const TS = [33242, 33243, 33244, 311400, 1004400, 1263600];
@@ -85,7 +83,9 @@ function init(root) {
       I[k] = s; segs.push({ s, len: VL, a: k ? ws[k - 1].p1 : mid(R[k]), b: k < N - 1 ? ws[k].p0 : mid(R[k]) }); s += VL; O[k] = s;
       if (k < N - 1) { ws[k].s0 = s; segs.push({ s, len: ws[k].len, w: ws[k] }); s += ws[k].len; }
     }
-    G = { W, H, R, ws, segs, I, O, END: s, cam: motion && win.clientHeight < H - 2, lh: parseFloat(getComputedStyle(lw).getPropertyValue('--lh')) || 25 };
+    const wh = win.clientHeight, lh = parseFloat(getComputedStyle(lw).getPropertyValue('--lh')) || 25;
+    G = { W, H, R, ws, segs, I, O, END: s, wh, cam: motion && wh < H - 2, lh, rows: Math.round(lw.clientHeight / lh) || 6 };
+    if (!G.cam) flow.style.transform = '';
     sizeGrid(W, H);
     fitNow();
     if (!motion) finished(); else first = true;
@@ -147,11 +147,12 @@ function init(root) {
       dir(n);
       if (ptr !== 'mouse' || e.detail === 0) { const on = tipOpen !== n; closeTip(); if (on) { n.classList.add('is-tip'); tipOpen = n; tipP = p; } }
       if (n.classList.contains('is-done') && motion) pop(k);
-      track('showcase_interact', { showcase: 'automations', action: 'trin-' + IDS[k] });
+      track('showcase_interact', { showcase: 'automations', action: 'trin-' + n.dataset.autNode });
       ptr = 'mouse';
     });
   });
   document.addEventListener('pointerdown', e => { if (tipOpen && !tipOpen.contains(e.target)) closeTip(); }, { passive: true });
+  cta.addEventListener('click', () => track('showcase_interact', { showcase: 'automations', action: 'fast-pris' }));
 
   // Reduced motion: the finished flow
   const finished = () => {
@@ -259,11 +260,10 @@ function init(root) {
     });
 
     // The log: one line per step that ran, the newest on top of the clock
-    if (count !== lastCount) {
+    if (count !== lastCount || first) {
       lastCount = count;
       lines.forEach((l, k) => { set(l, 'is-on', k < count); set(l, 'is-new', k === count - 1); });
-      const rows = Math.round(lw.clientHeight / G.lh) || 6;
-      list.style.transform = count > rows ? `translateY(${-(count - rows) * G.lh}px)` : '';
+      list.style.transform = count > G.rows ? `translateY(${-(count - G.rows) * G.lh}px)` : '';
     }
     text(ph, count ? '' : step ? PH[step - 1] : hand ? `Du bruger ${hand} min pr. opgave` : 'Kortlægger dine opgaver …');
     set(lw, 'is-ph', !count);
@@ -275,9 +275,11 @@ function init(root) {
     if (end && !payoff.classList.contains('is-on') && !first) wave();
     set(payoff, 'is-on', end); set(cta, 'is-on', end);
 
-    // Phones: the camera follows the dot down the flow
+    // Phones: the camera follows the wires being drawn (02), goes back up and follows the dot (03)
     if (G.cam) {
-      const wh = win.clientHeight, ty = clamp(wh * 0.46 - (going || sD > 1 ? pos[1] : 0), wh - G.H, 0);
+      const kf = clamp((p - BUILD) / LEG - 0.5, 0, N - 1), a = G.R[Math.floor(kf)], c = G.R[Math.ceil(kf)];
+      const fy = going || sD > 1 ? pos[1] : step === 1 ? lerp(a.y + a.h / 2, c.y + c.h / 2, kf % 1) : 0;
+      const ty = clamp(G.wh * 0.46 - fy, G.wh - G.H, 0);
       camY = first ? ty : camY + (ty - camY) * (1 - Math.pow(0.88, dt * 60));
       flow.style.transform = `translate3d(0,${camY.toFixed(1)}px,0)`;
     }

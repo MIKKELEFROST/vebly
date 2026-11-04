@@ -119,7 +119,7 @@
 
 /* The double-tap heart, and where the customer's finger lands */
 .show--meta-ads :where(.ma-pop, .ma-tap) { position: absolute; inset: 0; margin: auto; opacity: 0; pointer-events: none; }
-.show--meta-ads .ma-pop { width: 30.933cqw; height: 30.933cqw; fill: #fff; filter: drop-shadow(0 2.133cqw 5.333cqw rgba(0,0,0,.3)); }
+.show--meta-ads .ma-pop { width: 30.933cqw; height: 30.933cqw; fill: #fff; filter: drop-shadow(0 0 1.6cqw rgba(0,0,0,.22)) drop-shadow(0 2.133cqw 5.333cqw rgba(0,0,0,.35)); }
 .show--meta-ads.is-liked .ma-pop { animation: showMetaPop 1s cubic-bezier(.2,.9,.3,1.2) both; }
 .show--meta-ads .ma-tap { width: 12.267cqw; height: 12.267cqw; border-radius: 50%; background: rgba(17,17,17,.2); box-shadow: 0 0 0 .533cqw rgba(255,255,255,.85); }
 .show--meta-ads .ma-chips .ma-tap { right: auto; left: 5.6cqw; }
@@ -205,15 +205,17 @@
 /* Tablets: shorter pills, so they fit beside the phone */
 @media (min-width: 700px) and (max-width: 899px) { .show--meta-ads .ma-pill { font-size: 13px; } .show--meta-ads .ma-pill__x { display: none; } }
 @media (max-width: 699px), (max-height: 520px) { .show--meta-ads .ma-pill { display: none; } }
+/* Phones: the list arrow would cut "Branche" short; the suggestions still show while typing */
+@media (max-width: 699px) { .show--meta-ads .ma-egen input::-webkit-calendar-picker-indicator { display: none !important; } }
 /* Phones on their side and other short screens: the steps beside a phone sized to the height */
 @media (max-height: 520px) and (min-width: 600px) {
-  .show--meta-ads .ma-sticky { padding-top: 64px; }
+  .show--meta-ads .ma-sticky { padding-top: 84px; }
   .show--meta-ads .ma-fit { flex-direction: row; align-items: center; gap: 32px; max-width: 900px; }
   .show--meta-ads .ma-steps { flex: 1; }
   .show--meta-ads .ma-scene { padding-right: 64px; }
-  .show--meta-ads .ma-cluster { --pw: calc((100vh - 92px) * .468); }
+  .show--meta-ads .ma-cluster { --pw: calc((100vh - 108px) * .468); }
 }
-@supports (height: 100svh) { @media (max-height: 520px) and (min-width: 600px) { .show--meta-ads .ma-cluster { --pw: calc((100svh - 92px) * .468); } } }
+@supports (height: 100svh) { @media (max-height: 520px) and (min-width: 600px) { .show--meta-ads .ma-cluster { --pw: calc((100svh - 108px) * .468); } } }
 
 /* ---------- Reduced motion: nothing pinned, the whole story at once ---------- */
 @media (prefers-reduced-motion: reduce) {

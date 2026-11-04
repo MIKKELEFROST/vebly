@@ -28,7 +28,7 @@ function init(sec) {
     rengoering: ['hero-2', 'Få et gratis tilbud', 'Kom hjem til et rent hjem. Få et tilbud på fast rengøring.', 'Privat|Erhverv|Flytning', '28–65'],
     klinik: ['hero-2', 'Book en tid', 'Træt i skuldrene? Book en massage, når det passer dig.', 'Massage|Hot stones|Ansigt', '25–65'],
     fysioterapeut: ['hero-1', 'Book en tid', 'Ondt i ryggen eller knæet? Book en tid, når det passer dig.', 'Ryg|Knæ|Skulder', '30–70'],
-    'personlig-traener': ['hero-2', 'Book en træning', 'Vil du i form i år? Book din første træning, og kom i gang.', 'Personlig|Hold|Løb', '25–55'],
+    'personlig-traener': ['hero-1', 'Book en træning', 'Vil du i form i år? Book din første træning, og kom i gang.', 'Personlig|Hold|Løb', '25–55'],
     revisor: ['hero-2', 'Book et møde', 'Slip for bøvlet med regnskabet. Book et møde, og hør mere.', 'Regnskab|Moms|Løn', '30–65']
   };
   // Any other trade gets a graphic ad with the trade and town instead of a photo from another trade
@@ -113,7 +113,7 @@ function init(sec) {
     const q = io3(clamp((s - .78) / .075)), wide = innerWidth >= 900, bx = wide ? (innerWidth >= 1200 ? 36 : innerWidth >= 1100 ? 30 : 24) : 22;
     A.style.transform = q ? `translateX(${((wide ? -36 : -22) * q).toFixed(2)}%) rotate(${(-5 * q).toFixed(2)}deg) scale(${(1 - .08 * q).toFixed(3)})` : '';
     B.style.visibility = q ? 'visible' : '';
-    B.style.transform = q ? `translate(${(bx * q).toFixed(2)}%,${((1 - q) * 125 + (wide ? 2 : -2) * q).toFixed(2)}%) rotate(${(5 * q).toFixed(2)}deg)` : '';
+    B.style.transform = q ? `translate(${(bx * q).toFixed(2)}%,${((1 - q) * 125 + (wide || innerHeight < 520 ? 3 : -2) * q).toFixed(2)}%) rotate(${(5 * q).toFixed(2)}deg)` : '';
     pills.forEach(p => p.classList.toggle('is-away', q > .05));
     flag('is-lead', s > .87);
   };

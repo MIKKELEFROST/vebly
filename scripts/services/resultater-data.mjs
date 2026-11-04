@@ -34,6 +34,8 @@ export const cases = [
       h2: ['Fra en side fra 2012.', 'Til en, der giver opkald.'],
       lead: 'Et VVS-firma i Vejle fik ny hjemmeside og Google Ads. Scroll, og se hvad der skete.',
       gammel: { aar: '2012', titel: 'Velkommen til Hansen VVS ApS', under: 'VVS-arbejde i Vejle og omegn siden 1998' },
+      // Three boxes on the new site in the drawing
+      ydelser: [['Akut hjælp', 'Samme dag'], ['Badeværelse', 'Fast pris'], ['Varmepumpe', 'Service hele året']],
       trin: [
         ['Udgangspunktet', 'En side fra 2012. Langsom, svær at bruge på mobilen, og telefonen ringede sjældent.'],
         ['Ny hjemmeside', 'Hurtig, skarp på mobilen og med »Ring nu« øverst. Kunden ringer med ét tryk.'],

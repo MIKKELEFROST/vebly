@@ -1,14 +1,11 @@
 /* Showcase: e-mail marketing (scripts/services/showcase/email-marketing.html). Our own mail app, no real
-   app's marks: two panes on computers, a phone inbox on phones. With html.motion the stage is pinned and
-   email-marketing.js plays the story; without it the finished state just flows. Mockup sizes are in em. */
+   app's marks. html.motion: pinned and played by email-marketing.js; without it the finished state flows. */
 .show--email-marketing{position:relative;z-index:1;scroll-margin-top:48px;--row:76px;--nv:#0f3d2e;--lime:#d4f36b;--blue:#1f45b0;--pop:cubic-bezier(.3,1.6,.5,1);--out:cubic-bezier(.2,.8,.2,1)}
 .show--email-marketing .em-head{max-width:1200px;margin:0 auto;padding:40px 24px 0}
-.show--email-marketing .em-head .sec-head__lead{max-width:400px}
-
-/* The pinned stage */
+.show--email-marketing .em-head p{max-width:400px}
 .show--email-marketing .em-sticky{padding:48px 0 100px}
 .motion .show--email-marketing .em-track{height:470vh;margin-top:min(0px,calc(340px - 50vh))}
-.motion .show--email-marketing .em-sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden;padding:92px 0 0;pointer-events:none}
+.motion .show--email-marketing .em-sticky{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden;padding:92px 0 0;pointer-events:none}
 .show--email-marketing .em-fit{max-width:1200px;width:100%;margin:0 auto;padding:0 24px 16px;display:grid;grid-template-columns:minmax(280px,380px) minmax(0,700px);justify-content:space-between;align-items:center;gap:28px clamp(32px,5vw,72px);pointer-events:auto}
 
 /* Steps */
@@ -20,61 +17,57 @@
 .show--email-marketing .em-step p{margin:0;max-width:360px;font-size:16px;line-height:1.5;color:var(--muted)}
 .show--email-marketing .em-cta{align-self:flex-start;margin-top:10px;padding:12px 20px;border-radius:999px;background:var(--ink);color:#fff;font-size:15px;font-weight:700;transition:opacity .35s,background .2s}
 .show--email-marketing .em-cta:hover{color:#fff;background:var(--accent)}
-.show--email-marketing .em-pills{display:none}
+.show--email-marketing .em-pills,.show--email-marketing .em-back{display:none}
 .motion .show--email-marketing .em-step:not(.is-on){opacity:.22;transform:translateX(-8px)}
 .motion .show--email-marketing .em-step:not(.is-on) .em-cta:not(:focus-visible){opacity:0;pointer-events:none}
 
 /* The mail app */
 .show--email-marketing .em-stage{position:relative;width:100%;padding-bottom:60px}
 .show--email-marketing .em-win{position:relative;height:540px;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 40px 80px -30px rgba(17,17,17,.18);color:#1d1c1a;font-size:13px;line-height:1.35}
-.show--email-marketing .em-bar{display:flex;align-items:center;gap:14px;height:48px;padding:0 14px 0 16px;flex-shrink:0;border-bottom:1px solid var(--line)}
-.show--email-marketing .em-search{flex:1;max-width:300px;display:flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:8px;background:#f4f2ee;color:var(--muted);font-size:12.5px}
+.show--email-marketing :is(.em-bar,.em-box__head,.em-search,.em-from,.em-mail__top,.em-offer,.em-note,.em-ok,.em-flow__top,.em-stats__top,.em-label,.em-row__top){display:flex;align-items:center}
+.show--email-marketing .em-bar{gap:14px;height:48px;padding:0 14px 0 16px;flex-shrink:0;border-bottom:1px solid var(--line)}
+.show--email-marketing .em-search{flex:1;max-width:300px;gap:8px;height:30px;padding:0 12px;border-radius:8px;background:#f4f2ee;color:var(--muted);font-size:12.5px}
 .show--email-marketing svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.show--email-marketing :is(.em-me,.em-count,.em-logo,.em-ok__ic,.em-node i,.em-btn i){display:grid;place-items:center;border-radius:50%}
+.show--email-marketing :where(.em-me,.em-count,.em-logo,.em-ok__ic,.em-node i,.em-btn i){display:grid;place-items:center;flex-shrink:0;border-radius:50%}
 .show--email-marketing .em-me{margin-left:auto;width:28px;height:28px;background:#e9e1d3;font-size:12px;font-weight:700}
-.show--email-marketing .em-body{flex:1;min-height:0;display:grid;grid-template-columns:250px minmax(0,1fr)}
-.show--email-marketing .em-box{position:relative;display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
-.show--email-marketing .em-box__head{display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;flex-shrink:0;border-bottom:1px solid var(--line);font-size:15px}
+.show--email-marketing .em-body{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:250px minmax(0,1fr)}
+.show--email-marketing .em-box{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
+.show--email-marketing .em-box__head{gap:8px;height:46px;padding:0 16px;flex-shrink:0;border-bottom:1px solid var(--line);font-size:15px}
 .show--email-marketing .em-count{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;transition:opacity .3s,transform .45s var(--pop)}
 .show--email-marketing .em-count.is-off{opacity:0;transform:scale(.4)}
 .show--email-marketing .em-rows{position:relative;flex:1;min-height:0;overflow:hidden}
 .show--email-marketing .em-row{position:relative;height:var(--row);padding:.85em 1.08em 0 1.85em;border-bottom:1px solid #f0eee9;background:#fff;overflow:hidden;transition:background .35s}
 .show--email-marketing .em-row>div{margin-top:.15em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#3d3b37}
-.show--email-marketing .em-row__top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.show--email-marketing .em-row__top{justify-content:space-between;align-items:baseline;gap:8px}
 .show--email-marketing .em-row__top b{font-size:1.04em;font-weight:600;color:var(--ink)}
 .show--email-marketing :is(.em-row time,.em-row__pre){font-size:.9em;color:var(--muted);transition:opacity .25s}
 .show--email-marketing .is-unread :is(b,.em-row__sub){font-weight:700;color:var(--ink)}
-.show--email-marketing .em-row.is-hover{background:#f6f5f2}
-.show--email-marketing .em-row.is-sel{background:#eef2fb}
-.show--email-marketing .em-row.is-new{background:#fff3ed}
+.show--email-marketing .is-hover{background:#f6f5f2}
+.show--email-marketing .is-sel{background:#eef2fb}
+.show--email-marketing .is-new{background:#fff3ed}
 .show--email-marketing .em-dot{position:absolute;left:.7em;top:1.32em;width:.62em;height:.62em;border-radius:50%;background:var(--blue);transform:scale(0);transition:transform .5s cubic-bezier(.3,1.8,.5,1)}
-.show--email-marketing .is-unread .em-dot{transform:none}
-.show--email-marketing .em-label{position:absolute;right:.77em;top:.7em;display:flex;align-items:center;gap:.35em;padding:.38em .86em;border-radius:999px;background:var(--accent);color:#fff;font-size:.81em;font-weight:700;line-height:1.1;white-space:nowrap;opacity:0;transform:translateY(4px) scale(.85);transition:opacity .3s,transform .45s var(--pop)}
+.show--email-marketing .is-unread .em-dot,.show--email-marketing .is-yours .em-label{transform:none;opacity:1}
+.show--email-marketing .em-label{position:absolute;right:.77em;top:.7em;gap:.35em;padding:.38em .86em;border-radius:999px;background:var(--accent);color:#fff;font-size:.81em;font-weight:700;line-height:1.1;white-space:nowrap;opacity:0;transform:translateY(4px) scale(.85);transition:opacity .3s,transform .45s var(--pop)}
 .show--email-marketing .em-label--auto{background:var(--ink)}
 .show--email-marketing .em-label svg{width:1.05em;height:1.05em}
-.show--email-marketing .is-yours .em-label{opacity:1;transform:none}
 .show--email-marketing .is-yours time{opacity:0}
 
-/* The reading pane */
+/* The reading pane and the newsletter, in Nordvik's own colours */
 .show--email-marketing .em-read{position:relative;min-width:0;overflow:hidden;background:#f6f5f2}
 .show--email-marketing :is(.em-empty,.em-open){position:absolute;inset:0;display:flex;flex-direction:column}
 .show--email-marketing .em-empty{align-items:center;justify-content:center;gap:12px;color:var(--faint)}
 .show--email-marketing .em-empty svg{width:46px;height:46px;stroke:var(--line-strong);stroke-width:1.6}
-.show--email-marketing .em-back{display:none}
 .show--email-marketing .em-meta{flex-shrink:0;padding:14px 22px 12px;background:#fff;border-bottom:1px solid var(--line)}
 .show--email-marketing .em-meta__sub{display:block;font-size:16px;line-height:1.25}
-.show--email-marketing .em-from{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.92em;color:var(--muted)}
-.show--email-marketing .em-from b{color:var(--ink)}
-.show--email-marketing .em-from time{margin-left:auto}
-.show--email-marketing .em-view{position:relative;flex:1;min-height:0;overflow:hidden;padding:16px 22px 0;-webkit-mask-image:linear-gradient(transparent,#000 14px);mask-image:linear-gradient(transparent,#000 14px)}
-
-/* The newsletter, in Nordvik's own colours */
+.show--email-marketing .em-from{gap:8px;margin-top:8px;font-size:.92em;color:var(--muted)}
+.show--email-marketing :is(.em-from,.em-note) b{color:var(--ink)}
+.show--email-marketing :is(.em-from time,.em-mail__top span:last-child){margin-left:auto}
+.show--email-marketing .em-view{position:relative;flex:1;min-height:0;overflow:hidden;padding:16px 22px 0;mask-image:linear-gradient(transparent,#000 14px)}
 .show--email-marketing .em-mail{max-width:400px;margin:0 auto 16px;padding:1.08em 1.08em 1.23em;background:#fff;border-radius:14px;box-shadow:0 1px 2px rgba(17,17,17,.06),0 12px 30px -20px rgba(17,17,17,.3);color:#0e1a14;font-size:13px}
-.show--email-marketing .em-mail__top{display:flex;align-items:center;gap:.55em;font-size:.88em;color:#66706a}
+.show--email-marketing .em-mail__top{gap:.55em;font-size:.88em;color:#66706a}
 .show--email-marketing .em-mail__top b{font-size:1.23em;letter-spacing:-.02em;color:#0e1a14}
-.show--email-marketing .em-mail__top span:last-child{margin-left:auto}
-.show--email-marketing .em-logo{width:18px;height:18px;flex-shrink:0;background:var(--nv)}
-.show--email-marketing .em-logo i{width:6px;height:6px;border-radius:50%;background:var(--lime)}
+.show--email-marketing .em-logo{width:18px;height:18px;background:var(--nv)}
+.show--email-marketing .em-logo i{width:34%;height:34%;border-radius:50%;background:var(--lime)}
 .show--email-marketing .em-mail__img{position:relative;height:11.5em;margin-top:.92em;border-radius:12px;overflow:hidden;background:#dfe5df}
 .show--email-marketing .em-mail__img img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
 .show--email-marketing .em-mail__sale{position:absolute;right:.92em;bottom:.92em;padding:.45em .8em;border-radius:.8em;background:var(--lime);font-size:1.23em;font-weight:700;letter-spacing:-.03em;transform:rotate(-6deg);box-shadow:0 10px 20px -10px rgba(14,26,20,.6)}
@@ -82,7 +75,7 @@
 .show--email-marketing .em-mail__h{display:block;margin-top:.22em;font-size:2.08em;line-height:1.02;letter-spacing:-.045em}
 .show--email-marketing .em-mail__h em{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.02em;color:var(--nv)}
 .show--email-marketing .em-mail p{margin:.6em 0 0;line-height:1.5;color:#5f6b64}
-.show--email-marketing .em-offer{display:flex;align-items:center;gap:.92em;margin-top:1.08em;padding:.77em 1.08em;border:1.5px dashed #a7c64a;border-radius:1.08em;background:#f4f9e1;font-size:.92em;color:#34443b}
+.show--email-marketing .em-offer{gap:.92em;margin-top:1.08em;padding:.77em 1.08em;border:1.5px dashed #a7c64a;border-radius:1.08em;background:#f4f9e1;font-size:.92em;color:#34443b}
 .show--email-marketing .em-offer b{font-size:2.5em;line-height:1;letter-spacing:-.05em;color:var(--nv);white-space:nowrap}
 .show--email-marketing .em-mail__cta{display:flex;margin-top:1.08em}
 .show--email-marketing .em-btn{display:inline-flex;align-items:center;gap:.75em;padding:.55em .55em .55em 1.4em;border-radius:999px;background:var(--nv);color:#fff;font-size:1.04em;font-weight:700;transition:background .3s,color .3s,transform .3s var(--pop)}
@@ -97,17 +90,23 @@
 .show--email-marketing .is-done :is(.em-btn__t>span+span,i b+b){opacity:1;transform:none}
 .show--email-marketing .em-mail__foot{display:block;margin-top:1.08em;padding-top:.77em;border-top:1px solid #eeede8;font-size:.81em;line-height:1.45;color:#8a918c}
 
-/* The booking confirmation: a toast on computers, a banner from the top on phones */
-.show--email-marketing .em-ok{position:absolute;left:22px;right:22px;bottom:16px;max-width:400px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:11px 16px 11px 11px;border-radius:18px;background:var(--nv);box-shadow:0 24px 40px -18px rgba(14,26,20,.7);font-size:12px;color:#b5cdbf}
-.show--email-marketing .em-ok__ic{width:34px;height:34px;flex-shrink:0;background:var(--lime);color:var(--nv);font-size:16px;font-weight:700}
-.show--email-marketing .em-ok b{display:block;margin-bottom:1px;font-size:14px;color:#fff}
+/* New mail and booked: a notification and a toast on computers, banners from the top on phones */
+.show--email-marketing :is(.em-note,.em-ok){position:absolute;z-index:4;gap:10px;padding:10px 12px 10px 10px;border-radius:14px;font-size:12px;line-height:1.3;color:var(--muted)}
+.show--email-marketing .em-note{top:14px;right:14px;width:284px;background:#fff;box-shadow:0 1px 2px rgba(17,17,17,.08),0 16px 36px -14px rgba(17,17,17,.4)}
+.show--email-marketing :is(.em-note .em-logo,.em-ok__ic){width:32px;height:32px}
+.show--email-marketing .em-note__t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.show--email-marketing :is(.em-note,.em-ok) b{display:block;font-size:1.15em}
+.show--email-marketing .em-note time{align-self:flex-start}
+.show--email-marketing .em-ok{left:22px;right:22px;bottom:16px;max-width:400px;margin:0 auto;border-radius:18px;background:var(--nv);box-shadow:0 24px 40px -18px rgba(14,26,20,.7);color:#b5cdbf}
+.show--email-marketing .em-ok__ic{background:var(--lime);color:var(--nv);font-size:15px;font-weight:700}
+.show--email-marketing .em-ok b{color:#fff}
 .show--email-marketing .em-ok small{font-size:inherit}
 
-/* Eksempel tag, the pointer and its click */
+/* Eksempel, the pointer and its click */
 .show--email-marketing .em-tag{position:absolute;top:-11px;right:22px;z-index:6}
 .show--email-marketing .em-cursor{position:absolute;left:0;top:0;z-index:7;width:22px;height:22px;margin:-2px 0 0 -5px;pointer-events:none;opacity:0}
 .show--email-marketing .em-cursor svg{display:block;width:22px;height:22px;fill:var(--ink);stroke:#fff;stroke-width:1.6;filter:drop-shadow(0 3px 4px rgba(17,17,17,.3))}
-.show--email-marketing .em-cursor::after{content:"";position:absolute;left:-11px;top:-11px;width:30px;height:30px;border-radius:50%;border:2px solid var(--accent);opacity:0}
+.show--email-marketing .em-cursor::after{content:"";position:absolute;inset:-11px auto auto -11px;width:30px;height:30px;border-radius:50%;border:2px solid var(--accent);opacity:0}
 .show--email-marketing .em-cursor.is-click::after{animation:emShowRing .55s ease-out}
 @keyframes emShowRing{from{opacity:1;transform:scale(.3)}to{opacity:0;transform:scale(1.7)}}
 @keyframes emShowPulse{from{box-shadow:0 0 0 0 rgba(224,85,43,.45)}to{box-shadow:0 0 0 12px rgba(224,85,43,0)}}
@@ -115,28 +114,28 @@
 /* The automatic flow and the numbers, floating over the app */
 .show--email-marketing :is(.em-flow,.em-stats){position:absolute;top:466px;z-index:8;width:430px;padding:14px 18px 16px;border-radius:22px;box-shadow:0 30px 60px -24px rgba(17,17,17,.4)}
 .show--email-marketing .em-flow{left:-40px;background:#fff;border:1px solid var(--line)}
-.show--email-marketing :is(.em-flow__top,.em-stats__top){display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}
+.show--email-marketing :is(.em-flow__top,.em-stats__top){justify-content:space-between;gap:10px;font-size:14px}
 .show--email-marketing .em-flow__row{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px}
 .show--email-marketing .em-flow__line{position:absolute;left:12.5%;right:12.5%;top:12px;height:2px;background:var(--line)}
 .show--email-marketing .em-flow__line i{position:absolute;inset:0;background:var(--ink);transform-origin:0 50%;transform:scaleX(.6667)}
 .show--email-marketing .em-flow__line b{position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(224,85,43,.2);opacity:0}
 .show--email-marketing .em-node{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;font-size:12px;font-weight:700;color:var(--muted);transition:color .3s}
 .show--email-marketing .em-node i{width:26px;height:26px;margin-bottom:6px;border:2px solid var(--line-strong);background:#fff;color:transparent;font-style:normal;transition:background .3s,border .3s,color .3s,transform .45s var(--pop)}
-.show--email-marketing .em-node small{font-size:10.5px;font-weight:500;color:var(--faint)}
+.show--email-marketing .em-node small{font-size:.875em;font-weight:500;color:var(--faint)}
 .show--email-marketing .em-node.is-done{color:var(--ink)}
 .show--email-marketing .em-node.is-done i{background:var(--ink);border-color:var(--ink);color:#fff}
 .show--email-marketing .em-node.is-now{color:var(--accent)}
 .show--email-marketing .em-node.is-now i{border:7px solid var(--accent);transform:scale(1.12);animation:emShowPulse 1.4s ease-out infinite}
 .show--email-marketing .em-stats{top:36px;right:-18px;z-index:9;width:318px;padding:18px 20px 20px;border-radius:24px;box-shadow:0 40px 70px -30px rgba(17,17,17,.65)}
-.show--email-marketing .em-stats__top{font-size:13px;color:var(--dark-muted)}
 .show--email-marketing .em-stats__row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
-.show--email-marketing .em-stats__row div{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--dark-muted)}
+.show--email-marketing :is(.em-stats__top,.em-stats__row div){font-size:13px;color:var(--dark-muted)}
+.show--email-marketing .em-stats__row div{display:flex;flex-direction:column;gap:6px}
 .show--email-marketing .em-stats__row b{font:800 42px/1 var(--display);letter-spacing:-.05em;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
 .show--email-marketing .em-stats__row small{margin-left:3px;font-size:.5em;letter-spacing:0;color:var(--accent)}
 
 /* Motion: the opening state until the script takes over */
 .motion .show--email-marketing .em-row{transform:translateY(calc(var(--row) * -2))}
-.motion .show--email-marketing :is(.em-open,.em-ok,.em-flow,.em-stats){opacity:0}
+.motion .show--email-marketing :is(.em-open,.em-ok,.em-flow,.em-stats,.em-note){opacity:0}
 
 /* Tablets and phones: the steps as numbers with only the current one written out, the app below */
 @media (max-width:999px){
@@ -168,7 +167,7 @@
   .motion .show--email-marketing .em-win{height:clamp(330px,calc(100svh - 290px),470px)}
   .show--email-marketing .em-win::before{content:"";position:absolute;top:7px;left:50%;z-index:9;width:64px;height:18px;margin-left:-32px;border-radius:999px;background:var(--ink)}
   .show--email-marketing :is(.em-bar,.em-empty){display:none}
-  .show--email-marketing .em-body{display:block;position:relative}
+  .show--email-marketing .em-body{display:block}
   .show--email-marketing .em-box{height:100%;border:0}
   .show--email-marketing .em-box__head{height:auto;padding:36px 14px 8px;border:0;font-size:20px;letter-spacing:-.02em}
   .show--email-marketing .em-read{position:absolute;inset:0;z-index:3;background:#fff}
@@ -179,17 +178,16 @@
   .show--email-marketing .em-view{padding:0}
   .show--email-marketing .em-mail{max-width:none;margin:0;padding:10px 12px 16px;border-radius:0;box-shadow:none;font-size:11px}
   .show--email-marketing .em-mail__img{border-radius:10px}
-  .show--email-marketing .em-ok{left:0;right:0;top:0;bottom:auto;max-width:none;padding:34px 14px 14px;border-radius:0 0 22px 22px;font-size:11px}
-  .show--email-marketing .em-ok__ic{width:30px;height:30px;font-size:14px}
-  .show--email-marketing .em-ok b{font-size:13px}
+  .show--email-marketing :is(.em-note,.em-ok){left:6px;right:6px;top:30px;bottom:auto;width:auto;max-width:none;border-radius:16px;font-size:11px}
+  .show--email-marketing .em-note{background:rgba(246,245,242,.97)}
+  .show--email-marketing .em-ok{left:0;right:0;top:0;padding:34px 14px 14px;border-radius:0 0 22px 22px}
   .show--email-marketing .em-tag{top:-9px;right:calc(50% - 150px)}
   .show--email-marketing .em-cursor{width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:rgba(17,17,17,.16);border:2px solid rgba(255,255,255,.9);box-shadow:0 4px 12px rgba(17,17,17,.2)}
   .show--email-marketing .em-cursor svg{display:none}
-  .show--email-marketing .em-cursor::after{left:-6px;top:-6px;width:46px;height:46px}
+  .show--email-marketing .em-cursor::after{inset:-6px auto auto -6px;width:46px;height:46px}
   /* The flow and the numbers take turns over the inbox, clear of the buttons at the bottom */
   .show--email-marketing :is(.em-flow,.em-stats){left:0;right:0;top:148px;width:auto;padding:14px 14px 16px;border-radius:22px}
   .show--email-marketing .em-node{font-size:11px}
-  .show--email-marketing .em-node small{font-size:9.5px}
   .show--email-marketing .em-stats__row b{font-size:38px}
 }
 
@@ -197,7 +195,7 @@
 html:not(.motion) .show--email-marketing .em-fit{align-items:start}
 html:not(.motion) .show--email-marketing .em-stage{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:0 16px;padding:0}
 html:not(.motion) .show--email-marketing .em-win{grid-column:1/-1;height:auto}
-html:not(.motion) .show--email-marketing :is(.em-empty,.em-row--nl .em-label){display:none}
+html:not(.motion) .show--email-marketing :is(.em-empty,.em-note,.em-row--nl .em-label){display:none}
 html:not(.motion) .show--email-marketing :is(.em-open,.em-ok,.em-flow,.em-stats){position:relative;inset:auto;width:auto}
 html:not(.motion) .show--email-marketing .em-ok{width:calc(100% - 44px);margin:0 auto 18px}
 html:not(.motion) .show--email-marketing :is(.em-flow,.em-stats){margin-top:16px}

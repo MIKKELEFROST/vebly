@@ -1,11 +1,14 @@
 /* Showcase: Google Shopping Ads. The drawn search page has its own greys, link blue and green, and scales
-   with the font size of .gsa-scr. :is(.motion *) = with motion, :not(.motion *) = the static version */
+   with the font size of .gsa-scr. :is(.motion *) = with motion, :not(.motion *) = the static version.
+   Screens under 500px tall get no pinning: the JS shows the moment your ad is first, with all steps */
 .show--google-shopping-ads { position: relative; z-index: 1; padding-bottom: 56px; }
 .show--google-shopping-ads .gsa__head { max-width: 1200px; margin: 0 auto; padding: 40px 24px 36px; }
 .show--google-shopping-ads .gsa__head .sec-head__lead { max-width: 380px; }
-.show--google-shopping-ads:is(.motion *) .gsa__pin { height: 400vh; margin-top: -100px; }
-.show--google-shopping-ads:is(.motion *) .gsa__sticky { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; padding-top: 92px; pointer-events: none; }
-.show--google-shopping-ads:is(.motion *) .gsa__fit > * { pointer-events: auto; }
+@media (min-height: 500px) {
+  .show--google-shopping-ads:is(.motion *) .gsa__pin { height: 400vh; margin-top: -100px; }
+  .show--google-shopping-ads:is(.motion *) .gsa__sticky { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; padding-top: 92px; pointer-events: none; }
+  .show--google-shopping-ads:is(.motion *) .gsa__fit > * { pointer-events: auto; }
+}
 .show--google-shopping-ads .gsa__fit { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 24px 16px; display: grid; grid-template-columns: minmax(250px, 340px) minmax(0, 1fr); gap: clamp(18px, 3.4vh, 34px) clamp(32px, 5vw, 72px); align-items: center; }
 .show--google-shopping-ads :where(.gsa__fx, .gsa__fx i, .gsa__defs, .gsa-ac, .gsa-tag, .gsa-you, .gsa-next, .gsa-ph, .gsa-dim, .gsa-sheet, .gsa-toast, .gsa-cur, .gsa-rip) { position: absolute; }
 .show--google-shopping-ads :where(.gsa__fx, .gsa-ph, .gsa-dim) { inset: 0; }
@@ -110,10 +113,12 @@
 .show--google-shopping-ads .gsa-rip { z-index: 5; left: 0; top: 0; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #e0552b4d; opacity: 0; }
 .show--google-shopping-ads:not(.motion *) :is(.gsa-q__caret, .gsa-ac, .gsa-sheet, .gsa-dim, .gsa-toast, .gsa-cur, .gsa-rip), .show--google-shopping-ads .gsa-cur i { display: none; }
 
-/* Tablets and phones: the steps as numbers above the stage, only the current one written out */
+/* Tablets and phones: one column, and with the story the steps as numbers, only the current one written out */
 @media (max-width: 999px) {
   .show--google-shopping-ads .gsa__fit { grid-template-columns: minmax(0, 1fr); }
   .show--google-shopping-ads .gsa-step p { max-width: 560px; }
+}
+@media (max-width: 999px) and (min-height: 500px) {
   .show--google-shopping-ads:is(.motion *) .gsa__steps { display: grid; grid-template-columns: repeat(4, auto) 1fr; gap: 10px 6px; align-items: center; }
   .show--google-shopping-ads:is(.motion *) .gsa-step { display: contents; }
   .show--google-shopping-ads:is(.motion *) .gsa-step__n { grid-row: 1; display: grid; place-items: center; width: 36px; height: 28px; min-width: 0; border: 1px solid var(--line-strong); border-radius: 9em; color: var(--muted); font-size: 13px; transition: .3s; }
@@ -128,19 +133,15 @@
   .show--google-shopping-ads .gsa__egen.is-out { width: auto; margin: 0 20px 8px; }
   .show--google-shopping-ads .gsa__fit { padding: 0 20px 14px; gap: 14px; }
   .show--google-shopping-ads .gsa-step p { font-size: 14.5px; line-height: 1.45; }
-  .show--google-shopping-ads:is(.motion *) .gsa__pin { margin-top: -40px; }
-  .show--google-shopping-ads:is(.motion *) .gsa__sticky { align-items: stretch; height: 100svh; padding-top: 82px; }
-  .show--google-shopping-ads:is(.motion *) .gsa__fit { height: 100%; padding-bottom: 72px; gap: 12px; grid-template-rows: auto minmax(0, 1fr); align-items: start; }
-  .show--google-shopping-ads:is(.motion *) .gsa-step h3 { font-size: 21px; }
-  .show--google-shopping-ads:is(.motion *) .gsa-step__b { min-height: 70px; }
-  .show--google-shopping-ads:is(.motion *) :is(.gsa-step__cta, .gsa-tabs), .show--google-shopping-ads .gsa-next { display: none; }
+  .show--google-shopping-ads .gsa-next { display: none; }
   .show--google-shopping-ads .gsa__stage { display: flex; justify-content: center; }
-  .show--google-shopping-ads:is(.motion *) .gsa__stage { height: 100%; min-height: 0; }
   .show--google-shopping-ads .gsa__browser { width: min(100%, 304px); display: flex; flex-direction: column; }
   .show--google-shopping-ads .gsa__browser .browser__bar { padding: 28px 10px 7px; }
   .show--google-shopping-ads .gsa-scr { flex: 1; min-height: 0; padding: 10px 10px 12px; gap: 10px; border-radius: 0; font-size: 11px; }
   .show--google-shopping-ads .gsa-ads { --cw: 116px; }
-  .show--google-shopping-ads .gsa-row { margin: -22px -10px 0; padding: 22px 5px 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 5px; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .show--google-shopping-ads .gsa-row { margin: -22px -10px -30px; padding: 22px 5px 30px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+  /* Snapping only in the static version: with motion the story moves the cards, and snapping would scroll the row */
+  .show--google-shopping-ads:not(.motion *) .gsa-row { scroll-snap-type: x mandatory; scroll-padding: 0 5px; }
   .show--google-shopping-ads .gsa-row::-webkit-scrollbar { display: none; }
   .show--google-shopping-ads .gsa-row.is-lock { overflow-x: hidden; }
   .show--google-shopping-ads .gsa-card { scroll-snap-align: start; }
@@ -153,4 +154,20 @@
   .show--google-shopping-ads .gsa-cur { width: 30px; height: 30px; margin: -15px 0 0 -15px; transform-origin: 50%; }
   .show--google-shopping-ads .gsa-cur svg { display: none; }
   .show--google-shopping-ads .gsa-cur i { display: block; height: 100%; border: 2px solid #fffffff2; border-radius: 50%; background: #11111147; box-shadow: 0 4px 12px #1111114d; }
+}
+/* Phones with the pinned story: the phone fills the screen above the floating buttons */
+@media (max-width: 699px) and (min-height: 500px) {
+  .show--google-shopping-ads:is(.motion *) .gsa__pin { margin-top: -40px; }
+  .show--google-shopping-ads:is(.motion *) .gsa__sticky { align-items: stretch; height: 100svh; padding-top: 82px; }
+  .show--google-shopping-ads:is(.motion *) .gsa__fit { height: 100%; padding-bottom: 72px; gap: 12px; grid-template-rows: auto minmax(0, 1fr); align-items: start; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step h3 { font-size: 21px; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step__b { min-height: 70px; }
+  .show--google-shopping-ads:is(.motion *) :is(.gsa-step__cta, .gsa-tabs) { display: none; }
+  .show--google-shopping-ads:is(.motion *) .gsa__stage { height: 100%; min-height: 0; }
+}
+/* Short phones (an iPhone SE in Safari): the step titles only, and a shorter product sheet */
+@media (max-width: 699px) and (min-height: 500px) and (max-height: 599px) {
+  .show--google-shopping-ads:is(.motion *) .gsa-step p, .show--google-shopping-ads .gsa-sheet__stock { display: none; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step__b { min-height: 0; }
+  .show--google-shopping-ads .gsa-sheet__t { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 }
