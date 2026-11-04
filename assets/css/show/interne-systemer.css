@@ -55,7 +55,7 @@
 .show--interne-systemer .crm__hint { display: flex; align-items: center; gap: 12px; min-height: 30px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
 .show--interne-systemer .crm__h-t { display: none; }
 @media (pointer: coarse) { .show--interne-systemer .crm__h-m { display: none; } .show--interne-systemer .crm__h-t { display: inline; } }
-.show--interne-systemer .crm__reset { margin-left: auto; padding: 6px 13px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; color: var(--ink); font: 700 12.5px var(--body); cursor: pointer; transition: background .2s, color .2s; }
+.show--interne-systemer .crm__reset { flex: none; margin-left: auto; white-space: nowrap; padding: 6px 13px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; color: var(--ink); font: 700 12.5px var(--body); cursor: pointer; transition: background .2s, color .2s; }
 .show--interne-systemer .crm__reset:hover { background: var(--ink); color: #fff; }
 
 /* The board: three columns */
@@ -113,13 +113,13 @@
 .show--interne-systemer .crm__day { position: relative; height: calc(8 * var(--hh)); margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--hh) - 1px), #f3f1ed calc(var(--hh) - 1px) var(--hh)); }
 .show--interne-systemer .crm__ev { position: absolute; left: 4px; right: 4px; top: calc(var(--s) * var(--hh) + 2px); height: calc(var(--h) * var(--hh) - 4px); overflow: hidden; padding: 4px 8px; border-radius: 9px; border-left: 3px solid var(--green); background: #e6f4eb; color: #2c6b45; font-size: 11.5px; line-height: 1.25; }
 .show--interne-systemer .crm__ev b { display: block; overflow: hidden; color: var(--ink); font-size: 12.5px; white-space: nowrap; text-overflow: ellipsis; }
-.show--interne-systemer .crm__ev span { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.show--interne-systemer .crm__ev span { display: block; overflow: hidden; }
 .show--interne-systemer :is(.crm__ev.is-bes, .crm__key .is-bes) { border-color: var(--yellow); background: #fdf1d4; color: #7a5c14; }
 .show--interne-systemer .crm__ev.is-lev { border-color: var(--line-strong); background: #f3f1ed; color: var(--muted); }
 .show--interne-systemer .crm__key .is-job { background: #cfe9d9; }
 .show--interne-systemer .crm__key .is-bes { background: #f8dd97; }
 .show--interne-systemer .crm__ev.is-new { box-shadow: 0 0 0 2px var(--accent); }
-.show--interne-systemer .crm__ev i { position: absolute; top: 5px; right: 6px; padding: 2px 6px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 10px/1.2 var(--body); font-style: normal; }
+.show--interne-systemer .crm__ev i { position: absolute; bottom: 6px; left: 8px; padding: 2px 6px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 10px/1.2 var(--body); font-style: normal; }
 .show--interne-systemer:is(.motion *) .crm__ev.is-new { animation: crmPop .6s var(--sp) .25s backwards; }
 
 /* The drawn cursor of the one-time demo */
