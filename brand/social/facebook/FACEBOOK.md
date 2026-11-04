@@ -24,7 +24,7 @@ Link til alle opslag (med sporing, så du kan se Facebook-trafik i GA4):
 
 **Intro** (kort tekst øverst på siden, maks. 101 tegn):
 ```
-Hjemmesider til servicefag fra 3.000 kr. Alt er med. Klar på 7 dage. Ingen binding.
+Hjemmesider, annoncer, SEO og AI til servicefag. Hjemmesider fra 2.995 kr. Ingen binding.
 ```
 
 **Beskrivelse** (Om-fanen):
