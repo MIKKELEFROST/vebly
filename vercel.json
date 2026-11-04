@@ -36,6 +36,11 @@
       "permanent": true
     },
     {
+      "source": "/services",
+      "destination": "/#services",
+      "permanent": false
+    },
+    {
       "source": "/api/_lib/:path*",
       "destination": "/",
       "permanent": false

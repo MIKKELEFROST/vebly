@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // /services/SEO, /services/Google-Ads …: the pages are in lower case, so try that first.
+  // (Done here and not as a redirect in vercel.json, where matching ignores case and would loop.)
+  if (/^\/services\/[a-z-]*[A-Z][A-Za-z-]*\/?$/.test(location.pathname)) location.replace(location.pathname.toLowerCase() + location.search + location.hash);
+</script>
 <title>Siden findes ikke · Webleads</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#fbfaf8">
