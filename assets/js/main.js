@@ -20,24 +20,26 @@ const state = { addons: [] };
 /* ------------------------------------------------------------------ */
 
 // Trades marquee (two copies so the loop is seamless)
-{
+if ($('[data-track]')) {
   const items = [...trades, ...trades].map(t => `<div class="track__item">${esc(t)}<i></i></div>`).join('');
   $('[data-track]').innerHTML = items;
   $('[data-track2]').innerHTML = items;
 }
 
-// Included list
-$('[data-incl]').innerHTML = included.map(([t, d]) => `
+// Included list (service pages write their own list in the HTML)
+const inclEl = $('[data-incl]');
+if (inclEl && !inclEl.children.length) inclEl.innerHTML = included.map(([t, d]) => `
   <button type="button" class="incl__item" data-modal="inc-${esc(t)}">
     <span class="check" aria-hidden="true">✓</span>
     <span class="incl__txt"><b>${esc(t)}</b><span>${esc(d)}</span></span>
     <span class="incl__plus" aria-hidden="true">+</span>
   </button>`).join('');
 
-// Add-on cards
-$('[data-htrack]').innerHTML = addons.map((a, i) => `
+// Add-on cards (the front page and service pages write their service cards in the HTML)
+const htrack = $('[data-htrack]');
+if (htrack && !htrack.children.length) htrack.innerHTML = addons.map((a, i) => `
   <div class="addon-slot">
-    <div class="addon" data-tilt data-addon="${esc(a.t)}">
+    <div class="addon" data-tilt data-addon="${esc(a.t)}" data-value="${String(a.price).replace(/\D/g, '')}">
       <div class="glare" data-glare></div>
       <span class="addon__n">0${i + 1}</span>
       <div class="addon__head"><h3>${esc(a.t)}</h3><p>${esc(a.d)}</p></div>
@@ -75,14 +77,15 @@ $$('[data-review]').forEach(el => {
   }
 });
 
-// FAQ (first one open, as in the design)
-$('[data-faq]').innerHTML = faqs.map(([q, a], i) => `
+// FAQ (first one open, as in the design). Pages with their own questions write them in the HTML.
+const faqEl = $('[data-faq]');
+if (faqEl && !faqEl.children.length) faqEl.innerHTML = faqs.map(([q, a], i) => `
   <div class="faq__item${i === 0 ? ' is-open' : ''}" data-reveal="${i}">
     <button type="button" class="faq__q" aria-expanded="${i === 0}" aria-controls="faq-${i}">${esc(q)}<span class="faq__icon" aria-hidden="true">+</span></button>
     <div class="faq__a" id="faq-${i}"><div><p>${esc(a)}</p></div></div>
   </div>`).join('');
 
-$('[data-faq]').addEventListener('click', e => {
+if (faqEl) faqEl.addEventListener('click', e => {
   const btn = e.target.closest('.faq__q'); if (!btn) return;
   const item = btn.parentElement, wasOpen = item.classList.contains('is-open');
   $$('.faq__item').forEach(it => { it.classList.remove('is-open'); $('.faq__q', it).setAttribute('aria-expanded', 'false'); });
@@ -92,7 +95,7 @@ $('[data-faq]').addEventListener('click', e => {
 
 // Odometer price
 const odo = $('[data-odo]');
-if (motion) {
+if (odo && motion) {
   const text = odo.textContent.trim();
   odo.setAttribute('aria-label', text);
   odo.innerHTML = text.split('').map((d, i) => /\d/.test(d)
@@ -105,6 +108,14 @@ if (motion) {
 /* ------------------------------------------------------------------ */
 
 const form = $('[data-form]'), thanks = $('[data-thanks]');
+// What the form is about: the page's own service (data-base on the form, "Hjemmeside" when it is not
+// set, empty on the front page) plus what was added from the cards. data-value is its start price.
+const base = form ? (form.dataset.base ?? 'Hjemmeside') : '';
+const baseValue = form && form.dataset.value !== undefined ? (+form.dataset.value || 0) : 3000;
+const priceOf = t => {
+  const card = $$('[data-addon]').find(c => c.dataset.addon === t);
+  return +(card && card.dataset.value) || +String(addons.find(a => a.t === t)?.price || '').replace(/\D/g, '') || 0;
+};
 const syncAddons = () => {
   $$('[data-addon]').forEach(card => {
     const on = state.addons.includes(card.dataset.addon);
@@ -113,10 +124,11 @@ const syncAddons = () => {
     b.textContent = on ? '✓ Tilføjet' : '+ Tilføj';
     b.setAttribute('aria-pressed', String(on));
   });
-  const chosen = ['Hjemmeside', ...state.addons].join(' + ');
+  if (!form) return;
+  const chosen = [base, ...state.addons].filter(Boolean).join(' + ');
   $('[data-chosen]').hidden = state.addons.length === 0;
   $('[data-chosen-val]').textContent = chosen;
-  $('[data-chosen-input]').value = chosen;
+  $('[data-chosen-input]').value = chosen || 'Generel henvendelse';
   // Changing the selection re-opens the form, like the design
   form.hidden = false; thanks.hidden = true;
 };
@@ -134,10 +146,10 @@ if ('IntersectionObserver' in window) {
   $$('[data-addon]').forEach(c => seen.observe(c));
   // The price: seen when the big number is on screen
   const priceSeen = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { priceSeen.disconnect(); track('price_view', { seconds: Math.round(performance.now() / 1000) }); } }, { threshold: 0.6 });
-  priceSeen.observe($('[data-odo]'));
+  if (odo) priceSeen.observe(odo);
 }
 
-form.addEventListener('submit', async e => {
+if (form) form.addEventListener('submit', async e => {
   e.preventDefault();
   const err = $('[data-form-error]');
   err.hidden = true;
@@ -147,8 +159,8 @@ form.addEventListener('submit', async e => {
   try {
     // For Meta: the start price of what was chosen (monthly add-ons count one month), and an
     // event id shared with /api/contact, which sends the same Lead with the e-mail hashed
-    const chosen = $('[data-chosen-input]').value || 'Hjemmeside';
-    const value = 3000 + state.addons.reduce((sum, t) => sum + (+String(addons.find(a => a.t === t)?.price || '').replace(/\D/g, '') || 0), 0);
+    const chosen = $('[data-chosen-input]').value || base || 'Generel henvendelse';
+    const value = baseValue + state.addons.reduce((sum, t) => sum + priceOf(t), 0);
     const meta = metaLeadFields();
     const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), ...meta, meta_value: value }) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -190,7 +202,7 @@ function modalData(key) {
   if (type === 'ball') {
     const x = ballInfo[id]; if (!x) return null;
     const c = bandPalette[Math.max(0, balls.indexOf(id)) % bandPalette.length], rel = x[1];
-    return { ...base, kicker: 'Alt under ét tag', title: id, lead: x[0], glyph: id, color: c[0], fg: c[1], sec: rel ? (rel === 'pris' ? 'Se prisen' : 'Læs mere') : null, secondary: rel === 'pris' ? 'pris' : 'open:' + rel };
+    return { ...base, kicker: 'Alt under ét tag', title: id, lead: x[0], glyph: id, color: c[0], fg: c[1], sec: rel ? (rel === 'pris' ? 'Se prisen' : 'Læs mere') : null, secondary: rel === 'pris' || String(rel).startsWith('link:') ? rel : 'open:' + rel };
   }
   if (type === 'team') {
     const T = team[+id]; if (!T) return null;
@@ -253,7 +265,10 @@ function scrollToId(id) {
 function act(a) {
   if (mKey) track('popup_action', { popup: mKey, popup_type: mKey.split('-')[0], action: (a || 'close').split(':')[0] });
   if (!a || a === 'close') return closeModal('luk-knap');
+  // The price lives on /services/hjemmesider; pages without it go there
+  if (a === 'pris' && !document.getElementById('pris')) { closeModal('til-pris'); location.href = '/services/hjemmesider#pris'; return; }
   if (a === 'contact' || a === 'pris') { closeModal(a === 'pris' ? 'til-pris' : 'til-kontakt'); return scrollToId(a === 'pris' ? 'pris' : 'kontakt'); }
+  if (a.startsWith('link:')) { closeModal('til-side'); location.href = a.slice(5); return; }
   if (a.startsWith('toggle:')) { toggleAddon(a.slice(7), 'popup'); return renderModal(true); }
   if (a.startsWith('open:')) openModal(a.slice(5));
 }
@@ -285,21 +300,26 @@ document.addEventListener('keydown', e => {
 
 // Scale the "Sådan virker det" block down on short screens so nothing is cut off
 // (the room under the menu is padding on the pinned frame, so it is never scaled away)
-const fitEl = $('[data-fit]'), fitTop = fitEl.parentElement;
-const fitNow = () => { fitEl.style.transform = ''; if (!motion) return; const s = Math.min(1, (innerHeight - parseFloat(getComputedStyle(fitTop).paddingTop)) / fitEl.scrollHeight); fitEl.style.transform = s < 1 ? `scale(${s})` : ''; };
-fitNow();
-addEventListener('resize', fitNow); addEventListener('load', fitNow);
-new ResizeObserver(fitNow).observe(fitEl);
-if (document.fonts) document.fonts.ready.then(fitNow);
+const fitEl = $('[data-fit]');
+if (fitEl) {
+  const fitTop = fitEl.parentElement;
+  const fitNow = () => { fitEl.style.transform = ''; if (!motion) return; const s = Math.min(1, (innerHeight - parseFloat(getComputedStyle(fitTop).paddingTop)) / fitEl.scrollHeight); fitEl.style.transform = s < 1 ? `scale(${s})` : ''; };
+  fitNow();
+  addEventListener('resize', fitNow); addEventListener('load', fitNow);
+  new ResizeObserver(fitNow).observe(fitEl);
+  if (document.fonts) document.fonts.ready.then(fitNow);
+}
 
 // The demo renders at 1280px (390px on phones) and is scaled into the browser frame
 const isPhone = () => innerWidth < 700;
 const shot = $('[data-shot]'), demo = $('[data-demo]');
 let lastW = 0;
-const sizeFrame = force => { if (!shot.clientWidth) return; if (!force && shot.clientWidth === lastW) return; lastW = shot.clientWidth; const base = isPhone() ? 390 : 1280; demo.style.width = base + 'px'; const s = shot.clientWidth / base; demo.style.height = (shot.clientHeight / s) + 'px'; demo.style.transform = `scale(${s})`; };
-sizeFrame(true);
-addEventListener('resize', () => sizeFrame(true));
-new ResizeObserver(() => sizeFrame(false)).observe(shot);
+const sizeFrame = force => { if (!shot || !shot.clientWidth) return; if (!force && shot.clientWidth === lastW) return; lastW = shot.clientWidth; const base = isPhone() ? 390 : 1280; demo.style.width = base + 'px'; const s = shot.clientWidth / base; demo.style.height = (shot.clientHeight / s) + 'px'; demo.style.transform = `scale(${s})`; };
+if (shot) {
+  sizeFrame(true);
+  addEventListener('resize', () => sizeFrame(true));
+  new ResizeObserver(() => sizeFrame(false)).observe(shot);
+}
 
 // "Prøv med din egen virksomhed": the visitor's trade, town and company name go into the
 // example site, the address bar and the search in step 04–05, and on into "Bestil" from the
@@ -307,6 +327,7 @@ new ResizeObserver(() => sizeFrame(false)).observe(shot);
 const egen = (() => {
   const KEY = 'wl-egen', DEF = { fag: 'Tømrer', by: 'København', navn: 'Nordvik' };
   const box = $('[data-egen-box]'), f = Object.fromEntries($$('[data-egen]').map(i => [i.dataset.egen, i]));
+  if (!box) return null;
   const ALIAS = { massage: 'klinik', klinik: 'klinik', fysioterapi: 'fysioterapeut', fysio: 'fysioterapeut', 'el-installatør': 'elektriker', elinstallatør: 'elektriker', blikkenslager: 'vvs', rengøringsfirma: 'rengoering', pt: 'personlig-traener', træner: 'personlig-traener', bogholder: 'revisor' };
   $('[data-egen-fag]').innerHTML = FAG.filter(([id]) => id !== 'generisk').map(([, l]) => `<option value="${esc(l)}"></option>`).join('');
   try { const v = JSON.parse(sessionStorage.getItem(KEY) || 'null'); if (v) Object.keys(f).forEach(k => { if (typeof v[k] === 'string') f[k].value = v[k].slice(0, 60); }); } catch (x) { /* fine */ }
@@ -415,7 +436,7 @@ addEventListener('scroll', onScroll, { passive: true }); onScroll();
       ping.setAttribute('aria-label', 'Send os en sms');
       ping.dataset.event = 'Flydende knap: SMS';
     } else {
-      ping.href = `mailto:${email}?subject=${encodeURIComponent('Møde om hjemmeside')}&body=${encodeURIComponent(msg)}`;
+      ping.href = `mailto:${email}?subject=${encodeURIComponent(ping.dataset.subject || 'Møde om hjemmeside')}&body=${encodeURIComponent(msg)}`;
       $('[data-ping-label]', ping).textContent = 'Skriv til os';
       ping.setAttribute('aria-label', 'Send os en e-mail');
       ping.dataset.event = 'Flydende knap: Mail';
@@ -433,6 +454,7 @@ const ba = $('[data-ba]'), baNew = $('[data-ba-new]'), baH = $('[data-ba-h]'), b
 const baOld = $$('[data-ba-old]'), baNewV = $$('[data-ba-newv]'), baGo = $$('[data-ba-go]');
 let baPos = 50, baTouched = false, baTarget = null;
 const baSet = v => {
+  if (!ba) return;
   baPos = clamp(v, 0, 100);
   baNew.style.clipPath = `inset(0 0 0 ${baPos}%)`; baH.style.left = baPos + '%';
   const pn = 1 - baPos / 100;
@@ -441,7 +463,7 @@ const baSet = v => {
   baGo.forEach(b => b.classList.toggle('is-on', Math.abs(+b.dataset.baGo - baPos) < 8));
 };
 baGo.forEach(b => b.addEventListener('click', () => { baTouched = true; if (motion) baTarget = +b.dataset.baGo; else baSet(+b.dataset.baGo); track('ba_mode', { mode: { 100: 'foer', 50: 'begge', 0: 'efter' }[b.dataset.baGo] }); }));
-{
+if (ba) {
   let drag = false, drags = 0;
   const fromEv = e => { const r = ba.getBoundingClientRect(); baSet((e.clientX - r.left) / r.width * 100); };
   ba.addEventListener('pointerdown', e => { drag = true; baTouched = true; baTarget = null; baKnob.classList.add('is-drag'); try { ba.setPointerCapture(e.pointerId); } catch (x) {} fromEv(e); });
@@ -479,11 +501,13 @@ const pit = $('[data-pit]');
 /* ------------------------------------------------------------------ */
 
 if (!motion) {
-  $('[data-url]').textContent = $('[data-url]').dataset.full;
-  const st = $('[data-status]'); st.textContent = '● Live'; st.classList.add('is-live');
-  pit.classList.add('pit--static');
-  pit.innerHTML = balls.map((lab, i) => { const [bg, fg] = palette[i % palette.length]; return `<button type="button" class="ball" data-modal="ball-${esc(lab)}" style="width:120px;height:120px;font-size:16px;background:${bg};color:${fg};border:${bg === '#fff' ? '1.5px solid #111' : 'none'}">${esc(lab)}</button>`; }).join('');
-  $('[data-shake]').hidden = true;
+  const url = $('[data-url]'), st = $('[data-status]');
+  if (url) url.textContent = url.dataset.full;
+  if (st) { st.textContent = '● Live'; st.classList.add('is-live'); }
+  if (pit) pit.classList.add('pit--static');
+  if (pit) pit.innerHTML = balls.map((lab, i) => { const [bg, fg] = palette[i % palette.length]; return `<button type="button" class="ball" data-modal="ball-${esc(lab)}" style="width:120px;height:120px;font-size:16px;background:${bg};color:${fg};border:${bg === '#fff' ? '1.5px solid #111' : 'none'}">${esc(lab)}</button>`; }).join('');
+  if ($('[data-shake]')) $('[data-shake]').hidden = true;
+  if ($('[data-loader]')) $('[data-loader]').remove();
 } else {
   runEffects();
 }
@@ -493,9 +517,14 @@ if (!motion) {
 /* ------------------------------------------------------------------ */
 
 function runEffects() {
-  // Intro curtain
-  {
-    const Ld = $('[data-loader]'), lc = $('[data-lc]'), t0 = performance.now();
+  // Intro curtain: shown on the first page of a visit, not again when moving between pages
+  // (the class is set in <head> before first paint, so the curtain never flashes)
+  const Ld = $('[data-loader]'), intro = !!Ld && !document.documentElement.classList.contains('intro-seen');
+  const D = intro ? 1.5 : 0.1; // seconds the hero waits before it animates in
+  if (Ld && !intro) Ld.remove();
+  if (intro) {
+    try { sessionStorage.setItem('wl-intro', '1'); } catch (x) { /* fine */ }
+    const lc = $('[data-lc]'), t0 = performance.now();
     requestAnimationFrame(() => requestAnimationFrame(() => $$('.loader__word span', Ld).forEach(s => s.style.transform = 'none')));
     let lifted = false;
     const lift = () => { if (lifted) return; lifted = true; Ld.style.clipPath = 'inset(0 0 100% 0)'; setTimeout(() => Ld.remove(), 1100); };
@@ -516,7 +545,7 @@ function runEffects() {
 
   // Headline words slide up
   $$('[data-word]').forEach((w, i) => {
-    requestAnimationFrame(() => requestAnimationFrame(() => { w.style.transition = `transform 1.1s cubic-bezier(.2,.9,.2,1) ${1.55 + i * 0.09}s`; w.classList.add('is-up'); }));
+    requestAnimationFrame(() => requestAnimationFrame(() => { w.style.transition = `transform 1.1s cubic-bezier(.2,.9,.2,1) ${D + 0.05 + i * 0.09}s`; w.classList.add('is-up'); }));
   });
 
   // Reveal on scroll, count-up and odometer
@@ -530,16 +559,16 @@ function runEffects() {
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     const el = e.target; io.unobserve(el);
-    if (el.hasAttribute('data-count')) return el.closest('[data-hero]') ? setTimeout(() => countUp(el), 1600) : countUp(el);
+    if (el.hasAttribute('data-count')) return el.closest('[data-hero]') ? setTimeout(() => countUp(el), D * 1000 + 100) : countUp(el);
     if (el.hasAttribute('data-odo')) return $$('[data-odo-col]', el).forEach(c => { c.style.transform = `translateY(-${+c.dataset.d + 20}em)`; });
     el.classList.add('is-in');
   }), { threshold: 0.15 });
   $$('[data-reveal]').forEach(el => {
-    const d = (+el.dataset.reveal || 0) * 0.1 + (el.closest('[data-hero]') ? 1.5 : 0);
+    const d = (+el.dataset.reveal || 0) * 0.1 + (el.closest('[data-hero]') ? D : 0);
     el.style.transition = `opacity 1s ease ${d}s, transform 1.1s cubic-bezier(.2,.8,.2,1) ${d}s`;
     io.observe(el);
   });
-  $$('[data-count]').forEach(el => io.observe(el)); io.observe(odo);
+  $$('[data-count]').forEach(el => io.observe(el)); if (odo) io.observe(odo);
 
   // 3D tilt with glare
   $$('[data-tilt]').forEach(card => {
@@ -607,26 +636,27 @@ function runEffects() {
   const scEl = $('[data-scramble]');
   let scrRun = false;
   const scramble = () => {
-    if (scrRun) return; scrRun = true;
+    if (!scEl || scrRun) return; scrRun = true;
     const fin = scEl.dataset.text || scEl.textContent; scEl.dataset.text = fin;
     const chars = 'abcdefghijklmnopqrstuvwxyzæøå#%&'; let f = 0;
     const tick = () => { f++; scEl.textContent = fin.split('').map((c, i) => i < f / 2.2 || c === '.' ? c : chars[Math.floor(Math.random() * chars.length)]).join(''); if (f / 2.2 < fin.length) requestAnimationFrame(tick); else { scEl.textContent = fin; scrRun = false; } };
     tick();
   };
-  setTimeout(scramble, 2300); scEl.addEventListener('mouseenter', scramble);
+  if (scEl) { setTimeout(scramble, D * 1000 + 800); scEl.addEventListener('mouseenter', scramble); }
 
   // Rotating word in the badge
   {
-    const flip = $('[data-flip]'); let fi = 0;
-    setInterval(() => {
+    const flip = $('[data-flip]'), words = flip && flip.dataset.words ? flip.dataset.words.split('|') : flipWords; let fi = 0;
+    if (flip) setInterval(() => {
       flip.style.transition = 'transform .3s cubic-bezier(.7,0,.3,1),opacity .3s'; flip.style.transform = 'translateY(-70%)'; flip.style.opacity = 0;
-      setTimeout(() => { fi = (fi + 1) % flipWords.length; flip.textContent = flipWords[fi]; flip.style.transition = 'none'; flip.style.transform = 'translateY(70%)'; void flip.offsetHeight; flip.style.transition = 'transform .35s cubic-bezier(.2,.9,.3,1),opacity .35s'; flip.style.transform = ''; flip.style.opacity = 1; }, 300);
+      setTimeout(() => { fi = (fi + 1) % words.length; flip.textContent = words[fi]; flip.style.transition = 'none'; flip.style.transform = 'translateY(70%)'; void flip.offsetHeight; flip.style.transition = 'transform .35s cubic-bezier(.2,.9,.3,1),opacity .35s'; flip.style.transform = ''; flip.style.opacity = 1; }, 300);
     }, 2200);
   }
 
   // Hand-drawn underline under "3.000 kr."
   {
-    const wd = $('[data-hero] [data-count]').closest('[data-word]');
+    const mark = $('[data-hero] [data-underline]') || $('[data-hero] [data-count]'), wd = mark && mark.closest('[data-word]');
+    if (wd) {
     wd.style.position = 'relative';
     const NS = 'http://www.w3.org/2000/svg', sv = document.createElementNS(NS, 'svg');
     sv.setAttribute('viewBox', '0 0 300 30'); sv.setAttribute('preserveAspectRatio', 'none'); sv.setAttribute('aria-hidden', 'true');
@@ -636,13 +666,14 @@ function runEffects() {
     p.style.cssText = 'fill:none;stroke:#111;stroke-width:7;stroke-linecap:round';
     sv.appendChild(p); wd.appendChild(sv);
     const len = p.getTotalLength(); p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
-    setTimeout(() => { p.style.transition = 'stroke-dashoffset .9s cubic-bezier(.6,0,.2,1)'; p.style.strokeDashoffset = 0; }, 2900);
+    setTimeout(() => { p.style.transition = 'stroke-dashoffset .9s cubic-bezier(.6,0,.2,1)'; p.style.strokeDashoffset = 0; }, D * 1000 + 1400);
+    }
   }
 
   // Trade cards that pop up in the mouse's trail over the marquee
   {
     const sec = $('[data-trades]'); let tlx = null, tly = null, ti = 0;
-    sec.addEventListener('mousemove', e => {
+    if (sec) sec.addEventListener('mousemove', e => {
       if (tlx === null) { tlx = e.clientX; tly = e.clientY; return; }
       if (Math.hypot(e.clientX - tlx, e.clientY - tly) < 80) return;
       tlx = e.clientX; tly = e.clientY;
@@ -692,7 +723,7 @@ function runEffects() {
     }
     for (const b of pitBalls) { if (b !== grab && b.y > H - b.r) b.y = H - b.r; b.el.style.transform = `translate(${b.x - b.r}px,${b.y - b.r}px) rotate(${(b.x / b.r) * 20}deg)`; }
   };
-  {
+  if (pit) {
     const loc = e => { const r = pit.getBoundingClientRect(); pmx = e.clientX - r.left; pmy = e.clientY - r.top; };
     pit.addEventListener('pointerdown', e => {
       loc(e);
@@ -715,14 +746,14 @@ function runEffects() {
   }
 
   // Dotted hero background
-  const cv = $('[data-dots]'), cx = cv.getContext('2d'), dpr = Math.min(2, devicePixelRatio || 1);
+  const cv = $('[data-dots]'), cx = cv && cv.getContext('2d'), dpr = Math.min(2, devicePixelRatio || 1);
   let cw = 0, ch = 0;
-  const sizeCv = () => { cw = cv.clientWidth; ch = cv.clientHeight; cv.width = cw * dpr; cv.height = ch * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  const sizeCv = () => { if (!cv) return; cw = cv.clientWidth; ch = cv.clientHeight; cv.width = cw * dpr; cv.height = ch * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); };
   sizeCv(); addEventListener('resize', sizeCv);
 
   // Demo build-up driven by scroll
   let needBuild = true, lastBuild = -1, lastStep = -1, live = null, demoMax = 0, liveSeen = false, serpOn = null, you = null, atStart = null;
-  demo.addEventListener('load', () => { needBuild = true; sizeFrame(true); setTimeout(() => { needBuild = true; }, 600); });
+  if (demo) demo.addEventListener('load', () => { needBuild = true; sizeFrame(true); setTimeout(() => { needBuild = true; }, 600); });
 
   // Cached elements for the frame loop
   const el = {
@@ -730,7 +761,7 @@ function runEffects() {
     url: $('[data-url]'), caret: $('[data-caret]'), status: $('[data-status]'), track: $('[data-track]'), track2: $('[data-track2]'),
     serp: $('[data-serp]'), sq: $('[data-serp-q]'), scaret: $('[data-serp-caret]'), sres: $$('[data-serp-hit], [data-serp-card], .serp__ph'), egq: $('[data-egen-q]'), egen: $('[data-egen-box]'),
     floats: $$('[data-float]'), spin: $('[data-spin]'),
-    hs: $('[data-hs]'), hw: $('[data-hwrap]'), ht: $('[data-htrack]'), hbar: $('[data-hbar]'), hnum: $('[data-hnum]'), cards: $$('[data-card]'),
+    hs: $('[data-hs]'), hw: $('[data-hwrap]'), ht: $('[data-htrack]'), hbar: $('[data-hbar]'), hnum: $('[data-hnum]'), hcards: $$('[data-htrack] [data-addon]'), cards: $$('[data-card]'),
     wm: $('[data-wm]'), wl: $$('[data-wl]')
   };
   let lastY = scrollY, vel = 0, mpos = 0, mpos2 = null, t = 0, spinA = 0;
@@ -738,20 +769,22 @@ function runEffects() {
   const loop = () => {
     t++;
     ox += (mx - ox) * 0.07; oy += (my - oy) * 0.07;
-    el.orb.style.transform = `translate(${ox - 300}px,${oy - 300}px)`;
+    if (el.orb) el.orb.style.transform = `translate(${ox - 300}px,${oy - 300}px)`;
     const sy = scrollY, vh = innerHeight;
     vel += ((sy - lastY) - vel) * 0.12; lastY = sy;
 
     // Hero parallax + tilt
     const hp = clamp(sy / vh);
+    if (el.hero) {
     el.hero.style.transform = `translateY(${hp * 140}px) scale(${1 - hp * 0.1})`;
     el.hero.style.opacity = 1 - hp * 1.1;
     if (sy < vh) el.h1.style.transform = `perspective(1000px) rotateX(${(oy / vh - 0.5) * -7}deg) rotateY(${(ox / innerWidth - 0.5) * 9}deg)`;
+    }
 
     // Sådan virker det: the site is built (01–02) and goes live on its own address (03),
     // then a customer searches for the trade and town (04) and finds it (05)
     sizeFrame(false);
-    {
+    if (el.build) {
       const r = el.build.getBoundingClientRect();
       const p = clamp(-r.top / (r.height - vh)), pb = clamp(p / 0.58);
       if (Math.abs(pb - lastBuild) > 0.0005 || needBuild) {
@@ -791,7 +824,7 @@ function runEffects() {
     }
 
     // Marquees (speed and skew follow scroll velocity)
-    {
+    if (el.track) {
       const half = el.track.scrollWidth / 2;
       mpos -= 0.8 + Math.abs(vel) * 0.5;
       if (half > 0 && mpos <= -half) mpos += half;
@@ -802,7 +835,7 @@ function runEffects() {
     }
 
     // Dots
-    if (sy < vh * 1.1) {
+    if (cv && sy < vh * 1.1) {
       const g = 30;
       cx.clearRect(0, 0, cw, ch); cx.fillStyle = 'rgba(17,17,17,0.12)';
       for (let y = g / 2; y < ch; y += g) for (let x = g / 2; x < cw; x += g) {
@@ -813,10 +846,10 @@ function runEffects() {
 
     // Floating badges
     if (innerWidth >= 1000) el.floats.forEach(f => { const dp = +f.dataset.float, br = +(f.dataset.rot || 0); f.style.transform = `translate(${(ox - innerWidth / 2) * dp * 0.035}px,${(oy - innerHeight / 2) * dp * 0.035 - sy * dp * 0.3}px) rotate(${br + Math.sin(t * 0.02 + dp * 3) * 3}deg)`; });
-    spinA += 0.25 + Math.abs(vel) * 0.35; el.spin.style.transform = `rotate(${spinA}deg)`;
+    spinA += 0.25 + Math.abs(vel) * 0.35; if (el.spin) el.spin.style.transform = `rotate(${spinA}deg)`;
 
-    // Horizontal add-on scroll
-    {
+    // Horizontal card scroll (add-ons, or the services on the front page)
+    if (el.hs) {
       let ph;
       if (isPhone()) {
         // Phones swipe the cards natively; the meter follows the swipe
@@ -831,11 +864,12 @@ function runEffects() {
         el.ht.style.transform = `translateX(${-dist * ph}px)`;
       }
       el.hbar.style.transform = `scaleX(${ph})`;
-      el.hnum.textContent = '0' + Math.min(4, 1 + Math.floor(ph * 3.999));
+      const n = el.hcards.length || 1;
+      el.hnum.textContent = String(Math.min(n, 1 + Math.floor(ph * (n - 0.001)))).padStart(2, '0');
     }
 
     // Before/after autoplay until touched
-    {
+    if (ba) {
       const r = ba.getBoundingClientRect(), vis = r.top < vh && r.bottom > 0;
       if (!baTouched && vis) baSet(50 + Math.sin(t * 0.016) * 38);
       else if (baTarget !== null) { baSet(baPos + (baTarget - baPos) * 0.12); if (Math.abs(baTarget - baPos) < 0.2) { baSet(baTarget); baTarget = null; } }
@@ -843,16 +877,16 @@ function runEffects() {
     }
 
     // Stacked promise cards shrink as the next one covers them
-    {
+    if (el.cards.length) {
       const rr = el.cards.map(c => c.getBoundingClientRect());
       if (rr[0].top < vh && rr[rr.length - 1].bottom > 0) el.cards.forEach((c, i) => { let s = 0; for (let j = i + 1; j < el.cards.length; j++) s += clamp(1 - (rr[j].top - rr[i].top) / (vh * 0.7)); c.style.transform = `scale(${1 - s * 0.045})`; c.style.filter = s > 0.01 ? `brightness(${1 - s * 0.12})` : ''; });
     }
 
     // Ball pit
-    { const r = pit.getBoundingClientRect(); if (!pitOn && r.top < vh * 0.8 && r.bottom > 0) { pitOn = true; initPit(); } if (pitOn && r.bottom > -100 && r.top < vh + 100) pitStep(); }
+    if (pit) { const r = pit.getBoundingClientRect(); if (!pitOn && r.top < vh * 0.8 && r.bottom > 0) { pitOn = true; initPit(); } if (pitOn && r.bottom > -100 && r.top < vh + 100) pitStep(); }
 
     // Wordmark letters lift towards the mouse
-    { const r = el.wm.getBoundingClientRect(); if (r.top < vh && r.bottom > 0) el.wl.forEach((l, i) => { const lr = l.getBoundingClientRect(); const d = Math.hypot(mx - (lr.left + lr.width / 2), my - (lr.top + lr.height / 2)); const f = Math.max(0, 1 - d / 320); l.style.transform = `translateY(${-f * 70 + Math.sin(t * 0.04 + i * 0.8) * 6}px) rotate(${f * (i % 2 ? 8 : -8)}deg) scale(${1 + f * 0.06})`; }); }
+    if (el.wm) { const r = el.wm.getBoundingClientRect(); if (r.top < vh && r.bottom > 0) el.wl.forEach((l, i) => { const lr = l.getBoundingClientRect(); const d = Math.hypot(mx - (lr.left + lr.width / 2), my - (lr.top + lr.height / 2)); const f = Math.max(0, 1 - d / 320); l.style.transform = `translateY(${-f * 70 + Math.sin(t * 0.04 + i * 0.8) * 6}px) rotate(${f * (i % 2 ? 8 : -8)}deg) scale(${1 + f * 0.06})`; }); }
 
     requestAnimationFrame(loop);
   };

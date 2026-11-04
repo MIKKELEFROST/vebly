@@ -55,31 +55,36 @@ export const team = [
   { n: 'Mikkel', a: 'IT-udvikling', g: 'M', lead: 'Mikkel bygger interne systemer og automations. Han gør de tunge, gentagne opgaver lette, så du får tid til det vigtige.', l: [['Interne systemer', 'Booking, CRM og dashboards.'], ['Automations', 'Mails, fakturaer og opfølgning.'], ['Integrationer', 'Får dine programmer til at tale sammen.']] }
 ];
 
-export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Booking', 'Automations', 'AI-annoncer', 'CRM', 'Meta Ads', 'Dashboards', 'Google-profil', 'Webshop', 'Chatbot', 'Nyhedsbrev', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
+// The first 12 are the ones shown on narrow phones
+export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automations', 'AI-annoncer', 'GEO', 'Google Shopping', 'CRO', 'Nyhedsbrev', 'Booking', 'CRM', 'Dashboards', 'Google-profil', 'Webshop', 'Chatbot', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
 
-// [explanation, related pop-up key or 'pris' or null]
+// [explanation, related: a pop-up key, 'pris', 'link:/a/page' or null]
 export const ballInfo = {
   'Hjemmeside': ['Vores hovedprodukt. En komplet hjemmeside, hvor alt det vigtige er med.', 'pris'],
-  'SEO': ['Bliv fundet først, når kunderne søger efter det, du laver.', 'addon-seo'],
-  'Google Ads': ['Vær øverst på Google, når kunderne søger lige nu.', 'addon-annoncering'],
+  'SEO': ['Bliv fundet først, når kunderne søger efter det, du laver.', 'link:/services/seo'],
+  'Google Ads': ['Vær øverst på Google, når kunderne søger lige nu.', 'link:/services/google-ads'],
+  'Meta Ads': ['Annoncer på Facebook og Instagram, der rammer de rigtige.', 'link:/services/meta-ads'],
+  'Automations': ['Lad mails, fakturaer og opfølgning klare sig selv.', 'link:/services/automations'],
+  'AI-annoncer': ['AI laver og tester mange annoncer og flytter budgettet derhen, hvor det virker.', 'link:/services/ai'],
+  'GEO': ['Bliv nævnt, når kunderne spørger ChatGPT, Gemini og Googles AI-svar om råd.', 'link:/services/geo'],
+  'Google Shopping': ['Vis dine produkter med billede og pris øverst på Google.', 'link:/services/google-shopping-ads'],
+  'CRO': ['Få flere af dem, der besøger din side, til at ringe, skrive eller købe.', 'link:/services/cro'],
+  'Nyhedsbrev': ['Hold kontakten med dine kunder med nyhedsbreve og mails, der sendes automatisk.', 'link:/services/email-marketing'],
   'Booking': ['Lad kunderne booke tid direkte på siden, døgnet rundt.', 'addon-systemer'],
-  'Automations': ['Lad mails, fakturaer og opfølgning klare sig selv.', 'addon-automations'],
-  'AI-annoncer': ['AI laver og tester mange annoncer og flytter budgettet derhen, hvor det virker.', 'addon-annoncering'],
   'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'addon-systemer'],
-  'Meta Ads': ['Annoncer på Facebook og Instagram, der rammer de rigtige.', 'addon-annoncering'],
   'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'addon-systemer'],
   'Google-profil': ['Vi opretter eller opdaterer din profil, så du ses på Google Maps.', 'inc-Google-profil'],
   'Webshop': ['Sælg produkter eller gavekort direkte fra din hjemmeside.', null],
-  'Chatbot': ['En AI-chatbot, der svarer dine kunder døgnet rundt.', 'addon-automations'],
-  'Nyhedsbrev': ['Hold kontakten med dine kunder med nyhedsbreve, der sendes automatisk.', 'addon-automations'],
-  'Tekster': ['Tekster, der sælger og kan findes på Google.', 'addon-seo'],
+  'Chatbot': ['En AI-chatbot, der svarer dine kunder døgnet rundt.', 'link:/services/ai'],
+  'Tekster': ['Tekster, der sælger og kan findes på Google.', 'link:/services/seo'],
   'Logo': ['Et enkelt, genkendeligt logo og farver, der passer til dig.', null],
   'Hosting': ['Hurtig og sikker hosting. Typisk 50–100 kr. om måneden.', 'inc-Domæne og opsætning'],
   'SSL': ['Sikker forbindelse med hængelås i browseren. Altid inkluderet.', 'inc-SSL-sikkerhed'],
   'Mobile-first': ['Designet til telefonen først og skarp på alle skærme.', 'inc-Responsivt design']
 };
 
-// Keep in sync with the FAQPage structured data in index.html
+// The questions on /services/hjemmesider. Keep in sync with the FAQPage structured data there.
+// The front page and the other service pages have their own (scripts/services/data.mjs).
 export const faqs = [
   ['Er der en månedlig betaling?', 'Nej, du betaler én gang for hjemmesiden. Hosting og domæne koster typisk 50–100 kr. om måneden, og det sætter vi op for dig.'],
   ['Jeg har ikke tid til det. Hvad skal jeg lave?', 'Et opkald på 15 minutter og nogle billeder. Resten klarer vi, også teksterne.'],

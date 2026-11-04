@@ -716,3 +716,23 @@ html:not(.motion) .serp { display: none; }
   .hero h1 { margin-bottom: 24px; }
   .hero__lead { font-size: 17px; margin-bottom: 28px; }
 }
+
+/* ---------- Flere sider: forsiden og /services/* ---------- */
+/* The intro curtain runs on the first page of a visit only (class set in <head>, see main.js) */
+.intro-seen .loader { display: none; }
+/* Service cards: "Læs mere" is a link to the service's own page */
+a.addon__more { display: block; color: inherit; }
+/* "Det får du" on a service page is a plain list, not buttons */
+div.incl__item { cursor: default; }
+div.incl__item:hover { padding-left: 0; }
+.price__lead { margin: 0; font-size: 18px; line-height: 1.55; color: var(--dark-muted); max-width: 440px; }
+/* Every service at the bottom of every page */
+.sitemap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px 22px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; font-size: 14px; color: var(--muted); }
+.sitemap b { color: var(--ink); font-weight: 700; margin-right: 4px; }
+.sitemap a { color: inherit; }
+.sitemap a:hover, .sitemap a[aria-current] { color: var(--ink); }
+@media (max-width: 699px) {
+  .sitemap { justify-content: center; text-align: center; gap: 2px 18px; padding-bottom: 14px; }
+  .sitemap b { flex-basis: 100%; margin: 0 0 4px; }
+  .sitemap a { padding: 8px 2px; }
+}
