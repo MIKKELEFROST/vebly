@@ -82,7 +82,7 @@ function init(root) {
     if (S.sprog) add('sprog', `${S.sprog} ekstra sprog og ${S.sprog > 1 ? 'valutaer' : 'valuta'}`, S.sprog * P.language, 0, `${S.sprog} ekstra sprog`, `${S.sprog} sprog`);
     const ig = on('integ'), many = ig.length > 1;
     if (ig.length) add('integ', many ? `${ig.length} integrationer` : nameOf(ig[0]), ig.length * P.integration, 0,
-      many ? `${ig.length} integrationer` : nameOf(ig[0]).toLocaleLowerCase('da-DK'), ig.map(nameOf).join(' + '), many ? ig.map(nameOf).join(', ') : '');
+      many ? `${ig.length} integrationer` : nameOf(ig[0]).toLocaleLowerCase('da-DK'), ig.map(i => i.dataset.c).join(' + '), many ? ig.map(nameOf).join(', ') : '');
     on('fn').forEach(i => add('fn-' + i.value, nameOf(i), P[i.value], 0, i.dataset.s, i.dataset.c));
     if (has('service')) add('service', 'Webshop-service', 0, P.service, 'Webshop-service');
     S.ads.forEach((v, k) => { const t = nameOf(inputs('ads').find(i => i.value === v)); add('ad-' + v, t, 0, k ? P.channel.extra : P.channel.first, t); });
@@ -139,11 +139,15 @@ function init(root) {
   const writeForm = (r, user) => {
     const ci = document.querySelector('[data-chosen-input]'), cv = document.querySelector('[data-chosen-val]'), cb = document.querySelector('[data-chosen]');
     if (!ci) return;
+    // The products first, then the one-off items by price, so a cut at 300 characters only drops the smallest
     const md = r.L.filter(l => l.md), once = r.L.filter(l => !l.md && l.key !== 'base');
+    once.push(...once.splice(1).sort((a, b) => b.once - a.once));
     ci.value = `Webshop: ${total(r)} ekskl. moms` + (md.length ? ` · Pr. md.: ${md.map(l => `${l.c} ${fmt(l.md)}`).join(', ')}` : '')
       + ` · Engang: ${once.map(l => `${l.c} ${l.once ? fmt(l.once) : '(med)'}`).join(', ')}`;
     if (cv) cv.textContent = `${r.L[0].s} med ${list(r.L.slice(1).map(l => l.s))} · ${total(r)}`;
     if (cb) cb.hidden = false;
+    // The value of the lead (one-off + the first month), for when main.js reads it at submit time
+    if (form) form.dataset.value = r.once + r.md;
     // Changing the choice after a sent message opens the form again (as on /services/hjemmesider)
     if (user && form && thanks && !thanks.hidden) { form.hidden = false; thanks.hidden = true; }
   };
@@ -231,7 +235,10 @@ function init(root) {
     to = clamp(to, 1, MAX);
     if (to !== n) { setN(to, 'type'); commitN(); }
   });
-  num.addEventListener('focus', () => { num.value = mirror.textContent = String(S.n); requestAnimationFrame(() => num.select()); });
+  // Focus selects the number, so typing replaces it (the click's mouseup would otherwise drop the selection)
+  let picked = false;
+  num.addEventListener('focus', () => { num.value = mirror.textContent = String(S.n); num.select(); picked = true; });
+  num.addEventListener('mouseup', e => { if (picked) e.preventDefault(); picked = false; });
   num.addEventListener('input', () => { const v = parseInt(num.value.replace(/\D/g, ''), 10); mirror.textContent = num.value || ' '; if (v > 0) setN(v, 'type'); });
   num.addEventListener('blur', () => { num.value = fmt(S.n); commitN(); });
   num.addEventListener('keydown', e => {
@@ -239,7 +246,8 @@ function init(root) {
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); setN(S.n + (e.key === 'ArrowUp' ? 1 : -1) * (e.shiftKey ? 10 : 1), 'type'); num.value = String(S.n); }
   });
 
-  const goTo = (el, off) => { if (el) scrollTo({ top: el.getBoundingClientRect().top + scrollY - off, behavior: motion ? 'smooth' : 'auto' }); };
+  // Scroll to an element by its place in the layout (a box that is still fading in is moved by its transform)
+  const goTo = (el, off) => { let y = 0; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; if (el) scrollTo({ top: y - off, behavior: motion ? 'smooth' : 'auto' }); };
   root.addEventListener('click', e => {
     const t = e.target.closest('[data-ws-tick], [data-ws-step], [data-ws-pick], [data-ws-go], [data-ws-bar]');
     if (!t) return;

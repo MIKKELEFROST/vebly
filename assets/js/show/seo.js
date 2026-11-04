@@ -146,7 +146,7 @@ function init(root) {
     type(nameEl, name, seg(p, .004, .07), p > .002);
     type(qEl, q, seg(p, .755, .8), p > .73);
     // 03: the example's rating and count go up (the visitor's own business shows none)
-    const r = 4.9 * eo(seg(p, .53, .62));
+    const r = 4.9 * eo(seg(p, .5, .6));
     nums.forEach(n => { const t = n.dataset.gpN === 'r' ? r.toFixed(1).replace('.', ',') : String(Math.round(128 * r / 4.9)); if (n.textContent !== t) n.textContent = t; });
     stars.forEach((s, j) => sv(s, '--f', String(Math.round(clamp(r - j % 5) * 100) / 100)));
     // The profile scrolls on inside the card: to the services (02), then to the reviews (03)

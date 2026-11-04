@@ -25,12 +25,13 @@ export default async function ({ lib, data, showcase, read }) {
   const group = (n, title, body, role = 'group') => `<div class="calc__group" role="${role}" aria-labelledby="ws-g${n}" data-reveal="0"><span class="calc__lbl" id="ws-g${n}">${n} · ${esc(title)}</span>${body}</div>`;
   const row = (items, two) => `<div class="calc__row${two ? ' ws-row2' : ''}">${items.join('')}</div>`;
 
+  // [value, title, description, short name for the summary in the contact form]
   const INTEG = [
-    ['fragt', 'Fragt og labels', 'Fx Shipmondo. Labels og track & trace.'],
-    ['regnskab', 'Regnskab', 'Fx e-conomic eller Dinero.'],
-    ['nyhedsbrev', 'Nyhedsbrev', 'Fx Klaviyo. Kunderne kan tilmelde sig.'],
-    ['feed', 'Produktfeed', 'Dine varer til Google Shopping og Meta.'],
-    ['anmeldelser', 'Anmeldelser', 'Fx Trustpilot.']
+    ['fragt', 'Fragt og labels', 'Fx Shipmondo. Labels og track & trace.', 'Fragt'],
+    ['regnskab', 'Regnskab', 'Fx e-conomic eller Dinero.', 'Regnskab'],
+    ['nyhedsbrev', 'Nyhedsbrev', 'Fx Klaviyo. Kunderne kan tilmelde sig.', 'Nyhedsbrev'],
+    ['feed', 'Produktfeed', 'Dine varer til Google Shopping og Meta.', 'Produktfeed'],
+    ['anmeldelser', 'Anmeldelser', 'Fx Trustpilot.', 'Anmeldelser']
   ];
   const ADS = [['gsa', 'Google Shopping Ads', 'Dine varer med billede og pris på Google.'], ['gads', 'Google Ads', 'Øverst, når kunderne søger.'], ['meta', 'Meta Ads', 'Annoncer på Facebook og Instagram.']];
   const startS = SCALE.find(([, n]) => n === P.included)[0];
@@ -64,7 +65,7 @@ export default async function ({ lib, data, showcase, read }) {
               <button type="button" data-ws-step="-1" aria-label="Et sprog færre" disabled>−</button><output data-ws-sprog aria-live="polite">0</output><button type="button" data-ws-step="1" aria-label="Et sprog mere">+</button>
             </span>
           </div></div>
-        ${group(4, 'Integrationer', row(INTEG.map(([v, t, d]) => opt({ name: 'integ', value: v, t, d, p: '+' + kr(P.integration), pk: 'integ' }))))}
+        ${group(4, 'Integrationer', row(INTEG.map(([v, t, d, c]) => opt({ name: 'integ', value: v, t, d, p: '+' + kr(P.integration), pk: 'integ', s: t.toLocaleLowerCase('da-DK'), c }))))}
         ${group(5, 'Funktioner', row([
           opt({ name: 'fn', value: 'b2b', t: 'B2B og forhandlerpriser', d: 'Egne priser og login til forhandlere.', p: '+' + kr(P.b2b), s: 'B2B-priser', c: 'B2B-priser' }),
           opt({ name: 'fn', value: 'subscriptions', t: 'Abonnementer', d: 'Faste leveringer, fx hver måned.', p: '+' + kr(P.subscriptions), s: 'abonnementer', c: 'Abonnementer' }),

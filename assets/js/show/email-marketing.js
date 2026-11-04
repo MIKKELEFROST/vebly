@@ -35,7 +35,7 @@ function init(sec) {
   const sp = (k, d) => ({ x: 0, v: 0, t: 0, k, d });
   const S = {
     drop: sp(0.12, 0.74), push: sp(0.14, 0.66), drop2: sp(0.12, 0.74), push2: sp(0.14, 0.66),
-    slide: sp(0.2, 0.56), ok: sp(0.12, 0.72), flow: sp(0.12, 0.72), stats: sp(0.12, 0.72),
+    slide: sp(0.2, 0.56), open: sp(0.06, 0.72), scroll: sp(0.14, 0.62), ok: sp(0.12, 0.72), flow: sp(0.12, 0.72), stats: sp(0.12, 0.72),
     cx: sp(0.09, 0.74), cy: sp(0.09, 0.74), co: sp(0.16, 0.6)
   };
   const go = (s, f) => {
@@ -90,7 +90,7 @@ function init(sec) {
     track('showcase_interact', { showcase: SC, action: 'trin-' + (i + 1) });
   }));
 
-  let last = performance.now(), on = -1, seen = 0, was = {}, t0 = 0, kn = 0;
+  let last = performance.now(), on = -1, seen = 0, dwell = -1, dwellT = 0, was = {}, t0 = 0, kn = 0;
   const frame = now => {
     requestAnimationFrame(frame);
     const f = Math.min(3, (now - last) / 16.667); last = now;
@@ -105,9 +105,12 @@ function init(sec) {
     if (idx !== on) {
       on = idx;
       steps.forEach((s, i) => cls(s, 'is-on', i === idx));
-      pills.forEach((b, i) => { cls(b, 'is-on', i === idx); b.setAttribute('aria-pressed', String(i === idx)); });
+      pills.forEach((b, i) => { cls(b, 'is-on', i === idx); if (i === idx) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
     }
-    if (raw >= 0) while (seen <= idx) track('showcase_step', { showcase: SC, step: ++seen });
+    // (a step counts once it has been on screen for a moment, so gliding past with the menu does not)
+    if (raw < 0 || raw > 1) dwell = -1;
+    else if (idx !== dwell) { dwell = idx; dwellT = now; }
+    else if (now - dwellT > 350) while (seen <= idx) track('showcase_step', { showcase: SC, step: ++seen });
 
     // 01 The newsletter lands at the top and pushes the list down; 04 the automatic mail does the same
     S.drop.t = S.push.t = st.landed ? 1 : 0;
@@ -125,17 +128,20 @@ function init(sec) {
     cls(count, 'is-off', !((st.landed && !st.opened) || st.auto));
 
     // 02 It opens: in the reading pane on computers, as its own screen on phones
+    // (a spring, so the parts come in one after another however fast the page is scrolled)
     S.slide.t = phone && st.opened && p < STEP[3] ? 1 : 0;
-    const sl = go(S.slide, f), ko = phone ? 1 : ease(seg(p, OPEN, OPEN + 0.02));
+    S.open.t = st.opened ? 1 : 0;
+    const sl = go(S.slide, f), op = go(S.open, f), ko = phone ? 1 : clamp(op * 3);
     set(read, 'transform', phone ? `translateX(${((1 - sl) * 100).toFixed(2)}%)` : '');
     set(open, 'opacity', ko.toFixed(3)); set(empty, 'opacity', (1 - ko).toFixed(3));
     parts.forEach((el, i) => {
-      const k = ease(seg(p, OPEN + 0.004 + i * 0.012, OPEN + 0.044 + i * 0.012));
-      set(el, 'opacity', k.toFixed(3)); set(el, 'transform', k < 1 ? `translateY(${((1 - k) * 16).toFixed(1)}px)` : '');
+      const k = ease(clamp((op - i * 0.1) / 0.45));
+      set(el, 'opacity', k.toFixed(3)); set(el, 'transform', k < 1 ? `translateY(${((1 - k) * 18).toFixed(1)}px)` : '');
       if (i === 1 && img) set(img, 'transform', `scale(${(1.14 - 0.14 * k).toFixed(4)})`);
     });
-    // … and is read down to the button
-    set(mail, 'transform', `translateY(${(-L.scroll * ease(seg(p, STEP[2] - 0.055, STEP[2] + 0.05))).toFixed(1)}px)`);
+    // … and is read down to the button (scroll sets where, a spring smooths the way there)
+    S.scroll.t = L.scroll * ease(seg(p, STEP[2] - 0.055, STEP[2] + 0.05));
+    set(mail, 'transform', `translateY(${(-go(S.scroll, f)).toFixed(1)}px)`);
 
     // 03 The button is pressed and the booking is confirmed
     cls(btn, 'is-done', st.pressed);

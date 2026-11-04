@@ -133,14 +133,14 @@ function geo(sec) {
 
   /* Scroll story */
   // Where each beat sits on the way through the pinned stage (0 = pinned, 1 = released)
-  const T = { t0: .05, t1: .2, send: .23, think: .27, c0: .3, c1: .49, found: .52, a0: .55, a1: .84 };
+  const T = { t0: .05, t1: .2, send: .23, think: .27, c0: .29, c1: .44, found: .46, a0: .49, a1: .8 };
   let pv = 0, chars = 0, wn = 0, ty = 0, tyShown = 0, raf = 0, near = false, tp = 0, fresh = true;
   const reached = [];
   const progress = () => { const r = story.getBoundingClientRect(), d = r.height - stage.offsetHeight; return d > 0 ? clamp(-r.top / d) : 1; };
 
   function frame(t) {
     raf = 0;
-    const dt = clamp((t - tp) / 1000, 0, .05) || 0, p = progress(), first = fresh;
+    const dt = clamp((t - tp) / 1000, 0, .1) || 0, p = progress(), first = fresh;
     tp = t;
     // The first look starts where the visitor is (coming back from below, or a reload half-way)
     if (first) { fresh = false; pv = p; }

@@ -37,7 +37,7 @@
 .show--meta-ads .ma-eks { position: absolute; z-index: 4; top: -12px; left: -14px; }
 .show--meta-ads .ma-ph--b .ma-eks { left: auto; right: -14px; }
 .show--meta-ads :where(.ma-lbl, .ma-pill) { position: absolute; z-index: 3; display: flex; align-items: center; border-radius: 999px; white-space: nowrap; }
-.show--meta-ads .ma-lbl { left: 50%; bottom: calc(100% + 14px); transform: translateX(-50%); gap: 8px; padding: 9px 16px; background: var(--ink); color: #fff; font-size: 14px; font-weight: 700; box-shadow: 0 14px 30px -14px rgba(17,17,17,.5); }
+.show--meta-ads .ma-lbl { left: 50%; top: -18px; transform: translateX(-50%); gap: 8px; padding: 9px 16px; background: var(--ink); color: #fff; font-size: 14px; font-weight: 700; box-shadow: 0 14px 30px -14px rgba(17,17,17,.5); }
 .show--meta-ads .ma-lbl i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(47,158,91,.3); }
 .show--meta-ads .ma-pill { gap: 10px; padding: 8px 18px 8px 8px; background: #fff; color: var(--ink); border: 1px solid var(--line); font-size: 15px; font-weight: 500; box-shadow: 0 22px 40px -20px rgba(17,17,17,.35); opacity: 0; transform: translateY(16px) scale(.8) rotate(var(--r)); transition: opacity .3s, transform .6s cubic-bezier(.2,1.5,.4,1), translate .8s cubic-bezier(.2,.8,.2,1); }
 .show--meta-ads .ma-pill.is-on { opacity: 1; transform: rotate(var(--r)); }
@@ -111,7 +111,7 @@
 .show--meta-ads.is-cta .ma-cta > span, .show--meta-ads.is-cta .ma-cta small { color: #fff; }
 .show--meta-ads.is-cta .ma-cta__btn { color: var(--blue); box-shadow: none; }
 .show--meta-ads.is-book .ma-cta__btn { transform: scale(.94); }
-.show--meta-ads.is-egen .ma-num { visibility: hidden; }
+.show--meta-ads.is-egen .ma-num { display: none; }
 .show--meta-ads .ma-roll { display: inline-flex; flex-direction: column; height: 1.4em; overflow: hidden; vertical-align: top; }
 .show--meta-ads .ma-roll span { line-height: 1.4; transition: transform .5s cubic-bezier(.2,.9,.3,1.3); }
 .show--meta-ads.is-liked .ma-roll span { transform: translateY(-100%); }
@@ -185,24 +185,35 @@
 @keyframes showMetaBuzz { 20% { transform: rotate(2.2deg) } 40% { transform: rotate(-2.2deg) } 60% { transform: rotate(1.4deg) } 80% { transform: rotate(-1deg) } }
 @keyframes showMetaIn { from { opacity: 0; transform: translateY(10px) } }
 
-/* ---------- Phones and small tablets: compact steps above one centred phone ---------- */
-@media (max-width: 899px) {
+/* ---------- Phones, small tablets and short screens: compact steps and one phone ---------- */
+@media (max-width: 899px), (max-height: 520px) {
   .show--meta-ads .ma-sticky { padding-top: 78px; }
   .show--meta-ads .ma-fit { display: flex; flex-direction: column; align-items: stretch; gap: 16px; padding: 0 20px 12px; }
   .show--meta-ads .ma-steps { gap: 12px; }
-  .show--meta-ads :where(.ma-steps > .kicker, .ma-step:not(.is-on), .ma-step__cta, .ma-lbl) { display: none; }
+  .show--meta-ads .ma-steps > .kicker, .show--meta-ads .ma-step:not(.is-on), .show--meta-ads .ma-step__cta, .show--meta-ads .ma-lbl { display: none; }
   .show--meta-ads .ma-bars { display: flex; }
   .show--meta-ads .ma-step { gap: 12px; min-height: 84px; }
   .show--meta-ads .ma-step.is-on { animation: showMetaIn .45s cubic-bezier(.2,.8,.2,1); }
   .show--meta-ads .ma-step__n { font-size: 16px; min-width: 22px; }
-  .show--meta-ads .ma-step h3 { font-size: 22px; margin-bottom: 4px; }
+  .show--meta-ads .ma-step h3 { font-size: min(22px, 5.6vw); margin-bottom: 4px; }
   .show--meta-ads .ma-step p { font-size: 15px; line-height: 1.45; }
   .show--meta-ads .ma-cluster { --pw: clamp(180px, calc((100vh - 220px) * .468), 290px); --bz: 6px; }
   .show--meta-ads .ma-eks { top: -10px; left: -12px; }
   .show--meta-ads .ma-ph--b .ma-eks { right: -12px; }
 }
 @supports (height: 100svh) { @media (max-width: 899px) { .show--meta-ads .ma-cluster { --pw: clamp(180px, calc((100svh - 220px) * .468), 290px); } } }
-@media (max-width: 699px) { .show--meta-ads .ma-pill { display: none; } }
+/* Tablets: shorter pills, so they fit beside the phone */
+@media (min-width: 700px) and (max-width: 899px) { .show--meta-ads .ma-pill { font-size: 13px; } .show--meta-ads .ma-pill__x { display: none; } }
+@media (max-width: 699px), (max-height: 520px) { .show--meta-ads .ma-pill { display: none; } }
+/* Phones on their side and other short screens: the steps beside a phone sized to the height */
+@media (max-height: 520px) and (min-width: 600px) {
+  .show--meta-ads .ma-sticky { padding-top: 64px; }
+  .show--meta-ads .ma-fit { flex-direction: row; align-items: center; gap: 32px; max-width: 900px; }
+  .show--meta-ads .ma-steps { flex: 1; }
+  .show--meta-ads .ma-scene { padding-right: 64px; }
+  .show--meta-ads .ma-cluster { --pw: calc((100vh - 92px) * .468); }
+}
+@supports (height: 100svh) { @media (max-height: 520px) and (min-width: 600px) { .show--meta-ads .ma-cluster { --pw: calc((100svh - 92px) * .468); } } }
 
 /* ---------- Reduced motion: nothing pinned, the whole story at once ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -229,4 +240,6 @@
   .show--meta-ads .ma-cluster { --pw: 230px; margin: 0 0 calc(var(--pw) * 1.5); }
   .show--meta-ads .ma-ph--a { transform: translateX(-16%) rotate(-3deg); }
   .show--meta-ads .ma-ph--b { transform: translate(18%, 70%) rotate(4deg); }
+  /* While the form is open it needs the room; the lead comes in when it is sent */
+  .show--meta-ads.is-form:not(.is-sent) .ma-ph--b { visibility: hidden; }
 }

@@ -110,10 +110,10 @@ function init(sec) {
     dim.style.opacity = (k * .45).toFixed(3);
     flag('is-fill', s > .6); flag('is-chip', s > .645); flag('is-send', s > .69 && s < .75); flag('is-sent', s > .705);
     // 04: the customer's phone steps back, yours comes up, and the lead arrives
-    const q = io3(clamp((s - .78) / .075)), wide = innerWidth >= 900;
+    const q = io3(clamp((s - .78) / .075)), wide = innerWidth >= 900, bx = wide ? (innerWidth >= 1200 ? 36 : innerWidth >= 1100 ? 30 : 24) : 22;
     A.style.transform = q ? `translateX(${((wide ? -36 : -22) * q).toFixed(2)}%) rotate(${(-5 * q).toFixed(2)}deg) scale(${(1 - .08 * q).toFixed(3)})` : '';
     B.style.visibility = q ? 'visible' : '';
-    B.style.transform = q ? `translate(${((wide ? 36 : 22) * q).toFixed(2)}%,${((1 - q) * 125 + (wide ? 4 : -2) * q).toFixed(2)}%) rotate(${(5 * q).toFixed(2)}deg)` : '';
+    B.style.transform = q ? `translate(${(bx * q).toFixed(2)}%,${((1 - q) * 125 + (wide ? 2 : -2) * q).toFixed(2)}%) rotate(${(5 * q).toFixed(2)}deg)` : '';
     pills.forEach(p => p.classList.toggle('is-away', q > .05));
     flag('is-lead', s > .87);
   };

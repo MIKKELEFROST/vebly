@@ -1,5 +1,5 @@
 // Showcase: Automations, a flow that runs by itself (scripts/services/showcase/automations.html).
-// The pinned stage is driven by scroll: 01 each task gets the minutes it costs by hand, 02 the wires are
+// The pinned stage is driven by scroll: 01 each task gets the minutes it takes by hand, 02 the wires are
 // drawn and each step gets its rule, 03 a customer writes: the first three steps fire at once like
 // dominoes, and from there scrolling moves time on (the clock runs through the days) to the offer, the
 // invoice and the review. The dot has its own speed, so it keeps running a moment after you stop.
@@ -44,7 +44,8 @@ function init(root) {
     fit.style.transform = '';
     if (!motion) return;
     const cs = getComputedStyle(pin), pt = parseFloat(cs.paddingTop), room = pin.clientHeight - pt - parseFloat(cs.paddingBottom);
-    const h = fit.scrollHeight, s = Math.min(1, room / h);
+    // Layout sizes, not scrollHeight: the reveal effect keeps the log moved down until it is seen
+    const h = Math.max(...[...fit.children].map(c => c.offsetTop + c.offsetHeight)) - fit.offsetTop, s = Math.min(1, room / h);
     if (s < 0.995) fit.style.transform = `scale(${s.toFixed(3)})`;
     // Until it pins, the stage sits right under the headline: the room above it slides up behind it
     sec.style.marginTop = `${-Math.max(0, pt + Math.max(0, (room - h * s) / 2) - 24)}px`;
@@ -264,7 +265,7 @@ function init(root) {
       const rows = Math.round(lw.clientHeight / G.lh) || 6;
       list.style.transform = count > rows ? `translateY(${-(count - rows) * G.lh}px)` : '';
     }
-    text(ph, count ? '' : step ? PH[step - 1] : hand ? `I hånden i dag: ${hand} min pr. opgave` : 'Kortlægger dine opgaver …');
+    text(ph, count ? '' : step ? PH[step - 1] : hand ? `Du bruger ${hand} min pr. opgave` : 'Kortlægger dine opgaver …');
     set(lw, 'is-ph', !count);
     text(clock, step < 2 ? '' : fired[0] ? fmt(timeAt(sD), timeAt(sD) < TS[2] + 60) : 'Man. 09:14');
     if (want !== sTo) { sFrom = sNow; sTo = want; sT0 = now; }
@@ -289,7 +290,7 @@ function init(root) {
   };
 
   new IntersectionObserver(es => {
-    vis = es[0].isIntersecting;
+    vis = es[es.length - 1].isIntersecting;
     if (vis && !running) { running = true; lastT = 0; requestAnimationFrame(frame); }
   }, { rootMargin: '120px 0px' }).observe(sec);
 }

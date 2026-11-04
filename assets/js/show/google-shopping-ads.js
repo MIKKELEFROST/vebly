@@ -20,15 +20,16 @@ function run(root) {
   const pin = $('[data-gsa-pin]'), sticky = $('[data-gsa-sticky]'), fit = $('[data-gsa-fit]'), scr = $('[data-gsa-scr]');
   const qbox = $('[data-gsa-qbox]'), ac = $('[data-gsa-ac]'), acRows = [...ac.children], qEl = $('[data-gsa-q]'), url = $('[data-gsa-url]'), res = $('[data-gsa-res]'), ads = $('[data-gsa-ads]'), next = $('[data-gsa-next]');
   const dim = $('[data-gsa-dim]'), sheet = $('[data-gsa-sheet]'), buy = $('[data-gsa-buy]'), cur = $('[data-gsa-cur]'), rip = $('[data-gsa-rip]'), fx = $('[data-gsa-fx]');
-  const cards = $$('[data-gsa-card]'), steps = $$('[data-gsa-step]'), box = $('[data-gsa-egen]');
+  const row = $('[data-gsa-row]'), cards = $$('[data-gsa-card]'), steps = $$('[data-gsa-step]'), box = $('[data-gsa-egen]');
   const small = matchMedia('(max-width: 699px)');
-  let Q = 'keramik krus', dirty = true, L = null, S0 = [];
+  let Q = 'keramik krus', SHOP = 'lervaerk.dk/produkt/keramik-krus-salviegroen', dirty = true, L = null, S0 = [];
   const searchUrl = () => 'google.dk/search?q=' + Q.replace(/\s+/g, '+');
 
   /* ---------------- Prøv med din egen vare ---------------- */
   // "Lerværk" → lervaerk.dk, "Krus & Kande" → krus-og-kande.dk
-  const domain = n => (n.toLocaleLowerCase('da-DK').replace(/\s+(aps|a\/s|ivs)\.?$/, '').replace(/&/g, ' og ').replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
-    .normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30).replace(/-+$/, '') || 'lervaerk') + '.dk';
+  const slug = (n, max) => n.toLocaleLowerCase('da-DK').replace(/\s+(aps|a\/s|ivs)\.?$/, '').replace(/&/g, ' og ').replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, max).replace(/-+$/, '');
+  const domain = n => (slug(n, 30) || 'lervaerk') + '.dk';
   const f = { vare: $('[data-gsa-in="vare"]'), butik: $('[data-gsa-in="butik"]') }, DEF = $('[data-gsa-title]').textContent;
   try {
     const v = JSON.parse(sessionStorage.getItem('wl-shop') || 'null') || {}, e = JSON.parse(sessionStorage.getItem('wl-egen') || 'null') || {};
@@ -45,6 +46,8 @@ function run(root) {
     Q = vare ? vare.toLocaleLowerCase('da-DK').slice(0, 32).trim() : 'keramik krus';
     put('[data-gsa-title]', vare || DEF); put('[data-gsa-shop]', shop); put('[data-gsa-ini]', first(shop)); put('[data-gsa-pi]', first(vare) || 'V');
     put('[data-gsa-qt]', Q); put('[data-gsa-dom]', domain(shop));
+    // Where the click lands: the product in your webshop
+    SHOP = `${domain(shop)}/produkt/${slug(vare, 40) || 'keramik-krus-salviegroen'}`;
     // Their own product gets a placeholder instead of our mug, and their shop no stars
     root.classList.toggle('is-own', !!vare);
     root.classList.toggle('is-egen', !!(vare || butik));
@@ -114,7 +117,12 @@ function run(root) {
   let s = 0, last = -1, step = -1, reached = 0, you = null, bought = null, sold = null, typing = null, start = null, armed = true, snap = true;
   const render = v => {
     const a = v < .2 ? 0 : v < .44 ? 1 : v < .66 ? 2 : 3;
-    if (a !== step) { step = a; steps.forEach((el, i) => el.classList.toggle('is-on', i === a)); }
+    if (a !== step) {
+      step = a; steps.forEach((el, i) => el.classList.toggle('is-on', i === a));
+      // Phones can swipe the row until your card moves to the front
+      row.classList.toggle('is-lock', a > 1);
+      if (a > 1 && row.scrollLeft) row.scrollTo({ left: 0, behavior: 'smooth' });
+    }
     // 01 The query is typed, then the box glides up and the results appear
     const n = Math.round(Q.length * seg(v, .02, .13)), qt = Q.slice(0, n);
     if (qEl.textContent !== qt) {
@@ -126,7 +134,7 @@ function run(root) {
     ac.style.opacity = n > 1 ? 1 - seg(v, .132, .148) : 0;
     const ty = n > 0 && n < Q.length;
     if (ty !== typing) { typing = ty; root.classList.toggle('is-typing', ty); }
-    const u = v > .145 ? searchUrl() : 'google.dk';
+    const u = v > .79 ? SHOP : v > .145 ? searchUrl() : 'google.dk';
     if (url.textContent !== u) url.textContent = u;
     const up = 1 - inout(seg(v, .14, .19));
     qbox.style.transform = up ? `translate3d(${(L.qx * up).toFixed(1)}px,${(L.qy * up).toFixed(1)}px,0) scale(${(1 + .06 * up).toFixed(4)})` : '';
@@ -144,13 +152,13 @@ function run(root) {
       c.style.opacity = o.toFixed(3);
     });
     const isYou = hl > .4;
-    if (isYou !== you) { you = isYou; ads.classList.toggle('is-you', isYou); }
+    if (isYou !== you) { you = isYou; root.classList.toggle('is-you', isYou); }
     next.style.opacity = seg(v, .36, .42);
     // 04 A click on your ad, your product in your webshop, a click on "Læg i kurv" and the sale
     const c1 = inout(seg(v, .67, .745)), shk = inout(seg(v, .77, .83)), c2 = inout(seg(v, .83, .87)), p2 = seg(v, .87, .89);
-    const A = c2 ? L.t1 : L.t0, B = c2 ? L.t2 : L.t1, ck = c2 || c1, pr = p2 || p1, R = p2 ? L.t2 : L.t1;
-    const cx = lerp(A.x, B.x, ck), cy = lerp(A.y, B.y, ck) - 34 * Math.sin(Math.PI * ck);
-    cur.style.opacity = seg(v, .66, .69);
+    const T1 = { x: L.t1.x - row.scrollLeft, y: L.t1.y }, A = c2 ? T1 : L.t0, B = c2 ? L.t2 : T1, ck = c2 || c1, pr = p2 || p1, R = p2 ? L.t2 : T1;
+    const gone = ease(seg(v, .9, .97)), cx = lerp(A.x, B.x, ck) + 46 * gone, cy = lerp(A.y, B.y, ck) - 34 * Math.sin(Math.PI * ck) + 30 * gone;
+    cur.style.opacity = seg(v, .66, .69) * (1 - seg(v, .93, .97));
     cur.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0) scale(${(1 - .2 * Math.sin(Math.PI * pr)).toFixed(4)})`;
     rip.style.opacity = pr > 0 && pr < 1 ? (.7 * (1 - pr)).toFixed(3) : 0;
     rip.style.transform = `translate3d(${R.x.toFixed(1)}px,${R.y.toFixed(1)}px,0) scale(${(.3 + 1.6 * pr).toFixed(3)})`;
