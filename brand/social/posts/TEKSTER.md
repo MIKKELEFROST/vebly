@@ -227,7 +227,7 @@ Kan kunderne nemt finde dig og skrive til dig?
 
 En kontaktformular med beskeder direkte i din indbakke og spamfilter. Kort med din adresse og rutevejledning med ét klik. Åbningstider, der er nemme at opdatere.
 
-Det hele er med i prisen fra 3.000 kr.
+Det hele er med i prisen fra 2.995 kr.
 
 ↓ Gratis tilbud via linket i bio.
 
@@ -251,7 +251,7 @@ Dit Instagram-feed på din hjemmeside.
 
 Hvis du vil, viser vi dit feed direkte på siden. Du får også links til dine profiler, og siden ser pæn ud, når nogen deler den.
 
-Det er med i prisen fra 3.000 kr.
+Det er med i prisen fra 2.995 kr.
 
 ↓ Gratis tilbud via linket i bio.
 

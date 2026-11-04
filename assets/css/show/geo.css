@@ -1,0 +1,203 @@
+/* GEO showcase: an AI chat with question chips (scripts/services/showcase/geo.html).
+   Static (no motion or no JS): the first answer is finished and the panel lit. .is-anim (geo.js, motion on)
+   hides what is about to be typed, streamed and lit. The chat keeps a fixed height, so the page never moves. */
+.show--geo { --e: cubic-bezier(.2,.8,.2,1); --pop: cubic-bezier(.2,.9,.3,1.45); --tint: #fbe5dc; position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 30px; }
+.show--geo .sec-head { margin-bottom: 36px; }
+.show--geo .sec-head__lead { max-width: 340px; }
+.show--geo .geo-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 352px; gap: 28px; align-items: stretch; }
+
+/* The chat: our own drawing, no product's name, logo or colours */
+.show--geo .geo-chat { position: relative; display: flex; flex-direction: column; min-height: 540px; min-width: 0; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 28px; box-shadow: 0 40px 80px -30px rgba(17,17,17,.18); font-size: 16px; }
+.show--geo .geo-bar { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.show--geo .geo-bar .dots3 { margin-right: 8px; }
+.show--geo .geo-bar .tag-eks { margin-left: auto; }
+/* The assistant: a dark lens with a dot that circles while it thinks */
+.show--geo .geo-av { position: relative; flex-shrink: 0; display: block; width: 1em; height: 1em; border-radius: 50%; background: var(--ink); font-size: 26px; }
+.show--geo .geo-av::before { content: ""; position: absolute; inset: .28em; border-radius: 50%; border: .075em solid #fff; }
+.show--geo .geo-av::after { content: ""; position: absolute; top: .06em; left: 50%; width: .2em; height: .2em; margin-left: -.1em; border-radius: 50%; background: var(--accent); transform-origin: .1em .44em; }
+
+.show--geo .geo-body { position: relative; flex: 1 1 0px; min-height: 0; overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 24px, #000 calc(100% - 18px), transparent); mask-image: linear-gradient(transparent, #000 24px, #000 calc(100% - 18px), transparent); }
+.show--geo .geo-thread { position: relative; display: flex; flex-direction: column; gap: 26px; padding: 24px 24px 16px; will-change: transform; }
+.show--geo .geo-hi { position: absolute; inset: 0 0 8%; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 0 24px; text-align: center; font-family: var(--display); font-size: clamp(24px, 2.3vw, 30px); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
+.show--geo .geo-hi .geo-av { font-size: 54px; }
+
+/* One question and its answer */
+.show--geo .geo-ex { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.show--geo .geo-u { align-self: flex-end; max-width: 78%; margin: 0; padding: .66em 1.05em; border-radius: 20px 20px 6px 20px; background: var(--cream); line-height: 1.4; transform-origin: 100% 100%; }
+.show--geo .geo-a { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; }
+.show--geo .geo-a > .geo-av { margin-top: 1px; }
+.show--geo .geo-a__c { position: relative; min-width: 0; line-height: 1.55; }
+.show--geo .geo-a__c p { margin: 0 0 .45em; }
+.show--geo .geo-a__c strong { position: relative; isolation: isolate; font-weight: 700; }
+/* A marker stroke behind the recommended name, drawn when the answer is done */
+.show--geo .geo-a__c strong::after { content: ""; position: absolute; left: -.12em; right: -.12em; bottom: .04em; z-index: -1; height: .5em; border-radius: 3px; background: rgba(224,85,43,.26); transform-origin: 0 50%; }
+.show--geo .geo-ul { display: flex; flex-direction: column; gap: 3px; margin: 0 0 .5em; padding: 0; list-style: none; }
+.show--geo .geo-ul li { position: relative; padding-left: 20px; }
+.show--geo .geo-ul li::before { content: ""; position: absolute; left: 5px; top: .66em; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+.show--geo .geo-tbl { margin: .15em 0 .7em; border: 1px solid var(--line); border-radius: 14px; font-size: .93em; }
+.show--geo .geo-tr { display: flex; justify-content: space-between; gap: 14px; padding: 9px 14px; }
+.show--geo .geo-tr + .geo-tr { border-top: 1px solid var(--line); }
+.show--geo .geo-tr span { color: #4d4a45; }
+/* Where a sentence came from: a small number, as in a real answer */
+.show--geo .geo-nb { white-space: nowrap; }
+.show--geo .geo-cite { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; margin-left: .3em; border-radius: 50%; background: var(--tint); color: var(--accent); font-size: .66em; font-style: normal; font-weight: 700; line-height: 1; vertical-align: .3em; }
+.show--geo .geo-srcs { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.show--geo .geo-srcs li { display: inline-flex; align-items: center; gap: 7px; padding: 4px 12px 4px 4px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; font-size: 13px; font-weight: 500; line-height: 1.2; white-space: nowrap; }
+.show--geo .geo-srcs i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--tint); color: var(--accent); font-size: 11px; font-style: normal; font-weight: 700; }
+.show--geo .geo-think { position: absolute; top: 0; left: 0; display: none; align-items: center; gap: 7px; color: var(--muted); white-space: nowrap; }
+.show--geo .geo-think i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .5; }
+.show--geo .geo-think i:first-of-type { margin-left: 2px; }
+
+/* The questions: real buttons */
+.show--geo .geo-qs { position: relative; display: flex; flex-wrap: wrap; gap: 8px; padding: 2px 18px 12px; }
+.show--geo .geo-q { position: relative; flex-shrink: 0; padding: 9px 15px; border: 1px solid transparent; border-radius: 999px; background: #f3f1ec; color: var(--ink); font: inherit; font-size: 14px; font-weight: 500; line-height: 1.25; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .3s var(--pop); }
+.show--geo .geo-q:hover { border-color: var(--line-strong); background: #fff; transform: translateY(-2px); }
+.show--geo .geo-q.is-on { background: var(--ink); border-color: var(--ink); color: #fff; cursor: default; transform: none; }
+.show--geo .geo-q:active { transform: scale(.96); }
+.show--geo .geo-q::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid var(--accent); opacity: 0; pointer-events: none; }
+
+/* The composer (only typed into by the example) */
+.show--geo .geo-comp { display: flex; align-items: center; gap: 10px; margin: 0 16px 16px; padding: 7px 7px 7px 18px; border: 1px solid var(--line-strong); border-radius: 999px; box-shadow: 0 8px 20px -14px rgba(17,17,17,.35); }
+.show--geo .geo-field { position: relative; flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; font-size: 15px; line-height: 1.5; }
+.show--geo .geo-line { display: inline-block; }
+.show--geo .geo-ph { position: absolute; left: 3px; top: 0; color: var(--faint); pointer-events: none; }
+.show--geo .geo-caret { display: none; width: 1.5px; height: 1.15em; margin-left: 1px; vertical-align: -.22em; background: var(--ink); }
+.show--geo .geo-send { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--line-strong); transition: background .25s, transform .25s var(--pop); }
+.show--geo .geo-send svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.show--geo .geo-chat.is-typing .geo-send { background: var(--accent); }
+.show--geo .geo-chat.is-typing .geo-ph { display: none; }
+.show--geo .geo-send.is-press { transform: scale(.78); }
+
+/* "Det, AI læser": the sources, lit when the answer uses them */
+.show--geo .geo-panel { display: flex; flex-direction: column; gap: 16px; min-width: 0; padding: 26px 22px 22px; border: 1px solid var(--line); border-radius: 28px; background: rgba(255,255,255,.5); }
+.show--geo .geo-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 20px; margin: 0 4px 2px; }
+.show--geo .geo-panel__h { margin: 0; font-size: 13px; font-weight: 700; line-height: 20px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.show--geo .geo-st { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; line-height: 20px; color: var(--muted); white-space: nowrap; }
+.show--geo .geo-st.is-read { color: var(--accent); }
+.show--geo .geo-st.is-read::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.show--geo .geo-rows { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.show--geo .geo-row { position: relative; isolation: isolate; display: grid; grid-template-columns: 40px minmax(0, 1fr) 22px; gap: 12px; align-items: center; padding: 11px 12px; border-radius: 18px; overflow: hidden; }
+/* The card behind a lit row, and a reading sweep while the assistant thinks */
+.show--geo .geo-row::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: #fff; box-shadow: inset 0 0 0 1px var(--line), 0 16px 30px -22px rgba(17,17,17,.4); opacity: 0; }
+.show--geo .geo-row::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, transparent 20%, rgba(224,85,43,.2) 50%, transparent 80%); transform: translateX(-101%); pointer-events: none; }
+.show--geo .geo-ico { position: relative; isolation: isolate; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #efece7; color: var(--muted); overflow: hidden; }
+.show--geo .geo-ico::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--accent); transform: scale(0); }
+.show--geo .geo-ico svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--geo .geo-row__t { display: flex; flex-direction: column; gap: 2px; min-width: 0; line-height: 1.3; }
+.show--geo .geo-row__t b { font-size: 15.5px; }
+.show--geo .geo-row__d { font-size: 13.5px; color: var(--muted); }
+.show--geo .geo-sh { display: none; }
+.show--geo .geo-n { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 12px; font-style: normal; font-weight: 700; opacity: 0; transform: scale(.3); }
+.show--geo .geo-row.is-lit { transform: translateX(-4px); }
+.show--geo .geo-row.is-lit::before, .show--geo .geo-row.is-lit .geo-n { opacity: 1; }
+.show--geo .geo-row.is-lit .geo-ico { color: #fff; }
+.show--geo .geo-row.is-lit .geo-ico::before, .show--geo .geo-row.is-lit .geo-n { transform: none; }
+.show--geo .geo-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-top: auto; padding: 18px 4px 0; border-top: 1px solid var(--line); }
+.show--geo .geo-foot p { margin: 0; font-size: 14.5px; line-height: 1.5; }
+.show--geo .geo-foot p span { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }
+.show--geo .geo-cta { display: inline-block; padding: 13px 20px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; transition: background .25s; }
+.show--geo .geo-cta:hover { background: var(--accent); color: #fff; }
+
+/* Motion (.is-anim from geo.js): what is about to happen starts hidden */
+.show--geo.is-anim .geo-chat:not(.is-started) .geo-hi { display: flex; }
+.show--geo.is-anim .geo-row { transition: transform .55s var(--e); }
+.show--geo.is-anim .geo-row::before { transition: opacity .45s; }
+.show--geo.is-anim .geo-ico { transition: color .3s; }
+.show--geo.is-anim .geo-ico::before { transition: transform .5s var(--pop); }
+.show--geo.is-anim .geo-n { transition: opacity .25s, transform .5s var(--pop); }
+.show--geo.is-anim .geo-hi { transition: opacity .45s, transform .7s var(--e); }
+.show--geo.is-anim .geo-hi .geo-av { animation: geoBreathe 3.2s ease-in-out infinite; }
+.show--geo.is-anim .geo-chat.is-leaving .geo-hi { opacity: 0; transform: translateY(-26px) scale(.95); }
+.show--geo.is-anim .geo-ex:not(.is-sent) .geo-u { opacity: 0; }
+.show--geo.is-anim .geo-a { opacity: 0; transform: translateY(8px); transition: opacity .35s, transform .5s var(--e); }
+.show--geo.is-anim .is-think .geo-a { opacity: 1; transform: none; }
+.show--geo.is-anim .geo-a.is-think .geo-think { display: flex; }
+.show--geo.is-anim .geo-a.is-think > .geo-av::after { animation: geoOrbit .95s linear infinite; }
+.show--geo.is-anim .geo-a.is-think .geo-think i { animation: geoDot 1s ease-in-out infinite; }
+.show--geo.is-anim .geo-a.is-think .geo-think i:nth-of-type(2) { animation-delay: .15s; }
+.show--geo.is-anim .geo-a.is-think .geo-think i:nth-of-type(3) { animation-delay: .3s; }
+.show--geo.is-anim .gw { position: relative; opacity: 0; transition: opacity .3s; }
+.show--geo.is-anim .gw.is-on { opacity: 1; }
+/* A dot after the newest word while the answer is written */
+.show--geo.is-anim .gw.is-last::after { content: ""; position: absolute; left: calc(100% + 5px); bottom: .34em; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.show--geo.is-anim .geo-ul li::before { transform: scale(0); transition: transform .4s var(--pop); }
+.show--geo.is-anim .geo-ul li.is-on::before { transform: none; }
+.show--geo.is-anim .geo-cite { opacity: 0; transform: scale(0); transition: opacity .2s, transform .5s var(--pop); }
+.show--geo.is-anim .geo-tbl { border-color: transparent; transition: border-color .4s; }
+.show--geo.is-anim .geo-tbl.is-on { border-color: var(--line); }
+.show--geo.is-anim .geo-tr { opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .45s var(--e); }
+.show--geo.is-anim .geo-srcs li { opacity: 0; transform: translateY(8px) scale(.7); transition: opacity .25s, transform .5s cubic-bezier(.2,.9,.3,1.2); }
+.show--geo.is-anim .geo-cite.is-on, .show--geo.is-anim .geo-tr.is-on, .show--geo.is-anim .geo-srcs li.is-on { opacity: 1; transform: none; }
+.show--geo.is-anim .geo-a__c strong::after { transform: scaleX(0); transition: transform .7s var(--e) .1s; }
+.show--geo.is-anim .geo-a__c strong.is-hl::after { transform: none; }
+.show--geo.is-anim .geo-chat.is-focus .geo-caret { display: inline-block; }
+.show--geo.is-anim .geo-chat.is-focus:not(.is-typing) .geo-caret { animation: geoBlink 1.05s steps(1) infinite; }
+.show--geo.is-anim .geo-panel.is-scan .geo-row::after { animation: geoScan .85s var(--e) both; }
+.show--geo.is-anim .geo-panel.is-scan .geo-row:nth-child(2)::after { animation-delay: .12s; }
+.show--geo.is-anim .geo-panel.is-scan .geo-row:nth-child(3)::after { animation-delay: .24s; }
+.show--geo.is-anim .geo-panel.is-scan .geo-row:nth-child(4)::after { animation-delay: .36s; }
+.show--geo.is-anim .geo-row.is-pop .geo-ico { animation: geoPop .6s var(--pop); }
+.show--geo.is-anim .geo-q.is-hint::after { animation: geoRing 1.4s var(--e) 3; }
+.show--geo.is-anim .geo-q.is-tap { animation: geoTap .35s var(--pop); }
+@keyframes geoBlink { 50% { opacity: 0; } }
+@keyframes geoOrbit { to { transform: rotate(1turn); } }
+@keyframes geoDot { 0%, 70%, 100% { transform: none; opacity: .4; } 35% { transform: translateY(-3px); opacity: 1; } }
+@keyframes geoBreathe { 50% { transform: scale(1.06); } }
+@keyframes geoScan { to { transform: translateX(101%); } }
+@keyframes geoPop { 40% { transform: scale(1.14); } }
+@keyframes geoRing { 0% { opacity: .9; transform: none; } 100% { opacity: 0; transform: scale(1.08, 1.45); } }
+@keyframes geoTap { 50% { transform: scale(.94); } }
+
+/* Shorter screens: a shorter chat */
+
+/* Tablets and phones: the chat on top, the sources as small chips under it */
+@media (max-width: 999px) {
+  .show--geo .geo-wrap { grid-template-columns: minmax(0, 1fr); max-width: 720px; margin: 0 auto; gap: 16px; }
+  .show--geo .geo-chat { height: 560px; min-height: 0; }
+  .show--geo .sec-head { max-width: 720px; margin-left: auto; margin-right: auto; }
+  .show--geo .geo-panel { gap: 10px; padding: 0; border: 0; border-radius: 0; background: none; }
+  .show--geo .geo-panel__h { margin: 0 0 0 2px; font-size: 12px; }
+  .show--geo .geo-rows { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+  .show--geo .geo-row { grid-template-columns: auto auto; justify-content: start; gap: 7px; padding: 4px 12px 4px 4px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-strong); }
+  .show--geo .geo-row::before { box-shadow: inset 0 0 0 1px var(--accent); background: var(--tint); }
+  .show--geo .geo-row.is-lit { transform: none; }
+  .show--geo .geo-ico { width: 26px; height: 26px; border-radius: 50%; }
+  .show--geo .geo-ico svg { width: 14px; height: 14px; stroke-width: 2; }
+  .show--geo .geo-row__t b { font-size: 13.5px; font-weight: 500; }
+  .show--geo .geo-row__d, .show--geo .geo-n { display: none; }
+  .show--geo .geo-foot { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px 24px; margin-top: 8px; padding: 0 2px; border: 0; }
+  .show--geo .geo-foot p { flex: 1 1 280px; }
+}
+
+/* Phones */
+@media (max-width: 699px) {
+  .show--geo { padding: 32px 20px 72px; }
+  .show--geo .sec-head { margin-bottom: 24px; }
+  .show--geo .geo-chat { height: 476px; height: clamp(420px, calc(100svh - 196px), 480px); border-radius: 24px; font-size: 15px; }
+  .show--geo .geo-bar { gap: 9px; padding: 11px 14px; font-size: 14px; }
+  .show--geo .geo-bar .dots3 { display: none; }
+  .show--geo .geo-bar .geo-av, .show--geo .geo-a > .geo-av { font-size: 22px; }
+  .show--geo .geo-hi .geo-av { font-size: 46px; }
+  .show--geo .geo-thread { gap: 20px; padding: 18px 14px 12px; }
+  .show--geo .geo-ex { gap: 12px; }
+  .show--geo .geo-u { max-width: 88%; }
+  .show--geo .geo-a { gap: 10px; }
+  .show--geo .geo-ul li { padding-left: 17px; }
+  .show--geo .geo-ul li::before { left: 3px; }
+  .show--geo .geo-tr { padding: 8px 12px; }
+  .show--geo .geo-srcs { margin-top: 8px; }
+  .show--geo .geo-srcs li { padding-right: 10px; font-size: 12.5px; }
+  /* One row of questions to swipe, so the answer keeps its room */
+  .show--geo .geo-qs { flex-wrap: nowrap; gap: 6px; padding: 3px 14px 10px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; --fl: 14px; --fr: 30px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent); mask-image: linear-gradient(90deg, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent); }
+  .show--geo .geo-qs.is-l { --fl: 0px; }
+  .show--geo .geo-qs.is-r { --fr: 0px; }
+  .show--geo .geo-qs::-webkit-scrollbar { display: none; }
+  .show--geo .geo-q { padding: 8px 13px; font-size: 13.5px; }
+  .show--geo .geo-q:hover { transform: none; }
+  .show--geo .geo-comp { gap: 8px; margin: 0 10px 10px; padding: 5px 5px 5px 15px; }
+  .show--geo .geo-send { width: 34px; height: 34px; }
+  .show--geo .geo-lg { display: none; }
+  .show--geo .geo-sh { display: inline; }
+  .show--geo .geo-foot { margin-top: 10px; }
+  .show--geo .geo-foot p { flex-basis: 100%; }
+}

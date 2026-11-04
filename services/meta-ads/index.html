@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="da" data-page="service_meta-ads">
 <head>
-<!-- Genereret af scripts/services/build.mjs ud fra scripts/services/data.mjs. Ret der, ikke her. -->
+<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meta Ads · Annoncer på Facebook og Instagram · Webleads</title>
@@ -154,15 +154,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261104c">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104c">
+<link rel="stylesheet" href="/assets/css/show/meta-ads.css?v=20261104c">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
-<script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/main.js?v=20261104c"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104c"></script>
+<script type="module" src="/assets/js/show/meta-ads.js?v=20261104c"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -190,8 +194,8 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
-        <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
         <a href="#kontakt" class="nav__cta" data-magnet data-roll data-event="Menu: Kontakt">Kontakt</a>
       </nav>
@@ -223,7 +227,7 @@
         <p class="hero__lead" data-reveal="3">Vi laver annoncer, der fanger opmærksomheden i feedet og rammer de rigtige mennesker. Du får tekst, grafik, målretning og en månedlig rapport.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -236,6 +240,290 @@
             <span class="trust__txt"><span class="trust__top"><b class="trust__tpname">Trustpilot</b><span class="trust__stars trust__stars--tp" data-stars aria-hidden="true"></span></span><span class="trust__sub">TrustScore <b data-score></b> · <span data-num></span> anmeldelser</span></span>
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="sx sx-stm" data-sec="pointe" data-stm style="--n:14">
+      <div class="kicker sx-stm__k" data-reveal="0">Kort sagt</div>
+      <h2 class="sx-stm__text"><span class="sx-w" style="--i:0">Dine</span> <span class="sx-w" style="--i:1">næste</span> <span class="sx-w" style="--i:2">kunder</span> <span class="sx-w" style="--i:3">søger</span> <span class="sx-w" style="--i:4">ikke</span> <span class="sx-w" style="--i:5">efter</span> <span class="sx-w" style="--i:6">dig.</span> <br class="sx-br"><span class="sx-w dim" style="--i:7">De</span> <span class="sx-w dim" style="--i:8">scroller.</span> <span class="sx-w" style="--i:9">Mød</span> <span class="sx-w" style="--i:10">dem,</span> <span class="sx-w hot" style="--i:11">før</span> <span class="sx-w hot" style="--i:12">de</span> <span class="sx-w hot sx-u" style="--i:13">søger.<svg class="sx-u__l" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 20 C 60 6, 120 4, 170 12 S 260 26, 296 8"/></svg></span></h2>
+      <p class="sx-stm__sub" data-reveal="2">På Facebook og Instagram møder du dem med et tilbud eller et godt eksempel på dit arbejde.</p>
+    </section>
+
+    <!-- Showcase for Meta Ads: a story ad for Nordvik (an example carpenter in København) playing on a phone, the same ad
+     as a feed post and a reel, and beside it who sees it (area, age, interests and an example reach).
+     Our own drawings, no platform marks. Styles: assets/css/show/meta-ads.css, behaviour: assets/js/show/meta-ads.js -->
+<section id="eksempel" class="show show--meta-ads" data-sec="eksempel">
+  <div class="ma">
+    <div class="sec-head" data-reveal="0">
+      <div class="sec-head__title"><div class="kicker">Sådan ser det ud</div><h2 class="h2">Tryk dig igennem.<br><span class="dim">Ligesom dine kunder.</span></h2></div>
+      <p class="sec-head__lead">Sådan kan din annonce se ud på Facebook og Instagram, her for en tømrer i København. Tryk for næste billede, hold for at pause, og vælg, hvem der skal se den.</p>
+    </div>
+
+    <div class="ma-grid">
+      <div class="ma-dev" data-reveal="1">
+        <div class="seg ma-seg" role="group" aria-label="Vis annoncen som">
+          <button type="button" class="is-on" aria-pressed="true" data-ma-view="story">Story</button>
+          <button type="button" aria-pressed="false" data-ma-view="feed">Feed</button>
+          <button type="button" aria-pressed="false" data-ma-view="reels">Reels</button>
+        </div>
+
+        <div class="ma-ph">
+          <span class="ma-eks"><span class="tag-eks">Eksempel</span></span>
+          <span class="ma-pill ma-pill--1" aria-hidden="true"><i><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-tap"/></svg></i>Tryk for næste</span>
+          <span class="ma-pill ma-pill--2" aria-hidden="true"><i><svg class="ma-i ma-i--fill" viewBox="0 0 24 24"><use href="#ma-pause"/></svg></i>Hold for pause</span>
+          <div class="ma-phone">
+            <div class="ma-scr" data-ma-scr data-view="story">
+              <i class="ma-isl" aria-hidden="true"></i>
+              <div class="ma-sb" aria-hidden="true"><span>09:41</span><svg class="ma-sb__i" viewBox="0 0 66 12"><rect y="8" width="3" height="4" rx="1"/><rect x="4.5" y="6" width="3" height="6" rx="1"/><rect x="9" y="3.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="1" width="3" height="11" rx="1"/><path d="M28.2 4a8.6 8.6 0 0 1 11.6 0M30.4 6.6a5.3 5.3 0 0 1 7.2 0M32.6 9.2a2 2 0 0 1 2.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="45.5" y="1" width="17.5" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="47.2" y="2.7" width="12.8" height="6.6" rx="1.6"/><path d="M64.8 4.6v2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".4"/></svg></div>
+
+              <!-- Story: three frames, tap right or left, hold to pause -->
+              <div class="ma-v ma-st is-on is-paused" data-v="story" data-ma-story>
+                <p class="sr-only">Eksempel: En story-annonce fra Nordvik, en tømrer i København, i tre billeder. Først en ny terrasse i Valby med teksten "Ny terrasse? Bygget på 5 dage." Så "Gratis tilbud. Fast pris, før vi går i gang." Til sidst "Vælg en tid. Vi kommer ud og måler op." med knappen Book tid.</p>
+                <div class="ma-card">
+                  <div class="ma-frs" aria-hidden="true">
+                    <div class="ma-fr ma-fr--1 is-on">
+                      <img class="ma-kb" src="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/projekt-1.webp 896w" sizes="(max-width: 899px) 560px, 720px" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false">
+                      <span class="ma-loc"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-pin"/></svg>Valby</span>
+                      <span class="ma-tx"><b>Ny terrasse?</b><span class="ma-hl">Bygget på 5 dage.</span></span>
+                    </div>
+                    <div class="ma-fr ma-fr--2">
+                      <span class="ma-pc"><img src="/udkast/_faelles/billeder/toemrer/hero-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/hero-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/hero-1.webp 896w" sizes="(max-width: 899px) 180px, 240px" alt="" width="480" height="600" loading="lazy" decoding="async" draggable="false"></span>
+                      <svg class="ma-ring" viewBox="0 0 100 100"><defs><path id="ma-rp" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs><circle cx="50" cy="50" r="49"/><g class="ma-ring__t"><text><textPath href="#ma-rp" textLength="236" lengthAdjust="spacing">FAST PRIS • GRATIS TILBUD •</textPath></text></g><circle class="ma-ring__dot" cx="50" cy="50" r="11"/></svg>
+                      <span class="ma-tx"><b>Gratis tilbud.</b><span>Fast pris, før vi går i gang.</span></span>
+                    </div>
+                    <div class="ma-fr ma-fr--3">
+                      <img class="ma-kb" src="/udkast/_faelles/billeder/toemrer/hero-2-480.webp" srcset="/udkast/_faelles/billeder/toemrer/hero-2-480.webp 480w, /udkast/_faelles/billeder/toemrer/hero-2.webp 896w" sizes="(max-width: 899px) 340px, 440px" alt="" width="480" height="600" loading="lazy" decoding="async" draggable="false">
+                      <span class="ma-tx"><b>Vælg en tid.</b><span class="ma-hl">Vi kommer ud og måler op.</span></span>
+                    </div>
+                  </div>
+                  <div class="ma-top">
+                    <div class="ma-bars" aria-hidden="true"><i class="is-on"><b></b></i><i><b></b></i><i><b></b></i></div>
+                    <div class="ma-who">
+                      <i class="ma-av" aria-hidden="true">N</i>
+                      <span class="ma-who__t" aria-hidden="true"><b>Nordvik</b><small>Sponsoreret</small></span>
+                      <button type="button" class="ma-ic ma-ic--p" data-ma-pause aria-label="Pause"><svg class="ma-i ma-i--fill" viewBox="0 0 24 24"><use href="#ma-pause"/></svg><svg class="ma-i ma-i--fill" viewBox="0 0 24 24"><use href="#ma-play"/></svg></button>
+                      <svg class="ma-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#ma-more"/></svg>
+                    </div>
+                  </div>
+                  <button type="button" class="ma-zone ma-zone--prev" data-ma-prev aria-label="Forrige billede"></button>
+                  <button type="button" class="ma-zone ma-zone--next" data-ma-next aria-label="Næste billede"></button>
+                  <div class="ma-end"><button type="button" class="ma-again" data-ma-replay><svg class="ma-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#ma-replay"/></svg>Se den igen</button></div>
+                  <div class="ma-cta">
+                    <span class="ma-cta__up" aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-up"/></svg><small>Swipe op</small></span>
+                    <button type="button" class="ma-cta__btn" data-ma-book>Book tid</button>
+                  </div>
+                </div>
+                <div class="ma-reply" aria-hidden="true"><span>Send besked</span><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-heart"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-send"/></svg></div>
+              </div>
+
+              <!-- Feed: the same ad between friends' posts -->
+              <div class="ma-v ma-fd" data-v="feed" inert>
+                <p class="sr-only">Eksempel: Den samme annonce i feedet, mellem opslag fra venner, med billedet af terrassen og knappen Book tid.</p>
+                <div class="ma-app" aria-hidden="true"><b>Til dig<svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-down"/></svg></b><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-heart"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-send"/></svg></div>
+                <div class="ma-view">
+                  <div class="ma-feed" data-ma-feed>
+                    <div class="ma-trays" aria-hidden="true">
+                      <span class="ma-tr ma-tr--me"><i class="ma-tr__r"><i class="ma-tr__a"></i><i class="ma-tr__plus">+</i></i><small>Din historie</small></span>
+                      <span class="ma-tr"><i class="ma-tr__r"><i class="ma-tr__a">S</i></i><small>sofie</small></span>
+                      <span class="ma-tr"><i class="ma-tr__r"><i class="ma-tr__a" style="--c:#cfe3d4">J</i></i><small>jonas.k</small></span>
+                      <span class="ma-tr"><i class="ma-tr__r"><i class="ma-tr__a" style="--c:#f2d48a">L</i></i><small>line_og_mads</small></span>
+                      <span class="ma-tr"><i class="ma-tr__r"><i class="ma-tr__a" style="--c:#c9d6f2">E</i></i><small>emma</small></span>
+                    </div>
+                    <article class="ma-post" aria-hidden="true">
+                      <header class="ma-post__h"><i class="ma-av" style="--c:#cfe3d4;--f:#111">J</i><span><b>Jonas Krag</b><small>Søerne, København</small></span><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-more"/></svg></header>
+                      <div class="ma-post__img"><img src="/udkast/_faelles/billeder/personlig-traener/projekt-3-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></div>
+                      <div class="ma-act"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-heart"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-chat"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-send"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-save"/></svg></div>
+                      <p class="ma-post__likes">87 synes godt om</p>
+                      <p><b>Jonas Krag</b> 7 km før kaffen.</p>
+                    </article>
+                    <article class="ma-post ma-ad" data-ma-ad>
+                      <header class="ma-post__h" aria-hidden="true"><i class="ma-av">N</i><span><b>Nordvik</b><small>Sponsoreret</small></span><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-more"/></svg></header>
+                      <button type="button" class="ma-post__img ma-ad__img" data-ma-like aria-label="Synes godt om">
+                        <img src="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/projekt-1.webp 896w" sizes="(max-width: 899px) 300px, 400px" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false">
+                        <svg class="ma-pop" viewBox="0 0 24 24" aria-hidden="true"><use href="#ma-heart"/></svg>
+                      </button>
+                      <button type="button" class="ma-adbar" data-ma-book><span>Book tid</span><svg class="ma-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#ma-right"/></svg></button>
+                      <div class="ma-act" aria-hidden="true"><svg class="ma-i ma-i--like" viewBox="0 0 24 24"><use href="#ma-heart"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-chat"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-send"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-save"/></svg></div>
+                      <p class="ma-post__likes" aria-hidden="true"><span class="ma-roll"><span>1.248</span><span>1.249</span></span> synes godt om</p>
+                      <p aria-hidden="true"><b>Nordvik</b> Ny terrasse? Vi bygger den på 5 dage, til fast pris. Book en gratis besigtigelse.</p>
+                      <p class="ma-post__time" aria-hidden="true">Se alle 86 kommentarer</p>
+                    </article>
+                  </div>
+                </div>
+                <div class="ma-nav" aria-hidden="true"><svg class="ma-i ma-i--fill" viewBox="0 0 24 24"><use href="#ma-home"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-find"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-plus"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-reel"/></svg><i class="ma-nav__me"></i></div>
+              </div>
+
+              <!-- Reels: the same ad in full height, between short videos -->
+              <div class="ma-v ma-rl" data-v="reels" inert>
+                <p class="sr-only">Eksempel: Den samme annonce som reel i fuld højde, med knapperne i siden og Book tid under teksten.</p>
+                <img class="ma-rl__img" src="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/projekt-1.webp 896w" sizes="(max-width: 899px) 640px, 860px" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false">
+                <div class="ma-rl__top" aria-hidden="true"><b>Reels</b><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-cam"/></svg></div>
+                <span class="ma-rl__h" aria-hidden="true"><b>Ny terrasse?</b><span class="ma-hl">Bygget på 5 dage.</span></span>
+                <div class="ma-rl__side">
+                  <button type="button" class="ma-rl__b" data-ma-like aria-label="Synes godt om"><svg class="ma-i ma-i--like" viewBox="0 0 24 24" aria-hidden="true"><use href="#ma-heart"/></svg><small class="ma-roll" aria-hidden="true"><span>2.481</span><span>2.482</span></small></button>
+                  <span class="ma-rl__b" aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-chat"/></svg><small>86</small></span>
+                  <span class="ma-rl__b" aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-send"/></svg><small>41</small></span>
+                  <span class="ma-rl__b" aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-more"/></svg></span>
+                  <i class="ma-rl__aud" aria-hidden="true">N</i>
+                </div>
+                <div class="ma-rl__info">
+                  <span class="ma-rl__who" aria-hidden="true"><i class="ma-av">N</i><span><b>Nordvik</b><small>Sponsoreret</small></span></span>
+                  <p aria-hidden="true">Fra skitse til terrasse på 5 dage. Book en gratis besigtigelse … <span>mere</span></p>
+                  <button type="button" class="ma-rl__cta" data-ma-book><span>Book tid</span><svg class="ma-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#ma-right"/></svg></button>
+                </div>
+                <i class="ma-rl__line" aria-hidden="true"><b></b></i>
+                <div class="ma-nav" aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-home"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-find"/></svg><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-plus"/></svg><svg class="ma-i ma-i--b" viewBox="0 0 24 24"><use href="#ma-reel"/></svg><i class="ma-nav__me"></i></div>
+              </div>
+
+              <!-- Behind every "Book tid": Nordvik's booking page opens in the app -->
+              <div class="ma-sheet" data-ma-sheet inert>
+                <button type="button" class="ma-dim" data-ma-close tabindex="-1" aria-label="Luk"></button>
+                <div class="ma-sh" role="group" aria-label="Eksempel: booking hos Nordvik">
+                  <div class="ma-sh__bar"><button type="button" class="ma-ic" data-ma-close aria-label="Luk"><svg class="ma-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#ma-x"/></svg></button><span aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-lock"/></svg>nordvik.dk</span></div>
+                  <div class="ma-sh__in">
+                    <span class="ma-sh__brand" aria-hidden="true"><i class="ma-av">N</i>Nordvik</span>
+                    <b class="ma-sh__t">Book en gratis besigtigelse</b>
+                    <span class="ma-sh__s">Vælg en tid, så kommer vi ud og måler op.</span>
+                    <div class="ma-slots" role="group" aria-label="Tider">
+                      <button type="button" class="is-on" aria-pressed="true" data-ma-slot="tirsdag kl. 10.00">Tirsdag<b>10.00</b></button>
+                      <button type="button" aria-pressed="false" data-ma-slot="onsdag kl. 14.00">Onsdag<b>14.00</b></button>
+                      <button type="button" aria-pressed="false" data-ma-slot="fredag kl. 8.00">Fredag<b>8.00</b></button>
+                    </div>
+                    <div class="ma-flds" aria-hidden="true"><span class="ma-fld"><small>Navn</small>Mette Krogh</span><span class="ma-fld"><small>Telefon</small>12 34 56 78</span></div>
+                    <span class="ma-auto" aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-ok"/></svg>Udfyldt fra din profil</span>
+                    <button type="button" class="ma-sh__go" data-ma-send>Book tid</button>
+                  </div>
+                  <div class="ma-sh__ok" aria-live="polite"><i aria-hidden="true"><svg class="ma-i" viewBox="0 0 24 24"><use href="#ma-ok"/></svg></i><b>Tak!</b><span data-ma-when></span><button type="button" class="ma-sh__back" data-ma-close>Tilbage til annoncen</button></div>
+                </div>
+              </div>
+              <i class="ma-home" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <p class="ma-cap" data-ma-cap aria-live="polite">Story · fuld skærm, cirka fire sekunder pr. billede</p>
+      </div>
+
+      <!-- Who sees it: area, age and interests set an example reach -->
+      <div class="ma-aud" data-reveal="2">
+        <div class="ma-aud__in">
+          <div class="ma-aud__h"><h3>Hvem ser den?</h3><p>Vi viser annoncen for dem, der kan blive dine kunder.</p></div>
+          <div class="ma-map" aria-hidden="true">
+          <svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <defs>
+              <pattern id="ma-wav" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9"/></pattern>
+              <clipPath id="ma-dk"><use href="#ma-dkp"/><use href="#ma-slp"/></clipPath>
+            </defs>
+            <rect class="ma-m__sea" x="-200" y="-200" width="880" height="700"/>
+            <g class="ma-m__z">
+              <path class="ma-m__land" d="M240 -47L249 -23C252 -16 257 -10 260 -5C263 1 264 5 267 10C269 15 272 20 276 26C280 32 289 38 292 46C295 54 295 65 296 72C297 78 296 78 298 85C301 93 306 107 310 116C314 125 320 132 323 140C326 147 327 155 328 160C328 166 327 168 325 172C323 176 318 180 316 185C314 191 312 199 311 206C311 213 314 222 313 228C313 235 310 240 307 245C303 249 293 252 292 254C291 256 296 258 300 259C304 259 311 255 318 256C325 257 332 262 342 264C352 266 364 267 376 267C388 267 402 263 417 264C432 264 442 268 464 270L553 272L553 -47L240 -47Z"/>
+              <path class="ma-m__land" id="ma-dkp" d="M-73 82L-32 72C-20 68 -9 63 2 58C13 53 26 45 36 43C46 41 55 45 63 45C71 44 77 41 84 38C90 35 96 31 104 26C113 21 126 11 135 6C144 0 150 -4 158 -8C167 -12 178 -17 185 -18C192 -19 197 -16 203 -14C208 -12 212 -9 217 -6C222 -4 228 -1 233 2C239 6 246 10 250 13C253 16 252 17 252 19C251 22 250 24 247 28C244 31 238 37 235 41C232 46 230 50 230 55C230 60 233 67 235 72C236 77 239 80 240 84C241 89 241 93 242 97C243 102 247 108 247 113C247 118 243 124 243 128C244 132 248 134 249 136C250 139 248 142 248 144C249 145 251 143 252 145C254 147 257 152 258 155C259 159 258 163 259 166C260 168 264 167 265 169C266 171 264 175 264 177C263 179 264 181 262 183C261 185 258 188 255 189C253 191 251 192 249 191C246 191 243 188 240 186C237 183 235 180 233 178C230 176 229 173 225 172C221 172 213 174 208 175C204 176 200 177 197 179C194 180 192 183 189 186C186 189 184 192 180 195C177 199 171 202 168 206C165 209 164 213 163 216C162 220 161 223 161 227C161 230 163 231 165 234C166 238 167 243 170 247C174 251 181 254 186 257C190 260 194 261 198 264C201 267 205 270 208 274C211 278 214 281 215 286C216 291 217 298 214 302C211 306 204 308 198 311C191 314 182 315 175 319C169 322 164 325 158 330L145 347L-73 347L-73 82Z"/>
+              <path class="ma-m__land" id="ma-slp" d="M275 162C276 160 280 157 283 157C285 157 290 160 291 162C292 163 293 167 292 169C290 171 286 172 284 172C281 172 277 171 276 169C275 167 274 163 275 162Z"/>
+              <g clip-path="url(#ma-dk)"><circle class="ma-m__fill" cx="240" cy="150" r="136"/></g>
+              <path class="ma-m__fj" d="M88 39C91 42 99 53 104 58C109 64 113 67 118 72C122 77 129 81 132 87C135 93 135 100 135 106C134 112 129 117 129 123C129 129 132 137 133 143C134 149 136 156 137 158" stroke-width="5"/>
+              <path class="ma-m__fj" d="M75 39C74 43 71 54 71 62C71 69 75 75 74 82C73 89 67 96 65 102C62 109 58 117 57 123C56 128 57 132 56 134" stroke-width="12"/>
+              <path class="ma-m__fj" d="M250 141C249 143 247 147 245 150C243 153 241 156 239 159C237 162 235 165 233 167C231 169 229 172 228 173" stroke-width="2.4"/>
+              <path class="ma-m__lake" d="M124 38C125 36 131 31 135 30C139 28 145 28 148 29C151 30 154 34 153 36C152 39 147 41 143 43C140 44 136 44 133 43C129 42 124 40 124 38Z"/><path class="ma-m__lake" d="M197 19C198 17 202 18 203 20C204 22 204 28 203 30C203 33 201 36 200 36C199 37 197 34 196 31C196 28 196 21 197 19Z"/>
+              <path class="ma-m__road" d="M240 150C235 151 222 154 213 155C203 157 192 158 182 160C172 161 160 161 152 162C144 163 145 166 135 164C124 161 100 152 87 147C74 142 83 138 56 134C30 130 -51 125 -73 123M240 150C239 147 236 136 233 130C231 123 227 119 226 113C224 106 225 99 225 92C225 85 225 80 226 72C228 64 230 53 233 45C236 37 241 29 243 24C246 19 247 17 248 15M240 150C237 152 229 159 223 164C217 169 209 175 203 180C196 185 188 190 182 196C176 202 170 208 165 215C161 221 157 228 155 235C153 242 153 248 152 259C150 270 149 285 145 300C141 314 131 339 128 347M226 147C222 144 208 135 199 130C190 124 183 119 172 113C161 106 141 93 135 89M225 109C222 106 213 98 206 89C199 80 187 61 183 55"/>
+              <path class="ma-m__road ma-m__br" d="M277 171C281 171 291 172 298 172C304 172 314 173 318 173"/>
+              <circle class="ma-m__ring" cx="240" cy="150" r="136"/>
+              <text class="ma-m__wl ma-m__c" x="226" y="236" style="--o:226px 236px">Køge Bugt</text>
+              <text class="ma-m__se ma-m__c" x="352" y="134" style="--o:352px 134px">SVERIGE</text>
+              <g class="ma-tw ma-m__c" data-d="11.2" style="--o:226px 115px"><circle cx="226" cy="115" r="3"/><text x="233" y="119">Lyngby</text></g>
+              <g class="ma-tw ma-m__c" data-d="14.3" style="--o:196px 129px"><circle cx="196" cy="129" r="3"/><text x="189" y="133" text-anchor="end">Ballerup</text></g>
+              <g class="ma-tw ma-m__c" data-d="11.3" style="--o:262px 181px"><circle cx="262" cy="181" r="3"/><text x="269" y="185">Dragør</text></g>
+              <g class="ma-tw ma-m__c" data-d="19.7" style="--o:183px 185px"><circle cx="183" cy="185" r="3"/><text x="176" y="189" text-anchor="end">Greve</text></g>
+              <g class="ma-tw ma-m__c" data-d="23.0" style="--o:226px 73px"><circle cx="226" cy="73" r="3"/><text x="233" y="77">Hørsholm</text></g>
+              <g class="ma-tw ma-m__c" data-d="30.8" style="--o:136px 163px"><circle cx="136" cy="163" r="3"/><text x="129" y="167" text-anchor="end">Roskilde</text></g>
+              <g class="ma-tw ma-m__c" data-d="32.6" style="--o:183px 55px"><circle cx="183" cy="55" r="3"/><text x="190" y="59">Hillerød</text></g>
+              <g class="ma-tw ma-m__c" data-d="34.2" style="--o:158px 232px"><circle cx="158" cy="232" r="3"/><text x="165" y="236">Køge</text></g>
+              <g class="ma-tw ma-m__c" data-d="40.1" style="--o:250px 14px"><circle cx="250" cy="14" r="3"/><text x="243" y="18" text-anchor="end">Helsingør</text></g>
+              <g class="ma-tw ma-m__c" data-d="36.2" style="--o:134px 88px"><circle cx="134" cy="88" r="3"/><text x="127" y="92" text-anchor="end">Frederikssund</text></g>
+              <g class="ma-m__pin ma-m__c" style="--o:240px 150px"><circle class="ma-m__pulse" cx="240" cy="150" r="5"/><circle cx="240" cy="150" r="5"/><text x="233" y="166" text-anchor="end">København</text></g>
+              <g class="ma-m__km"><g><rect x="-20" y="-11" width="40" height="22" rx="11"/><text y="4" text-anchor="middle" data-ma-km>15 km</text></g></g>
+            </g>
+          </svg>
+          </div>
+          <div class="ma-f">
+            <label class="ma-f__h" for="ma-r"><span>Område</span><b data-ma-rv>15 km omkring København</b></label>
+            <input id="ma-r" class="ma-range" type="range" min="5" max="40" step="1" value="15" aria-valuetext="15 kilometer omkring København" data-ma-r>
+          </div>
+          <div class="ma-f" role="group" aria-labelledby="ma-al">
+            <span class="ma-f__h" id="ma-al"><span>Alder</span></span>
+            <div class="ma-chips" data-ma-age>
+              <button type="button" aria-pressed="false">18–24</button><button type="button" aria-pressed="true">25–34</button><button type="button" aria-pressed="true">35–44</button><button type="button" aria-pressed="true">45–54</button><button type="button" aria-pressed="true">55–64</button><button type="button" aria-pressed="false">65+</button>
+            </div>
+          </div>
+          <div class="ma-f" role="group" aria-labelledby="ma-il">
+            <span class="ma-f__h" id="ma-il"><span>Interesser</span></span>
+            <div class="ma-chips" data-ma-int>
+              <button type="button" aria-pressed="true">Indretning</button><button type="button" aria-pressed="true">Have</button><button type="button" aria-pressed="true">Gør det selv</button><button type="button" aria-pressed="false">Boligkøb</button>
+            </div>
+          </div>
+        </div>
+        <div class="ma-sum spot" data-spot>
+          <div class="ma-sum__n"><span class="ma-odo" data-ma-odo aria-hidden="true">302.000</span><span class="ma-sum__l">personer kan se den <span class="tag-eks">Eksempel</span></span></div>
+          <p class="ma-sum__s" data-ma-sum>25–64 år, inden for 15 km af København, med interesse for indretning, have eller gør det selv.</p>
+          <span class="sr-only" data-ma-live aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Icons for the mockup: our own drawings, no platform marks -->
+  <svg class="ma-sprite" aria-hidden="true" focusable="false">
+    <symbol id="ma-heart" viewBox="0 0 24 24"><path d="M12 20.3s-7.6-4.5-9.4-9.2C1.4 7.7 3.5 4.3 6.9 4.3c2 0 3.5 1.1 5.1 3 1.6-1.9 3.1-3 5.1-3 3.4 0 5.5 3.4 4.3 6.8-1.8 4.7-9.4 9.2-9.4 9.2z"/></symbol>
+    <symbol id="ma-chat" viewBox="0 0 24 24"><path d="M20.6 12a8.6 8.6 0 0 1-12.9 7.5l-4.3 1.1 1.2-4.1A8.6 8.6 0 1 1 20.6 12z"/></symbol>
+    <symbol id="ma-send" viewBox="0 0 24 24"><path d="M21.2 3.2 9.9 14.1M21.2 3.2l-6.8 17.6-3.7-6.9-7.1-3.6z"/></symbol>
+    <symbol id="ma-save" viewBox="0 0 24 24"><path d="M18.6 20.8 12 15.4l-6.6 5.4V4.9c0-.9.7-1.6 1.6-1.6h10c.9 0 1.6.7 1.6 1.6z"/></symbol>
+    <symbol id="ma-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="19" cy="12" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="ma-down" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6"/></symbol>
+    <symbol id="ma-up" viewBox="0 0 24 24"><path d="m6 14.5 6-6 6 6"/></symbol>
+    <symbol id="ma-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+    <symbol id="ma-home" viewBox="0 0 24 24"><path d="M3.6 10.2 12 3.5l8.4 6.7v9.3c0 .6-.5 1-1 1h-4.6v-6.2H9.2v6.2H4.6c-.6 0-1-.4-1-1z"/></symbol>
+    <symbol id="ma-find" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.4-4.4"/></symbol>
+    <symbol id="ma-plus" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><path d="M12 8v8M8 12h8"/></symbol>
+    <symbol id="ma-reel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><path d="m10.2 8.8 5.2 3.2-5.2 3.2z"/></symbol>
+    <symbol id="ma-pin" viewBox="0 0 24 24"><path d="M12 21.2s-6.8-6.1-6.8-11.4a6.8 6.8 0 0 1 13.6 0c0 5.3-6.8 11.4-6.8 11.4z"/><circle cx="12" cy="9.8" r="2.4"/></symbol>
+    <symbol id="ma-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.3 4.3L19 7.3"/></symbol>
+    <symbol id="ma-pause" viewBox="0 0 24 24"><rect x="6" y="4.5" width="4" height="15" rx="1.4"/><rect x="14" y="4.5" width="4" height="15" rx="1.4"/></symbol>
+    <symbol id="ma-play" viewBox="0 0 24 24"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4c.6-.4.6-1.4 0-1.8l-10-6.4C8.9 4.3 8 4.8 8 5.6z"/></symbol>
+    <symbol id="ma-replay" viewBox="0 0 24 24"><path d="M4.6 12a7.4 7.4 0 1 0 2.2-5.3"/><path d="M4.4 3.9v4.4h4.4"/></symbol>
+    <symbol id="ma-tap" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="8"/></symbol>
+    <symbol id="ma-cam" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12.5" rx="3"/><circle cx="12" cy="13.2" r="3.3"/><path d="m8.6 7 1.4-2.5h4l1.4 2.5"/></symbol>
+    <symbol id="ma-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+    <symbol id="ma-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+  </svg>
+</section>
+
+    <section id="forskel" class="sx sx-vs" data-sec="uden-med" data-vs>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Forskellen</div>
+          <h2 class="h2">Et boostet opslag.<br><span class="dim">Eller en plan.</span></h2>
+        </div>
+        <div class="sx-vs__side">
+          <p class="sec-head__lead">Forskellen på at trykke “Promover” og at have annoncer, der bliver styret.</p>
+          <div class="seg sx-vs__seg" role="group" aria-label="Vis uden en plan eller med webleads">
+            <button type="button" data-vs-go="uden" aria-pressed="false">Uden en plan</button>
+            <button type="button" data-vs-go="med" class="is-on" aria-pressed="true">Med Webleads</button>
+          </div>
+        </div>
+      </div>
+      <div class="sx-vs__board" data-vs-board data-show="med" style="grid-template-rows:repeat(6, auto)">
+        <div class="sx-vs__bg is-uden" aria-hidden="true"></div>
+        <div class="sx-vs__bg is-med" aria-hidden="true"></div>
+        <div class="sx-vs__head is-uden" style="grid-row:1;--i:0"><span class="sx-vs__mk" aria-hidden="true">✕</span>Uden en plan</div>
+        <div class="sx-vs__head is-med" style="grid-row:1;--i:1"><img src="/assets/logo-icon.svg" alt="" width="28" height="28">Med Webleads</div>
+        <div class="sx-vs__cell is-uden" style="grid-row:2;--i:2"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Du promoverer et opslag og håber på det bedste.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:2;--i:3"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Annoncer med et mål, lavet færdige til feedet.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:3;--i:4"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Annoncen bliver vist for alle mulige.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:3;--i:5"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Den bliver vist for de rigtige i dit område.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:4;--i:6"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Dem, der kiggede, glemmer dig igen.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:4;--i:7"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Retargeting minder dem om at vende tilbage.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:5;--i:8"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Den samme annonce kører, til den holder op med at virke.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:5;--i:9"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Flere varianter bliver testet, og budgettet flytter derhen, hvor det virker.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:6;--i:10"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden en plan: </span>Du ved ikke, hvad annoncerne giver.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:6;--i:11"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med Webleads: </span>Meta Pixel og en månedlig rapport viser det.</span></div>
       </div>
     </section>
 
@@ -258,27 +546,6 @@
           <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Meta Pixel og sporing</b><span>Vi sætter målingen op, så du kan se, hvad annoncerne giver.</span></span></div>
           <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Månedlig rapport</b><span>Kort og klart overblik over, hvad du får for pengene.</span></span></div>
           <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Direkte kontakt</b><span>Du taler med den, der kører dine annoncer.</span></span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="saadan" class="promise" data-sec="saadan">
-      <div class="promise__head" data-reveal="0">
-        <div class="kicker">Sådan foregår det</div>
-        <h2 class="h2">Tre trin.<br><span class="dim">Så kører det.</span></h2>
-      </div>
-      <div class="promise__list">
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">01 / 03</span><h3>Mål og budget.</h3><p>Vi aftaler, hvad du vil opnå, og hvad det må koste.</p></div>
-          <span class="pcard__g" aria-hidden="true">kr</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">02 / 03</span><h3>Annoncer og målretning.</h3><p>Vi laver annoncerne og sætter målretning og sporing op.</p></div>
-          <span class="pcard__g" aria-hidden="true">f</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">03 / 03</span><h3>Test og optimering.</h3><p>Vi tester, justerer og sender en månedlig rapport.</p></div>
-          <span class="pcard__g" aria-hidden="true">↗</span>
         </div>
       </div>
     </section>
@@ -334,9 +601,22 @@
             </div>
           </div>
           <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+            <div class="addon" data-tilt data-addon="Google CSS" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">04</span>
+              <div class="addon__head"><h3>Google CSS</h3><p>Op til 20% billigere klik på dine Google Shopping-annoncer.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Skift til en CSS-partner</li><li><span class="check" aria-hidden="true">✓</span>Hele buddet tæller i auktionen</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="Google CSS" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
+              </div>
+            </div>
+          </div>
+          <div class="addon-slot">
+            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">05</span>
               <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
               <div class="addon__price">995 kr./time</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
@@ -349,7 +629,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="GEO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">05</span>
+              <span class="addon__n">06</span>
               <div class="addon__head"><h3>GEO</h3><p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Tjek af din synlighed i AI</li><li><span class="check" aria-hidden="true">✓</span>Indhold, AI kan citere</li><li><span class="check" aria-hidden="true">✓</span>Struktureret data</li></ul>
@@ -362,7 +642,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="AI" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">06</span>
+              <span class="addon__n">07</span>
               <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
@@ -375,7 +655,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">07</span>
+              <span class="addon__n">08</span>
               <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
               <div class="addon__price">fra 4.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
@@ -388,7 +668,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">08</span>
+              <span class="addon__n">09</span>
               <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
@@ -401,7 +681,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="CRO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">09</span>
+              <span class="addon__n">10</span>
               <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
@@ -416,7 +696,7 @@
         <div class="wrap addons__meter" style="width:100%">
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
-          <span>09</span>
+          <span>10</span>
         </div>
       </div>
     </section>
@@ -481,7 +761,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" aria-current="page" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" aria-current="page" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>

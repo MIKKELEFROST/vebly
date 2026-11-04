@@ -1,0 +1,89 @@
+<!-- Showcase for Google Ads: a big search field types local searches in a loop, and the sponsored text ad at
+     the top of the results rewrites itself to each search. The visitor can type their own search in the field.
+     Our own drawing: no logos, the icons are inline SVG. Everything in the results is an example.
+     Styles: assets/css/show/google-ads.css, behaviour: assets/js/show/google-ads.js -->
+<section id="eksempel" class="show show--google-ads" data-sec="eksempel">
+  <div class="sec-head ga-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Sådan ser det ud på Google</div>
+      <h2 class="h2">Kunden søger.<br><span class="dim">Din annonce svarer.</span></h2>
+    </div>
+    <p class="sec-head__lead">Annoncen skifter med søgningen, så kunden ser lige det, de leder efter. Prøv selv: skriv dit fag og din by i feltet.</p>
+  </div>
+
+  <div class="ga-stage" data-ga-stage>
+    <div class="ga-fwrap" data-reveal="1">
+      <!-- A real field: what is typed goes into the example ad below and never leaves the browser (no name, so nothing is submitted) -->
+      <form class="ga-field" role="search" action="#eksempel" data-ga-form>
+        <svg class="ga-ico ga-field__i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+        <label class="sr-only" for="ga-in">Prøv en søgning: skriv dit fag og din by</label>
+        <input class="ga-field__in" id="ga-in" type="search" data-ga-in maxlength="70" placeholder="fx frisør odense" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
+        <span class="ga-field__q" aria-hidden="true"><span class="ga-field__qt" data-ga-qt>tømrer københavn</span><i class="ga-caret"></i></span>
+        <button type="submit" class="ga-field__go" data-ga-go aria-label="Søg"><svg class="ga-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
+        <label class="ga-try" for="ga-in" aria-hidden="true"><span>Prøv din egen søgning</span></label>
+      </form>
+    </div>
+
+    <div class="ga-rwrap" data-reveal="2">
+      <div class="ga-res" data-ga-res aria-hidden="true" aria-label="Eksempel på en søgeside" data-event="Eksempel: Annoncen">
+        <div class="ga-tabs"><b>Alle</b><span>Kort</span><span>Billeder</span><span>Nyheder</span><span>Mere</span><span class="tag-eks">Eksempel</span></div>
+        <div class="ga-pane">
+          <i class="ga-res__bar"></i>
+          <div class="ga-body" data-ga-body>
+            <div class="ga-ad" aria-label="Eksempel på en annonce">
+              <span class="ga-ad__sp ga-a">Sponsoreret</span>
+              <div class="ga-site ga-a" style="--d:.04s">
+                <i class="ga-ini" data-ga="ini" style="--c1:#0f3d2e;--c2:#d4f36b">N</i>
+                <span class="ga-site__t"><b data-ga="navn">Nordvik</b><small data-ga="url">nordvik.dk › tomrer</small></span>
+                <svg class="ga-dots" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg>
+              </div>
+              <div class="ga-ad__h" data-ga="h">Tømrer i København | Fast pris før vi går i gang</div>
+              <p class="ga-ad__t ga-a" style="--d:.22s" data-ga="t">Terrasser, tilbygninger og nye vinduer i København og omegn. Vi svarer samme dag og giver en fast pris, før vi går i gang.</p>
+              <div class="ga-ad__row ga-a" style="--d:.3s">
+                <span class="ga-call" data-ga="call"><svg class="ga-ico" viewBox="0 0 24 24"><path d="M5.2 3.5h3.1l1.6 4.2-2.1 1.4a11 11 0 0 0 7.1 7.1l1.4-2.1 4.2 1.6v3.1c0 .9-.7 1.6-1.6 1.6C10.6 20.4 3.6 13.4 3.6 5.1c0-.9.7-1.6 1.6-1.6z"/></svg><span data-ga="callt">Ring</span></span>
+                <span class="ga-links" data-ga="links"><span>Terrasse</span><span>Tilbygning</span><span>Få et tilbud</span></span>
+              </div>
+              <!-- "Din annonce" turns into the moment you pay when the ad is clicked -->
+              <span class="ga-you" data-ga-you><span>Din annonce</span><span>Først nu betaler du</span></span>
+            </div>
+            <div class="ga-org ga-a" style="--d:.34s">
+              <div class="ga-site">
+                <i class="ga-ini ga-ini--o" data-ga="oi">T</i>
+                <span class="ga-site__t"><b data-ga="on">Tagholm Tømrer</b><small data-ga="ou">tagholm.dk › kontakt</small></span>
+                <svg class="ga-dots" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg>
+              </div>
+              <div class="ga-org__h" data-ga="oh">Tømrer i Valby og København · Tagholm</div>
+              <p class="ga-org__t" data-ga="ot">Tag, gulve og køkkener i hele <b>København</b>. Se vores projekter, og bestil en gratis besigtigelse af din opgave.</p>
+            </div>
+            <div class="ga-ph ga-a" style="--d:.4s"><i></i><i></i><i></i></div>
+          </div>
+          <!-- Shown while the results load -->
+          <div class="ga-skel"><div><i></i><i></i><i></i><i></i><i></i></div><div><i></i><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div></div>
+        </div>
+        <!-- The click: a cursor (a finger on phones) and a ripple -->
+        <span class="ga-cur" data-ga-cur><svg viewBox="0 0 24 24"><path d="M5.5 3.2v16.2l4.3-4.2 2.8 6.3 3.1-1.4-2.8-6.2h6z"/></svg><i></i></span>
+        <i class="ga-rip" data-ga-rip></i>
+      </div>
+      <p class="sr-only">Eksempel på en annonce på Google. Søgningen »tømrer københavn« viser øverst en annonce fra Nordvik: Tømrer i København, fast pris før vi går i gang, med en Ring-knap og links til Terrasse, Tilbygning og Få et tilbud. Annoncen skifter med hver søgning. Skriv dit eget fag og din by i søgefeltet for at se din egen.</p>
+      <p class="sr-only" data-ga-live aria-live="polite"></p>
+    </div>
+
+    <ul class="ga-facts" aria-label="Godt at vide om annoncer på Google">
+      <li data-reveal="3" data-ga-chip="soeg"><span class="ga-facts__i" aria-hidden="true"><svg class="ga-ico" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Vises, når de søger</li>
+      <li data-reveal="4" data-ga-chip="klik"><span class="ga-facts__i" aria-hidden="true"><svg class="ga-ico" viewBox="0 0 24 24"><path d="M6.5 4v14.2l3.8-3.7 2.5 5.6 2.7-1.2-2.5-5.5h5.3z"/></svg></span>Du betaler kun, når nogen klikker</li>
+      <li data-reveal="5" data-ga-chip="budget"><span class="ga-facts__i" aria-hidden="true"><b>kr</b></span>Du bestemmer budgettet</li>
+    </ul>
+  </div>
+
+  <!-- The searches of the loop and their ads: q the search, n the business, u the url line, c the initial's colours,
+       k where the click lands (h the headline, c the call button, 0–2 a sitelink), h the headline, t the text,
+       s the sitelinks, o an organic result (name, url, title, text). The first one is also written out above. -->
+  <script type="application/json" data-ga-ex>
+[
+  {"q":"tømrer københavn","n":"Nordvik","u":"nordvik.dk › tomrer","c":"#0f3d2e #d4f36b","k":"h","h":"Tømrer i København | Fast pris før vi går i gang","t":"Terrasser, tilbygninger og nye vinduer i København og omegn. Vi svarer samme dag og giver en fast pris, før vi går i gang.","s":["Terrasse","Tilbygning","Få et tilbud"],"o":["Tagholm Tømrer","tagholm.dk › kontakt","Tømrer i Valby og København · Tagholm","Tag, gulve og køkkener i hele København. Se vores projekter, og bestil en gratis besigtigelse af din opgave."]},
+  {"q":"akut vvs nu","n":"Kildevik VVS","u":"kildevik.dk › akut","c":"#123a5a #9fe3ff","k":"c","h":"Akut VVS-hjælp nu | Vi kører med det samme","t":"Stoppet afløb, utæt rør eller ingen varme? Vi rykker ud døgnet rundt i hele Storkøbenhavn og siger prisen, før vi går i gang.","s":["Stoppet afløb","Vandskade","Ingen varme"],"o":["Husk Huset","huskhuset.dk › vandskade","Utæt rør? Det gør du, mens du venter på VVS’eren","Luk for hovedhanen, tør op, og tag billeder til forsikringen. Sådan begrænser du skaden, til hjælpen er fremme."]},
+  {"q":"elektriker frederiksberg","n":"Lysholt El","u":"lysholt-el.dk › frederiksberg","c":"#2b2140 #ffd36b","k":0,"h":"Elektriker på Frederiksberg | Fast pris på opgaven","t":"Ladestandere, nye stik og el-tavler på Frederiksberg og i resten af København. Autoriseret, og vi rydder op efter os.","s":["Ladestander","El-tavle","Få et tilbud"],"o":["Strømkredsen","stroemkredsen.dk › el","Elektriker på Frederiksberg og Vesterbro · Strømkredsen","Autoriseret elinstallatør på Frederiksberg. Belysning, stikkontakter og fejlfinding, også i weekenden."]},
+  {"q":"maler i nærheden","n":"Farveholm","u":"farveholm.dk › maler","c":"#7a3b5e #ffd9e8","k":2,"h":"Maler i nærheden | Gratis tilbud inden for 24 timer","t":"Indvendig og udvendig maling, tapet og træværk. Vi dækker af, maler pænt og rydder op efter os.","s":["Indvendig maling","Facade","Få et tilbud"],"o":["Kulørkontoret","kuloerkontoret.dk › priser","Malerfirma nær dig · Se priser på indvendig maling","Lokale malere i hele hovedstadsområdet. Book en gratis farverådgivning, når det passer dig."]}
+]
+  </script>
+</section>

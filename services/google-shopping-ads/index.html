@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="da" data-page="service_google-shopping-ads">
 <head>
-<!-- Genereret af scripts/services/build.mjs ud fra scripts/services/data.mjs. Ret der, ikke her. -->
+<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Google Shopping Ads · Dine produkter med billede og pris på Google · Webleads</title>
@@ -145,6 +145,14 @@
             "@type": "Answer",
             "text": "Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan klikket blive billigere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ofte, ja. Går dine Shopping-annoncer gennem en CSS-partner i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn."
+          }
         }
       ]
     }
@@ -154,15 +162,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261104c">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104c">
+<link rel="stylesheet" href="/assets/css/show/google-shopping-ads.css?v=20261104c">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
-<script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/main.js?v=20261104c"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104c"></script>
+<script type="module" src="/assets/js/show/google-shopping-ads.js?v=20261104c"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -190,6 +202,7 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -225,7 +238,7 @@
         <p class="hero__lead" data-reveal="3">Vi sætter Google Shopping op, så dine produkter bliver vist med billede og pris, når kunderne søger efter dem. Vi klarer produktfeed, Merchant Center og kampagner.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -241,26 +254,288 @@
       </div>
     </section>
 
-    <section id="pris" class="price-sec" data-sec="pris">
-      <div class="spot price" data-reveal="0" data-spot>
-        <div class="price__main">
-          <div class="kicker">Google Shopping Ads</div>
-          <h2>Fast pris.<br><span>Ingen gætteri.</span></h2>
-          <div class="price__amount"><span class="odo" data-odo>8.000</span><span>kr./md.</span></div>
-          <div class="price__vat">Pr. kanal · hver ekstra kanal 5.000 kr./md. · ekskl. moms</div>
-          <p class="price__lead">Tager du flere kanaler, fx også Google Ads eller Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p>
-          <div class="price__cta"><a href="#kontakt" class="btn btn--accent" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
+    <section id="eksempel" class="show show--google-shopping-ads" data-sec="eksempel">
+      <div class="gsa" data-gsa>
+        <div class="sec-head gsa__head" data-reveal="0">
+          <div class="sec-head__title"><div class="kicker">Google Shopping i praksis</div><h2 class="h2">Samme krus.<br><span class="dim">Bedre annonce.</span></h2></div>
+          <p class="sec-head__lead">Sådan står din vare på Google. Slå rettelserne i feedet til og fra, og se, hvad de gør ved din annonce.</p>
         </div>
-        <div class="incl">
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Merchant Center</b><span>Vi opretter eller rydder op i din Google Merchant Center-konto.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Produktfeed</b><span>Dine produkter, priser og lagerstatus sendes automatisk til Google.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Kobling til din webshop</b><span>Fx Shopify, hvor vi er Shopify Partner.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Titler og billeder</b><span>Produkttitler med de ord, kunderne faktisk søger på.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Kampagner</b><span>Shopping og Performance Max, delt op efter det, der sælger.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Sporing af salg</b><span>Hvert køb bliver målt, så du kan se, hvad annoncerne sælger for.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Løbende optimering</b><span>Vi flytter budgettet mod de produkter, der sælger.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Månedlig rapport</b><span>Salg, forbrug og afkast forklaret kort.</span></span></div>
+
+        <!-- Your product as one row of the product feed. The three switches rewrite your card in the carousel -->
+        <div class="gsa-feed" data-reveal="1">
+          <div class="gsa-feed__bar">
+            <span class="gsa-feed__name"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9 4.5v15"/></svg><b>Produktfeed</b><span>lervaerk.dk</span></span>
+            <div class="gsa-fix" role="group" aria-labelledby="gsa-fix-lbl">
+              <span class="gsa-feed__lbl" id="gsa-fix-lbl">Ret med ét klik</span>
+              <button type="button" class="gsa-fix__b" data-gsa-fix="titel" aria-pressed="true"><i aria-hidden="true"></i>Bedre titel</button>
+              <button type="button" class="gsa-fix__b" data-gsa-fix="tilbud" aria-pressed="true"><i aria-hidden="true"></i>Tilbudspris</button>
+              <button type="button" class="gsa-fix__b" data-gsa-fix="fragt" aria-pressed="true"><i aria-hidden="true"></i>Gratis fragt</button>
+            </div>
+          </div>
+          <div class="gsa-grid" aria-hidden="true">
+            <span class="gsa-grid__n"></span><span class="gsa-grid__l">A</span><span class="gsa-grid__l">B</span><span class="gsa-grid__l">C</span><span class="gsa-grid__l">D</span><span class="gsa-grid__l">E</span>
+            <span class="gsa-grid__n">1</span><span class="gsa-grid__h">Titel</span><span class="gsa-grid__h">Pris</span><span class="gsa-grid__h">Tilbud</span><span class="gsa-grid__h">Fragt</span><span class="gsa-grid__h">Lager</span>
+            <span class="gsa-grid__n">2</span><span class="gsa-cell" data-gsa-cell="titel"><span>Keramik krus 35 cl i stentøj, salviegrøn – håndlavet i Danmark</span></span><span class="gsa-cell"><span>329,00 kr.</span></span><span class="gsa-cell" data-gsa-cell="tilbud"><span>249,00 kr.</span></span><span class="gsa-cell" data-gsa-cell="fragt"><span>0,00 kr.</span></span><span class="gsa-cell"><span>På lager</span></span>
+            <span class="gsa-grid__n gsa-grid__x">3</span><span class="gsa-cell gsa-grid__x"><span>Krus blå</span></span><span class="gsa-cell gsa-grid__x"><span>329,00 kr.</span></span><span class="gsa-cell gsa-grid__x"></span><span class="gsa-cell gsa-grid__x"><span>39,00 kr.</span></span><span class="gsa-cell gsa-grid__x"><span>På lager</span></span>
+          </div>
         </div>
+
+        <!-- A drawing of a search page with a shopping carousel: no search engine's logo, the products and shops are made up -->
+        <div class="browser gsa-br" data-reveal="2">
+          <div class="browser__bar" aria-hidden="true">
+            <div class="dots3"><i></i><i></i><i></i></div>
+            <div class="browser__url"><svg class="gsa-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg><span data-gsa-url>google.dk/search?q=keramik+krus</span></div>
+            <span class="tag-eks">Eksempel</span>
+          </div>
+          <div class="gsa-scr" data-gsa-scr>
+            <p class="sr-only">Eksempel på en søgning på Google efter »keramik krus«. Øverst står sponsorerede shoppingannoncer med billede, pris og fragt. Din annonce fra Lerværk står som nummer to. Vælg en vare for at se den.</p>
+            <div class="gsa-q" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span data-gsa-q>keramik krus</span><i class="gsa-q__caret"></i></div>
+            <div class="gsa-tabs" aria-hidden="true"><b>Alle</b><span>Billeder</span><span>Videoer</span><span>Nyheder</span><span>Kort</span></div>
+            <div class="gsa-ads" role="region" aria-label="Sponsorerede shoppingannoncer, eksempel">
+              <div class="gsa-ads__h" aria-hidden="true"><b>Sponsoreret</b><span>· Shopping</span><i>⋮</i></div>
+              <div class="gsa-car">
+                <div class="gsa-row" data-gsa-row>
+                  <div class="gsa-trk" data-gsa-trk>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(4 25) scale(.66)" style="--g:#e9dfce;--gd:#d5c7af;--c:#cfae84;--gl:.55;--s:#5b4532;--so:.62"/><use href="#gsa-mug" transform="translate(48 36) scale(.74)" style="--g:#e9dfce;--gd:#d5c7af;--c:#cfae84;--gl:.55;--s:#5b4532;--so:.62"/></svg></span>
+                      <span class="gsa-card__t">Kaffekrus i stentøj, 2 stk. – sand med prikker</span>
+                      <span class="gsa-card__p"><b>299,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#8b5e3c" aria-hidden="true">K</i>Krus &amp; Kande</span>
+                      <span class="gsa-card__d">+ 39,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,6</b><span style="--f:92%" aria-hidden="true">★★★★★</span>(41)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card gsa-card--you is-tilbud" data-gsa-card data-gsa-you>
+                      <span class="gsa-you">Din annonce</span>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#9cb79a;--gd:#7d987c;--c:#d9bb93;--gl:.9;--so:.24"/></svg><span class="gsa-tag">Tilbud</span></span>
+                      <span class="gsa-card__t" data-gsa-y="titel"><mark>Keramik krus</mark> 35 cl i stentøj, salviegrøn – håndlavet i Danmark</span>
+                      <span class="gsa-card__p" data-gsa-y="tilbud"><b class="is-sale">249,00 kr.</b><s>329,00 kr.</s></span>
+                      <span class="gsa-card__s"><i style="--i:#4d6b50" aria-hidden="true">L</i>Lerværk</span>
+                      <span class="gsa-card__d" data-gsa-y="fragt">Gratis fragt</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#2f4d80;--gd:#223a61;--c:#d3b68e;--g2:#a8c2dc;--b:.92;--r:#b9d0e5;--gl:1;--s:#e2eaf4;--so:.22"/></svg></span>
+                      <span class="gsa-card__t">Krus med hank, blå reaktiv glasur 40 cl</span>
+                      <span class="gsa-card__p"><b>189,95 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#2d4a7a" aria-hidden="true">G</i>Glasurhuset</span>
+                      <span class="gsa-card__d">Hent i dag · 2,1 km</span>
+                      <span class="gsa-card__r"><b>4,9</b><span style="--f:98%" aria-hidden="true">★★★★★</span>(128)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card is-tilbud" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#c56a43;--gd:#a6532f;--c:#bc8e67;--gl:.3;--s:#4a2516;--so:.3"/></svg><span class="gsa-tag">Tilbud</span></span>
+                      <span class="gsa-card__t">Stentøjskrus i terrakotta, 30 cl</span>
+                      <span class="gsa-card__p"><b class="is-sale">159,00 kr.</b><s>199,00 kr.</s></span>
+                      <span class="gsa-card__s"><i style="--i:#b0532c" aria-hidden="true">D</i>Drejeskiven</span>
+                      <span class="gsa-card__d">+ 49,00 kr. i fragt</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#3b3a38;--gd:#292826;--c:#d2b48c;--gl:.24;--s:#e6e0d7;--so:.34"/></svg></span>
+                      <span class="gsa-card__t">Mat sort krus 45 cl i stentøj</span>
+                      <span class="gsa-card__p"><b>219,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#2b2b2b" aria-hidden="true">B</i>Bordkunst</span>
+                      <span class="gsa-card__d">Gratis fragt over 499 kr.</span>
+                      <span class="gsa-card__r"><b>4,5</b><span style="--f:90%" aria-hidden="true">★★★★★</span>(17)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#f1eee7;--gd:#dcd6ca;--c:#d4bc98;--g2:#2f4d80;--b:1;--r:#2f4d80;--gl:.7;--s:#7d7466;--so:.16"/></svg></span>
+                      <span class="gsa-card__t">Hvidt krus med blå kant, 25 cl</span>
+                      <span class="gsa-card__p"><b>119,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#3d5c8a" aria-hidden="true">O</i>Ovnfrisk</span>
+                      <span class="gsa-card__d">Levering i morgen</span>
+                      <span class="gsa-card__r"><b>4,4</b><span style="--f:88%" aria-hidden="true">★★★★★</span>(23)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(200 0) scale(-1 1)" style="--g:#e4b5a9;--gd:#cc988b;--c:#ddbd99;--gl:.85;--s:#6b4a40;--so:.2"/></svg></span>
+                      <span class="gsa-card__t">Krus i stentøj, rosa – 35 cl</span>
+                      <span class="gsa-card__p"><b>139,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#a35d6a" aria-hidden="true">K</i>Køkkenkrogen</span>
+                      <span class="gsa-card__d">+ 39,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,7</b><span style="--f:94%" aria-hidden="true">★★★★★</span>(9)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#d49d3c;--gd:#b3802a;--c:#cfb38c;--gl:.62;--s:#5a3d12;--so:.24"/></svg></span>
+                      <span class="gsa-card__t">Okkergult krus i stentøj, 35 cl</span>
+                      <span class="gsa-card__p"><b>179,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#8a6a2a" aria-hidden="true">S</i>Stentøjsstuen</span>
+                      <span class="gsa-card__d">+ 45,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,8</b><span style="--f:96%" aria-hidden="true">★★★★★</span>(52)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" transform="translate(4 25) scale(.66)" style="--g:#3f5e4a;--gd:#2d4637;--c:#cdb08a;--gl:.5;--s:#d9e3d6;--so:.2"/><use href="#gsa-mug" transform="translate(48 36) scale(.74)" style="--g:#3f5e4a;--gd:#2d4637;--c:#cdb08a;--gl:.5;--s:#d9e3d6;--so:.2"/></svg></span>
+                      <span class="gsa-card__t">Krus i stentøj, mørkegrøn – 2 stk. à 30 cl</span>
+                      <span class="gsa-card__p"><b>349,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#3f5e4a" aria-hidden="true">H</i>Hverdagsler</span>
+                      <span class="gsa-card__d">Gratis fragt</span>
+                      <span class="gsa-card__r"><b>4,6</b><span style="--f:92%" aria-hidden="true">★★★★★</span>(31)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card is-tilbud" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#a99bc7;--gd:#8a7caa;--c:#d6bd9a;--gl:.8;--s:#4b3f63;--so:.2"/></svg><span class="gsa-tag">Tilbud</span></span>
+                      <span class="gsa-card__t">Krus med hank i lavendel, 30 cl</span>
+                      <span class="gsa-card__p"><b class="is-sale">129,00 kr.</b><s>169,00 kr.</s></span>
+                      <span class="gsa-card__s"><i style="--i:#6d5f99" aria-hidden="true">T</i>Tetid</span>
+                      <span class="gsa-card__d">+ 29,00 kr. i fragt</span>
+                      <span class="gsa-card__r"><b>4,3</b><span style="--f:86%" aria-hidden="true">★★★★★</span>(14)</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                    <button type="button" class="gsa-card" data-gsa-card>
+                      <span class="gsa-img"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#gsa-bd"/><use href="#gsa-mug" style="--g:#a8c2dc;--gd:#88a4c0;--c:#d8c09e;--g2:#f4f1ea;--b:1;--r:#f4f1ea;--gl:.75;--s:#3d5470;--so:.2"/></svg></span>
+                      <span class="gsa-card__t">Lyseblåt krus med hvid kant, 35 cl</span>
+                      <span class="gsa-card__p"><b>199,00 kr.</b></span>
+                      <span class="gsa-card__s"><i style="--i:#5b7da3" aria-hidden="true">K</i>Kopkompagniet</span>
+                      <span class="gsa-card__d">Levering 2–3 dage</span>
+                      <span class="gsa-card__by">Af Google</span>
+                    </button>
+                  </div>
+                </div>
+                <button type="button" class="gsa-arr gsa-arr--l" data-gsa-arr="-1" aria-label="Forrige varer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6 8.5 12l6 6"/></svg></button>
+                <button type="button" class="gsa-arr gsa-arr--r" data-gsa-arr="1" aria-label="Flere varer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg></button>
+              </div>
+            </div>
+            <div class="gsa-org" aria-hidden="true">
+              <div><i></i><i></i><i></i><i></i></div>
+              <div><i></i><i></i><i></i><i></i></div>
+            </div>
+
+            <!-- The product, like when you click a card on Google -->
+            <button type="button" class="gsa-dim" data-gsa-dim tabindex="-1" aria-hidden="true"></button>
+            <div class="gsa-pan" data-gsa-pan role="dialog" aria-labelledby="gsa-pan-t" inert>
+              <i class="gsa-pan__grab" aria-hidden="true"></i>
+              <div class="gsa-pan__top"><span class="gsa-card__s" data-gsa-p="s"></span><button type="button" class="gsa-pan__x" data-gsa-close aria-label="Luk varen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+              <div class="gsa-pan__body" data-gsa-pbody>
+                <span class="gsa-img gsa-pan__img" data-gsa-p="img"></span>
+                <div class="gsa-pan__info">
+                  <b class="gsa-pan__t" id="gsa-pan-t" data-gsa-p="t"></b>
+                  <span class="gsa-card__p" data-gsa-p="p"></span>
+                  <span class="gsa-pan__d"><span data-gsa-p="d"></span><span class="gsa-pan__stock">På lager</span></span>
+                  <span class="gsa-card__r" data-gsa-p="r"></span>
+                  <button type="button" class="gsa-go" data-gsa-go><span>Gå til butik</span><span data-gsa-go2>Købt ✓</span></button>
+                  <button type="button" class="gsa-pan__mine" data-gsa-mine>Se din annonce →</button>
+                </div>
+              </div>
+            </div>
+            <div class="gsa-toast" data-gsa-toast aria-live="polite"><i aria-hidden="true">✓</i><span><b>Nyt salg · <span data-gsa-sum>249,00 kr.</span></b>Målt fra Google Shopping</span></div>
+          </div>
+        </div>
+
+        <div class="gsa-do" data-reveal="3"><span>Det klarer vi for dig:</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Produktfeed</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Titler</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Priser</span><span class="gsa-do__c"><b aria-hidden="true">✓</b>Sporing af salg</span></div>
+        <i class="gsa-dot" data-gsa-dot aria-hidden="true"></i>
+      </div>
+
+      <!-- Drawings: a stoneware mug as a studio photo. The glaze colours come from the style on each <use> -->
+      <svg class="gsa__defs" width="0" height="0" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="gsa-bgv" x2="0" y2="1"><stop offset="0" stop-color="#fbfbfa"/><stop offset=".58" stop-color="#f6f5f2"/><stop offset=".8" stop-color="#edebe7"/><stop offset="1" stop-color="#e7e5e0"/></linearGradient>
+          <radialGradient id="gsa-bgr" cx=".5" cy=".44" r=".78"><stop offset=".55" stop-opacity="0"/><stop offset="1" stop-opacity=".08"/></radialGradient>
+          <radialGradient id="gsa-sh"><stop offset="0" stop-opacity=".36"/><stop offset=".55" stop-opacity=".13"/><stop offset="1" stop-opacity="0"/></radialGradient>
+          <radialGradient id="gsa-hl"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset=".55" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <linearGradient id="gsa-cy"><stop offset="0" stop-opacity=".36"/><stop offset=".09" stop-opacity=".14"/><stop offset=".2" stop-color="#fff" stop-opacity=".08"/><stop offset=".3" stop-color="#fff" stop-opacity=".22"/><stop offset=".4" stop-color="#fff" stop-opacity=".06"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset=".52" stop-opacity="0"/><stop offset=".8" stop-opacity=".17"/><stop offset=".94" stop-opacity=".36"/><stop offset="1" stop-opacity=".22"/></linearGradient>
+          <linearGradient id="gsa-vt" x2="0" y2="1"><stop offset=".6" stop-opacity="0"/><stop offset="1" stop-opacity=".24"/></linearGradient>
+          <linearGradient id="gsa-sp" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".3" stop-color="#fff" stop-opacity=".75"/><stop offset=".65" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <linearGradient id="gsa-in" x2="0" y2="1"><stop offset="0" stop-opacity=".04"/><stop offset=".55" stop-opacity=".24"/><stop offset="1" stop-opacity=".52"/></linearGradient>
+          <linearGradient id="gsa-hd" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".3"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset=".62" stop-opacity=".06"/><stop offset="1" stop-opacity=".34"/></linearGradient>
+          <path id="gsa-b" d="M56 64C54.6 98 55.6 128 58.4 150A37.6 9 0 0 0 133.6 150C136.4 128 137.4 98 136 64A40 10 0 0 0 56 64Z"/>
+          <path id="gsa-h" d="M133 78C150 74 166 82 166 102 166 121 150 130 133 128V116C144 117 154 112 154 102 154 92 145 88 133 90Z"/>
+          <clipPath id="gsa-cl"><use href="#gsa-b"/></clipPath>
+          <symbol id="gsa-bd" viewBox="0 0 200 200"><rect width="200" height="200" fill="url(#gsa-bgv)"/><rect width="200" height="200" fill="url(#gsa-bgr)"/></symbol>
+          <symbol id="gsa-mug" viewBox="0 0 200 200">
+            <g transform="translate(-42 -34) scale(1.28)">
+              <ellipse cx="103" cy="156.5" rx="60" ry="10" fill="url(#gsa-sh)" opacity=".62"/>
+              <ellipse cx="96" cy="154.8" rx="39" ry="5" fill="url(#gsa-sh)"/>
+              <ellipse cx="96" cy="157" rx="42" ry="5.5" style="fill:var(--g)" opacity=".14"/>
+              <use href="#gsa-h" style="fill:var(--g)"/>
+              <use href="#gsa-h" fill="url(#gsa-hd)"/>
+              <path d="M138 80.5C152 79 161 86 162.5 98" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="2" stroke-linecap="round"/>
+              <use href="#gsa-b" style="fill:var(--c)"/>
+              <g clip-path="url(#gsa-cl)">
+                <path style="fill:var(--g)" d="M40 30H152V126C146 127 140 128.5 136 129.6 132 131 129.5 132.4 126.5 133.4 124.6 134 124.2 135.6 123.9 137.6 123.6 140 122.4 141.4 120.9 141.3 119.3 141.2 118.6 139.6 118.5 137.4 118.4 135.8 117.6 135.2 115.6 135.6 111 136.3 107 136.8 104 136.9 102.6 137 102.2 138.6 102.1 141 102 143.6 100.8 145.4 99.1 145.4 97.4 145.4 96.4 143.6 96.4 141.2 96.4 138.8 95.8 137.2 94.2 137.1 88 136.9 83 136.6 78.6 136 76.8 135.8 76 137 75.8 139 75.6 141.4 74.4 142.8 72.8 142.8 71.2 142.8 70.2 141.2 70.1 139 70 136.6 69.4 135 67.4 134.4 63 133 59 131 56 129.4 52 128 46 126.5 40 126Z"/>
+                <path style="fill:var(--g2,#fff);opacity:var(--b,0)" d="M40 30H152V79C146 80 140 81 136 81.6 132 82.4 130.6 83 130.2 85 129.8 87.6 128.6 89.2 127 89.2 125.4 89.2 124.4 87.8 124.2 86 124 84.6 123 84.2 121 84.6 114 85.8 109 86.6 105 87 103.6 87.2 103.2 88.8 103.1 91.6 103 94.4 101.8 96 100.2 96 98.6 96 97.6 94.4 97.5 91.8 97.4 89 96.6 87.8 94.6 87.6 88 87 82 86.4 77.6 85.6 75.6 85.2 74.8 86.4 74.6 88.6 74.4 91 73.2 92.4 71.7 92.4 70.2 92.4 69.2 91 69 88.8 68.8 86.4 67.6 84.8 64.6 84 60 82.8 56 81.6 52 80.6 48 79.8 44 79.2 40 79Z"/>
+              </g>
+              <use href="#gsa-b" fill="url(#gsa-cy)"/>
+              <use href="#gsa-b" fill="url(#gsa-vt)"/>
+              <g style="opacity:var(--gl,.8)"><ellipse cx="73" cy="101" rx="6.5" ry="32" fill="url(#gsa-hl)"/><rect x="71.6" y="80" width="2" height="42" rx="1" fill="url(#gsa-sp)"/><ellipse cx="124.5" cy="101" rx="3.6" ry="27" fill="url(#gsa-hl)" opacity=".4"/></g>
+              <g style="fill:var(--s,#2a241d);opacity:var(--so,.3)"><circle cx="70" cy="96" r=".9"/><circle cx="84" cy="110" r=".7"/><circle cx="104" cy="84" r=".8"/><circle cx="118" cy="120" r=".9"/><circle cx="92" cy="126" r=".6"/><circle cx="125" cy="98" r=".7"/><circle cx="78" cy="131" r=".6"/><circle cx="110" cy="102" r=".55"/><circle cx="64" cy="114" r=".65"/><circle cx="100" cy="148" r=".7"/><circle cx="88" cy="90" r=".5"/><circle cx="114" cy="143" r=".6"/><circle cx="76" cy="78" r=".55"/><circle cx="128" cy="112" r=".5"/><circle cx="96" cy="104" r=".6"/><circle cx="66" cy="143" r=".6"/><circle cx="122" cy="149" r=".5"/></g>
+              <ellipse cx="96" cy="64" rx="40" ry="10" style="fill:var(--r,var(--g))"/>
+              <ellipse cx="96" cy="64" rx="40" ry="10" fill="url(#gsa-cy)" opacity=".55"/>
+              <ellipse cx="96" cy="64" rx="38.2" ry="9.1" fill="none" style="stroke:var(--c)" stroke-width="1.1" opacity=".5"/>
+              <ellipse cx="96.3" cy="65" rx="36.3" ry="8.3" style="fill:var(--gd)"/>
+              <ellipse cx="96.3" cy="65" rx="36.3" ry="8.3" fill="url(#gsa-in)"/>
+              <path d="M70 58.4A36.3 8.3 0 0 1 122 58.2" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M61.4 69A40 10 0 0 0 89.1 73.85" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.3" stroke-linecap="round"/>
+            </g>
+          </symbol>
+        </defs>
+      </svg>
+    </section>
+
+    <section class="sx sx-facts" data-sec="fakta" data-facts>
+      <h2 class="kicker sx-facts__k" data-reveal="0">Kort fortalt</h2>
+      <dl class="sx-facts__list" style="--n:4">
+        <div class="sx-fact" style="--i:0">
+          <dt class="sx-fact__lbl">Webshop</dt>
+          <dd class="sx-fact__big"><span>Shopify Partner</span></dd>
+          <dd class="sx-fact__txt">De fleste webshops kan sende varer til Google. Bruger du Shopify, er vi Shopify Partner.</dd>
+        </div>
+        <div class="sx-fact" style="--i:1">
+          <dt class="sx-fact__lbl">Produktfeed</dt>
+          <dd class="sx-fact__big"><span>Af sig selv</span></dd>
+          <dd class="sx-fact__txt">Produkter, priser og lagerstatus bliver sendt til Google automatisk.</dd>
+        </div>
+        <div class="sx-fact" style="--i:2">
+          <dt class="sx-fact__lbl">Sporing</dt>
+          <dd class="sx-fact__big"><span>Hvert køb</span></dd>
+          <dd class="sx-fact__txt">bliver målt, så du kan se, hvad annoncerne sælger for.</dd>
+        </div>
+        <div class="sx-fact" style="--i:3">
+          <dt class="sx-fact__lbl">Svar</dt>
+          <dd class="sx-fact__big"><span><span data-count>24</span> timer</span></dd>
+          <dd class="sx-fact__txt">Fortæl os om din webshop, så har du en fast pris inden for 24 timer.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="pris" class="sx sx-rcpt" data-sec="pris" data-rcpt>
+      <div class="sx-rcpt__text" data-reveal="0">
+        <div class="kicker">Det får du</div>
+        <h2 class="h2">Det hele er med.<br><span class="dim">Til én fast pris.</span></h2>
+      </div>
+      <div class="sx-rcpt__stage">
+        <div class="sx-rcpt__slot" aria-hidden="true"></div>
+        <div class="sx-rcpt__feed">
+          <div class="sx-rcpt__paper">
+            <div class="sx-rcpt__brand" aria-hidden="true">webleads<span>.</span></div>
+            <div class="sx-rcpt__meta"><b>Google Shopping Ads</b><span>Fast pris pr. måned</span></div>
+            <ul class="sx-rcpt__items">
+              <li><span>Merchant Center</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Produktfeed</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Kobling til din webshop</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Titler og billeder</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Kampagner</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Sporing af salg</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Løbende optimering</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Månedlig rapport</span><i aria-hidden="true"></i><b>inkl.</b></li>
+            </ul>
+            <div class="sx-rcpt__total">
+              <span class="sx-rcpt__lbl">I alt</span>
+              <span class="sx-rcpt__sum"><span class="odo" data-odo>8.000</span><small>kr./md.</small></span>
+            </div>
+            <div class="sx-rcpt__vat">Ekskl. moms</div>
+            <ul class="sx-rcpt__notes"><li>Pr. kanal</li><li>Hver ekstra kanal 5.000 kr./md.</li><li>Annoncebudgettet betaler du direkte til Google</li></ul>
+            <div class="sx-rcpt__bar" aria-hidden="true"></div>
+            <div class="sx-rcpt__bye" aria-hidden="true">Tak, fordi du kiggede med</div>
+          </div>
+        </div>
+      </div>
+      <div class="sx-rcpt__after" data-reveal="1">
+        <p class="sx-rcpt__lead">Tager du flere kanaler, fx også Google Ads eller Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p>
+        <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a>
       </div>
     </section>
 
@@ -281,6 +556,38 @@
         <div class="pcard" data-card>
           <div class="pcard__body"><span class="pcard__n">03 / 03</span><h3>Optimering.</h3><p>Vi flytter budgettet mod det, der sælger, og sender en rapport.</p></div>
           <span class="pcard__g" aria-hidden="true">↗</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="sx sx-fq" data-sec="faq">
+      <div class="sx-fq__side" data-reveal="0">
+        <div class="kicker">Spørgsmål og svar</div>
+        <h2 class="h2">Godt spørgsmål.<br><span class="dim">Her er svarene.</span></h2>
+        <p class="sx-fq__nudge">Står dit spørgsmål ikke her? Skriv til os, så svarer vi inden for 24 timer.</p>
+        <a href="#kontakt" class="btn btn--dark sx-fq__cta" data-magnet data-burst data-event="Spørgsmål: Stil dit spørgsmål">Stil dit spørgsmål →</a>
+        <span class="sx-fq__glyph" aria-hidden="true">?</span>
+      </div>
+      <div class="faq__list sx-fq__list" data-faq>
+        <div class="faq__item is-open" data-reveal="0">
+          <button type="button" class="faq__q" aria-expanded="true" aria-controls="faq-0">Hvad koster Google Shopping Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-0"><div><p>Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="1">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-1">Hvad er et produktfeed?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-1"><div><p>En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="2">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-2">Virker det med min webshop?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-2"><div><p>De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="3">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-3">Hvad er forskellen på Shopping og almindelige Google Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-3"><div><p>Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="4">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-4">Kan klikket blive billigere?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-4"><div><p>Ofte, ja. Går dine Shopping-annoncer gennem en CSS-partner i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn. <a class="faq__more" href="/services/google-css" data-event="Spørgsmål: Læs om Google CSS">Læs om Google CSS →</a></p></div></div>
         </div>
       </div>
     </section>
@@ -336,9 +643,22 @@
             </div>
           </div>
           <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+            <div class="addon" data-tilt data-addon="Google CSS" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">04</span>
+              <div class="addon__head"><h3>Google CSS</h3><p>Op til 20% billigere klik på dine Google Shopping-annoncer.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Skift til en CSS-partner</li><li><span class="check" aria-hidden="true">✓</span>Hele buddet tæller i auktionen</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="Google CSS" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
+              </div>
+            </div>
+          </div>
+          <div class="addon-slot">
+            <div class="addon" data-tilt data-addon="SEO" data-value="995">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">05</span>
               <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
               <div class="addon__price">995 kr./time</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
@@ -351,7 +671,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="GEO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">05</span>
+              <span class="addon__n">06</span>
               <div class="addon__head"><h3>GEO</h3><p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Tjek af din synlighed i AI</li><li><span class="check" aria-hidden="true">✓</span>Indhold, AI kan citere</li><li><span class="check" aria-hidden="true">✓</span>Struktureret data</li></ul>
@@ -364,7 +684,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="AI" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">06</span>
+              <span class="addon__n">07</span>
               <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
@@ -377,7 +697,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">07</span>
+              <span class="addon__n">08</span>
               <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
               <div class="addon__price">fra 4.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
@@ -390,7 +710,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">08</span>
+              <span class="addon__n">09</span>
               <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
@@ -403,7 +723,7 @@
           <div class="addon-slot">
             <div class="addon" data-tilt data-addon="CRO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">09</span>
+              <span class="addon__n">10</span>
               <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
@@ -418,29 +738,7 @@
         <div class="wrap addons__meter" style="width:100%">
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
-          <span>09</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="faq" data-sec="faq">
-      <h2 class="h2" data-reveal="0">Spørgsmål?</h2>
-      <div class="faq__list" data-faq>
-        <div class="faq__item is-open" data-reveal="0">
-          <button type="button" class="faq__q" aria-expanded="true" aria-controls="faq-0">Hvad koster Google Shopping Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-0"><div><p>Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="1">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-1">Hvad er et produktfeed?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-1"><div><p>En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="2">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-2">Virker det med min webshop?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-2"><div><p>De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="3">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-3">Hvad er forskellen på Shopping og almindelige Google Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-3"><div><p>Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.</p></div></div>
+          <span>10</span>
         </div>
       </div>
     </section>
@@ -483,7 +781,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" aria-current="page" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" aria-current="page" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>

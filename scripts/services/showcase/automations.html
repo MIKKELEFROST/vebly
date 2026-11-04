@@ -1,0 +1,57 @@
+<section id="eksempel" class="show show--automations" data-sec="eksempel">
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title"><div class="kicker">Automations i praksis</div><h2 class="h2">Du passer jobbet.<br><span class="dim">Flowet klarer resten.</span></h2></div>
+        <div class="fm-side">
+          <p class="sec-head__lead">Tre flows, vi ofte sætter op. Vælg et, og se det køre.</p>
+          <!-- data-sr: what the flow does, read aloud when it is chosen; data-end: the line under the finished run -->
+          <div class="seg" role="group" aria-label="Vælg et eksempel på et flow">
+            <button type="button" class="is-on" aria-pressed="true" data-fm-go data-end="Fra booking til anmeldelse." data-sr="Eksempel på et flow: Når en kunde booker en tid på hjemmesiden, får kunden en SMS-bekræftelse, og tiden lander i kalenderen. Dagen efter går fakturaen ud, og tre dage efter bliver kunden bedt om en anmeldelse. Du skal ikke klikke på noget.">Booking</button>
+            <button type="button" aria-pressed="false" data-fm-go data-end="Fra færdigt job til betaling." data-sr="Eksempel på et flow: Når jobbet slutter i kalenderen, går fakturaen ud med det samme. Otte dage efter tjekker flowet, om den er betalt. Er den ikke det, får kunden en venlig rykker, og når kunden betaler, bliver det bogført. Du skal ikke klikke på noget.">Faktura og rykker</button>
+            <button type="button" aria-pressed="false" data-fm-go data-end="Fra første besked til opfølgning." data-sr="Eksempel på et flow: Når en kunde skriver via hjemmesiden, får kunden en SMS med det samme, og du får besked på telefonen. Kunden lander i kundelisten, og har kunden ikke svaret efter to dage, går der en opfølgning ud på mail. Du skal ikke klikke på noget.">Nye leads</button>
+          </div>
+        </div>
+      </div>
+      <p class="sr-only" aria-live="polite" data-fm-sr>Eksempel på et flow: Når en kunde booker en tid på hjemmesiden, får kunden en SMS-bekræftelse, og tiden lander i kalenderen. Dagen efter går fakturaen ud, og tre dage efter bliver kunden bedt om en anmeldelse. Du skal ikke klikke på noget.</p>
+      <!-- A flow machine (assets/js/show/automations.js): the nodes are placed and wired from a small spec per
+           example, a pulse runs through them, and the .seg control re-routes the machine. Icons: our own drawings -->
+      <svg class="fm__sprite" aria-hidden="true" focusable="false">
+        <symbol id="fm-i-book" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/></symbol>
+        <symbol id="fm-i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></symbol>
+        <symbol id="fm-i-done" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15l2 2 4-4"/></symbol>
+        <symbol id="fm-i-sms" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></symbol>
+        <symbol id="fm-i-bill" viewBox="0 0 24 24"><path d="M6 3.5h12V20l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3L6 20z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></symbol>
+        <symbol id="fm-i-star" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></symbol>
+        <symbol id="fm-i-fork" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="2.2"/><circle cx="18.5" cy="6" r="2.2"/><circle cx="18.5" cy="18" r="2.2"/><path d="M7.7 12H10c2.6 0 3.2-6 6.2-6M10 12c2.6 0 3.2 6 6.2 6"/></symbol>
+        <symbol id="fm-i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></symbol>
+        <symbol id="fm-i-ledger" viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3H19v15H7.5A1.5 1.5 0 0 0 6 19.5z"/><path d="M6 19.5A1.5 1.5 0 0 0 7.5 21H19v-3M10 7.5h5M10 11h3"/></symbol>
+        <symbol id="fm-i-inbox" viewBox="0 0 24 24"><path d="M4 13.5h4.2l1.6 2.5h4.4l1.6-2.5H20"/><path d="M6.6 5h10.8l2.6 8.5V18a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18v-4.5z"/></symbol>
+        <symbol id="fm-i-phone" viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="2.5"/><path d="M10.5 17.5h3"/></symbol>
+        <symbol id="fm-i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+        <symbol id="fm-i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></symbol>
+        <symbol id="fm-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 12l3.2 1.9"/></symbol>
+      </svg>
+      <div class="fm" data-fm data-reveal="1">
+        <div class="fm__bar">
+          <span class="fm__app" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7.5" height="6.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="6.5" rx="2"/><path d="M10.5 7.2h2.3a3 3 0 0 1 3 3v3.3"/></svg></span>
+          <span class="fm__name"><span class="fm__t"><b data-fm-title>Booking</b><span class="tag-eks">Eksempel</span></span><small data-fm-who>Nordvik · Tømrer · København</small></span>
+          <span class="fm__live" aria-hidden="true"><i></i>Aktiv</span>
+          <button type="button" class="fm__run" data-fm-run>Kør igen <span aria-hidden="true">↻</span></button>
+        </div>
+        <div class="fm__cv" data-fm-cv aria-hidden="true">
+          <i class="fm__dots"></i><i class="fm__hot" data-fm-hot></i>
+          <svg class="fm__wires" data-fm-wires focusable="false"></svg>
+          <i class="fm__pulse" data-fm-pulse></i><i class="fm__pulse" data-fm-pulse></i>
+          <span class="fm__wait" data-fm-wait><svg viewBox="0 0 24 24"><use href="#fm-i-clock"/><path class="fm__h" d="M12 12V7"/></svg><b>Dagen efter</b></span>
+          <span class="fm__wait" data-fm-wait><svg viewBox="0 0 24 24"><use href="#fm-i-clock"/><path class="fm__h" d="M12 12V7"/></svg><b>3 dage efter</b></span>
+          <span class="fm__lbl is-off" data-fm-lbl>Ja</span><span class="fm__lbl is-off" data-fm-lbl>Nej</span>
+          <div class="fm__nodes">
+            <div class="fm__node is-trig" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-book"/></svg></span><span class="fm__txt"><b>Ny booking</b><span class="fm__sub"><span>Fra din hjemmeside</span><span>Mette, tir. kl. 10</span></span></span></div><span class="fm__toast">Mette, tir. kl. 10</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-sms"/></svg></span><span class="fm__txt"><b>SMS-bekræftelse</b><span class="fm__sub"><span>Til kunden</span><span>SMS sendt</span></span></span></div><span class="fm__toast">SMS sendt</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-cal"/></svg></span><span class="fm__txt"><b>I kalenderen</b><span class="fm__sub"><span>Din kalender</span><span>Tid lagt ind</span></span></span></div><span class="fm__toast">Tid lagt ind</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-bill"/></svg></span><span class="fm__txt"><b>Faktura</b><span class="fm__sub"><span>Sendes på mail</span><span>Faktura sendt</span></span></span></div><span class="fm__toast">Faktura sendt</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-star"/></svg></span><span class="fm__txt"><b>Anmeldelse</b><span class="fm__sub"><span>Spørg kunden</span><span>Mail sendt</span></span></span></div><span class="fm__toast">Mail sendt</span></div>
+          </div>
+        </div>
+        <p class="fm__end"><i aria-hidden="true">✓</i><span data-fm-end>Fra booking til anmeldelse.</span><b>0 klik fra dig.</b><span class="tag-eks">Eksempel</span></p>
+      </div>
+    </section>

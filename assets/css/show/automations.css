@@ -1,0 +1,160 @@
+/* Showcase: Automations, a flow machine (scripts/services/showcase/automations.html).
+   assets/js/show/automations.js places the nodes, draws the wires and runs the pulse. States: is-live, is-swap,
+   is-blank, is-end, is-v (top to bottom) on .fm; is-run, is-done, is-toast, is-land, is-res on a node; is-go
+   on a wire. Rules with :is(.motion *) only apply when html.motion is set; without it the finished run shows. */
+.show--automations { --ez: cubic-bezier(.2,.8,.2,1); --sp: cubic-bezier(.3,1.55,.5,1); --sh: 0 14px 28px -18px rgba(17,17,17,.32); position: relative; z-index: 1; padding: 40px 0 100px; scroll-margin-top: 64px; }
+.show--automations :is(.sec-head, .fm__bar, .fm__end) { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.show--automations .sec-head { margin-bottom: 30px; }
+.show--automations .fm-side { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.show--automations .fm-side p { max-width: 330px; }
+.show--automations .seg { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.show--automations .seg button { flex: none; }
+.show--automations .fm__sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* The bar above the canvas: the flow's name, its status and "Kør igen" */
+.show--automations .fm__bar { --bp: 24px; display: flex; align-items: center; gap: 12px; max-width: calc(var(--fw, 1152px) + 2 * var(--bp)); padding: 0 var(--bp); }
+.show--automations .fm__app { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: var(--ink); color: #fff; }
+.show--automations :is(.fm__app, .fm__ico, .fm__wait) svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--automations .fm__app svg { width: 22px; height: 22px; }
+.show--automations .fm__name { display: flex; flex-direction: column; gap: 4px; min-width: 0; margin-right: auto; }
+.show--automations .fm__t { display: flex; align-items: center; gap: 10px; }
+.show--automations .fm__t b { font: 800 24px/1 var(--display); letter-spacing: -.035em; white-space: nowrap; }
+.show--automations .fm__name small { font-size: 13.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.show--automations .fm__live { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
+.show--automations .fm__live i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.show--automations .fm__live i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: fmPing 1.8s ease-out infinite; }
+.show--automations .fm__run { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 13px 20px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 700 15px var(--body); cursor: pointer; transition: background .2s; }
+.show--automations .fm__run:hover { background: var(--accent); }
+.show--automations .fm__run span { display: inline-block; transition: transform .5s var(--ez); }
+.show--automations .fm__run:is(:hover, :focus-visible) span { transform: rotate(180deg); }
+html:not(.motion) .show--automations .fm__run { display: none; }
+
+/* The canvas: a dot grid like the hero's; the dots near the pulse light up */
+.show--automations .fm__cv { position: relative; height: 400px; margin-top: 6px; }
+.show--automations .is-swap .fm__cv { transition: height .45s var(--ez); }
+.show--automations :is(.fm__dots, .fm__hot) { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle, rgba(17,17,17,.15) 1.25px, transparent 1.8px) 0 0 / 22px 22px; }
+.show--automations .fm__dots { -webkit-mask: radial-gradient(ellipse 64% 62% at 50% 50%, #000 42%, transparent); mask: radial-gradient(ellipse 64% 62% at 50% 50%, #000 42%, transparent); }
+.show--automations .fm__hot { background-image: radial-gradient(circle, var(--accent) 1.7px, transparent 2.3px); --m: radial-gradient(circle 82px at var(--ax, -999px) var(--ay, 0), #000, transparent), radial-gradient(circle 82px at var(--bx, -999px) var(--by, 0), #000, transparent); -webkit-mask: var(--m); mask: var(--m); }
+.show--automations .fm__wires { position: absolute; left: 0; top: 0; z-index: 1; overflow: visible; pointer-events: none; transition: opacity .25s; }
+.show--automations .fm__wires path { fill: none; stroke-linecap: round; }
+.show--automations .w-b { stroke: #d3cec5; stroke-width: 2; }
+.show--automations .is-skip .w-b { stroke-dasharray: 2 7; }
+.show--automations .w-t { stroke: var(--ink); stroke-width: 2; }
+.show--automations .w-g { stroke: rgba(224,85,43,.2); stroke-width: 10; }
+.show--automations .w-c { stroke: var(--accent); stroke-width: 2.6; }
+.show--automations :is(.w-g, .w-c) { opacity: 0; transition: opacity .4s; }
+.show--automations .is-go :is(.w-g, .w-c) { opacity: 1; transition: none; }
+.show--automations .fm__wires circle { fill: #fff; stroke: #cbc5bb; stroke-width: 1.5; transform-box: fill-box; transform-origin: center; transition: fill .3s, stroke .3s; }
+.show--automations .fm__wires circle.is-on { fill: var(--ink); stroke: var(--ink); }
+.show--automations .is-plug g:not(.is-skip) .w-b { animation: fmPlug .55s var(--ez) calc(var(--d, 0s) + var(--i) * .09s) both; }
+.show--automations .is-plug circle { animation: fmDot .35s var(--sp) calc(var(--d, 0s) + var(--i) * .09s + .25s) both; }
+.show--automations .is-plug .is-skip { animation: fmFade .5s calc(var(--d, 0s) + var(--i) * .09s + .2s) both; }
+.show--automations:is(.motion *) .fm:not(.is-live) .fm__wires, .show--automations .is-swap .fm__wires { opacity: 0; }
+
+/* The pulse: an orange dot with a glowing tail, under the cards and the clocks */
+.show--automations .fm__pulse { position: absolute; left: 0; top: 0; z-index: 2; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(224,85,43,.2), 0 0 24px 7px rgba(224,85,43,.5); opacity: 0; transition: opacity .2s; pointer-events: none; will-change: transform; }
+.show--automations .fm__pulse::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: #fff; }
+.show--automations .fm__pulse.is-on { opacity: 1; }
+
+/* Waits on the wire (a clock that spins while the pulse is inside) and the branch labels */
+.show--automations :is(.fm__wait, .fm__lbl) { position: absolute; left: 0; top: 0; z-index: 3; display: flex; align-items: center; gap: 6px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; font-weight: 700; line-height: 16px; white-space: nowrap; transition: opacity .3s, scale .45s var(--sp), border-color .3s, box-shadow .3s, background .3s, color .3s; }
+.show--automations .fm__wait { padding: 5px 12px 5px 6px; font-size: 12.5px; box-shadow: var(--sh); }
+.show--automations .fm__wait svg { width: 18px; height: 18px; color: var(--muted); transition: color .3s; }
+.show--automations .fm__h { transform-origin: 12px 12px; }
+.show--automations .fm__wait.is-on { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,85,43,.14), var(--sh); }
+.show--automations .fm__wait.is-on svg { color: var(--accent); }
+.show--automations .fm__wait.is-on .fm__h { animation: fmSpin .45s linear infinite; }
+.show--automations .fm__wait.is-done svg { color: var(--ink); }
+.show--automations .fm__lbl { padding: 3px 9px; font-size: 12px; color: var(--muted); }
+.show--automations .fm__lbl.is-on { border-color: var(--ink); background: var(--ink); color: #fff; }
+.show--automations .fm.is-live :is(.fm__wait, .fm__lbl) { transition-delay: var(--pd, .3s); }
+.show--automations .fm :is(.fm__wait, .fm__lbl):is(.is-on, .is-done, .is-off), .show--automations .fm.is-swap :is(.fm__wait, .fm__lbl) { transition-delay: 0s; }
+.show--automations .fm :is(.fm__wait, .fm__lbl).is-off, .show--automations .fm.is-swap :is(.fm__wait, .fm__lbl), .show--automations:is(.motion *) .fm:not(.is-live) :is(.fm__wait, .fm__lbl) { opacity: 0; scale: .5; }
+
+/* The nodes */
+.show--automations .fm__node { position: absolute; left: 0; top: 0; z-index: 4; height: var(--nh, 64px); }
+.show--automations:is(.motion *) .fm:not(.is-live) .fm__node { opacity: 0; }
+.show--automations:is(.motion *) .fm.is-live .fm__node { animation: fmIn .6s var(--sp) calc(var(--i) * 80ms) backwards; }
+.show--automations .fm__card { position: relative; display: flex; align-items: center; gap: 10px; height: 100%; padding: 0 12px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: var(--sh); transition: border-color .3s, box-shadow .3s, transform .5s var(--sp); }
+.show--automations .fm .is-trig .fm__card { border-radius: 32px 18px 18px 32px; }
+.show--automations .fm__card > * { transition: opacity .16s; }
+.show--automations .is-blank .fm__card > * { opacity: 0; }
+.show--automations .fm__ico { position: relative; flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; background: var(--cream); color: var(--ink); transition: background .3s, color .3s; }
+.show--automations .is-trig .fm__ico { border-radius: 50%; background: var(--ink); color: #fff; }
+.show--automations .fm__ico svg { width: 19px; height: 19px; }
+.show--automations .fm__ico::after { content: "✓"; position: absolute; right: -5px; bottom: -5px; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px #fff; color: #fff; font-size: 10px; font-weight: 700; transform: scale(0); transition: transform .4s var(--sp); }
+.show--automations .is-done .fm__ico::after { transform: none; }
+.show--automations .is-run .fm__card { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,85,43,.15), 0 18px 34px -18px rgba(224,85,43,.6); transform: scale(1.06); }
+.show--automations .is-run .fm__ico { background: var(--accent); color: #fff; }
+.show--automations .is-done .fm__ico { background: #e4f3ea; color: var(--green); }
+.show--automations .is-if.is-done .fm__ico { background: #fbf0d2; color: #8a6510; }
+.show--automations .is-if .fm__ico::after, .show--automations .is-if .fm__toast::before { content: "!"; background: var(--yellow); color: var(--ink); }
+.show--automations .fm__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.show--automations .fm__txt b { font-size: 14.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* What the node does, and the result it rolls to when the toast lands */
+.show--automations .fm__sub { display: grid; overflow: hidden; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+.show--automations .fm__sub span { grid-area: 1 / 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; transition: transform .45s var(--ez), opacity .3s; }
+.show--automations .fm__sub span + span { color: var(--green); font-weight: 700; opacity: 0; transform: translateY(100%); }
+.show--automations .is-if .fm__sub span + span { color: #946b0c; }
+.show--automations .is-res .fm__sub span:first-child { opacity: 0; transform: translateY(-100%); }
+.show--automations .is-res .fm__sub span + span { opacity: 1; transform: none; }
+/* The toast pops above the node, then drops into it */
+.show--automations .fm__toast { position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 5; display: flex; align-items: center; gap: 6px; padding: 5px 11px 5px 5px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 12.5px; font-weight: 700; line-height: 16px; white-space: nowrap; box-shadow: 0 14px 26px -12px rgba(17,17,17,.55); opacity: 0; transform: translate(-50%, 10px) scale(.6); transition: transform .45s var(--sp), opacity .2s; pointer-events: none; }
+.show--automations .fm__toast::before { content: "✓"; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--green); font-size: 10px; }
+.show--automations .fm__toast::after { content: ""; position: absolute; left: 50%; bottom: -3px; width: 8px; height: 8px; margin-left: -4px; border-radius: 2px; background: var(--ink); transform: rotate(45deg); }
+.show--automations .is-toast .fm__toast { opacity: 1; transform: translate(-50%, 0); }
+.show--automations .is-land .fm__toast { opacity: 0; transform: translate(-50%, 16px) scale(.7); transition: transform .4s var(--ez), opacity .2s; }
+
+/* The end: one more wave through the flow, and the line under it */
+.show--automations:is(.motion *) .is-end .fm__card { animation: fmWave .6s var(--ez) calc(var(--i) * 90ms); }
+.show--automations .fm__end { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 4px; font-size: 15px; color: var(--muted); transition: opacity .5s, transform .6s var(--ez); }
+.show--automations .fm__end i { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--green); color: #fff; font: 700 13px var(--body); }
+.show--automations .fm__end b { font: 800 24px/1 var(--display); letter-spacing: -.035em; color: var(--ink); }
+.show--automations:is(.motion *) .fm:not(.is-end) .fm__end { opacity: 0; transform: translateY(12px); }
+.show--automations .is-static *, .show--automations .is-static *::before, .show--automations .is-static *::after { transition: none !important; animation: none !important; }
+
+/* Before the script has placed them: the nodes in a row */
+.show--automations .fm:not(.is-ready) .fm__cv { height: auto; }
+.show--automations .fm:not(.is-ready) .fm__nodes { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; padding: 40px 24px; }
+.show--automations .fm:not(.is-ready) .fm__node { position: relative; width: 200px; }
+.show--automations .fm:not(.is-ready) :is(.fm__wait, .fm__lbl, .fm__toast) { display: none; }
+
+/* Compact cards: across a smaller screen (is-c) and top to bottom (is-v) */
+.show--automations :is(.is-c, .is-v) .fm__card { gap: 9px; padding: 0 11px 0 10px; }
+.show--automations :is(.is-c, .is-v) .fm__ico { width: 32px; height: 32px; border-radius: 10px; }
+.show--automations :is(.is-c, .is-v) .fm__ico svg { width: 17px; height: 17px; }
+.show--automations :is(.is-c, .is-v) .fm__txt b { font-size: 14px; }
+.show--automations .is-v .fm__card { border-radius: 16px; }
+.show--automations .is-v .fm__sub { font-size: 12px; }
+.show--automations .is-v .fm__toast { bottom: calc(100% + 8px); font-size: 12px; }
+
+@keyframes fmPlug { from { stroke-dashoffset: var(--l); } to { stroke-dashoffset: 0; } }
+@keyframes fmDot { from { transform: scale(0); } }
+@keyframes fmFade { from { opacity: 0; } }
+@keyframes fmIn { from { opacity: 0; scale: .8; } }
+@keyframes fmWave { 40% { transform: translateY(-7px) scale(1.03); } }
+@keyframes fmSpin { to { transform: rotate(360deg); } }
+@keyframes fmPing { from { opacity: .6; } to { opacity: 0; transform: scale(3); } }
+
+@media (max-width: 699px) {
+  .show--automations { padding: 32px 0 72px; }
+  .show--automations :is(.sec-head, .fm__end) { padding: 0 20px; }
+  .show--automations .sec-head { margin-bottom: 24px; }
+  .show--automations .seg button { padding: 9px 12px; font-size: 13.5px; }
+  /* The bar in two rows: the name and the tag, then who it is for and "Kør igen" */
+  .show--automations .fm__bar { --bp: 20px; display: grid; grid-template: "app t t" auto "app who run" auto / auto minmax(0, 1fr) auto; gap: 4px 10px; }
+  .show--automations .fm__name { display: contents; }
+  .show--automations .fm__t { grid-area: t; }
+  .show--automations .fm__name small { grid-area: who; }
+  .show--automations .fm__run { grid-area: run; }
+  .show--automations .fm__app { grid-area: app; align-self: start; width: 38px; height: 38px; border-radius: 12px; }
+  .show--automations .fm__app svg { width: 19px; height: 19px; }
+  .show--automations .fm__t { gap: 8px; }
+  .show--automations .fm__t b { font-size: 20px; }
+  .show--automations .fm__name small { font-size: 12.5px; }
+  .show--automations .fm__live { display: none; }
+  .show--automations .fm__run { padding: 9px 14px; font-size: 13.5px; }
+  .show--automations .fm__end { gap: 8px; font-size: 14px; }
+  .show--automations .fm__end b { font-size: 21px; }
+}
+@media (max-width: 379px) { .show--automations .seg button { padding: 9px 10px; font-size: 13px; } }

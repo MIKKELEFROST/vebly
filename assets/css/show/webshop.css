@@ -1,0 +1,216 @@
+/* /services/webshop (udkast). #beregner: the website calculator from main.css (.calc, .calc__opts, .calc__opt,
+   .calc__sum) with a product slider that fills an example shop, two-way choices, a language stepper and a cart.
+   #pris: a packing slip. #saadan: a track-and-trace line. Every selector starts with .show--webshop. */
+
+/* ---------- The choices ---------- */
+.show--webshop .calc__opts { gap: 34px; }
+.show--webshop .calc__group { gap: 12px; }
+.show--webshop .calc__opt { position: relative; }
+.show--webshop .calc__opt:active { transform: translateY(-1px) scale(.985); }
+.show--webshop .calc__opt em, .show--webshop .ws-lang em { margin-top: auto; padding-top: 6px; font-style: normal; font-size: 14px; font-weight: 700; color: var(--ink); transition: color .25s; }
+.show--webshop .calc__opt.is-on em { color: #fff; }
+.show--webshop .ws-in, .show--webshop .ws-seg input { position: absolute; top: 50%; left: 50%; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.show--webshop .calc__opt:has(input:focus-visible), .show--webshop .ws-seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.show--webshop .ws-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.show--webshop .ws-wide { grid-column: 1 / -1; }
+.show--webshop .ws-sub { margin-top: 10px; font-size: 15px; font-weight: 700; }
+.show--webshop .ws-cap { margin: -2px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+
+/* Products: the example shop, the number (type in it), the slider and its marks */
+.show--webshop .ws-prod__top { display: flex; justify-content: space-between; align-items: center; gap: 8px 14px; flex-wrap: wrap; }
+.show--webshop .ws-inc { padding: 7px 13px; border-radius: 999px; background: var(--cream); font-size: 13px; font-weight: 700; transition: background .3s, color .3s; }
+.show--webshop .ws-inc.is-extra { background: #fdeee7; color: #b2401c; }
+.show--webshop .ws-wall { margin: 2px 0 0; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #fffdf9; box-shadow: 0 30px 60px -38px rgba(17,17,17,.35); }
+.show--webshop .ws-wall__bar { display: flex; align-items: center; gap: 10px; padding: 8px 10px 8px 12px; border-bottom: 1px solid var(--line); background: #fff; }
+.show--webshop .ws-wall__url { flex: 1; min-width: 0; overflow: hidden; padding: 5px 10px; border-radius: 8px; background: #f4f2ee; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.show--webshop .ws-wall__head { display: flex; align-items: center; gap: 14px; padding: 12px 16px 0; color: #776e62; font-size: 13px; }
+.show--webshop .ws-wall__logo { color: #2a241d; letter-spacing: .2em; text-transform: uppercase; }
+.show--webshop .ws-wall__n b { color: #2a241d; font-variant-numeric: tabular-nums; }
+.show--webshop .ws-wall__lang { display: flex; gap: 4px; margin-left: auto; }
+.show--webshop .ws-wall__lang i { padding: 3px 7px; border-radius: 99px; background: #2a241d; color: #fff; font-size: 10.5px; font-weight: 700; }
+.show--webshop .ws-wall__lang i:not(.is-on) { display: none; }
+.show--webshop .ws-wall__cart svg { display: block; width: 20px; height: 20px; fill: none; stroke: #2a241d; stroke-width: 1.8; stroke-linejoin: round; }
+.show--webshop .ws-wall canvas { display: block; width: 100%; height: 178px; }
+.show--webshop .ws-num { display: flex; align-items: baseline; gap: 10px; margin-top: 8px; }
+.show--webshop .ws-num__box { display: inline-grid; cursor: text; }
+.show--webshop .ws-num__box > * { grid-area: 1 / 1; padding: 0 2px 3px 0; font: 800 clamp(46px, 4.8vw, 62px)/1 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.show--webshop .ws-num__m { visibility: hidden; white-space: pre; }
+.show--webshop .ws-num input { width: 0; min-width: 100%; margin: 0; border: 0; border-bottom: 2px dashed var(--line-strong); border-radius: 0; background: none; color: var(--ink); transition: border-color .2s; }
+.show--webshop .ws-num input:hover { border-bottom-color: var(--faint); }
+.show--webshop .ws-num input:focus { outline: none; border-bottom-color: var(--accent); }
+.show--webshop .ws-num__u { font-size: 17px; font-weight: 700; color: var(--muted); }
+.show--webshop .ws-range { --s: .12; --f: linear-gradient(90deg, var(--accent) calc(16px + (100% - 32px) * var(--s)), #ebe8e2 0); --t: 0 0 0 5px #fff, 0 12px 26px -8px rgba(224,85,43,.85); display: block; width: 100%; height: 40px; margin: 0; background: none; cursor: pointer; -webkit-appearance: none; appearance: none; touch-action: pan-y; }
+.show--webshop .ws-range:focus { outline: none; }
+.show--webshop .ws-range:focus-visible { --t: 0 0 0 5px #fff, 0 0 0 8px var(--accent); }
+.show--webshop .ws-range::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; background: var(--f); }
+.show--webshop .ws-range::-moz-range-track { height: 10px; border-radius: 999px; background: var(--f); }
+.show--webshop .ws-range::-webkit-slider-thumb { -webkit-appearance: none; width: 32px; height: 32px; margin-top: -11px; border: 0; border-radius: 50%; background: var(--accent); box-shadow: var(--t); transition: transform .3s cubic-bezier(.2,1.4,.4,1); }
+.show--webshop .ws-range::-moz-range-thumb { width: 32px; height: 32px; border: 0; border-radius: 50%; background: var(--accent); box-shadow: var(--t); transition: transform .3s cubic-bezier(.2,1.4,.4,1); }
+.show--webshop .ws-range:active::-webkit-slider-thumb { transform: scale(1.18); }
+.show--webshop .ws-range:active::-moz-range-thumb { transform: scale(1.18); }
+.show--webshop .ws-ticks { position: relative; height: 28px; margin: -4px 16px 0; }
+.show--webshop .ws-ticks button { position: absolute; top: 0; left: var(--x); transform: translateX(-50%); padding: 7px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 700 13px/1 var(--body); white-space: nowrap; cursor: pointer; transition: color .2s, background .2s; }
+.show--webshop .ws-ticks button:first-child { transform: translateX(-40%); }
+.show--webshop .ws-ticks button:last-child { transform: translateX(-70%); }
+.show--webshop .ws-ticks button:hover { color: var(--ink); background: #f1efea; }
+.show--webshop .ws-ticks button.is-on { color: var(--accent); }
+
+/* Two choices side by side: the dark thumb slides to the chosen one */
+.show--webshop .ws-seg { position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 5px; border: 1.5px solid var(--line-strong); border-radius: 20px; background: var(--bg); }
+.show--webshop .ws-seg label { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 3px; padding: 13px 15px; border-radius: 15px; cursor: pointer; transition: color .35s; }
+.show--webshop .ws-seg b { font-size: 16px; }
+.show--webshop .ws-seg em { font-style: normal; font-size: 14px; font-weight: 700; color: var(--muted); transition: color .35s; }
+.show--webshop .ws-seg label.is-on { color: #fff; }
+.show--webshop .ws-seg label.is-on em { color: var(--dark-muted); }
+.show--webshop .ws-seg label:not(.is-on):hover b { color: var(--accent); }
+.show--webshop .ws-seg__thumb { position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc(50% - 5px); border-radius: 15px; background: var(--ink); box-shadow: 0 12px 24px -14px rgba(17,17,17,.7); transition: transform .55s cubic-bezier(.3,1.35,.45,1); }
+.show--webshop .ws-seg[data-on="1"] .ws-seg__thumb { transform: translateX(100%); }
+
+/* The tip: the cheaper way to get the products in, with a button that switches */
+.show--webshop .ws-tip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; margin: 0; padding: 12px 12px 12px 16px; border-radius: 16px; background: var(--cream); font-size: 14px; line-height: 1.45; }
+.show--webshop .ws-tip[hidden] { display: none; }
+.motion .show--webshop .ws-tip:not([hidden]) { animation: wsIn .45s cubic-bezier(.2,.8,.2,1) both; }
+.show--webshop .ws-tip b { color: var(--accent); }
+.show--webshop .ws-tip button { flex-shrink: 0; padding: 10px 15px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 700 13px/1 var(--body); cursor: pointer; transition: background .2s; }
+.show--webshop .ws-tip button:hover { background: var(--accent); }
+
+/* Languages: the stepper from main.css, and the language switcher it fills */
+.show--webshop .ws-lang { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; padding: 14px 14px 14px 18px; border: 1.5px solid var(--line-strong); border-radius: 18px; background: var(--bg); }
+.show--webshop .ws-lang__t { display: flex; flex-direction: column; gap: 4px; flex: 1 1 200px; }
+.show--webshop .ws-lang__t b { font-size: 16px; }
+.show--webshop .ws-lang__t span { font-size: 14px; color: var(--muted); }
+.show--webshop .ws-lang em { order: 3; flex-basis: 100%; margin: -6px 0 0; padding: 0; }
+.show--webshop .ws-lang .calc__step button:disabled { opacity: .22; cursor: default; background: var(--ink); }
+.show--webshop .ws-lang .calc__step button:active:not(:disabled) { transform: scale(.9); }
+.show--webshop [data-ws-lang] i { display: inline-block; font-style: normal; }
+.show--webshop .ws-lang__pills { display: flex; gap: 4px; }
+.show--webshop .ws-lang__pills i { padding: 6px 9px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--faint); font-size: 12px; font-weight: 700; transition: background .3s, border-color .3s, color .3s; }
+.show--webshop .ws-lang__pills i.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+.show--webshop [data-ws-lang] i.is-pop { animation: wsPop .5s cubic-bezier(.2,1.6,.4,1); }
+@keyframes wsPop { 0% { transform: scale(.4); } }
+
+/* ---------- The cart (the price box) ---------- */
+.show--webshop .calc__sum { top: var(--ws-top, 96px); gap: 16px; }
+.show--webshop .ws-sum__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: -4px; }
+.show--webshop .ws-bag { position: relative; display: grid; place-items: center; flex-shrink: 0; width: 46px; height: 46px; border: 1px solid #333; border-radius: 50%; background: #1c1c1c; }
+.show--webshop .ws-bag svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.show--webshop .ws-bag i { position: absolute; top: -5px; right: -6px; min-width: 21px; height: 21px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 11.5px/21px var(--body); font-style: normal; text-align: center; font-variant-numeric: tabular-nums; }
+.show--webshop .is-bump { animation: wsBump .55s cubic-bezier(.2,1.6,.4,1); }
+.show--webshop .calc__tot b { transform-origin: 100% 60%; }
+.show--webshop .calc__tot b.is-bump { animation-name: wsBumpN; }
+@keyframes wsBump { 35% { transform: scale(1.14) rotate(-6deg); } }
+@keyframes wsBumpN { 35% { transform: scale(1.05); } }
+.show--webshop .calc__line { align-items: baseline; padding: 11px 0; }
+.show--webshop .calc__line small { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.4; color: var(--dark-muted); }
+.show--webshop .calc__line.is-new { animation: wsIn .5s var(--ws-d, 0ms) cubic-bezier(.2,.8,.2,1) both; }
+@keyframes wsIn { from { opacity: 0; transform: translateY(10px); } }
+
+/* A price chip on its way into the cart, or a lower price floating out of it (moved by webshop.js) */
+.show--webshop .ws-fly { position: fixed; top: 0; left: 0; z-index: 90; padding: 8px 13px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 14px/1 var(--body); white-space: nowrap; pointer-events: none; box-shadow: 0 12px 26px -10px rgba(224,85,43,.8); will-change: transform; }
+.show--webshop .ws-fly.is-neg { background: #fff; color: var(--ink); box-shadow: 0 10px 24px -12px rgba(17,17,17,.5); }
+
+/* The cart bar on phones and tablets */
+.show--webshop .ws-bar { display: none; }
+@media (max-width: 900px) {
+  .show--webshop .calc { gap: 16px; }
+  .show--webshop .ws-bar { position: fixed; left: 16px; right: 16px; bottom: 96px; z-index: 75; display: flex; align-items: center; gap: 12px; max-width: 560px; margin: 0 auto; padding: 8px 8px 8px 9px; border: 0; border-radius: 24px; background: var(--ink); color: #fff; box-shadow: 0 22px 44px -18px rgba(17,17,17,.6); font: inherit; text-align: left; cursor: pointer; opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .show--webshop .ws-bar.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .show--webshop .ws-bar .ws-bag { width: 42px; height: 42px; }
+  .show--webshop .ws-bar__t { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .show--webshop .ws-bar__t small { color: var(--dark-muted); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .show--webshop .ws-bar__t b { color: #fff; font: 800 20px/1 var(--display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .show--webshop .ws-bar__t > span { font-size: 13px; color: var(--dark-muted); white-space: nowrap; }
+  .show--webshop .ws-bar__t > span[hidden] { display: none; }
+  .show--webshop .ws-bar__go { flex-shrink: 0; padding: 12px 15px; border-radius: 999px; background: var(--accent); font-size: 14px; font-weight: 700; }
+}
+
+/* ---------- #pris: what the base price includes, as a packing slip ---------- */
+.show--webshop.ws-pris { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 6vw, 88px); align-items: center; max-width: 1200px; margin: 0 auto; padding: 60px 24px 90px; }
+.show--webshop .ws-pris__copy { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.show--webshop .ws-pris__copy .sec-head__lead { max-width: 440px; }
+.show--webshop .ws-pris__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; }
+.show--webshop .ws-slip { filter: drop-shadow(0 34px 34px rgba(17,17,17,.13)) drop-shadow(0 2px 3px rgba(17,17,17,.06)); transform: rotate(1.2deg); }
+.show--webshop .ws-slip__paper { --m: radial-gradient(circle 6px at 50% 0, #0000 98%, #000) 50% 0 / 18px 51% repeat-x, radial-gradient(circle 6px at 50% 100%, #0000 98%, #000) 50% 100% / 18px 51% repeat-x; padding: 30px clamp(22px, 3vw, 36px); background: #fff; -webkit-mask: var(--m); mask: var(--m); }
+.motion .show--webshop .ws-slip[data-reveal] { transform: translateY(80px) rotate(4deg); }
+.motion .show--webshop .ws-slip[data-reveal].is-in { transform: rotate(1.2deg); }
+.show--webshop .ws-slip__head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 18px; border-bottom: 2px solid var(--ink); }
+.show--webshop .ws-slip__head > span:first-child { display: flex; flex-direction: column; gap: 4px; }
+.show--webshop .ws-slip__head b { font: 800 clamp(28px, 3vw, 36px)/1 var(--display); letter-spacing: -.04em; }
+.show--webshop .ws-slip__head small { font-size: 13px; color: var(--muted); }
+.show--webshop .ws-stamp { flex-shrink: 0; margin-right: 4px; padding: 8px 11px; border: 3px solid var(--accent); border-radius: 10px; color: var(--accent); font: 800 15px/1 var(--display); text-align: center; text-transform: uppercase; transform: rotate(-9deg); }
+.motion .show--webshop .ws-stamp[data-reveal] { opacity: 0; transform: rotate(-22deg) scale(2); transition: opacity .2s ease 1.1s, transform .45s cubic-bezier(.3,1.6,.5,1) 1.1s !important; }
+.motion .show--webshop .ws-stamp[data-reveal].is-in { opacity: 1; transform: rotate(-9deg); }
+.show--webshop .ws-slip__th { display: grid; grid-template-columns: 52px 1fr; padding: 12px 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.show--webshop .ws-slip__list { margin: 0; padding: 0; list-style: none; }
+.show--webshop .ws-slip__list li { display: grid; grid-template-columns: 52px 1fr auto; gap: 0 4px; align-items: baseline; padding: 11px 0; border-bottom: 1px dashed var(--line-strong); }
+.show--webshop .ws-slip__q { font: 800 20px/1 var(--display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.show--webshop .ws-slip__t { display: flex; flex-direction: column; gap: 2px; }
+.show--webshop .ws-slip__t b { font-size: 15.5px; }
+.show--webshop .ws-slip__t small { font-size: 13.5px; line-height: 1.4; color: var(--muted); }
+.show--webshop .ws-slip__list .check { display: inline-block; font-size: 17px; }
+.motion .show--webshop .ws-slip__list li[data-reveal] { transform: translateX(-14px); }
+.motion .show--webshop .ws-slip__list li[data-reveal] .check { transform: scale(0); transition: transform .5s cubic-bezier(.2,1.8,.4,1) calc(var(--i) * .1s + .3s); }
+.motion .show--webshop .ws-slip__list li.is-in, .motion .show--webshop .ws-slip__list li.is-in .check { transform: none; }
+.show--webshop .ws-slip__sum { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-top: 18px; }
+.show--webshop .ws-slip__sum > span { display: flex; flex-direction: column; gap: 3px; font-weight: 700; }
+.show--webshop .ws-slip__sum small { font-size: 13px; font-weight: 500; color: var(--muted); }
+.show--webshop .ws-slip__sum b { font: 800 clamp(34px, 4vw, 48px)/1 var(--display); letter-spacing: -.04em; white-space: nowrap; }
+.show--webshop .ws-slip__code { display: block; height: 30px; margin-top: 22px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, #0000 2px 4px, var(--ink) 4px 5px, #0000 5px 8px, var(--ink) 8px 11px, #0000 11px 12px, var(--ink) 12px 13px, #0000 13px 17px); opacity: .85; }
+
+/* ---------- #saadan: a track-and-trace line. Each stop lights up and its line fills; a parcel travels along ---------- */
+.show--webshop.ws-tt { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 90px; }
+.show--webshop.ws-tt .sec-head { margin-bottom: 64px; }
+.show--webshop .ws-tt__line { position: relative; }
+.show--webshop .ws-tt__line ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.show--webshop .ws-tt__line li { position: relative; display: flex; flex-direction: column; gap: 6px; padding-top: 54px; }
+.show--webshop .ws-tt__line li::before { content: '✓'; position: absolute; top: 0; left: 0; z-index: 1; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; transition: background .3s var(--d), color .3s var(--d), box-shadow .3s var(--d), transform .5s cubic-bezier(.2,1.6,.4,1) var(--d); }
+.show--webshop .ws-tt__line li > i { position: absolute; top: 15px; left: 17px; right: -41px; height: 4px; overflow: hidden; border-radius: 4px; background: var(--line-strong); }
+.show--webshop .ws-tt__line li > i::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform-origin: 0 50%; transition: transform .7s cubic-bezier(.4,0,.6,1) calc(var(--d) + .15s); }
+.show--webshop .ws-tt__line b { font: 800 clamp(22px, 2.2vw, 28px)/1.05 var(--display); letter-spacing: -.03em; }
+.show--webshop .ws-tt__line span { max-width: 260px; font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+.motion .show--webshop .ws-tt__line[data-reveal] li::before { background: #fff; color: #fff; box-shadow: inset 0 0 0 3px var(--line-strong); transform: scale(.85); }
+.motion .show--webshop .ws-tt__line[data-reveal] li > i::after { transform: scaleX(0); }
+.motion .show--webshop .ws-tt__line.is-in li::before { background: var(--accent); color: #fff; box-shadow: inset 0 0 0 3px var(--accent); transform: none; }
+.motion .show--webshop .ws-tt__line.is-in li > i::after { transform: none; }
+.show--webshop .ws-tt__road { position: absolute; top: 0; left: 17px; right: calc(25% - 35px); height: 34px; pointer-events: none; }
+.show--webshop .ws-tt__van { position: absolute; inset: 0; z-index: 2; }
+.show--webshop .ws-tt__van svg { position: absolute; top: -42px; right: -17px; width: 34px; height: 34px; fill: #e9c896; stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
+.motion .show--webshop .ws-tt__line[data-reveal] .ws-tt__van { transform: translateX(-100%); }
+.motion .show--webshop .ws-tt__line.is-in .ws-tt__van { animation: wsVan 2.55s .2s both; }
+@keyframes wsVan { 0%, 5.9% { transform: translateX(-100%); } 33.3%, 39.2% { transform: translateX(-66.67%); } 66.7%, 72.5% { transform: translateX(-33.33%); } 100% { transform: none; } }
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .show--webshop.ws-pris { grid-template-columns: 1fr; padding-top: 40px; }
+}
+@media (max-width: 699px) {
+  .show--webshop.calc-sec, .show--webshop.ws-pris, .show--webshop.ws-tt { padding-left: 20px; padding-right: 20px; }
+  .show--webshop .calc__opts { gap: 28px; padding: 22px 18px; border-radius: 26px; }
+  .show--webshop .ws-bar { bottom: 76px; }
+  .show--webshop .ws-wall { border-radius: 16px; }
+  .show--webshop .ws-wall canvas { height: 150px; }
+  .show--webshop .ws-wall__head { gap: 10px; padding: 10px 12px 0; }
+  .show--webshop .ws-wall__lang { display: none; }
+  .show--webshop .ws-wall__n { margin-left: auto; }
+  .show--webshop .ws-seg label { padding: 11px 12px; }
+  .show--webshop .ws-seg b { font-size: 15px; }
+  .show--webshop .ws-seg em { font-size: 13px; }
+  .show--webshop .ws-ticks { margin: -4px 12px 0; }
+  .show--webshop .ws-ticks button { padding: 7px 4px; font-size: 12px; }
+  .show--webshop .ws-ticks [data-ws-tick="1000"] { display: none; }
+  .show--webshop .ws-lang { padding: 12px 12px 12px 14px; }
+  .show--webshop .ws-lang__pills i { padding: 5px 7px; font-size: 11px; }
+  .show--webshop .ws-slip, .motion .show--webshop .ws-slip[data-reveal].is-in { transform: none; }
+  .show--webshop .ws-slip__paper { padding: 26px 18px; }
+  .show--webshop .ws-slip__th { grid-template-columns: 48px 1fr; font-size: 10.5px; letter-spacing: .06em; }
+  .show--webshop .ws-slip__list li { grid-template-columns: 48px 1fr auto; }
+  .show--webshop .ws-stamp { font-size: 12.5px; }
+  /* The line runs down the left side, one piece from each stop to the next; no parcel */
+  .show--webshop .ws-tt__line ol { grid-template-columns: 1fr; gap: 28px; }
+  .show--webshop .ws-tt__line li { padding: 4px 0 0 54px; }
+  .show--webshop .ws-tt__line li > i { top: 17px; bottom: -45px; left: 15px; right: auto; width: 4px; height: auto; }
+  .show--webshop .ws-tt__line li > i::after { transform-origin: 50% 0; }
+  .motion .show--webshop .ws-tt__line[data-reveal] li > i::after { transform: scaleY(0); }
+  .motion .show--webshop .ws-tt__line.is-in li > i::after { transform: none; }
+  .show--webshop .ws-tt__road { display: none; }
+}

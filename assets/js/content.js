@@ -90,7 +90,7 @@ export const team = [
 ];
 
 // The first 12 are the ones shown on narrow phones
-export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automations', 'AI-annoncer', 'GEO', 'Google Shopping', 'CRO', 'Nyhedsbrev', 'Booking', 'CRM', 'Dashboards', 'Google-profil', 'Webshop', 'Chatbot', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
+export const balls = ['Hjemmeside', 'SEO', 'Google Ads', 'Meta Ads', 'Automations', 'AI-annoncer', 'GEO', 'Google Shopping', 'CRO', 'Nyhedsbrev', 'Booking', 'CRM', 'Dashboards', 'Google CSS', 'Google-profil', 'Webshop', 'Chatbot', 'Tekster', 'Logo', 'Hosting', 'SSL', 'Mobile-first'];
 
 // [explanation, related: a pop-up key, 'pris', 'link:/a/page' or null]
 export const ballInfo = {
@@ -107,6 +107,7 @@ export const ballInfo = {
   'Booking': ['Lad kunderne booke tid direkte på siden, døgnet rundt.', 'addon-systemer'],
   'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'addon-systemer'],
   'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'addon-systemer'],
+  'Google CSS': ['Lad dine Shopping-annoncer gå gennem en CSS-partner, så hele dit bud tæller, og klikket kan blive billigere.', 'link:/services/google-css'],
   'Google-profil': ['Vi opretter eller opdaterer din profil, så du ses på Google Maps.', 'inc-Google-profil'],
   'Webshop': ['Sælg produkter eller gavekort direkte fra din hjemmeside.', null],
   'Chatbot': ['En AI-chatbot, der svarer dine kunder døgnet rundt.', 'link:/services/ai'],

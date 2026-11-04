@@ -15,6 +15,7 @@ export const services = [
   { slug: 'google-ads', t: 'Google Ads', price: '8.000 kr./md.', value: 8000, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'meta-ads', t: 'Meta Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Sporing af salg', 'Ekstra kanal: 5.000 kr./md.'] },
+  { slug: 'google-css', t: 'Google CSS', price: 'Fast pris efter en snak', value: 0, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Skift til en CSS-partner', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
   { slug: 'seo', t: 'SEO', price: '995 kr./time', value: 995, d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'] },
   { slug: 'geo', t: 'GEO', price: 'Fast pris efter en snak', value: 0, d: 'Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.', ex: ['Tjek af din synlighed i AI', 'Indhold, AI kan citere', 'Struktureret data'] },
   { slug: 'ai', t: 'AI', price: 'Fast pris efter en snak', value: 0, d: 'Chatbots, AI-annoncer og assistenter, der sparer dig tid.', ex: ['AI-chatbot døgnet rundt', 'AI-annoncering', 'AI-assistenter til rutinerne'] },
@@ -28,7 +29,23 @@ const SERVICEFAG = ['servicevirksomheder', 'håndværkere', 'klinikker', 'frisø
 
 // h1: line one is `a` + the scrambled orange word `hot`; line two is the grey `dim` + the underlined `mark`.
 // price: { amount, pre, post, note } shows the rolling number; null shows "Fast pris efter en snak".
-// steps become the stacked cards (glyph: one or two characters the display font has).
+// steps become the stacked cards or the timeline (glyph: one or two characters the display font has).
+//
+// layout: the sections after the hero, in order (the contact form always comes last). Every page has its
+// own order and mix, so no two pages are built the same way; build.mjs warns when two pages open with
+// the same three sections. One of each kind:
+//   showcase                     the example of the service (scripts/services/showcase/<slug>.html)
+//   price | receipt | band       the price: the dark box, a receipt that prints, or a light band
+//   cards | timeline             the steps: stacked cards or a line that draws itself (or leave it out)
+//   faq | faqSplit               the questions: a plain list, or with a big heading and a nudge beside them
+//   track | grid                 the other services: sideways cards, or a compact grid
+//   statement, compare, facts, marquee   extra sections, with their copy on the page:
+//     statement: { kicker, text, pill, sub }   text: *orange*, _grey_, {pill}, | = line break on wide screens
+//     compare:   { kicker, h2: [line, grey line], lead, uden, med, rows: [[without, with], …] } (4–5 rows)
+//     facts:     { kicker, items: [[label, big, text], …] }  only things that are true about the offer
+//     marquee:   { h2: [a, b], lead, tag (an example), icon, words }
+//   band: { chips } four item titles · receipt: { h2, notes } · flow (timeline): { h2, lead, end }
+//   faqSplit: { kicker, h2, nudge } (all optional)
 export const pages = [
   {
     slug: 'google-ads', name: 'Google Ads', short: 'Øverst på Google, når kunderne søger',
@@ -63,7 +80,15 @@ export const pages = [
       ['Hvad er forskellen på Google Ads og SEO?', 'Med Google Ads betaler du for at blive vist øverst med det samme. SEO er arbejdet med at blive fundet uden at betale for hvert klik. De to kan sagtens kombineres.']
     ],
     contact: 'Fortæl os, hvad du laver, og hvor dine kunder er. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvad laver din virksomhed, og hvor vil du gerne have flere kunder fra?'
+    placeholder: 'Hvad laver din virksomhed, og hvor vil du gerne have flere kunder fra?',
+    layout: ['showcase', 'statement', 'band', 'timeline', 'faqSplit', 'grid'],
+    statement: {
+      kicker: 'Kort sagt', pill: 'search',
+      text: 'Når nogen søger {elektriker odense}, skal de finde *dig.* | _Ikke din konkurrent._',
+      sub: 'Vi viser dine annoncer for kunder i dit område, og du betaler ikke for klik fra folk, der leder efter noget andet.'
+    },
+    band: { chips: ['Søgeordsanalyse', 'Kampagner og annoncer', 'Lokal målretning', 'Månedlig rapport'], sticker: 'Opsætning gratis' },
+    flow: { h2: ['Fra første snak.', 'Til annoncerne kører.'], lead: 'Opsætningen er gratis. Derefter justerer vi hver måned og sender dig en kort rapport.', end: 'Rapport hver måned' }
   },
   {
     slug: 'meta-ads', name: 'Meta Ads', short: 'Annoncer på Facebook og Instagram',
@@ -98,7 +123,25 @@ export const pages = [
       ['Hvad er forskellen på Meta Ads og Google Ads?', 'På Google bliver du vist, når folk søger efter det, du laver. På Facebook og Instagram møder du dem, før de søger, fx med et tilbud eller et godt eksempel på dit arbejde.']
     ],
     contact: 'Fortæl os, hvad du laver, og hvem dine kunder er. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvad laver din virksomhed, og hvem vil du gerne nå?'
+    placeholder: 'Hvad laver din virksomhed, og hvem vil du gerne nå?',
+    layout: ['statement', 'showcase', 'compare', 'price', 'track', 'faq'],
+    statement: {
+      kicker: 'Kort sagt',
+      text: 'Dine næste kunder søger ikke efter dig. | _De scroller._ Mød dem, *før de søger.*',
+      sub: 'På Facebook og Instagram møder du dem med et tilbud eller et godt eksempel på dit arbejde.'
+    },
+    compare: {
+      h2: ['Et boostet opslag.', 'Eller en plan.'],
+      lead: 'Forskellen på at trykke “Promover” og at have annoncer, der bliver styret.',
+      uden: 'Uden en plan', med: 'Med Webleads',
+      rows: [
+        ['Du promoverer et opslag og håber på det bedste.', 'Annoncer med et mål, lavet færdige til feedet.'],
+        ['Annoncen bliver vist for alle mulige.', 'Den bliver vist for de rigtige i dit område.'],
+        ['Dem, der kiggede, glemmer dig igen.', 'Retargeting minder dem om at vende tilbage.'],
+        ['Den samme annonce kører, til den holder op med at virke.', 'Flere varianter bliver testet, og budgettet flytter derhen, hvor det virker.'],
+        ['Du ved ikke, hvad annoncerne giver.', 'Meta Pixel og en månedlig rapport viser det.']
+      ]
+    }
   },
   {
     slug: 'google-shopping-ads', name: 'Google Shopping Ads', short: 'Dine produkter med billede og pris på Google',
@@ -130,10 +173,77 @@ export const pages = [
       ['Hvad koster Google Shopping Ads?', 'Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.'],
       ['Hvad er et produktfeed?', 'En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.'],
       ['Virker det med min webshop?', 'De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.'],
-      ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.']
+      ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.'],
+      ['Kan klikket blive billigere?', 'Ofte, ja. Går dine Shopping-annoncer gennem en CSS-partner i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn.', ['/services/google-css', 'Læs om Google CSS']]
     ],
     contact: 'Fortæl os om din webshop, så svarer vi inden for 24 timer med en fast pris.',
-    placeholder: 'Hvilken webshop har du, og hvad sælger du?'
+    placeholder: 'Hvilken webshop har du, og hvad sælger du?',
+    layout: ['showcase', 'facts', 'receipt', 'cards', 'faqSplit', 'track'],
+    facts: {
+      kicker: 'Kort fortalt',
+      items: [
+        ['Webshop', 'Shopify Partner', 'De fleste webshops kan sende varer til Google. Bruger du Shopify, er vi Shopify Partner.'],
+        ['Produktfeed', 'Af sig selv', 'Produkter, priser og lagerstatus bliver sendt til Google automatisk.'],
+        ['Sporing', 'Hvert køb', 'bliver målt, så du kan se, hvad annoncerne sælger for.'],
+        ['Svar', '24 timer', 'Fortæl os om din webshop, så har du en fast pris inden for 24 timer.']
+      ]
+    },
+    receipt: { h2: ['Det hele er med.', 'Til én fast pris.'], notes: ['Annoncebudgettet betaler du direkte til Google'] }
+  },
+  {
+    // Checked against Google's help pages and the market (4 Nov 2026). The 20% is the industry's estimate of the
+    // margin Google's own CSS takes from the bid: Google does not publish it, so every "20%" needs the estimate
+    // sentence on the same page. Never "rabat", "garanteret", "Ingen binding" or "Webleads er CSS-partner".
+    // price: null until Mikkel sets one.
+    slug: 'google-css', name: 'Google CSS', short: 'Op til 20% billigere klik på Google Shopping',
+    description: 'Vi kobler din webshop til en CSS-partner, så hele dit bud tæller, og klik på dine Google Shopping-annoncer kan blive op til 20% billigere. Fast pris efter en kort snak.',
+    serviceType: 'CSS (Comparison Shopping Service) til Google Shopping',
+    words: ['webshops', 'netbutikker', 'Shopify-butikker', 'butikker med varer'],
+    h1: { a: ['Op', 'til'], hot: '20%', dim: 'billigere', mark: 'klik.' },
+    lead: 'Vi kobler din webshop til en CSS-partner, så hele dit bud tæller i auktionen på Google. Det samme klik kan blive op til 20% billigere, og vi klarer skiftet.',
+    floats: ['CSS-partner', 'Hele buddet tæller', 'Op til 20% ↓'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
+    price: null,
+    priceH2: ['Fast pris.', 'Efter en snak.'],
+    priceLead: 'Vi ser på din Merchant Center, dine lande og dit Shopping-budget og giver dig en fast pris inden for 24 timer.',
+    items: [
+      ['Tjek af din konto', 'Vi ser på din Merchant Center, dine kampagner og de lande, du sælger til.'],
+      ['Lande og placeringer', 'Vi tjekker, at CSS-partneren dækker dine lande og de steder, dine annoncer vises.'],
+      ['Vi klarer skiftet', 'Vi sætter skiftet i gang, og du godkender det i din Merchant Center.'],
+      ['Som regel samme kampagner', 'Som regel er din Google Ads-konto, dine kampagner og dit produktfeed de samme som i dag.'],
+      ['Hele buddet tæller', 'Uden margin fra Googles egen CSS kommer hele dit bud med i auktionen.'],
+      ['Shopping og Performance Max', 'Det gælder dine produktannoncer i både Shopping og Performance Max.'],
+      ['Bud og mål', 'Vi justerer bud og mål, så fordelen giver lavere klikpris, flere klik eller lidt af begge.'],
+      ['Måling før og efter', 'Fordelen står ikke på fakturaen, så vi måler klikpris, klik og salg før og efter.']
+    ],
+    steps: [
+      ['Tjek', 'Vi ser på din konto, dine lande og dit budget og siger ærligt, om det kan betale sig.', '?'],
+      ['Skift', 'Vi kobler din Merchant Center på en CSS-partner, og du godkender skiftet.', '%'],
+      ['Opfølgning', 'Vi sammenligner klikpris, klik og salg før og efter og sender dig tallene.', '↓']
+    ],
+    faqs: [
+      ['Hvad er en CSS?', 'CSS står for Comparison Shopping Service, på dansk en prissammenligningstjeneste. Efter EU’s sag mod Google i 2017 bliver Shopping-annoncer i Danmark altid vist gennem en CSS. Har du ikke valgt en anden, er det Googles egen, Google Shopping.'],
+      ['Hvorfor bliver klikket billigere?', 'Googles egen CSS, Google Shopping, trækker en fast procentdel fra dit bud, før det kommer med i auktionen. Med en CSS-partner tæller hele buddet, så det samme klik kan blive billigere, eller du kan få flere klik for samme budget. Google oplyser ikke procentdelen, men branchen anslår den til op til ca. 20%.'],
+      ['Skal jeg lave mine kampagner om?', 'Som regel ikke. Vi flytter den Merchant Center-konto, du har i dag, over til CSS-partneren, så din Google Ads-konto, dine kampagner og dit feed er de samme. Kræver CSS-partneren en ny konto, siger vi det, før vi går i gang.'],
+      ['Hvilke annoncer gælder det?', 'Dine Shopping-annoncer, også produkterne i Performance Max. Almindelige tekstannoncer påvirkes ikke. Om produkterne også kan vises fx på YouTube, afhænger af CSS-partneren, og det tjekker vi før skiftet.'],
+      ['Gælder det i alle lande?', 'Det gælder i Danmark og en række andre lande i Europa, fx Sverige, Norge og Tyskland. Uden for de lande giver det ingen fordel. Sælger du til flere lande, tjekker vi, at CSS-partneren dækker dem alle.'],
+      ['Hvad koster det?', 'Du får en fast pris efter en kort snak om din webshop.']
+    ],
+    contact: 'Fortæl os om din webshop, så ser vi, om det kan betale sig, og svarer inden for 24 timer med en fast pris.',
+    placeholder: 'Hvilken webshop har du, og hvad bruger du på Google Shopping om måneden?',
+    // Layout and the copy it needs (preliminary like the rest of this page)
+    layout: ['showcase', 'compare', 'band', 'faq', 'grid'],
+    compare: {
+      h2: ['Samme annoncer.', 'Billigere klik.'],
+      lead: 'Det eneste, der skifter, er den CSS, dine annoncer bliver vist gennem.',
+      uden: 'Uden CSS-partner', med: 'Med en CSS-partner',
+      rows: [
+        ['Google Shopping lægger en margin oven i klikprisen.', 'Gennem en anden CSS slipper du for den margin.'],
+        ['Du betaler marginen i hvert eneste klik.', 'Det samme klik kan koste op til 20% mindre.'],
+        ['Et skifte lyder som et stort arbejde.', 'Vi klarer skiftet. Dine kampagner kører videre.'],
+        ['Du ved ikke, hvad du kunne spare.', 'Vi måler klikpriserne før og efter.']
+      ]
+    },
+    band: { chips: ['Samme annoncer', 'Shopping og Performance Max', 'Måling før og efter', 'Ingen binding'], sticker: 'Op til 20% billigere klik' }
   },
   {
     slug: 'seo', name: 'SEO', short: 'Bliv fundet først, når kunderne søger',
@@ -168,7 +278,15 @@ export const pages = [
       ['Hvad er lokal SEO?', 'At blive fundet på dit fag og dit område, fx “frisør Roskilde” eller “tømrer Vejle”. Det handler blandt andet om din Google-profil, dine anmeldelser og teksterne på din side.']
     ],
     contact: 'Fortæl os, hvad du laver, og hvor du holder til. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvad laver din virksomhed, og hvad vil du gerne findes på?'
+    placeholder: 'Hvad laver din virksomhed, og hvad vil du gerne findes på?',
+    layout: ['showcase', 'marquee', 'price', 'timeline', 'grid', 'faqSplit'],
+    marquee: {
+      sec: 'soegninger', icon: 'search', tag: true,
+      h2: ['Det søger dine kunder på.', 'Der, hvor du holder til.'],
+      lead: 'Vi finder de ord, dine kunder faktisk søger på.',
+      words: ['tømrer københavn', 'frisør i nærheden', 'elektriker odense', 'fysioterapeut aarhus', 'vvs akut', 'maler pris', 'rengøring vejle', 'revisor til lille virksomhed', 'frisør roskilde', 'personlig træner frederiksberg', 'massage åben søndag', 'tømrer vejle', 'elektriker i nærheden', 'klinik aalborg']
+    },
+    flow: { h2: ['Først en plan.', 'Så det seje træk.'], lead: 'Du bestemmer, hvor mange timer vi bruger, og hver måned kan du se, hvad vi har lavet.', end: 'Hver måned' }
   },
   {
     slug: 'geo', name: 'GEO', short: 'Bliv anbefalet af ChatGPT og Googles AI',
@@ -203,7 +321,14 @@ export const pages = [
       ['Hvad koster GEO?', 'Du får en fast pris efter en kort snak om din virksomhed.']
     ],
     contact: 'Fortæl os, hvad du laver, og hvor du holder til. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvad laver din virksomhed, og hvad vil du gerne anbefales til?'
+    placeholder: 'Hvad laver din virksomhed, og hvad vil du gerne anbefales til?',
+    layout: ['statement', 'showcase', 'receipt', 'cards', 'faq', 'track'],
+    statement: {
+      kicker: 'Kort sagt', pill: 'spark',
+      text: 'Flere spørger {AI} om råd, før de vælger. | _Bliv et af de svar,_ *de får.*',
+      sub: 'Ingen kan styre, hvad AI svarer. Vi gør din virksomhed til det tydeligste og mest troværdige svar.'
+    },
+    receipt: { h2: ['Alt det her.', 'Til én fast pris.'] }
   },
   {
     slug: 'ai', name: 'AI', short: 'Chatbots, AI-annoncer og assistenter',
@@ -238,7 +363,29 @@ export const pages = [
       ['Hvad koster det?', 'Du får en fast pris efter en kort snak, når vi ved, hvad AI skal løse for dig.']
     ],
     contact: 'Fortæl os, hvilke opgaver der tager for meget tid. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvilke opgaver vil du gerne have AI til at klare?'
+    placeholder: 'Hvilke opgaver vil du gerne have AI til at klare?',
+    layout: ['facts', 'showcase', 'compare', 'band', 'track', 'faqSplit'],
+    facts: {
+      kicker: 'AI, kort fortalt',
+      items: [
+        ['Pris', 'Fast pris', 'efter en kort snak, når vi ved, hvad AI skal løse for dig.'],
+        ['Kontrol', 'Du godkender', 'Et menneske godkender, hvor det betyder noget.'],
+        ['Viden', 'Dine egne data', 'AI, der kender dine priser, ydelser og regler, ikke bare internettet.'],
+        ['Svar', '24 timer', 'Fortæl os, hvilke opgaver der tager for meget tid, så svarer vi inden for 24 timer.']
+      ]
+    },
+    compare: {
+      h2: ['Uden AI.', 'Og med.'],
+      lead: 'Det er de samme opgaver. Forskellen er, hvem der bruger tiden på dem.',
+      uden: 'Uden AI', med: 'Med AI',
+      rows: [
+        ['Spørgsmål om aftenen venter til i morgen.', 'Chatbotten svarer med det samme, døgnet rundt.'],
+        ['Du skriver hvert tilbud og svar fra bunden.', 'AI skriver udkastet. Du godkender det.'],
+        ['Én annonce ad gangen og meget gætteri.', 'Mange varianter bliver testet, og budgettet flytter derhen, hvor det virker.'],
+        ['Du slår op i kalender og kundesystem i hånden.', 'AI slår selv op i kalender, kundesystem og mail.']
+      ]
+    },
+    band: { chips: ['AI-chatbot', 'AI-annoncering', 'AI-assistenter', 'Oplæring'] }
   },
   {
     slug: 'automations', name: 'Automations', short: 'Lad rutinerne klare sig selv',
@@ -273,7 +420,21 @@ export const pages = [
       ['Hvor er et godt sted at starte?', 'Med de opgaver, du gør hver uge på samme måde: bekræftelser, påmindelser, fakturaer og nye henvendelser. Dem finder vi sammen.']
     ],
     contact: 'Fortæl os, hvilke opgaver du gør igen og igen. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvilke opgaver gør du igen og igen?'
+    placeholder: 'Hvilke opgaver gør du igen og igen?',
+    layout: ['compare', 'showcase', 'price', 'cards', 'grid', 'faq'],
+    compare: {
+      kicker: 'Forskellen',
+      h2: ['I hånden.', 'Eller af sig selv.'],
+      lead: 'De opgaver, du gør igen og igen på samme måde, kan klare sig selv.',
+      uden: 'Uden automations', med: 'Med automations',
+      rows: [
+        ['Du sender hver bekræftelse og påmindelse selv.', 'Mails og sms sendes af sig selv.'],
+        ['Fakturaen bliver sendt, når du når det.', 'Fakturaen sendes, når opgaven er færdig.'],
+        ['Nye henvendelser skrives over i hånden.', 'Leads lander direkte i dit system.'],
+        ['Dine programmer taler ikke sammen.', 'Dine programmer taler sammen.'],
+        ['Ugens tal skal samles i hånden.', 'Ugens tal ligger i din indbakke hver mandag.']
+      ]
+    }
   },
   {
     slug: 'email-marketing', name: 'E-mail marketing', short: 'Nyhedsbreve og mailflows, der sælger',
@@ -308,7 +469,15 @@ export const pages = [
       ['Hvad koster det?', 'Du får en fast pris efter en kort snak om dine kunder og dine mål.']
     ],
     contact: 'Fortæl os om dine kunder, og hvad mailene skal give. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvem er dine kunder, og sender du mails i dag?'
+    placeholder: 'Hvem er dine kunder, og sender du mails i dag?',
+    layout: ['marquee', 'showcase', 'receipt', 'faqSplit', 'grid'],
+    marquee: {
+      sec: 'mails', icon: 'mail',
+      h2: ['Fra velkomstmail.', 'Til tilbud.'],
+      lead: 'Mails som de her kan vi skrive og sætte op for dig.',
+      words: ['Velkomstmail', 'Nyhedsbrev', 'Påmindelse om næste tid', 'Glemt kurv', 'Tak for i dag', 'Bed om en anmeldelse', 'Tid til service', 'Tilbud til dine kunder', 'Bekræft din tilmelding', 'Månedens nyt']
+    },
+    receipt: { h2: ['Alt det her.', 'Til én fast pris.'] }
   },
   {
     slug: 'cro', name: 'CRO', short: 'Flere kunder fra de besøgende, du har',
@@ -343,7 +512,15 @@ export const pages = [
       ['Hvad koster CRO?', 'Du får en fast pris efter en kort snak om din side og dine mål.']
     ],
     contact: 'Send os din side, så kigger vi på den. Vi svarer inden for 24 timer med en fast pris.',
-    placeholder: 'Hvad er adressen på din side, og hvad skal den gerne give?'
+    placeholder: 'Hvad er adressen på din side, og hvad skal den gerne give?',
+    layout: ['statement', 'showcase', 'band', 'timeline', 'faq', 'track'],
+    statement: {
+      kicker: 'Kort sagt', pill: 'cursor',
+      text: 'Du har allerede besøgende. | _Få flere af dem til at trykke_ {Ring nu}',
+      sub: 'Vi finder ud af, hvor dine besøgende falder fra, og retter det, så flere ringer, skriver eller køber.'
+    },
+    band: { chips: ['Analyse af din side', 'Heatmaps', 'A/B-test', 'Rapport'] },
+    flow: { h2: ['Vi gætter ikke.', 'Vi tester.'], lead: 'Hver forbedring bliver testet mod den side, du har i dag.', end: 'Klar til næste test' }
   }
 ];
 

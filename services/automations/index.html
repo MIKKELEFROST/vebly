@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="da" data-page="service_automations">
 <head>
-<!-- Genereret af scripts/services/build.mjs ud fra scripts/services/data.mjs. Ret der, ikke her. -->
+<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Automations · Lad rutinerne klare sig selv · Webleads</title>
@@ -153,15 +153,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261104c">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104c">
+<link rel="stylesheet" href="/assets/css/show/automations.css?v=20261104c">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
-<script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/main.js?v=20261104c"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104c"></script>
+<script type="module" src="/assets/js/show/automations.js?v=20261104c"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -189,6 +193,7 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -223,7 +228,7 @@
         <p class="hero__lead" data-reveal="3">Vi automatiserer de opgaver, du gør igen og igen, så du får timer tilbage hver uge og færre fejl.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -236,6 +241,96 @@
             <span class="trust__txt"><span class="trust__top"><b class="trust__tpname">Trustpilot</b><span class="trust__stars trust__stars--tp" data-stars aria-hidden="true"></span></span><span class="trust__sub">TrustScore <b data-score></b> · <span data-num></span> anmeldelser</span></span>
           </a>
         </div>
+      </div>
+    </section>
+
+    <section id="forskel" class="sx sx-vs" data-sec="uden-med" data-vs>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Forskellen</div>
+          <h2 class="h2">I hånden.<br><span class="dim">Eller af sig selv.</span></h2>
+        </div>
+        <div class="sx-vs__side">
+          <p class="sec-head__lead">De opgaver, du gør igen og igen på samme måde, kan klare sig selv.</p>
+          <div class="seg sx-vs__seg" role="group" aria-label="Vis uden automations eller med automations">
+            <button type="button" data-vs-go="uden" aria-pressed="false">Uden automations</button>
+            <button type="button" data-vs-go="med" class="is-on" aria-pressed="true">Med automations</button>
+          </div>
+        </div>
+      </div>
+      <div class="sx-vs__board" data-vs-board data-show="med" style="grid-template-rows:repeat(6, auto)">
+        <div class="sx-vs__bg is-uden" aria-hidden="true"></div>
+        <div class="sx-vs__bg is-med" aria-hidden="true"></div>
+        <div class="sx-vs__head is-uden" style="grid-row:1;--i:0"><span class="sx-vs__mk" aria-hidden="true">✕</span>Uden automations</div>
+        <div class="sx-vs__head is-med" style="grid-row:1;--i:1"><img src="/assets/logo-icon.svg" alt="" width="28" height="28">Med automations</div>
+        <div class="sx-vs__cell is-uden" style="grid-row:2;--i:2"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden automations: </span>Du sender hver bekræftelse og påmindelse selv.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:2;--i:3"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med automations: </span>Mails og sms sendes af sig selv.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:3;--i:4"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden automations: </span>Fakturaen bliver sendt, når du når det.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:3;--i:5"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med automations: </span>Fakturaen sendes, når opgaven er færdig.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:4;--i:6"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden automations: </span>Nye henvendelser skrives over i hånden.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:4;--i:7"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med automations: </span>Leads lander direkte i dit system.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:5;--i:8"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden automations: </span>Dine programmer taler ikke sammen.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:5;--i:9"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med automations: </span>Dine programmer taler sammen.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:6;--i:10"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden automations: </span>Ugens tal skal samles i hånden.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:6;--i:11"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med automations: </span>Ugens tal ligger i din indbakke hver mandag.</span></div>
+      </div>
+    </section>
+
+    <section id="eksempel" class="show show--automations" data-sec="eksempel">
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title"><div class="kicker">Automations i praksis</div><h2 class="h2">Du passer jobbet.<br><span class="dim">Flowet klarer resten.</span></h2></div>
+        <div class="fm-side">
+          <p class="sec-head__lead">Tre flows, vi ofte sætter op. Vælg et, og se det køre.</p>
+          <!-- data-sr: what the flow does, read aloud when it is chosen; data-end: the line under the finished run -->
+          <div class="seg" role="group" aria-label="Vælg et eksempel på et flow">
+            <button type="button" class="is-on" aria-pressed="true" data-fm-go data-end="Fra booking til anmeldelse." data-sr="Eksempel på et flow: Når en kunde booker en tid på hjemmesiden, får kunden en SMS-bekræftelse, og tiden lander i kalenderen. Dagen efter går fakturaen ud, og tre dage efter bliver kunden bedt om en anmeldelse. Du skal ikke klikke på noget.">Booking</button>
+            <button type="button" aria-pressed="false" data-fm-go data-end="Fra færdigt job til betaling." data-sr="Eksempel på et flow: Når jobbet slutter i kalenderen, går fakturaen ud med det samme. Otte dage efter tjekker flowet, om den er betalt. Er den ikke det, får kunden en venlig rykker, og når kunden betaler, bliver det bogført. Du skal ikke klikke på noget.">Faktura og rykker</button>
+            <button type="button" aria-pressed="false" data-fm-go data-end="Fra første besked til opfølgning." data-sr="Eksempel på et flow: Når en kunde skriver via hjemmesiden, får kunden en SMS med det samme, og du får besked på telefonen. Kunden lander i kundelisten, og har kunden ikke svaret efter to dage, går der en opfølgning ud på mail. Du skal ikke klikke på noget.">Nye leads</button>
+          </div>
+        </div>
+      </div>
+      <p class="sr-only" aria-live="polite" data-fm-sr>Eksempel på et flow: Når en kunde booker en tid på hjemmesiden, får kunden en SMS-bekræftelse, og tiden lander i kalenderen. Dagen efter går fakturaen ud, og tre dage efter bliver kunden bedt om en anmeldelse. Du skal ikke klikke på noget.</p>
+      <!-- A flow machine (assets/js/show/automations.js): the nodes are placed and wired from a small spec per
+           example, a pulse runs through them, and the .seg control re-routes the machine. Icons: our own drawings -->
+      <svg class="fm__sprite" aria-hidden="true" focusable="false">
+        <symbol id="fm-i-book" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/></symbol>
+        <symbol id="fm-i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></symbol>
+        <symbol id="fm-i-done" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15l2 2 4-4"/></symbol>
+        <symbol id="fm-i-sms" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></symbol>
+        <symbol id="fm-i-bill" viewBox="0 0 24 24"><path d="M6 3.5h12V20l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3L6 20z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></symbol>
+        <symbol id="fm-i-star" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></symbol>
+        <symbol id="fm-i-fork" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="2.2"/><circle cx="18.5" cy="6" r="2.2"/><circle cx="18.5" cy="18" r="2.2"/><path d="M7.7 12H10c2.6 0 3.2-6 6.2-6M10 12c2.6 0 3.2 6 6.2 6"/></symbol>
+        <symbol id="fm-i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></symbol>
+        <symbol id="fm-i-ledger" viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3H19v15H7.5A1.5 1.5 0 0 0 6 19.5z"/><path d="M6 19.5A1.5 1.5 0 0 0 7.5 21H19v-3M10 7.5h5M10 11h3"/></symbol>
+        <symbol id="fm-i-inbox" viewBox="0 0 24 24"><path d="M4 13.5h4.2l1.6 2.5h4.4l1.6-2.5H20"/><path d="M6.6 5h10.8l2.6 8.5V18a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18v-4.5z"/></symbol>
+        <symbol id="fm-i-phone" viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="2.5"/><path d="M10.5 17.5h3"/></symbol>
+        <symbol id="fm-i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+        <symbol id="fm-i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></symbol>
+        <symbol id="fm-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 12l3.2 1.9"/></symbol>
+      </svg>
+      <div class="fm" data-fm data-reveal="1">
+        <div class="fm__bar">
+          <span class="fm__app" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7.5" height="6.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="6.5" rx="2"/><path d="M10.5 7.2h2.3a3 3 0 0 1 3 3v3.3"/></svg></span>
+          <span class="fm__name"><span class="fm__t"><b data-fm-title>Booking</b><span class="tag-eks">Eksempel</span></span><small data-fm-who>Nordvik · Tømrer · København</small></span>
+          <span class="fm__live" aria-hidden="true"><i></i>Aktiv</span>
+          <button type="button" class="fm__run" data-fm-run>Kør igen <span aria-hidden="true">↻</span></button>
+        </div>
+        <div class="fm__cv" data-fm-cv aria-hidden="true">
+          <i class="fm__dots"></i><i class="fm__hot" data-fm-hot></i>
+          <svg class="fm__wires" data-fm-wires focusable="false"></svg>
+          <i class="fm__pulse" data-fm-pulse></i><i class="fm__pulse" data-fm-pulse></i>
+          <span class="fm__wait" data-fm-wait><svg viewBox="0 0 24 24"><use href="#fm-i-clock"/><path class="fm__h" d="M12 12V7"/></svg><b>Dagen efter</b></span>
+          <span class="fm__wait" data-fm-wait><svg viewBox="0 0 24 24"><use href="#fm-i-clock"/><path class="fm__h" d="M12 12V7"/></svg><b>3 dage efter</b></span>
+          <span class="fm__lbl is-off" data-fm-lbl>Ja</span><span class="fm__lbl is-off" data-fm-lbl>Nej</span>
+          <div class="fm__nodes">
+            <div class="fm__node is-trig" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-book"/></svg></span><span class="fm__txt"><b>Ny booking</b><span class="fm__sub"><span>Fra din hjemmeside</span><span>Mette, tir. kl. 10</span></span></span></div><span class="fm__toast">Mette, tir. kl. 10</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-sms"/></svg></span><span class="fm__txt"><b>SMS-bekræftelse</b><span class="fm__sub"><span>Til kunden</span><span>SMS sendt</span></span></span></div><span class="fm__toast">SMS sendt</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-cal"/></svg></span><span class="fm__txt"><b>I kalenderen</b><span class="fm__sub"><span>Din kalender</span><span>Tid lagt ind</span></span></span></div><span class="fm__toast">Tid lagt ind</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-bill"/></svg></span><span class="fm__txt"><b>Faktura</b><span class="fm__sub"><span>Sendes på mail</span><span>Faktura sendt</span></span></span></div><span class="fm__toast">Faktura sendt</span></div>
+            <div class="fm__node" data-fm-node><div class="fm__card"><span class="fm__ico"><svg viewBox="0 0 24 24"><use href="#fm-i-star"/></svg></span><span class="fm__txt"><b>Anmeldelse</b><span class="fm__sub"><span>Spørg kunden</span><span>Mail sendt</span></span></span></div><span class="fm__toast">Mail sendt</span></div>
+          </div>
+        </div>
+        <p class="fm__end"><i aria-hidden="true">✓</i><span data-fm-end>Fra booking til anmeldelse.</span><b>0 klik fra dig.</b><span class="tag-eks">Eksempel</span></p>
       </div>
     </section>
 
@@ -283,140 +378,97 @@
       </div>
     </section>
 
-    <section id="services" class="addons" data-hs data-sec="services">
-      <div class="addons__sticky" data-hsticky>
-        <div class="wrap sec-head" style="width:100%">
-          <div class="sec-head__title">
-            <div class="kicker">Andre services</div>
-            <h2 class="h2">Vil du have mere?<br><span class="dim">Vi kan det hele.</span></h2>
-          </div>
+    <section id="services" class="sx sx-grid" data-sec="services" data-grid>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Andre services</div>
+          <h2 class="h2">Mere end Automations?<br><span class="dim">Sæt det sammen her.</span></h2>
+        </div>
+        <div class="sx-grid__side">
           <p class="sec-head__lead">Tilføj det, du også er interesseret i, så får du én samlet pris sammen med Automations.</p>
+          <a href="#kontakt" class="sx-grid__sum" data-grid-sum hidden><span>I din forespørgsel</span><b data-grid-sum-txt></b><i aria-hidden="true">→</i></a>
         </div>
-        <div class="addons__wrap" data-hwrap>
-          <div class="addons__track" data-htrack>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Hjemmesider" data-value="2995">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">01</span>
-              <div class="addon__head"><h3>Hjemmesider</h3><p>Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.</p></div>
-              <div class="addon__price">fra 2.995 kr.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Simpel one page: 2.995 kr.</li><li><span class="check" aria-hidden="true">✓</span>Normal hjemmeside: 9.995 kr.</li><li><span class="check" aria-hidden="true">✓</span>SEO hjemmeside: 29.995 kr.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Hjemmesider" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/hjemmesider" aria-label="Læs mere om Hjemmesider" data-event="Services: Hjemmesider">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Google Ads" data-value="8000">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">02</span>
-              <div class="addon__head"><h3>Google Ads</h3><p>Vær øverst på Google, når kunderne søger lige nu.</p></div>
-              <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Søgeord og kampagner</li><li><span class="check" aria-hidden="true">✓</span>Lokal målretning</li><li><span class="check" aria-hidden="true">✓</span>Månedlig rapport</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Google Ads" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/google-ads" aria-label="Læs mere om Google Ads" data-event="Services: Google Ads">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Meta Ads" data-value="8000">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">03</span>
-              <div class="addon__head"><h3>Meta Ads</h3><p>Annoncer på Facebook og Instagram, der rammer de rigtige.</p></div>
-              <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Tekst og grafik</li><li><span class="check" aria-hidden="true">✓</span>Målretning og retargeting</li><li><span class="check" aria-hidden="true">✓</span>Månedlig rapport</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Meta Ads" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/meta-ads" aria-label="Læs mere om Meta Ads" data-event="Services: Meta Ads">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Google Shopping Ads" data-value="8000">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">04</span>
-              <div class="addon__head"><h3>Google Shopping Ads</h3><p>Dine produkter med billede og pris øverst på Google.</p></div>
-              <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Produktfeed og Merchant Center</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li><li><span class="check" aria-hidden="true">✓</span>Sporing af salg</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Google Shopping Ads" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/google-shopping-ads" aria-label="Læs mere om Google Shopping Ads" data-event="Services: Google Shopping Ads">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="995">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">05</span>
-              <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
-              <div class="addon__price">995 kr./time</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="SEO" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/seo" aria-label="Læs mere om SEO" data-event="Services: SEO">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="GEO" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">06</span>
-              <div class="addon__head"><h3>GEO</h3><p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Tjek af din synlighed i AI</li><li><span class="check" aria-hidden="true">✓</span>Indhold, AI kan citere</li><li><span class="check" aria-hidden="true">✓</span>Struktureret data</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="GEO" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/geo" aria-label="Læs mere om GEO" data-event="Services: GEO">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="AI" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">07</span>
-              <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="AI" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/ai" aria-label="Læs mere om AI" data-event="Services: AI">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">08</span>
-              <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="E-mail marketing" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/email-marketing" aria-label="Læs mere om E-mail marketing" data-event="Services: E-mail marketing">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="CRO" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">09</span>
-              <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="CRO" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/cro" aria-label="Læs mere om CRO" data-event="Services: CRO">Læs mere →</a>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="sx-grid__list">
+        <div class="sx-gc" data-addon="Hjemmesider" data-value="2995" data-reveal="0">
+          <div class="sx-gc__top"><h3>Hjemmesider</h3><span class="sx-gc__price">fra 2.995 kr.</span></div>
+          <p>Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Hjemmesider" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/hjemmesider" aria-label="Læs mere om Hjemmesider" data-event="Services: Hjemmesider">Læs mere →</a>
           </div>
         </div>
-        <div class="wrap addons__meter" style="width:100%">
-          <span data-hnum>01</span>
-          <div class="addons__bar"><div data-hbar></div></div>
-          <span>09</span>
+        <div class="sx-gc" data-addon="Google Ads" data-value="8000" data-reveal="1">
+          <div class="sx-gc__top"><h3>Google Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
+          <p>Vær øverst på Google, når kunderne søger lige nu.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Google Ads" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/google-ads" aria-label="Læs mere om Google Ads" data-event="Services: Google Ads">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="Meta Ads" data-value="8000" data-reveal="2">
+          <div class="sx-gc__top"><h3>Meta Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
+          <p>Annoncer på Facebook og Instagram, der rammer de rigtige.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Meta Ads" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/meta-ads" aria-label="Læs mere om Meta Ads" data-event="Services: Meta Ads">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="Google Shopping Ads" data-value="8000" data-reveal="3">
+          <div class="sx-gc__top"><h3>Google Shopping Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
+          <p>Dine produkter med billede og pris øverst på Google.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Google Shopping Ads" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/google-shopping-ads" aria-label="Læs mere om Google Shopping Ads" data-event="Services: Google Shopping Ads">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="Google CSS" data-value="0" data-reveal="4">
+          <div class="sx-gc__top"><h3>Google CSS</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Op til 20% billigere klik på dine Google Shopping-annoncer.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Google CSS" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="SEO" data-value="995" data-reveal="0">
+          <div class="sx-gc__top"><h3>SEO</h3><span class="sx-gc__price">995 kr./time</span></div>
+          <p>Bliv fundet først, når kunderne søger.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="SEO" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/seo" aria-label="Læs mere om SEO" data-event="Services: SEO">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="GEO" data-value="0" data-reveal="1">
+          <div class="sx-gc__top"><h3>GEO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="GEO" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/geo" aria-label="Læs mere om GEO" data-event="Services: GEO">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="AI" data-value="0" data-reveal="2">
+          <div class="sx-gc__top"><h3>AI</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="AI" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/ai" aria-label="Læs mere om AI" data-event="Services: AI">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="E-mail marketing" data-value="0" data-reveal="3">
+          <div class="sx-gc__top"><h3>E-mail marketing</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="E-mail marketing" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/email-marketing" aria-label="Læs mere om E-mail marketing" data-event="Services: E-mail marketing">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="CRO" data-value="0" data-reveal="4">
+          <div class="sx-gc__top"><h3>CRO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Flere kunder fra de besøgende, du allerede har.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="CRO" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/cro" aria-label="Læs mere om CRO" data-event="Services: CRO">Læs mere →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -481,7 +533,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" aria-current="page" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" aria-current="page" data-event="Bund: Automations">Automations</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>

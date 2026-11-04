@@ -36,6 +36,11 @@
       "permanent": true
     },
     {
+      "source": "/referencer",
+      "destination": "/resultater",
+      "permanent": false
+    },
+    {
       "source": "/services",
       "destination": "/#services",
       "permanent": false
