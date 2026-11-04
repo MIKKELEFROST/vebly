@@ -1,9 +1,6 @@
-// Showcase: CRO, an A/B test on a landing page (scripts/services/showcase/cro.html).
-// In view, visitor dots run from "Dine besøgende" along the split into A and B; each looks around and
-// leaves, or clicks the call button (a henvendelse). Counters tick (Konvertering = henvendelser / besøg
-// as shown) and after 14 example days B wins. "Vis heatmap" shows where the dots looked and clicked, also
-// mid-run; "Kør testen igen" starts over. Phones show one version at a time. Without html.motion: the
-// finished test, static. All numbers are an example.
+// Showcase: CRO, an A/B test (scripts/services/showcase/cro.html). In view, visitor dots split into A and B,
+// look around or click the call button; counters tick (rate = henvendelser / besøg) and B wins after 14
+// example days. Heatmap toggle, replay, one version at a time on phones. No motion: the finished test.
 import { track } from '/assets/js/analytics.js';
 
 const root = document.querySelector('.show--cro');
