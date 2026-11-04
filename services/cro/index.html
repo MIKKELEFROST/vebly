@@ -146,6 +146,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/show/cro.css?v=20261104a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
@@ -154,6 +155,7 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104a"></script>
 <script type="module" src="/assets/js/show/cro.js?v=20261104a"></script>
 </head>
 <body>
@@ -182,6 +184,7 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -228,6 +231,12 @@
           </a>
         </div>
       </div>
+    </section>
+
+    <section class="sx sx-stm" data-sec="pointe" data-stm style="--n:12">
+      <div class="kicker sx-stm__k" data-reveal="0">Kort sagt</div>
+      <h2 class="sx-stm__text"><span class="sx-w" style="--i:0">Du</span> <span class="sx-w" style="--i:1">har</span> <span class="sx-w" style="--i:2">allerede</span> <span class="sx-w" style="--i:3">besøgende.</span> <br class="sx-br"><span class="sx-w dim" style="--i:4">Få</span> <span class="sx-w dim" style="--i:5">flere</span> <span class="sx-w dim" style="--i:6">af</span> <span class="sx-w dim" style="--i:7">dem</span> <span class="sx-w dim" style="--i:8">til</span> <span class="sx-w dim" style="--i:9">at</span> <span class="sx-w dim" style="--i:10">trykke</span> <span class="sx-w sx-w--pill" style="--i:11"><span class="sx-pill sx-pill--cursor"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M5.5 3.2 19 10.1l-6 1.7-2.5 5.9z"/></svg><span class="sx-pill__t">Ring nu</span></span></span></h2>
+      <p class="sx-stm__sub" data-reveal="2">Vi finder ud af, hvor dine besøgende falder fra, og retter det, så flere ringer, skriver eller køber.</p>
     </section>
 
     <section id="eksempel" class="show show--cro" data-sec="eksempel">
@@ -313,44 +322,74 @@
       </div>
     </section>
 
-    <section id="pris" class="price-sec" data-sec="pris">
-      <div class="spot price" data-reveal="0" data-spot>
-        <div class="price__main">
+    <section id="pris" class="sx sx-band" data-sec="pris" data-band>
+      <div class="sx-band__box" data-reveal="0">
+        <div class="sx-band__price">
           <div class="kicker">CRO</div>
-          <h2>Fast pris.<br><span>Efter en snak.</span></h2>
-          <p class="price__lead">Vi kigger på din side og dine tal og giver dig en fast pris inden for 24 timer.</p>
-          <div class="price__cta"><a href="#kontakt" class="btn btn--accent" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
+          <div class="sx-band__amount sx-band__amount--txt">Fast pris<span>efter en snak</span></div>
         </div>
-        <div class="incl">
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Analyse af din side</b><span>Vi ser på dine tal og finder, hvor de besøgende falder fra.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Heatmaps</b><span>Se, hvor folk klikker, og hvor langt de læser.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>A/B-test</b><span>Vi tester to versioner mod hinanden og beholder den, der virker.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Tydeligere tekster</b><span>Overskrifter og knapper, der siger, hvad kunden får.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Kortere vej til kontakt</b><span>Færre felter, færre klik og knapper, der altid er synlige.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Hastighed</b><span>En hurtigere side mister færre besøgende.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Tillid</b><span>Anmeldelser og priser, der er nemme at finde.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Rapport</b><span>Hvad vi har testet, hvad det gav, og hvad der er det næste.</span></span></div>
+        <div class="sx-band__body">
+          <h2 class="sx-band__h">Du kender prisen, <span>før vi går i gang.</span></h2>
+          <p class="sx-band__lead">Vi kigger på din side og dine tal og giver dig en fast pris inden for 24 timer.</p>
+          <ul class="sx-band__chips">
+            <li class="sx-chip" style="--i:0"><span class="check" aria-hidden="true">✓</span>Analyse af din side</li>
+            <li class="sx-chip" style="--i:1"><span class="check" aria-hidden="true">✓</span>Heatmaps</li>
+            <li class="sx-chip" style="--i:2"><span class="check" aria-hidden="true">✓</span>A/B-test</li>
+            <li class="sx-chip" style="--i:3"><span class="check" aria-hidden="true">✓</span>Rapport</li>
+            <li style="--i:4"><button type="button" class="sx-chip sx-chip--more" data-band-more aria-expanded="false" aria-controls="sx-band-all">Se alt, der er med <span aria-hidden="true">+</span></button></li>
+          </ul>
+          <div class="sx-band__all" id="sx-band-all" data-band-all><div><ul>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Analyse af din side</b>Vi ser på dine tal og finder, hvor de besøgende falder fra.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Heatmaps</b>Se, hvor folk klikker, og hvor langt de læser.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>A/B-test</b>Vi tester to versioner mod hinanden og beholder den, der virker.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Tydeligere tekster</b>Overskrifter og knapper, der siger, hvad kunden får.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Kortere vej til kontakt</b>Færre felter, færre klik og knapper, der altid er synlige.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Hastighed</b>En hurtigere side mister færre besøgende.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Tillid</b>Anmeldelser og priser, der er nemme at finde.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Rapport</b>Hvad vi har testet, hvad det gav, og hvad der er det næste.</span></li>
+          </ul></div></div>
+          <div class="sx-band__cta"><a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
         </div>
       </div>
     </section>
 
-    <section id="saadan" class="promise" data-sec="saadan">
-      <div class="promise__head" data-reveal="0">
-        <div class="kicker">Sådan foregår det</div>
-        <h2 class="h2">Tre trin.<br><span class="dim">Så kører det.</span></h2>
+    <section id="saadan" class="sx sx-tl" data-sec="saadan" data-tl>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Sådan foregår det</div>
+          <h2 class="h2">Vi gætter ikke.<br><span class="dim">Vi tester.</span></h2>
+        </div>
+        <p class="sec-head__lead">Hver forbedring bliver testet mod den side, du har i dag.</p>
       </div>
-      <div class="promise__list">
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">01 / 03</span><h3>Analyse.</h3><p>Vi finder de steder, hvor de besøgende falder fra.</p></div>
-          <span class="pcard__g" aria-hidden="true">%</span>
+      <div class="sx-tl__track" style="--n:3">
+        <div class="sx-tl__rail" aria-hidden="true"><i data-tl-fill></i></div>
+        <ol class="sx-tl__list">
+          <li class="sx-tl__step" style="--i:0"><span class="sx-tl__node" aria-hidden="true"><span>%</span></span><h3>Analyse.</h3><p>Vi finder de steder, hvor de besøgende falder fra.</p></li>
+          <li class="sx-tl__step" style="--i:1"><span class="sx-tl__node" aria-hidden="true"><span>A/B</span></span><h3>Test.</h3><p>Vi tester forbedringer mod den side, du har i dag.</p></li>
+          <li class="sx-tl__step" style="--i:2"><span class="sx-tl__node" aria-hidden="true"><span>↗</span></span><h3>Forbedring.</h3><p>Vi beholder det, der virker, og tager det næste.</p></li>
+        </ol>
+        <span class="sx-tl__end" aria-hidden="true"><i></i>Klar til næste test</span>
+      </div>
+    </section>
+
+    <section id="faq" class="faq" data-sec="faq">
+      <h2 class="h2" data-reveal="0">Spørgsmål?</h2>
+      <div class="faq__list" data-faq>
+        <div class="faq__item is-open" data-reveal="0">
+          <button type="button" class="faq__q" aria-expanded="true" aria-controls="faq-0">Hvad er CRO?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-0"><div><p>Conversion Rate Optimization, på dansk konverteringsoptimering. Det handler om at få flere af dem, der allerede besøger din side, til at blive kunder.</p></div></div>
         </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">02 / 03</span><h3>Test.</h3><p>Vi tester forbedringer mod den side, du har i dag.</p></div>
-          <span class="pcard__g" aria-hidden="true">A/B</span>
+        <div class="faq__item" data-reveal="1">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-1">Hvornår giver CRO mening?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-1"><div><p>Når du har besøgende, men for få henvendelser eller salg. Især hvis du betaler for trafikken med annoncer, for så giver hver ekstra kunde mere for det samme budget.</p></div></div>
         </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">03 / 03</span><h3>Forbedring.</h3><p>Vi beholder det, der virker, og tager det næste.</p></div>
-          <span class="pcard__g" aria-hidden="true">↗</span>
+        <div class="faq__item" data-reveal="2">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-2">Skal jeg have en ny hjemmeside?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-2"><div><p>Ikke nødvendigvis. Som regel forbedrer vi den side, du har. Er den for gammel at bygge videre på, siger vi det ærligt, og så kan vi bygge en ny fra 2.995 kr.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="3">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-3">Hvad koster CRO?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-3"><div><p>Du får en fast pris efter en kort snak om din side og dine mål.</p></div></div>
         </div>
       </div>
     </section>
@@ -502,28 +541,6 @@
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
           <span>10</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="faq" data-sec="faq">
-      <h2 class="h2" data-reveal="0">Spørgsmål?</h2>
-      <div class="faq__list" data-faq>
-        <div class="faq__item is-open" data-reveal="0">
-          <button type="button" class="faq__q" aria-expanded="true" aria-controls="faq-0">Hvad er CRO?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-0"><div><p>Conversion Rate Optimization, på dansk konverteringsoptimering. Det handler om at få flere af dem, der allerede besøger din side, til at blive kunder.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="1">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-1">Hvornår giver CRO mening?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-1"><div><p>Når du har besøgende, men for få henvendelser eller salg. Især hvis du betaler for trafikken med annoncer, for så giver hver ekstra kunde mere for det samme budget.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="2">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-2">Skal jeg have en ny hjemmeside?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-2"><div><p>Ikke nødvendigvis. Som regel forbedrer vi den side, du har. Er den for gammel at bygge videre på, siger vi det ærligt, og så kan vi bygge en ny fra 2.995 kr.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="3">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-3">Hvad koster CRO?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-3"><div><p>Du får en fast pris efter en kort snak om din side og dine mål.</p></div></div>
         </div>
       </div>
     </section>

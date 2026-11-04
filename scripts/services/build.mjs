@@ -75,25 +75,79 @@ if (want('forside')) {
 /* Service pages                                                        */
 /* ------------------------------------------------------------------ */
 
+// Each page lists its sections after the hero in p.layout (data.mjs); the contact form always comes
+// last. Without a layout a page gets the old order. A page has one section of each kind: one price
+// (price, receipt or band), one process (cards or timeline, or none), one FAQ (faq or faqSplit) and
+// one list of the other services (track or grid). The kinds give the menu and the analytics names.
+const DEFAULT_LAYOUT = ['showcase', 'price', 'cards', 'track', 'faq'];
+const KIND = {
+  showcase: 'eksempel', statement: 'pointe', compare: 'uden-med', facts: 'fakta', marquee: 'ord',
+  price: 'pris', receipt: 'pris', band: 'pris', cards: 'saadan', timeline: 'saadan',
+  faq: 'faq', faqSplit: 'faq', track: 'services', grid: 'services'
+};
+const MENU = { eksempel: ['Eksempel', '#eksempel'], pris: ['Det får du', '#pris'], saadan: ['Sådan foregår det', '#saadan'], faq: ['Spørgsmål', '#faq'] };
+// These need assets/css/sections.css and assets/js/sections.js
+const NEW = new Set(['statement', 'compare', 'facts', 'marquee', 'receipt', 'band', 'timeline', 'faqSplit', 'grid']);
+
+const layoutOf = p => {
+  const L = p.layout || DEFAULT_LAYOUT, kinds = L.map(k => KIND[k]);
+  L.forEach(k => { if (!KIND[k]) throw new Error(`${p.slug}: ukendt sektion "${k}" i layout (kan være: ${Object.keys(KIND).join(', ')})`); });
+  const twice = kinds.find((k, i) => kinds.indexOf(k) !== i);
+  if (twice) throw new Error(`${p.slug}: layout har to sektioner af samme slags (${twice})`);
+  if (!kinds.includes('pris') || !kinds.includes('faq')) throw new Error(`${p.slug}: layout skal have en pris og et FAQ`);
+  return L;
+};
+
+const others = p => services.filter(x => x.slug !== p.slug);
+const render = {
+  showcase: (p, sc) => sc.html,
+  statement: p => lib.statement(p),
+  compare: p => lib.compare(p),
+  facts: p => lib.facts(p),
+  marquee: p => lib.marquee(p),
+  price: p => price(p),
+  receipt: p => lib.receipt(p),
+  band: p => lib.band(p),
+  cards: p => cards({ id: 'saadan', sec: 'saadan', kicker: 'Sådan foregår det', h2: `${p.steps.length === 3 ? 'Tre' : 'Fire'} trin.<br><span class="dim">Så kører det.</span>`, list: p.steps }),
+  timeline: p => lib.timeline(p),
+  track: p => track({ id: 'services', kicker: 'Andre services', h2: 'Vil du have mere?<br><span class="dim">Vi kan det hele.</span>', lead: `Tilføj det, du også er interesseret i, så får du én samlet pris sammen med ${p.name}.`, list: others(p) }),
+  grid: p => lib.grid({ id: 'services', kicker: 'Andre services', h2: `Mere end ${esc(p.name)}?<br><span class="dim">Sæt det sammen her.</span>`, lead: `Tilføj det, du også er interesseret i, så får du én samlet pris sammen med ${p.name}.`, list: others(p) }),
+  faq: p => faq(p.faqs),
+  faqSplit: p => lib.faqSplit(p.faqs, p.faqSplit)
+};
+
+// Two pages must not open the same way: warn when the first three sections after the hero repeat
+{
+  const seen = new Map();
+  for (const p of pages) {
+    const k = layoutOf(p).slice(0, 3).join(' · ');
+    if (seen.has(k)) console.warn(`OBS: ${p.slug} og ${seen.get(k)} starter med de samme tre sektioner (${k})`);
+    else seen.set(k, p.slug);
+  }
+}
+
 for (const p of pages) {
   if (!want(p.slug)) continue;
   const s = services.find(x => x.slug === p.slug);
   if (!s) throw new Error('Mangler kort i services: ' + p.slug);
   const sc = showcase(p.slug);
+  const L = layoutOf(p).filter(k => k !== 'showcase' || sc.html);
+  const own = L.some(k => NEW.has(k));
+  // The menu: the sections this page has, in its own order (the old pages keep their old menu)
+  const nav = p.layout
+    ? [['Services', '/#services'], ...L.map(k => MENU[KIND[k]]).filter(Boolean)]
+    : [['Services', '/#services'], ['Det får du', '#pris'], ['Sådan foregår det', '#saadan'], ['Spørgsmål', '#faq']];
   out(`services/${p.slug}/index.html`, page({
     pageType: `service_${p.slug}`, slug: p.slug,
     title: `${p.name} · ${p.short} · Webleads`, description: p.description, url: url(p.slug), og: `/assets/og/${p.slug}.png`, ogAlt: `Webleads: ${p.name}. ${p.short}.`, ld: serviceLd(p, s),
     tag: `${p.name}${s.value ? ' ' + s.price : ''}`, subject: `Møde om ${p.name}`,
     msg: `Hej, jeg var lige inde på webleads.dk og vil gerne høre mere om ${p.name}. Kan vi opsætte et møde?`,
-    nav: [['Services', '/#services'], ['Det får du', '#pris'], ['Sådan foregår det', '#saadan'], ['Spørgsmål', '#faq']],
-    css: sc.css, js: sc.js
+    nav,
+    css: [...(own ? [`/assets/css/sections.css?v=${V.css}`] : []), ...sc.css],
+    js: [...(own ? [`/assets/js/sections.js?v=${V.js}`] : []), ...sc.js]
   }, [
     hero({ ...p, badge: `${esc(p.name)} · til`, cta: 'Få en fast pris', more: sc.html ? ['Se et eksempel', '#eksempel'] : ['Se hvad du får', '#pris'] }),
-    sc.html,
-    price(p),
-    cards({ id: 'saadan', sec: 'saadan', kicker: 'Sådan foregår det', h2: `${p.steps.length === 3 ? 'Tre' : 'Fire'} trin.<br><span class="dim">Så kører det.</span>`, list: p.steps }),
-    track({ id: 'services', kicker: 'Andre services', h2: 'Vil du have mere?<br><span class="dim">Vi kan det hele.</span>', lead: `Tilføj det, du også er interesseret i, så får du én samlet pris sammen med ${p.name}.`, list: services.filter(x => x.slug !== p.slug) }),
-    faq(p.faqs),
+    ...L.map(k => render[k](p, sc)),
     contact({ lead: p.contact, base: p.name, value: s.value, placeholder: p.placeholder })
   ].filter(Boolean)));
 }

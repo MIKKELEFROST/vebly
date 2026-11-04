@@ -162,6 +162,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/show/google-css.css?v=20261104a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
@@ -170,6 +171,7 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104a"></script>
 <script type="module" src="/assets/js/show/google-css.js?v=20261104a"></script>
 </head>
 <body>
@@ -198,8 +200,8 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
-        <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
         <a href="#kontakt" class="nav__cta" data-magnet data-roll data-event="Menu: Kontakt">Kontakt</a>
       </nav>
@@ -265,7 +267,7 @@
                 <div class="gcss-q"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span>duftlys i glas</span></div>
                 <span class="tag-eks">Eksempel</span>
               </div>
-              <div class="gcss-tabs"><b>Alle</b><span>Shopping</span><span>Billeder</span><span>Videoer</span><span>Nyheder</span></div>
+              <div class="gcss-tabs"><b>Alle</b><span>Billeder</span><span>Videoer</span><span>Nyheder</span></div>
               <div class="gcss-ads">
                 <div class="gcss-ads__h"><b>Sponsoreret</b><span>· Shopping</span><i>⋮</i></div>
                 <div class="gcss-row">
@@ -330,7 +332,7 @@
                 <span class="gcss-sticker" data-gcss-sticker><i></i><b>−20%</b></span>
               </div>
             </div>
-            <p class="gcss-why">Google Shopping lægger en margin oven i klikprisen. Det slipper du for med en CSS-partner.</p>
+            <p class="gcss-why">Googles egen CSS trækker en margin fra dit bud, før det kommer med i auktionen. Med en CSS-partner tæller hele buddet.</p>
             <div class="gcss-budget">
               <div class="gcss-budget__row"><label for="gcss-budget">Dit Shopping-budget om måneden</label><b data-gcss-bv aria-hidden="true">10.000 kr.</b></div>
               <div class="gcss-rail" data-gcss-rail><input class="gcss-range" type="range" id="gcss-budget" min="0" max="48" step="1" value="16" aria-valuetext="10.000 kr." data-gcss-range></div>
@@ -338,7 +340,7 @@
             </div>
             <div class="gcss-res" aria-hidden="true">
               <div class="gcss-res__row">
-                <span class="gcss-res__lbl">Op til 25% flere klik for samme budget</span>
+                <span class="gcss-res__lbl">Flere klik for samme budget</span>
                 <span class="gcss-res__val"><span class="gcss-res__was" data-gcss-c0>2.000</span><span class="gcss-res__arr">→</span><b class="gcss-res__now" data-gcss-c1>2.500</b><span class="gcss-res__u">klik</span></span>
               </div>
               <div class="gcss-res__row">
@@ -347,7 +349,7 @@
               </div>
             </div>
             <p class="sr-only" data-gcss-live>Med en CSS-partner: 4,00 kr. pr. klik i stedet for 5,00 kr. Med et budget på 10.000 kr. om måneden giver det op til 2.500 klik i stedet for 2.000, eller op til 2.000 kr. sparet om måneden for de samme klik.</p>
-            <p class="gcss-fine">Eksempel: klikpris 5,00 kr. uden og 4,00 kr. med en CSS-partner. Hvor meget du sparer, afhænger af auktionen.</p>
+            <p class="gcss-fine">Eksempel: klikpris 5,00 kr. uden og 4,00 kr. med en CSS-partner, hvis margenen hos Googles egen CSS er ca. 20%. Google oplyser ikke marginens størrelse; 20% er branchens skøn. Hvor meget du får ud af det, afhænger af auktionen.</p>
           </div>
         </div>
       </div>
@@ -382,195 +384,64 @@
       </svg>
     </section>
 
-    <section id="pris" class="price-sec" data-sec="pris">
-      <div class="spot price" data-reveal="0" data-spot>
-        <div class="price__main">
+    <section id="forskel" class="sx sx-vs" data-sec="uden-med" data-vs>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Forskellen</div>
+          <h2 class="h2">Samme annoncer.<br><span class="dim">Billigere klik.</span></h2>
+        </div>
+        <div class="sx-vs__side">
+          <p class="sec-head__lead">Det eneste, der skifter, er den CSS, dine annoncer bliver vist gennem.</p>
+          <div class="seg sx-vs__seg" role="group" aria-label="Vis uden css-partner eller med en css-partner">
+            <button type="button" data-vs-go="uden" aria-pressed="false">Uden CSS-partner</button>
+            <button type="button" data-vs-go="med" class="is-on" aria-pressed="true">Med en CSS-partner</button>
+          </div>
+        </div>
+      </div>
+      <div class="sx-vs__board" data-vs-board data-show="med" style="grid-template-rows:repeat(5, auto)">
+        <div class="sx-vs__bg is-uden" aria-hidden="true"></div>
+        <div class="sx-vs__bg is-med" aria-hidden="true"></div>
+        <div class="sx-vs__head is-uden" style="grid-row:1;--i:0"><span class="sx-vs__mk" aria-hidden="true">✕</span>Uden CSS-partner</div>
+        <div class="sx-vs__head is-med" style="grid-row:1;--i:1"><img src="/assets/logo-icon.svg" alt="" width="28" height="28">Med en CSS-partner</div>
+        <div class="sx-vs__cell is-uden" style="grid-row:2;--i:2"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden CSS-partner: </span>Google Shopping lægger en margin oven i klikprisen.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:2;--i:3"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med en CSS-partner: </span>Gennem en anden CSS slipper du for den margin.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:3;--i:4"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden CSS-partner: </span>Du betaler marginen i hvert eneste klik.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:3;--i:5"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med en CSS-partner: </span>Det samme klik kan koste op til 20% mindre.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:4;--i:6"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden CSS-partner: </span>Et skifte lyder som et stort arbejde.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:4;--i:7"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med en CSS-partner: </span>Vi klarer skiftet. Dine kampagner kører videre.</span></div>
+        <div class="sx-vs__cell is-uden" style="grid-row:5;--i:8"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Uden CSS-partner: </span>Du ved ikke, hvad du kunne spare.</span></div>
+        <div class="sx-vs__cell is-med" style="grid-row:5;--i:9"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med en CSS-partner: </span>Vi måler klikpriserne før og efter.</span></div>
+      </div>
+    </section>
+
+    <section id="pris" class="sx sx-band" data-sec="pris" data-band>
+      <div class="sx-band__box" data-reveal="0">
+        <div class="sx-band__price">
           <div class="kicker">Google CSS</div>
-          <h2>Fast pris.<br><span>Efter en snak.</span></h2>
-          <p class="price__lead">Vi ser på din Merchant Center, dine lande og dit Shopping-budget og giver dig en fast pris inden for 24 timer.</p>
-          <div class="price__cta"><a href="#kontakt" class="btn btn--accent" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
+          <span class="sx-band__sticker">Op til 20% billigere klik</span>
+          <div class="sx-band__amount sx-band__amount--txt">Fast pris<span>efter en snak</span></div>
         </div>
-        <div class="incl">
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Tjek af din konto</b><span>Vi ser på din Merchant Center, dine kampagner og de lande, du sælger til.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Lande og placeringer</b><span>Vi tjekker, at CSS-partneren dækker dine lande og de steder, dine annoncer vises.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Vi klarer skiftet</b><span>Vi sætter skiftet i gang, og du godkender det i din Merchant Center.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Som regel samme kampagner</b><span>Som regel er din Google Ads-konto, dine kampagner og dit produktfeed de samme som i dag.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Hele buddet tæller</b><span>Uden margin fra Googles egen CSS kommer hele dit bud med i auktionen.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Shopping og Performance Max</b><span>Det gælder dine produktannoncer i både Shopping og Performance Max.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Bud og mål</b><span>Vi justerer bud og mål, så fordelen giver lavere klikpris, flere klik eller lidt af begge.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Måling før og efter</b><span>Fordelen står ikke på fakturaen, så vi måler klikpris, klik og salg før og efter.</span></span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="saadan" class="promise" data-sec="saadan">
-      <div class="promise__head" data-reveal="0">
-        <div class="kicker">Sådan foregår det</div>
-        <h2 class="h2">Tre trin.<br><span class="dim">Så kører det.</span></h2>
-      </div>
-      <div class="promise__list">
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">01 / 03</span><h3>Tjek.</h3><p>Vi ser på din konto, dine lande og dit budget og siger ærligt, om det kan betale sig.</p></div>
-          <span class="pcard__g" aria-hidden="true">?</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">02 / 03</span><h3>Skift.</h3><p>Vi kobler din Merchant Center på en CSS-partner, og du godkender skiftet.</p></div>
-          <span class="pcard__g" aria-hidden="true">%</span>
-        </div>
-        <div class="pcard" data-card>
-          <div class="pcard__body"><span class="pcard__n">03 / 03</span><h3>Opfølgning.</h3><p>Vi sammenligner klikpris, klik og salg før og efter og sender dig tallene.</p></div>
-          <span class="pcard__g" aria-hidden="true">↓</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="addons" data-hs data-sec="services">
-      <div class="addons__sticky" data-hsticky>
-        <div class="wrap sec-head" style="width:100%">
-          <div class="sec-head__title">
-            <div class="kicker">Andre services</div>
-            <h2 class="h2">Vil du have mere?<br><span class="dim">Vi kan det hele.</span></h2>
-          </div>
-          <p class="sec-head__lead">Tilføj det, du også er interesseret i, så får du én samlet pris sammen med Google CSS.</p>
-        </div>
-        <div class="addons__wrap" data-hwrap>
-          <div class="addons__track" data-htrack>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Hjemmesider" data-value="2995">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">01</span>
-              <div class="addon__head"><h3>Hjemmesider</h3><p>Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.</p></div>
-              <div class="addon__price">fra 2.995 kr.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Simpel one page: 2.995 kr.</li><li><span class="check" aria-hidden="true">✓</span>Normal hjemmeside: 9.995 kr.</li><li><span class="check" aria-hidden="true">✓</span>SEO hjemmeside: 29.995 kr.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Hjemmesider" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/hjemmesider" aria-label="Læs mere om Hjemmesider" data-event="Services: Hjemmesider">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Google Ads" data-value="8000">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">02</span>
-              <div class="addon__head"><h3>Google Ads</h3><p>Vær øverst på Google, når kunderne søger lige nu.</p></div>
-              <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Søgeord og kampagner</li><li><span class="check" aria-hidden="true">✓</span>Lokal målretning</li><li><span class="check" aria-hidden="true">✓</span>Månedlig rapport</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Google Ads" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/google-ads" aria-label="Læs mere om Google Ads" data-event="Services: Google Ads">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Meta Ads" data-value="8000">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">03</span>
-              <div class="addon__head"><h3>Meta Ads</h3><p>Annoncer på Facebook og Instagram, der rammer de rigtige.</p></div>
-              <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Tekst og grafik</li><li><span class="check" aria-hidden="true">✓</span>Målretning og retargeting</li><li><span class="check" aria-hidden="true">✓</span>Månedlig rapport</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Meta Ads" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/meta-ads" aria-label="Læs mere om Meta Ads" data-event="Services: Meta Ads">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Google Shopping Ads" data-value="8000">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">04</span>
-              <div class="addon__head"><h3>Google Shopping Ads</h3><p>Dine produkter med billede og pris øverst på Google.</p></div>
-              <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Produktfeed og Merchant Center</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li><li><span class="check" aria-hidden="true">✓</span>Sporing af salg</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Google Shopping Ads" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/google-shopping-ads" aria-label="Læs mere om Google Shopping Ads" data-event="Services: Google Shopping Ads">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="995">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">05</span>
-              <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
-              <div class="addon__price">995 kr./time</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="SEO" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/seo" aria-label="Læs mere om SEO" data-event="Services: SEO">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="GEO" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">06</span>
-              <div class="addon__head"><h3>GEO</h3><p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Tjek af din synlighed i AI</li><li><span class="check" aria-hidden="true">✓</span>Indhold, AI kan citere</li><li><span class="check" aria-hidden="true">✓</span>Struktureret data</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="GEO" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/geo" aria-label="Læs mere om GEO" data-event="Services: GEO">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="AI" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">07</span>
-              <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="AI" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/ai" aria-label="Læs mere om AI" data-event="Services: AI">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="Automations" data-value="4999">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">08</span>
-              <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
-              <div class="addon__price">fra 4.999 kr.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="Automations" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/automations" aria-label="Læs mere om Automations" data-event="Services: Automations">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">09</span>
-              <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="E-mail marketing" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/email-marketing" aria-label="Læs mere om E-mail marketing" data-event="Services: E-mail marketing">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="CRO" data-value="0">
-              <div class="glare" data-glare></div>
-              <span class="addon__n">10</span>
-              <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
-              <div class="addon__price">Fast pris efter en snak</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
-              <div class="addon__actions">
-                <button type="button" class="addon__toggle" data-toggle="CRO" data-burst aria-pressed="false">+ Tilføj</button>
-                <a class="addon__more" href="/services/cro" aria-label="Læs mere om CRO" data-event="Services: CRO">Læs mere →</a>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-        <div class="wrap addons__meter" style="width:100%">
-          <span data-hnum>01</span>
-          <div class="addons__bar"><div data-hbar></div></div>
-          <span>10</span>
+        <div class="sx-band__body">
+          <h2 class="sx-band__h">Du kender prisen, <span>før vi går i gang.</span></h2>
+          <p class="sx-band__lead">Vi ser på din Merchant Center, dine lande og dit Shopping-budget og giver dig en fast pris inden for 24 timer.</p>
+          <ul class="sx-band__chips">
+            <li class="sx-chip" style="--i:0"><span class="check" aria-hidden="true">✓</span>Samme annoncer</li>
+            <li class="sx-chip" style="--i:1"><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li>
+            <li class="sx-chip" style="--i:2"><span class="check" aria-hidden="true">✓</span>Måling før og efter</li>
+            <li class="sx-chip" style="--i:3"><span class="check" aria-hidden="true">✓</span>Ingen binding</li>
+            <li style="--i:4"><button type="button" class="sx-chip sx-chip--more" data-band-more aria-expanded="false" aria-controls="sx-band-all">Se alt, der er med <span aria-hidden="true">+</span></button></li>
+          </ul>
+          <div class="sx-band__all" id="sx-band-all" data-band-all><div><ul>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Tjek af din konto</b>Vi ser på din Merchant Center, dine kampagner og de lande, du sælger til.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Lande og placeringer</b>Vi tjekker, at CSS-partneren dækker dine lande og de steder, dine annoncer vises.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Vi klarer skiftet</b>Vi sætter skiftet i gang, og du godkender det i din Merchant Center.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Som regel samme kampagner</b>Som regel er din Google Ads-konto, dine kampagner og dit produktfeed de samme som i dag.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Hele buddet tæller</b>Uden margin fra Googles egen CSS kommer hele dit bud med i auktionen.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Shopping og Performance Max</b>Det gælder dine produktannoncer i både Shopping og Performance Max.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Bud og mål</b>Vi justerer bud og mål, så fordelen giver lavere klikpris, flere klik eller lidt af begge.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span><b>Måling før og efter</b>Fordelen står ikke på fakturaen, så vi måler klikpris, klik og salg før og efter.</span></li>
+          </ul></div></div>
+          <div class="sx-band__cta"><a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
         </div>
       </div>
     </section>
@@ -601,6 +472,101 @@
         <div class="faq__item" data-reveal="5">
           <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-5">Hvad koster det?<span class="faq__icon" aria-hidden="true">+</span></button>
           <div class="faq__a" id="faq-5"><div><p>Du får en fast pris efter en kort snak om din webshop.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="sx sx-grid" data-sec="services" data-grid>
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title">
+          <div class="kicker">Andre services</div>
+          <h2 class="h2">Mere end Google CSS?<br><span class="dim">Sæt det sammen her.</span></h2>
+        </div>
+        <div class="sx-grid__side">
+          <p class="sec-head__lead">Tilføj det, du også er interesseret i, så får du én samlet pris sammen med Google CSS.</p>
+          <a href="#kontakt" class="sx-grid__sum" data-grid-sum hidden><span>I din forespørgsel</span><b data-grid-sum-txt></b><i aria-hidden="true">→</i></a>
+        </div>
+      </div>
+      <div class="sx-grid__list">
+        <div class="sx-gc" data-addon="Hjemmesider" data-value="2995" data-reveal="0">
+          <div class="sx-gc__top"><h3>Hjemmesider</h3><span class="sx-gc__price">fra 2.995 kr.</span></div>
+          <p>Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Hjemmesider" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/hjemmesider" aria-label="Læs mere om Hjemmesider" data-event="Services: Hjemmesider">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="Google Ads" data-value="8000" data-reveal="1">
+          <div class="sx-gc__top"><h3>Google Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
+          <p>Vær øverst på Google, når kunderne søger lige nu.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Google Ads" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/google-ads" aria-label="Læs mere om Google Ads" data-event="Services: Google Ads">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="Meta Ads" data-value="8000" data-reveal="2">
+          <div class="sx-gc__top"><h3>Meta Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
+          <p>Annoncer på Facebook og Instagram, der rammer de rigtige.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Meta Ads" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/meta-ads" aria-label="Læs mere om Meta Ads" data-event="Services: Meta Ads">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="Google Shopping Ads" data-value="8000" data-reveal="3">
+          <div class="sx-gc__top"><h3>Google Shopping Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
+          <p>Dine produkter med billede og pris øverst på Google.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Google Shopping Ads" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/google-shopping-ads" aria-label="Læs mere om Google Shopping Ads" data-event="Services: Google Shopping Ads">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="SEO" data-value="995" data-reveal="4">
+          <div class="sx-gc__top"><h3>SEO</h3><span class="sx-gc__price">995 kr./time</span></div>
+          <p>Bliv fundet først, når kunderne søger.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="SEO" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/seo" aria-label="Læs mere om SEO" data-event="Services: SEO">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="GEO" data-value="0" data-reveal="0">
+          <div class="sx-gc__top"><h3>GEO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="GEO" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/geo" aria-label="Læs mere om GEO" data-event="Services: GEO">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="AI" data-value="0" data-reveal="1">
+          <div class="sx-gc__top"><h3>AI</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="AI" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/ai" aria-label="Læs mere om AI" data-event="Services: AI">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="Automations" data-value="4999" data-reveal="2">
+          <div class="sx-gc__top"><h3>Automations</h3><span class="sx-gc__price">fra 4.999 kr.</span></div>
+          <p>Lad rutinerne klare sig selv.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="Automations" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/automations" aria-label="Læs mere om Automations" data-event="Services: Automations">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="E-mail marketing" data-value="0" data-reveal="3">
+          <div class="sx-gc__top"><h3>E-mail marketing</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="E-mail marketing" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/email-marketing" aria-label="Læs mere om E-mail marketing" data-event="Services: E-mail marketing">Læs mere →</a>
+          </div>
+        </div>
+        <div class="sx-gc" data-addon="CRO" data-value="0" data-reveal="4">
+          <div class="sx-gc__top"><h3>CRO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+          <p>Flere kunder fra de besøgende, du allerede har.</p>
+          <div class="sx-gc__actions">
+            <button type="button" class="sx-gc__add" data-toggle="CRO" data-burst aria-pressed="false">+ Tilføj</button>
+            <a class="sx-gc__more" href="/services/cro" aria-label="Læs mere om CRO" data-event="Services: CRO">Læs mere →</a>
+          </div>
         </div>
       </div>
     </section>

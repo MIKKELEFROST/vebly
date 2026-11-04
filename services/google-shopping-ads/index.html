@@ -156,6 +156,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/show/google-shopping-ads.css?v=20261104a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
@@ -164,6 +165,7 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104a"></script>
 <script type="module" src="/assets/js/show/google-shopping-ads.js?v=20261104a"></script>
 </head>
 <body>
@@ -192,6 +194,7 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -279,7 +282,7 @@
           <div class="gsa-scr" data-gsa-scr>
             <p class="sr-only">Eksempel på en søgning på Google efter »keramik krus«. Øverst står sponsorerede shoppingannoncer med billede, pris og fragt. Din annonce fra Lerværk står som nummer to. Vælg en vare for at se den.</p>
             <div class="gsa-q" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span data-gsa-q>keramik krus</span><i class="gsa-q__caret"></i></div>
-            <div class="gsa-tabs" aria-hidden="true"><b>Alle</b><span>Shopping</span><span>Billeder</span><span>Videoer</span><span>Nyheder</span><span>Kort</span></div>
+            <div class="gsa-tabs" aria-hidden="true"><b>Alle</b><span>Billeder</span><span>Videoer</span><span>Nyheder</span><span>Kort</span></div>
             <div class="gsa-ads" role="region" aria-label="Sponsorerede shoppingannoncer, eksempel">
               <div class="gsa-ads__h" aria-hidden="true"><b>Sponsoreret</b><span>· Shopping</span><i>⋮</i></div>
               <div class="gsa-car">
@@ -453,26 +456,67 @@
       </svg>
     </section>
 
-    <section id="pris" class="price-sec" data-sec="pris">
-      <div class="spot price" data-reveal="0" data-spot>
-        <div class="price__main">
-          <div class="kicker">Google Shopping Ads</div>
-          <h2>Fast pris.<br><span>Ingen gætteri.</span></h2>
-          <div class="price__amount"><span class="odo" data-odo>8.000</span><span>kr./md.</span></div>
-          <div class="price__vat">Pr. kanal · hver ekstra kanal 5.000 kr./md. · ekskl. moms</div>
-          <p class="price__lead">Tager du flere kanaler, fx også Google Ads eller Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p>
-          <div class="price__cta"><a href="#kontakt" class="btn btn--accent" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
+    <section class="sx sx-facts" data-sec="fakta" data-facts>
+      <h2 class="kicker sx-facts__k" data-reveal="0">Kort fortalt</h2>
+      <dl class="sx-facts__list" style="--n:4">
+        <div class="sx-fact" style="--i:0">
+          <dt class="sx-fact__lbl">Webshop</dt>
+          <dd class="sx-fact__big"><span>Shopify Partner</span></dd>
+          <dd class="sx-fact__txt">De fleste webshops kan sende varer til Google. Bruger du Shopify, er vi Shopify Partner.</dd>
         </div>
-        <div class="incl">
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Merchant Center</b><span>Vi opretter eller rydder op i din Google Merchant Center-konto.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Produktfeed</b><span>Dine produkter, priser og lagerstatus sendes automatisk til Google.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Kobling til din webshop</b><span>Fx Shopify, hvor vi er Shopify Partner.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Titler og billeder</b><span>Produkttitler med de ord, kunderne faktisk søger på.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Kampagner</b><span>Shopping og Performance Max, delt op efter det, der sælger.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Sporing af salg</b><span>Hvert køb bliver målt, så du kan se, hvad annoncerne sælger for.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Løbende optimering</b><span>Vi flytter budgettet mod de produkter, der sælger.</span></span></div>
-          <div class="incl__item"><span class="check" aria-hidden="true">✓</span><span class="incl__txt"><b>Månedlig rapport</b><span>Salg, forbrug og afkast forklaret kort.</span></span></div>
+        <div class="sx-fact" style="--i:1">
+          <dt class="sx-fact__lbl">Produktfeed</dt>
+          <dd class="sx-fact__big"><span>Af sig selv</span></dd>
+          <dd class="sx-fact__txt">Produkter, priser og lagerstatus bliver sendt til Google automatisk.</dd>
         </div>
+        <div class="sx-fact" style="--i:2">
+          <dt class="sx-fact__lbl">Sporing</dt>
+          <dd class="sx-fact__big"><span>Hvert køb</span></dd>
+          <dd class="sx-fact__txt">bliver målt, så du kan se, hvad annoncerne sælger for.</dd>
+        </div>
+        <div class="sx-fact" style="--i:3">
+          <dt class="sx-fact__lbl">Svar</dt>
+          <dd class="sx-fact__big"><span><span data-count>24</span> timer</span></dd>
+          <dd class="sx-fact__txt">Fortæl os om din webshop, så har du en fast pris inden for 24 timer.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="pris" class="sx sx-rcpt" data-sec="pris" data-rcpt>
+      <div class="sx-rcpt__text" data-reveal="0">
+        <div class="kicker">Det får du</div>
+        <h2 class="h2">Det hele er med.<br><span class="dim">Til én fast pris.</span></h2>
+      </div>
+      <div class="sx-rcpt__stage">
+        <div class="sx-rcpt__slot" aria-hidden="true"></div>
+        <div class="sx-rcpt__feed">
+          <div class="sx-rcpt__paper">
+            <div class="sx-rcpt__brand" aria-hidden="true">webleads<span>.</span></div>
+            <div class="sx-rcpt__meta"><b>Google Shopping Ads</b><span>Fast pris pr. måned</span></div>
+            <ul class="sx-rcpt__items">
+              <li><span>Merchant Center</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Produktfeed</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Kobling til din webshop</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Titler og billeder</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Kampagner</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Sporing af salg</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Løbende optimering</span><i aria-hidden="true"></i><b>inkl.</b></li>
+              <li><span>Månedlig rapport</span><i aria-hidden="true"></i><b>inkl.</b></li>
+            </ul>
+            <div class="sx-rcpt__total">
+              <span class="sx-rcpt__lbl">I alt</span>
+              <span class="sx-rcpt__sum"><span class="odo" data-odo>8.000</span><small>kr./md.</small></span>
+            </div>
+            <div class="sx-rcpt__vat">Ekskl. moms</div>
+            <ul class="sx-rcpt__notes"><li>Pr. kanal</li><li>Hver ekstra kanal 5.000 kr./md.</li><li>Annoncebudgettet betaler du direkte til Google</li></ul>
+            <div class="sx-rcpt__bar" aria-hidden="true"></div>
+            <div class="sx-rcpt__bye" aria-hidden="true">Tak, fordi du kiggede med</div>
+          </div>
+        </div>
+      </div>
+      <div class="sx-rcpt__after" data-reveal="1">
+        <p class="sx-rcpt__lead">Tager du flere kanaler, fx også Google Ads eller Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p>
+        <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a>
       </div>
     </section>
 
@@ -493,6 +537,34 @@
         <div class="pcard" data-card>
           <div class="pcard__body"><span class="pcard__n">03 / 03</span><h3>Optimering.</h3><p>Vi flytter budgettet mod det, der sælger, og sender en rapport.</p></div>
           <span class="pcard__g" aria-hidden="true">↗</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="sx sx-fq" data-sec="faq">
+      <div class="sx-fq__side" data-reveal="0">
+        <div class="kicker">Spørgsmål og svar</div>
+        <h2 class="h2">Godt spørgsmål.<br><span class="dim">Her er svarene.</span></h2>
+        <p class="sx-fq__nudge">Står dit spørgsmål ikke her? Skriv til os, så svarer vi inden for 24 timer.</p>
+        <a href="#kontakt" class="btn btn--dark sx-fq__cta" data-magnet data-burst data-event="Spørgsmål: Stil dit spørgsmål">Stil dit spørgsmål →</a>
+        <span class="sx-fq__glyph" aria-hidden="true">?</span>
+      </div>
+      <div class="faq__list sx-fq__list" data-faq>
+        <div class="faq__item is-open" data-reveal="0">
+          <button type="button" class="faq__q" aria-expanded="true" aria-controls="faq-0">Hvad koster Google Shopping Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-0"><div><p>Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="1">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-1">Hvad er et produktfeed?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-1"><div><p>En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="2">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-2">Virker det med min webshop?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-2"><div><p>De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.</p></div></div>
+        </div>
+        <div class="faq__item" data-reveal="3">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-3">Hvad er forskellen på Shopping og almindelige Google Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-3"><div><p>Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.</p></div></div>
         </div>
       </div>
     </section>
@@ -644,28 +716,6 @@
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
           <span>10</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="faq" data-sec="faq">
-      <h2 class="h2" data-reveal="0">Spørgsmål?</h2>
-      <div class="faq__list" data-faq>
-        <div class="faq__item is-open" data-reveal="0">
-          <button type="button" class="faq__q" aria-expanded="true" aria-controls="faq-0">Hvad koster Google Shopping Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-0"><div><p>Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="1">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-1">Hvad er et produktfeed?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-1"><div><p>En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="2">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-2">Virker det med min webshop?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-2"><div><p>De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.</p></div></div>
-        </div>
-        <div class="faq__item" data-reveal="3">
-          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-3">Hvad er forskellen på Shopping og almindelige Google Ads?<span class="faq__icon" aria-hidden="true">+</span></button>
-          <div class="faq__a" id="faq-3"><div><p>Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.</p></div></div>
         </div>
       </div>
     </section>
