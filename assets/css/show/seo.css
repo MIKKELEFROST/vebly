@@ -40,6 +40,8 @@
 .show--seo .gp-card__in, .show--seo .gp-srch { overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 26px; box-shadow: 0 40px 80px -30px rgba(17,17,17,.22), 0 2px 6px rgba(17,17,17,.04); }
 .show--seo .gp-card { z-index: 1; top: 0; left: 50%; width: 400px; height: 620px; margin-left: -200px; }
 .show--seo .gp-card__in { position: absolute; inset: 0; }
+/* 04: the profile fades back a little behind the search (--b from seo.js) */
+.show--seo .gp-card__in::after { content: ""; position: absolute; inset: 0; z-index: 4; background: var(--bg); opacity: var(--b, 0); pointer-events: none; }
 .show--seo .gp-srch { z-index: 2; left: 0; bottom: 0; width: 430px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
 .motion .show--seo .gp-srch { opacity: 0; }
 .show--seo .gp-eks { position: absolute; z-index: 3; top: -12px; left: 22px; }
@@ -129,11 +131,11 @@
 .show--seo .gp-hist > span { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--gm); }
 .show--seo .gp-hist > span > span { flex: 1; height: 7px; overflow: hidden; border-radius: 999px; background: #eceae6; }
 .show--seo .gp-hist i { display: block; height: 100%; background: var(--gy); transform: scaleX(calc(var(--w) * var(--k))); transform-origin: 0 50%; }
-.show--seo .gp-rcard { margin-top: 14px; padding: 14px; background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 16px 30px -20px rgba(17,17,17,.3); }
+.show--seo .gp-rcard { position: relative; margin-top: 14px; padding: 14px; background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 16px 30px -20px rgba(17,17,17,.3); }
 .show--seo .gp-rcard__h { display: flex; align-items: center; gap: 10px; }
 .show--seo .gp-rcard__h > span:nth-child(2) { display: flex; flex-direction: column; gap: 2px; }
 .show--seo .gp-rcard__h small { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gm); }
-.show--seo .gp-rcard__h .tag-eks { margin-left: auto; align-self: flex-start; }
+.show--seo .gp-rcard .tag-eks { position: absolute; top: 12px; right: 12px; }
 .show--seo .gp-rcard .gp-stars i { width: 12px; height: 12px; }
 .show--seo .gp-rcard p { margin: 10px 0 0; font-size: 13.5px; line-height: 1.5; }
 .show--seo .gp-av { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: #0f3d2e; color: #d4f36b; font: 700 15px/34px var(--body); font-style: normal; text-align: center; }
@@ -202,7 +204,7 @@
   .show--seo .gp-card__in, .show--seo .gp-srch { border: 0; border-radius: 0; box-shadow: none; }
   .show--seo .gp-card { z-index: 2; }
   .show--seo .gp-srch { z-index: 1; padding: 6px 14px; gap: 10px; }
-  .motion .show--seo .gp-card > .gp-eks { display: none; }
+  .motion .show--seo .gp-card > .gp-eks, .motion .show--seo .gp-mapbox .gp-eks { display: none; }
   .motion .show--seo .gp-eks--dev { display: block; top: -12px; left: 30px; z-index: 6; }
   .motion .show--seo .gp-srch { opacity: 1; }
   .show--seo .gp-tabs { display: none; }

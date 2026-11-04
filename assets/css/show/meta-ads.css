@@ -47,10 +47,10 @@
 .show--meta-ads .ma-pill b { font-weight: 700; }
 .show--meta-ads .ma-pill i { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; }
 .show--meta-ads .ma-pill .ma-i { width: 17px; height: 17px; stroke-width: 2.2; }
-.show--meta-ads .ma-pill--1 { top: 13%; right: calc(100% - 34px); --r: -4deg; }
-.show--meta-ads .ma-pill--2 { top: 41%; left: calc(100% - 30px); --r: 4deg; background: var(--accent); border-color: var(--accent); color: #fff; }
+.show--meta-ads .ma-pill--1 { top: 8%; right: calc(100% - 16px); --r: -4deg; }
+.show--meta-ads .ma-pill--2 { top: 37%; left: calc(100% - 30px); --r: 4deg; background: var(--accent); border-color: var(--accent); color: #fff; }
 .show--meta-ads .ma-pill--2 i { background: #fff; color: var(--accent); }
-.show--meta-ads .ma-pill--3 { top: 70%; right: calc(100% - 44px); --r: -2deg; background: var(--ink); border-color: var(--ink); color: #fff; }
+.show--meta-ads .ma-pill--3 { top: 85%; right: calc(100% - 16px); --r: -3deg; background: var(--ink); border-color: var(--ink); color: #fff; }
 
 /* ---------- Inside the screen ---------- */
 .show--meta-ads .ma-i { display: block; flex-shrink: 0; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }

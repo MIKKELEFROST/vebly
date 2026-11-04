@@ -126,7 +126,8 @@ function init(root) {
     // How much of the profile is in view: all of the card, or on a phone the part above the bottom edge
     const view = phone ? Math.min(card.clientHeight, sticky.clientHeight - offTop(card) + shift - 8) : card.clientHeight;
     const max = Math.max(0, scr.offsetHeight - view), until = ydl.offsetHeight ? ydl : info;
-    const s2 = clamp(until.offsetTop + until.offsetHeight + 14 - view, 0, max);
+    // Computers see the services without scrolling; a phone scrolls down to them
+    const s2 = phone ? clamp(until.offsetTop + until.offsetHeight + 14 - view, 0, max) : 0;
     L = { phone, shift, s2, s3: clamp(rev.offsetTop - 12, s2, max), W: dev.offsetWidth, w: card.offsetWidth, h: card.offsetHeight, rh: you.offsetHeight };
     last = -1;
   };
@@ -160,7 +161,7 @@ function init(root) {
     } else {
       const s = 1 - .14 * k, dx = (L.W - L.w * s) / 2 * k, dy = -(L.h - L.h * s) / 2;
       sv(card, 'transform', k ? `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${s.toFixed(4)}) rotate(${(2.5 * k).toFixed(2)}deg)` : '');
-      sv(srch, 'opacity', k.toFixed(3));
+      sv(srch, 'opacity', k.toFixed(3)); sv(card, '--b', (.42 * k).toFixed(3));
       sv(srch, 'transform', `translate(${(-22 * (1 - k)).toFixed(1)}px,${(26 * (1 - k)).toFixed(1)}px) scale(${(.95 + .05 * k).toFixed(4)})`);
     }
     // …and the profile climbs from the bottom of the list to the top
