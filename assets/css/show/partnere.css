@@ -1,0 +1,87 @@
+/* Partner scroll right under the front page hero, and the same customers as a wall on the results page
+   (scripts/services/front/partnere.mjs). Every selector starts with .show--partnere.
+   Still by default (reduced motion, no JS, or 1–4 customers): tidy rows inside the page width.
+   assets/js/show/partnere.js adds .is-moving and drives the rows sideways. */
+
+.show--partnere { position: relative; z-index: 1; --pt-gap: 56px; --pt-fade: clamp(44px, 11vw, 190px); }
+.show--partnere.pt { padding: 28px 0 56px; }
+
+/* The kicker on a hairline, so the band reads as a quiet credit line under the hero */
+.show--partnere .pt__head { max-width: 1200px; margin: 0 auto 18px; padding: 0 24px; display: flex; align-items: center; gap: 20px; }
+.show--partnere .pt__head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.show--partnere .pt__kicker { margin: 0; display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+/* Still: a tidy grid inside the page width */
+.show--partnere .pt__band { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 8px; }
+.show--partnere .pt__set { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 248px), 1fr)); gap: 10px 24px; }
+.show--partnere .pt__set > li { display: flex; min-width: 0; }
+.show--partnere:not(.is-moving) .pt__item { white-space: normal; }
+
+/* Moving: full width, soft at both edges, one line per row */
+.show--partnere.is-moving .pt__band { max-width: none; padding: 12px 0 22px; margin-bottom: -10px; overflow: hidden; overflow: clip; user-select: none; -webkit-user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--pt-fade), #000 calc(100% - var(--pt-fade)), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 var(--pt-fade), #000 calc(100% - var(--pt-fade)), transparent); }
+.show--partnere.is-moving .pt__track { display: flex; width: max-content; will-change: transform; }
+.show--partnere.is-moving .pt__set { display: flex; gap: var(--pt-gap); padding-right: var(--pt-gap); }
+
+/* One customer: initial, name, and trade · town */
+.show--partnere .pt__item { position: relative; display: inline-flex; align-items: center; gap: 13px; margin: 0 -16px 0 -9px; padding: 9px 16px 9px 9px; border-radius: 18px; color: var(--ink); white-space: nowrap; transition: background .35s, box-shadow .35s, transform .4s cubic-bezier(.2,.8,.2,1); }
+.show--partnere .pt__mark { flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--cream); font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.04em; line-height: 1; color: var(--ink); transition: background .3s, color .3s, transform .5s cubic-bezier(.2,1.5,.4,1); }
+.show--partnere .pt__txt { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.show--partnere .pt__name { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -0.035em; line-height: 1; color: var(--ink); }
+.show--partnere .pt__meta { font-size: 13px; font-weight: 500; line-height: 1.2; color: var(--muted); }
+.show--partnere .pt__logo { display: block; height: var(--lh, 28px); width: auto; max-width: 164px; object-fit: contain; object-position: left center; filter: grayscale(1); opacity: .7; transition: filter .4s, opacity .4s; }
+.show--partnere .pt__item--logo { padding-left: 16px; margin-left: -16px; }
+.show--partnere .pt__go { align-self: flex-start; margin: -2px -4px 0 -6px; font-size: 14px; font-weight: 700; color: var(--accent); opacity: 0; transform: translate(-5px, 5px); transition: opacity .3s, transform .4s cubic-bezier(.2,.8,.2,1); }
+.show--partnere a.pt__item:focus-visible { background: #fff; outline-offset: 0; }
+.show--partnere a.pt__item:focus-visible .pt__mark { background: var(--accent); color: #fff; }
+.show--partnere a.pt__item:focus-visible .pt__go { opacity: 1; transform: none; }
+.show--partnere a.pt__item:focus-visible .pt__logo { filter: none; opacity: 1; }
+
+@media (hover: hover) {
+  .show--partnere .pt__item:hover .pt__mark { transform: rotate(-8deg); }
+  .show--partnere a.pt__item:hover { color: var(--ink); background: #fff; box-shadow: 0 0 0 1px var(--line), 0 18px 34px -20px rgba(17,17,17,.32); transform: translateY(-2px); }
+  .show--partnere a.pt__item:hover .pt__mark { background: var(--accent); color: #fff; transform: rotate(-10deg) scale(1.06); }
+  .show--partnere a.pt__item:hover .pt__go { opacity: 1; transform: none; }
+  .show--partnere .pt__item:hover .pt__logo { filter: none; opacity: 1; }
+}
+
+/* ---------- The wall (results page) ---------- */
+.show--partnere.pw { display: flex; flex-direction: column; gap: 14px; }
+.show--partnere .pw__head { display: flex; }
+.show--partnere .pw__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.show--partnere .pw__cell { display: flex; min-width: 0; }
+.show--partnere .pw__cell .pt__item { flex: 1; min-width: 0; margin: 0; overflow: hidden; flex-direction: column; align-items: flex-start; gap: 30px; min-height: 160px; padding: 20px 22px 22px; white-space: normal; background: #fff; border: 1px solid var(--line); border-radius: 24px; }
+.show--partnere .pw__cell .pt__txt { margin-top: auto; }
+.show--partnere .pw__cell .pt__name { font-size: 26px; overflow-wrap: anywhere; }
+.show--partnere .pw__cell .pt__logo { height: calc(var(--lh, 28px) * 1.25); max-width: 100%; }
+.show--partnere .pw__glyph { position: absolute; right: -6px; bottom: -40px; font-family: var(--display); font-weight: 800; font-size: 170px; line-height: 1; letter-spacing: -0.06em; color: var(--ink); opacity: .045; pointer-events: none; transition: opacity .4s, transform .6s cubic-bezier(.2,.8,.2,1); }
+.show--partnere .pw__cell .pt__go { position: absolute; top: 20px; right: 22px; margin: 0; font-size: 18px; }
+@media (hover: hover) {
+  .show--partnere .pw__cell a.pt__item:hover { box-shadow: 0 22px 40px -24px rgba(17,17,17,.35); transform: translateY(-4px); }
+  .show--partnere .pw__cell .pt__item:hover .pw__glyph { opacity: .08; transform: translateY(-6px); }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 699px) {
+  .show--partnere { --pt-gap: 36px; --pt-fade: 34px; }
+  .show--partnere.pt { padding: 24px 0 40px; }
+  .show--partnere .pt__head { padding: 0 20px; margin-bottom: 12px; gap: 14px; }
+  .show--partnere .pt__band { padding: 0 20px; }
+  .show--partnere.is-moving .pt__band { padding: 8px 0 16px; margin-bottom: -8px; gap: 4px; }
+  .show--partnere .pt__item { gap: 10px; }
+  .show--partnere .pt__mark { width: 34px; height: 34px; font-size: 15px; }
+  .show--partnere .pt__name { font-size: 18px; }
+  .show--partnere .pt__meta { font-size: 12px; }
+  .show--partnere .pt__logo { height: calc(var(--lh, 28px) * .85); max-width: 132px; }
+  /* Still on a phone: two columns */
+  .show--partnere:not(.is-moving) .pt__set { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 14px; }
+  .show--partnere:not(.is-moving) .pt__item { margin-right: 0; padding-right: 8px; }
+  .show--partnere:not(.is-moving) .pt__meta, .show--partnere .pw__cell .pt__meta { display: flex; flex-direction: column; gap: 2px; }
+  .show--partnere:not(.is-moving) .pt__sep, .show--partnere .pw__cell .pt__sep { display: none; }
+  .show--partnere .pw__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .show--partnere .pw__cell .pt__item { min-height: 128px; gap: 20px; padding: 16px 16px 18px; border-radius: 20px; }
+  .show--partnere .pw__cell .pt__name { font-size: 20px; }
+  .show--partnere .pw__glyph { font-size: 130px; bottom: -32px; }
+  .show--partnere .pw__cell .pt__go { top: 14px; right: 16px; }
+}

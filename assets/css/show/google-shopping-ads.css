@@ -1,0 +1,190 @@
+/* Showcase: Google Shopping Ads (scripts/services/showcase/google-shopping-ads.html)
+   A customer searches, the shopping ads slide in, your product moves to the front and lights up, then a
+   click, the cart and a sale. With motion: a pinned stage driven by scroll (assets/js/show/google-shopping-ads.js).
+   Without: the finished state, static. Inside the drawn search page its own greys, link blue and green are
+   used; the frame around it is Webleads. ":is(.motion *)" = only when motion is allowed. */
+.show--google-shopping-ads { position: relative; z-index: 1; padding-bottom: 56px; }
+.show--google-shopping-ads .gsa__head { max-width: 1200px; margin: 0 auto; padding: 40px 24px 36px; }
+.show--google-shopping-ads .gsa__head .sec-head__lead { max-width: 380px; }
+.show--google-shopping-ads .gsa__sticky { position: relative; }
+.show--google-shopping-ads:is(.motion *) .gsa__pin { height: 400vh; }
+.show--google-shopping-ads:is(.motion *) .gsa__sticky { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; padding-top: 92px; }
+.show--google-shopping-ads .gsa__fit { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 24px 16px; display: grid; grid-template-columns: minmax(250px, 340px) minmax(0, 1fr); gap: clamp(18px, 3.4vh, 34px) clamp(32px, 5vw, 72px); align-items: center; }
+.show--google-shopping-ads .gsa__fx { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.show--google-shopping-ads .gsa__fx i { position: absolute; display: block; }
+.show--google-shopping-ads .gsa__defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.show--google-shopping-ads:is(.motion *) .egen.is-filled.is-start [data-gsa-lbl] { display: none; }
+
+/* Steps, as in "Sådan virker det" */
+.show--google-shopping-ads .gsa__steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: clamp(12px, 2.6vh, 28px); }
+.show--google-shopping-ads .gsa-step { display: flex; gap: 20px; align-items: baseline; transition: opacity .4s, transform .4s cubic-bezier(.2,.8,.2,1); }
+.show--google-shopping-ads:is(.motion *) .gsa-step:not(.is-on) { opacity: .22; transform: translateX(-8px); }
+.show--google-shopping-ads .gsa-step__n { min-width: 28px; font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--accent); }
+.show--google-shopping-ads .gsa-step__b { display: flex; flex-direction: column; gap: 4px; }
+.show--google-shopping-ads .gsa-step h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(22px, 2.6vw, 32px); letter-spacing: -.025em; line-height: 1.05; }
+.show--google-shopping-ads .gsa-step p { margin: 0; max-width: 360px; font-size: 16px; line-height: 1.5; color: var(--muted); }
+.show--google-shopping-ads .gsa-step__cta { align-self: flex-start; margin-top: 10px; padding: 12px 20px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; transition: opacity .35s, background .2s; }
+.show--google-shopping-ads .gsa-step__cta:hover { color: #fff; background: var(--accent); }
+.show--google-shopping-ads:is(.motion *) .gsa-step:not(.is-on) .gsa-step__cta:not(:focus-visible) { opacity: 0; pointer-events: none; }
+
+/* The browser and the search page */
+.show--google-shopping-ads .gsa__stage { min-width: 0; }
+.show--google-shopping-ads .gsa__browser { max-width: 720px; margin: 0 auto; }
+.show--google-shopping-ads .gsa-scr { position: relative; overflow: hidden; border-radius: 0 0 17px 17px; padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 16px; color: #202124; font-size: 13px; line-height: 1.35; }
+.show--google-shopping-ads .gsa-q { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; height: 46px; max-width: 540px; padding: 0 20px; border: 1px solid #dfe1e5; border-radius: 999px; background: #fff; box-shadow: 0 1px 6px rgba(32,33,36,.14); font-size: 16px; white-space: nowrap; overflow: hidden; }
+.show--google-shopping-ads .gsa-q svg { width: 17px; height: 17px; flex-shrink: 0; fill: none; stroke: #70757a; stroke-width: 2.4; stroke-linecap: round; }
+.show--google-shopping-ads .gsa-q__caret { flex-shrink: 0; width: 1.5px; height: 20px; margin-left: -11px; background: #202124; animation: gsa-blink 1.05s steps(1) infinite; }
+.show--google-shopping-ads.is-typing .gsa-q__caret { animation: none; }
+.show--google-shopping-ads:not(.motion *) .gsa-q__caret { display: none; }
+@keyframes gsa-blink { 50% { opacity: 0; } }
+.show--google-shopping-ads .gsa-res { display: flex; flex-direction: column; gap: 14px; }
+.show--google-shopping-ads .gsa-tabs { display: flex; gap: 22px; padding: 0 4px 9px; border-bottom: 1px solid #ebebeb; color: #70757a; }
+.show--google-shopping-ads .gsa-tabs b { color: #202124; font-weight: 600; box-shadow: 0 12px 0 -9px #202124; }
+.show--google-shopping-ads .gsa-ads { --cw: 150px; position: relative; }
+.show--google-shopping-ads .gsa-ads__h { display: flex; align-items: center; gap: 5px; margin-bottom: 14px; color: #70757a; }
+.show--google-shopping-ads .gsa-ads__h b { color: #202124; font-size: 14px; }
+.show--google-shopping-ads .gsa-ads__h i { margin-left: auto; font-style: normal; font-weight: 700; }
+.show--google-shopping-ads .gsa-row { display: flex; gap: 8px; margin: 0 -6px; }
+
+/* A shopping card */
+.show--google-shopping-ads .gsa-card { position: relative; flex: 0 0 var(--cw); min-width: 0; display: flex; flex-direction: column; gap: 2px; padding: 6px 6px 10px; border-radius: 16px; background: #fff; transition: background .5s, box-shadow .5s; }
+.show--google-shopping-ads:is(.motion *) .gsa-card { will-change: transform, opacity; }
+.show--google-shopping-ads .gsa-card--you { z-index: 1; }
+.show--google-shopping-ads .gsa-card__img, .show--google-shopping-ads .gsa-sheet__img { position: relative; aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: #f3f2ef; container-type: inline-size; }
+.show--google-shopping-ads .gsa-card__img { margin-bottom: 6px; }
+.show--google-shopping-ads .gsa-card__img svg, .show--google-shopping-ads .gsa-sheet__img svg { display: block; width: 100%; height: 100%; }
+.show--google-shopping-ads .gsa-tag { position: absolute; top: 7px; left: 7px; padding: 3px 6px; border-radius: 6px; background: #fff; color: #202124; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; box-shadow: 0 1px 3px rgba(32,33,36,.2); }
+.show--google-shopping-ads .gsa-card__t { min-height: 2.6em; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; color: #1f45b0; font-size: 13px; line-height: 1.3; }
+.show--google-shopping-ads .gsa-card__p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 6px; margin-top: 3px; }
+.show--google-shopping-ads .gsa-card__p b { font-size: 14px; }
+.show--google-shopping-ads .gsa-card__p s, .show--google-shopping-ads .gsa-sheet__p s { color: #70757a; font-size: 11.5px; }
+.show--google-shopping-ads .is-sale { color: #188038; }
+.show--google-shopping-ads .gsa-card__s { display: flex; align-items: center; gap: 5px; margin-top: 2px; font-size: 12px; white-space: nowrap; overflow: hidden; }
+.show--google-shopping-ads .gsa-card__s i, .show--google-shopping-ads .gsa-sheet__shop i { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--i); color: #fff; font-style: normal; font-size: 8.5px; font-weight: 700; line-height: 15px; text-align: center; }
+.show--google-shopping-ads .gsa-card__d { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #4d5156; font-size: 11.5px; }
+.show--google-shopping-ads .gsa-card__r { display: flex; align-items: center; gap: 3px; color: #70757a; font-size: 11.5px; }
+.show--google-shopping-ads .gsa-card__r b { color: #202124; font-weight: 500; }
+.show--google-shopping-ads .gsa-card__r span { background: linear-gradient(90deg, #fbbc04 var(--f), #dadce0 0); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 11px; letter-spacing: -.5px; }
+/* No stars for the visitor's own shop */
+.show--google-shopping-ads.is-egen .gsa-card--you .gsa-card__r { visibility: hidden; }
+/* Your ad: orange ring and a label */
+.show--google-shopping-ads .gsa-you { position: absolute; z-index: 1; top: -10px; left: 50%; padding: 4px 9px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 10.5px; font-weight: 700; white-space: nowrap; box-shadow: 0 6px 14px -6px rgba(224,85,43,.8); opacity: 0; transform: translate(-50%, 6px) scale(.8); transition: opacity .3s, transform .5s cubic-bezier(.2,1.6,.4,1); }
+.show--google-shopping-ads .gsa-ads.is-you .gsa-you, .show--google-shopping-ads:not(.motion *) .gsa-you { opacity: 1; transform: translate(-50%, 0); }
+.show--google-shopping-ads .gsa-ads.is-you .gsa-card--you, .show--google-shopping-ads:not(.motion *) .gsa-card--you { background: #fff6f2; box-shadow: 0 0 0 2px var(--accent), 0 24px 40px -24px rgba(224,85,43,.7); }
+.show--google-shopping-ads .gsa-next { position: absolute; z-index: 2; right: -10px; top: 90px; width: 36px; height: 36px; padding-bottom: 3px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #fff; box-shadow: 0 2px 10px rgba(32,33,36,.28); color: #202124; font-size: 22px; line-height: 1; }
+.show--google-shopping-ads .gsa-org { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
+.show--google-shopping-ads .gsa-org i { display: block; height: 9px; border-radius: 999px; background: #f1f0ed; }
+.show--google-shopping-ads .gsa-org i:nth-child(1) { width: 24%; }
+.show--google-shopping-ads .gsa-org i:nth-child(2) { width: 56%; height: 13px; background: #e8ebf5; }
+.show--google-shopping-ads .gsa-org i:nth-child(3) { width: 90%; }
+.show--google-shopping-ads .gsa-org i:nth-child(4) { width: 72%; }
+/* The visitor's own product: a placeholder instead of our photo */
+.show--google-shopping-ads .gsa-ph { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 7cqw; background: repeating-linear-gradient(135deg, #efede8 0 12px, #e9e7e3 12px 24px); }
+.show--google-shopping-ads.is-own .gsa-ph { display: flex; }
+.show--google-shopping-ads .gsa-ph b { width: 42cqw; height: 42cqw; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--faint); font-family: var(--display); font-size: 20cqw; font-weight: 800; }
+.show--google-shopping-ads .gsa-ph span { padding: 4px 9px; border-radius: 999px; background: var(--ink); color: #fff; font-size: max(9px, 7cqw); font-weight: 700; white-space: nowrap; }
+
+/* Step 04: the product in the webshop, the cart and the sale */
+.show--google-shopping-ads .gsa-dim { position: absolute; inset: 0; z-index: 3; background: rgba(17,17,17,.2); opacity: 0; pointer-events: none; }
+.show--google-shopping-ads .gsa-sheet { position: absolute; z-index: 4; left: 16px; right: 16px; bottom: 0; padding: 10px 24px 24px; border-radius: 22px 22px 0 0; background: #fff; box-shadow: 0 -20px 50px -24px rgba(17,17,17,.45); transform: translateY(110%); }
+.show--google-shopping-ads .gsa-sheet__grab { display: block; width: 40px; height: 4px; margin: 0 auto 12px; border-radius: 4px; background: #dadce0; }
+.show--google-shopping-ads .gsa-sheet__shop { display: flex; align-items: center; gap: 8px; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.show--google-shopping-ads .gsa-sheet__shop span { margin-left: auto; color: var(--muted); font-size: 12px; }
+.show--google-shopping-ads .gsa-sheet__body { display: grid; grid-template-columns: 176px minmax(0, 1fr); gap: 24px; align-items: center; }
+.show--google-shopping-ads .gsa-sheet__img { border-radius: 16px; }
+.show--google-shopping-ads .gsa-sheet__info { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.show--google-shopping-ads .gsa-sheet__t { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 700; letter-spacing: -.02em; line-height: 1.12; }
+.show--google-shopping-ads .gsa-sheet__p { display: flex; align-items: baseline; gap: 8px; }
+.show--google-shopping-ads .gsa-sheet__p b { color: #188038; font-size: 19px; }
+.show--google-shopping-ads .gsa-sheet__stock { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 13px; }
+.show--google-shopping-ads .gsa-sheet__stock i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(47,158,91,.15); }
+.show--google-shopping-ads .gsa-buy { position: relative; display: block; overflow: hidden; height: 46px; min-width: 200px; margin-top: 6px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; transition: background .35s; }
+.show--google-shopping-ads .gsa-buy span { display: flex; align-items: center; justify-content: center; height: 46px; transition: transform .5s cubic-bezier(.2,.9,.3,1.25); }
+.show--google-shopping-ads.is-bought .gsa-buy { background: var(--green); }
+.show--google-shopping-ads.is-bought .gsa-buy span { transform: translateY(-100%); }
+.show--google-shopping-ads .gsa-toast { position: absolute; z-index: 5; top: 14px; right: 14px; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; border-radius: 16px; background: #fff; box-shadow: 0 16px 36px -14px rgba(17,17,17,.4), 0 0 0 1px var(--line); color: var(--muted); font-size: 12.5px; line-height: 1.3; opacity: 0; transform: translateY(-14px) scale(.95); transition: opacity .35s, transform .55s cubic-bezier(.2,1.4,.4,1); }
+.show--google-shopping-ads.is-sold .gsa-toast { opacity: 1; transform: none; }
+.show--google-shopping-ads .gsa-toast i { flex-shrink: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e3f4ea; color: var(--green); font-style: normal; font-weight: 700; }
+.show--google-shopping-ads .gsa-toast b { display: block; color: var(--ink); font-size: 14px; }
+.show--google-shopping-ads .gsa-cur { position: absolute; z-index: 6; left: 0; top: 0; width: 26px; height: 26px; margin: -2.7px 0 0 -4.9px; transform-origin: 4.9px 2.7px; opacity: 0; pointer-events: none; will-change: transform; }
+.show--google-shopping-ads .gsa-cur svg { display: block; width: 100%; height: 100%; fill: #111; stroke: #fff; stroke-width: 1.5; stroke-linejoin: round; filter: drop-shadow(0 3px 4px rgba(17,17,17,.3)); }
+.show--google-shopping-ads .gsa-cur i { display: none; }
+.show--google-shopping-ads .gsa-rip { position: absolute; z-index: 5; left: 0; top: 0; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: rgba(224,85,43,.3); opacity: 0; pointer-events: none; }
+.show--google-shopping-ads:not(.motion *) :is(.gsa-sheet, .gsa-dim, .gsa-toast, .gsa-cur, .gsa-rip) { display: none; }
+
+/* Tablets: the steps as numbers above the stage, only the current one written out */
+@media (max-width: 999px) {
+  .show--google-shopping-ads .gsa__fit { grid-template-columns: minmax(0, 1fr); }
+  .show--google-shopping-ads:is(.motion *) .gsa__steps { display: grid; grid-template-columns: repeat(4, auto) 1fr; gap: 10px 6px; align-items: center; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step { display: contents; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step__n { grid-row: 1; width: 36px; height: 28px; min-width: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted); font-size: 13px; transition: background .3s, border-color .3s, color .3s; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step.is-on .gsa-step__n { border-color: var(--accent); background: var(--accent); color: #fff; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step__b { grid-row: 2; grid-column: 1 / -1; min-height: 100px; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step:not(.is-on) .gsa-step__b { display: none; }
+  .show--google-shopping-ads .gsa-step p { max-width: 560px; }
+}
+
+/* Phones: the search page on a phone, the cards as a swipe row */
+@media (max-width: 699px) {
+  .show--google-shopping-ads .gsa__head { padding: 32px 20px 24px; }
+  .show--google-shopping-ads .gsa__egen.is-out { width: auto; margin: 0 20px 20px; }
+  .show--google-shopping-ads:is(.motion *) .gsa__sticky { align-items: stretch; height: 100vh; height: 100svh; padding-top: 82px; }
+  .show--google-shopping-ads .gsa__fit { padding: 0 20px 14px; gap: 14px; }
+  .show--google-shopping-ads:is(.motion *) .gsa__fit { height: 100%; grid-template-rows: auto minmax(0, 1fr); align-items: start; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step h3 { font-size: 21px; }
+  .show--google-shopping-ads .gsa-step p { font-size: 15px; line-height: 1.45; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step__b { min-height: 92px; }
+  .show--google-shopping-ads:is(.motion *) .gsa-step__cta { display: none; }
+  .show--google-shopping-ads .gsa__stage { display: flex; justify-content: center; }
+  .show--google-shopping-ads:is(.motion *) .gsa__stage { height: 100%; min-height: 0; }
+  .show--google-shopping-ads .gsa__browser { width: min(100%, 304px); display: flex; flex-direction: column; }
+  .show--google-shopping-ads .gsa__browser .browser__bar { padding: 28px 10px 7px; }
+  .show--google-shopping-ads .gsa__browser .tag-eks { padding: 5px 8px; font-size: 10px; }
+  .show--google-shopping-ads .gsa-scr { flex: 1; min-height: 0; padding: 10px 10px 12px; gap: 10px; border-radius: 0; font-size: 11px; }
+  .show--google-shopping-ads .gsa-q { height: 34px; gap: 8px; padding: 0 12px; font-size: 13px; }
+  .show--google-shopping-ads .gsa-q svg { width: 13px; height: 13px; }
+  .show--google-shopping-ads .gsa-q__caret { height: 15px; margin-left: -7px; }
+  .show--google-shopping-ads .gsa-res { gap: 10px; }
+  .show--google-shopping-ads .gsa-tabs { gap: 13px; padding: 0 2px 7px; }
+  .show--google-shopping-ads .gsa-tabs b { box-shadow: 0 9px 0 -7px #202124; }
+  .show--google-shopping-ads .gsa-ads { --cw: 116px; }
+  .show--google-shopping-ads .gsa-ads__h { margin-bottom: 12px; }
+  .show--google-shopping-ads .gsa-ads__h b { font-size: 12px; }
+  .show--google-shopping-ads .gsa-row { gap: 6px; margin: 0 -4px; }
+  .show--google-shopping-ads .gsa-card { padding: 4px 4px 8px; border-radius: 12px; }
+  .show--google-shopping-ads .gsa-card__img { margin-bottom: 4px; border-radius: 9px; }
+  .show--google-shopping-ads .gsa-tag { top: 5px; left: 5px; padding: 2px 5px; border-radius: 5px; font-size: 8.5px; }
+  .show--google-shopping-ads .gsa-you { top: -9px; padding: 3px 7px; font-size: 9.5px; }
+  .show--google-shopping-ads .gsa-card__t { font-size: 11px; }
+  .show--google-shopping-ads .gsa-card__p b { font-size: 12px; }
+  .show--google-shopping-ads .gsa-card__p s { font-size: 10px; }
+  .show--google-shopping-ads :is(.gsa-card__s, .gsa-card__d, .gsa-card__r) { font-size: 10px; }
+  .show--google-shopping-ads .gsa-card__s i { width: 13px; height: 13px; line-height: 13px; font-size: 7.5px; }
+  .show--google-shopping-ads .gsa-card__r span { font-size: 9.5px; }
+  .show--google-shopping-ads .gsa-next { display: none; }
+  .show--google-shopping-ads .gsa-org i { height: 7px; }
+  .show--google-shopping-ads .gsa-sheet { left: 0; right: 0; padding: 8px 14px 16px; border-radius: 20px 20px 0 0; }
+  .show--google-shopping-ads .gsa-sheet__grab { margin-bottom: 8px; }
+  .show--google-shopping-ads .gsa-sheet__shop { padding-bottom: 8px; margin-bottom: 10px; font-size: 12px; }
+  .show--google-shopping-ads .gsa-sheet__shop span { font-size: 10.5px; }
+  .show--google-shopping-ads .gsa-sheet__body { grid-template-columns: 96px minmax(0, 1fr); gap: 12px; }
+  .show--google-shopping-ads .gsa-sheet__img { border-radius: 12px; }
+  .show--google-shopping-ads .gsa-sheet__info { gap: 5px; }
+  .show--google-shopping-ads .gsa-sheet__t { font-size: 14px; }
+  .show--google-shopping-ads .gsa-sheet__p b { font-size: 15px; }
+  .show--google-shopping-ads .gsa-sheet__p s { font-size: 10.5px; }
+  .show--google-shopping-ads .gsa-sheet__stock { gap: 6px; font-size: 10.5px; }
+  .show--google-shopping-ads .gsa-buy { width: 100%; min-width: 0; height: 36px; margin-top: 4px; font-size: 13px; }
+  .show--google-shopping-ads .gsa-buy span { height: 36px; }
+  .show--google-shopping-ads .gsa-toast { top: 8px; left: 8px; right: 8px; gap: 8px; padding: 8px 10px; border-radius: 14px; font-size: 10.5px; }
+  .show--google-shopping-ads .gsa-toast i { width: 26px; height: 26px; }
+  .show--google-shopping-ads .gsa-toast b { font-size: 12px; }
+  /* A finger instead of a mouse pointer */
+  .show--google-shopping-ads .gsa-cur { width: 30px; height: 30px; margin: -15px 0 0 -15px; transform-origin: 50% 50%; }
+  .show--google-shopping-ads .gsa-cur svg { display: none; }
+  .show--google-shopping-ads .gsa-cur i { display: block; width: 100%; height: 100%; border: 2px solid rgba(255,255,255,.95); border-radius: 50%; background: rgba(17,17,17,.28); box-shadow: 0 4px 12px rgba(17,17,17,.3); }
+  /* Without motion the row can be swiped */
+  .show--google-shopping-ads:not(.motion *) .gsa-row { margin: -12px -10px 0; padding: 12px 10px 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 10px; scrollbar-width: none; }
+  .show--google-shopping-ads:not(.motion *) .gsa-row::-webkit-scrollbar { display: none; }
+  .show--google-shopping-ads:not(.motion *) .gsa-card { scroll-snap-align: start; }
+}

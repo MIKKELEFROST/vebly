@@ -1,0 +1,180 @@
+/* Showcase: Automations, a flow that runs by itself (scripts/services/showcase/automations.html).
+   Every selector starts with .show--automations. Rules with :is(.motion *) only apply when html.motion is
+   set; without it the finished flow is shown, static and not pinned. The states (is-built, is-done, data-m,
+   is-on) are set by assets/js/show/automations.js. */
+
+.show--automations { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
+.show--automations .sec-head { margin-bottom: 32px; }
+.show--automations .sec-head__lead { max-width: 380px; }
+.show--automations.is-init * { transition: none !important; }
+
+/* The scroll track and the pinned stage (like "Sådan virker det") */
+.show--automations .aut { position: relative; }
+.show--automations:is(.motion *) .aut { height: 380vh; }
+.show--automations:is(.motion *) .aut__pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; padding: 92px 0 20px; }
+.show--automations .aut__fit { width: 100%; display: grid; grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); grid-template-areas: "steps board" "steps log"; gap: 14px clamp(32px, 4.4vw, 60px); align-items: center; transform-origin: 50% 50%; }
+
+/* Steps: what Webleads does */
+.show--automations .aut__steps { grid-area: steps; display: flex; flex-direction: column; gap: clamp(14px, 2.6vh, 28px); }
+.show--automations .aut__lbl { font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.show--automations .aut__step { display: flex; gap: 18px; align-items: baseline; transition: opacity .4s, transform .4s cubic-bezier(.2,.8,.2,1); }
+.show--automations:is(.motion *) .aut__step:not(.is-on) { opacity: .22; transform: translateX(-8px); }
+.show--automations .aut__n { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--accent); min-width: 26px; }
+.show--automations .aut__sb { display: flex; flex-direction: column; gap: 4px; }
+.show--automations .aut__step h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(22px, 2.6vw, 32px); letter-spacing: -.025em; line-height: 1.05; }
+.show--automations .aut__step p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--muted); }
+.show--automations .aut__cta { align-self: flex-start; margin-top: 12px; padding: 12px 20px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; transition: opacity .35s, background .2s; }
+.show--automations .aut__cta:hover { color: #fff; background: var(--accent); }
+.show--automations:is(.motion *) .aut__cta:not(.is-on):not(:focus-visible) { opacity: 0; pointer-events: none; }
+
+/* The board: a flow on a calm dot grid */
+.show--automations .aut__board { grid-area: board; position: relative; display: flex; flex-direction: column; min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 40px 80px -30px rgba(17,17,17,.18); }
+.show--automations .aut__bar { display: flex; align-items: center; gap: 14px; padding: 12px 14px 12px 20px; border-bottom: 1px solid var(--line); }
+.show--automations .aut__name { display: flex; flex-direction: column; gap: 1px; min-width: 0; margin-right: auto; }
+.show--automations .aut__name b { font-size: 14px; font-weight: 700; }
+.show--automations .aut__name small { font-size: 12.5px; color: var(--muted); }
+.show--automations .aut__hint { font-size: 13px; font-weight: 700; color: var(--accent); white-space: nowrap; opacity: 0; transition: opacity .4s; }
+.show--automations:is(.motion *) .aut__hint.is-on { opacity: 1; }
+.show--automations .aut__win { position: relative; flex: 1; min-height: 0; border-radius: 0 0 24px 24px; background: #f7f5f1; }
+.show--automations .aut__flow { position: relative; }
+.show--automations .aut__grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.show--automations .aut__wires { position: absolute; left: 0; top: 0; z-index: 1; overflow: visible; pointer-events: none; }
+.show--automations .aut__wires path { fill: none; stroke-linecap: round; }
+.show--automations .aut__wires .w-sk { stroke: var(--line-strong); stroke-width: 1.6; stroke-dasharray: 2 7; }
+.show--automations .aut__wires .w-bd { stroke: #cdc8bf; stroke-width: 2; }
+.show--automations .aut__wires .w-gl { stroke: rgba(224,85,43,.18); stroke-width: 10; }
+.show--automations .aut__wires .w-pr { stroke: var(--accent); stroke-width: 2.6; }
+.show--automations .aut__wires circle { fill: #fff; stroke: #cdc8bf; stroke-width: 1.5; opacity: 0; transition: opacity .3s, fill .3s, stroke .3s; }
+.show--automations .aut__wires circle.is-b { opacity: 1; }
+.show--automations .aut__wires circle.is-on { fill: var(--accent); stroke: var(--accent); }
+
+/* The glowing dot that runs along the wires (under the cards) */
+.show--automations .aut__dot { position: absolute; left: 0; top: 0; z-index: 2; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(224,85,43,.18), 0 0 22px 6px rgba(224,85,43,.5); opacity: 0; transition: opacity .3s; pointer-events: none; will-change: transform; }
+.show--automations .aut__dot::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: #fff; opacity: .8; }
+.show--automations .aut__dot.is-on { opacity: 1; }
+
+/* Nodes: two rows on a computer, the first three happen at once, the last three over the next days */
+.show--automations .aut__nodes { position: relative; z-index: 3; list-style: none; margin: 0; padding: 28px 28px 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 104px clamp(26px, 3.6vw, 52px); align-items: start; }
+.show--automations .aut__node { position: relative; }
+.show--automations .aut__node:nth-child(3n+2) { margin-top: 22px; }
+.show--automations .aut__node:hover, .show--automations .aut__node.is-tip, .show--automations .aut__node:focus-within { z-index: 6; }
+.show--automations .aut__card { position: relative; display: flex; align-items: center; gap: 11px; width: 100%; padding: 12px 14px; background: #fff; border: 1px solid var(--line-strong); border-radius: 18px; box-shadow: 0 14px 28px -20px rgba(17,17,17,.3); font: inherit; color: var(--ink); text-align: left; cursor: pointer; transition: border-color .35s, box-shadow .35s, translate .3s cubic-bezier(.2,.8,.2,1); }
+.show--automations .aut__node:not(.is-built) .aut__card { border-style: dashed; box-shadow: none; }
+.show--automations .aut__card:hover { translate: 0 -2px; box-shadow: 0 18px 32px -18px rgba(17,17,17,.35); }
+.show--automations .aut__card::after { content: ""; position: absolute; inset: -1px; border: 2px solid var(--green); border-radius: inherit; opacity: 0; pointer-events: none; }
+.show--automations .is-run .aut__card { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,85,43,.16), 0 14px 28px -20px rgba(17,17,17,.3); }
+.show--automations .is-done .aut__card { border-color: #cfe7d8; }
+.show--automations .is-pop .aut__card { animation: autBump .55s cubic-bezier(.2,.8,.2,1); }
+.show--automations .is-pop .aut__card::after { animation: autRing .8s ease-out; }
+.show--automations .aut__ico { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; background: #f1eee9; color: var(--faint); transition: background .4s, color .4s; }
+.show--automations .aut__ico svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--automations .is-built .aut__ico { background: var(--cream); color: var(--ink); }
+.show--automations .is-done .aut__ico { background: #e3f4ea; color: var(--green); }
+.show--automations .aut__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.show--automations .aut__txt b { font-size: 15px; font-weight: 700; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* The status rolls on: 1 the minutes it costs by hand, 2 its rule, 3 when it ran */
+.show--automations .aut__meta { display: grid; height: 1.4em; overflow: hidden; font-size: 12.5px; line-height: 1.4; font-weight: 500; color: var(--muted); }
+.show--automations .aut__meta > span { grid-area: 1 / 1; display: flex; align-items: center; gap: 6px; white-space: nowrap; opacity: 0; transform: translateY(105%); transition: transform .5s cubic-bezier(.2,.9,.2,1), opacity .35s; }
+.show--automations [data-m="1"] .aut__meta > :nth-child(1), .show--automations [data-m="2"] .aut__meta > :nth-child(2), .show--automations [data-m="3"] .aut__meta > :nth-child(3) { opacity: 1; transform: none; }
+.show--automations [data-m="2"] .aut__meta > :nth-child(1), .show--automations [data-m="3"] .aut__meta > :nth-child(-n+2) { transform: translateY(-105%); }
+.show--automations [data-m="3"] .aut__meta > :nth-child(3) { color: var(--green); font-weight: 700; }
+.show--automations .aut__ping { position: relative; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.show--automations .aut__ping::after, .show--automations .aut__live.is-on i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--green); animation: autPing 1.5s ease-out infinite; }
+.show--automations .aut__chk { position: absolute; top: -8px; right: -8px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; line-height: 1; box-shadow: 0 0 0 3px #fff; transform: scale(0); transition: transform .45s cubic-bezier(.3,1.7,.5,1); }
+.show--automations .is-done .aut__chk { transform: scale(1); }
+.show--automations .aut__plus { position: absolute; top: -12px; right: 22px; z-index: 4; padding: 4px 9px; border-radius: 999px; background: var(--green); color: #fff; font-size: 12.5px; font-weight: 700; line-height: 1; white-space: nowrap; opacity: 0; pointer-events: none; }
+.show--automations .is-pop .aut__plus { animation: autPlus 1.3s cubic-bezier(.2,.8,.2,1); }
+/* A short line on what each step does: hover, focus or tap */
+.show--automations .aut__tip { --tx: -50%; position: absolute; left: 50%; top: calc(100% + 10px); z-index: 5; width: max-content; max-width: 240px; padding: 10px 13px; border-radius: 12px; background: var(--ink); color: #fff; font-size: 13.5px; font-weight: 500; line-height: 1.4; box-shadow: 0 16px 30px -14px rgba(17,17,17,.5); opacity: 0; transform: translate(var(--tx), 6px); transition: opacity .25s, transform .3s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.show--automations .aut__tip::before { content: ""; position: absolute; left: 50%; top: -5px; width: 10px; height: 10px; margin-left: -5px; border-radius: 2px; background: inherit; transform: rotate(45deg); }
+.show--automations [data-tip="up"] .aut__tip { top: auto; bottom: calc(100% + 10px); transform: translate(var(--tx), -6px); }
+.show--automations [data-tip="up"] .aut__tip::before { top: auto; bottom: -5px; }
+.show--automations .aut__node.is-tip .aut__tip, .show--automations .aut__card:focus-visible + .aut__tip { opacity: 1; transform: translate(var(--tx), 0); }
+@media (hover: hover) { .show--automations .aut__node:hover .aut__tip { opacity: 1; transform: translate(var(--tx), 0); } }
+
+/* The log: a dark spot box with the run, line by line, and the time saved */
+.show--automations .aut__log { grid-area: log; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "lh lh" "lw saved"; gap: 14px 28px; min-width: 0; padding: 20px 24px 22px; border-radius: 24px; }
+.show--automations .aut__lh { grid-area: lh; display: flex; align-items: center; gap: 14px; font-size: 13px; font-weight: 700; }
+.show--automations .aut__live { display: inline-flex; align-items: center; gap: 8px; color: var(--dark-muted); transition: color .3s; }
+.show--automations .aut__live i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #57534d; transition: background .3s; }
+.show--automations .aut__live.is-on { color: #fff; }
+.show--automations .aut__live.is-on i { background: var(--green); }
+.show--automations .aut__clock { margin-right: auto; color: var(--dark-muted); font-weight: 500; font-variant-numeric: tabular-nums; transition: opacity .3s; }
+.show--automations .aut__clock:empty { opacity: 0; }
+.show--automations .aut__lw { --rows: 6; --lh: 25px; grid-area: lw; position: relative; height: calc(var(--rows) * var(--lh)); overflow: hidden; }
+.show--automations .aut__lines { list-style: none; margin: 0; padding: 0; transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.show--automations .aut__lines li, .show--automations .aut__ph { display: flex; align-items: baseline; gap: 14px; height: var(--lh); font-size: 14px; line-height: var(--lh); white-space: nowrap; }
+.show--automations .aut__lines li { transition: opacity .4s, transform .5s cubic-bezier(.2,.8,.2,1); }
+.show--automations:is(.motion *) .aut__lines li:not(.is-on) { opacity: 0; transform: translateY(10px); }
+.show--automations .aut__lines time { flex: none; width: 82px; color: var(--dark-muted); font-variant-numeric: tabular-nums; transition: color .4s; }
+.show--automations .aut__lines li.is-new time { color: var(--accent); }
+.show--automations .aut__lines span { overflow: hidden; text-overflow: ellipsis; }
+.show--automations .aut__ph { position: absolute; left: 0; top: 0; color: var(--dark-muted); }
+.show--automations .aut__ph::after { content: ""; align-self: center; width: 7px; height: 15px; margin-left: -8px; background: var(--dark-muted); animation: autBlink 1s steps(2) infinite; }
+.show--automations .aut__ph:empty { display: none; }
+.show--automations .aut__saved { grid-area: saved; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; min-width: 210px; padding-left: 28px; border-left: 1px solid var(--dark-line); }
+.show--automations .aut__saved > span { font-size: 13px; color: var(--dark-muted); }
+.show--automations .aut__saved b { font-family: var(--display); font-weight: 800; font-size: clamp(44px, 4.4vw, 60px); letter-spacing: -.045em; line-height: .95; font-variant-numeric: tabular-nums; }
+.show--automations .aut__saved b small { font-size: .4em; letter-spacing: -.01em; color: var(--dark-muted); }
+.show--automations .aut__saved em { font-size: 13px; font-style: normal; color: var(--dark-muted); transition: opacity .5s; }
+.show--automations:is(.motion *) .aut__saved em:not(.is-on) { opacity: 0; }
+
+@keyframes autBump { 40% { transform: scale(1.05); } }
+@keyframes autRing { from { opacity: .7; transform: none; } to { opacity: 0; transform: scale(1.1, 1.45); } }
+@keyframes autPlus { 0% { opacity: 0; transform: translateY(8px) scale(.7); } 18% { opacity: 1; transform: translateY(-6px) scale(1); } 72% { opacity: 1; transform: translateY(-14px); } 100% { opacity: 0; transform: translateY(-30px); } }
+@keyframes autPing { from { opacity: .6; transform: scale(1); } to { opacity: 0; transform: scale(3); } }
+@keyframes autBlink { 50% { opacity: 0; } }
+
+/* Tablets: the steps in a row above the board */
+@media (min-width: 700px) and (max-width: 999px) {
+  .show--automations .aut__fit { grid-template-columns: minmax(0, 1fr); grid-template-areas: "steps" "board" "log"; }
+  .show--automations .aut__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 24px; }
+  .show--automations .aut__lbl { grid-column: 1 / -1; }
+  .show--automations .aut__step { flex-direction: column; gap: 6px; }
+  .show--automations .aut__step h3 { font-size: 22px; }
+  .show--automations .aut__step p { font-size: 14.5px; }
+}
+
+/* Phones: the flow runs down, the camera follows the dot, the log sits below */
+@media (max-width: 699px) {
+  .show--automations { padding: 32px 20px 72px; }
+  .show--automations .sec-head { margin-bottom: 24px; }
+  .show--automations .aut__fit { grid-template-columns: minmax(0, 1fr); grid-template-areas: "steps" "board" "log"; gap: 12px; }
+  .show--automations:is(.motion *) .aut__pin { align-items: stretch; padding: 84px 0 72px; }
+  .show--automations:is(.motion *) .aut__fit { height: 100%; grid-template-rows: auto minmax(0, 1fr) auto; }
+  .show--automations:is(.motion *) .aut__steps { display: grid; grid-template-columns: repeat(3, auto) minmax(0, 1fr); align-items: center; gap: 8px 6px; }
+  .show--automations:is(.motion *) :is(.aut__lbl, .aut__cta) { display: none; }
+  .show--automations:is(.motion *) :is(.aut__step, .aut__sb) { display: contents; }
+  .show--automations:is(.motion *) .aut__n { grid-row: 1; display: flex; align-items: center; justify-content: center; width: 38px; height: 28px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 13px; color: var(--muted); transition: background .3s, border-color .3s, color .3s; }
+  .show--automations:is(.motion *) .is-on .aut__n { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .show--automations:is(.motion *) .aut__step h3 { grid-row: 1; grid-column: 4; margin-left: 8px; font-size: 22px; }
+  .show--automations:is(.motion *) .aut__step p { grid-row: 2; grid-column: 1 / -1; min-height: 2.8em; font-size: 15px; line-height: 1.4; }
+  .show--automations:is(.motion *) .aut__step:not(.is-on) :is(h3, p) { display: none; }
+  .show--automations .aut__board { border-radius: 20px; }
+  .show--automations .aut__bar { padding: 10px 12px 10px 16px; }
+  .show--automations .aut__name b { font-size: 13px; }
+  .show--automations :is(.aut__name small, .aut__hint) { display: none; }
+  .show--automations .aut__win { border-radius: 0 0 20px 20px; }
+  .show--automations:is(.motion *) .aut__win { min-height: 150px; overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 14px, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(transparent, #000 14px, #000 calc(100% - 22px), transparent); }
+  .show--automations:is(.motion *) .aut__flow { will-change: transform; }
+  .show--automations .aut__nodes { grid-template-columns: minmax(0, 1fr); gap: 34px; padding: 22px 16px 26px; }
+  .show--automations .aut__node { width: min(272px, calc(100% - 44px)); }
+  .show--automations .aut__node:nth-child(3n+2) { margin-top: 0; }
+  .show--automations .aut__node:nth-child(even) { justify-self: end; }
+  .show--automations .aut__card { gap: 10px; padding: 10px 12px; border-radius: 16px; }
+  .show--automations .aut__ico { width: 32px; height: 32px; border-radius: 10px; }
+  .show--automations .aut__ico svg { width: 17px; height: 17px; }
+  .show--automations .aut__txt b { font-size: 14.5px; }
+  .show--automations .aut__meta { font-size: 12px; }
+  .show--automations .aut__tip { --tx: 0; left: 0; right: 0; width: auto; max-width: none; }
+  .show--automations .aut__tip::before { left: 30px; }
+  .show--automations .aut__log { grid-template-columns: minmax(0, 1fr); grid-template-areas: "lh" "lw" "saved"; gap: 8px; padding: 14px 16px; border-radius: 20px; }
+  .show--automations .aut__lh { gap: 10px; font-size: 12px; }
+  .show--automations .aut__lw { --lh: 22px; }
+  .show--automations:is(.motion *) .aut__lw { --rows: 3; }
+  .show--automations :is(.aut__lines li, .aut__ph) { gap: 10px; font-size: 13px; }
+  .show--automations .aut__lines time { width: 70px; }
+  .show--automations .aut__saved { flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 10px; min-width: 0; padding: 8px 0 0; border-left: 0; border-top: 1px solid var(--dark-line); }
+  .show--automations .aut__saved b { font-size: 30px; }
+  .show--automations .aut__saved em { flex-basis: 100%; font-size: 12px; }
+}

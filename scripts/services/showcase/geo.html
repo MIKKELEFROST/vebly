@@ -1,0 +1,74 @@
+<section id="eksempel" class="show show--geo" data-sec="eksempel">
+      <div class="geo-head">
+        <div class="sec-head" data-reveal="0">
+          <div class="sec-head__title"><div class="kicker">Sådan ser det ud</div><h2 class="h2">Kunden spørger.<br><span class="dim">Du er svaret.</span></h2></div>
+          <p class="sec-head__lead">Sådan kan det se ud, når en kunde spørger en AI-assistent om råd. Scroll, og se svaret blive skrevet.</p>
+        </div>
+        <!-- Phones: the box below moves up here (geo.js), so the pinned example has room for the chat -->
+        <div class="geo-slot" data-geo-slot></div>
+      </div>
+      <div class="geo-story" data-geo-story>
+        <div class="geo-stage" data-geo-stage>
+          <div class="geo-fit" data-geo-fit>
+            <!-- The visitor's own trade, town and name go into the question and the answer. Nothing leaves the browser -->
+            <div class="egen" role="group" aria-labelledby="geo-egen-lbl" data-geo-egen>
+              <span class="egen__lbl"><span id="geo-egen-lbl">Prøv med din egen virksomhed</span><span class="egen__hint" aria-hidden="true">Scroll videre, og se svaret ↓</span></span>
+              <div class="egen__row">
+                <label class="egen__f"><span class="sr-only">Branche</span><input data-geo-f="fag" list="geo-fag" placeholder="Branche" maxlength="40" autocomplete="off" autocapitalize="sentences" enterkeyhint="next"></label>
+                <label class="egen__f"><span class="sr-only">By</span><input data-geo-f="by" placeholder="By" maxlength="40" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next"></label>
+                <label class="egen__f"><span class="sr-only">Firmanavn</span><input data-geo-f="navn" placeholder="Firmanavn" maxlength="60" autocomplete="organization" autocapitalize="words" enterkeyhint="done"></label>
+              </div>
+              <datalist id="geo-fag"><option value="Frisør"></option><option value="Tømrer"></option><option value="Maler"></option><option value="Elektriker"></option><option value="VVS"></option><option value="Rengøring"></option><option value="Klinik og massage"></option><option value="Fysioterapeut"></option><option value="Personlig træner"></option><option value="Revisor"></option></datalist>
+            </div>
+
+            <div class="geo-steps">
+              <div class="kicker">Sådan virker det</div>
+              <div class="geo-step is-on" data-geo-step>
+                <div class="geo-step__n">01</div>
+                <div class="geo-step__b"><h3>Kunden spørger</h3><p>Vi finder de spørgsmål, dine kunder stiller, og <b>skriver svarene</b> ind på din side.</p></div>
+              </div>
+              <div class="geo-step is-on" data-geo-step>
+                <div class="geo-step__n">02</div>
+                <div class="geo-step__b"><h3>AI’en leder efter svar</h3><p>Vi markerer din side med <b>struktureret data</b> og får dig <b>nævnt</b> de steder, AI’en læser.</p></div>
+              </div>
+              <div class="geo-step is-on" data-geo-step>
+                <div class="geo-step__n">03</div>
+                <div class="geo-step__b"><h3 data-geo-h>Du bliver anbefalet</h3><p data-geo-p>Vi <b>måler løbende</b>, hvor og hvordan du bliver nævnt, og forbedrer det.</p>
+                  <a href="#kontakt" class="geo-cta" data-geo-cta data-burst data-event="Eksempel: Få en fast pris">Få en fast pris →</a></div>
+              </div>
+            </div>
+
+            <div class="geo-seg">
+              <div class="seg" role="group" aria-label="Vis svaret før eller efter GEO">
+                <button type="button" data-geo-mode="foer" aria-pressed="false">Før<span class="geo-x"> GEO</span></button>
+                <button type="button" data-geo-mode="efter" aria-pressed="true" class="is-on" data-burst>Efter<span class="geo-x"> GEO</span></button>
+              </div>
+              <span class="geo-seg__hint" aria-hidden="true">Se forskellen</span>
+            </div>
+
+            <p class="sr-only" data-geo-sr>Eksempel: En kunde spørger en AI-assistent: »Hvem er en god tømrer i København?« Assistenten anbefaler tre tømrere, med Nordvik først: Svarer samme dag og har mange gode anmeldelser.</p>
+            <!-- Our own drawing of a generic AI chat: no product's name, logo or colours -->
+            <div class="geo-chat" data-geo-chat aria-hidden="true">
+              <div class="geo-chat__bar"><span class="dots3"><i></i><i></i><i></i></span><span class="geo-orb"></span><b>AI-assistent</b><span class="tag-eks">Eksempel</span></div>
+              <div class="geo-chat__body" data-geo-body>
+                <div class="geo-hi"><span class="geo-orb"></span><b>Hvad kan jeg hjælpe med?</b></div>
+                <div class="geo-chat__in" data-geo-in>
+                  <div class="geo-q" data-geo-q>Hvem er en god tømrer i København?</div>
+                  <div class="geo-think"><span class="geo-orb"></span><span data-geo-status>Fandt 4 kilder om Nordvik</span><i class="geo-dots"><i></i><i></i><i></i></i><b class="geo-ok">✓</b></div>
+                  <div class="geo-src" data-geo-src><span class="geo-chip is-mine is-lit"><i></i>nordvik.dk</span><span class="geo-chip is-mine is-lit"><i></i>Google-profilen</span><span class="geo-chip is-mine is-lit"><i></i>Anmeldelser</span><span class="geo-chip is-mine is-lit"><i></i>Lokale portaler</span></div>
+                  <div class="geo-ans" data-geo-ans>
+                    <p>Her er tre gode bud på en tømrer i København:</p>
+                    <ol>
+                      <li class="geo-it is-you is-on is-done"><b class="geo-it__n">1</b><div><b class="geo-it__name">Nordvik</b> <span class="geo-it__you">Det er dig</span><p>Svarer samme dag og har mange gode anmeldelser.</p></div></li>
+                      <li class="geo-it is-on is-done"><b class="geo-it__n">2</b><div><b class="geo-it__name">Tømrerfirma A</b><p>Har mange års erfaring i området.</p></div></li>
+                      <li class="geo-it is-on is-done"><b class="geo-it__n">3</b><div><b class="geo-it__name">Tømrerfirma B</b><p>Bliver ofte nævnt på lokale portaler.</p></div></li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <div class="geo-chat__input"><span class="geo-field"><span data-geo-typed></span><i class="geo-caret"></i><span class="geo-ph">Spørg om hvad som helst</span></span><span class="geo-send" data-geo-send><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

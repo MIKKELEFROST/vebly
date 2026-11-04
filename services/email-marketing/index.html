@@ -146,6 +146,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css?v=20261104a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
+<link rel="stylesheet" href="/assets/css/show/email-marketing.css?v=20261104a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -153,6 +154,7 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script type="module" src="/assets/js/main.js?v=20261104a"></script>
+<script type="module" src="/assets/js/show/email-marketing.js?v=20261104a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -214,7 +216,7 @@
         <p class="hero__lead" data-reveal="3">Vi laver nyhedsbreve og automatiske mails, der holder kontakten med dine kunder, så de kommer igen. Fra velkomstmail til påmindelser og tilbud.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -229,6 +231,124 @@
         </div>
       </div>
     </section>
+
+    <!-- Showcase: e-mail marketing. A newsletter lands in the customer's inbox, is opened and becomes a booking,
+     and the next mail runs by itself. Styles: assets/css/show/email-marketing.css, motion: assets/js/show/email-marketing.js.
+     The HTML is the finished state (shown as it is without motion); the script rewinds it and plays it on scroll. -->
+<section id="eksempel" class="show show--email-marketing" data-sec="eksempel">
+  <div class="em-head sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Et nyhedsbrev i praksis</div>
+      <h2 class="h2">Fra indbakken.<br><span class="hot">Til kalenderen.</span></h2>
+    </div>
+    <p class="sec-head__lead">Sådan lander et nyhedsbrev hos din kunde, bliver åbnet og ender som en booking. Bagefter kører den næste mail af sig selv.</p>
+  </div>
+
+  <div class="em-track" data-em-track>
+    <div class="em-sticky" data-em-sticky>
+      <div class="em-fit" data-em-fit>
+        <div class="em-left">
+          <div class="kicker em-kick">Sådan virker det</div>
+          <div class="em-pills" role="group" aria-label="Gå til et trin">
+            <button type="button" data-em-pill aria-label="Trin 1: Mailen lander">01</button>
+            <button type="button" data-em-pill aria-label="Trin 2: Kunden åbner">02</button>
+            <button type="button" data-em-pill aria-label="Trin 3: Kunden booker">03</button>
+            <button type="button" data-em-pill aria-label="Trin 4: Næste mail kører selv">04</button>
+            <button type="button" data-em-pill aria-label="Trin 5: Du ser, hvad det giver">05</button>
+          </div>
+          <ol class="em-steps">
+            <li class="em-step is-on" data-em-step><span class="em-step__n" aria-hidden="true">01</span><div class="em-step__body"><h3>Mailen lander</h3><p>Kun hos kunder, der har sagt ja. Vi sætter tilmelding og samtykke op efter reglerne.</p></div></li>
+            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">02</span><div class="em-step__body"><h3>Kunden åbner</h3><p>Vi skriver teksten og designer mailen, så den er værd at åbne. Også på mobilen.</p></div></li>
+            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">03</span><div class="em-step__body"><h3>Kunden booker</h3><p>Én tydelig knap, der fører direkte til din kalender. Uden omveje.</p></div></li>
+            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">04</span><div class="em-step__body"><h3>Næste mail kører selv</h3><p>Vi sætter automatiske flows op: velkomst, påmindelse og en mail, der beder om en anmeldelse.</p></div></li>
+            <li class="em-step" data-em-step><span class="em-step__n" aria-hidden="true">05</span><div class="em-step__body"><h3>Du ser, hvad det giver</h3><p>Åbninger, klik og bookinger, forklaret kort.</p><a href="#kontakt" class="em-cta" data-em-cta data-event="Eksempel: Få en fast pris">Få en fast pris →</a></div></li>
+          </ol>
+        </div>
+
+        <div class="em-stage" data-em-stage aria-hidden="true">
+          <div class="em-win" data-em-win>
+            <div class="em-bar">
+              <span class="dots3"><i></i><i></i><i></i></span>
+              <span class="em-search"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>Søg i mails</span>
+              <span class="em-me">M</span>
+            </div>
+            <div class="em-body">
+              <div class="em-box">
+                <div class="em-box__head"><b>Indbakke</b><span class="em-count" data-em-count>1</span></div>
+                <div class="em-rows" data-em-rows>
+                  <div class="em-row em-row--auto is-unread is-yours" data-em-auto>
+                    <i class="em-dot"></i>
+                    <div class="em-row__top"><b>Nordvik</b><time>16.00</time></div>
+                    <div class="em-row__sub">Vi ses i morgen kl. 9.00</div>
+                    <div class="em-row__pre">Påmindelse om dit forårstjek. Ring, hvis tiden ikke passer.</div>
+                    <span class="em-label em-label--auto"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.5h-4.5"/></svg>Automatisk</span>
+                  </div>
+                  <div class="em-row em-row--nl is-sel" data-em-nl>
+                    <i class="em-dot"></i>
+                    <div class="em-row__top"><b>Nordvik</b><time>08.02</time></div>
+                    <div class="em-row__sub">Forårstjek af dit tag: 10 % i april</div>
+                    <div class="em-row__pre">Vinteren slider på tagsten og tagrender. Book et tjek nu.</div>
+                    <span class="em-label">Dit nyhedsbrev</span>
+                  </div>
+                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Lene Holm</b><time>I går</time></div><div class="em-row__sub">Kaffe på lørdag?</div><div class="em-row__pre">Vi tager kage med. Passer det kl. 14, eller er det for tidligt?</div></div>
+                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Boligforeningen</b><time>I går</time></div><div class="em-row__sub">Referat fra generalforsamlingen</div><div class="em-row__pre">Hermed referatet fra torsdag. Næste møde er i juni.</div></div>
+                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Fodboldklubben</b><time>Lør.</time></div><div class="em-row__sub">Træning flyttes til torsdag</div><div class="em-row__pre">Banen er lukket på tirsdag, så vi træner torsdag kl. 17.</div></div>
+                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Bageriet på hjørnet</b><time>Fre.</time></div><div class="em-row__sub">Kvittering for dit køb</div><div class="em-row__pre">Tak for dit køb. Du finder kvitteringen herunder.</div></div>
+                  <div class="em-row" data-em-o><i class="em-dot"></i><div class="em-row__top"><b>Mor</b><time>Fre.</time></div><div class="em-row__sub">Søndag?</div><div class="em-row__pre">Kommer I til middag på søndag? Far laver suppe.</div></div>
+                </div>
+              </div>
+
+              <div class="em-read" data-em-read>
+                <div class="em-empty" data-em-empty><svg viewBox="0 0 48 48"><rect x="6" y="11" width="36" height="26" rx="5"/><path d="M8 14l16 12 16-12"/></svg>Ingen mail valgt</div>
+                <div class="em-open" data-em-open>
+                  <span class="em-back">‹ Indbakke</span>
+                  <div class="em-meta">
+                    <b class="em-meta__sub">Forårstjek af dit tag: 10 % i april</b>
+                    <div class="em-from"><span class="em-logo"><i></i></span><span><b>Nordvik</b> hej@nordvik.dk</span><time>08.02</time></div>
+                  </div>
+                  <div class="em-view" data-em-view>
+                    <div class="em-mail" data-em-mail>
+                      <div class="em-mail__top" data-em-part><span class="em-logo"><i></i></span><b>Nordvik</b><span>Nyhedsbrev · april</span></div>
+                      <div class="em-mail__img" data-em-part><img src="/udkast/_faelles/billeder/toemrer/projekt-3-480.webp" srcset="/udkast/_faelles/billeder/toemrer/projekt-3-480.webp 480w, /udkast/_faelles/billeder/toemrer/projekt-3.webp 960w" sizes="(max-width: 699px) 230px, 380px" width="480" height="362" alt="" loading="lazy" decoding="async"><span class="em-mail__sale">−10 %</span></div>
+                      <div class="em-mail__txt" data-em-part><span class="em-mail__kick">Forårstjek</span><b class="em-mail__h">Er dit tag klar<br>til <em>foråret?</em></b><p>Vinteren slider på tagsten og tagrender. Vi tjekker hele taget på en time og giver dig en fast pris.</p></div>
+                      <div class="em-offer" data-em-part><b>10 %</b><span>på forårstjekket, når du booker i april</span></div>
+                      <div class="em-mail__cta" data-em-part><span class="em-btn" data-em-btn><span class="em-btn__t"><span>Book et tjek</span><span>Booket</span></span><i><b>→</b><b>✓</b></i></span></div>
+                      <small class="em-mail__foot" data-em-part>Du får mailen, fordi du har sagt ja til nyheder fra Nordvik. <u>Afmeld</u></small>
+                    </div>
+                  </div>
+                  <div class="em-ok" data-em-ok><span class="em-ok__ic">✓</span><span><b>Du er booket</b><small>Forårstjek · tirsdag kl. 9.00</small></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="tag-eks em-tag">Eksempel</span>
+          <span class="em-cursor" data-em-cursor><svg viewBox="0 0 24 24"><path d="M5 2.5v17.2l4.6-4.4 2.9 6.6 3-1.3-2.9-6.5h6.3z"/></svg></span>
+
+          <div class="em-flow" data-em-flow>
+            <div class="em-flow__top"><b>Automatisk flow</b><span class="tag-eks">Eksempel</span></div>
+            <div class="em-flow__row">
+              <span class="em-flow__line"><i data-em-line></i><b data-em-fdot></b></span>
+              <span class="em-node is-done" data-em-node><i>✓</i>Velkomst<small>Ved tilmelding</small></span>
+              <span class="em-node is-done" data-em-node><i>✓</i>Tilbud<small>Denne mail</small></span>
+              <span class="em-node is-now" data-em-node><i>✓</i>Påmindelse<small>Dagen før</small></span>
+              <span class="em-node" data-em-node><i>✓</i>Anmeldelse<small>Efter opgaven</small></span>
+            </div>
+          </div>
+
+          <div class="spot em-stats" data-spot data-em-stats>
+            <div class="em-stats__top"><span>Nyhedsbrev: Forårstjek</span><span class="tag-eks">Eksempel</span></div>
+            <div class="em-stats__row">
+              <div><b><span data-em-n="58">58</span><small>%</small></b><span>Åbnet</span></div>
+              <div><b><span data-em-n="14">14</span><small>%</small></b><span>Klik</span></div>
+              <div><b><span data-em-n="11">11</span></b><span>Bookinger</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="sr-only">Eksempel: Et nyhedsbrev fra tømreren Nordvik lander øverst i kundens indbakke med emnet »Forårstjek af dit tag: 10 % i april«. Kunden åbner mailen, der har et billede af et tag, en kort tekst, et tilbud på 10 % og knappen »Book et tjek«, og booker et tjek tirsdag kl. 9.00. Bagefter sender et automatisk flow en påmindelse dagen før, og rapporten viser, at 58 % åbnede mailen, 14 % klikkede, og at den gav 11 bookinger.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
     <section id="pris" class="price-sec" data-sec="pris">
       <div class="spot price" data-reveal="0" data-spot>
@@ -336,11 +456,11 @@
             </div>
           </div>
           <div class="addon-slot">
-            <div class="addon" data-tilt data-addon="SEO" data-value="999">
+            <div class="addon" data-tilt data-addon="SEO" data-value="995">
               <div class="glare" data-glare></div>
               <span class="addon__n">05</span>
               <div class="addon__head"><h3>SEO</h3><p>Bliv fundet først, når kunderne søger.</p></div>
-              <div class="addon__price">fra 999 kr./md.</div>
+              <div class="addon__price">995 kr./time</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Lokal SEO og Google-profil</li><li><span class="check" aria-hidden="true">✓</span>Tekster og søgeord</li><li><span class="check" aria-hidden="true">✓</span>Teknisk optimering</li></ul>
               <div class="addon__actions">
                 <button type="button" class="addon__toggle" data-toggle="SEO" data-burst aria-pressed="false">+ Tilføj</button>
