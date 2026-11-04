@@ -87,7 +87,7 @@ function init(sec) {
   // The mail app: one e-mail at a time; showing one restarts its parts' entrance
   const show = id => {
     Object.values(mails).forEach(m => m.classList.remove('is-cur'));
-    $$('.em-btn.is-done').forEach(b => b.classList.remove('is-done'));
+    $$('.em-btn.is-done').forEach(b => { b.classList.remove('is-done'); b.firstChild.textContent = b.dataset.t; });
     void list.offsetWidth;
     mails[id].classList.add('is-cur'); cur = id; opened = true;
     sec.classList.remove('is-hint'); sec.classList.toggle('is-cue2', !sent);
@@ -192,7 +192,7 @@ function init(sec) {
   envs.forEach(env => env.addEventListener('click', () => send(env)));
   list.addEventListener('click', e => {
     const b = e.target.closest('[data-em-book]'), u = e.target.closest('[data-em-unsub]');
-    if (b && !b.classList.contains('is-done')) { b.classList.add('is-done'); act('book'); }
+    if (b && !b.classList.contains('is-done')) { b.dataset.t = b.firstChild.textContent; b.firstChild.textContent = b.dataset.ok; b.classList.add('is-done'); act('book'); }
     if (u) {
       toast.textContent = 'Du er afmeldt. Med ét klik, som reglerne siger.';
       sec.classList.add('is-toast'); clearTimeout(tt); tt = setTimeout(() => sec.classList.remove('is-toast'), 2800);

@@ -32,7 +32,7 @@ function init(root) {
   const LEAD = new Set('jeg vi søger leder efter find finde har brug for skal bruge mig gerne vil en et hvor kan man'.split(' '));
   const town = by => by === 'kbh' ? 'København' : by.split(' ').map(w => SUF.test(w) ? w.toUpperCase() : w.split('-').map(cap).join('-')).join(' ');
   const nice = f => cap(f).replace(/(^|[\s-])vvs(?=$|[\s-])/gi, '$1VVS');
-  const slug = s => lc(s).replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24).replace(/-+$/, '');
+  const slug = s => lc(s).replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24).replace(/-+$/, '');
   // "frisør i odense", "Tømrer Høje-Taastrup", "kbh frisør", "maler i nærheden", "odense" → { fag, by, near }
   function parse(raw) {
     let s = ` ${lc(raw).normalize('NFC').replace(/[^\p{L}\p{N}&' -]+/gu, ' ').replace(/\s+/g, ' ').trim()} `, near = false, by = '';
