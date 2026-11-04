@@ -161,17 +161,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261104c">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261104d">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261104c">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261104d">
+<link rel="stylesheet" href="/assets/css/show/interne-systemer.css?v=20261104d">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
-<script type="module" src="/assets/js/main.js?v=20261104c"></script>
-<script type="module" src="/assets/js/sections.js?v=20261104c"></script>
+<script type="module" src="/assets/js/main.js?v=20261104d"></script>
+<script type="module" src="/assets/js/sections.js?v=20261104d"></script>
+<script type="module" src="/assets/js/show/interne-systemer.js?v=20261104d"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -199,6 +201,7 @@
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
         <a href="/#services" data-roll>Services</a>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -235,7 +238,7 @@
         <p class="hero__lead" data-reveal="3">Vi bygger systemer skræddersyet til din virksomhed, så kunder, aftaler, tilbud og tal er samlet ét sted, i stedet for i regneark, post-its og programmer, der næsten passer.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -304,6 +307,85 @@
         <div class="sx-vs__cell is-med" style="grid-row:4;--i:7"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med jeres eget system: </span>Dashboardet viser dem, hver gang du kigger.</span></div>
         <div class="sx-vs__cell is-uden" style="grid-row:5;--i:8"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">I dag: </span>Programmer, der næsten passer.</span></div>
         <div class="sx-vs__cell is-med" style="grid-row:5;--i:9"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Med jeres eget system: </span>Et system bygget til jeres måde at arbejde på.</span></div>
+      </div>
+    </section>
+
+    <section id="eksempel" class="show show--interne-systemer" data-sec="eksempel">
+      <div class="sec-head" data-reveal="0">
+        <div class="sec-head__title"><div class="kicker">Sådan kan det se ud</div><h2 class="h2">Træk kortet.<br><span class="dim">Tallene følger med.</span></h2></div>
+        <p class="sec-head__lead">Et eksempel på et system til tømreren Nordvik. Flyt et lead fra henvendelse til vundet, og se overblikket regne med.</p>
+      </div>
+      <!-- A CRM of our own drawing (assets/js/show/interne-systemer.js): dashboard tiles, a pipeline whose cards
+           are dragged or moved with their button, and a week calendar where won jobs show up.
+           The business, the customers and the amounts are made up. -->
+      <div class="browser crm-br" data-reveal="1">
+        <div class="browser__bar" aria-hidden="true">
+          <div class="dots3"><i></i><i></i><i></i></div>
+          <div class="browser__url"><svg class="crm-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg><span>nordvik.dk/system/<span data-crm-path>pipeline</span></span></div>
+          <span class="tag-eks">Eksempel</span>
+        </div>
+        <div class="crm" data-crm data-view="pipeline">
+          <div class="crm__rail" aria-hidden="true">
+            <i><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></i>
+            <i><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 5.6a3.2 3.2 0 0 1 0 5.8M17 14.2a5.5 5.5 0 0 1 3.5 4.8"/></svg></i>
+            <i class="crm__ri-p"><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="4.5" height="16" rx="1.6"/><rect x="9.75" y="4" width="4.5" height="11" rx="1.6"/><rect x="16" y="4" width="4.5" height="7" rx="1.6"/></svg></i>
+            <i class="crm__ri-k"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></i>
+            <i><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10.5A.5.5 0 0 1 6.5 20V4a.5.5 0 0 1 .5-.5z"/><path d="M14 3.5V8h4M9.5 12.5h5M9.5 16h5"/></svg></i>
+          </div>
+          <div class="crm__main">
+            <p class="sr-only">Eksempel på et kundesystem til tømreren Nordvik i København, med opdigtede kunder og beløb. Øverst står tre tal: åbne tilbud, vundne opgaver og omsætning denne måned. Herunder en pipeline med tre kolonner: Ny henvendelse, Tilbud sendt og Vundet. Knappen på hvert kort flytter det til næste kolonne, og tallene følger med. Knappen Kalender viser ugens aftaler.</p>
+            <div class="crm__top">
+              <span class="crm__logo" aria-hidden="true">N</span>
+              <span class="crm__name"><b>Nordvik</b><small>Tømrer · København</small></span>
+              <span class="crm__search" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>Søg kunde eller adresse</span>
+              <div class="seg crm__seg" role="group" aria-label="Visning">
+                <button type="button" class="is-on" aria-pressed="true" data-crm-view="pipeline">Pipeline</button>
+                <button type="button" aria-pressed="false" data-crm-view="kalender">Kalender<i class="crm__badge" data-crm-badge aria-hidden="true" hidden>1</i></button>
+              </div>
+            </div>
+            <ul class="crm__tiles" aria-label="Overblik">
+              <li class="crm__tile"><span class="crm__tl">Åbne tilbud</span><b class="crm__n" data-t="open">2</b><span class="crm__ts" data-t="openKr">122.000 kr. i spil</span></li>
+              <li class="crm__tile"><span class="crm__tl">Vundet denne måned</span><b class="crm__n" data-t="won">2</b><span class="crm__ts" data-crm-last>Senest: Kasper Friis</span></li>
+              <li class="crm__tile crm__tile--kr"><span class="crm__tl">Omsætning denne måned</span><b class="crm__n" data-t="wonKr">108.000 kr.</b><span class="crm__ts">Fra vundne opgaver</span>
+                <span class="crm__bars" aria-hidden="true"><i style="--v:.3"></i><i style="--v:.44"></i><i style="--v:.37"></i><i style="--v:.52"></i><i class="is-now" data-crm-bar></i></span>
+                <span class="crm__delta" data-crm-delta aria-hidden="true"></span></li>
+            </ul>
+
+            <div class="crm__pane" data-crm-pane="pipeline">
+              <div class="crm__hint"><span class="crm__h-m">Træk et kort videre, eller brug knappen på kortet.</span><span class="crm__h-t">Hold på et kort, og træk det. Eller brug knappen.</span><button type="button" class="crm__reset" data-crm-reset hidden>Nulstil <span aria-hidden="true">↺</span></button></div>
+              <div class="crm__board" data-crm-board>
+                <div class="crm__col" data-crm-col role="group" aria-labelledby="crm-h0" style="--c:var(--yellow)">
+                  <div class="crm__ch"><i class="crm__dot"></i><h3 id="crm-h0">Ny henvendelse</h3><span class="crm__cnt" data-c>2</span><span class="crm__sum" data-s>73.500 kr.</span></div>
+                  <ul class="crm__list">
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="42000" data-slot="3,7,4" data-cal="Terrasse" data-m0="Fra hjemmesiden · i dag"><span class="crm__av" aria-hidden="true" style="--a:#e6ecfb">JB</span><span class="crm__who"><b>Jonas Brandt</b><span>Terrasse i lærk</span></span><span class="crm__kr">42.000 kr.</span><span class="crm__meta" data-meta>Fra hjemmesiden · i dag</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Jonas Brandt til Tilbud sendt">Send tilbud<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="31500" data-slot="3,12,3" data-cal="Vinduer" data-m0="Besigtigelse ons. kl. 13"><span class="crm__av" aria-hidden="true" style="--a:#fbe1d6">SL</span><span class="crm__who"><b>Sara Lund</b><span>Nye vinduer</span></span><span class="crm__kr">31.500 kr.</span><span class="crm__meta" data-meta>Besigtigelse ons. kl. 13</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Sara Lund til Tilbud sendt">Send tilbud<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                  </ul>
+                </div>
+                <div class="crm__col" data-crm-col role="group" aria-labelledby="crm-h1" style="--c:var(--accent)">
+                  <div class="crm__ch"><i class="crm__dot"></i><h3 id="crm-h1">Tilbud sendt</h3><span class="crm__cnt" data-c>2</span><span class="crm__sum" data-s>122.000 kr.</span></div>
+                  <ul class="crm__list">
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="68000" data-slot="4,7,8" data-cal="Køkken" data-m1="Sendt for 2 dage siden"><span class="crm__av" aria-hidden="true" style="--a:#fde7c2">MH</span><span class="crm__who"><b>Mette Holm</b><span>Nyt køkken</span></span><span class="crm__kr">68.000 kr.</span><span class="crm__meta" data-meta>Sendt for 2 dage siden</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Mette Holm til Vundet">Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                    <li class="crm__card" data-lead tabindex="-1" data-kr="54000" data-slot="2,7,5" data-cal="Carport" data-m1="Sendt i går"><span class="crm__av" aria-hidden="true" style="--a:#e3f4ea">PK</span><span class="crm__who"><b>Peter Krogh</b><span>Carport</span></span><span class="crm__kr">54.000 kr.</span><span class="crm__meta" data-meta>Sendt i går</span><button type="button" class="crm__mv" data-mv aria-label="Flyt Peter Krogh til Vundet">Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                  </ul>
+                </div>
+                <div class="crm__col" data-crm-col role="group" aria-labelledby="crm-h2" style="--c:var(--green)">
+                  <div class="crm__ch"><i class="crm__dot"></i><h3 id="crm-h2">Vundet</h3><span class="crm__cnt" data-c>2</span><span class="crm__sum" data-s>108.000 kr.</span></div>
+                  <ul class="crm__list">
+                    <li class="crm__card is-won" data-lead tabindex="-1" data-kr="23000" data-slot="1,7,5" data-cal="Skur og hegn"><span class="crm__av" aria-hidden="true" style="--a:#ece7fb">KF</span><span class="crm__who"><b>Kasper Friis</b><span>Skur og hegn</span></span><span class="crm__kr">23.000 kr.</span><span class="crm__meta" data-meta>Booket tir. kl. 7</span><button type="button" class="crm__mv" data-mv hidden>Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                    <li class="crm__card is-won" data-lead tabindex="-1" data-kr="85000" data-slot="0,7,8" data-cal="Nyt tag"><span class="crm__av" aria-hidden="true" style="--a:#f2ede4">LB</span><span class="crm__who"><b>Line Bach</b><span>Nyt tag</span></span><span class="crm__kr">85.000 kr.</span><span class="crm__meta" data-meta>Booket man. kl. 7</span><button type="button" class="crm__mv" data-mv hidden>Vundet<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="crm__pane crm__cal" data-crm-pane="kalender" hidden>
+              <div class="crm__calh"><b>Denne uge</b><span data-crm-n>4 aftaler</span><span class="crm__key" aria-hidden="true"><i class="is-job"></i>Opgaver<i class="is-bes"></i>Besigtigelser</span></div>
+              <div class="crm__wrap"><div class="crm__wk" data-crm-cal></div></div>
+            </div>
+            <p class="sr-only" aria-live="polite" data-crm-live></p>
+          </div>
+          <span class="crm__hand" data-crm-hand aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 2.8v16.4l4.3-4.1 2.9 6.4 2.9-1.3-2.9-6.3 5.9-.4z"/></svg></span>
+        </div>
       </div>
     </section>
 
@@ -433,7 +515,7 @@
               <span class="addon__n">03</span>
               <div class="addon__head"><h3>Google Ads</h3><p>Vær øverst på Google, når kunderne søger lige nu.</p></div>
               <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Søgeord og kampagner</li><li><span class="check" aria-hidden="true">✓</span>Lokal målretning</li><li><span class="check" aria-hidden="true">✓</span>Månedlig rapport</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Søgeord og kampagner</li><li><span class="check" aria-hidden="true">✓</span>Lokal målretning</li><li><span class="check" aria-hidden="true">✓</span>Google Shopping med i prisen</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
               <div class="addon__actions">
                 <button type="button" class="addon__toggle" data-toggle="Google Ads" data-burst aria-pressed="false">+ Tilføj</button>
                 <a class="addon__more" href="/services/google-ads" aria-label="Læs mere om Google Ads" data-event="Services: Google Ads">Læs mere →</a>
@@ -459,7 +541,7 @@
               <span class="addon__n">05</span>
               <div class="addon__head"><h3>Google Shopping Ads</h3><p>Dine produkter med billede og pris øverst på Google.</p></div>
               <div class="addon__price">8.000 kr./md.</div>
-              <ul><li><span class="check" aria-hidden="true">✓</span>Produktfeed og Merchant Center</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li><li><span class="check" aria-hidden="true">✓</span>Sporing af salg</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Produktfeed og Merchant Center</li><li><span class="check" aria-hidden="true">✓</span>Shopping og Performance Max</li><li><span class="check" aria-hidden="true">✓</span>Google Ads med i prisen</li><li><span class="check" aria-hidden="true">✓</span>Ekstra kanal: 5.000 kr./md.</li></ul>
               <div class="addon__actions">
                 <button type="button" class="addon__toggle" data-toggle="Google Shopping Ads" data-burst aria-pressed="false">+ Tilføj</button>
                 <a class="addon__more" href="/services/google-shopping-ads" aria-label="Læs mere om Google Shopping Ads" data-event="Services: Google Shopping Ads">Læs mere →</a>

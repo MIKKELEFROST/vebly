@@ -1,7 +1,7 @@
 import { track } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { openBestil, FAG } from './bestil.js';
-import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, SEO_TIMER, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
+import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, kanalPriser, kanalPlus, SEO_TIMER, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
 const $ = (s, r = document) => r.querySelector(s);
@@ -128,29 +128,31 @@ const label = n => priser[n] && priser[n].time && hours() ? `${n} · ${timerTxt(
 const fallbackValue = form && form.dataset.value !== undefined ? (+form.dataset.value || 0) : 2995;
 
 // The price of a list of names (content.js → priser): one-off, a month, and the advertising
-// channels, where the first costs KANAL.first and each extra KANAL.extra a month
+// channels, where the first costs KANAL.first and each extra KANAL.extra a month (Google Ads and Google
+// Shopping Ads count as one, content.js)
 const beregn = names => {
-  const r = { once: 0, md: 0, kanaler: 0, fraOnce: false, fraMd: false, timepris: [] };
+  const r = { once: 0, md: 0, kanaler: 0, fraOnce: false, fraMd: false, timepris: [] }, groups = [];
   names.forEach(n => {
     const p = priser[n]; if (!p) return;
     if (p.time) { if (hours()) r.md += p.time * hours(); else r.timepris.push([n, kr(p.time) + '/time']); return; }
-    if (p.kanal) r.kanaler++;
+    if (p.kanal) groups.push(p.kanal);
     r.once += p.once || 0; r.md += p.md || 0;
     if (p.fra && p.once) r.fraOnce = true;
     if (p.fra && p.md && !p.once) r.fraMd = true;
   });
-  if (r.kanaler) r.md += KANAL.first + KANAL.extra * (r.kanaler - 1);
+  r.kanaler = new Set(groups).size;
+  r.md += kanalPriser(groups).reduce((a, b) => a + b, 0);
   return r;
 };
 const priceText = (r, alone) => [r.once ? (r.fraOnce ? 'fra ' : '') + kr(r.once) : '', r.md ? (r.fraMd ? 'fra ' : '') + kr(r.md) + '/md.' : '',
   ...r.timepris.map(([n, t]) => alone ? t : `${n} ${t}`)].filter(Boolean).join(' + ');
 // One line per thing chosen; channels in the order they were picked (first full price, then extra)
 const priceLines = names => {
-  let k = 0;
+  const groups = [];
   return names.map(n => {
     const p = priser[n]; if (!p) return [n, 'Pris efter en snak'];
     if (p.time) return hours() ? [`${n} · ${timerTxt(hours())}`, kr(p.time * hours()) + '/md.'] : [n, kr(p.time) + '/time'];
-    if (p.kanal) return [n, kr(k++ ? KANAL.extra : KANAL.first) + '/md.'];
+    if (p.kanal) { groups.push(p.kanal); const v = kanalPriser(groups).at(-1); return [n, v ? kr(v) + '/md.' : 'Uden ekstra pris']; }
     return [n, (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ')];
   });
 };
@@ -218,13 +220,14 @@ const rollTo = (el, to, suffix = '') => {
 const syncCalc = () => {
   if (!calcEl) return;
   const names = chosenNames(), r = beregn(names), on = new Set(names);
-  const kanaler = state.addons.filter(n => priser[n] && priser[n].kanal).length;
+  const groups = state.addons.filter(n => priser[n] && priser[n].kanal).map(n => priser[n].kanal), kanaler = groups.length;
+  const saved = KANAL.first * kanaler - kanalPriser(groups).reduce((a, b) => a + b, 0);
   $$('.calc__opt', calcEl).forEach(b => {
     const id = b.dataset.pakke, n = b.dataset.toggle, sel = id ? id === state.pakke : on.has(n);
     b.classList.toggle('is-on', sel); b.setAttribute('aria-pressed', String(sel));
     const p = id ? { once: pakker.find(x => x.id === id).price } : priser[n];
     let txt = p.time ? kr(p.time) + '/time' : (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ');
-    if (p.kanal) txt = sel ? priceLines(names).find(l => l[0] === n)[1] : (kanaler ? '+' + kr(KANAL.extra) : kr(KANAL.first)) + '/md.';
+    if (p.kanal) { const plus = kanalPlus(groups, p.kanal); txt = sel ? priceLines(names).find(l => l[0] === n)[1] : plus ? (kanaler ? '+' : '') + kr(plus) + '/md.' : 'Uden ekstra pris'; }
     $('[data-calc-p]', b).textContent = txt;
   });
   const timer = $('[data-calc-timer]', calcEl);
@@ -232,9 +235,9 @@ const syncCalc = () => {
   $('[data-timer-val]', timer).textContent = state.timer;
   $('[data-timer-p]', timer).textContent = `${state.timer} × ${kr(priser.SEO.time)} = ${kr(priser.SEO.time * state.timer)}/md.`;
   $('[data-calc-lines]', calcEl).innerHTML = priceLines(names).map(([t, v]) => `<div class="calc__line"><span>${esc(t)}</span><span>${esc(v)}</span></div>`).join('');
-  $('[data-calc-hint]', calcEl).innerHTML = kanaler === 0 ? `Første kanal ${kr(KANAL.first)}/md. Hver ekstra kanal kun ${kr(KANAL.extra)}/md.`
-    : kanaler === 1 ? `Tag en kanal mere for kun <b>${kr(KANAL.extra)}/md.</b>`
-    : `Du sparer <b>${kr((KANAL.first - KANAL.extra) * (kanaler - 1))}/md.</b> ved at samle ${kanaler} kanaler hos os.`;
+  $('[data-calc-hint]', calcEl).innerHTML = kanaler === 0 ? `Første kanal ${kr(KANAL.first)}/md. Hver ekstra kanal kun ${kr(KANAL.extra)}/md. Google Ads og Google Shopping tæller som én.`
+    : !saved ? `Tag en kanal mere for kun <b>${kr(KANAL.extra)}/md.</b>`
+    : `Du sparer <b>${kr(saved)}/md.</b> ved at samle ${kanaler} kanaler hos os.`;
   rollTo($('[data-calc-once]', calcEl), r.once);
   rollTo($('[data-calc-md]', calcEl), r.md);
   $('[data-calc-once]', calcEl).dataset.fra = r.fraOnce ? '1' : '';

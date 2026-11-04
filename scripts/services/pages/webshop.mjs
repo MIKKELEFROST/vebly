@@ -88,7 +88,7 @@ export default async function ({ lib, data, showcase, read }) {
         ${group('md', 'Hver måned, hvis du vil', `${row([
           opt('service', 'service', 'Webshop-service', 'Opdateringer, små rettelser og hjælp, når du har brug for det.', kr(P.service) + '/md.', { cls: ' ws-wide' }),
           ...ADS.map(([v, t, d]) => opt('ads', v, t, d, kr(P.channel.first) + '/md.', { pk: 'ad:' + v }))
-        ])}<p class="calc__hint" data-ws-adtip>Første kanal ${kr(P.channel.first)}/md. Hver ekstra kanal kun ${kr(P.channel.extra)}/md.</p>`)}
+        ])}<p class="calc__hint" data-ws-adtip>Første kanal ${kr(P.channel.first)}/md. Hver ekstra kanal kun ${kr(P.channel.extra)}/md. Google Ads og Google Shopping tæller som én.</p>`)}
       </div>`;
 
   const cart = `<div class="spot calc__sum" data-spot data-ws-sum data-reveal="2">

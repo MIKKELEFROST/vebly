@@ -13,9 +13,9 @@ export const SITE = 'https://webleads.dk';
 export const services = [
   { slug: 'hjemmesider', t: 'Hjemmesider', price: 'fra 2.995 kr.', value: 2995, d: 'Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.', ex: ['Simpel one page: 2.995 kr.', 'Normal hjemmeside: 9.995 kr.', 'SEO hjemmeside: 29.995 kr.'] },
   { slug: 'webshop', t: 'Webshop', price: 'fra 12.995 kr.', value: 12995, d: 'Webshop på Shopify med betaling, fragt og dine produkter. Beregn selv prisen.', ex: ['Shopify Partner', '25 produkter med i prisen', 'Beregn din pris på siden'] },
-  { slug: 'google-ads', t: 'Google Ads', price: '8.000 kr./md.', value: 8000, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
+  { slug: 'google-ads', t: 'Google Ads', price: '8.000 kr./md.', value: 8000, d: 'Vær øverst på Google, når kunderne søger lige nu.', ex: ['Søgeord og kampagner', 'Lokal målretning', 'Google Shopping med i prisen', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'meta-ads', t: 'Meta Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Facebook og Instagram, der rammer de rigtige.', ex: ['Tekst og grafik', 'Målretning og retargeting', 'Månedlig rapport', 'Ekstra kanal: 5.000 kr./md.'] },
-  { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Sporing af salg', 'Ekstra kanal: 5.000 kr./md.'] },
+  { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Google Ads med i prisen', 'Ekstra kanal: 5.000 kr./md.'] },
   { slug: 'google-css', t: 'Google CSS', price: '49 kr./md.', value: 49, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Webleads som din CSS', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
   { slug: 'video', t: 'Video', price: 'Fast pris efter en snak', value: 0, d: 'Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', ex: ['Reklamevideoer til sociale medier', 'Explainer-videoer', 'Motion graphics og logoanimation'] },
   { slug: 'seo', t: 'SEO', price: '995 kr./time', value: 995, d: 'Bliv fundet først, når kunderne søger.', ex: ['Lokal SEO og Google-profil', 'Tekster og søgeord', 'Teknisk optimering'] },
@@ -53,15 +53,15 @@ const SERVICEFAG = ['servicevirksomheder', 'håndværkere', 'klinikker', 'frisø
 export const pages = [
   {
     slug: 'google-ads', name: 'Google Ads', short: 'Øverst på Google, når kunderne søger',
-    description: 'Vi opsætter og styrer dine Google Ads, så du bliver vist øverst, når kunderne søger efter det, du laver. 8.000 kr./md., hver ekstra kanal 5.000 kr./md., opsætning gratis, og annoncebudgettet betaler du direkte til Google.',
+    description: 'Vi opsætter og styrer dine Google Ads, så du bliver vist øverst, når kunderne søger efter det, du laver. 8.000 kr./md., også med Google Shopping, hver ekstra kanal 5.000 kr./md., opsætning gratis, og annoncebudgettet betaler du direkte til Google.',
     serviceType: 'Google Ads-annoncering',
     words: SERVICEFAG,
     h1: { a: ['Øverst', 'på'], hot: 'Google.', dim: 'Når de', mark: 'søger.' },
     lead: 'Vi bygger og styrer dine annoncer på Google, så du bliver vist, når nogen søger efter det, du laver, der hvor du holder til. Og vi holder øje med hver krone.',
     floats: ['Opsætning gratis', 'Månedlig rapport', 'Søgeord ↗'], ring: 'GOOGLE ADS • SØGNING • LOKAL • RAPPORT •',
-    price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · ekskl. moms' },
+    price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · Google Shopping med uden ekstra pris · hver ekstra kanal 5.000 kr./md. · opsætning gratis · ekskl. moms' },
     priceH2: ['Fast pris.', 'Ingen gætteri.'],
-    priceLead: 'Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google, så du altid kan se, hvad der bliver brugt.',
+    priceLead: 'Google Shopping er med i samme pris. Tager du også Meta Ads, koster den kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google, så du altid kan se, hvad der bliver brugt.',
     items: [
       ['Søgeordsanalyse', 'Vi finder de ord, dine kunder faktisk søger på.'],
       ['Kampagner og annoncer', 'Vi bygger kampagnerne og skriver annoncerne færdige.'],
@@ -78,7 +78,7 @@ export const pages = [
       ['Optimering', 'Vi justerer løbende og sender en månedlig rapport.', '↗']
     ],
     faqs: [
-      ['Hvad koster Google Ads?', 'Vores arbejde koster 8.000 kr. om måneden, og opsætningen er gratis. Tager du flere kanaler, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google, og det aftaler vi sammen.'],
+      ['Hvad koster Google Ads?', 'Vores arbejde koster 8.000 kr. om måneden, og opsætningen er gratis. Google Shopping er med i samme pris. Tager du flere kanaler, fx Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google, og det aftaler vi sammen.'],
       ['Hvor hurtigt kan annoncerne køre?', 'Så snart kampagnerne er sat op og godkendt af Google. Derefter justerer vi løbende, så du får mest muligt ud af budgettet.'],
       ['Skal jeg have en ny hjemmeside?', 'Ikke nødvendigvis. Annoncerne kan sende kunderne til den side, du har i dag. Spænder siden ben for resultaterne, siger vi det ærligt.'],
       ['Hvad er forskellen på Google Ads og SEO?', 'Med Google Ads betaler du for at blive vist øverst med det samme. SEO er arbejdet med at blive fundet uden at betale for hvert klik. De to kan sagtens kombineres.']
@@ -104,7 +104,7 @@ export const pages = [
     floats: ['Opsætning gratis', 'Facebook og Instagram', 'Retargeting ↗'], ring: 'META ADS • FACEBOOK • INSTAGRAM • REELS •',
     price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · opsætning gratis · ekskl. moms' },
     priceH2: ['Fast pris.', 'Ingen gætteri.'],
-    priceLead: 'Tager du flere kanaler, fx også Google Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Meta, så du altid kan se, hvad der bliver brugt.',
+    priceLead: 'Tager du også Google Ads, koster det kun 5.000 kr. mere om måneden, og Google Shopping er med i den pris. Annoncebudgettet betaler du direkte til Meta, så du altid kan se, hvad der bliver brugt.',
     items: [
       ['Tekst og grafik', 'Vi laver annoncerne færdige, klar til at køre.'],
       ['Målretning', 'Vis dine annoncer for de rigtige i dit område.'],
@@ -149,15 +149,15 @@ export const pages = [
   },
   {
     slug: 'google-shopping-ads', name: 'Google Shopping Ads', short: 'Dine produkter med billede og pris på Google',
-    description: 'Vi sætter Google Shopping op for din webshop: Merchant Center, produktfeed, kampagner og sporing af salg, så dine produkter bliver vist med billede og pris, når kunderne søger. 8.000 kr./md., hver ekstra kanal 5.000 kr./md.',
+    description: 'Vi sætter Google Shopping op for din webshop: Merchant Center, produktfeed, kampagner og sporing af salg, så dine produkter bliver vist med billede og pris, når kunderne søger. 8.000 kr./md., også med Google Ads, hver ekstra kanal 5.000 kr./md.',
     serviceType: 'Google Shopping-annoncering',
     words: ['webshops', 'netbutikker', 'Shopify-butikker', 'butikker med varer'],
     h1: { a: ['Dine', 'varer'], hot: 'øverst.', dim: 'Med billede og', mark: 'pris.' },
     lead: 'Vi sætter Google Shopping op, så dine produkter bliver vist med billede og pris, når kunderne søger efter dem. Vi klarer produktfeed, Merchant Center og kampagner.',
     floats: ['Produktfeed', 'Merchant Center', 'Billede og pris ↗'], ring: 'GOOGLE SHOPPING • PRODUKTER • FEED • SALG •',
-    price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · hver ekstra kanal 5.000 kr./md. · ekskl. moms' },
+    price: { amount: '8.000', pre: '', post: 'kr./md.', note: 'Pr. kanal · Google Ads med uden ekstra pris · hver ekstra kanal 5.000 kr./md. · ekskl. moms' },
     priceH2: ['Fast pris.', 'Ingen gætteri.'],
-    priceLead: 'Tager du flere kanaler, fx også Google Ads eller Meta Ads, koster hver ekstra kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.',
+    priceLead: 'Google Ads er med i samme pris. Tager du også Meta Ads, koster den kun 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.',
     items: [
       ['Merchant Center', 'Vi opretter eller rydder op i din Google Merchant Center-konto.'],
       ['Produktfeed', 'Dine produkter, priser og lagerstatus sendes automatisk til Google.'],
@@ -174,7 +174,7 @@ export const pages = [
       ['Optimering', 'Vi flytter budgettet mod det, der sælger, og sender en rapport.', '↗']
     ],
     faqs: [
-      ['Hvad koster Google Shopping Ads?', 'Vores arbejde koster 8.000 kr. om måneden. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.'],
+      ['Hvad koster Google Shopping Ads?', 'Vores arbejde koster 8.000 kr. om måneden, og Google Ads er med i samme pris. Tager du flere kanaler, fx også Meta Ads, koster hver ekstra kanal 5.000 kr. om måneden. Annoncebudgettet betaler du direkte til Google.'],
       ['Hvad er et produktfeed?', 'En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.'],
       ['Virker det med min webshop?', 'De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.'],
       ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.'],
@@ -716,7 +716,7 @@ export const front = {
     ['Svar inden for 24 timer.', 'Skriv til os, så vender vi tilbage med en fast pris.', '24']
   ],
   faqs: [
-    ['Hvad koster det?', 'Det afhænger af, hvad du har brug for. En hjemmeside starter ved 2.995 kr., og SEO koster 995 kr. i timen. Annoncering koster 8.000 kr. om måneden for den første kanal og 5.000 kr. for hver ekstra. Skriv til os, så får du en fast pris inden for 24 timer.'],
+    ['Hvad koster det?', 'Det afhænger af, hvad du har brug for. En hjemmeside starter ved 2.995 kr., og SEO koster 995 kr. i timen. Annoncering koster 8.000 kr. om måneden for den første kanal og 5.000 kr. for hver ekstra, og Google Ads og Google Shopping tæller som én. Skriv til os, så får du en fast pris inden for 24 timer.'],
     ['Skal jeg købe det hele?', 'Nej. Du vælger kun det, du har brug for. Du kan starte med én ting, fx en hjemmeside eller Google Ads, og bygge på senere.'],
     ['Hvem taler jeg med?', 'Den, der laver arbejdet. Der er ingen mellemled, så du har direkte kontakt til den, der bygger din side eller kører dine annoncer.'],
     ['Er annoncebudgettet med i prisen?', 'Nej. Annoncebudgettet betaler du direkte til Google eller Meta, så du altid kan se, hvad der bliver brugt. Opsætningen af annoncerne er gratis.'],

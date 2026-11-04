@@ -2,7 +2,7 @@
 // The product slider fills an example shop with products; every paid choice flies into the cart (the price box).
 // Tracks only calc_change (field and choice, never typed text) and calc_cta.
 import { track } from '/assets/js/analytics.js';
-import { KANAL } from '/assets/js/content.js';
+import { KANAL, kanalPriser, kanalPlus } from '/assets/js/content.js';
 
 // PRICES:start (scripts/services/pages/webshop.mjs reads this block, so the copy on the page says the same)
 // Our prices (approved 4 Nov 2026), in kroner ex. VAT. Change a number here, then run: node scripts/services/build.mjs webshop
@@ -28,6 +28,8 @@ const PRICES = {
 // The product slider: [position 0–1000, products]. Most shops have a few hundred, so they get most of the track
 const SCALE = [[0, 1], [120, 25], [400, 100], [600, 250], [750, 500], [880, 1000], [1000, 2000]];
 // PRICES:end
+// The channel group of each advertising choice: Google Shopping Ads and Google Ads are one Google channel
+const grp = v => v === 'meta' ? 'meta' : 'google';
 
 const root = document.querySelector('#beregner.show--webshop');
 if (root) init();
@@ -73,13 +75,18 @@ function init() {
       many ? `${ig.length} integrationer` : ig[0].dataset.s, ig.map(i => i.dataset.c).join('+'), many ? and(ig.map(title)) : '');
     on('fn').forEach(i => add(i.value, title(i), P[i.value], 0, i.dataset.s, i.dataset.c));
     if (on('service').length) add('service', 'Webshop-service', 0, P.service, 'Webshop-service', 'Service');
-    S.ads.forEach((v, k) => { const t = title(ins('ads').find(i => i.value === v)); add('ad-' + v, t, 0, k ? P.channel.extra : P.channel.first, t); });
+    const kp = kanalPriser(S.ads.map(grp));
+    S.ads.forEach((v, k) => { const t = title(ins('ads').find(i => i.value === v)); add('ad-' + v, t, 0, kp[k], t); });
     return { L, n, extra, imp, once: L.reduce((a, l) => a + l.once, 0), md: L.reduce((a, l) => a + l.md, 0) };
   };
   const lv = l => l.md ? kr(l.md) + '/md.' : l.once ? kr(l.once) : 'Med i prisen';
   const total = r => kr(r.once) + (r.md ? ` + ${kr(r.md)}/md.` : '');
-  // A channel costs the first price or the extra one, by the order they are picked
-  const adP = v => { const i = S.ads.indexOf(v); return (i < 0 ? (S.ads.length ? '+' + kr(P.channel.extra) : kr(P.channel.first)) : kr(i ? P.channel.extra : P.channel.first)) + '/md.'; };
+  // A channel costs the first price or the extra one, by the order they are picked; Google Ads and Google
+  // Shopping Ads are one Google channel together (content.js), so the second of them is free
+  const adP = v => {
+    const gs = S.ads.map(grp), i = S.ads.indexOf(v), x = i < 0 ? kanalPlus(gs, grp(v)) : kanalPriser(gs)[i];
+    return x ? (i < 0 && gs.length ? '+' : '') + kr(x) + '/md.' : i < 0 ? 'Uden ekstra pris' : 'Med i prisen';
+  };
 
   // Numbers roll to their new value, like the website calculator (after a delay while a price chip is in the air)
   const ease = t => 1 - Math.pow(1 - t, 3), tw = new Set();
@@ -139,7 +146,7 @@ function init() {
 
   // how: '' first draw · 'slide' the slider is dragged · 'type' the number or the keys · 'user' a choice (src: what was clicked)
   const sync = (how = '', src = null) => {
-    const r = calc(), cost = r.extra * P.perProduct, k = S.ads.length;
+    const r = calc(), cost = r.extra * P.perProduct, k = S.ads.length, saved = P.channel.first * k - kanalPriser(S.ads.map(grp)).reduce((a, b) => a + b, 0);
     $$('.calc__opt, .ws-seg label').forEach(l => l.classList.toggle('is-on', $('input', l).checked));
     $$('[data-ws-seg]').forEach(g => { const i = ins($('input', g).name).findIndex(x => x.checked); g.dataset.on = i; g.nextElementSibling.textContent = ins($('input', g).name)[i].dataset.cap; });
     const dyn = { opret: r.extra ? '+' + kr(cost) : 'Med i prisen', tekster: '+' + kr(r.n * P.texts), sprog: S.sprog ? '+' + kr(S.sprog * P.language) : 'Kun dansk' };
@@ -169,8 +176,8 @@ function init() {
         : r.extra ? `Med ${stk(r.n)} er det <b>${kr(P.import - cost)}</b> billigere, at vi opretter dem.` : `Op til ${P.included} produkter opretter vi uden ekstra pris.`;
       tip.lastChild.dataset.wsPick = pick; tip.lastChild.textContent = pick === 'import' ? 'Skift til import' : 'Lad os oprette dem';
     }
-    $('[data-ws-adtip]').innerHTML = k === 0 ? `Første kanal ${kr(P.channel.first)}/md. Hver ekstra kanal kun ${kr(P.channel.extra)}/md.`
-      : k === 1 ? `Tag en kanal mere for kun <b>${kr(P.channel.extra)}/md.</b>` : `Du sparer <b>${kr((P.channel.first - P.channel.extra) * (k - 1))}/md.</b> ved at samle ${k} kanaler hos os.`;
+    $('[data-ws-adtip]').innerHTML = k === 0 ? `Første kanal ${kr(P.channel.first)}/md. Hver ekstra kanal kun ${kr(P.channel.extra)}/md. Google Ads og Google Shopping tæller som én.`
+      : !saved ? `Tag en kanal mere for kun <b>${kr(P.channel.extra)}/md.</b>` : `Du sparer <b>${kr(saved)}/md.</b> ved at samle ${k} kanaler hos os.`;
     // The cart: a chip flies in first, then the new line slides in and the totals roll
     const d1 = prev ? r.once - prev.once : 0, d2 = prev ? r.md - prev.md : 0;
     const delay = how === 'user' && (d1 || d2) ? fly(src, d1 || d2, !d1) : 0;
