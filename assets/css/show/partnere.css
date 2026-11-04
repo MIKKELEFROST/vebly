@@ -1,7 +1,7 @@
 /* Partner scroll right under the front page hero, and the same customers as a wall on the results page
    (scripts/services/front/partnere.mjs). Every selector starts with .show--partnere.
-   Still by default (reduced motion, no JS, or 1–4 customers): tidy rows inside the page width.
-   assets/js/show/partnere.js adds .is-moving and drives the rows sideways. */
+   Still by default (reduced motion, no JS, or 1–4 customers): a tidy grid inside the page width.
+   assets/js/show/partnere.js adds .is-moving and drives one or two rows sideways. */
 
 .show--partnere { position: relative; z-index: 1; --pt-gap: 56px; --pt-fade: clamp(44px, 11vw, 190px); }
 .show--partnere.pt { padding: 28px 0 56px; }
