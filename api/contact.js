@@ -21,6 +21,9 @@ export default async function handler(req, res) {
   const email = String(body.email || '').trim().slice(0, 200);
   const besked = String(body.besked || '').trim().slice(0, 5000);
   const valgt = String(body.valgt || 'Hjemmeside').trim().slice(0, 300);
+  // The page the form was sent from (main.js): its thank-you address is /tak/<side>
+  const side = /^[a-z0-9-]{1,40}$/.test(body.side || '') ? body.side : '';
+  const sideUrl = /^\/[a-z0-9/-]{0,80}$/i.test(body.side_url || '') ? SITE + body.side_url : '';
 
   // Honeypot: bots fill the hidden field. Pretend success.
   if (body._gotcha) return res.status(200).json({ ok: true });
@@ -38,8 +41,8 @@ export default async function handler(req, res) {
     to: [TO],
     reply_to: email,
     subject: `Ny henvendelse fra ${navn}`,
-    text: `Navn: ${navn}\nE-mail: ${email}\nValgt: ${valgt}\n\n${besked}`,
-    html: `<p><b>Navn:</b> ${esc(navn)}<br><b>E-mail:</b> ${esc(email)}<br><b>Valgt:</b> ${esc(valgt)}</p><p style="white-space:pre-wrap">${esc(besked)}</p>`
+    text: `Navn: ${navn}\nE-mail: ${email}\nValgt: ${valgt}${sideUrl ? `\nSide: ${sideUrl}` : ''}\n\n${besked}`,
+    html: `<p><b>Navn:</b> ${esc(navn)}<br><b>E-mail:</b> ${esc(email)}<br><b>Valgt:</b> ${esc(valgt)}${sideUrl ? `<br><b>Side:</b> ${esc(sideUrl)}` : ''}</p><p style="white-space:pre-wrap">${esc(besked)}</p>`
   }, { toUs: true, tag: 'contact' });
   if (!ok) return res.status(502).json({ error: 'Beskeden kunne ikke sendes.' });
 
@@ -67,7 +70,8 @@ export default async function handler(req, res) {
       event_time: Math.floor(Date.now() / 1000),
       event_id: body.meta_event_id.slice(0, 64),
       action_source: 'website',
-      event_source_url: 'https://webleads.dk/',
+      // The thank-you address, as for the browser's Lead, so "URL contains /tak/<side>" works for both
+      event_source_url: side ? `${SITE}/tak/${side}` : `${SITE}/`,
       user_data: userData(req, { email, name: navn }),
       custom_data: { content_name: valgt.slice(0, 100), value: Math.min(Math.max(Number(body.meta_value) || 0, 0), 100000), currency: 'DKK' }
     }]);

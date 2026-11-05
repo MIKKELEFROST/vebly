@@ -80,6 +80,9 @@ export function track(name, params = {}) {
     if (!timer) timer = setTimeout(flush, 1500);
   } catch (x) { /* analytics must never break the page */ }
 }
+// The contact form hands its lead on to /tak/<side>, which counts it (assets/js/show/tak.js). This tells the
+// form page that the form was sent, so leaving it for the thank-you page is not a form_abandon.
+export function leadDone() { leadSent = true; }
 // For scripts that should not import this file: document.dispatchEvent(new CustomEvent('wl:track', { detail: { name, params } }))
 document.addEventListener('wl:track', e => { if (e.detail && e.detail.name) track(e.detail.name, e.detail.params || {}); });
 
