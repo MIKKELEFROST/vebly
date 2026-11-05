@@ -19,6 +19,7 @@ assets/js/content.js  Copy for the lists and pop-ups on /services/hjemmesider (i
                       the team and the balls
 assets/js/main.js     Rendering, pop-ups, contact form and all effects, on every page (each part runs only
                       when its section is on the page)
+assets/partnere/      Customer logos for the front page band and the results wall (taken from each customer's site)
 demo/                 The "Nordvik" sample site that builds itself in "Sådan virker det" (window.__build, window.__set)
 api/contact.js        Vercel function that emails contact-form submissions via Resend
 api/collect.js        Vercel function that forwards analytics events to GA4
