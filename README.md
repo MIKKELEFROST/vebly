@@ -37,15 +37,19 @@ assets/og/            Share images for the front page and the other service page
 ## Pages and services
 
 ```
-/                          Front page: hero, Services (all ten as cards), Vores løfte, Alt under ét tag,
-                           Teamet, Spørgsmål, Kontakt
+/                          Front page: hero, customer band, Services (all of them as cards), Vores løfte,
+                           Alt under ét tag, Teamet, Spørgsmål, Kontakt
 /services/hjemmesider      Hjemmesider: three packages and a price calculator (Sådan virker det, Før og efter,
                            Pakker, Tilvalg, Beregn din pris …)
-/services/<slug>           Hero, Det får du (price and what is included), Sådan foregår det,
+/services/<slug>           Hero, then the page's own `layout` (data.mjs): its showcase, price section, process,
                            Andre services, Spørgsmål, Kontakt
+/services/webshop          Webshop on Shopify with the price calculator (scripts/services/pages/webshop.mjs)
+/resultater                Review scores and the real customers; real cases when there are some
+                           (scripts/services/pages/resultater.mjs)
 ```
 
-The copy for the front page and the nine service pages is in `scripts/services/data.mjs`. After a change:
+The copy for the front page and the service pages is in `scripts/services/data.mjs` (each page's showcase is in
+`scripts/services/showcase/`, see the README there). After a change:
 
 ```
 node scripts/services/build.mjs    # writes index.html and services/<slug>/index.html
@@ -54,7 +58,7 @@ node scripts/services/og.mjs       # share images in assets/og/ (needs Playwrigh
 
 Do not edit the generated files by hand; the next build overwrites them. `/services/hjemmesider` is edited by hand, except the list of services at the bottom (between `sitemap:start` and `sitemap:end`), which the build refreshes. A new service: add a card to `services` and a page to `pages` in `data.mjs`, then build, make the share image and add it to `sitemap.xml`.
 
-Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak". Never invent numbers, results or customers in the copy.
+Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra; Google Ads and Google Shopping Ads together count as one channel. Google CSS 49 kr./md. (our own CSS, Webleads Shopping). Webshop fra 12.995 kr. SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer og CRM fra 14.999 kr. All ex. VAT; the full list and the rules for Claude are in `CLAUDE.md`. A service with `price: null` says "Fast pris efter en snak". Never invent numbers, results or customers in the copy.
 
 - On the cards, "+ Tilføj" puts the service in the contact form ("Du har valgt"), as the add-ons do on the website page. On a service page the form starts with that service (`data-base` on the form; `data-value` is its start price, used as the value of the Meta lead). With nothing chosen on the front page the e-mail says "Generel henvendelse".
 - Old links to the website offer on the front page (`/#saadan`, `/#pris`, `/#tilvalg`, `/#video`) are sent on to `/services/hjemmesider` with the same `?utm_…` and `#…` (script at the top of `index.html`). `/#kontakt`, `/#teamet`, `/#faq` and `/#bestil` stay on the front page.
@@ -67,6 +71,15 @@ Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal
 ```
 npx http-server . -p 8080      # static only, the contact form shows its error fallback
 npx vercel dev                 # includes /api/contact
+node scripts/dev/server.mjs    # small stand-in for Vercel (static + /api), http://127.0.0.1:8790
+```
+
+Checks (need Playwright with Chromium and a running server):
+
+```
+node scripts/dev/check-pages.mjs [--click]   # every page × desktop/phone/reduced motion: JS errors, failed
+                                             # requests, overflow, menu links; --click presses the showcase buttons
+node scripts/dev/check-prices.mjs            # price rules in the contact form and the webshop calculator
 ```
 
 The demo is loaded in an iframe and controlled from the parent page, so open the site over http, not `file://`.

@@ -37,7 +37,7 @@ polished.
   (or »Af <CSS-navn>« when another CSS placed it, for Webleads »Af Webleads Shopping«). Draw it on Shopping cards.
 - Never show free listings or a »populære produkter« block, and leave »Shopping« out of mock tab rows
   (use Alle, Billeder, Videoer, Nyheder): both changed in the EEA in September 2026.
-- Google CSS: the facts and the exact wording are in the scratchpad file ws/google-css/FAKTA.md.
+- Google CSS: the facts and the exact wording are in `google-css-fakta.md` next to this file.
 
 ## Files (one set per service, nothing else)
 
