@@ -734,6 +734,8 @@ export const front = {
 // "webshop" or "neutral" (main.css hides the rest).
 export const segments = {
   tabs: { q: 'Hvad sælger du?', ydelser: 'Ydelser', webshop: 'Produkter online' },
+  // The bubble under the tabs until the visitor has chosen
+  nudge: 'Vælg her, så viser vi det, der passer til dig.',
   order: {
     ydelser: ['hjemmesider', 'google-ads', 'seo', 'meta-ads', 'geo', 'ai', 'automations', 'interne-systemer', 'video', 'email-marketing', 'cro', 'app-udvikling', 'webshop', 'google-shopping-ads', 'google-css'],
     webshop: ['webshop', 'google-shopping-ads', 'google-css', 'meta-ads', 'email-marketing', 'cro', 'google-ads', 'seo', 'geo', 'ai', 'video', 'automations', 'interne-systemer', 'app-udvikling', 'hjemmesider']

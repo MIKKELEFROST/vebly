@@ -20,7 +20,7 @@ export const SEG_HEAD = `<script>
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>`;
-export const SEG_BAR = `<div class="segbar" data-seg-bar data-order-ydelser="${segments.order.ydelser.join(',')}" data-order-webshop="${segments.order.webshop.join(',')}">
+export const SEG_BAR = `<div class="segbar" data-seg-bar data-nudge="${segments.nudge.replace(/"/g, '&quot;')}" data-order-ydelser="${segments.order.ydelser.join(',')}" data-order-webshop="${segments.order.webshop.join(',')}">
       <div class="segbar__in">
         <span class="segbar__q" id="seg-q">${segments.tabs.q.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))}</span>
         <div class="segbar__tabs" role="group" aria-labelledby="seg-q">

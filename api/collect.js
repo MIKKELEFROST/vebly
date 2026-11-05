@@ -24,7 +24,7 @@ const EVENTS = new Set([
   // Forms and leads
   'form_start', 'form_field', 'form_field_done', 'form_submit', 'form_invalid', 'form_abandon', 'form_error', 'generate_lead',
   // What the visitor sells (the tabs above the menu)
-  'segment_choice',
+  'segment_choice', 'segment_nudge',
   // Quality
   'js_error', 'resource_error', 'web_vitals', 'consent_view', 'consent_choice',
   // Front page
