@@ -10,7 +10,11 @@ Plain HTML, CSS and JavaScript, with no build step on Vercel. The front page and
 index.html            Front page (generated, see Pages and services)
 services/hjemmesider/ The website offer: the old front page, edited by hand
 services/<slug>/      One page per service (generated): google-ads, meta-ads, google-shopping-ads, google-css,
-                      video, seo, geo, ai, automations, interne-systemer, app-udvikling, email-marketing, cro
+                      video, seo (for webshops), lokal-seo, geo, ai, automations, interne-systemer, app-udvikling,
+                      email-marketing, cro, and from 5 Nov 2026: linkbuilding, linkedin-ads, tiktok-ads,
+                      snapchat-ads, pinterest-ads, youtube-annoncering, bing-ads, reddit-ads, markedspladser, ugc,
+                      influencer-marketing, affiliate-marketing, organisk-instagram, organisk-facebook,
+                      organisk-tiktok, branding
 services/webshop/     Webshop on Shopify with its price calculator (scripts/services/pages/webshop.mjs)
 resultater/           Customers and reviews (scripts/services/pages/resultater.mjs; customers in partnere.mjs)
 scripts/services/     data.mjs (all copy for the front page and service pages), build.mjs, og.mjs
@@ -40,7 +44,7 @@ assets/og/            Share images for the front page and the other service page
 ## Pages and services
 
 ```
-/                          Front page: hero, Services (all ten as cards), Vores løfte, Alt under ét tag,
+/                          Front page: hero, Services (all of them as cards), Vores løfte, Alt under ét tag,
                            Teamet, Spørgsmål, Kontakt
 /services/hjemmesider      Hjemmesider: three packages and a price calculator (Sådan virker det, Før og efter,
                            Pakker, Tilvalg, Beregn din pris …)
@@ -48,7 +52,7 @@ assets/og/            Share images for the front page and the other service page
                            Andre services, Spørgsmål, Kontakt
 ```
 
-The copy for the front page and the nine service pages is in `scripts/services/data.mjs`. After a change:
+The copy for the front page and the service pages is in `scripts/services/data.mjs`. After a change:
 
 ```
 node scripts/services/build.mjs    # writes index.html and services/<slug>/index.html
@@ -57,7 +61,7 @@ node scripts/services/og.mjs       # share images in assets/og/ (needs Playwrigh
 
 Do not edit the generated files by hand; the next build overwrites them. `/services/hjemmesider` is edited by hand, except the list of services at the bottom (between `sitemap:start` and `sitemap:end`), which the build refreshes. A new service: add a card to `services` and a page to `pages` in `data.mjs`, then build, make the share image and add it to `sitemap.xml`.
 
-Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak". Never invent numbers, results or customers in the copy.
+Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO and Lokal SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak"; that is every service added on 5 Nov 2026 except Lokal SEO, until Mikkel sets their prices (the new ad channels too: LinkedIn, TikTok, Snapchat, Pinterest, YouTube, Bing and Reddit). Never invent numbers, results or customers in the copy.
 
 - On the cards, "+ Tilføj" puts the service in the contact form ("Du har valgt"), as the add-ons do on the website page. On a service page the form starts with that service (`data-base` on the form; `data-value` is its start price, used as the value of the Meta lead). With nothing chosen on the front page the e-mail says "Generel henvendelse".
 - Old links to the website offer on the front page (`/#saadan`, `/#pris`, `/#tilvalg`, `/#video`) are sent on to `/services/hjemmesider` with the same `?utm_…` and `#…` (script at the top of `index.html`). `/#kontakt`, `/#teamet`, `/#faq` and `/#bestil` stay on the front page.
