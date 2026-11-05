@@ -67,6 +67,21 @@
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
+<script>
+  // What the visitor sells (assets/js/segment.js): a link with ?for=, an earlier choice, or a guess from the first page of a visit
+  (function () {
+    var K = 'wl-seg', S = { webshop: 'webshop', ydelser: 'ydelser' }, G = {"webshop":"webshop","google-shopping-ads":"webshop","google-css":"webshop","hjemmesider":"ydelser"}, s = null, first = false;
+    try { s = JSON.parse(localStorage.getItem(K) || 'null'); } catch (e) {}
+    try { first = !sessionStorage.getItem('wl-seg-v'); sessionStorage.setItem('wl-seg-v', '1'); } catch (e) {}
+    var f = (new URLSearchParams(location.search).get('for') || '').toLowerCase();
+    if (S[f]) { if (!s || s.seg !== S[f] || s.src !== 'link') window.__wlSeg = 'link'; s = { seg: S[f], src: 'link' }; }
+    else if (first && (!s || s.src === 'side')) {
+      var m = location.pathname.toLowerCase().match(/^\/services\/([a-z0-9-]+)/), g = m && G[m[1]];
+      if (g && (!s || s.seg !== g)) { s = { seg: g, src: 'side' }; window.__wlSeg = 'side'; }
+    }
+    if (s && S[s.seg]) { document.documentElement.setAttribute('data-seg', s.seg); try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) {} }
+  })();
+</script>
 <script type="module" src="/assets/js/main.js?v=20261105a"></script>
 <script type="module" src="/assets/js/show/partnere.js?v=20261105a"></script>
 <script type="module" src="/assets/js/show/tak.js?v=20261105a"></script>
@@ -93,6 +108,15 @@
   <div class="orb" data-orb aria-hidden="true"></div>
 
   <header class="nav" data-nav>
+    <div class="segbar" data-seg-bar data-order-ydelser="hjemmesider,google-ads,seo,meta-ads,geo,ai,automations,interne-systemer,video,email-marketing,cro,app-udvikling,webshop,google-shopping-ads,google-css" data-order-webshop="webshop,google-shopping-ads,google-css,meta-ads,email-marketing,cro,google-ads,seo,geo,ai,video,automations,interne-systemer,app-udvikling,hjemmesider">
+      <div class="segbar__in">
+        <span class="segbar__q" id="seg-q">Hvad sælger du?</span>
+        <div class="segbar__tabs" role="group" aria-labelledby="seg-q">
+          <button type="button" class="segbar__tab" data-seg-set="ydelser" aria-pressed="false">Ydelser</button>
+          <button type="button" class="segbar__tab" data-seg-set="webshop" aria-pressed="false">Produkter online</button>
+        </div>
+      </div>
+    </div>
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
@@ -146,6 +170,8 @@
       </div>
     </section>
 
+    <script type="application/json" data-tak-sider>{"hjemmesider":"Hjemmesider","webshop":"Webshop","google-ads":"Google Ads","meta-ads":"Meta Ads","google-shopping-ads":"Google Shopping Ads","google-css":"Google CSS","video":"Video","seo":"SEO","geo":"GEO","ai":"AI","automations":"Automations","interne-systemer":"Interne systemer og CRM","app-udvikling":"App-udvikling","email-marketing":"E-mail marketing","cro":"CRO"}</script>
+
     <section id="naeste" class="promise" data-sec="naeste">
       <div class="promise__head" data-reveal="0">
         <div class="kicker">Det sker nu</div>
@@ -189,18 +215,18 @@
     </section>
 
     <section id="kontakt" class="contact-sec tak-kontakt" data-sec="kontakt">
-      <div class="spot contact" data-reveal="0" data-spot>
-        <div class="contact__info">
-          <h2>Haster det?</h2>
-          <p class="contact__lead">Ring eller skriv en sms, så tager vi den derfra. Eller send en mail, hvis du har glemt at fortælle os noget.</p>
-          <div class="contact__links">
-            <a href="tel:+4541826799" data-event="Tak: Ring">41 82 67 99</a>
-            <a href="mailto:hej@webleads.dk" data-event="Tak: E-mail">hej@webleads.dk</a>
-            <a href="/resultater" data-event="Tak: Resultater">Se hvem vi har hjulpet →</a>
-          </div>
+    <div class="spot contact" data-reveal="0" data-spot>
+      <div class="contact__info">
+        <h2>Haster det?</h2>
+        <p class="contact__lead">Ring eller skriv en sms, så tager vi den derfra. Eller send en mail, hvis du har glemt at fortælle os noget.</p>
+        <div class="contact__links">
+          <a href="tel:+4541826799" data-event="Tak: Ring">41 82 67 99</a>
+          <a href="mailto:hej@webleads.dk" data-event="Tak: E-mail">hej@webleads.dk</a>
+          <a href="/resultater" data-event="Tak: Resultater">Se hvem vi har hjulpet →</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <section class="wm" data-wm aria-hidden="true" data-sec="bund">
       <div class="wm__word"><span data-wl>w</span><span data-wl>e</span><span data-wl>b</span><span data-wl>l</span><span data-wl>e</span><span data-wl>a</span><span data-wl>d</span><span data-wl>s</span><span data-wl>.</span></div>

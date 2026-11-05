@@ -29,7 +29,8 @@ api/oensker.js        Vercel function that e-mails the visitor's wishes and favo
 api/udkast.js         Vercel function that renders instant drafts at /mit-udkast
 assets/js/temaer.js   Colour themes for drafts (main colour, accent, background), shared by browser and server
 bestil/               "Bestil en hjemmeside" as its own page (/bestil)
-tak/                  Thank-you pages after the contact form, /tak/<side> (generated, see Contact form)
+tak/                  The thank-you page after the contact form, served for every /tak/<side> (generated, see Contact form)
+assets/js/segment.js  The tabs above the menu: what the visitor sells (see Segments)
 privatliv/            Privacy policy (/privatliv), linked from the form and the footer
 robots.txt, sitemap.xml
 assets/og.png         Share image (1200 × 630) for /services/hjemmesider
@@ -85,7 +86,7 @@ The form posts to `/api/contact`, which emails the message to us through [Resend
 
 ### Thank-you page (`/tak/<side>`)
 
-When the message has gone through, the visitor is sent to `/tak/<the page the form was on>`: `/tak/forside`, `/tak/resultater` or `/tak/<service slug>` (for instance `/tak/meta-ads`, `/tak/seo`, `/tak/hjemmesider`). Built by `scripts/services/pages/tak.mjs` (`node scripts/services/build.mjs tak`), one page per service from `data.mjs`, plus `/tak` for any other page (vercel.json sends `/tak/<anything else>` there, with the address kept). Not indexed (robots meta and `X-Robots-Tag`), not in the sitemap. The e-mail to us says which page the form was sent from (`Side:`).
+When the message has gone through, the visitor is sent to `/tak/<the page the form was on>`: `/tak/forside`, `/tak/resultater` or `/tak/<service slug>` (for instance `/tak/meta-ads`, `/tak/seo`, `/tak/hjemmesider`). It is one page, `tak/index.html` (`scripts/services/pages/tak.mjs`, `node scripts/services/build.mjs tak`): vercel.json serves it for every `/tak/<side>` and keeps the address, so a new page with the form gets its own thank-you address by itself. `assets/js/show/tak.js` puts the name of the service in from the address ("Din besked om Meta Ads"), from the list of services in `data.mjs`. Not indexed (robots meta and `X-Robots-Tag`), not in the sitemap. The e-mail to us says which page the form was sent from (`Side:`).
 
 The lead is counted on the thank-you page, so every lead has an address that says where it came from:
 
@@ -96,6 +97,15 @@ The lead is counted on the thank-you page, so every lead has an address that say
 - "Bestil en hjemmeside" (`/bestil`) keeps its own flow (the draft is shown at once) and counts its lead there (`generate_lead` with `form_name` bestil).
 
 Without a key, the form shows a message asking the visitor to email instead. Mail goes out from `hej@webleads.dk`, which Resend only accepts once `webleads.dk` is verified there (Resend → Domains, DNS records at Simply.com). Until then, mail to us is resent from Resend's test sender `onboarding@resend.dev` (it can only deliver to the address on the Resend account), and receipts to visitors are skipped and logged. The receipt never repeats the visitor's message, and greets by first name only, so the form cannot be used to send other text to someone else's inbox.
+
+## Segments: "Hvad sælger du?"
+
+A thin bar above the menu on every generated page and on `/services/hjemmesider` asks what the visitor sells: **Ydelser** or **Produkter online** (webshop). The answer is `html[data-seg]` (`ydelser` or `webshop`; missing when we do not know, which shows the neutral page). Settings and copy are in `scripts/services/data.mjs` → `segments`.
+
+- **How it is set**, before the page is drawn (`lib.SEG_HEAD` in `<head>`): a link with `?for=webshop` or `?for=ydelser` (use it in ads and e-mails), an earlier choice in the tabs, or a guess from the first page of a visit (`segments.guess`: Webshop, Google Shopping Ads and Google CSS mean webshop, Hjemmesider means ydelser). A choice or a link is never overruled by a guess. It is kept in localStorage (`wl-seg`).
+- **What changes** (`assets/js/segment.js`): the hero on the front page (badge words and lead, `segments.front`), and the order of the services in every list (`segments.order`, numbered again). Anything else can be shown for one segment with `data-seg-only="ydelser"`, `"webshop"` or `"neutral"`; main.css hides the rest.
+- **GA4**: every event carries `segment` (`ydelser`, `webshop` or `ukendt`), so every report can be split by it, leads included. `segment_choice` (`segment`, `segment_source` faner/link/side, `previous`) logs each choice. Register `segment`, `segment_source` and `previous` under Admin → Custom definitions (event scope).
+- `/services/hjemmesider` is edited by hand; the build keeps its tabs and head script (between `seg-head:start`/`seg-bar:start` markers) and its main.css/main.js versions in step.
 
 ## Analytics (GA4, first-party)
 
@@ -150,7 +160,7 @@ Every event carries `page_type` (`forside`, `service_hjemmesider`, `service_<slu
 
 **Customer drafts** (`udkast/_faelles/udkast.js`): `udkast_farve` (`colour` on hand-made drafts, `theme` on instant drafts), `udkast_faerdig_click` (back to webleads.dk), `udkast_bar_close`, `udkast_form_try`. **Cookie box** (`meta-pixel.js`, through a `wl:track` DOM event): `consent_view` (`trigger` automatisk/link), `consent_choice` (`choice` ja/nej, `seconds`). **Referencer:** `reference_filter` (`filter`, `results`).
 
-**In GA4:** mark `generate_lead` (both forms; `form_name` tells them apart, `form_page` and the `/tak/<side>` address tell the pages apart) and `contact_click` as key events. Register the parameters you want in reports under Admin → Custom definitions (event scope): `page_type`, `section`, `button`, `element_type`, `method`, `click_type`, `popup`, `popup_type`, `popup_name`, `addon`, `faq_question`, `step`, `step_name`, `choice_group`, `choice`, `choice_action`, `field_name`, `form_name`, `form_page`, `fag`, `design`, `theme`, `trigger`, `contact_method`, `contact_time`, `metric_name`, `metric_rating`, `copied_type`, `input`, `ad_click`, `meta_consent`, and the metrics `seconds` (seconds) and `metric_value`. `link_text`, `link_url`, `link_domain`, `outbound` and `percent_scrolled` are built in.
+**In GA4:** mark `generate_lead` (both forms; `form_name` tells them apart, `form_page` and the `/tak/<side>` address tell the pages apart) and `contact_click` as key events. Register the parameters you want in reports under Admin → Custom definitions (event scope): `page_type`, `section`, `button`, `element_type`, `method`, `click_type`, `popup`, `popup_type`, `popup_name`, `addon`, `faq_question`, `step`, `step_name`, `choice_group`, `choice`, `choice_action`, `field_name`, `form_name`, `form_page`, `segment`, `segment_source`, `previous`, `fag`, `design`, `theme`, `trigger`, `contact_method`, `contact_time`, `metric_name`, `metric_rating`, `copied_type`, `input`, `ad_click`, `meta_consent`, and the metrics `seconds` (seconds) and `metric_value`. `link_text`, `link_url`, `link_domain`, `outbound` and `percent_scrolled` are built in.
 
 ## Meta Pixel and Conversions API (only with consent)
 

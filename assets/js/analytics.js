@@ -74,7 +74,8 @@ export function track(name, params = {}) {
   try {
     if (name === 'generate_lead') leadSent = true;
     fromAnalytics(name, params);
-    const p = { ...params, page_type: pageType, engagement_time_msec: takeEngagement() };
+    // What the visitor sells (segment.js): on every event, so all of GA4 can be split by it
+    const p = { segment: document.documentElement.dataset.seg || 'ukendt', ...params, page_type: pageType, engagement_time_msec: takeEngagement() };
     if (debug) { p.debug_mode = 1; console.info('[wl]', name, p); }
     queue.push({ name, params: p });
     if (!timer) timer = setTimeout(flush, 1500);

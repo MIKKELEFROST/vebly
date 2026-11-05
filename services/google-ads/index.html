@@ -164,6 +164,21 @@
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
+<script>
+  // What the visitor sells (assets/js/segment.js): a link with ?for=, an earlier choice, or a guess from the first page of a visit
+  (function () {
+    var K = 'wl-seg', S = { webshop: 'webshop', ydelser: 'ydelser' }, G = {"webshop":"webshop","google-shopping-ads":"webshop","google-css":"webshop","hjemmesider":"ydelser"}, s = null, first = false;
+    try { s = JSON.parse(localStorage.getItem(K) || 'null'); } catch (e) {}
+    try { first = !sessionStorage.getItem('wl-seg-v'); sessionStorage.setItem('wl-seg-v', '1'); } catch (e) {}
+    var f = (new URLSearchParams(location.search).get('for') || '').toLowerCase();
+    if (S[f]) { if (!s || s.seg !== S[f] || s.src !== 'link') window.__wlSeg = 'link'; s = { seg: S[f], src: 'link' }; }
+    else if (first && (!s || s.src === 'side')) {
+      var m = location.pathname.toLowerCase().match(/^\/services\/([a-z0-9-]+)/), g = m && G[m[1]];
+      if (g && (!s || s.seg !== g)) { s = { seg: g, src: 'side' }; window.__wlSeg = 'side'; }
+    }
+    if (s && S[s.seg]) { document.documentElement.setAttribute('data-seg', s.seg); try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) {} }
+  })();
+</script>
 <script type="module" src="/assets/js/main.js?v=20261105a"></script>
 <script type="module" src="/assets/js/sections.js?v=20261105a"></script>
 <script type="module" src="/assets/js/show/google-ads.js?v=20261105a"></script>
@@ -190,6 +205,15 @@
   <div class="orb" data-orb aria-hidden="true"></div>
 
   <header class="nav" data-nav>
+    <div class="segbar" data-seg-bar data-order-ydelser="hjemmesider,google-ads,seo,meta-ads,geo,ai,automations,interne-systemer,video,email-marketing,cro,app-udvikling,webshop,google-shopping-ads,google-css" data-order-webshop="webshop,google-shopping-ads,google-css,meta-ads,email-marketing,cro,google-ads,seo,geo,ai,video,automations,interne-systemer,app-udvikling,hjemmesider">
+      <div class="segbar__in">
+        <span class="segbar__q" id="seg-q">Hvad sælger du?</span>
+        <div class="segbar__tabs" role="group" aria-labelledby="seg-q">
+          <button type="button" class="segbar__tab" data-seg-set="ydelser" aria-pressed="false">Ydelser</button>
+          <button type="button" class="segbar__tab" data-seg-set="webshop" aria-pressed="false">Produkter online</button>
+        </div>
+      </div>
+    </div>
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
@@ -432,8 +456,8 @@
           <a href="#kontakt" class="sx-grid__sum" data-grid-sum hidden><span>I din forespørgsel</span><b data-grid-sum-txt></b><i aria-hidden="true">→</i></a>
         </div>
       </div>
-      <div class="sx-grid__list">
-        <div class="sx-gc" data-addon="Hjemmesider" data-value="2995" data-reveal="0">
+      <div class="sx-grid__list" data-seg-sort>
+        <div class="sx-gc" data-slug="hjemmesider" data-addon="Hjemmesider" data-value="2995" data-reveal="0">
           <div class="sx-gc__top"><h3>Hjemmesider</h3><span class="sx-gc__price">fra 2.995 kr.</span></div>
           <p>Tre pakker, fra en enkel one page til en hjemmeside bygget til Google.</p>
           <div class="sx-gc__actions">
@@ -441,7 +465,7 @@
             <a class="sx-gc__more" href="/services/hjemmesider" aria-label="Læs mere om Hjemmesider" data-event="Services: Hjemmesider">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="Webshop" data-value="12995" data-reveal="1">
+        <div class="sx-gc" data-slug="webshop" data-addon="Webshop" data-value="12995" data-reveal="1">
           <div class="sx-gc__top"><h3>Webshop</h3><span class="sx-gc__price">fra 12.995 kr.</span></div>
           <p>Webshop på Shopify med betaling, fragt og dine produkter. Beregn selv prisen.</p>
           <div class="sx-gc__actions">
@@ -449,7 +473,7 @@
             <a class="sx-gc__more" href="/services/webshop" aria-label="Læs mere om Webshop" data-event="Services: Webshop">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="Meta Ads" data-value="8000" data-reveal="2">
+        <div class="sx-gc" data-slug="meta-ads" data-addon="Meta Ads" data-value="8000" data-reveal="2">
           <div class="sx-gc__top"><h3>Meta Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Annoncer på Facebook og Instagram, der rammer de rigtige.</p>
           <div class="sx-gc__actions">
@@ -457,7 +481,7 @@
             <a class="sx-gc__more" href="/services/meta-ads" aria-label="Læs mere om Meta Ads" data-event="Services: Meta Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="Google Shopping Ads" data-value="8000" data-reveal="3">
+        <div class="sx-gc" data-slug="google-shopping-ads" data-addon="Google Shopping Ads" data-value="8000" data-reveal="3">
           <div class="sx-gc__top"><h3>Google Shopping Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Dine produkter med billede og pris øverst på Google.</p>
           <div class="sx-gc__actions">
@@ -465,7 +489,7 @@
             <a class="sx-gc__more" href="/services/google-shopping-ads" aria-label="Læs mere om Google Shopping Ads" data-event="Services: Google Shopping Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="Google CSS" data-value="49" data-reveal="4">
+        <div class="sx-gc" data-slug="google-css" data-addon="Google CSS" data-value="49" data-reveal="4">
           <div class="sx-gc__top"><h3>Google CSS</h3><span class="sx-gc__price">49 kr./md.</span></div>
           <p>Op til 20% billigere klik på dine Google Shopping-annoncer.</p>
           <div class="sx-gc__actions">
@@ -473,7 +497,7 @@
             <a class="sx-gc__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="Video" data-value="0" data-reveal="0">
+        <div class="sx-gc" data-slug="video" data-addon="Video" data-value="0" data-reveal="0">
           <div class="sx-gc__top"><h3>Video</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
           <p>Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.</p>
           <div class="sx-gc__actions">
@@ -481,7 +505,7 @@
             <a class="sx-gc__more" href="/services/video" aria-label="Læs mere om Video" data-event="Services: Video">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="SEO" data-value="995" data-reveal="1">
+        <div class="sx-gc" data-slug="seo" data-addon="SEO" data-value="995" data-reveal="1">
           <div class="sx-gc__top"><h3>SEO</h3><span class="sx-gc__price">995 kr./time</span></div>
           <p>Bliv fundet først, når kunderne søger.</p>
           <div class="sx-gc__actions">
@@ -489,7 +513,7 @@
             <a class="sx-gc__more" href="/services/seo" aria-label="Læs mere om SEO" data-event="Services: SEO">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="GEO" data-value="0" data-reveal="2">
+        <div class="sx-gc" data-slug="geo" data-addon="GEO" data-value="0" data-reveal="2">
           <div class="sx-gc__top"><h3>GEO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
           <p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p>
           <div class="sx-gc__actions">
@@ -497,7 +521,7 @@
             <a class="sx-gc__more" href="/services/geo" aria-label="Læs mere om GEO" data-event="Services: GEO">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="AI" data-value="0" data-reveal="3">
+        <div class="sx-gc" data-slug="ai" data-addon="AI" data-value="0" data-reveal="3">
           <div class="sx-gc__top"><h3>AI</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
           <p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p>
           <div class="sx-gc__actions">
@@ -505,7 +529,7 @@
             <a class="sx-gc__more" href="/services/ai" aria-label="Læs mere om AI" data-event="Services: AI">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="Automations" data-value="4999" data-reveal="4">
+        <div class="sx-gc" data-slug="automations" data-addon="Automations" data-value="4999" data-reveal="4">
           <div class="sx-gc__top"><h3>Automations</h3><span class="sx-gc__price">fra 4.999 kr.</span></div>
           <p>Lad rutinerne klare sig selv.</p>
           <div class="sx-gc__actions">
@@ -513,7 +537,7 @@
             <a class="sx-gc__more" href="/services/automations" aria-label="Læs mere om Automations" data-event="Services: Automations">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="Interne systemer og CRM" data-value="14999" data-reveal="0">
+        <div class="sx-gc" data-slug="interne-systemer" data-addon="Interne systemer og CRM" data-value="14999" data-reveal="0">
           <div class="sx-gc__top"><h3>Interne systemer og CRM</h3><span class="sx-gc__price">fra 14.999 kr.</span></div>
           <p>CRM, booking og dashboards, der passer til jeres måde at arbejde på.</p>
           <div class="sx-gc__actions">
@@ -521,7 +545,7 @@
             <a class="sx-gc__more" href="/services/interne-systemer" aria-label="Læs mere om Interne systemer og CRM" data-event="Services: Interne systemer og CRM">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="App-udvikling" data-value="0" data-reveal="1">
+        <div class="sx-gc" data-slug="app-udvikling" data-addon="App-udvikling" data-value="0" data-reveal="1">
           <div class="sx-gc__top"><h3>App-udvikling</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
           <p>Apps til iPhone og Android, bygget til din virksomhed.</p>
           <div class="sx-gc__actions">
@@ -529,7 +553,7 @@
             <a class="sx-gc__more" href="/services/app-udvikling" aria-label="Læs mere om App-udvikling" data-event="Services: App-udvikling">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="E-mail marketing" data-value="0" data-reveal="2">
+        <div class="sx-gc" data-slug="email-marketing" data-addon="E-mail marketing" data-value="0" data-reveal="2">
           <div class="sx-gc__top"><h3>E-mail marketing</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
           <p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p>
           <div class="sx-gc__actions">
@@ -537,7 +561,7 @@
             <a class="sx-gc__more" href="/services/email-marketing" aria-label="Læs mere om E-mail marketing" data-event="Services: E-mail marketing">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-addon="CRO" data-value="0" data-reveal="3">
+        <div class="sx-gc" data-slug="cro" data-addon="CRO" data-value="0" data-reveal="3">
           <div class="sx-gc__top"><h3>CRO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
           <p>Flere kunder fra de besøgende, du allerede har.</p>
           <div class="sx-gc__actions">

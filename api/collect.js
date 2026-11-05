@@ -23,6 +23,8 @@ const EVENTS = new Set([
   'cta_click', 'nav_click', 'outbound_click', 'contact_click', 'ui_click', 'rage_click', 'dead_click',
   // Forms and leads
   'form_start', 'form_field', 'form_field_done', 'form_submit', 'form_invalid', 'form_abandon', 'form_error', 'generate_lead',
+  // What the visitor sells (the tabs above the menu)
+  'segment_choice',
   // Quality
   'js_error', 'resource_error', 'web_vitals', 'consent_view', 'consent_choice',
   // Front page

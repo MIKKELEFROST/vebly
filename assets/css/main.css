@@ -99,6 +99,27 @@ button { font-family: inherit; }
 .nav__cta:hover { background: var(--accent); color: #fff; }
 @media (max-width: 860px) { .nav__links a:not(.nav__cta) { display: none; } }
 
+/* ---------- What the visitor sells: tabs above the menu (assets/js/segment.js) ---------- */
+.segbar { background: var(--ink); color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1; }
+.segbar__in { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 34px; display: flex; align-items: center; gap: 12px; }
+.segbar__q { font-weight: 500; white-space: nowrap; }
+.segbar__tabs { display: flex; height: 100%; }
+.segbar__tab { position: relative; height: 100%; padding: 0 10px; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; white-space: nowrap; cursor: pointer; transition: color .25s; }
+.segbar__tab::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 2px; border-radius: 2px 2px 0 0; background: var(--accent); transform: scaleX(0); transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.segbar__tab:hover, .segbar__tab:focus-visible { color: #fff; }
+.segbar__tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 6px; }
+html[data-seg="ydelser"] .segbar__tab[data-seg-set="ydelser"], html[data-seg="webshop"] .segbar__tab[data-seg-set="webshop"] { color: #fff; }
+html[data-seg="ydelser"] .segbar__tab[data-seg-set="ydelser"]::after, html[data-seg="webshop"] .segbar__tab[data-seg-set="webshop"]::after { transform: none; }
+/* Not chosen yet: a soft dot asks for an answer */
+html:not([data-seg]) .segbar__q::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: -2px 8px 0 0; border-radius: 50%; background: var(--accent); vertical-align: middle; animation: seg-pulse 1.8s ease-in-out infinite; }
+@keyframes seg-pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { html:not([data-seg]) .segbar__q::before { animation: none; } }
+@media (max-width: 380px) { .segbar__in { padding: 0 14px; gap: 6px; } .segbar__tab { padding: 0 8px; } .segbar__tab::after { left: 8px; right: 8px; } }
+/* Copy for one segment only (data-seg-only="ydelser" | "webshop" | "neutral") */
+html:not([data-seg="ydelser"]) [data-seg-only="ydelser"], html:not([data-seg="webshop"]) [data-seg-only="webshop"], html[data-seg] [data-seg-only="neutral"] { display: none !important; }
+/* The note on draft pages sits under the menu, which the tabs make taller */
+html:has(.segbar) .draft-bar { top: 116px; }
+
 /* Rolling hover text (applied by JS) */
 .roll { display: inline-block; overflow: hidden; vertical-align: bottom; height: 1.25em; line-height: 1.25em; }
 .roll__in { display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.7,0,.2,1); }

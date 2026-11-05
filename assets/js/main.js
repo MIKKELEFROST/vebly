@@ -1,6 +1,7 @@
 import { track, leadDone } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { openBestil, FAG } from './bestil.js';
+import './segment.js';
 import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, kanalPriser, kanalPlus, SEO_TIMER, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
@@ -805,10 +806,13 @@ function runEffects() {
 
   // Rotating word in the badge
   {
-    const flip = $('[data-flip]'), words = flip && flip.dataset.words ? flip.dataset.words.split('|') : flipWords; let fi = 0;
+    // The words are read each time, so the thank-you page and the segment tabs (segment.js) can change them
+    const flip = $('[data-flip]'), wordsOf = () => (flip.dataset.words ? flip.dataset.words.split('|') : flipWords); let fi = 0;
     if (flip) setInterval(() => {
+      const words = wordsOf();
+      if (words.length < 2) return;
       flip.style.transition = 'transform .3s cubic-bezier(.7,0,.3,1),opacity .3s'; flip.style.transform = 'translateY(-70%)'; flip.style.opacity = 0;
-      setTimeout(() => { fi = (fi + 1) % words.length; flip.textContent = words[fi]; flip.style.transition = 'none'; flip.style.transform = 'translateY(70%)'; void flip.offsetHeight; flip.style.transition = 'transform .35s cubic-bezier(.2,.9,.3,1),opacity .35s'; flip.style.transform = ''; flip.style.opacity = 1; }, 300);
+      setTimeout(() => { const now = wordsOf(); fi = (fi + 1) % now.length; flip.textContent = now[fi]; flip.style.transition = 'none'; flip.style.transform = 'translateY(70%)'; void flip.offsetHeight; flip.style.transition = 'transform .35s cubic-bezier(.2,.9,.3,1),opacity .35s'; flip.style.transform = ''; flip.style.opacity = 1; }, 300);
     }, 2200);
   }
 

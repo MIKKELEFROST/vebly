@@ -1,4 +1,4 @@
-// /tak/<side>: counts the lead (scripts/services/pages/tak.mjs).
+// /tak/<side>: names the service and counts the lead (scripts/services/pages/tak.mjs).
 // The contact form (main.js) leaves a note in sessionStorage ('wl-lead') and sends the visitor here.
 // The note is read once and removed, so only the visit right after a real submit counts as a lead:
 // generate_lead to GA4 and Lead to Meta (with the event id /api/contact used for the same Lead on the
@@ -6,6 +6,20 @@
 // Every lead is counted on a /tak/… address, so "URL contains /tak/meta-ads" works in GA4, Meta and Google Ads.
 import { track } from '/assets/js/analytics.js';
 import { metaTrack } from '/assets/js/meta-pixel.js';
+
+// One page for every /tak/<side> (vercel.json): the name of the service comes from the address
+{
+  const side = (location.pathname.match(/^\/tak\/([a-z0-9-]{1,40})\/?$/i) || [])[1];
+  let names = {};
+  try { names = JSON.parse((document.querySelector('[data-tak-sider]') || {}).textContent || '{}'); } catch (x) { /* keep the plain text */ }
+  const name = side && names[side.toLowerCase()];
+  const flip = document.querySelector('[data-flip]'), lead = document.querySelector('.hero__lead');
+  if (name && flip) {
+    if (flip.previousSibling) flip.previousSibling.textContent = 'Din besked om';
+    flip.dataset.words = name; flip.textContent = name;
+    if (lead) lead.textContent = `Vi har fået din besked om ${name} og vender tilbage inden for 24 timer.`;
+  }
+}
 
 const KEY = 'wl-lead';
 let lead = null;

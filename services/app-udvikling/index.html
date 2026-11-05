@@ -170,6 +170,21 @@
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
+<script>
+  // What the visitor sells (assets/js/segment.js): a link with ?for=, an earlier choice, or a guess from the first page of a visit
+  (function () {
+    var K = 'wl-seg', S = { webshop: 'webshop', ydelser: 'ydelser' }, G = {"webshop":"webshop","google-shopping-ads":"webshop","google-css":"webshop","hjemmesider":"ydelser"}, s = null, first = false;
+    try { s = JSON.parse(localStorage.getItem(K) || 'null'); } catch (e) {}
+    try { first = !sessionStorage.getItem('wl-seg-v'); sessionStorage.setItem('wl-seg-v', '1'); } catch (e) {}
+    var f = (new URLSearchParams(location.search).get('for') || '').toLowerCase();
+    if (S[f]) { if (!s || s.seg !== S[f] || s.src !== 'link') window.__wlSeg = 'link'; s = { seg: S[f], src: 'link' }; }
+    else if (first && (!s || s.src === 'side')) {
+      var m = location.pathname.toLowerCase().match(/^\/services\/([a-z0-9-]+)/), g = m && G[m[1]];
+      if (g && (!s || s.seg !== g)) { s = { seg: g, src: 'side' }; window.__wlSeg = 'side'; }
+    }
+    if (s && S[s.seg]) { document.documentElement.setAttribute('data-seg', s.seg); try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) {} }
+  })();
+</script>
 <script type="module" src="/assets/js/main.js?v=20261105a"></script>
 <script type="module" src="/assets/js/sections.js?v=20261105a"></script>
 <script type="module" src="/assets/js/show/app-udvikling.js?v=20261105a"></script>
@@ -196,6 +211,15 @@
   <div class="orb" data-orb aria-hidden="true"></div>
 
   <header class="nav" data-nav>
+    <div class="segbar" data-seg-bar data-order-ydelser="hjemmesider,google-ads,seo,meta-ads,geo,ai,automations,interne-systemer,video,email-marketing,cro,app-udvikling,webshop,google-shopping-ads,google-css" data-order-webshop="webshop,google-shopping-ads,google-css,meta-ads,email-marketing,cro,google-ads,seo,geo,ai,video,automations,interne-systemer,app-udvikling,hjemmesider">
+      <div class="segbar__in">
+        <span class="segbar__q" id="seg-q">Hvad sælger du?</span>
+        <div class="segbar__tabs" role="group" aria-labelledby="seg-q">
+          <button type="button" class="segbar__tab" data-seg-set="ydelser" aria-pressed="false">Ydelser</button>
+          <button type="button" class="segbar__tab" data-seg-set="webshop" aria-pressed="false">Produkter online</button>
+        </div>
+      </div>
+    </div>
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
@@ -512,8 +536,8 @@
           <p class="sec-head__lead">Tilføj det, du også er interesseret i, så får du én samlet pris sammen med App-udvikling.</p>
         </div>
         <div class="addons__wrap" data-hwrap>
-          <div class="addons__track" data-htrack>
-          <div class="addon-slot">
+          <div class="addons__track" data-htrack data-seg-sort>
+          <div class="addon-slot" data-slug="hjemmesider">
             <div class="addon" data-tilt data-addon="Hjemmesider" data-value="2995">
               <div class="glare" data-glare></div>
               <span class="addon__n">01</span>
@@ -526,7 +550,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="webshop">
             <div class="addon" data-tilt data-addon="Webshop" data-value="12995">
               <div class="glare" data-glare></div>
               <span class="addon__n">02</span>
@@ -539,7 +563,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="google-ads">
             <div class="addon" data-tilt data-addon="Google Ads" data-value="8000">
               <div class="glare" data-glare></div>
               <span class="addon__n">03</span>
@@ -552,7 +576,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="meta-ads">
             <div class="addon" data-tilt data-addon="Meta Ads" data-value="8000">
               <div class="glare" data-glare></div>
               <span class="addon__n">04</span>
@@ -565,7 +589,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="google-shopping-ads">
             <div class="addon" data-tilt data-addon="Google Shopping Ads" data-value="8000">
               <div class="glare" data-glare></div>
               <span class="addon__n">05</span>
@@ -578,7 +602,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="google-css">
             <div class="addon" data-tilt data-addon="Google CSS" data-value="49">
               <div class="glare" data-glare></div>
               <span class="addon__n">06</span>
@@ -591,7 +615,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="video">
             <div class="addon" data-tilt data-addon="Video" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">07</span>
@@ -604,7 +628,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="seo">
             <div class="addon" data-tilt data-addon="SEO" data-value="995">
               <div class="glare" data-glare></div>
               <span class="addon__n">08</span>
@@ -617,7 +641,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="geo">
             <div class="addon" data-tilt data-addon="GEO" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">09</span>
@@ -630,7 +654,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="ai">
             <div class="addon" data-tilt data-addon="AI" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">10</span>
@@ -643,7 +667,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="automations">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
               <span class="addon__n">11</span>
@@ -656,7 +680,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="interne-systemer">
             <div class="addon" data-tilt data-addon="Interne systemer og CRM" data-value="14999">
               <div class="glare" data-glare></div>
               <span class="addon__n">12</span>
@@ -669,7 +693,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="email-marketing">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">13</span>
@@ -682,7 +706,7 @@
               </div>
             </div>
           </div>
-          <div class="addon-slot">
+          <div class="addon-slot" data-slug="cro">
             <div class="addon" data-tilt data-addon="CRO" data-value="0">
               <div class="glare" data-glare></div>
               <span class="addon__n">14</span>
