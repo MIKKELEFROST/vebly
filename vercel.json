@@ -169,6 +169,15 @@
       ]
     },
     {
+      "source": "/tak(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/udkast/(.*)",
       "headers": [
         {
@@ -183,6 +192,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/tak/:side([a-z0-9-]+)",
+      "destination": "/tak"
+    },
     {
       "source": "/mit-udkast",
       "destination": "/api/udkast"

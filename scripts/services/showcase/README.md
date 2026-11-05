@@ -18,7 +18,8 @@ polished.
 | --- | --- | --- |
 | google-shopping-ads | Live carousel and feed editor | The "Sponsoreret · Shopping" carousel you can drag, your card in it, and a product feed row that rewrites your card |
 | google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af Webleads" (Webleads is a CSS), the click price rolls down, a budget slider shows what it means |
-| seo | Annotated anatomy | A Google business profile in the middle, labels with thin leader lines pointing at its parts |
+| lokal-seo | Annotated anatomy | A Google business profile in the middle, labels with thin leader lines pointing at its parts (it was the SEO page's until 5 Nov 2026, when SEO became the page for webshops) |
+| ugc | Media wall | A wall of our own UGC, tall videos and lower photos in columns, filter Alt / Video / Billeder; videos play muted on screen and a tap turns the sound on. Placeholders until the files arrive (how to swap them: the comment at the top of ugc.html). Everything on it must be made by us |
 | google-ads | Live search loop | A big search field that types local searches; the sponsored text ad on top rewrites itself to each query |
 | meta-ads | Stories player | A phone playing a tap-through story ad, next to a panel that shows who sees it |
 | geo | Chat with question chips | An AI chat: pick a question, the answer streams in and recommends the example business |
@@ -29,6 +30,7 @@ polished.
 | video | Editing timeline | A video editor of our own drawing: a preview playing a short animated example video above a timeline (video, text and music tracks) with a running playhead; tabs switch Reklamevideo / Explainer / Motion graphics, format chips reframe the preview 9:16 · 1:1 · 16:9 |
 | app-udvikling | Twin devices | The same example app on an iPhone-like and an Android-like phone side by side (our own drawings); a tap on one plays on both; the app icon installs itself when the section comes into view; booking ends with a push notification |
 | interne-systemer | Drag pipeline | A CRM in a browser window: lead cards you drag (or move with buttons) from Ny henvendelse to Tilbud sendt to Vundet; the dashboard tiles above count up as cards land |
+| (no showcase yet) | | seo (since it became the webshop page) and the pages added on 5 Nov 2026: linkbuilding, linkedin-ads, tiktok-ads, snapchat-ads, pinterest-ads, youtube-annoncering, bing-ads, reddit-ads, markedspladser, influencer-marketing, affiliate-marketing, organisk-instagram, organisk-facebook, organisk-tiktok, branding. Each needs its own format when it gets one |
 | resultater (page) | Case spread | Big metric tiles that count up, the growth line drawing itself, a mini site; then the filterable gallery |
 
 ## Facts for Google mockups (checked 4 Nov 2026)

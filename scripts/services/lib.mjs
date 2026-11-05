@@ -3,11 +3,32 @@
 // extra pages in scripts/services/pages/*.mjs, so every page keeps the same DNA.
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, services, pages, front } from './data.mjs';
+import { SITE, services, pages, front, segments } from './data.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const V = { css: '20261104d', js: '20261104d' };
+export const V = { css: '20261105a', js: '20261105a' };
 export const GENERATED = '<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->';
+
+/* What the visitor sells: the tabs above the menu (data.mjs → segments, assets/js/segment.js) */
+// Runs in <head> before the page is drawn, so the visitor's own choice is shown at once. Only a choice made in
+// the tabs counts: no links and no guessing.
+export const SEG_HEAD = `<script>
+  // What the visitor sells (assets/js/segment.js): only the visitor's own choice in the tabs
+  (function () {
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem('wl-seg') || 'null'); } catch (e) {}
+    if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
+  })();
+</script>`;
+export const SEG_BAR = `<div class="segbar" data-seg-bar data-nudge="${segments.nudge.replace(/"/g, '&quot;')}" data-order-ydelser="${segments.order.ydelser.join(',')}" data-order-webshop="${segments.order.webshop.join(',')}">
+      <div class="segbar__in">
+        <span class="segbar__q" id="seg-q">${segments.tabs.q.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))}</span>
+        <div class="segbar__tabs" role="group" aria-labelledby="seg-q">
+          <button type="button" class="segbar__tab" data-seg-set="ydelser" aria-pressed="false">${segments.tabs.ydelser}</button>
+          <button type="button" class="segbar__tab" data-seg-set="webshop" aria-pressed="false">${segments.tabs.webshop}</button>
+        </div>
+      </div>
+    </div>`;
 
 export const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 export const ld = o => JSON.stringify(o, null, 2).replace(/</g, '\\u003c');
@@ -159,6 +180,7 @@ ${ld(p.ld)}
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
+${SEG_HEAD}
 <script type="module" src="/assets/js/main.js?v=${V.js}"></script>${(p.js || []).map(s => `
 <script type="module" src="${s}"></script>`).join('')}
 </head>`;
@@ -187,6 +209,7 @@ export function top(p) {
   <div class="draft-bar" role="note">${esc(p.bar)}</div>` : ''}
 
   <header class="nav" data-nav>
+    ${SEG_BAR}
     <div class="nav__in">
       <a href="${p.home ? '#top' : '/'}" class="logo" aria-label="${p.home ? 'Webleads, til toppen' : 'Webleads, til forsiden'}"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
@@ -222,9 +245,9 @@ export function hero(p) {
       <div class="float float--g" data-float="1.6" data-rot="5" data-float-review="google" hidden></div>
       <div class="float float--t" data-float="0.9" data-rot="-4" data-float-review="tp" hidden></div>
       <div class="hero__in" data-hero>
-        <div class="hero__badge" data-reveal="0"><i></i>${p.badge}<span class="hero__flip" data-flip data-words="${esc(p.words.join('|'))}">${esc(p.words[0])}</span></div>
+        <div class="hero__badge" data-reveal="0"><i></i>${p.badge}<span class="hero__flip" data-flip data-words="${esc(p.words.join('|'))}"${p.seg ? Object.entries(p.seg).map(([k, v]) => ` data-words-${k}="${esc(v.words.join('|'))}"`).join('') : ''}>${esc(p.words[0])}</span></div>
         ${h1(p.h1)}
-        <p class="hero__lead" data-reveal="3">${esc(p.lead)}</p>
+        <p class="hero__lead" data-reveal="3">${p.seg ? `<span data-seg-only="neutral">${esc(p.lead)}</span>${Object.entries(p.seg).map(([k, v]) => `<span data-seg-only="${k}">${esc(v.lead)}</span>`).join('')}` : esc(p.lead)}</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: ${esc(p.cta)}">${esc(p.cta)}</a>
           <a href="${p.more[1]}" class="hero__more" data-event="Hero: ${esc(p.more[0])}">${esc(p.more[0])} <span>↓</span></a>
@@ -235,7 +258,7 @@ export function hero(p) {
 }
 
 export function card(s, i) {
-  return `<div class="addon-slot">
+  return `<div class="addon-slot" data-slug="${s.slug}">
             <div class="addon" data-tilt data-addon="${esc(s.t)}" data-value="${s.value}">
               <div class="glare" data-glare></div>
               <span class="addon__n">${pad(i + 1)}</span>
@@ -261,7 +284,7 @@ export function track({ id, kicker, h2, lead, list }) {
           <p class="sec-head__lead">${esc(lead)}</p>
         </div>
         <div class="addons__wrap" data-hwrap>
-          <div class="addons__track" data-htrack>
+          <div class="addons__track" data-htrack data-seg-sort>
           ${list.map(card).join('\n          ')}
           </div>
         </div>
@@ -604,8 +627,8 @@ export function grid({ id, kicker, h2: title, lead: text, list }) {
           <a href="#kontakt" class="sx-grid__sum" data-grid-sum hidden><span>I din forespørgsel</span><b data-grid-sum-txt></b><i aria-hidden="true">→</i></a>
         </div>
       </div>
-      <div class="sx-grid__list">
-        ${list.map((s, i) => `<div class="sx-gc" data-addon="${esc(s.t)}" data-value="${s.value}" data-reveal="${i % 5}">
+      <div class="sx-grid__list" data-seg-sort>
+        ${list.map((s, i) => `<div class="sx-gc" data-slug="${s.slug}" data-addon="${esc(s.t)}" data-value="${s.value}" data-reveal="${i % 5}">
           <div class="sx-gc__top"><h3>${esc(s.t)}</h3><span class="sx-gc__price">${esc(s.price)}</span></div>
           <p>${esc(s.d)}</p>
           <div class="sx-gc__actions">

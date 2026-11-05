@@ -1,4 +1,4 @@
-// SEO showcase (/services/seo): an annotated anatomy of an example business profile on Google Maps
+// Local SEO showcase (/services/lokal-seo): an annotated anatomy of an example business profile on Google Maps
 // (Nordvik, a carpenter in København: an example, never a real business). Seven labels sit beside the
 // phone with thin leader lines to their parts. When the phone comes into view the search types itself,
 // the lines draw out from the profile and the labels pop in one by one (time-based, never tied to the
@@ -7,7 +7,7 @@
 // Below 1024px the labels are a list: a tap scrolls the part into view and pulses it.
 import { track } from '/assets/js/analytics.js';
 
-const root = document.querySelector('.show--seo');
+const root = document.querySelector('.show--lokal-seo');
 if (root) {
   try { init(root); } catch (e) { root.classList.add('is-in', 'is-lin', 'is-done'); throw e; }
 }
@@ -18,7 +18,7 @@ function init(root) {
   const stage = $('[data-an-stage]'), svg = $('[data-an-svg]'), ph = $('.an-ph'), dev = $('[data-an-dev]');
   const row = $('[data-an-row]'), q = $('[data-an-q]'), list = $('.an__list'), segs = $$('[data-an-view]');
   const wide = matchMedia('(min-width: 1024px)');
-  const ev = action => track('showcase_interact', { showcase: 'seo', action });
+  const ev = action => track('showcase_interact', { showcase: 'lokal-seo', action });
   const svgEl = (n, c, a = {}) => { const e = document.createElementNS('http://www.w3.org/2000/svg', n); e.setAttribute('class', c); for (const k in a) e.setAttribute(k, a[k]); return e; };
   const f = n => n.toFixed(1), GAP = 4;
   const parts = $$('[data-an-p]'), keysOf = p => p.dataset.anP.split(' ');
@@ -177,9 +177,9 @@ function init(root) {
     started = true;
     root.classList.add('is-in');
     if (isW || list.getBoundingClientRect().top < innerHeight) listIn();
-    track('showcase_step', { showcase: 'seo', step: 1 });
+    track('showcase_step', { showcase: 'lokal-seo', step: 1 });
     typeQ();
-    setTimeout(() => { root.classList.add('is-done'); track('showcase_step', { showcase: 'seo', step: 2 }); }, motion ? 2200 + items.length * 130 : 0);
+    setTimeout(() => { root.classList.add('is-done'); track('showcase_step', { showcase: 'lokal-seo', step: 2 }); }, motion ? 2200 + items.length * 130 : 0);
   };
 
   layout();

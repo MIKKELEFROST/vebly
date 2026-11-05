@@ -1,7 +1,7 @@
 // Partner band right under the front page hero (scripts/services/front/partnere.mjs).
-// The customers drift calmly inside the page width (full width on phones), in two rows the other way
-// round when there are many. A row can be grabbed and thrown: it follows the mouse or the finger and
-// glides back to its own pace. The rows roll in from the sides as the band comes into view. Hovering,
+// An infinity scroll: the customers drift calmly in one endless row across the whole width of the screen.
+// The row can be grabbed and thrown: it follows the mouse or the finger and glides back to its own pace.
+// It rolls in from the side as the band comes into view. Hovering,
 // a touch, keyboard focus or the pause button brings them to a soft stop.
 // The list only moves when it is wider than the band, so no customer is ever on screen twice. With
 // reduced motion, without JS, with 1–4 customers (data-pt-still) or a list that fits, it stands still.
@@ -59,17 +59,15 @@ function run() {
     });
   };
 
-  // Still, one row or two: measured in one line, so it adapts to the screen and not only to the count
+  // Still or moving: measured in one line, so it adapts to the screen and not only to the count
   const layout = () => {
     vw = innerWidth;
     rows.forEach(r => { if (r.before) r.before.remove(); r.after.forEach(c => c.remove()); });
-    band.querySelectorAll('.pt__row').forEach(r => { if (r !== first) r.remove(); });
     set0.replaceChildren(...items);
     sec.classList.add('is-moving');
     const bw = band.clientWidth, gap = parseFloat(getComputedStyle(set0).columnGap) || 0;
     const width = list => list.reduce((s, li) => s + li.offsetWidth + gap, 0);
-    const odd = items.filter((_, i) => i % 2), even = items.filter((_, i) => !(i % 2));
-    mode = width(items) <= bw + 1 ? 'still' : items.length >= 10 && Math.min(width(odd), width(even)) > bw ? 'two' : 'one';
+    mode = width(items) <= bw + 1 ? 'still' : 'one';
     if (mode === 'still') {
       sec.classList.remove('is-moving'); rows = [];
       first.style.opacity = ''; first.firstElementChild.style.transform = '';
@@ -78,14 +76,7 @@ function run() {
     }
     if (btn) btn.hidden = false;
     const old = rows;
-    rows = [first];
-    if (mode === 'two') {
-      const row = first.cloneNode(false), track = first.firstElementChild.cloneNode(false), set = set0.cloneNode(false);
-      track.dataset.ptTrack = '1';
-      set.append(...odd); track.append(set); row.append(track); band.append(row);
-      rows.push(row);
-    }
-    rows = rows.map((row, i) => {
+    rows = [first].map((row, i) => {
       const track = row.querySelector('[data-pt-track]');
       return { row, track, set: track.querySelector('.pt__set'), dir: +track.dataset.ptTrack < 0 ? -1 : 1, x: old[i] ? old[i].x : null, v: 0, w: 0, before: null, after: [] };
     });

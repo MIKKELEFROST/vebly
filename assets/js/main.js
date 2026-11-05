@@ -1,6 +1,7 @@
-import { track } from './analytics.js';
+import { track, leadDone } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { openBestil, FAG } from './bestil.js';
+import './segment.js';
 import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, kanalPriser, kanalPlus, SEO_TIMER, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
@@ -290,6 +291,14 @@ if ('IntersectionObserver' in window) {
   if (odo) priceSeen.observe(odo);
 }
 
+// The page a form is on, as the end of its thank-you address: / → forside, /services/meta-ads → meta-ads
+const takSide = () => {
+  const p = location.pathname.replace(/\/+$/, '').toLowerCase();
+  if (!p) return 'forside';
+  const m = p.match(/^\/services\/([a-z0-9-]{1,40})$/) || p.match(/^\/([a-z0-9-]{1,40})$/);
+  return m ? m[1] : 'andet';
+};
+
 if (form) form.addEventListener('submit', async e => {
   e.preventDefault();
   const err = $('[data-form-error]');
@@ -303,14 +312,24 @@ if (form) form.addEventListener('submit', async e => {
     const chosen = $('[data-chosen-input]').value || base() || 'Generel henvendelse';
     const r = beregn(chosenNames()), value = r.once + r.md || fallbackValue;
     const meta = metaLeadFields();
-    const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), ...meta, meta_value: value }) });
+    const side = takSide();
+    const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), ...meta, meta_value: value, side, side_url: location.pathname }) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json().catch(() => ({}));
     $('[data-thanks-mail]').hidden = !data.kvittering;
-    track('generate_lead', { selected: chosen, form_name: 'kontakt', addons_total: state.addons.length, value, currency: 'DKK', receipt: data.kvittering ? 'ja' : 'nej' });
-    metaTrack('Lead', { content_name: chosen, value, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
+    // The lead is counted on /tak/<side> (assets/js/show/tak.js), so every lead has an address that says
+    // which page it came from. Without sessionStorage it is counted here instead, before the visitor goes.
+    const lead = { side, selected: chosen, value, addons: state.addons.length, receipt: !!data.kvittering, id: meta.meta_event_id || '', t: Date.now() };
+    let handed = false;
+    try { sessionStorage.setItem('wl-lead', JSON.stringify(lead)); handed = !!sessionStorage.getItem('wl-lead'); } catch (x) { /* blocked storage */ }
+    if (handed) leadDone();
+    else {
+      track('generate_lead', { selected: chosen, form_name: 'kontakt', form_page: side, addons_total: state.addons.length, value, currency: 'DKK', receipt: data.kvittering ? 'ja' : 'nej' });
+      metaTrack('Lead', { content_name: chosen, value, currency: 'DKK' }, { id: meta.meta_event_id, mirror: false });
+    }
     form.reset(); syncAddons();
     form.hidden = true; thanks.hidden = false;
+    location.assign('/tak/' + side);
   } catch (x) {
     track('form_error', { form_name: 'kontakt', error_message: String(x.message || x).slice(0, 100) });
     err.innerHTML = 'Beskeden kunne ikke sendes. Skriv til <a href="mailto:hej@webleads.dk" style="color:#fff;text-decoration:underline">hej@webleads.dk</a>.';
@@ -787,10 +806,13 @@ function runEffects() {
 
   // Rotating word in the badge
   {
-    const flip = $('[data-flip]'), words = flip && flip.dataset.words ? flip.dataset.words.split('|') : flipWords; let fi = 0;
+    // The words are read each time, so the thank-you page and the segment tabs (segment.js) can change them
+    const flip = $('[data-flip]'), wordsOf = () => (flip.dataset.words ? flip.dataset.words.split('|') : flipWords); let fi = 0;
     if (flip) setInterval(() => {
+      const words = wordsOf();
+      if (words.length < 2) return;
       flip.style.transition = 'transform .3s cubic-bezier(.7,0,.3,1),opacity .3s'; flip.style.transform = 'translateY(-70%)'; flip.style.opacity = 0;
-      setTimeout(() => { fi = (fi + 1) % words.length; flip.textContent = words[fi]; flip.style.transition = 'none'; flip.style.transform = 'translateY(70%)'; void flip.offsetHeight; flip.style.transition = 'transform .35s cubic-bezier(.2,.9,.3,1),opacity .35s'; flip.style.transform = ''; flip.style.opacity = 1; }, 300);
+      setTimeout(() => { const now = wordsOf(); fi = (fi + 1) % now.length; flip.textContent = now[fi]; flip.style.transition = 'none'; flip.style.transform = 'translateY(70%)'; void flip.offsetHeight; flip.style.transition = 'transform .35s cubic-bezier(.2,.9,.3,1),opacity .35s'; flip.style.transform = ''; flip.style.opacity = 1; }, 300);
     }, 2200);
   }
 

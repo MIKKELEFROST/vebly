@@ -10,7 +10,11 @@ Plain HTML, CSS and JavaScript, with no build step on Vercel. The front page and
 index.html            Front page (generated, see Pages and services)
 services/hjemmesider/ The website offer: the old front page, edited by hand
 services/<slug>/      One page per service (generated): google-ads, meta-ads, google-shopping-ads, google-css,
-                      video, seo, geo, ai, automations, interne-systemer, app-udvikling, email-marketing, cro
+                      video, seo (for webshops), lokal-seo, geo, ai, automations, interne-systemer, app-udvikling,
+                      email-marketing, cro, and from 5 Nov 2026: linkbuilding, linkedin-ads, tiktok-ads,
+                      snapchat-ads, pinterest-ads, youtube-annoncering, bing-ads, reddit-ads, markedspladser, ugc,
+                      influencer-marketing, affiliate-marketing, organisk-instagram, organisk-facebook,
+                      organisk-tiktok, branding
 services/webshop/     Webshop on Shopify with its price calculator (scripts/services/pages/webshop.mjs)
 resultater/           Customers and reviews (scripts/services/pages/resultater.mjs; customers in partnere.mjs)
 scripts/services/     data.mjs (all copy for the front page and service pages), build.mjs, og.mjs
@@ -19,6 +23,7 @@ assets/js/content.js  Copy for the lists and pop-ups on /services/hjemmesider (i
                       the team and the balls
 assets/js/main.js     Rendering, pop-ups, contact form and all effects, on every page (each part runs only
                       when its section is on the page)
+assets/partnere/      Customer logos for the front page band and the results wall (taken from each customer's site)
 demo/                 The "Nordvik" sample site that builds itself in "Sådan virker det" (window.__build, window.__set)
 api/contact.js        Vercel function that emails contact-form submissions via Resend
 api/collect.js        Vercel function that forwards analytics events to GA4
@@ -28,6 +33,8 @@ api/oensker.js        Vercel function that e-mails the visitor's wishes and favo
 api/udkast.js         Vercel function that renders instant drafts at /mit-udkast
 assets/js/temaer.js   Colour themes for drafts (main colour, accent, background), shared by browser and server
 bestil/               "Bestil en hjemmeside" as its own page (/bestil)
+tak/                  The thank-you page after the contact form, served for every /tak/<side> (generated, see Contact form)
+assets/js/segment.js  The tabs above the menu: what the visitor sells (see Segments)
 privatliv/            Privacy policy (/privatliv), linked from the form and the footer
 robots.txt, sitemap.xml
 assets/og.png         Share image (1200 × 630) for /services/hjemmesider
@@ -37,7 +44,7 @@ assets/og/            Share images for the front page and the other service page
 ## Pages and services
 
 ```
-/                          Front page: hero, Services (all ten as cards), Vores løfte, Alt under ét tag,
+/                          Front page: hero, Services (all of them as cards), Vores løfte, Alt under ét tag,
                            Teamet, Spørgsmål, Kontakt
 /services/hjemmesider      Hjemmesider: three packages and a price calculator (Sådan virker det, Før og efter,
                            Pakker, Tilvalg, Beregn din pris …)
@@ -45,7 +52,7 @@ assets/og/            Share images for the front page and the other service page
                            Andre services, Spørgsmål, Kontakt
 ```
 
-The copy for the front page and the nine service pages is in `scripts/services/data.mjs`. After a change:
+The copy for the front page and the service pages is in `scripts/services/data.mjs`. After a change:
 
 ```
 node scripts/services/build.mjs    # writes index.html and services/<slug>/index.html
@@ -54,7 +61,7 @@ node scripts/services/og.mjs       # share images in assets/og/ (needs Playwrigh
 
 Do not edit the generated files by hand; the next build overwrites them. `/services/hjemmesider` is edited by hand, except the list of services at the bottom (between `sitemap:start` and `sitemap:end`), which the build refreshes. A new service: add a card to `services` and a page to `pages` in `data.mjs`, then build, make the share image and add it to `sitemap.xml`.
 
-Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak". Never invent numbers, results or customers in the copy.
+Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO and Lokal SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak"; that is every service added on 5 Nov 2026 except Lokal SEO, until Mikkel sets their prices (the new ad channels too: LinkedIn, TikTok, Snapchat, Pinterest, YouTube, Bing and Reddit). Never invent numbers, results or customers in the copy.
 
 - On the cards, "+ Tilføj" puts the service in the contact form ("Du har valgt"), as the add-ons do on the website page. On a service page the form starts with that service (`data-base` on the form; `data-value` is its start price, used as the value of the Meta lead). With nothing chosen on the front page the e-mail says "Generel henvendelse".
 - Old links to the website offer on the front page (`/#saadan`, `/#pris`, `/#tilvalg`, `/#video`) are sent on to `/services/hjemmesider` with the same `?utm_…` and `#…` (script at the top of `index.html`). `/#kontakt`, `/#teamet`, `/#faq` and `/#bestil` stay on the front page.
@@ -81,7 +88,29 @@ The form posts to `/api/contact`, which emails the message to us through [Resend
 | `CONTACT_TO`     | no       | `hej@webleads.dk`                 |
 | `CONTACT_FROM`   | no       | `Webleads <hej@webleads.dk>`      |
 
+### Thank-you page (`/tak/<side>`)
+
+When the message has gone through, the visitor is sent to `/tak/<the page the form was on>`: `/tak/forside`, `/tak/resultater` or `/tak/<service slug>` (for instance `/tak/meta-ads`, `/tak/seo`, `/tak/hjemmesider`). It is one page, `tak/index.html` (`scripts/services/pages/tak.mjs`, `node scripts/services/build.mjs tak`): vercel.json serves it for every `/tak/<side>` and keeps the address, so a new page with the form gets its own thank-you address by itself. `assets/js/show/tak.js` puts the name of the service in from the address ("Din besked om Meta Ads"), from the list of services in `data.mjs`. Not indexed (robots meta and `X-Robots-Tag`), not in the sitemap. The e-mail to us says which page the form was sent from (`Side:`).
+
+The lead is counted on the thank-you page, so every lead has an address that says where it came from:
+
+- `URL contains /tak` is every lead from the contact form; `URL contains /tak/meta-ads` the ones from the Meta Ads page. That works in GA4, Meta (custom conversions) and Google Ads.
+- `assets/js/show/tak.js` sends `generate_lead` to GA4 (`form_page` = the page, plus `selected`, `value`, `addons_total`, `receipt`) and `Lead` to Meta, only right after a real submit (a note in sessionStorage that the form leaves and the page removes). A reload or a direct visit is only a page view. Without sessionStorage the form page counts the lead itself, as before.
+- Meta gets the Lead twice with the same event id (browser and `/api/contact`), both with the thank-you address as the page, so Meta counts it once.
+- Which ad or campaign the visitor came from is not in the address: GA4, Meta and Google Ads know that from the click itself. Count leads from Meta ads in Meta, and leads per page with the address.
+- "Bestil en hjemmeside" (`/bestil`) keeps its own flow (the draft is shown at once) and counts its lead there (`generate_lead` with `form_name` bestil).
+
 Without a key, the form shows a message asking the visitor to email instead. Mail goes out from `hej@webleads.dk`, which Resend only accepts once `webleads.dk` is verified there (Resend → Domains, DNS records at Simply.com). Until then, mail to us is resent from Resend's test sender `onboarding@resend.dev` (it can only deliver to the address on the Resend account), and receipts to visitors are skipped and logged. The receipt never repeats the visitor's message, and greets by first name only, so the form cannot be used to send other text to someone else's inbox.
+
+## Segments: "Hvad sælger du?"
+
+A thin bar above the menu on every generated page and on `/services/hjemmesider` asks what the visitor sells: **Ydelser** or **Produkter online** (webshop). The answer is `html[data-seg]` (`ydelser` or `webshop`; missing until the visitor has chosen, which shows the neutral page). Settings and copy are in `scripts/services/data.mjs` → `segments`.
+
+- **How it is set:** only by the visitor's own choice in the tabs (or the floating card). No links and no guessing from the page (Mikkel: we must be sure). Nothing is chosen in advance. The choice is kept in localStorage (`wl-seg`) and set before the page is drawn on the next pages (`lib.SEG_HEAD` in `<head>`).
+- **Until a choice is made** the visitor is asked: a dot pulses by the question, a light sweeps over the tabs and an orange bubble under them says "Vælg her, så viser vi det, der passer til dig." (`segments.nudge`; on at most 3 pages a visit, gone after 10 seconds, ✕ stops it; not on phones, where it would cover the menu). A floating card at the bottom asks the same after the first scroll or a few seconds and stays until a choice is made (✕ hides it for the visit; it waits while the cookie question is open).
+- **What changes** (`assets/js/segment.js`): the hero on the front page (badge words and lead, `segments.front`), and the order of the services in every list (`segments.order`, numbered again). Anything else can be shown for one segment with `data-seg-only="ydelser"`, `"webshop"` or `"neutral"`; main.css hides the rest.
+- **GA4**: every event carries `segment` (`ydelser`, `webshop` or `ukendt`), so every report can be split by it, leads included. `segment_choice` (`segment`, `previous`, `segment_source` faner/bund, `nudge` ja/nej) logs each choice, and `segment_nudge` (`action` vist/lukket/skjult, `nudge_type` boble/bund) the bubble and the card. Register `segment`, `previous`, `segment_source`, `nudge`, `action` and `nudge_type` under Admin → Custom definitions (event scope).
+- `/services/hjemmesider` is edited by hand; the build keeps its tabs and head script (between `seg-head:start`/`seg-bar:start` markers) and its main.css/main.js versions in step.
 
 ## Analytics (GA4, first-party)
 
@@ -130,13 +159,13 @@ Every event carries `page_type` (`forside`, `service_hjemmesider`, `service_<slu
 | `web_vitals` | Loading speed: TTFB, FCP, LCP, CLS, INP | `metric_name`, `metric_value` (ms, CLS as a number), `metric_rating` (god/forbedres/daarlig) |
 | `page_not_found` | The 404 page | `link_url` (the missing address) |
 
-**Front page** (`assets/js/main.js`): `generate_lead` (`form_name`, `value`, `currency`, `addons_total`, `receipt`), `form_error`, `addon_add` / `addon_remove` (`addon`, `addons_total`, `source` kort/popup), `addon_view` (a card was on screen), `price_view` (the price was on screen), `popup_open` (`popup`, `popup_type` cmp/inc/addon/ball/team, `popup_name`), `popup_close` (`action` kryds/baggrund/escape/luk-knap/til-kontakt/til-pris, `seconds`), `popup_action`, `faq_open` / `faq_close` (`faq_question`, `faq_index`), `ba_mode` (før/begge/efter), `ba_drag` (`position`), `pit_shake`, `pit_ball_throw` (`ball`), `intro_skip`, `demo_step` (2–5: we build it, online, the search, found), `demo_live`, `demo_personalize` (a field in "Prøv med din egen virksomhed" was used, once per field: `field_name` branche/by/firmanavn, `fag` as our trade id or andet; never what was typed), `video_start` / `video_progress` (25, 50, 75) / `video_complete` (`video_title`, `video_percent`, `video_duration`, `video_current_time`; only once the explainer video is switched on).
+**Front page** (`assets/js/main.js`, the contact form on every page): `generate_lead` (`form_name`, `form_page`, `value`, `currency`, `addons_total`, `receipt`; sent from `/tak/<side>`, see Thank-you page), `form_error`, `addon_add` / `addon_remove` (`addon`, `addons_total`, `source` kort/popup), `addon_view` (a card was on screen), `price_view` (the price was on screen), `popup_open` (`popup`, `popup_type` cmp/inc/addon/ball/team, `popup_name`), `popup_close` (`action` kryds/baggrund/escape/luk-knap/til-kontakt/til-pris, `seconds`), `popup_action`, `faq_open` / `faq_close` (`faq_question`, `faq_index`), `ba_mode` (før/begge/efter), `ba_drag` (`position`), `pit_shake`, `pit_ball_throw` (`ball`), `intro_skip`, `demo_step` (2–5: we build it, online, the search, found), `demo_live`, `demo_personalize` (a field in "Prøv med din egen virksomhed" was used, once per field: `field_name` branche/by/firmanavn, `fag` as our trade id or andet; never what was typed), `video_start` / `video_progress` (25, 50, 75) / `video_complete` (`video_title`, `video_percent`, `video_duration`, `video_current_time`; only once the explainer video is switched on).
 
 **Bestil en hjemmeside** (`assets/js/bestil.js`): `bestil_open` (`from` incl. saadan, `resumed`, `prefilled` ja when trade, name and town came from "Sådan virker det"), `bestil_step_view` (`step`, `step_name`, `direction`), one event per finished step: `bestil_1_fag` (`fag`), `bestil_2_virksomhed` (`has_year`, `team_size`), `bestil_3_behov` (`functions`, `functions_count`, `has_site`), `bestil_4_stil` (`design`, `theme`, `theme_changed`), `bestil_5_kontakt` (`has_phone`, `has_message`, `contact_method` ring/sms/mail, `contact_time`), all with `seconds`; plus `bestil_step` (the same, as one event), `bestil_choice` (`choice_group` incl. farvetema/kontaktform/kontakttid, `choice`, `choice_action` valgt/fravalgt), `bestil_field` (`field_name`, filled), `bestil_back`, `bestil_submit`, `generate_lead` (`form_name` bestil), `bestil_error`, `bestil_udkast_vist` (`fag`, `design`, `theme`, `view`, `receipt`, `seconds_total`), `bestil_result_change` (`change_type` visning/design/farvetema/baggrund/egne_farver), `bestil_forslag` (a new suggestion: `trigger` knap/mere-farve/mere-enkel/mere-moderne/mere-klassisk/anden-tekst/andre-billeder, `number`, `design`, `theme`), `bestil_forslag_nav` (`direction` frem/tilbage, `number`), `bestil_favorit` (`action` gemt/fjernet, `number`, `design`, `theme`), `bestil_oensker_sendt` (`result`, `has_text`, `favourites`, `suggestions`, `nudges`; never the text), `bestil_draft_open`, `bestil_link_copy`, `bestil_close` (`step` 1–6, `finished`, `seconds_total`).
 
 **Customer drafts** (`udkast/_faelles/udkast.js`): `udkast_farve` (`colour` on hand-made drafts, `theme` on instant drafts), `udkast_faerdig_click` (back to webleads.dk), `udkast_bar_close`, `udkast_form_try`. **Cookie box** (`meta-pixel.js`, through a `wl:track` DOM event): `consent_view` (`trigger` automatisk/link), `consent_choice` (`choice` ja/nej, `seconds`). **Referencer:** `reference_filter` (`filter`, `results`).
 
-**In GA4:** mark `generate_lead` (both forms; `form_name` tells them apart) and `contact_click` as key events. Register the parameters you want in reports under Admin → Custom definitions (event scope): `page_type`, `section`, `button`, `element_type`, `method`, `click_type`, `popup`, `popup_type`, `popup_name`, `addon`, `faq_question`, `step`, `step_name`, `choice_group`, `choice`, `choice_action`, `field_name`, `form_name`, `fag`, `design`, `theme`, `trigger`, `contact_method`, `contact_time`, `metric_name`, `metric_rating`, `copied_type`, `input`, `ad_click`, `meta_consent`, and the metrics `seconds` (seconds) and `metric_value`. `link_text`, `link_url`, `link_domain`, `outbound` and `percent_scrolled` are built in.
+**In GA4:** mark `generate_lead` (both forms; `form_name` tells them apart, `form_page` and the `/tak/<side>` address tell the pages apart) and `contact_click` as key events. Register the parameters you want in reports under Admin → Custom definitions (event scope): `page_type`, `section`, `button`, `element_type`, `method`, `click_type`, `popup`, `popup_type`, `popup_name`, `addon`, `faq_question`, `step`, `step_name`, `choice_group`, `choice`, `choice_action`, `field_name`, `form_name`, `form_page`, `segment`, `previous`, `segment_source`, `nudge`, `nudge_type`, `fag`, `design`, `theme`, `trigger`, `contact_method`, `contact_time`, `metric_name`, `metric_rating`, `copied_type`, `input`, `ad_click`, `meta_consent`, and the metrics `seconds` (seconds) and `metric_value`. `link_text`, `link_url`, `link_domain`, `outbound` and `percent_scrolled` are built in.
 
 ## Meta Pixel and Conversions API (only with consent)
 
