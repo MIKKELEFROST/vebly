@@ -23,7 +23,8 @@
 //                   still wider than the band.
 //   Reduced motion: a grid, and on phones a row you swipe.
 // The customers Mikkel listed on 4 Nov 2026. On 5 Nov the logos were taken from each customer's own site
-// (assets/partnere/), and navn, fag and by from the same site (the name the site uses, the address by its CVR).
+// (assets/partnere/), and navn, fag and by from the same site (the name the site uses, the address by its CVR;
+// Holms Maler is in Hvidovre, as Mikkel confirmed, although the CVR address on its site is in Brøndby).
 // Holms Maler and Carelax use a white logo on their sites, so the files here are their dark versions: Carelax's
 // own dark logo and Holms' wordmark in dark ink. Uniq's logo is a JPG on white; the white around it is made
 // transparent. mikkelbranth.dk could not be reached, so it has no logo, fag or by yet.
@@ -35,7 +36,7 @@ export const partnere = [
   { navn: 'Carelax Danmark', fag: 'Massagestole', by: 'Glostrup', url: 'https://carelaxdanmark.dk', logo: '/assets/partnere/carelax.svg' },
   { navn: 'GladTeknik', fag: 'IT-support', by: 'Hvidovre', url: 'https://gladteknik.dk', logo: '/assets/partnere/gladteknik.png' },
   { navn: 'Uniq VVS-Teknik', fag: 'VVS', by: 'Stenløse', url: 'https://uniqvvs.dk', logo: '/assets/partnere/uniqvvs.png' },
-  { navn: 'Holms Maler Entreprise', fag: 'Maler', by: 'Brøndby', url: 'https://holmsmaler.dk', logo: '/assets/partnere/holmsmaler.png' },
+  { navn: 'Holms Maler Entreprise', fag: 'Maler', by: 'Hvidovre', url: 'https://holmsmaler.dk', logo: '/assets/partnere/holmsmaler.png' },
   { navn: 'mikkelbranth.dk', url: 'https://mikkelbranth.dk' },
   { navn: 'Raadvad Kro', fag: 'Kro og restaurant', by: 'Kongens Lyngby', url: 'https://raadvadkro.dk', logo: '/assets/partnere/raadvadkro.png' },
   { navn: 'Fastelavnskostumer.dk', fag: 'Kostumer', by: 'Hvidovre', url: 'https://fastelavnskostumer.dk', logo: '/assets/partnere/fastelavnskostumer.png' },
