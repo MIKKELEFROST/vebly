@@ -17,7 +17,7 @@ polished.
 | Page | Format | What the visitor sees |
 | --- | --- | --- |
 | google-shopping-ads | Live carousel and feed editor | The "Sponsoreret · Shopping" carousel you can drag, your card in it, and a product feed row that rewrites your card |
-| google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af Webleads" (Webleads is a CSS), the click price rolls down, a budget slider shows what it means |
+| google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af Webleads Shopping" (Webleads is a CSS), the click price rolls down, a budget slider shows what it means |
 | seo | Annotated anatomy | A Google business profile in the middle, labels with thin leader lines pointing at its parts |
 | google-ads | Live search loop | A big search field that types local searches; the sponsored text ad on top rewrites itself to each query |
 | meta-ads | Stories player | A phone playing a tap-through story ad, next to a panel that shows who sees it |
@@ -34,7 +34,7 @@ polished.
 ## Facts for Google mockups (checked 4 Nov 2026)
 
 - Every Shopping ad in Denmark ends with a small link line under shop, price, delivery and rating: »Af Google«
-  (or »Af <CSS-navn>« when another CSS placed it, for Webleads »Af Webleads«). Draw it on Shopping cards.
+  (or »Af <CSS-navn>« when another CSS placed it, for Webleads »Af Webleads Shopping«). Draw it on Shopping cards.
 - Never show free listings or a »populære produkter« block, and leave »Shopping« out of mock tab rows
   (use Alle, Billeder, Videoer, Nyheder): both changed in the EEA in September 2026.
 - Google CSS: the facts and the exact wording are in the scratchpad file ws/google-css/FAKTA.md.
