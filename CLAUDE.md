@@ -46,6 +46,12 @@ open work; README.md explains how the site is built.
 | Interne systemer og CRM | from 14.999 kr. | `content.js`, `data.mjs` |
 | Video, App-udvikling, GEO, AI, E-mail marketing, CRO | Fast pris efter en snak | `data.mjs` |
 
+## Brand files
+
+- Logo, icons and backgrounds: `brand/` and `assets/`. The e-mail signature generator is
+  `brand/mail/signatur.html` (it uses the icons in `brand/mail/` from https://webleads.dk/brand/mail/).
+- Social posts, reels and the content calendar: `scripts/social/README.md`.
+
 ## Build and check
 
 ```
