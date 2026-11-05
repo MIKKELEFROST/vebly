@@ -17,10 +17,9 @@
 //
 // The front page shows the band as soon as there is one customer here: node scripts/services/build.mjs forside
 //   1–4 customers   a calm row that stands still
-//   5 or more       drifts sideways inside the page width; visitors can grab it and throw it. It only moves
-//                   when the list is wider than the band, so nobody is on screen twice (on a wide screen a
-//                   short list stands still). From 10, two rows the other way round, when both rows are
-//                   still wider than the band.
+//   5 or more       an infinity scroll: one endless row across the whole width of the screen; visitors can
+//                   grab it and throw it. It only moves when the list is wider than the screen, so nobody is
+//                   on screen twice (on a very wide screen a short list stands still).
 //   Reduced motion: a grid, and on phones a row you swipe.
 // The customers Mikkel listed on 4 Nov 2026. On 5 Nov the logos were taken from each customer's own site
 // (assets/partnere/), and navn, fag and by from the same site (the name the site uses, the address by its CVR;

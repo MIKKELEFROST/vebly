@@ -1,8 +1,8 @@
 /* Partner band right under the front page hero, and the same customers as a wall on the results page
    (scripts/services/front/partnere.mjs). Every selector starts with .show--partnere.
    Still by default (reduced motion, no JS, 1–4 customers or a list that fits): a tidy grid inside the page
-   width, and on phones a row you swipe. assets/js/show/partnere.js adds .is-moving and lets one or two rows
-   drift inside the page width (full width on phones); a row can be grabbed and thrown. */
+   width, and on phones a row you swipe. assets/js/show/partnere.js adds .is-moving and turns it into an
+   infinity scroll: one endless row across the whole width of the screen, which can be grabbed and thrown. */
 
 .show--partnere { position: relative; z-index: 1; --pt-gap: 56px; --pt-fade: clamp(48px, 8vw, 110px); }
 .show--partnere.pt { padding: 28px 0 56px; }
@@ -26,9 +26,9 @@
 .show--partnere .pt__set > li { display: flex; align-items: flex-end; min-width: 0; }
 .show--partnere:not(.is-moving) .pt__item { white-space: normal; }
 
-/* Moving: inside the page width, soft at both ends, one line per row. Grab a row to throw it;
+/* Moving: one line across the whole width of the screen, soft at both ends. Grab it to throw it;
    a swipe up or down still scrolls the page */
-.show--partnere.is-moving .pt__band { width: calc(100% - 48px); max-width: 1152px; margin: 0 auto -10px; padding: 12px 0 22px; overflow: hidden; overflow: clip; user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: grab;
+.show--partnere.is-moving .pt__band { width: 100%; max-width: none; margin: 0 0 -10px; padding: 12px 0 22px; overflow: hidden; overflow: clip; user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: grab;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--pt-fade), #000 calc(100% - var(--pt-fade)), transparent);
   mask-image: linear-gradient(90deg, transparent, #000 var(--pt-fade), #000 calc(100% - var(--pt-fade)), transparent); }
 .show--partnere.is-dragging .pt__band, .show--partnere.is-dragging .pt__item { cursor: grabbing; }
