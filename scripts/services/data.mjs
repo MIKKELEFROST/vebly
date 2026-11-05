@@ -725,19 +725,15 @@ export const front = {
 };
 
 // The tabs above the menu on every page: what the visitor sells (assets/js/segment.js).
-// html[data-seg] is "ydelser" or "webshop", or missing when we do not know (the neutral page).
-// It is set before the page is drawn, by the visitor's choice in the tabs, by a link with ?for=webshop or
-// ?for=ydelser (ads and e-mails), or guessed from the first page of a visit (guess). The choice is kept in
-// localStorage ('wl-seg'), and every event to GA4 carries it as `segment`.
+// html[data-seg] is "ydelser" or "webshop", or missing until the visitor has chosen (the neutral page).
+// Only the visitor's own choice in the tabs sets it (Mikkel, 5 Nov 2026: no links and no guessing, we must
+// be sure). It is set before the page is drawn, kept in localStorage ('wl-seg'), and every event to GA4
+// carries it as `segment`.
 // Copy that differs: front (the hero on the front page) and order (the order of the services, everywhere
 // they are listed). Anything else on a page can be shown for one segment with data-seg-only="ydelser",
 // "webshop" or "neutral" (main.css hides the rest).
 export const segments = {
   tabs: { q: 'Hvad sælger du?', ydelser: 'Ydelser', webshop: 'Produkter online' },
-  guess: {
-    webshop: ['webshop', 'google-shopping-ads', 'google-css'],
-    ydelser: ['hjemmesider']
-  },
   order: {
     ydelser: ['hjemmesider', 'google-ads', 'seo', 'meta-ads', 'geo', 'ai', 'automations', 'interne-systemer', 'video', 'email-marketing', 'cro', 'app-udvikling', 'webshop', 'google-shopping-ads', 'google-css'],
     webshop: ['webshop', 'google-shopping-ads', 'google-css', 'meta-ads', 'email-marketing', 'cro', 'google-ads', 'seo', 'geo', 'ai', 'video', 'automations', 'interne-systemer', 'app-udvikling', 'hjemmesider']

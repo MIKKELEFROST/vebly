@@ -1,11 +1,11 @@
 // What the visitor sells: the tabs above the menu ("Ydelser | Produkter online").
-// Settings and copy: scripts/services/data.mjs → segments. The script in <head> (lib.SEG_HEAD) has already
-// set html[data-seg] from a link (?for=webshop), an earlier choice or a guess, so the page is drawn right.
-// This file:
+// Settings and copy: scripts/services/data.mjs → segments. Only the visitor's own choice in the tabs sets the
+// segment: no links and no guessing. The script in <head> (lib.SEG_HEAD) has already set html[data-seg] from
+// an earlier choice, so the page is drawn right. This file:
 //   · marks the active tab, and swaps what differs: the badge words on the front page (data-words-<segment>)
 //     and the order of the services in every list with data-seg-sort (copy in data-seg-only is CSS only)
 //   · keeps a choice in the tabs (localStorage 'wl-seg', the same key the <head> script reads)
-//   · tells GA4: segment_choice (segment, segment_source faner/link/side, previous). Every other event
+//   · tells GA4: segment_choice (segment, previous). Every other event
 //     carries the segment too (analytics.js), so all of GA4 can be split by it.
 import { track } from './analytics.js';
 
@@ -40,9 +40,6 @@ function apply(seg) {
 
 apply(root.dataset.seg || '');
 
-// Set by the <head> script when a link or the first page chose the segment on this page view
-if (window.__wlSeg && root.dataset.seg) track('segment_choice', { segment: root.dataset.seg, segment_source: window.__wlSeg, previous: 'ukendt' });
-
 document.addEventListener('click', e => {
   const b = e.target.closest && e.target.closest('[data-seg-set]');
   if (!b) return;
@@ -50,5 +47,5 @@ document.addEventListener('click', e => {
   if (seg === prev) return;
   try { localStorage.setItem(KEY, JSON.stringify({ seg, src: 'faner' })); } catch (x) { /* private mode: it lasts for this page */ }
   apply(seg);
-  track('segment_choice', { segment: seg, segment_source: 'faner', previous: prev });
+  track('segment_choice', { segment: seg, previous: prev });
 });

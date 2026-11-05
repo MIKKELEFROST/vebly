@@ -172,18 +172,11 @@
   try { if (sessionStorage.getItem('wl-intro')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
 </script>
 <script>
-  // What the visitor sells (assets/js/segment.js): a link with ?for=, an earlier choice, or a guess from the first page of a visit
+  // What the visitor sells (assets/js/segment.js): only the visitor's own choice in the tabs
   (function () {
-    var K = 'wl-seg', S = { webshop: 'webshop', ydelser: 'ydelser' }, G = {"webshop":"webshop","google-shopping-ads":"webshop","google-css":"webshop","hjemmesider":"ydelser"}, s = null, first = false;
-    try { s = JSON.parse(localStorage.getItem(K) || 'null'); } catch (e) {}
-    try { first = !sessionStorage.getItem('wl-seg-v'); sessionStorage.setItem('wl-seg-v', '1'); } catch (e) {}
-    var f = (new URLSearchParams(location.search).get('for') || '').toLowerCase();
-    if (S[f]) { if (!s || s.seg !== S[f] || s.src !== 'link') window.__wlSeg = 'link'; s = { seg: S[f], src: 'link' }; }
-    else if (first && (!s || s.src === 'side')) {
-      var m = location.pathname.toLowerCase().match(/^\/services\/([a-z0-9-]+)/), g = m && G[m[1]];
-      if (g && (!s || s.seg !== g)) { s = { seg: g, src: 'side' }; window.__wlSeg = 'side'; }
-    }
-    if (s && S[s.seg]) { document.documentElement.setAttribute('data-seg', s.seg); try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) {} }
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem('wl-seg') || 'null'); } catch (e) {}
+    if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
 <script type="module" src="/assets/js/main.js?v=20261105a"></script>

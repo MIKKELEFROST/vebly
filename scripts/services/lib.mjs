@@ -10,22 +10,14 @@ export const V = { css: '20261105a', js: '20261105a' };
 export const GENERATED = '<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->';
 
 /* What the visitor sells: the tabs above the menu (data.mjs → segments, assets/js/segment.js) */
-// Runs in <head> before the page is drawn, so the right copy is shown at once: a link (?for=webshop),
-// an earlier choice, or a guess from the first page of a visit. window.__wlSeg tells segment.js to log it.
-const SEG_GUESS = Object.fromEntries(Object.entries(segments.guess).flatMap(([seg, slugs]) => slugs.map(s => [s, seg])));
+// Runs in <head> before the page is drawn, so the visitor's own choice is shown at once. Only a choice made in
+// the tabs counts: no links and no guessing.
 export const SEG_HEAD = `<script>
-  // What the visitor sells (assets/js/segment.js): a link with ?for=, an earlier choice, or a guess from the first page of a visit
+  // What the visitor sells (assets/js/segment.js): only the visitor's own choice in the tabs
   (function () {
-    var K = 'wl-seg', S = { webshop: 'webshop', ydelser: 'ydelser' }, G = ${JSON.stringify(SEG_GUESS)}, s = null, first = false;
-    try { s = JSON.parse(localStorage.getItem(K) || 'null'); } catch (e) {}
-    try { first = !sessionStorage.getItem('wl-seg-v'); sessionStorage.setItem('wl-seg-v', '1'); } catch (e) {}
-    var f = (new URLSearchParams(location.search).get('for') || '').toLowerCase();
-    if (S[f]) { if (!s || s.seg !== S[f] || s.src !== 'link') window.__wlSeg = 'link'; s = { seg: S[f], src: 'link' }; }
-    else if (first && (!s || s.src === 'side')) {
-      var m = location.pathname.toLowerCase().match(/^\\/services\\/([a-z0-9-]+)/), g = m && G[m[1]];
-      if (g && (!s || s.seg !== g)) { s = { seg: g, src: 'side' }; window.__wlSeg = 'side'; }
-    }
-    if (s && S[s.seg]) { document.documentElement.setAttribute('data-seg', s.seg); try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) {} }
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem('wl-seg') || 'null'); } catch (e) {}
+    if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>`;
 export const SEG_BAR = `<div class="segbar" data-seg-bar data-order-ydelser="${segments.order.ydelser.join(',')}" data-order-webshop="${segments.order.webshop.join(',')}">
