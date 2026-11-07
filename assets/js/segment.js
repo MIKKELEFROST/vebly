@@ -41,6 +41,8 @@ function apply(seg) {
     kids.sort((a, b) => rank(a) - rank(b)).forEach(k => list.appendChild(k));
     list.querySelectorAll('.addon__n').forEach((n, i) => { n.textContent = String(i + 1).padStart(2, '0'); });
   });
+  // Other parts that follow the choice (the trades band, the cut in the front page services: main.js)
+  document.dispatchEvent(new CustomEvent('wl:seg', { detail: seg || '' }));
 }
 
 apply(root.dataset.seg || '');

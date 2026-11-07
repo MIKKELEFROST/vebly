@@ -1,0 +1,212 @@
+/* Bing Ads showcase (/services/bing-ads): import and mirror. A Google Ads-like account and an empty Microsoft
+   Advertising-like account side by side (our own drawings, plain text names, no logos); "Importér" flies the
+   campaign rows across, and a Bing-like results page below shows the same ad. bing-ads.js flies the rows.
+   Without html.motion: imported, live and still. */
+.show--bing-ads { --e: cubic-bezier(.2,.8,.2,1); --pop: cubic-bezier(.2,1.5,.4,1); --gb: #1a73e8; --mb: #0f6cbd; --bl: #4007a2; --bu: #006d21;
+  position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; overflow-x: clip; scroll-margin-top: 40px; }
+.show--bing-ads .sec-head { margin-bottom: 44px; }
+.show--bing-ads .sec-head__lead { max-width: 420px; text-wrap: pretty; }
+.show--bing-ads .im-i { display: block; flex-shrink: 0; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.show--bing-ads .im { position: relative; }
+.show--bing-ads .im__desk { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 184px minmax(0, 1fr); align-items: center; }
+.show--bing-ads .im__eks { position: absolute; z-index: 3; top: -12px; left: 26px; }
+
+/* ---------- The two account windows ---------- */
+.show--bing-ads .im-win { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 40px 80px -34px rgba(17,17,17,.24); color: #202124; font-size: 14px; }
+.show--bing-ads .im-win--g { border-radius: 24px; }
+.show--bing-ads .im-win--m { border-radius: 12px; color: #242424; }
+.show--bing-ads .im-win__bar { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 16px 0 18px; border-bottom: 1px solid var(--line); font-size: 13.5px; white-space: nowrap; }
+.show--bing-ads .im-win__bar b { font-weight: 700; color: #3c4043; }
+.show--bing-ads .im-win--m .im-win__bar { border: 0; background: var(--mb); color: #fff; }
+.show--bing-ads .im-win--m .im-win__bar b { color: #fff; letter-spacing: .01em; }
+.show--bing-ads .im-acc { margin-left: auto; padding: 5px 10px; border-radius: 999px; background: #f1f3f4; color: #5f6368; font-size: 12px; font-weight: 700; }
+.show--bing-ads .im-win--m .im-acc { border-radius: 4px; background: rgba(255,255,255,.18); color: #fff; }
+.show--bing-ads .im-win__hd { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px 12px; }
+.show--bing-ads .im-win__hd > b { font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+.show--bing-ads .im-new { padding: 7px 13px; border-radius: 999px; background: var(--gb); color: #fff; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.show--bing-ads .im-st { min-width: 0; overflow: hidden; font-size: 12.5px; font-weight: 700; color: #616161; white-space: nowrap; text-overflow: ellipsis; transition: color .3s; }
+.show--bing-ads .im.is-run .im-st { color: var(--mb); }
+.show--bing-ads .im.is-done .im-st { color: #107c10; }
+.show--bing-ads .im-prog { display: block; height: 3px; margin-top: -3px; background: var(--mb); transform: scaleX(0); transform-origin: 0 50%; opacity: 0; }
+.show--bing-ads .im.is-run .im-prog { opacity: 1; transform: scaleX(.96); transition: transform 2.6s cubic-bezier(.3,.6,.3,1); }
+.show--bing-ads .im.is-done .im-prog { opacity: 0; transform: scaleX(1); transition: opacity .6s .3s, transform .3s; }
+.show--bing-ads .im-th { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 0 28px 8px 54px; border-bottom: 1px solid var(--line); font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #80868b; white-space: nowrap; }
+.show--bing-ads .im-win--m .im-th { grid-template-columns: minmax(0, 1fr) 98px 92px; padding: 0 26px 8px; border-bottom-width: 2px; color: #616161; }
+.show--bing-ads .im-win--m .im-th span:last-child, .show--bing-ads .im-th span:last-child { text-align: right; }
+.show--bing-ads .im-rows { position: relative; margin: 0; padding: 6px 8px 10px; list-style: none; }
+
+/* A campaign row */
+.show--bing-ads .im-r { display: grid; align-items: center; gap: 12px; min-height: 62px; padding: 0 10px; }
+.show--bing-ads .im-r__n { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.show--bing-ads .im-r__n b, .show--bing-ads .im-r__n small { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.show--bing-ads .im-r__n b { font-size: 14.5px; font-weight: 700; }
+.show--bing-ads .im-r__n small { margin-top: 2px; font-size: 12.5px; color: #5f6368; }
+.show--bing-ads .im-r__b { font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.show--bing-ads .im-r--g { grid-template-columns: 16px 8px minmax(0, 1fr) auto; border-radius: 14px; transition: background-color .35s; }
+.show--bing-ads .im-rows > .im-r--g + .im-r--g { background: linear-gradient(#f1f1ef, #f1f1ef) 50% 0 / calc(100% - 20px) 1px no-repeat; }
+.show--bing-ads .im-rows > .im-r--g.is-twin { background: #e8f0fe; }
+.show--bing-ads .im-rows > .im-r--g.is-twin + .im-r--g { background: none; }
+.show--bing-ads .im-ck { position: relative; width: 16px; height: 16px; border: 2px solid #80868b; border-radius: 3px; transition: background .2s, border-color .2s; }
+.show--bing-ads .im-ck::after { content: ""; position: absolute; left: 3.5px; top: 0; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0); transition: transform .3s var(--pop); }
+.show--bing-ads .is-sent .im-ck { background: var(--gb); border-color: var(--gb); }
+.show--bing-ads .is-sent .im-ck::after { transform: rotate(45deg); }
+.show--bing-ads .im-dot { width: 8px; height: 8px; border-radius: 50%; background: #1e8e3e; }
+
+/* Microsoft rows: a dashed slot until the row lands; then a button that picks the campaign */
+.show--bing-ads .im-slot { position: relative; min-height: 62px; }
+.show--bing-ads .im-slot + .im-slot { margin-top: 4px; }
+.show--bing-ads .im-slot::before { content: ""; position: absolute; inset: 3px 0; border: 1.5px dashed #d1d1d1; border-radius: 6px; transition: opacity .3s; }
+.show--bing-ads .im-slot.is-in::before { opacity: 0; }
+.show--bing-ads .im-slot:not(.is-in) .im-r--m { visibility: hidden; }
+.show--bing-ads .im-r--m { position: relative; grid-template-columns: minmax(0, 1fr) 98px 92px; width: 100%; padding: 0 18px; border: 0; border-radius: 6px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; transition: background .25s, box-shadow .25s; }
+.show--bing-ads .im-r--m:hover { background: #f5f9fd; }
+.show--bing-ads .im-r--m[aria-pressed="true"] { background: #ebf3fc; box-shadow: inset 3px 0 0 var(--mb); }
+.show--bing-ads .im-r--m:focus-visible { outline-offset: -2px; }
+.motion .show--bing-ads .im-slot.is-land .im-r--m { animation: imLand .6s var(--pop) both; }
+@keyframes imLand { from { opacity: .4; transform: translateY(-6px) scale(1.03); } }
+.show--bing-ads .im-chip { display: inline-grid; justify-self: start; }
+.show--bing-ads .im-chip > span { grid-area: 1 / 1; justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px; border-radius: 4px; background: #eef1f5; color: #44546a; font-size: 12px; font-weight: 700; white-space: nowrap; transition: opacity .3s, transform .4s var(--pop); }
+.show--bing-ads .im-chip > span + span { background: #dff6dd; color: #107c10; opacity: 0; transform: scale(.8); }
+.show--bing-ads .im-chip > span + span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.show--bing-ads .is-live .im-chip > span:first-child { opacity: 0; transform: scale(.8); }
+.show--bing-ads .is-live .im-chip > span + span { opacity: 1; transform: none; }
+.show--bing-ads .im-r--m .im-r__b { display: grid; justify-items: end; }
+.show--bing-ads .im-r--m .im-r__b > * { grid-area: 1 / 1; transition: opacity .3s, transform .45s var(--pop); }
+.show--bing-ads .im-r--m s { text-decoration: none; }
+.show--bing-ads .im-r--m .im-r__b b { font-weight: 700; color: var(--mb); opacity: 0; transform: translateY(8px); }
+.show--bing-ads .is-live .im-r__b s { text-decoration: line-through; color: #a19f9d; font-size: 11.5px; transform: translateY(-11px); }
+.show--bing-ads .is-live .im-r__b b { opacity: 1; transform: translateY(6px); }
+
+.show--bing-ads .im-empty { position: absolute; left: 0; right: 0; bottom: 0; top: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: rgba(255,255,255,.88); text-align: center; transition: opacity .4s, transform .5s var(--e), visibility .4s; }
+.show--bing-ads .im-empty .im-i { width: 46px; height: 46px; margin-bottom: 8px; padding: 12px; border-radius: 50%; background: #ebf3fc; color: var(--mb); }
+.show--bing-ads .im-empty b { font-size: 15px; }
+.show--bing-ads .im-empty span { font-size: 13px; color: #616161; }
+.show--bing-ads .im.is-run .im-empty, .show--bing-ads .im.is-done .im-empty { opacity: 0; visibility: hidden; transform: scale(.96); }
+
+/* The flying copy of a row */
+.show--bing-ads .im-fly { position: absolute; z-index: 30; margin: 0; background: #fff; border-radius: 14px; box-shadow: 0 30px 50px -20px rgba(17,17,17,.4), 0 0 0 1.5px rgba(224,85,43,.7); list-style: none; pointer-events: none; transform-origin: 0 0; will-change: transform; }
+
+/* ---------- Importér ---------- */
+.show--bing-ads .im__mid { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0 10px; }
+.show--bing-ads .im__mid::before { content: ""; position: absolute; z-index: -1; left: -6px; right: -6px; top: 31px; border-top: 2px dashed var(--line-strong); }
+.show--bing-ads .im-go { position: relative; display: inline-flex; align-items: center; gap: 9px; height: 62px; padding: 0 20px 0 24px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; font: 700 16.5px/1 var(--body); white-space: nowrap; cursor: pointer; box-shadow: 0 18px 34px -14px rgba(224,85,43,.8); transition: background .25s, transform .35s var(--pop), box-shadow .25s; }
+.show--bing-ads .im-go:hover { background: var(--ink); box-shadow: 0 18px 34px -16px rgba(17,17,17,.6); }
+.show--bing-ads .im-go:active, .show--bing-ads .im-go.is-press { transform: scale(.93); }
+.show--bing-ads .im-go[aria-disabled="true"] { background: var(--ink); cursor: progress; box-shadow: none; }
+.show--bing-ads .im-go .im-i { width: 20px; height: 20px; stroke-width: 2.6; transition: transform .35s var(--pop); }
+.show--bing-ads .im-go:hover .im-i { transform: translateX(3px); }
+.show--bing-ads .im-go::after { content: ""; position: absolute; inset: -2px; border-radius: inherit; box-shadow: 0 0 0 0 rgba(224,85,43,.45); pointer-events: none; }
+.motion .show--bing-ads .im.is-wait .im-go::after { animation: imRing 1.8s ease-out infinite; }
+@keyframes imRing { to { box-shadow: 0 0 0 16px rgba(224,85,43,0); } }
+.show--bing-ads .im__sub { max-width: 140px; font-size: 12.5px; line-height: 1.35; color: var(--muted); text-align: center; }
+
+/* ---------- The same search on Bing ---------- */
+.show--bing-ads .im__tip { margin: 30px 0 0; font-size: 14px; font-weight: 500; color: var(--muted); text-align: center; opacity: 0; transform: translateY(6px); transition: opacity .5s .6s, transform .6s var(--pop) .6s; }
+.show--bing-ads .im__tip::before { content: ""; display: inline-block; width: 8px; height: 8px; margin: 0 8px 1px 0; border-radius: 50%; background: var(--accent); vertical-align: middle; }
+.show--bing-ads .im.is-done .im__tip { opacity: 1; transform: none; }
+.show--bing-ads .im-serp { max-width: 900px; margin: 18px auto 0; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 26px; box-shadow: 0 40px 80px -34px rgba(17,17,17,.22); color: #111; }
+.show--bing-ads .im-serp__top { display: flex; align-items: center; gap: 16px; padding: 22px 28px 0; }
+.show--bing-ads .im-sq { flex: 1; min-width: 0; max-width: 580px; display: flex; align-items: center; gap: 12px; height: 50px; padding: 0 16px 0 22px; border-radius: 26px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 3px 10px -2px rgba(0,0,0,.12); font-size: 16px; }
+.show--bing-ads .im-sq span { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.show--bing-ads .im-sq .im-i { width: 22px; height: 22px; color: #174ae4; stroke-width: 2.4; }
+.show--bing-ads .im-serp__top .tag-eks { margin-left: auto; }
+.show--bing-ads .im-tabs { display: flex; gap: 24px; padding: 16px 28px 0 50px; border-bottom: 1px solid #ececec; font-size: 12.5px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: #666; white-space: nowrap; overflow: hidden; }
+.show--bing-ads .im-tabs > * { padding-bottom: 10px; }
+.show--bing-ads .im-tabs b { font-weight: 700; color: #111; box-shadow: inset 0 -3px 0 #174ae4; }
+.show--bing-ads .im-serp__body { max-width: 720px; padding: 14px 28px 30px 50px; }
+.show--bing-ads .im-cnt { display: block; font-size: 12.5px; color: #767676; }
+.show--bing-ads .im-spot { display: grid; margin: 14px -18px 0; }
+.show--bing-ads .im-hole, .show--bing-ads .im-ad { grid-area: 1 / 1; }
+.show--bing-ads .im-hole { display: flex; align-items: center; justify-content: center; padding: 20px; border: 2px dashed var(--line-strong); border-radius: 20px; color: var(--muted); font-size: 14px; text-align: center; transition: opacity .4s; }
+.show--bing-ads .im-serp.is-live .im-hole { opacity: 0; }
+.show--bing-ads .im-ad { position: relative; min-width: 0; padding: 16px 18px 18px; border-radius: 20px; background: #fff7f3; box-shadow: inset 0 0 0 1.5px rgba(224,85,43,.5); opacity: 0; transform: translateY(-16px) scale(.97); visibility: hidden; }
+.show--bing-ads .im-serp.is-live .im-ad { opacity: 1; transform: none; visibility: visible; }
+.motion .show--bing-ads .im-serp.is-live .im-ad { transition: opacity .5s, transform .8s var(--pop), visibility 0s; }
+.show--bing-ads .im-same { position: absolute; top: -14px; right: 18px; padding: 7px 12px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 12.5px; font-weight: 700; white-space: nowrap; transform: rotate(2.5deg); box-shadow: 0 12px 22px -12px rgba(224,85,43,.9); }
+.motion .show--bing-ads .im-serp.is-live .im-same { animation: imStick .7s var(--pop) .45s both; }
+@keyframes imStick { from { opacity: 0; transform: rotate(-8deg) scale(.6); } }
+.show--bing-ads .im-site { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.show--bing-ads .im-site > span { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.show--bing-ads .im-site b { font-size: 14px; font-weight: 500; }
+.show--bing-ads .im-site small { display: flex; align-items: center; gap: 7px; min-width: 0; font-size: 12.5px; color: var(--bu); white-space: nowrap; }
+.show--bing-ads .im-site small span { overflow: hidden; text-overflow: ellipsis; }
+.show--bing-ads .im-site em { flex-shrink: 0; padding: 1px 5px; border: 1px solid #b9b9b9; border-radius: 3px; font-size: 10.5px; font-style: normal; font-weight: 700; color: #444; }
+.show--bing-ads .im-fav { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #f1f1ef; color: #5f5d58; font: normal 700 12.5px/1 var(--body); }
+.show--bing-ads .im-fav--k { background: #0b3b5a; color: #9fe3ff; }
+.show--bing-ads .im-ad__h, .show--bing-ads .im-org__h { display: block; overflow: hidden; margin-top: 8px; font-size: 20px; line-height: 1.3; color: var(--bl); white-space: nowrap; text-overflow: ellipsis; }
+.show--bing-ads .im-ad__t, .show--bing-ads .im-org p { margin: 5px 0 0; font-size: 14px; line-height: 1.55; color: #4d4d4d; }
+.show--bing-ads .im-ad__sl { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 12px; }
+.show--bing-ads .im-ad__sl span { padding: 6px 12px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px #e3e1df; font-size: 13px; color: var(--bl); }
+.motion .show--bing-ads .im-ad.is-swap > :not(.im-same) { animation: imIn .5s var(--pop) both; }
+.motion .show--bing-ads .im-ad.is-swap > .im-ad__t, .motion .show--bing-ads .im-ad.is-swap > .im-ad__sl { animation-delay: .06s; }
+@keyframes imIn { from { opacity: 0; transform: translateY(8px); } }
+.show--bing-ads .im-org { margin-top: 26px; }
+.show--bing-ads .im-org__h { font-size: 18px; }
+.show--bing-ads .im-ph { display: flex; flex-direction: column; gap: 9px; margin-top: 26px; }
+.show--bing-ads .im-ph i { display: block; height: 10px; border-radius: 999px; background: #f1efec; }
+.show--bing-ads .im-ph i:nth-child(1) { width: 30%; }
+.show--bing-ads .im-ph i:nth-child(2) { width: 64%; height: 14px; }
+.show--bing-ads .im-ph i:nth-child(3) { width: 88%; }
+
+/* The pointer that presses Importér by itself */
+.show--bing-ads .im-cur { position: absolute; z-index: 40; left: 0; top: 0; width: 30px; height: 30px; opacity: 0; pointer-events: none; transition: transform 1s cubic-bezier(.5,0,.2,1), opacity .3s; }
+.show--bing-ads .im-cur svg { width: 100%; height: 100%; fill: var(--ink); stroke: #fff; stroke-width: 1.4; stroke-linejoin: round; filter: drop-shadow(0 4px 6px rgba(17,17,17,.3)); }
+.show--bing-ads .im-cur.is-on { opacity: 1; }
+
+@media (max-width: 1120px) and (min-width: 881px) {
+  .show--bing-ads .im__desk { grid-template-columns: minmax(0, 1fr) 170px minmax(0, 1fr); }
+  .show--bing-ads .im-win--m .im-th, .show--bing-ads .im-r--m { grid-template-columns: minmax(0, 1fr) 80px 84px; gap: 8px; }
+  .show--bing-ads .im-r--m { padding: 0 12px; }
+  .show--bing-ads .im-win--m .im-th { padding: 0 20px 8px; }
+}
+/* ---------- Tablets and phones: the windows on top of each other ---------- */
+@media (max-width: 880px) {
+  .show--bing-ads .im__desk { grid-template-columns: minmax(0, 1fr); }
+  .show--bing-ads .im__mid { flex-direction: row; justify-content: center; gap: 14px; padding: 16px 0; }
+  .show--bing-ads .im__mid::before { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 2px dashed var(--line-strong); }
+  .show--bing-ads .im-go .im-i { transform: rotate(90deg); }
+  .show--bing-ads .im-go:hover .im-i { transform: rotate(90deg) translateX(3px); }
+  .show--bing-ads .im__sub { display: none; }
+  .show--bing-ads .im__tip { margin-top: 24px; font-size: 13.5px; }
+}
+@media (max-width: 560px) {
+  .show--bing-ads { padding: 32px 20px 80px; }
+  .show--bing-ads .sec-head { margin-bottom: 30px; }
+  .show--bing-ads .im-win--g { border-radius: 20px; }
+  .show--bing-ads .im-win__bar { height: 44px; padding: 0 12px 0 14px; font-size: 13px; }
+  .show--bing-ads .im-win__hd { padding: 12px 14px 8px; }
+  .show--bing-ads .im-win--g .im-win__hd { display: none; }
+  .show--bing-ads .im-win--g .im-th { padding-top: 12px; }
+  .show--bing-ads .im-win__hd > b { font-size: 16.5px; }
+  .show--bing-ads .im-new { padding: 6px 10px; font-size: 12px; }
+  .show--bing-ads .im-th { padding: 0 20px 8px 48px; }
+  .show--bing-ads .im-win--m .im-th { grid-template-columns: minmax(0, 1fr) auto; padding: 0 18px 8px; }
+  .show--bing-ads .im-win--m .im-th span:nth-child(2) { display: none; }
+  .show--bing-ads .im-rows { padding: 4px 6px 8px; }
+  .show--bing-ads .im-r, .show--bing-ads .im-slot { gap: 10px; min-height: 56px; padding: 0 8px; }
+  .show--bing-ads .im-slot { padding: 0; }
+  .show--bing-ads .im-r__n b { font-size: 14px; }
+  .show--bing-ads .im-r__n small { font-size: 12px; }
+  .show--bing-ads .im-r--m { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "n c" "n b"; row-gap: 3px; padding: 6px 12px; }
+  .show--bing-ads .im-r--m .im-r__n { grid-area: n; }
+  .show--bing-ads .im-r--m .im-chip { grid-area: c; justify-self: end; }
+  .show--bing-ads .im-r--m .im-r__b { grid-area: b; }
+  .show--bing-ads .im-chip > span { padding: 3px 7px; font-size: 11px; }
+  .show--bing-ads .is-live .im-r__b s { transform: translateX(-46px); }
+  .show--bing-ads .is-live .im-r__b b { transform: none; }
+  .show--bing-ads .im-empty { top: 118px; }
+  .show--bing-ads .im-go { height: 56px; padding: 0 20px 0 24px; font-size: 16px; }
+  .show--bing-ads .im-serp { border-radius: 22px; }
+  .show--bing-ads .im-serp__top { gap: 10px; padding: 14px 14px 0; }
+  .show--bing-ads .im-sq { height: 44px; padding: 0 12px 0 16px; font-size: 15px; }
+  .show--bing-ads .im-serp__top .tag-eks { padding: 5px 8px; font-size: 10.5px; }
+  .show--bing-ads .im-tabs { gap: 18px; padding: 14px 16px 0 24px; font-size: 11.5px; }
+  .show--bing-ads .im-serp__body { padding: 12px 16px 24px 24px; }
+  .show--bing-ads .im-spot { margin: 14px -10px 0; }
+  .show--bing-ads .im-ad { padding: 16px 12px 14px; border-radius: 16px; }
+  .show--bing-ads .im-same { right: 10px; font-size: 11.5px; }
+  .show--bing-ads .im-ad__h { font-size: 17px; white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .show--bing-ads .im-org__h { font-size: 16.5px; }
+  .show--bing-ads .im-ad__t, .show--bing-ads .im-org p { font-size: 13.5px; }
+  .show--bing-ads .im-ad__sl span { padding: 5px 10px; font-size: 12px; }
+}

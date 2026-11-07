@@ -1,11 +1,12 @@
 <!-- Showcase for UGC-indhold: a wall of our own UGC, videos and photos. EVERYTHING shown here must be made by
-     us (Mikkel, 5 Nov 2026). Until the files arrive, each tile is a placeholder (data-ph). To put a real one in:
-       1. Put the file in /assets/ugc/: a video as .mp4 (H.264, 9:16, short and small) with a poster .jpg,
-          a photo as .jpg or .webp.
+     us (Mikkel, 5 Nov 2026). The files are ours, made on Higgsfield (assets/media/README.md, 7 Nov 2026).
+     A placeholder tile (data-ph, <div class="ug__ph">…</div>) can stand in for something on its way. To add one:
+       1. Put the file in /assets/media/ and list it in assets/media/README.md: a video as .mp4 (H.264, short
+          and small) with a poster .jpg, a photo as .jpg or .webp.
        2. In its tile, replace <div class="ug__ph">…</div> with
-            <video src="/assets/ugc/<navn>.mp4" poster="/assets/ugc/<navn>.jpg" muted loop playsinline preload="none"></video>
+            <video src="/assets/media/<navn>.mp4" poster="/assets/media/<navn>.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="<hvad videoen viser>. Tryk for lyd."></video>
           or
-            <img src="/assets/ugc/<navn>.jpg" alt="<hvad billedet viser>" loading="lazy" decoding="async">
+            <img src="/assets/media/<navn>.webp" alt="<hvad billedet viser>" loading="lazy" decoding="async">
        3. Remove data-ph from the <li>, and write in the caption what it is and where it was used.
      The ratio class on .ug__media (916, 45, 11) is the shape of the file: 9:16, 4:5 or 1:1. Add or remove tiles freely.
      Videos play without sound when they are on screen; a tap turns the sound on. With reduced motion they wait for a tap.
@@ -30,68 +31,92 @@
   </div>
 
   <ul class="ug__wall" data-ug>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:0">
+    <li class="ug__tile" data-kind="video" style="--i:0">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-nuttetbaby-mor.mp4" poster="/assets/media/ugc-nuttetbaby-mor.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En mor taler til kameraet, barnet i løvedragt bag hende. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Unboxing</b><span>TikTok · 9:16</span></figcaption>
+        <figcaption><b>Mor fortæller</b><span>Nuttet Baby · Reels</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="billede" data-ph style="--i:1">
+    <li class="ug__tile" data-kind="billede" style="--i:1">
       <figure>
         <div class="ug__media ug__media--45">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__pic"></span><span class="ug__ph-t">Billede kommer</span></div>
+          <img src="/assets/media/foto-nuttetbaby-dino.webp" alt="Et lille barn i en rød dragedragt" loading="lazy" decoding="async">
         </div>
-        <figcaption><b>Produkt i hverdagen</b><span>Instagram · 4:5</span></figcaption>
+        <figcaption><b>Dragedragt i stuen</b><span>Nuttet Baby · Instagram</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:2">
+    <li class="ug__tile" data-kind="video" style="--i:2">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-hundesele.mp4" poster="/assets/media/ugc-hundesele.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En kvinde viser en hundesele med sin hund ved siden af. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Anmeldelse</b><span>Reels · 9:16</span></figcaption>
+        <figcaption><b>Viser hundeselen</b><span>Hundesele · TikTok</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:3">
+    <li class="ug__tile" data-kind="video" style="--i:3">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-nuttetbaby-far.mp4" poster="/assets/media/ugc-nuttetbaby-far.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En far filmer sine to børn i dinosaurdragter. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Før og efter</b><span>Shorts · 9:16</span></figcaption>
+        <figcaption><b>Far filmer</b><span>Nuttet Baby · TikTok</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="billede" data-ph style="--i:4">
+    <li class="ug__tile" data-kind="billede" style="--i:4">
       <figure>
         <div class="ug__media ug__media--11">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__pic"></span><span class="ug__ph-t">Billede kommer</span></div>
+          <img src="/assets/media/foto-raglan.webp" alt="En raglan t-shirt fotograferet til en webshop" loading="lazy" decoding="async">
         </div>
-        <figcaption><b>Flat lay</b><span>Webshop · 1:1</span></figcaption>
+        <figcaption><b>Produktfoto</b><span>Herretøj · Webshop</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:5">
+    <li class="ug__tile" data-kind="video" style="--i:5">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-luftrenser.mp4" poster="/assets/media/ugc-luftrenser.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En baby i et roligt børneværelse med en luftrenser på kommoden. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Sådan bruger du den</b><span>TikTok · 9:16</span></figcaption>
+        <figcaption><b>Rolig nat</b><span>Luftrenser · Reels</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="billede" data-ph style="--i:6">
+    <li class="ug__tile" data-kind="billede" style="--i:6">
       <figure>
         <div class="ug__media ug__media--45">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__pic"></span><span class="ug__ph-t">Billede kommer</span></div>
+          <img src="/assets/media/foto-goblender.webp" alt="En blender på et orange set med frugt" loading="lazy" decoding="async">
         </div>
-        <figcaption><b>Hænder og produkt</b><span>Annonce · 4:5</span></figcaption>
+        <figcaption><b>Blender på orange</b><span>GoBlender · Annonce</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:7">
+    <li class="ug__tile" data-kind="video" style="--i:7">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-nuttetbaby-raev.mp4" poster="/assets/media/ugc-nuttetbaby-raev.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="To små børn i ræve- og enhjørningedragt på et tæppe. Tryk for lyd."></video>
         </div>
-        <figcaption><b>En dag med …</b><span>Reels · 9:16</span></figcaption>
+        <figcaption><b>Ræv og enhjørning</b><span>Nuttet Baby · TikTok</span></figcaption>
+      </figure>
+    </li>
+    <li class="ug__tile" data-kind="video" style="--i:8">
+      <figure>
+        <div class="ug__media ug__media--11">
+          <video src="/assets/media/goblender-asmr.mp4" poster="/assets/media/goblender-asmr.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En smoothie bliver lavet på et rødt bord. Tryk for lyd."></video>
+        </div>
+        <figcaption><b>Smoothie med lyd</b><span>GoBlender · Reels</span></figcaption>
+      </figure>
+    </li>
+    <li class="ug__tile" data-kind="video" style="--i:9">
+      <figure>
+        <div class="ug__media ug__media--916">
+          <video src="/assets/media/ugc-nuttetbaby-dino.mp4" poster="/assets/media/ugc-nuttetbaby-dino.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="Et lille barn i en grøn dinosaurdragt. Tryk for lyd."></video>
+        </div>
+        <figcaption><b>Lille dino</b><span>Nuttet Baby · Shorts</span></figcaption>
+      </figure>
+    </li>
+    <li class="ug__tile" data-kind="billede" style="--i:10">
+      <figure>
+        <div class="ug__media ug__media--11">
+          <img src="/assets/media/foto-nuttetbaby-flok.webp" alt="Fem børn i dyredragter" loading="lazy" decoding="async">
+        </div>
+        <figcaption><b>Fem dragter</b><span>Nuttet Baby · Webshop</span></figcaption>
       </figure>
     </li>
   </ul>

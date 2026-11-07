@@ -163,9 +163,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107a">
+<link rel="stylesheet" href="/assets/css/show/seo.css?v=20261107a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -180,8 +181,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107a"></script>
+<script type="module" src="/assets/js/show/seo.js?v=20261107a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -217,7 +219,48 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" aria-current="page" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -254,7 +297,7 @@
         <p class="hero__lead" data-reveal="3">Vi sørger for, at din webshop dukker op på Google, når nogen søger efter det, du sælger: med de rigtige søgeord, stærke kategorier og produktsider, og alt det tekniske i orden.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -269,6 +312,132 @@
         </div>
       </div>
     </section>
+
+    <!-- Showcase for SEO (webshops): a ranking climb. A results page of our own drawing for the search "løbesko herre"
+     and a month scrubber (januar to december, or the play button). A made-up webshop's category page (Kvikfod)
+     climbs from page 2 to the top while the result gets a better title, text and, from the product pages'
+     structured data, price, stars and "På lager". A dark report card beside it shows the position, a chart of
+     the climb and what we did that month. No logos; every business, number and result is an example.
+     Styles: assets/css/show/seo.css, behaviour: assets/js/show/seo.js -->
+<section id="eksempel" class="show show--seo" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Et år med SEO</div>
+      <h2 class="h2">Fra side 2.<br><span class="dim">Til øverst.</span></h2>
+    </div>
+    <p class="sec-head__lead">Følg en webshop måned for måned. Træk i tidslinjen, og se hvad vi laver, og hvad det gør ved placeringen på Google.</p>
+  </div>
+
+  <div class="rc" data-rc>
+    <!-- The results page: positions are set by seo.js; without it the page shows December, Kvikfod first -->
+    <div class="rc-win" data-reveal="1" aria-hidden="true">
+      <div class="rc-win__top">
+        <div class="rc-q"><svg class="rc-i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span>løbesko herre</span><svg class="rc-i rc-q__x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+      <div class="rc-tabs"><b>Alle</b><span>Billeder</span><span>Videoer</span><span>Nyheder</span></div>
+      <div class="rc-vp" data-rc-vp>
+        <ol class="rc-list" data-rc-list>
+          <li class="rc-r rc-r--k" data-rc-k>
+            <i class="rc-n">1</i>
+            <div class="rc-r__b">
+              <span class="rc-you">Din kategori</span>
+              <div class="rc-site"><i class="rc-fav rc-fav--k">K</i><span><b>Kvikfod</b><small data-rc-u>kvikfod.dk › herre › loebesko</small></span></div>
+              <span class="rc-t" data-rc-t>Løbesko til herrer | Kvikfod</span>
+              <p class="rc-s" data-rc-s>Find <b>løbesko til herrer</b> til asfalt, trail og konkurrence. Se pasform og størrelser, og få hjælp til at vælge.</p>
+              <div class="rc-sl" data-rc-x="sl"><span>Trailsko</span><span>Asfalt</span><span>Konkurrence</span><span>Størrelsesguide</span></div>
+              <div class="rc-sub" data-rc-x="sd">
+                <small>kvikfod.dk › produkt › tempo-3</small>
+                <span class="rc-t rc-t--s">Kvikfod Tempo 3 · Løbesko til herrer</span>
+                <div class="rc-rich"><span class="rc-rate">4,7 <span class="rc-stars"><i></i><i></i><i></i><i></i><i style="--f:.7"></i></span> (212)</span><span>899,00 kr.</span><span class="rc-ok">På lager</span></div>
+              </div>
+            </div>
+          </li>
+          <li class="rc-r"><i class="rc-n">2</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#1d4e89">T</i><span><b>Testfeltet</b><small>testfeltet.dk › løb › løbesko</small></span></div><span class="rc-t">Bedste løbesko til herrer: 9 par testet på 300 km</span><p class="rc-s">Vi har løbet i ni par. Her er vinderne til asfalt, trail og lange ture.</p></div></li>
+          <li class="rc-r"><i class="rc-n">3</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#6a4c93">S</i><span><b>Sålværket</b><small>saalvaerket.dk › herre › løbesko</small></span></div><span class="rc-t">Løbesko til herrer | Fri fragt og 100 dages retur</span><p class="rc-s">Stort udvalg af løbesko til herrer. Levering på 1-2 hverdage.</p></div></li>
+          <li class="rc-r"><i class="rc-n">4</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#c2410c">L</i><span><b>Løbelageret</b><small>loebelageret.dk › herre</small></span></div><span class="rc-t">Løbesko herre · Udsalg på sidste sæson</span><p class="rc-s">Spar på sidste sæsons løbesko. Få par i hver størrelse.</p></div></li>
+          <li class="rc-r"><i class="rc-n">5</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#3f6212">A</i><span><b>Asfaltklubben</b><small>asfaltklubben.dk › forum › sko</small></span></div><span class="rc-t">Hvilke løbesko til en nybegynder?</span><p class="rc-s">Jeg er lige startet med at løbe. Hvad skal jeg kigge efter?</p></div></li>
+          <li class="rc-r"><i class="rc-n">6</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#0f766e">T</i><span><b>Trailkassen</b><small>trailkassen.dk › sko › herre</small></span></div><span class="rc-t">Trailsko og løbesko til mænd</span><p class="rc-s">Sko til skov, sti og bjerg. Se guiden til det rigtige greb.</p></div></li>
+          <li class="rc-r"><i class="rc-n">7</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#9d174d">M</i><span><b>Motionsbladet</b><small>motionsbladet.dk › guide</small></span></div><span class="rc-t">Sådan vælger du de rigtige løbesko</span><p class="rc-s">Dæmpning, drop og pasform forklaret, så du kan vælge selv.</p></div></li>
+          <li class="rc-r"><i class="rc-n">8</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#334155">S</i><span><b>Skohylden</b><small>skohylden.dk › herre › sport</small></span></div><span class="rc-t">Sportssko til herrer | Skohylden</span><p class="rc-s">Løbesko, træningssko og indendørssko til herrer.</p></div></li>
+          <li class="rc-r"><i class="rc-n">9</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#b45309">P</i><span><b>Pulsbutikken</b><small>pulsbutikken.dk › løb</small></span></div><span class="rc-t">Løbesko til mænd · Stort udvalg</span><p class="rc-s">Løbesko i alle størrelser. Gratis bytte i butikken.</p></div></li>
+          <li class="rc-r"><i class="rc-n">10</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#1e3a8a">F</i><span><b>Fodfæste</b><small>fodfaeste.dk › loebeanalyse</small></span></div><span class="rc-t">Gratis løbeanalyse og løbesko</span><p class="rc-s">Book en løbeanalyse, og find den sko, der passer til dit løb.</p></div></li>
+          <li class="rc-pg" data-rc-pg aria-hidden="true"><span>Side 2</span></li>
+          <li class="rc-r"><i class="rc-n">11</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#7c2d12">S</i><span><b>Sportsugen</b><small>sportsugen.dk › artikel</small></span></div><span class="rc-t">Så ofte skal du skifte dine løbesko</span><p class="rc-s">Efter 600 til 800 km er dæmpningen typisk slidt.</p></div></li>
+          <li class="rc-r"><i class="rc-n">12</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#4c1d95">M</i><span><b>Mærkeskoen</b><small>maerkeskoen.dk › herre</small></span></div><span class="rc-t">Herresko | Sneakers, støvler og løbesko</span><p class="rc-s">Over 2.000 par sko til herrer. Fri fragt over 399 kr.</p></div></li>
+          <li class="rc-r"><i class="rc-n">13</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#155e75">L</i><span><b>Løbeuret</b><small>loebeuret.dk › blog</small></span></div><span class="rc-t">Løbesko til lange ture: vores favoritter</span><p class="rc-s">Fem sko, vi selv løber i, når turen er over 20 km.</p></div></li>
+          <li class="rc-r"><i class="rc-n">14</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#a16207">B</i><span><b>Billigsport</b><small>billigsport.dk › løbesko</small></span></div><span class="rc-t">Billige løbesko til herre</span><p class="rc-s">Løbesko til hverdagsløb. Nye varer hver uge.</p></div></li>
+          <li class="rc-r"><i class="rc-n">15</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#166534">S</i><span><b>Stiløber</b><small>stiloeber.dk › udstyr</small></span></div><span class="rc-t">Udstyr til trailløb: sko, vest og stave</span><p class="rc-s">Det skal du have med, når du løber på sti.</p></div></li>
+          <li class="rc-r"><i class="rc-n">16</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#be123c">S</i><span><b>Sportsrabat</b><small>sportsrabat.dk › herre</small></span></div><span class="rc-t">Løbesko herre | Tilbud hver uge</span><p class="rc-s">Ugens tilbud på løbesko, tøj og ure.</p></div></li>
+          <li class="rc-r"><i class="rc-n">17</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#475569">M</i><span><b>Maratonnet</b><small>maratonnet.dk › forum</small></span></div><span class="rc-t">Løbesko til maraton: hvad løber I i?</span><p class="rc-s">Tråd med 140 svar om sko til de lange distancer.</p></div></li>
+          <li class="rc-r"><i class="rc-n">18</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#0e7490">S</i><span><b>Skobyen</b><small>skobyen.dk › herre</small></span></div><span class="rc-t">Herresko online | Skobyen</span><p class="rc-s">Sko til hverdag, fest og sport. Fri retur.</p></div></li>
+          <li class="rc-r"><i class="rc-n">19</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#86198f">F</i><span><b>Fysiotipset</b><small>fysiotipset.dk › løb</small></span></div><span class="rc-t">Løbeskader og forkerte sko: det skal du vide</span><p class="rc-s">Ondt i knæ eller skinneben? Måske er det skoene.</p></div></li>
+          <li class="rc-r"><i class="rc-n">20</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#3730a3">L</i><span><b>Løbemakkeren</b><small>loebemakkeren.dk › udstyr</small></span></div><span class="rc-t">Løbeudstyr til mænd: det bruger vi selv</span><p class="rc-s">Sko, tøj og ure, vi har testet på vores egne ture.</p></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- The month scrubber: a real range input; seo.js also adds play and pause -->
+    <div class="rc-time" data-reveal="2">
+      <button type="button" class="rc-play" data-rc-play aria-pressed="false" aria-label="Afspil året"><svg class="rc-play__p" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg><svg class="rc-play__s" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5.5" width="4" height="13" rx="1.2"/><rect x="13.5" y="5.5" width="4" height="13" rx="1.2"/></svg><svg class="rc-play__r" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 12a6.5 6.5 0 1 0 2-4.7"/><path d="M5 4.5v4h4"/></svg></button>
+      <div class="rc-track">
+        <label class="sr-only" for="rc-m">Måned i forløbet</label>
+        <input class="rc-range" id="rc-m" type="range" min="0" max="11" step="1" value="11" data-rc-m aria-valuetext="December: placering 1">
+        <div class="rc-ticks" data-rc-ticks aria-hidden="true"><span>j<i>an</i></span><span>f<i>eb</i></span><span>m<i>ar</i></span><span>a<i>pr</i></span><span>m<i>aj</i></span><span>j<i>un</i></span><span>j<i>ul</i></span><span>a<i>ug</i></span><span>s<i>ep</i></span><span>o<i>kt</i></span><span>n<i>ov</i></span><span>d<i>ec</i></span></div>
+      </div>
+    </div>
+
+    <!-- The monthly report: position, the climb, and what we did -->
+    <div class="rc-rep spot" data-spot data-reveal="2">
+      <div class="rc-rep__hd"><span>Månedlig rapport</span><b data-rc-mn>December</b></div>
+      <div class="rc-pos">
+        <span class="rc-pos__l">Placering på »løbesko herre«</span>
+        <div class="rc-pos__row"><b class="rc-pos__n"><i>#</i><span data-rc-n>1</span></b><span class="rc-pg1" data-rc-pgl>Side 1</span></div>
+        <span class="rc-pos__v"><b data-rc-v>2.600</b> besøg fra Google om måneden</span>
+      </div>
+      <svg class="rc-ch" data-rc-ch viewBox="0 0 320 170" aria-hidden="true" focusable="false"></svg>
+      <div class="rc-task">
+        <span class="rc-task__c" data-rc-c>Rapport</span>
+        <p data-rc-d>Øverst på »løbesko herre«. Nu handler det om at blive der.</p>
+        <p class="rc-task__b" data-rc-b hidden></p>
+      </div>
+      <span class="rc-rep__eks"><span class="tag-eks">Eksempel</span></span>
+    </div>
+  </div>
+  <p class="rc-note" data-reveal="3">Et tænkt forløb. Ingen kan ærligt love en førsteplads, men hver måned kan du se, hvad vi har lavet, og hvor du står.</p>
+  <p class="sr-only">Eksempel på et år med SEO for Kvikfod, en tænkt webshop med løbesko. I januar ligger kategorisiden for løbesko til herrer som nummer 18 på side 2 af søgningen »løbesko herre«. Måned for måned får den bedre søgeord, en kategoritekst, hurtigere indlæsning, teknisk oprydning, bedre produktsider, interne links og struktureret data på produktsiderne, så Google kan vise pris, stjerner og »På lager«. I april når den side 1, og i december ligger den øverst.</p>
+
+  <!-- The months: p the position, v visits from Google, c what we worked on, d the text, b a before and after
+       (optional). Kvikfod's result: t, s, u are its title, text and address before and after a change, at month w -->
+  <script type="application/json" data-rc-data>
+{
+  "months": ["Januar","Februar","Marts","April","Maj","Juni","Juli","August","September","Oktober","November","December"],
+  "p": [18,16,13,9,8,6,5,4,3,2,2,1],
+  "v": [20,30,50,240,310,480,640,820,1150,1600,1700,2600],
+  "c": ["Analyse","Søgeord","Kategoritekst","Hastighed","Teknisk SEO","Produktsider","Interne links","Struktureret data","Konkurrenter","Links","Vedligehold","Rapport"],
+  "d": [
+    "Vi ser på din webshop, dine konkurrenter og de ord, kunderne søger på. Kategorien ligger på side 2.",
+    "Kategorien får de ord, kunderne bruger: »løbesko til herrer« i titlen og overskriften.",
+    "En kort tekst om underlag, pasform og størrelser, der hjælper kunden med at vælge.",
+    "Lettere billeder og færre scripts. Kategorien er klar langt hurtigere, også på mobilen.",
+    "Ren adresse, og filtersider uden værdi er lukket af, så Google bruger tiden på de rigtige sider.",
+    "Titler og tekster på produkterne, så de matcher det, folk søger på.",
+    "Forsiden, menuen og købsguiden linker nu til kategorien.",
+    "Pris, lager og anmeldelser er markeret på produktsiderne, så Google kan vise dem.",
+    "Vi har set, hvad dem over dig gør. Kategorien får en størrelsesguide, som de ikke har.",
+    "To danske løbesider linker til købsguiden.",
+    "Udsolgte varer er håndteret, og nye varer har fået titler fra start.",
+    "Øverst på »løbesko herre«. Nu handler det om at blive der."
+  ],
+  "b": {"3": "Indlæsning: 4,2 sek. før, 1,6 sek. nu", "4": "Sider på Google: 1.940 før, 410 nu", "6": "Links til kategorien: 3 før, 21 nu"},
+  "t": ["Herre – Kvikfod", "Løbesko til herrer | Kvikfod", 1],
+  "s": ["Kvikfod. Fri fragt over 499 kr. Køb nu.", "Find <b>løbesko til herrer</b> til asfalt, trail og konkurrence. Se pasform og størrelser, og få hjælp til at vælge.", 2],
+  "u": ["kvikfod.dk › collections › herre-sko-2", "kvikfod.dk › herre › loebesko", 4],
+  "sd": 7,
+  "sl": 11
+}
+  </script>
+</section>
 
     <section class="sx-mq" data-sec="soegninger" data-mq>
       <div class="sx-mq__head" data-reveal="0">

@@ -144,9 +144,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107a">
+<link rel="stylesheet" href="/assets/css/show/organisk-facebook.css?v=20261107a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -161,8 +162,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107a"></script>
+<script type="module" src="/assets/js/show/organisk-facebook.js?v=20261107a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -198,7 +200,48 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" aria-current="page" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -234,7 +277,7 @@
         <p class="hero__lead" data-reveal="3">På Facebook spørger kunderne i kommentarer, beskeder og lokale grupper. Vi lægger en plan, sætter opslagene til at gå ud af sig selv og bygger automatiske svar i Messenger, så ingen henvendelse bliver glemt.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -249,6 +292,113 @@
         </div>
       </div>
     </section>
+
+    <!-- Showcase for Organisk Facebook: "The week that plans itself + Messenger". A posting plan for Mango & Mokka (a made-up
+     café in Odense, never a real business): the week (Man to Søn) fills itself with planned posts (thumbnails from our own
+     media), then a clock runs through the week and each post flips from "Planlagt" to "Udgivet" when the now-line
+     reaches it. Beside it the page's Messenger inbox: the questions that come again and again get an automatic answer
+     at once, and a hard one is handed over to a person. The visitor can ask a question too. Our own drawing, no
+     platform marks. The HTML is the finished week, so it reads the same without motion.
+     Styles: assets/css/show/organisk-facebook.css, behaviour: assets/js/show/organisk-facebook.js -->
+<section id="eksempel" class="show show--organisk-facebook" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">En uge på din side</div>
+      <h2 class="h2">Ugen kører af sig selv.<br><span class="dim">Messenger svarer imens.</span></h2>
+    </div>
+    <p class="sec-head__lead">Sådan kan en uge se ud hos en café: opslagene går ud til tiden, og de faste spørgsmål får svar med det samme. Det svære går videre til et menneske.</p>
+  </div>
+
+  <div class="fb" data-fb>
+    <svg class="fb-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <symbol id="fb-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3 2"/></symbol>
+      <symbol id="fb-i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.4 4.4L19 7.3"/></symbol>
+      <symbol id="fb-i-heart" viewBox="0 0 24 24"><path d="M12 20.3S3.6 15.4 3.6 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.4 2.6c0 6-8.4 10.9-8.4 10.9z"/></symbol>
+      <symbol id="fb-i-cmt" viewBox="0 0 24 24"><path d="M4 5.5h16v10.6H10l-4.6 3.6v-3.6H4z"/></symbol>
+      <symbol id="fb-i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+      <symbol id="fb-i-pause" viewBox="0 0 24 24"><path d="M8 5.5v13M16 5.5v13"/></symbol>
+      <symbol id="fb-i-again" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.2v4.4h4.4"/></symbol>
+      <symbol id="fb-i-grp" viewBox="0 0 24 24"><circle cx="9" cy="8.6" r="3.2"/><path d="M3.4 19.2c.6-3.2 2.8-5 5.6-5s5 1.8 5.6 5"/><circle cx="16.8" cy="9.6" r="2.5"/><path d="M15.6 14.4c2.6-.4 4.6 1.2 5.1 4"/></symbol>
+      <symbol id="fb-i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.6"/><path d="M5 20c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/></symbol>
+      <symbol id="fb-i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.1l1.6 4.2-2.1 1.4a11 11 0 0 0 7.1 7.1l1.4-2.1 4.2 1.6v3.1c0 .9-.7 1.6-1.6 1.6C10.6 20.4 3.6 13.4 3.6 5.1c0-.9.7-1.6 1.6-1.6z"/></symbol>
+      <symbol id="fb-i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.4M12 7.6v.2"/></symbol>
+      <symbol id="fb-i-bolt" viewBox="0 0 24 24"><path d="M13.2 2.8 5.6 13.4h5.6l-1 7.8 7.6-10.6h-5.6z"/></symbol>
+    </svg>
+
+    <!-- The posting plan: a week of posts at their time of day, a now-line runs through it -->
+    <div class="fb-plan" data-reveal="1">
+      <div class="fb-plan__top">
+        <span class="fb-plan__id"><i class="fb-av" aria-hidden="true">M&amp;M</i><span><b>Opslagsplan</b><small>Mango &amp; Mokka · uge 46</small></span></span>
+        <span class="fb-clock" aria-hidden="true"><i></i><b data-fb-clock>Søn 21.00</b></span>
+        <span class="fb-ctl">
+          <button type="button" class="fb-btn" data-fb-pause aria-pressed="false" hidden><svg><use href="#fb-i-pause"/></svg><span>Pause</span></button>
+          <button type="button" class="fb-btn" data-fb-again hidden><svg><use href="#fb-i-again"/></svg><span>Se ugen igen</span></button>
+        </span>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+
+      <div class="fb-week" data-fb-week aria-hidden="true">
+        <div class="fb-hours"><span style="--y:.125">08</span><span style="--y:.375">12</span><span style="--y:.625">16</span><span style="--y:.875">20</span></div>
+        <div class="fb-day" data-fb-day><div class="fb-day__hd"><span>Man</span><b>9</b></div><div class="fb-day__bd"><i class="fb-now"></i>
+          <div class="fb-post is-pub" data-fb-post data-h="7.5" style="--y:.094"><span class="fb-post__img"><img src="/assets/media/kaffekvaern.jpg" alt="" width="960" height="540" loading="lazy" decoding="async" style="object-position:74% 50%"><i class="fb-post__k"><svg><use href="#fb-i-play"/></svg>Video</i></span><span class="fb-post__m"><time>07.30</time><b>Friskmalet kaffe</b></span><span class="fb-st"><span class="fb-st__a"><svg><use href="#fb-i-clock"/></svg>Planlagt</span><span class="fb-st__b"><svg><use href="#fb-i-ok"/></svg>Udgivet</span></span><span class="fb-post__re"><svg><use href="#fb-i-heart"/></svg>24<svg><use href="#fb-i-cmt"/></svg>3</span></div>
+        </div></div>
+        <div class="fb-day" data-fb-day><div class="fb-day__hd"><span>Tir</span><b>10</b></div><div class="fb-day__bd"><i class="fb-now"></i>
+          <div class="fb-post is-pub" data-fb-post data-h="11" style="--y:.313"><span class="fb-post__img"><img src="/assets/media/goblender-3d.jpg" alt="" width="960" height="540" loading="lazy" decoding="async" style="object-position:30% 50%"><i class="fb-post__k"><svg><use href="#fb-i-play"/></svg>Reel</i></span><span class="fb-post__m"><time>11.00</time><b>Ugens smoothie: mango</b></span><span class="fb-st"><span class="fb-st__a"><svg><use href="#fb-i-clock"/></svg>Planlagt</span><span class="fb-st__b"><svg><use href="#fb-i-ok"/></svg>Udgivet</span></span><span class="fb-post__re"><svg><use href="#fb-i-heart"/></svg>61<svg><use href="#fb-i-cmt"/></svg>8</span></div>
+        </div></div>
+        <div class="fb-day" data-fb-day><div class="fb-day__hd"><span>Ons</span><b>11</b></div><div class="fb-day__bd"><i class="fb-now"></i>
+          <div class="fb-post fb-post--camp is-pub" data-fb-post data-h="15" style="--y:.563"><span class="fb-post__img fb-post__img--zoom"><img src="/assets/media/goblender-orange.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"><i class="fb-post__k">Kampagne</i></span><span class="fb-post__m"><time>15.00</time><b>Kommentér JA for tilbud</b></span><span class="fb-st"><span class="fb-st__a"><svg><use href="#fb-i-clock"/></svg>Planlagt</span><span class="fb-st__b"><svg><use href="#fb-i-ok"/></svg>Udgivet</span></span><span class="fb-post__re"><svg><use href="#fb-i-heart"/></svg>38<svg><use href="#fb-i-cmt"/></svg>14</span></div>
+        </div></div>
+        <div class="fb-day" data-fb-day><div class="fb-day__hd"><span>Tor</span><b>12</b></div><div class="fb-day__bd"><i class="fb-now"></i>
+          <div class="fb-post is-pub" data-fb-post data-h="8" style="--y:.125"><span class="fb-post__img fb-post__img--txt"><b>Hvem smager først?</b><i class="fb-post__k">Tekst</i></span><span class="fb-post__m"><time>08.00</time><b>Ny chai på tavlen</b></span><span class="fb-st"><span class="fb-st__a"><svg><use href="#fb-i-clock"/></svg>Planlagt</span><span class="fb-st__b"><svg><use href="#fb-i-ok"/></svg>Udgivet</span></span><span class="fb-post__re"><svg><use href="#fb-i-heart"/></svg>17<svg><use href="#fb-i-cmt"/></svg>9</span></div>
+        </div></div>
+        <div class="fb-day" data-fb-day><div class="fb-day__hd"><span>Fre</span><b>13</b></div><div class="fb-day__bd"><i class="fb-now"></i>
+          <div class="fb-post is-pub" data-fb-post data-h="16" style="--y:.625"><span class="fb-post__img"><img src="/assets/media/kaffekvaern.jpg" alt="" width="960" height="540" loading="lazy" decoding="async" style="object-position:6% 50%"><i class="fb-post__k">Billede</i></span><span class="fb-post__m"><time>16.00</time><b>Brunch hele weekenden</b></span><span class="fb-st"><span class="fb-st__a"><svg><use href="#fb-i-clock"/></svg>Planlagt</span><span class="fb-st__b"><svg><use href="#fb-i-ok"/></svg>Udgivet</span></span><span class="fb-post__re"><svg><use href="#fb-i-heart"/></svg>45<svg><use href="#fb-i-cmt"/></svg>6</span></div>
+        </div></div>
+        <div class="fb-day" data-fb-day><div class="fb-day__hd"><span>Lør</span><b>14</b></div><div class="fb-day__bd"><i class="fb-now"></i>
+          <div class="fb-post is-pub" data-fb-post data-h="9.5" style="--y:.219"><span class="fb-post__img fb-post__img--grp"><svg><use href="#fb-i-grp"/></svg><b>3 lokale grupper</b><i class="fb-post__k">Grupper</i></span><span class="fb-post__m"><time>09.30</time><b>Loppemarked i gården</b></span><span class="fb-st"><span class="fb-st__a"><svg><use href="#fb-i-clock"/></svg>Planlagt</span><span class="fb-st__b"><svg><use href="#fb-i-ok"/></svg>Delt</span></span><span class="fb-post__re"><svg><use href="#fb-i-heart"/></svg>29<svg><use href="#fb-i-cmt"/></svg>11</span></div>
+        </div></div>
+        <div class="fb-day" data-fb-day><div class="fb-day__hd"><span>Søn</span><b>15</b></div><div class="fb-day__bd"><i class="fb-now"></i>
+          <div class="fb-post is-pub" data-fb-post data-h="10" style="--y:.25"><span class="fb-post__img"><img src="/assets/media/foto-goblender.webp" alt="" width="720" height="900" loading="lazy" decoding="async" style="object-position:50% 18%"><i class="fb-post__k">Story</i></span><span class="fb-post__m"><time>10.00</time><b>Søndagens smoothie-bar</b></span><span class="fb-st"><span class="fb-st__a"><svg><use href="#fb-i-clock"/></svg>Planlagt</span><span class="fb-st__b"><svg><use href="#fb-i-ok"/></svg>Udgivet</span></span><span class="fb-post__re"><svg><use href="#fb-i-heart"/></svg>33<svg><use href="#fb-i-cmt"/></svg>2</span></div>
+        </div></div>
+      </div>
+
+      <div class="fb-sum" aria-hidden="true">
+        <span><b data-fb-n="pub">7</b> opslag udgivet</span>
+        <span><b data-fb-n="svar">4</b> svar med det samme</span>
+        <span><b data-fb-n="videre">1</b> sendt videre til dig</span>
+      </div>
+    </div>
+
+    <!-- The page's Messenger inbox: customers on the left, the automatic answers on the right -->
+    <div class="fb-chat" data-reveal="2">
+      <div class="fb-chat__hd" aria-hidden="true">
+        <i class="fb-av fb-av--lg">M&amp;M</i>
+        <span class="fb-chat__who"><b>Mango &amp; Mokka</b><small><i class="fb-dot"></i>Svarer med det samme</small></span>
+        <span class="fb-chat__ic"><svg><use href="#fb-i-phone"/></svg><svg><use href="#fb-i-info"/></svg></span>
+      </div>
+      <ol class="fb-msgs" data-fb-msgs aria-hidden="true">
+        <li class="fb-dv"><b>Mette</b> · Lør 22.14</li>
+        <li class="fb-m fb-m--in"><i class="fb-av" style="--h:330">M</i><p>Kan I lave en lagkage uden gluten til 30 personer?</p></li>
+        <li class="fb-m fb-m--out"><p>Godt spørgsmål. Det giver jeg videre til et menneske.</p></li>
+        <li class="fb-hand"><svg><use href="#fb-i-person"/></svg>Sendt videre til Maja. Hun svarer i morgen.</li>
+        <li class="fb-dv"><b>Maja</b> svarer · Søn 09.05</li>
+        <li class="fb-m fb-m--out fb-m--human"><p>Hej Mette! Det kan vi godt. Jeg ringer til dig i dag, så finder vi en dato.</p></li>
+        <li class="fb-meta">Maja · Mango &amp; Mokka</li>
+      </ol>
+      <div class="fb-ask">
+        <p class="fb-ask__l" id="fb-ask-l"><svg aria-hidden="true"><use href="#fb-i-bolt"/></svg>Spørg som kunde</p>
+        <div class="fb-qr" role="group" aria-labelledby="fb-ask-l">
+          <button type="button" data-fb-ask="tider">Åbningstider?</button>
+          <button type="button" data-fb-ask="pris">Hvad koster det?</button>
+          <button type="button" data-fb-ask="book">Kan jeg booke?</button>
+          <button type="button" data-fb-ask="andet">Noget andet</button>
+        </div>
+      </div>
+      <p class="sr-only" aria-live="polite" data-fb-live></p>
+    </div>
+  </div>
+  <p class="sr-only">Eksempel på en uge på Facebook-siden for Mango &amp; Mokka, en café i Odense. Opslagsplanen for uge 46 har syv opslag: mandag kl. 7.30 en video om friskmalet kaffe, tirsdag kl. 11 en reel om ugens smoothie, onsdag kl. 15 en kampagne hvor man kommenterer JA for at få ugens tilbud, torsdag kl. 8 et tekstopslag om ny chai, fredag kl. 16 et billede om brunch, lørdag kl. 9.30 et loppemarked delt i tre lokale grupper og søndag kl. 10 en story. Hvert opslag går fra planlagt til udgivet af sig selv. Imens svarer Messenger automatisk med det samme på spørgsmål om åbningstider, priser og booking og på kommentaren JA, mens et svært spørgsmål om en glutenfri lagkage bliver sendt videre til en medarbejder, som svarer næste morgen.</p>
+</section>
 
     <section class="sx sx-facts" data-sec="fakta" data-facts>
       <h2 class="kicker sx-facts__k" data-reveal="0">Organisk Facebook, kort fortalt</h2>

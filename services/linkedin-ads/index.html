@@ -144,9 +144,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107a">
+<link rel="stylesheet" href="/assets/css/show/linkedin-ads.css?v=20261107a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -161,8 +162,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107a"></script>
+<script type="module" src="/assets/js/show/linkedin-ads.js?v=20261107a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -198,7 +200,48 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" aria-current="page" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -235,7 +278,7 @@
         <p class="hero__lead" data-reveal="3">På LinkedIn kan du vise dine annoncer til folk ud fra deres stilling, branche og virksomhedens størrelse. Vi bygger kampagnerne, så du rammer dem, der træffer beslutningen.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -276,6 +319,186 @@
         </div>
       </dl>
     </section>
+
+    <!-- Showcase for LinkedIn Ads: an audience builder. A sponsored post for Ferrolund Stål (a made-up steel supplier that
+     sells to other companies) sits in a feed of our own drawing, beside a targeting panel. Each chip (stilling, branche,
+     størrelse, område) narrows the funnel, and the post's first line rewrites itself to the people chosen. "Få tilbud"
+     opens a lead form, prefilled from the profile, and the lead lands under the funnel. No platform marks or logos.
+     Styles: assets/css/show/linkedin-ads.css, behaviour: assets/js/show/linkedin-ads.js -->
+<section id="eksempel" class="show show--linkedin-ads" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Sådan ser det ud</div><h2 class="h2">Du vælger hvem.<br><span class="dim">Annoncen taler til dem.</span></h2></div>
+    <p class="sec-head__lead">Et eksempel med en stålvirksomhed, der sælger til andre firmaer. Vælg stilling, branche, størrelse og område. Målgruppen bliver smallere, og annoncen skriver direkte til dem, du har valgt.</p>
+  </div>
+
+  <div class="li" data-li>
+    <!-- The feed with the sponsored post -->
+    <div class="li-col" data-reveal="1">
+      <div class="li-win">
+        <div class="li-top" aria-hidden="true">
+          <span class="li-srch"><svg class="li-i" viewBox="0 0 24 24"><use href="#li-find"/></svg>Søg</span>
+          <span class="li-nav">
+            <span class="is-on"><svg class="li-i" viewBox="0 0 24 24"><use href="#li-home"/></svg><small>Hjem</small></span>
+            <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-net"/></svg><small>Netværk</small></span>
+            <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-job"/></svg><small>Job</small></span>
+            <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-msg"/></svg><small>Beskeder</small></span>
+            <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-bell"/></svg><small>Notifikationer</small><b>3</b></span>
+          </span>
+        </div>
+
+        <div class="li-body" data-li-body>
+          <div class="li-comp" aria-hidden="true"><i class="li-me"></i><span>Start et opslag</span></div>
+
+          <article class="li-post" data-li-post>
+            <span class="li-eks"><span class="tag-eks">Eksempel</span></span>
+            <header class="li-ph" aria-hidden="true">
+              <i class="li-logo"><svg viewBox="0 0 24 24"><path d="M6 4.5h12v4H10.5v2.6h6v3.8h-6v4.6H6z"/></svg></i>
+              <span class="li-ph__t"><b>Ferrolund Stål</b><small>4.812 følgere</small><small>Promoveret</small></span>
+              <span class="li-follow"><svg class="li-i" viewBox="0 0 24 24"><use href="#li-plus"/></svg>Følg</span>
+            </header>
+            <p class="li-intro"><b class="li-hl" data-li-hl><span class="li-hl__in">Til indkøbschefer i byggeriet</span></b>Send os jeres tegning, så får I en fast pris inden for 24 timer. Vi skærer, bukker og leverer på 5 hverdage.</p>
+
+            <!-- The ad graphic: our own drawing of a laser-cut steel bracket -->
+            <div class="li-cr" aria-hidden="true">
+              <div class="li-cr__tx">
+                <span class="li-cr__k" data-li-kick>Stål til byggeriet</span>
+                <b class="li-cr__t">Skåret til.<br>Leveret på 5&nbsp;dage.</b>
+                <span class="li-cr__s">Laserskæring · Bukning · Svejsning</span>
+              </div>
+              <svg class="li-cr__art" viewBox="0 0 300 230" focusable="false">
+                <defs><linearGradient id="li-steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1f4f6"/><stop offset=".5" stop-color="#b3bec6"/><stop offset="1" stop-color="#76848f"/></linearGradient></defs>
+                <g class="li-pl--b" transform="rotate(-12 110 150)"><rect x="26" y="98" width="156" height="104" rx="10"/><g class="li-holes"><circle cx="50" cy="122" r="7"/><circle cx="50" cy="178" r="7"/><rect x="74" y="168" width="44" height="14" rx="7"/></g></g>
+                <circle class="li-pl--f" cx="175" cy="115" r="88"/>
+                <circle class="li-bev" cx="175" cy="115" r="44"/>
+                <g class="li-holes"><circle cx="175" cy="115" r="34"/><circle cx="232.3" cy="138.7" r="8"/><circle cx="198.7" cy="172.3" r="8"/><circle cx="151.3" cy="172.3" r="8"/><circle cx="117.7" cy="138.7" r="8"/><circle cx="117.7" cy="91.3" r="8"/><circle cx="151.3" cy="57.7" r="8"/><circle cx="198.7" cy="57.7" r="8"/><circle cx="232.3" cy="91.3" r="8"/></g>
+                <path class="li-cut" pathLength="1" d="M175 27a88 88 0 1 1 0 176a88 88 0 1 1 0-176"/>
+              </svg>
+            </div>
+
+            <div class="li-bar">
+              <span class="li-bar__t" aria-hidden="true"><b>Fast pris inden for 24 timer</b><small>ferrolund.dk</small></span>
+              <button type="button" class="li-cta" data-li-open>Få tilbud</button>
+            </div>
+            <div class="li-soc" aria-hidden="true">
+              <span class="li-rx"><i class="li-rx--a"><svg viewBox="0 0 24 24"><use href="#li-thumb"/></svg></i><i class="li-rx--b"><svg viewBox="0 0 24 24"><use href="#li-heart"/></svg></i><i class="li-rx--c"><svg viewBox="0 0 24 24"><use href="#li-bulb"/></svg></i>214</span>
+              <span>18 kommentarer · 6 delinger</span>
+            </div>
+            <div class="li-acts" aria-hidden="true">
+              <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-thumb"/></svg>Synes godt om</span>
+              <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-chat"/></svg>Kommenter</span>
+              <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-share"/></svg>Del</span>
+              <span><svg class="li-i" viewBox="0 0 24 24"><use href="#li-send"/></svg>Send</span>
+            </div>
+          </article>
+
+          <!-- Behind "Få tilbud": a lead form in the app, filled in from the profile -->
+          <div class="li-sheet" data-li-sheet inert>
+            <div class="li-dim" data-li-close></div>
+            <div class="li-form" role="group" aria-label="Eksempel: formular fra Ferrolund Stål">
+              <div class="li-form__h">
+                <i class="li-logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4.5h12v4H10.5v2.6h6v3.8h-6v4.6H6z"/></svg></i>
+                <span><b>Ferrolund Stål</b><small>Få en fast pris</small></span>
+                <button type="button" class="li-x" data-li-close aria-label="Luk formularen"><svg class="li-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#li-x"/></svg></button>
+              </div>
+              <div class="li-form__in">
+                <b class="li-form__t">Få en fast pris inden for 24 timer</b>
+                <p class="li-form__s">Ferrolund kontakter dig om tilbuddet. Du skal ikke forlade appen.</p>
+                <div class="li-flds">
+                  <span class="li-fld"><small>Fornavn</small><b data-li-f="fn">Mette</b></span>
+                  <span class="li-fld"><small>Efternavn</small><b data-li-f="ln">Holm</b></span>
+                  <span class="li-fld li-fld--w"><small>Arbejdsmail</small><b data-li-f="em">mh@soevangbyg.dk</b></span>
+                  <span class="li-fld li-fld--w"><small>Virksomhed</small><b data-li-f="co">Søvang Byg A/S</b></span>
+                  <span class="li-fld li-fld--w"><small>Stilling</small><b data-li-f="ti">Indkøbschef</b></span>
+                </div>
+                <span class="li-auto"><svg class="li-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#li-ok"/></svg>Udfyldt fra profilen</span>
+                <button type="button" class="li-send" data-li-send>Send</button>
+              </div>
+              <div class="li-ok" aria-live="polite">
+                <i aria-hidden="true"><svg class="li-i" viewBox="0 0 24 24"><use href="#li-ok"/></svg></i>
+                <b data-li-thx>Tak, Mette!</b>
+                <span>Ferrolund ringer inden for 24 timer med en fast pris.</span>
+                <button type="button" class="li-back" data-li-close>Tilbage til feedet</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Who sees it: the targeting panel, the funnel and the leads -->
+    <div class="li-aud" data-reveal="2">
+      <div class="li-aud__h">
+        <div><h3>Målgruppe</h3><p>Tryk for at vælge. Annoncen følger med.</p></div>
+        <button type="button" class="li-clear" data-li-clear>Ryd</button>
+      </div>
+      <div class="li-grp" role="group" aria-labelledby="li-g1">
+        <span class="li-grp__h" id="li-g1">Stilling</span>
+        <div class="li-chips">
+          <button type="button" aria-pressed="true" data-li-c="role" data-v="indkob">Indkøbschef</button><button type="button" aria-pressed="false" data-li-c="role" data-v="proj">Projektleder</button><button type="button" aria-pressed="false" data-li-c="role" data-v="dir">Direktør</button>
+        </div>
+      </div>
+      <div class="li-grp" role="group" aria-labelledby="li-g2">
+        <span class="li-grp__h" id="li-g2">Branche</span>
+        <div class="li-chips">
+          <button type="button" aria-pressed="true" data-li-c="ind" data-v="bygg">Byggeri</button><button type="button" aria-pressed="false" data-li-c="ind" data-v="prod">Produktion</button><button type="button" aria-pressed="false" data-li-c="ind" data-v="energi">Energi</button>
+        </div>
+      </div>
+      <div class="li-grp" role="group" aria-labelledby="li-g3">
+        <span class="li-grp__h" id="li-g3">Virksomhedsstørrelse <span>ansatte</span></span>
+        <div class="li-chips">
+          <button type="button" aria-pressed="false" data-li-c="size" data-v="s1">1–10</button><button type="button" aria-pressed="false" data-li-c="size" data-v="s2">11–50</button><button type="button" aria-pressed="true" data-li-c="size" data-v="s3">51–200</button><button type="button" aria-pressed="true" data-li-c="size" data-v="s4">201–500</button><button type="button" aria-pressed="false" data-li-c="size" data-v="s5">500+</button>
+        </div>
+      </div>
+      <div class="li-grp" role="group" aria-labelledby="li-g4">
+        <span class="li-grp__h" id="li-g4">Område</span>
+        <div class="li-chips">
+          <button type="button" aria-pressed="true" data-li-c="area" data-v="hov">Hovedstaden</button><button type="button" aria-pressed="true" data-li-c="area" data-v="sj">Sjælland</button><button type="button" aria-pressed="false" data-li-c="area" data-v="fyn">Fyn</button><button type="button" aria-pressed="false" data-li-c="area" data-v="jyl">Jylland</button>
+        </div>
+      </div>
+
+      <div class="li-meter spot" data-spot>
+        <div class="li-fun" aria-hidden="true">
+          <div class="li-row" data-li-row><span class="li-row__l">Alle</span><span class="li-row__b"><i></i></span><span class="li-row__n">2,0 mio.</span></div>
+          <div class="li-row" data-li-row><span class="li-row__l">Stilling</span><span class="li-row__b"><i></i></span><span class="li-row__n">40.000</span></div>
+          <div class="li-row" data-li-row><span class="li-row__l">Branche</span><span class="li-row__b"><i></i></span><span class="li-row__n">4.000</span></div>
+          <div class="li-row" data-li-row><span class="li-row__l">Størrelse</span><span class="li-row__b"><i></i></span><span class="li-row__n">1.300</span></div>
+          <div class="li-row" data-li-row><span class="li-row__l">Område</span><span class="li-row__b"><i></i></span><span class="li-row__n">740</span></div>
+        </div>
+        <div class="li-res">
+          <span class="li-res__n" data-li-n>740</span>
+          <span class="li-res__l">personer i målgruppen <span class="tag-eks">Eksempel</span></span>
+        </div>
+        <p class="li-note" data-li-note>Smal og præcis. Det er dem, der træffer beslutningen.</p>
+        <p class="li-echo">Annoncen starter: <b data-li-echo>Til indkøbschefer i byggeriet</b></p>
+        <span class="sr-only" aria-live="polite" data-li-live></span>
+      </div>
+
+      <div class="li-leads" data-li-leads>
+        <p class="li-lead0">Leads fra formularen lander her. Navn, stilling og firma, direkte fra profilen.</p>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only">Eksempel på en promoveret LinkedIn-annonce fra Ferrolund Stål, en opdigtet stålvirksomhed. Annoncen starter med "Til indkøbschefer i byggeriet" og tilbyder en fast pris inden for 24 timer. Ved siden af vælger du stilling, branche, virksomhedsstørrelse og område. Målgruppen bliver smallere for hvert valg, og annoncens første linje skifter til de valgte. Knappen Få tilbud åbner en formular, der er udfyldt fra profilen.</p>
+
+  <!-- Icons for the mockup: our own drawings, no platform marks -->
+  <svg class="li-sprite" aria-hidden="true" focusable="false">
+    <symbol id="li-find" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+    <symbol id="li-home" viewBox="0 0 24 24"><path d="M3.8 10.4 12 3.8l8.2 6.6v9.1c0 .6-.4 1-1 1h-4.7v-6h-5v6H4.8c-.6 0-1-.4-1-1z"/></symbol>
+    <symbol id="li-net" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.3"/><path d="M3.3 19.5c.6-3.3 2.9-5.2 5.7-5.2s5.1 1.9 5.7 5.2"/><circle cx="16.6" cy="9.6" r="2.6"/><path d="M15.8 14.4c2.5-.3 4.4 1.2 4.9 4.1"/></symbol>
+    <symbol id="li-job" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M8.8 7.5V5.8c0-.8.6-1.3 1.3-1.3h3.8c.7 0 1.3.5 1.3 1.3v1.7M3.5 12.5h17"/></symbol>
+    <symbol id="li-msg" viewBox="0 0 24 24"><path d="M4.5 5.5h15c.6 0 1 .4 1 1v9.5c0 .6-.4 1-1 1H10l-4.5 3.5V17h-1c-.6 0-1-.4-1-1V6.5c0-.6.4-1 1-1z"/></symbol>
+    <symbol id="li-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.6 1.8H4.4zM10 20.3a2.2 2.2 0 0 0 4 0"/></symbol>
+    <symbol id="li-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="li-thumb" viewBox="0 0 24 24"><path d="M7.5 10.5v9.5H4.3v-9.5zM7.5 10.5l3.6-6.3c1.3 0 2.1 1 1.9 2.3l-.6 3.4h5.6c1.2 0 2 1.1 1.7 2.2l-1.8 6.4c-.2.9-1 1.5-1.9 1.5H7.5"/></symbol>
+    <symbol id="li-heart" viewBox="0 0 24 24"><path d="M12 19.6s-7-4.2-8.6-8.5C2.3 8 4.2 5 7.3 5c1.9 0 3.3 1 4.7 2.8C13.4 6 14.8 5 16.7 5c3.1 0 5 3 3.9 6.1-1.6 4.3-8.6 8.5-8.6 8.5z"/></symbol>
+    <symbol id="li-bulb" viewBox="0 0 24 24"><path d="M9.2 17.5h5.6M10 20.5h4M12 3.5a5.8 5.8 0 0 0-3.4 10.5c.6.5 1 1.2 1 2v1.5h4.8V16c0-.8.4-1.5 1-2A5.8 5.8 0 0 0 12 3.5z"/></symbol>
+    <symbol id="li-chat" viewBox="0 0 24 24"><path d="M20.3 11.6a8.3 8.3 0 0 1-12.4 7.2l-4.1 1 1.1-3.9a8.3 8.3 0 1 1 15.4-4.3z"/></symbol>
+    <symbol id="li-share" viewBox="0 0 24 24"><path d="M4.5 10.5V9c0-1.4 1.1-2.5 2.5-2.5h12M15.5 3l3.5 3.5-3.5 3.5M19.5 13.5V15c0 1.4-1.1 2.5-2.5 2.5H5M8.5 21 5 17.5 8.5 14"/></symbol>
+    <symbol id="li-send" viewBox="0 0 24 24"><path d="M20.8 3.2 10 14M20.8 3.2l-6.5 17.4-3.7-6.9-7-3.7z"/></symbol>
+    <symbol id="li-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.3 4.3L19 7.3"/></symbol>
+    <symbol id="li-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+  </svg>
+</section>
 
     <section class="sx sx-stm" data-sec="pointe" data-stm style="--n:13">
       <div class="kicker sx-stm__k" data-reveal="0">Kort sagt</div>

@@ -144,9 +144,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107a">
+<link rel="stylesheet" href="/assets/css/show/reddit-ads.css?v=20261107a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -161,8 +162,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107a"></script>
+<script type="module" src="/assets/js/show/reddit-ads.js?v=20261107a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -198,7 +200,48 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" aria-current="page" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -235,7 +278,7 @@
         <p class="hero__lead" data-reveal="3">På Reddit samles folk om det, de brænder for: fra løbesko og gaming til software og gør det selv. Vi viser dine annoncer i de fællesskaber, hvor dine kunder allerede snakker om det, du sælger.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -251,17 +294,343 @@
       </div>
     </section>
 
-    <section class="sx-mq" data-sec="emner" data-mq>
-      <div class="sx-mq__head" data-reveal="0">
-        <h2 class="sx-mq__h">Der hvor de snakker om det. <span>Hver dag.</span></h2>
-        <p class="sx-mq__lead"><span class="tag-eks">Eksempel</span>Eksempler på emner, hvor dine annoncer kan vises.</p>
+    <!-- Showcase for Reddit Ads: a community thread. A forum of our own drawing (no platform logo or mascot) with three
+     communities. In each, a promoted post from a made-up brand sits among the members' own posts, written in that
+     community's tone; upvotes tick, comments arrive, and "Svar" shows how we answer a critical comment. All brands,
+     users and numbers are examples. Styles: assets/css/show/reddit-ads.css, behaviour: assets/js/show/reddit-ads.js -->
+<section id="eksempel" class="show show--reddit-ads" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Sådan ser det ud</div><h2 class="h2">Midt i samtalen.<br><span class="dim">I den rigtige tone.</span></h2></div>
+    <p class="sec-head__lead">Tre fællesskaber, tre eksempler. Annoncen er skrevet, så den passer ind. Og når kritikken kommer, hjælper vi dig med at svare. Tryk på Svar, og se hvordan.</p>
+  </div>
+
+  <div class="rd" data-rd>
+    <div class="rd-bar" data-reveal="1">
+      <span class="rd-bar__l" id="rd-pick">Vælg et fællesskab</span>
+      <div class="seg" role="group" aria-labelledby="rd-pick">
+        <button type="button" class="is-on" aria-pressed="true" data-rd-tab="kaffe">Kaffe</button>
+        <button type="button" aria-pressed="false" data-rd-tab="halvmaraton">Løb</button>
+        <button type="button" aria-pressed="false" data-rd-tab="selvbyg">Gør det selv</button>
       </div>
-      <div class="sx-mq__rows" aria-hidden="true">
-        <div class="sx-mq__row" data-mq-row data-dir="-1"><div class="sx-mq__set"><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>løbesko</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>gaming-pc</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>gør det selv</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>kaffe</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>mekaniske tastaturer</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>hjemmebryg</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>fotografering</span></div></div>
-        <div class="sx-mq__row" data-mq-row data-dir="1"><div class="sx-mq__set"><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>cykling</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>brætspil</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>software</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>madlavning</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>camping</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>strik</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>elbiler</span></div></div>
+    </div>
+
+    <div class="rd-stage" data-reveal="2">
+      <span class="rd-eks"><span class="tag-eks">Eksempel</span></span>
+      <div class="rd-win" data-rd-win>
+        <div class="rd-top" aria-hidden="true">
+          <span class="rd-burger"><i></i></span>
+          <span class="rd-srch"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-find"/></svg><span data-rd-q>Søg i r/kaffe</span></span>
+          <span class="rd-top__r"><span class="rd-make"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-plus"/></svg>Opret</span><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-bell"/></svg><i class="rd-me"></i></span>
+        </div>
+
+        <div class="rd-main">
+          <!-- The side menu: the same three communities, a click works like the tabs above -->
+          <div class="rd-nav" aria-hidden="true">
+            <span class="rd-nav__x"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-home"/></svg>Hjem</span>
+            <span class="rd-nav__x"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-trend"/></svg>Populære</span>
+            <span class="rd-nav__x"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-compass"/></svg>Udforsk</span>
+            <span class="rd-nav__h">Fællesskaber</span>
+            <button type="button" tabindex="-1" class="rd-nav__c is-on" data-rd-tab="kaffe"><i class="rd-ci rd-ci--kaffe"><svg viewBox="0 0 24 24"><use href="#rd-cup"/></svg></i>r/kaffe</button>
+            <button type="button" tabindex="-1" class="rd-nav__c" data-rd-tab="halvmaraton"><i class="rd-ci rd-ci--halvmaraton"><svg viewBox="0 0 24 24"><use href="#rd-shoe"/></svg></i>r/halvmaraton</button>
+            <button type="button" tabindex="-1" class="rd-nav__c" data-rd-tab="selvbyg"><i class="rd-ci rd-ci--selvbyg"><svg viewBox="0 0 24 24"><use href="#rd-hammer"/></svg></i>r/selvbyg</button>
+            <span class="rd-nav__x rd-nav__x--m"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-plus"/></svg>Opret et fællesskab</span>
+          </div>
+
+          <!-- ============ r/kaffe ============ -->
+          <div class="rd-com" data-rd-com="kaffe">
+            <div class="rd-pane">
+              <div class="rd-ban rd-ban--kaffe" aria-hidden="true">
+                <span class="rd-ban__art"></span>
+                <div class="rd-ban__row"><i class="rd-ci rd-ci--kaffe rd-ci--big"><svg viewBox="0 0 24 24"><use href="#rd-cup"/></svg></i><span class="rd-ban__t"><b>r/kaffe</b><small>48k medlemmer<span class="rd-onl"> · 312 online</span></small></span><span class="rd-join">Bliv medlem</span></div>
+              </div>
+              <article class="rd-post rd-post--o" aria-hidden="true">
+                <p class="rd-meta"><i class="rd-av" style="--c:#cfe3d4">t</i><b>u/tidligfugl</b><span>· 5 t</span></p>
+                <h3 class="rd-post__t">Hvilken vandtemperatur bruger I til lys ristning?</h3>
+                <div class="rd-acts"><span class="rd-vote"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>46</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span class="rd-pill"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-chat"/></svg>31</span><span class="rd-pill"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-share"/></svg>Del</span></div>
+              </article>
+              <article class="rd-post rd-post--ad">
+                <p class="rd-meta" aria-hidden="true"><i class="rd-av rd-av--b" style="--c:#2a1d16;--f:#f3c38c">M</i><b>Mølleværk</b><span class="rd-promo">Promoveret</span><svg class="rd-i rd-more" viewBox="0 0 24 24"><use href="#rd-more"/></svg></p>
+                <h3 class="rd-post__t">Vi har bygget en håndkværn, der skal holde i 10 år. Spørg os om alt.</h3>
+                <p class="rd-post__b">Vi er tre kaffenørder fra Aarhus. Knive i rustfrit stål, 40 klik pr. omgang og ingen plastik. Ros og kritik er velkommen, vi svarer her i tråden.</p>
+                <div class="rd-media"><video src="/assets/media/kaffekvaern.mp4" poster="/assets/media/kaffekvaern.jpg" width="960" height="540" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+                <div class="rd-link" aria-hidden="true"><span>moellevaerk.dk</span><span class="rd-link__b">Se kværnen</span></div>
+                <div class="rd-acts">
+                  <span class="rd-vote rd-vote--ad"><button type="button" class="rd-up" aria-pressed="false" data-rd-up aria-label="Stem op på annoncen"><svg class="rd-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-up"/></svg></button><b data-rd-votes>164</b><svg class="rd-i rd-dn" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-up"/></svg></span>
+                  <span class="rd-pill" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-chat"/></svg><b data-rd-cn>6</b></span>
+                  <span class="rd-pill" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-share"/></svg>Del</span>
+                </div>
+              </article>
+            </div>
+            <div class="rd-th">
+              <div class="rd-th__in" data-rd-scroll>
+                <div class="rd-th__h" aria-hidden="true"><b>Kommentarer</b><span class="rd-live"><i></i>Live</span><span class="rd-th__s">Bedste<svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-down"/></svg></span></div>
+                <div class="rd-box" aria-hidden="true">Skriv en kommentar</div>
+                <div class="rd-c" data-rd-c>
+                  <i class="rd-av" style="--c:#f2d48a" aria-hidden="true">f</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>filterfrida</b><span>· 1 t</span></p>
+                    <p class="rd-c__t">Fedt at se klik pr. omgang i en annonce. Hvor fint kan den male til espresso?</p>
+                    <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>18</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                    <div class="rd-c rd-c--b" data-rd-c>
+                      <i class="rd-av rd-av--b" style="--c:#2a1d16;--f:#f3c38c" aria-hidden="true">M</i>
+                      <div class="rd-c__b">
+                        <p class="rd-c__m"><b>Mølleværk</b><span class="rd-op">OP</span><span>· 52 min</span></p>
+                        <p class="rd-c__t">Helt ned til espresso. Det er de første 12 klik.</p>
+                        <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>9</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rd-c" data-rd-c>
+                  <i class="rd-av" style="--c:#c9d6f2" aria-hidden="true">k</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>kaffekarl</b><span>· 48 min</span></p>
+                    <p class="rd-c__t">Ingen plastik er et godt argument her. Min sidste kværn knækkede i håndtaget.</p>
+                    <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>7</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                  </div>
+                </div>
+                <div class="rd-c rd-c--crit" data-rd-c>
+                  <i class="rd-av" style="--c:#f2c9c0" aria-hidden="true">e</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>espresso_erik</b><span>· 31 min</span></p>
+                    <p class="rd-c__t">900 kr. for en håndkværn? For de penge får jeg en elektrisk.</p>
+                    <p class="rd-c__a"><span class="rd-cv" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>4</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><button type="button" class="rd-reply" data-rd-reply><svg class="rd-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-chat"/></svg>Svar</button><span class="rd-hint" aria-hidden="true">Se, hvordan vi svarer</span></p>
+                    <div class="rd-rep" data-rd-rep>
+                      <div class="rd-cmp" aria-hidden="true"><p class="rd-cmp__who">Svarer som <b>Mølleværk</b></p><p class="rd-cmp__t"><span data-rd-type></span><i class="rd-caret"></i></p><p class="rd-cmp__bar"><span>Annuller</span><span class="rd-cmp__go">Svar</span></p></div>
+                      <div class="rd-c rd-c--b rd-c--mine" data-rd-mine tabindex="-1">
+                        <i class="rd-av rd-av--b" style="--c:#2a1d16;--f:#f3c38c" aria-hidden="true">M</i>
+                        <div class="rd-c__b">
+                          <p class="rd-c__m"><b>Mølleværk</b><span class="rd-op">OP</span><span>· lige nu</span><span class="rd-ours" aria-hidden="true">Vores svar</span></p>
+                          <p class="rd-c__t" data-rd-text>Fair pointe. Laver du kaffe til hele familien hver morgen, ville vi selv vælge en elektrisk. Vores er til dig, der brygger én kop ad gangen og vil have samme smag hver gang.</p>
+                          <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b data-rd-mv data-to="23">23</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                          <div class="rd-c" data-rd-back>
+                            <i class="rd-av" style="--c:#f2c9c0" aria-hidden="true">e</i>
+                            <div class="rd-c__b">
+                              <p class="rd-c__m"><b>espresso_erik</b><span>· lige nu</span></p>
+                              <p class="rd-c__t">Okay, det var et ærligt svar. Det er faktisk lige mig.</p>
+                              <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>11</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ r/halvmaraton ============ -->
+          <div class="rd-com" data-rd-com="halvmaraton" hidden>
+            <div class="rd-pane">
+              <div class="rd-ban rd-ban--halvmaraton" aria-hidden="true">
+                <span class="rd-ban__art"></span>
+                <div class="rd-ban__row"><i class="rd-ci rd-ci--halvmaraton rd-ci--big"><svg viewBox="0 0 24 24"><use href="#rd-shoe"/></svg></i><span class="rd-ban__t"><b>r/halvmaraton</b><small>31k medlemmer<span class="rd-onl"> · 208 online</span></small></span><span class="rd-join">Bliv medlem</span></div>
+              </div>
+              <article class="rd-post rd-post--o" aria-hidden="true">
+                <p class="rd-meta"><i class="rd-av" style="--c:#f2d48a">s</i><b>u/sondagsloeber</b><span>· 3 t</span></p>
+                <h3 class="rd-post__t">Første halvmaraton i søndags. 2:04 og et kæmpe smil.</h3>
+                <div class="rd-acts"><span class="rd-vote"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>212</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span class="rd-pill"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-chat"/></svg>48</span><span class="rd-pill"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-share"/></svg>Del</span></div>
+              </article>
+              <article class="rd-post rd-post--ad">
+                <p class="rd-meta" aria-hidden="true"><i class="rd-av rd-av--b" style="--c:#1f5c43;--f:#c6f0d6">S</i><b>Skridt</b><span class="rd-promo">Promoveret</span><svg class="rd-i rd-more" viewBox="0 0 24 24"><use href="#rd-more"/></svg></p>
+                <h3 class="rd-post__t">Vi testede 12 løbesko på asfalt hele vinteren. Her er vores ærlige noter.</h3>
+                <p class="rd-post__b">Vi er en lille løbebutik i Odense. Tre af de sko, der klarede sig bedst, sælger vi slet ikke. Hele testen ligger i linket, uden rabatkoder.</p>
+                <div class="rd-media"><img src="/udkast/_faelles/billeder/personlig-traener/projekt-3-480.webp" srcset="/udkast/_faelles/billeder/personlig-traener/projekt-3-480.webp 480w, /udkast/_faelles/billeder/personlig-traener/projekt-3.webp 896w" sizes="(max-width: 759px) 340px, 560px" width="480" height="362" alt="" loading="lazy" decoding="async"></div>
+                <div class="rd-link" aria-hidden="true"><span>skridt-loeb.dk</span><span class="rd-link__b">Læs testen</span></div>
+                <div class="rd-acts">
+                  <span class="rd-vote rd-vote--ad"><button type="button" class="rd-up" aria-pressed="false" data-rd-up aria-label="Stem op på annoncen"><svg class="rd-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-up"/></svg></button><b data-rd-votes>279</b><svg class="rd-i rd-dn" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-up"/></svg></span>
+                  <span class="rd-pill" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-chat"/></svg><b data-rd-cn>6</b></span>
+                  <span class="rd-pill" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-share"/></svg>Del</span>
+                </div>
+              </article>
+            </div>
+            <div class="rd-th">
+              <div class="rd-th__in" data-rd-scroll>
+                <div class="rd-th__h" aria-hidden="true"><b>Kommentarer</b><span class="rd-live"><i></i>Live</span><span class="rd-th__s">Bedste<svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-down"/></svg></span></div>
+                <div class="rd-box" aria-hidden="true">Skriv en kommentar</div>
+                <div class="rd-c" data-rd-c>
+                  <i class="rd-av" style="--c:#e6d3f2" aria-hidden="true">m</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>mila_runs</b><span>· 2 t</span></p>
+                    <p class="rd-c__t">Respekt for at tage dem med, I ikke sælger. Så tror jeg mere på resten.</p>
+                    <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>21</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                  </div>
+                </div>
+                <div class="rd-c" data-rd-c>
+                  <i class="rd-av" style="--c:#c9d6f2" aria-hidden="true">h</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>halvmara_henrik</b><span>· 1 t</span></p>
+                    <p class="rd-c__t">Hvor mange km havde skoene på, da I målte sålen?</p>
+                    <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>8</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                    <div class="rd-c rd-c--b" data-rd-c>
+                      <i class="rd-av rd-av--b" style="--c:#1f5c43;--f:#c6f0d6" aria-hidden="true">S</i>
+                      <div class="rd-c__b">
+                        <p class="rd-c__m"><b>Skridt</b><span class="rd-op">OP</span><span>· 58 min</span></p>
+                        <p class="rd-c__t">Mellem 400 og 600 km. Det står for hver sko i testen.</p>
+                        <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>6</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rd-c rd-c--crit" data-rd-c>
+                  <i class="rd-av" style="--c:#f2c9c0" aria-hidden="true">k</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>km_kasper</b><span>· 40 min</span></p>
+                    <p class="rd-c__t">Så I anbefaler vel bare de sko, I selv tjener på?</p>
+                    <p class="rd-c__a"><span class="rd-cv" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>5</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><button type="button" class="rd-reply" data-rd-reply><svg class="rd-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-chat"/></svg>Svar</button><span class="rd-hint" aria-hidden="true">Se, hvordan vi svarer</span></p>
+                    <div class="rd-rep" data-rd-rep>
+                      <div class="rd-cmp" aria-hidden="true"><p class="rd-cmp__who">Svarer som <b>Skridt</b></p><p class="rd-cmp__t"><span data-rd-type></span><i class="rd-caret"></i></p><p class="rd-cmp__bar"><span>Annuller</span><span class="rd-cmp__go">Svar</span></p></div>
+                      <div class="rd-c rd-c--b rd-c--mine" data-rd-mine tabindex="-1">
+                        <i class="rd-av rd-av--b" style="--c:#1f5c43;--f:#c6f0d6" aria-hidden="true">S</i>
+                        <div class="rd-c__b">
+                          <p class="rd-c__m"><b>Skridt</b><span class="rd-op">OP</span><span>· lige nu</span><span class="rd-ours" aria-hidden="true">Vores svar</span></p>
+                          <p class="rd-c__t" data-rd-text>Godt spørgsmål. Tre af de fem sko, vi anbefaler mest, sælger vi ikke. Hele testen ligger i linket, så du selv kan tjekke tallene.</p>
+                          <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b data-rd-mv data-to="19">19</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                          <div class="rd-c" data-rd-back>
+                            <i class="rd-av" style="--c:#f2c9c0" aria-hidden="true">k</i>
+                            <div class="rd-c__b">
+                              <p class="rd-c__m"><b>km_kasper</b><span>· lige nu</span></p>
+                              <p class="rd-c__t">Okay, det havde jeg ikke set. Respekt.</p>
+                              <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>9</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ r/selvbyg ============ -->
+          <div class="rd-com" data-rd-com="selvbyg" hidden>
+            <div class="rd-pane">
+              <div class="rd-ban rd-ban--selvbyg" aria-hidden="true">
+                <span class="rd-ban__art"></span>
+                <div class="rd-ban__row"><i class="rd-ci rd-ci--selvbyg rd-ci--big"><svg viewBox="0 0 24 24"><use href="#rd-hammer"/></svg></i><span class="rd-ban__t"><b>r/selvbyg</b><small>67k medlemmer<span class="rd-onl"> · 455 online</span></small></span><span class="rd-join">Bliv medlem</span></div>
+              </div>
+              <article class="rd-post rd-post--o" aria-hidden="true">
+                <p class="rd-meta"><i class="rd-av" style="--c:#c9d6f2">b</i><b>u/bygherre_bo</b><span>· 6 t</span></p>
+                <h3 class="rd-post__t">Før og efter: det gamle skur blev til et udekøkken</h3>
+                <div class="rd-acts"><span class="rd-vote"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>389</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span class="rd-pill"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-chat"/></svg>57</span><span class="rd-pill"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-share"/></svg>Del</span></div>
+              </article>
+              <article class="rd-post rd-post--ad">
+                <p class="rd-meta" aria-hidden="true"><i class="rd-av rd-av--b" style="--c:#7a4a22;--f:#f6dcb8">B</i><b>Brædt &amp; Bjælke</b><span class="rd-promo">Promoveret</span><svg class="rd-i rd-more" viewBox="0 0 24 24"><use href="#rd-more"/></svg></p>
+                <h3 class="rd-post__t">5 fejl vi ser, når folk bygger terrasse selv. Vi sælger træ, men rådene er gratis.</h3>
+                <p class="rd-post__b">Fejl nr. 1: for lidt luft mellem brædderne. Træet arbejder, og så buler terrassen. Er du i gang med en terrasse, så skriv i tråden. Vi hjælper gerne.</p>
+                <div class="rd-media rd-media--hi"><img src="/udkast/_faelles/billeder/toemrer/hero-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/hero-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/hero-1.webp 896w" sizes="(max-width: 759px) 340px, 560px" width="480" height="600" alt="" loading="lazy" decoding="async"></div>
+                <div class="rd-link" aria-hidden="true"><span>braedtogbjaelke.dk</span><span class="rd-link__b">Se guiden</span></div>
+                <div class="rd-acts">
+                  <span class="rd-vote rd-vote--ad"><button type="button" class="rd-up" aria-pressed="false" data-rd-up aria-label="Stem op på annoncen"><svg class="rd-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-up"/></svg></button><b data-rd-votes>351</b><svg class="rd-i rd-dn" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-up"/></svg></span>
+                  <span class="rd-pill" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-chat"/></svg><b data-rd-cn>6</b></span>
+                  <span class="rd-pill" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-share"/></svg>Del</span>
+                </div>
+              </article>
+            </div>
+            <div class="rd-th">
+              <div class="rd-th__in" data-rd-scroll>
+                <div class="rd-th__h" aria-hidden="true"><b>Kommentarer</b><span class="rd-live"><i></i>Live</span><span class="rd-th__s">Bedste<svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-down"/></svg></span></div>
+                <div class="rd-box" aria-hidden="true">Skriv en kommentar</div>
+                <div class="rd-c" data-rd-c>
+                  <i class="rd-av" style="--c:#cfe3d4" aria-hidden="true">s</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>skrue_sus</b><span>· 3 t</span></p>
+                    <p class="rd-c__t">Fejl nr. 3 lærte jeg på den hårde måde. Gemmer den her.</p>
+                    <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>34</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                  </div>
+                </div>
+                <div class="rd-c" data-rd-c>
+                  <i class="rd-av" style="--c:#f2d48a" aria-hidden="true">t</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>terrasse_tom</b><span>· 2 t</span></p>
+                    <p class="rd-c__t">Hvilke skruer vil I bruge til lærk?</p>
+                    <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>6</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                    <div class="rd-c rd-c--b" data-rd-c>
+                      <i class="rd-av rd-av--b" style="--c:#7a4a22;--f:#f6dcb8" aria-hidden="true">B</i>
+                      <div class="rd-c__b">
+                        <p class="rd-c__m"><b>Brædt &amp; Bjælke</b><span class="rd-op">OP</span><span>· 1 t</span></p>
+                        <p class="rd-c__t">Rustfri skruer. Så undgår du sorte striber i træet.</p>
+                        <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>7</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rd-c rd-c--crit" data-rd-c>
+                  <i class="rd-av" style="--c:#f2c9c0" aria-hidden="true">b</i>
+                  <div class="rd-c__b">
+                    <p class="rd-c__m"><b>bjarne_bygger</b><span>· 1 t</span></p>
+                    <p class="rd-c__t">Det her er bare reklame forklædt som et godt råd.</p>
+                    <p class="rd-c__a"><span class="rd-cv" aria-hidden="true"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>3</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><button type="button" class="rd-reply" data-rd-reply><svg class="rd-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#rd-chat"/></svg>Svar</button><span class="rd-hint" aria-hidden="true">Se, hvordan vi svarer</span></p>
+                    <div class="rd-rep" data-rd-rep>
+                      <div class="rd-cmp" aria-hidden="true"><p class="rd-cmp__who">Svarer som <b>Brædt &amp; Bjælke</b></p><p class="rd-cmp__t"><span data-rd-type></span><i class="rd-caret"></i></p><p class="rd-cmp__bar"><span>Annuller</span><span class="rd-cmp__go">Svar</span></p></div>
+                      <div class="rd-c rd-c--b rd-c--mine" data-rd-mine tabindex="-1">
+                        <i class="rd-av rd-av--b" style="--c:#7a4a22;--f:#f6dcb8" aria-hidden="true">B</i>
+                        <div class="rd-c__b">
+                          <p class="rd-c__m"><b>Brædt &amp; Bjælke</b><span class="rd-op">OP</span><span>· lige nu</span><span class="rd-ours" aria-hidden="true">Vores svar</span></p>
+                          <p class="rd-c__t" data-rd-text>Ja, det er en annonce, og det står der også. Men rådene virker, uanset hvor du køber dit træ. Spørg løs, hvis du sidder fast.</p>
+                          <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b data-rd-mv data-to="27">27</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                          <div class="rd-c" data-rd-back>
+                            <i class="rd-av" style="--c:#f2c9c0" aria-hidden="true">b</i>
+                            <div class="rd-c__b">
+                              <p class="rd-c__m"><b>bjarne_bygger</b><span>· lige nu</span></p>
+                              <p class="rd-c__t">Fair nok. Så får I et spørgsmål: hvor meget fald skal terrassen have?</p>
+                              <p class="rd-c__a" aria-hidden="true"><span class="rd-cv"><svg class="rd-i" viewBox="0 0 24 24"><use href="#rd-up"/></svg><b>12</b><svg class="rd-i rd-dn" viewBox="0 0 24 24"><use href="#rd-up"/></svg></span><span>Svar</span></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="sr-only">løbesko, gaming-pc, gør det selv, kaffe, mekaniske tastaturer, hjemmebryg, fotografering, cykling, brætspil, software, madlavning, camping, strik, elbiler.</p>
-    </section>
+    </div>
+
+    <!-- How we wrote it: the tone for the chosen community -->
+    <div class="rd-tone" data-reveal="3">
+      <p class="rd-tone__h">Tonen i <b data-rd-name>r/kaffe</b></p>
+      <ul class="rd-tone__l" data-rd-tone="kaffe">
+        <li><b>Fakta frem for store ord.</b> Klik, knive og materialer. Ingen "verdens bedste".</li>
+        <li><b>Inviter til spørgsmål.</b> Kaffenørder vil gerne spørge løs.</li>
+        <li><b>Svar på kritikken.</b> Ærligt og i tråden, så alle kan se det.</li>
+      </ul>
+      <ul class="rd-tone__l" data-rd-tone="halvmaraton" hidden>
+        <li><b>Ærlig om konkurrenterne.</b> Sko, butikken ikke sælger, er med i testen.</li>
+        <li><b>Tal frem for superlativer.</b> Kilometer og sål, ikke "fantastisk".</li>
+        <li><b>Bliv, når nogen er skeptiske.</b> Svar med fakta, ikke forsvar.</li>
+      </ul>
+      <ul class="rd-tone__l" data-rd-tone="selvbyg" hidden>
+        <li><b>Hjælp først.</b> Rådene virker, uanset hvor du køber.</li>
+        <li><b>Sig det, som det er.</b> Ja, det er en annonce.</li>
+        <li><b>Bliv i tråden.</b> Svar på spørgsmål, også dagen efter.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="sr-only">Eksempel på et forum med fællesskaber, tegnet af os. I fællesskabet om kaffe ligger en promoveret annonce fra Mølleværk, en opdigtet kværnproducent, mellem medlemmernes egne opslag, med en video af en håndkværn. Under annoncen kommer kommentarer: et spørgsmål, som Mølleværk svarer på, ros og en kritisk kommentar om prisen. Knappen Svar viser, hvordan vi hjælper med et ærligt svar. Fanerne Løb og Gør det selv viser det samme for en løbebutik og en trælast.</p>
+
+  <!-- Icons for the mockup: our own drawings, no platform marks -->
+  <svg class="rd-sprite" aria-hidden="true" focusable="false">
+    <symbol id="rd-find" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+    <symbol id="rd-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="rd-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.6 1.8H4.4zM10 20.3a2.2 2.2 0 0 0 4 0"/></symbol>
+    <symbol id="rd-home" viewBox="0 0 24 24"><path d="M3.8 10.4 12 3.8l8.2 6.6v9.1c0 .6-.4 1-1 1h-4.7v-6h-5v6H4.8c-.6 0-1-.4-1-1z"/></symbol>
+    <symbol id="rd-trend" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m7.5 14.5 3-3 2 2 4-4M13.5 9.5h3v3"/></symbol>
+    <symbol id="rd-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+    <symbol id="rd-up" viewBox="0 0 24 24"><path d="M12 3.8 4.6 12.2h4.6v7.4h5.6v-7.4h4.6z"/></symbol>
+    <symbol id="rd-down" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
+    <symbol id="rd-chat" viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.9 7l-4 1 1.1-3.8A8 8 0 1 1 20 11.6z"/></symbol>
+    <symbol id="rd-share" viewBox="0 0 24 24"><path d="M14 4.5 20 10l-6 5.5V12.6c-4.6 0-7.6 1.4-9.6 5 .4-5.4 3.2-8.8 9.6-9.4z"/></symbol>
+    <symbol id="rd-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18.5" cy="12" r="1.2"/></symbol>
+    <symbol id="rd-cup" viewBox="0 0 24 24"><path d="M5 9.5h11v4.5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10.5h1.4a2.5 2.5 0 0 1 0 5H16M8.4 3.5c-.7 1 .7 1.6 0 2.8M12 3.5c-.7 1 .7 1.6 0 2.8"/></symbol>
+    <symbol id="rd-shoe" viewBox="0 0 24 24"><path d="M3.5 17.5V9.2l3.6-1.4 1.4 2.6 2.4-.8 1.3 2.3c2.3 1.2 5 1.4 7.1 2.3.9.4 1.2 1.3 1.2 2.3v1zM3.5 17.5h17.5M9 13.5l1.5-.6M11.5 15l1.5-.6"/></symbol>
+    <symbol id="rd-hammer" viewBox="0 0 24 24"><path d="M13.6 4.6 19.4 10.4l-2.3 2.3-1.9-1.9-1.5 1.5-2-2 1.5-1.5-1.9-1.9zM11.2 10.8 4.6 17.4a1.6 1.6 0 0 0 2.3 2.3l6.6-6.6"/></symbol>
+  </svg>
+</section>
 
     <section id="forskel" class="sx sx-vs" data-sec="uden-med" data-vs>
       <div class="sec-head" data-reveal="0">
@@ -291,6 +660,18 @@
         <div class="sx-vs__cell is-uden" style="grid-row:5;--i:8"><span class="sx-vs__mk" aria-hidden="true">✕</span><span><span class="sr-only">Bred annonce: </span>Svært at se, hvad den gav.</span></div>
         <div class="sx-vs__cell is-med" style="grid-row:5;--i:9"><span class="sx-vs__mk" aria-hidden="true">✓</span><span><span class="sr-only">Reddit Ads: </span>Pixel og konverteringer sat op fra start.</span></div>
       </div>
+    </section>
+
+    <section class="sx-mq" data-sec="emner" data-mq>
+      <div class="sx-mq__head" data-reveal="0">
+        <h2 class="sx-mq__h">Der hvor de snakker om det. <span>Hver dag.</span></h2>
+        <p class="sx-mq__lead"><span class="tag-eks">Eksempel</span>Eksempler på emner, hvor dine annoncer kan vises.</p>
+      </div>
+      <div class="sx-mq__rows" aria-hidden="true">
+        <div class="sx-mq__row" data-mq-row data-dir="-1"><div class="sx-mq__set"><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>løbesko</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>gaming-pc</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>gør det selv</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>kaffe</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>mekaniske tastaturer</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>hjemmebryg</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>fotografering</span></div></div>
+        <div class="sx-mq__row" data-mq-row data-dir="1"><div class="sx-mq__set"><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>cykling</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>brætspil</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>software</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>madlavning</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>camping</span><span class="sx-q"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>strik</span><span class="sx-q is-hot"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg>elbiler</span></div></div>
+      </div>
+      <p class="sr-only">løbesko, gaming-pc, gør det selv, kaffe, mekaniske tastaturer, hjemmebryg, fotografering, cykling, brætspil, software, madlavning, camping, strik, elbiler.</p>
     </section>
 
     <section id="pris" class="sx sx-band" data-sec="pris" data-band>

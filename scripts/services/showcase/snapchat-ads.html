@@ -1,0 +1,172 @@
+<!-- Showcase for Snapchat Ads: a geofence map. A neighbourhood of our own drawing (inline SVG) with an example
+     menswear shop, Kragen, in the middle and a radius you can drag; people walking around light up when they are
+     inside it. Beside it Ida's phone: friends' stories tick by, and while Ida is inside the radius our full-screen
+     story ad (assets/media/herretoej-film.mp4) plays between them, with "Swipe op". Kragen, Ida, her friends and all
+     numbers are examples. Styles: assets/css/show/snapchat-ads.css, behaviour: assets/js/show/snapchat-ads.js -->
+<section id="eksempel" class="show show--snapchat-ads" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Lokal målretning</div><h2 class="h2">Tæt på butikken.<br><span class="dim">Midt i deres stories.</span></h2></div>
+    <p class="sec-head__lead">Du vælger et område omkring din butik. Dem, der er inden for, får din annonce i fuld skærm mellem vennernes stories. Træk i cirklen, og se hvem der ser den.</p>
+  </div>
+
+  <div class="sn" data-sn>
+    <!-- The map: the area around the shop, the radius and the people in it -->
+    <div class="sn-card" data-reveal="1">
+      <div class="sn-card__top">
+        <span class="sn-biz"><i class="sn-av" aria-hidden="true">K</i><span><b>Kragen</b><small><i class="sn-live" aria-hidden="true"></i>Herretøj · annoncen kører</small></span></span>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+
+      <div class="sn-map" data-sn-map>
+        <svg class="sn-art" viewBox="0 0 720 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" data-sn-svg>
+          <defs>
+            <radialGradient id="sn-glow"><stop offset="0" stop-color="#e0552b" stop-opacity=".02"/><stop offset=".72" stop-color="#e0552b" stop-opacity=".07"/><stop offset="1" stop-color="#e0552b" stop-opacity=".16"/></radialGradient>
+            <pattern id="sn-tile" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#ebe5da"/><path d="M0 0h10v10" fill="none" stroke="#e2dbcf" stroke-width="1"/></pattern>
+            <g id="sn-sts"><path d="M66 71H740"/><path d="M66 191H740"/><path d="M66 331H466"/><path d="M141-20V480"/><path d="M301-20V480"/><path d="M461-20V480"/><path d="M611-20V331"/></g>
+          </defs>
+          <rect class="sn-land" width="720" height="460"/>
+          <!-- Water, park, square -->
+          <path class="sn-water" d="M0 0h62c-10 70 8 130-4 200-10 64 12 120 0 190-6 30 4 50 2 70H0z"/>
+          <rect class="sn-park" x="474" y="340" width="260" height="130" rx="22"/>
+          <rect x="310" y="200" width="142" height="122" rx="14" fill="url(#sn-tile)"/>
+          <!-- Blocks -->
+          <g class="sn-blk">
+            <rect x="72" y="-10" width="60" height="72" rx="8"/><rect x="150" y="-10" width="142" height="72" rx="8"/><rect x="310" y="-10" width="142" height="72" rx="8"/><rect x="470" y="-10" width="132" height="72" rx="8"/>
+            <rect x="72" y="80" width="60" height="102" rx="8"/><rect x="470" y="80" width="132" height="102" rx="8"/>
+            <rect x="72" y="200" width="60" height="122" rx="8"/><rect x="150" y="200" width="142" height="54" rx="8"/><rect x="470" y="200" width="132" height="122" rx="8"/><rect x="620" y="200" width="110" height="122" rx="8"/>
+            <rect x="72" y="340" width="60" height="130" rx="8"/><rect x="150" y="340" width="142" height="130" rx="8"/><rect x="310" y="340" width="146" height="130" rx="8"/>
+          </g>
+          <g class="sn-yard"><rect x="166" y="6" width="110" height="40" rx="6"/><rect x="326" y="6" width="110" height="40" rx="6"/><rect x="486" y="6" width="100" height="40" rx="6"/><rect x="486" y="96" width="100" height="70" rx="6"/><rect x="486" y="216" width="100" height="90" rx="6"/><rect x="636" y="216" width="78" height="90" rx="6"/><rect x="166" y="356" width="110" height="98" rx="6"/><rect x="326" y="356" width="114" height="98" rx="6"/></g>
+          <g class="sn-blk sn-blk--hi">
+            <rect x="150" y="80" width="142" height="102" rx="10"/><rect x="310" y="80" width="142" height="102" rx="10"/>
+            <rect x="620" y="80" width="100" height="102" rx="10"/>
+          </g>
+          <!-- Trees in the park and on the square -->
+          <g class="sn-tree">
+            <circle cx="500" cy="372" r="9"/><circle cx="530" cy="430" r="11"/><circle cx="574" cy="364" r="8"/><circle cx="612" cy="420" r="12"/><circle cx="660" cy="372" r="10"/><circle cx="700" cy="436" r="9"/><circle cx="560" cy="452" r="7"/>
+            <circle cx="326" cy="216" r="7"/><circle cx="436" cy="216" r="7"/><circle cx="326" cy="306" r="7"/><circle cx="436" cy="306" r="7"/>
+          </g>
+          <path class="sn-pathw" d="M484 398c50-20 90 18 140-6s70-8 110-20"/>
+          <!-- Streets: a light edge, then white (snapchat-ads.js walks people along the same lines) -->
+          <use href="#sn-sts" class="sn-st sn-st--edge"/>
+          <use href="#sn-sts" class="sn-st sn-st--top"/>
+          <!-- The railway and the station -->
+          <path class="sn-rail" d="M622-10C660 24 694 40 740 46"/>
+          <path class="sn-rail sn-rail--t" d="M622-10C660 24 694 40 740 46"/>
+          <g class="sn-lbl">
+            <text x="221" y="104" text-anchor="middle">GYMNASIET</text>
+            <text x="381" y="104" text-anchor="middle">CAFÉER</text>
+            <text x="670" y="104" text-anchor="middle">STATIONEN</text>
+            <text x="381" y="300" text-anchor="middle">TORVET</text>
+            <text x="604" y="404" text-anchor="middle">PARKEN</text>
+            <text x="30" y="250" text-anchor="middle" transform="rotate(-90 30 250)">SØEN</text>
+          </g>
+
+          <!-- The radius around the shop (moved and sized by snapchat-ads.js) -->
+          <g class="sn-fence" transform="translate(381 196)" data-sn-fence>
+            <circle class="sn-fence__fill" r="144" data-sn-c/>
+            <circle class="sn-fence__edge" r="144" data-sn-e/>
+            <line class="sn-fence__r" x1="0" y1="0" x2="110.3" y2="-92.6" data-sn-rl/>
+          </g>
+
+          <!-- People (drawn by snapchat-ads.js) and Ida -->
+          <g data-sn-people></g>
+          <g class="sn-ida" transform="translate(282 268)" data-sn-ida>
+            <circle class="sn-ida__ring" r="15"/>
+            <circle class="sn-ida__dot" r="9"/>
+            <text class="sn-ida__i" y="3.6" text-anchor="middle">I</text>
+            <g class="sn-ida__tag" transform="translate(0 -30)"><rect x="-30" y="-12" width="60" height="22" rx="11"/><text y="3.5" text-anchor="middle">Ida, 19</text></g>
+          </g>
+
+          <!-- The shop -->
+          <g class="sn-shop" transform="translate(381 196)" data-sn-shop>
+            <circle class="sn-shop__pulse" r="12"/>
+            <path class="sn-shop__pin" d="M0 0c-3-7-15-14-15-26a15 15 0 0 1 30 0c0 12-12 19-15 26z"/>
+            <text class="sn-shop__k" y="-21.5" text-anchor="middle">K</text>
+            <g class="sn-shop__tag" transform="translate(0 -56)"><rect x="-34" y="-13" width="68" height="25" rx="12.5"/><text y="4.5" text-anchor="middle">Kragen</text></g>
+          </g>
+
+          <!-- The handle on the edge of the radius, and its label -->
+          <g class="sn-hd" transform="translate(491.3 103.4) rotate(-40)" data-sn-hd>
+            <circle class="sn-hd__hit" r="24"/>
+            <circle class="sn-hd__b" r="12"/>
+            <path class="sn-hd__a" d="M-2.6-3-5.8 0-2.6 3M2.6-3 5.8 0 2.6 3"/>
+          </g>
+          <g class="sn-rv" transform="translate(460.4 129.4)" data-sn-rvg><rect x="-30" y="-12" width="60" height="24" rx="12"/><text y="4.5" text-anchor="middle" data-sn-rvt>600 m</text></g>
+
+          <g class="sn-scale" transform="translate(160 446)"><path d="M0 0v5h48V0"/><text x="24" y="-5" text-anchor="middle">200 m</text></g>
+        </svg>
+        <span class="sn-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12h11m-4-4 4 4-4 4M5 7v10"/></svg>Træk i cirklen</span>
+      </div>
+
+      <div class="sn-ctl">
+        <div class="sn-rng">
+          <label for="sn-r"><span>Område omkring butikken</span><b data-sn-rv>600 m</b></label>
+          <input id="sn-r" class="sn-range" type="range" min="200" max="1200" step="50" value="600" aria-valuetext="600 meter omkring Kragen" data-sn-r>
+        </div>
+        <div class="sn-stats" aria-live="off">
+          <span class="sn-stat"><b data-sn-now>0</b><small>i området lige nu</small></span>
+          <span class="sn-stat"><b data-sn-seen>1.240</b><small>har set annoncen i dag</small></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ida's phone: her friends' stories, and the ad when she is inside the radius -->
+    <div class="sn-dev" data-reveal="2">
+      <div class="sn-ph">
+        <span class="sn-eks"><span class="tag-eks">Eksempel</span></span>
+        <div class="sn-scr" data-sn-scr>
+          <i class="sn-isl" aria-hidden="true"></i>
+          <div class="sn-bars" aria-hidden="true" data-sn-bars></div>
+
+          <div class="sn-sl" data-sn-sl="f1" aria-hidden="true">
+            <img class="sn-bg" src="/udkast/_faelles/billeder/personlig-traener/projekt-3-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false">
+            <div class="sn-who"><i class="sn-av" style="--c:#c9d6f2">M</i><b>Mathilde</b><small>2 t</small></div>
+            <span class="sn-capbar">Morgenløb før skole</span>
+            <div class="sn-chat"><span>Send en chat</span><i></i></div>
+          </div>
+          <div class="sn-sl sn-sl--txt" data-sn-sl="f2" aria-hidden="true">
+            <div class="sn-who"><i class="sn-av" style="--c:#cfe3d4">O</i><b>Oliver</b><small>48 min</small></div>
+            <span class="sn-big">Fredagsbar i aften?<small>Vi mødes på Torvet kl. 20</small></span>
+            <div class="sn-chat"><span>Send en chat</span><i></i></div>
+          </div>
+          <div class="sn-sl sn-sl--ad" data-sn-sl="ad" aria-hidden="true">
+            <video class="sn-bg" src="/assets/media/herretoej-film.mp4" poster="/assets/media/herretoej-film.jpg" muted loop playsinline preload="none" data-sn-vid></video>
+            <div class="sn-who"><i class="sn-av sn-av--k">K</i><b>Kragen</b><small class="sn-adl">Annonce</small></div>
+            <span class="sn-adt"><b>Ny raglan.</b><span>Lige rundt om hjørnet.</span></span>
+          </div>
+          <div class="sn-sl" data-sn-sl="f3" aria-hidden="true">
+            <img class="sn-bg" src="/udkast/_faelles/billeder/frisoer/projekt-3-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false">
+            <div class="sn-who"><i class="sn-av" style="--c:#f2d48a">F</i><b>Freja</b><small>1 t</small></div>
+            <span class="sn-capbar">Klar til gallafest</span>
+            <div class="sn-chat"><span>Send en chat</span><i></i></div>
+          </div>
+
+          <button type="button" class="sn-zone sn-zone--prev" data-sn-prev aria-label="Forrige story"></button>
+          <button type="button" class="sn-zone sn-zone--next" data-sn-next aria-label="Næste story"></button>
+          <div class="sn-up" data-sn-upwrap>
+            <span class="sn-up__chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></svg>Swipe op</span>
+            <button type="button" class="sn-up__btn" data-sn-up>Find butikken · <span data-sn-dist>510 m</span></button>
+          </div>
+
+          <!-- Behind "Swipe op": Kragen's page opens in the app -->
+          <div class="sn-sheet" data-sn-sheet inert>
+            <div class="sn-sh" role="group" aria-label="Eksempel: Kragens side">
+              <div class="sn-sh__bar"><button type="button" class="sn-x" data-sn-close aria-label="Luk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button><span aria-hidden="true">kragen.dk</span></div>
+              <div class="sn-sh__img"><img src="/assets/media/foto-raglan.webp" alt="Hvid raglan-t-shirt med mørkeblå ærmer" width="720" height="720" loading="lazy" decoding="async" draggable="false"></div>
+              <div class="sn-sh__in">
+                <span class="sn-sh__t"><b>Raglan-tee</b><b>299 kr.</b></span>
+                <span class="sn-sh__s"><i aria-hidden="true"></i>På lager i butikken · <span data-sn-dist>510 m</span> herfra</span>
+                <button type="button" class="sn-sh__go" data-sn-route>Vis vej til butikken</button>
+                <span class="sn-sh__ok" aria-live="polite" data-sn-ok></span>
+              </div>
+            </div>
+          </div>
+          <i class="sn-home" aria-hidden="true"></i>
+        </div>
+      </div>
+      <p class="sn-cap" data-sn-cap aria-live="polite"><b>Idas telefon.</b> <span data-sn-capt>Hun er inden for området, så din annonce kommer mellem vennernes stories.</span></p>
+    </div>
+  </div>
+  <p class="sr-only">Eksempel: et kort over et kvarter med herrebutikken Kragen i midten og en cirkel på 600 meter omkring den. Folk, der går rundt inden for cirklen, får annoncen. Ved siden af ses Idas telefon: hendes venners stories, og imellem dem Kragens annonce i fuld skærm, en video af en ny raglan-t-shirt med teksten "Ny raglan. Lige rundt om hjørnet." og knappen Find butikken. Du kan gøre området større eller mindre med skyderen.</p>
+</section>

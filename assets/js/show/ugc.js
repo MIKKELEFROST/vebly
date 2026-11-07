@@ -29,6 +29,8 @@ if (root) {
     }), { threshold: 0.6 });
     videos.forEach(v => io.observe(v));
   }
+  // Enter or Space on a focused video does the same as a tap
+  videos.forEach(v => v.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); v.click(); } }));
   videos.forEach(v => v.addEventListener('click', () => {
     const media = v.parentElement;
     if (v.paused) v.play().catch(() => {});

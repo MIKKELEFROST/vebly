@@ -1,0 +1,25 @@
+/* /services: every service on one page, three on a line (scripts/services/pages/services.mjs) */
+.alls { position: relative; z-index: 1; padding: 170px 0 110px; }
+.alls__head { display: flex; flex-direction: column; gap: 14px; margin-bottom: 48px; }
+.alls__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.alls__c { position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 240px; padding: 22px 22px 18px; background: #fff; color: var(--ink); border: 1px solid var(--line); border-radius: 24px; transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s, border-color .3s; }
+.alls__c:hover, .alls__c:focus-visible { color: var(--ink); transform: translateY(-4px); border-color: #dcd9d2; box-shadow: 0 28px 44px -30px rgba(17,17,17,0.4); }
+.alls__g { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color: var(--muted); }
+.alls__ic { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 9px; background: var(--cream); color: var(--accent); }
+.alls__ic svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.alls__c h2 { margin: 6px 0 0; font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -0.03em; line-height: 1.05; }
+.alls__c p { flex: 1; margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.alls__foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.alls__foot b { font-size: 14px; color: var(--accent); }
+.alls__foot i { font-style: normal; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.alls__foot i span { display: inline-block; transition: transform .3s; }
+.alls__c:hover .alls__foot i span { transform: translateX(4px); }
+@media (max-width: 1000px) { .alls__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+@media (max-width: 620px) {
+  .alls { padding: 130px 0 80px; }
+  .alls__head { margin-bottom: 30px; }
+  .alls__grid { grid-template-columns: 1fr; gap: 10px; }
+  .alls__c { min-height: 0; padding: 18px 18px 14px; border-radius: 20px; }
+  .alls__c h2 { font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) { .alls__c, .alls__foot i span { transition: none; } }

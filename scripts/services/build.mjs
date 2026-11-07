@@ -20,8 +20,10 @@ import { pathToFileURL } from 'node:url';
 import * as lib from './lib.mjs';
 import * as data from './data.mjs';
 
-const { ROOT, V, esc, url, page, hero, track, cards, price, faq, contact, frontLd, serviceLd, sitemap, TRADES, PIT, TEAM } = lib;
-const { services, pages, front, segments } = data;
+const { ROOT, V, esc, url, page, hero, track, cards, price, faq, contact, frontLd, serviceLd, sitemap, PIT, TEAM } = lib;
+const { services, pages, front, segments, groups } = data;
+// The services on the front page and on /services: the most important first, then group by group
+const ordered = [...new Set([...front.featured, ...groups.flatMap(g => g.slugs)])].map(slug => services.find(s => s.slug === slug));
 const only = process.argv[2] || '';
 const want = slug => !only || only === slug;
 
@@ -61,9 +63,9 @@ if (want('forside')) {
   }, [
     hero({ ...front, seg: segments.front, badge: 'Til', cta: 'Få en fast pris', more: ['Se alle services', '#services'] }),
     partner.html,
-    track({ id: 'services', kicker: 'Services', h2: 'Det, vi kan.<br><span class="dim">Vælg det, du har brug for.</span>', lead: 'Tilføj det, du er interesseret i, så giver vi dig en fast pris. Eller læs mere om hver enkelt.', list: services }),
+    lib.frontServices({ list: ordered }),
     cards({ sec: 'loefte', kicker: 'Vores løfte', h2: 'Fire ting.<br><span class="dim">Hver eneste gang.</span>', list: front.promises }),
-    TRADES,
+    lib.trades(front.trades),
     PIT,
     TEAM,
     faq(front.faqs),
@@ -178,14 +180,15 @@ if (existsSync(extra)) {
 if (want('hjemmesider')) {
   const f = join(ROOT, 'services/hjemmesider/index.html');
   const html = readFileSync(f, 'utf8');
-  for (const m of ['sitemap:start', 'seg-head:start', 'seg-bar:start']) if (!html.includes(m)) throw new Error(`services/hjemmesider/index.html mangler <!-- ${m} --> … (se build.mjs)`);
-  // The list of services, the segment tabs (lib.SEG_HEAD, lib.SEG_BAR) and the version of the shared CSS and JS
+  for (const m of ['sitemap:start', 'seg-head:start', 'seg-bar:start', 'mega:start']) if (!html.includes(m)) throw new Error(`services/hjemmesider/index.html mangler <!-- ${m} --> … (se build.mjs)`);
+  // The list of services, the segment tabs (lib.SEG_HEAD, lib.SEG_BAR), the mega menu (lib.mega) and the version of the shared CSS and JS
   const next = html
     .replace(/<!-- sitemap:start[\s\S]*?<!-- sitemap:end -->/, sitemap('hjemmesider'))
     .replace(/(<!-- seg-head:start[^>]*-->)[\s\S]*?(<!-- seg-head:end -->)/, (_, a, b) => `${a}\n${lib.SEG_HEAD}\n${b}`)
     .replace(/(<!-- seg-bar:start[^>]*-->)[\s\S]*?(<!-- seg-bar:end -->)/, (_, a, b) => `${a}\n    ${lib.SEG_BAR}\n    ${b}`)
+    .replace(/(<!-- mega:start[^>]*-->)[\s\S]*?(<!-- mega:end -->)/, (_, a, b) => `${a}\n        ${lib.mega({ slug: 'hjemmesider' })}\n        ${b}`)
     .replace(/(\/assets\/css\/main\.css\?v=)\w+/, `$1${V.css}`)
     .replace(/(\/assets\/js\/main\.js\?v=)\w+/, `$1${V.js}`);
   writeFileSync(f, next);
-  console.log('opdaterede services/hjemmesider/index.html (listen over services, fanerne og versionen)');
+  console.log('opdaterede services/hjemmesider/index.html (listen over services, fanerne, megamenuen og versionen)');
 }

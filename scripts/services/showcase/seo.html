@@ -1,0 +1,125 @@
+<!-- Showcase for SEO (webshops): a ranking climb. A results page of our own drawing for the search "løbesko herre"
+     and a month scrubber (januar to december, or the play button). A made-up webshop's category page (Kvikfod)
+     climbs from page 2 to the top while the result gets a better title, text and, from the product pages'
+     structured data, price, stars and "På lager". A dark report card beside it shows the position, a chart of
+     the climb and what we did that month. No logos; every business, number and result is an example.
+     Styles: assets/css/show/seo.css, behaviour: assets/js/show/seo.js -->
+<section id="eksempel" class="show show--seo" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Et år med SEO</div>
+      <h2 class="h2">Fra side 2.<br><span class="dim">Til øverst.</span></h2>
+    </div>
+    <p class="sec-head__lead">Følg en webshop måned for måned. Træk i tidslinjen, og se hvad vi laver, og hvad det gør ved placeringen på Google.</p>
+  </div>
+
+  <div class="rc" data-rc>
+    <!-- The results page: positions are set by seo.js; without it the page shows December, Kvikfod first -->
+    <div class="rc-win" data-reveal="1" aria-hidden="true">
+      <div class="rc-win__top">
+        <div class="rc-q"><svg class="rc-i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span>løbesko herre</span><svg class="rc-i rc-q__x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+      <div class="rc-tabs"><b>Alle</b><span>Billeder</span><span>Videoer</span><span>Nyheder</span></div>
+      <div class="rc-vp" data-rc-vp>
+        <ol class="rc-list" data-rc-list>
+          <li class="rc-r rc-r--k" data-rc-k>
+            <i class="rc-n">1</i>
+            <div class="rc-r__b">
+              <span class="rc-you">Din kategori</span>
+              <div class="rc-site"><i class="rc-fav rc-fav--k">K</i><span><b>Kvikfod</b><small data-rc-u>kvikfod.dk › herre › loebesko</small></span></div>
+              <span class="rc-t" data-rc-t>Løbesko til herrer | Kvikfod</span>
+              <p class="rc-s" data-rc-s>Find <b>løbesko til herrer</b> til asfalt, trail og konkurrence. Se pasform og størrelser, og få hjælp til at vælge.</p>
+              <div class="rc-sl" data-rc-x="sl"><span>Trailsko</span><span>Asfalt</span><span>Konkurrence</span><span>Størrelsesguide</span></div>
+              <div class="rc-sub" data-rc-x="sd">
+                <small>kvikfod.dk › produkt › tempo-3</small>
+                <span class="rc-t rc-t--s">Kvikfod Tempo 3 · Løbesko til herrer</span>
+                <div class="rc-rich"><span class="rc-rate">4,7 <span class="rc-stars"><i></i><i></i><i></i><i></i><i style="--f:.7"></i></span> (212)</span><span>899,00 kr.</span><span class="rc-ok">På lager</span></div>
+              </div>
+            </div>
+          </li>
+          <li class="rc-r"><i class="rc-n">2</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#1d4e89">T</i><span><b>Testfeltet</b><small>testfeltet.dk › løb › løbesko</small></span></div><span class="rc-t">Bedste løbesko til herrer: 9 par testet på 300 km</span><p class="rc-s">Vi har løbet i ni par. Her er vinderne til asfalt, trail og lange ture.</p></div></li>
+          <li class="rc-r"><i class="rc-n">3</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#6a4c93">S</i><span><b>Sålværket</b><small>saalvaerket.dk › herre › løbesko</small></span></div><span class="rc-t">Løbesko til herrer | Fri fragt og 100 dages retur</span><p class="rc-s">Stort udvalg af løbesko til herrer. Levering på 1-2 hverdage.</p></div></li>
+          <li class="rc-r"><i class="rc-n">4</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#c2410c">L</i><span><b>Løbelageret</b><small>loebelageret.dk › herre</small></span></div><span class="rc-t">Løbesko herre · Udsalg på sidste sæson</span><p class="rc-s">Spar på sidste sæsons løbesko. Få par i hver størrelse.</p></div></li>
+          <li class="rc-r"><i class="rc-n">5</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#3f6212">A</i><span><b>Asfaltklubben</b><small>asfaltklubben.dk › forum › sko</small></span></div><span class="rc-t">Hvilke løbesko til en nybegynder?</span><p class="rc-s">Jeg er lige startet med at løbe. Hvad skal jeg kigge efter?</p></div></li>
+          <li class="rc-r"><i class="rc-n">6</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#0f766e">T</i><span><b>Trailkassen</b><small>trailkassen.dk › sko › herre</small></span></div><span class="rc-t">Trailsko og løbesko til mænd</span><p class="rc-s">Sko til skov, sti og bjerg. Se guiden til det rigtige greb.</p></div></li>
+          <li class="rc-r"><i class="rc-n">7</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#9d174d">M</i><span><b>Motionsbladet</b><small>motionsbladet.dk › guide</small></span></div><span class="rc-t">Sådan vælger du de rigtige løbesko</span><p class="rc-s">Dæmpning, drop og pasform forklaret, så du kan vælge selv.</p></div></li>
+          <li class="rc-r"><i class="rc-n">8</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#334155">S</i><span><b>Skohylden</b><small>skohylden.dk › herre › sport</small></span></div><span class="rc-t">Sportssko til herrer | Skohylden</span><p class="rc-s">Løbesko, træningssko og indendørssko til herrer.</p></div></li>
+          <li class="rc-r"><i class="rc-n">9</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#b45309">P</i><span><b>Pulsbutikken</b><small>pulsbutikken.dk › løb</small></span></div><span class="rc-t">Løbesko til mænd · Stort udvalg</span><p class="rc-s">Løbesko i alle størrelser. Gratis bytte i butikken.</p></div></li>
+          <li class="rc-r"><i class="rc-n">10</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#1e3a8a">F</i><span><b>Fodfæste</b><small>fodfaeste.dk › loebeanalyse</small></span></div><span class="rc-t">Gratis løbeanalyse og løbesko</span><p class="rc-s">Book en løbeanalyse, og find den sko, der passer til dit løb.</p></div></li>
+          <li class="rc-pg" data-rc-pg aria-hidden="true"><span>Side 2</span></li>
+          <li class="rc-r"><i class="rc-n">11</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#7c2d12">S</i><span><b>Sportsugen</b><small>sportsugen.dk › artikel</small></span></div><span class="rc-t">Så ofte skal du skifte dine løbesko</span><p class="rc-s">Efter 600 til 800 km er dæmpningen typisk slidt.</p></div></li>
+          <li class="rc-r"><i class="rc-n">12</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#4c1d95">M</i><span><b>Mærkeskoen</b><small>maerkeskoen.dk › herre</small></span></div><span class="rc-t">Herresko | Sneakers, støvler og løbesko</span><p class="rc-s">Over 2.000 par sko til herrer. Fri fragt over 399 kr.</p></div></li>
+          <li class="rc-r"><i class="rc-n">13</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#155e75">L</i><span><b>Løbeuret</b><small>loebeuret.dk › blog</small></span></div><span class="rc-t">Løbesko til lange ture: vores favoritter</span><p class="rc-s">Fem sko, vi selv løber i, når turen er over 20 km.</p></div></li>
+          <li class="rc-r"><i class="rc-n">14</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#a16207">B</i><span><b>Billigsport</b><small>billigsport.dk › løbesko</small></span></div><span class="rc-t">Billige løbesko til herre</span><p class="rc-s">Løbesko til hverdagsløb. Nye varer hver uge.</p></div></li>
+          <li class="rc-r"><i class="rc-n">15</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#166534">S</i><span><b>Stiløber</b><small>stiloeber.dk › udstyr</small></span></div><span class="rc-t">Udstyr til trailløb: sko, vest og stave</span><p class="rc-s">Det skal du have med, når du løber på sti.</p></div></li>
+          <li class="rc-r"><i class="rc-n">16</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#be123c">S</i><span><b>Sportsrabat</b><small>sportsrabat.dk › herre</small></span></div><span class="rc-t">Løbesko herre | Tilbud hver uge</span><p class="rc-s">Ugens tilbud på løbesko, tøj og ure.</p></div></li>
+          <li class="rc-r"><i class="rc-n">17</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#475569">M</i><span><b>Maratonnet</b><small>maratonnet.dk › forum</small></span></div><span class="rc-t">Løbesko til maraton: hvad løber I i?</span><p class="rc-s">Tråd med 140 svar om sko til de lange distancer.</p></div></li>
+          <li class="rc-r"><i class="rc-n">18</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#0e7490">S</i><span><b>Skobyen</b><small>skobyen.dk › herre</small></span></div><span class="rc-t">Herresko online | Skobyen</span><p class="rc-s">Sko til hverdag, fest og sport. Fri retur.</p></div></li>
+          <li class="rc-r"><i class="rc-n">19</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#86198f">F</i><span><b>Fysiotipset</b><small>fysiotipset.dk › løb</small></span></div><span class="rc-t">Løbeskader og forkerte sko: det skal du vide</span><p class="rc-s">Ondt i knæ eller skinneben? Måske er det skoene.</p></div></li>
+          <li class="rc-r"><i class="rc-n">20</i><div class="rc-r__b"><div class="rc-site"><i class="rc-fav" style="--c:#3730a3">L</i><span><b>Løbemakkeren</b><small>loebemakkeren.dk › udstyr</small></span></div><span class="rc-t">Løbeudstyr til mænd: det bruger vi selv</span><p class="rc-s">Sko, tøj og ure, vi har testet på vores egne ture.</p></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- The month scrubber: a real range input; seo.js also adds play and pause -->
+    <div class="rc-time" data-reveal="2">
+      <button type="button" class="rc-play" data-rc-play aria-pressed="false" aria-label="Afspil året"><svg class="rc-play__p" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg><svg class="rc-play__s" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5.5" width="4" height="13" rx="1.2"/><rect x="13.5" y="5.5" width="4" height="13" rx="1.2"/></svg><svg class="rc-play__r" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 12a6.5 6.5 0 1 0 2-4.7"/><path d="M5 4.5v4h4"/></svg></button>
+      <div class="rc-track">
+        <label class="sr-only" for="rc-m">Måned i forløbet</label>
+        <input class="rc-range" id="rc-m" type="range" min="0" max="11" step="1" value="11" data-rc-m aria-valuetext="December: placering 1">
+        <div class="rc-ticks" data-rc-ticks aria-hidden="true"><span>j<i>an</i></span><span>f<i>eb</i></span><span>m<i>ar</i></span><span>a<i>pr</i></span><span>m<i>aj</i></span><span>j<i>un</i></span><span>j<i>ul</i></span><span>a<i>ug</i></span><span>s<i>ep</i></span><span>o<i>kt</i></span><span>n<i>ov</i></span><span>d<i>ec</i></span></div>
+      </div>
+    </div>
+
+    <!-- The monthly report: position, the climb, and what we did -->
+    <div class="rc-rep spot" data-spot data-reveal="2">
+      <div class="rc-rep__hd"><span>Månedlig rapport</span><b data-rc-mn>December</b></div>
+      <div class="rc-pos">
+        <span class="rc-pos__l">Placering på »løbesko herre«</span>
+        <div class="rc-pos__row"><b class="rc-pos__n"><i>#</i><span data-rc-n>1</span></b><span class="rc-pg1" data-rc-pgl>Side 1</span></div>
+        <span class="rc-pos__v"><b data-rc-v>2.600</b> besøg fra Google om måneden</span>
+      </div>
+      <svg class="rc-ch" data-rc-ch viewBox="0 0 320 170" aria-hidden="true" focusable="false"></svg>
+      <div class="rc-task">
+        <span class="rc-task__c" data-rc-c>Rapport</span>
+        <p data-rc-d>Øverst på »løbesko herre«. Nu handler det om at blive der.</p>
+        <p class="rc-task__b" data-rc-b hidden></p>
+      </div>
+      <span class="rc-rep__eks"><span class="tag-eks">Eksempel</span></span>
+    </div>
+  </div>
+  <p class="rc-note" data-reveal="3">Et tænkt forløb. Ingen kan ærligt love en førsteplads, men hver måned kan du se, hvad vi har lavet, og hvor du står.</p>
+  <p class="sr-only">Eksempel på et år med SEO for Kvikfod, en tænkt webshop med løbesko. I januar ligger kategorisiden for løbesko til herrer som nummer 18 på side 2 af søgningen »løbesko herre«. Måned for måned får den bedre søgeord, en kategoritekst, hurtigere indlæsning, teknisk oprydning, bedre produktsider, interne links og struktureret data på produktsiderne, så Google kan vise pris, stjerner og »På lager«. I april når den side 1, og i december ligger den øverst.</p>
+
+  <!-- The months: p the position, v visits from Google, c what we worked on, d the text, b a before and after
+       (optional). Kvikfod's result: t, s, u are its title, text and address before and after a change, at month w -->
+  <script type="application/json" data-rc-data>
+{
+  "months": ["Januar","Februar","Marts","April","Maj","Juni","Juli","August","September","Oktober","November","December"],
+  "p": [18,16,13,9,8,6,5,4,3,2,2,1],
+  "v": [20,30,50,240,310,480,640,820,1150,1600,1700,2600],
+  "c": ["Analyse","Søgeord","Kategoritekst","Hastighed","Teknisk SEO","Produktsider","Interne links","Struktureret data","Konkurrenter","Links","Vedligehold","Rapport"],
+  "d": [
+    "Vi ser på din webshop, dine konkurrenter og de ord, kunderne søger på. Kategorien ligger på side 2.",
+    "Kategorien får de ord, kunderne bruger: »løbesko til herrer« i titlen og overskriften.",
+    "En kort tekst om underlag, pasform og størrelser, der hjælper kunden med at vælge.",
+    "Lettere billeder og færre scripts. Kategorien er klar langt hurtigere, også på mobilen.",
+    "Ren adresse, og filtersider uden værdi er lukket af, så Google bruger tiden på de rigtige sider.",
+    "Titler og tekster på produkterne, så de matcher det, folk søger på.",
+    "Forsiden, menuen og købsguiden linker nu til kategorien.",
+    "Pris, lager og anmeldelser er markeret på produktsiderne, så Google kan vise dem.",
+    "Vi har set, hvad dem over dig gør. Kategorien får en størrelsesguide, som de ikke har.",
+    "To danske løbesider linker til købsguiden.",
+    "Udsolgte varer er håndteret, og nye varer har fået titler fra start.",
+    "Øverst på »løbesko herre«. Nu handler det om at blive der."
+  ],
+  "b": {"3": "Indlæsning: 4,2 sek. før, 1,6 sek. nu", "4": "Sider på Google: 1.940 før, 410 nu", "6": "Links til kategorien: 3 før, 21 nu"},
+  "t": ["Herre – Kvikfod", "Løbesko til herrer | Kvikfod", 1],
+  "s": ["Kvikfod. Fri fragt over 499 kr. Køb nu.", "Find <b>løbesko til herrer</b> til asfalt, trail og konkurrence. Se pasform og størrelser, og få hjælp til at vælge.", 2],
+  "u": ["kvikfod.dk › collections › herre-sko-2", "kvikfod.dk › herre › loebesko", 4],
+  "sd": 7,
+  "sl": 11
+}
+  </script>
+</section>

@@ -300,7 +300,7 @@ export const pages = [
     ],
     contact: 'Fortæl os, hvad du sælger, og hvad du gerne vil findes på. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger din webshop, og hvad vil du gerne findes på?',
-    layout: ['marquee', 'price', 'timeline', 'grid', 'faqSplit'],
+    layout: ['showcase', 'marquee', 'price', 'timeline', 'grid', 'faqSplit'],
     marquee: {
       sec: 'soegninger', icon: 'search', tag: true,
       h2: ['Det søger dine kunder på.', 'Lige før de køber.'],
@@ -794,7 +794,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvilken side det handler om, og hvad du gerne vil findes på. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvilken side skal have flere links, og hvad vil du findes på?',
-    layout: ['statement', 'facts', 'band', 'timeline', 'faqSplit', 'grid'],
+    layout: ['statement', 'showcase', 'facts', 'band', 'timeline', 'faqSplit', 'grid'],
     statement: { kicker: 'Kort sagt', pill: 'spark', text: 'Et link fra en god side er en {anbefaling} til Google. | _Jo flere gode,_ *jo bedre.*', sub: 'Vi skaffer links fra rigtige danske sider med rigtige læsere. Ingen genveje, der kan skade din side.' },
     facts: { kicker: 'Linkbuilding, kort fortalt', items: [['Kilder', 'Danske sider', 'Relevante for dit fag, dit område eller dine kunder.'], ['Metode', 'Ingen linkfarme', 'Links, der også giver mening for et menneske.'], ['Overblik', 'Hvert link', 'Du får adressen på hvert link, vi skaffer.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     band: { chips: ['Relevante sider', 'Gæsteindlæg', 'Digital PR', 'Månedlig rapport'] },
@@ -836,7 +836,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvem du sælger til, og hvad du vil have flere af. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvem sælger du til, og hvad vil du have flere af?',
-    layout: ['facts', 'statement', 'receipt', 'cards', 'faq', 'track'],
+    layout: ['facts', 'showcase', 'statement', 'receipt', 'cards', 'faq', 'track'],
     facts: { kicker: 'LinkedIn Ads, kort fortalt', items: [['Målretning', 'Stilling', 'Ram folk ud fra titel, branche og virksomhed.'], ['Budget', 'Dit eget', 'Du betaler annoncerne direkte til LinkedIn.'], ['Måling', 'Henvendelser', 'Vi måler leads, ikke bare klik.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     statement: { kicker: 'Kort sagt', pill: 'cursor', text: 'Din næste kunde sidder på et {kontor}. | _Vis dig dér,_ *hvor de er.*', sub: 'På LinkedIn er folk på arbejde. Det er et godt sted at fange dem, der træffer beslutningen.' },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'], notes: ['Annoncebudget betales direkte til LinkedIn'] }
@@ -878,7 +878,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du sælger, og hvem du vil ramme. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og hvem vil du ramme på TikTok?',
-    layout: ['marquee', 'statement', 'band', 'cards', 'faqSplit', 'track'],
+    layout: ['showcase', 'marquee', 'statement', 'band', 'cards', 'faqSplit', 'track'],
     marquee: { sec: 'hooks', icon: 'spark', tag: {  }, h2: ['Det første sekund.', 'Det er dér, det afgøres.'], lead: 'Eksempler på hooks, vi tester.', words: ['3 ting, du ikke vidste om …', 'Vi prøvede det, så du ikke skal', 'POV: du har lige fået …', 'Svar på kommentar', 'Unboxing', 'Før og efter', 'Sådan bruger du den', 'Det mest stillede spørgsmål', 'Det, ingen fortæller dig om …', 'Tag din ven, der …', 'Kan man virkelig …?', 'En dag med …'] },
     statement: { kicker: 'Kort sagt', pill: 'spark', text: 'Det, der ligner en {reklame}, bliver scrollet væk. | _Det, der ligner TikTok,_ *bliver set.*', sub: 'Vi laver annoncer, der passer ind i feedet, og tester flere versioner, så pengene går til dem, der virker.' },
     band: { chips: ['Hooks', 'Video til feedet', 'Spark Ads', 'Månedlig rapport'] }
@@ -919,7 +919,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du sælger, og hvem dine kunder er. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og hvor gamle er dine kunder?',
-    layout: ['statement', 'marquee', 'receipt', 'timeline', 'faq', 'track'],
+    layout: ['statement', 'showcase', 'marquee', 'receipt', 'timeline', 'faq', 'track'],
     statement: { kicker: 'Kort sagt', pill: 'cursor', text: 'Ét {tap}, og de er inde på din side. | _Hvis annoncen_ *fanger.*', sub: 'Vi laver annoncer, der ligner resten af Snapchat, så de bliver set i stedet for sprunget over.' },
     marquee: { sec: 'formater', icon: 'spark', tag: {  }, h2: ['Det kan vi lave.', 'I Snapchats format.'], lead: 'Eksempler på annoncer, der passer ind.', words: ['Story-annonce', 'Tilbud i weekenden', 'Ny menu', 'Åbningsfest', 'Før og efter', 'Kom forbi i dag', 'Ugens produkt', 'Event', 'Rabatkode', 'Bag kulissen', 'Ny kollektion', 'Happy hour'] },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'], notes: ['Annoncebudget betales direkte til Snapchat'] },
@@ -961,7 +961,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du sælger, og hvem dine kunder er. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og hvad leder dine kunder efter?',
-    layout: ['facts', 'marquee', 'receipt', 'timeline', 'faqSplit', 'grid'],
+    layout: ['showcase', 'facts', 'marquee', 'receipt', 'timeline', 'faqSplit', 'grid'],
     facts: { kicker: 'Pinterest Ads, kort fortalt', items: [['Hvornår', 'Før købet', 'Folk er på Pinterest, når de planlægger.'], ['Produkter', 'Fra webshoppen', 'Dit katalog direkte i annoncerne.'], ['Budget', 'Dit eget', 'Du betaler annoncerne direkte til Pinterest.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     marquee: { sec: 'ideer', icon: 'search', tag: {  }, h2: ['Det søger de efter.', 'Når de planlægger.'], lead: 'Eksempler på søgninger på Pinterest.', words: ['nordisk køkken', 'bryllupsborde', 'lille altan', 'gaveidéer til hende', 'efterårsoutfit', 'børneværelse', 'sommerhus indretning', 'julebord pynt', 'have med krukker', 'nemme middage', 'badeværelse inspiration', 'sofa i bouclé'] },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'], notes: ['Annoncebudget betales direkte til Pinterest'] },
@@ -1003,7 +1003,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du sælger, og om du allerede har video. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og har du allerede videoer?',
-    layout: ['statement', 'compare', 'receipt', 'timeline', 'faq', 'grid'],
+    layout: ['showcase', 'statement', 'compare', 'receipt', 'timeline', 'faq', 'grid'],
     statement: { kicker: 'Kort sagt', pill: 'spark', text: 'Du har {fem sekunder}, før de kan springe over. | _Vi bruger dem_ *rigtigt.*', sub: 'Det vigtigste kommer først: hvem du er, og hvorfor de skal blive hængende.' },
     compare: { kicker: 'Forskellen', h2: ['En video.', 'Og en annonce, der virker.'], lead: 'Det er ikke nok, at videoen er flot. Den skal også bygges til YouTube.', uden: 'Typisk video', med: 'Bygget til YouTube', rows: [['Logoet kommer først, budskabet til sidst.', 'Budskabet kommer i de første sekunder.'], ['Kun lavet i bredformat.', 'Både bredformat og lodret til Shorts.'], ['Vises for alle.', 'Vises for dem, der ser og søger på dit emne.'], ['Ingen ved, hvad den gav.', 'Klik og henvendelser bliver målt.']] },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'], notes: ['Annoncebudget betales direkte til Google'] },
@@ -1045,7 +1045,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du laver, og om du allerede annoncerer på Google. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad laver du, og annoncerer du allerede på Google?',
-    layout: ['compare', 'facts', 'band', 'timeline', 'faq', 'grid'],
+    layout: ['compare', 'showcase', 'facts', 'band', 'timeline', 'faq', 'grid'],
     compare: { kicker: 'Forskellen', h2: ['Kun Google.', 'Og Google plus Bing.'], lead: 'Det er de samme kunder. Nogle af dem bruger bare en anden søgemaskine.', uden: 'Kun Google', med: 'Med Bing', rows: [['Du er væk, når nogen søger på Bing.', 'Du bliver også vist på Bing.'], ['Alle dine konkurrenter byder mod dig på Google.', 'Færre annoncører om de samme søgeord.'], ['Én kanal at være afhængig af.', 'To kanaler, der bygger på det samme arbejde.'], ['Kampagnerne skal bygges fra bunden.', 'Vi kan importere dine Google-kampagner og tilpasse dem.']] },
     facts: { kicker: 'Bing Ads, kort fortalt', items: [['Hvor', 'Bing og Edge', 'Søgemaskinen i Microsofts browser og på mange Windows-computere.'], ['Opstart', 'Import', 'Vi kan bygge videre på dine Google-kampagner.'], ['Budget', 'Dit eget', 'Du betaler annoncerne direkte til Microsoft.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     band: { chips: ['Søgeannoncer', 'Import fra Google', 'Shopping på Bing', 'Månedlig rapport'] },
@@ -1087,7 +1087,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du sælger, og hvem der er vilde med det. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og hvem er vilde med det?',
-    layout: ['marquee', 'compare', 'band', 'cards', 'faqSplit', 'grid'],
+    layout: ['showcase', 'compare', 'marquee', 'band', 'cards', 'faqSplit', 'grid'],
     marquee: { sec: 'emner', icon: 'spark', tag: {  }, h2: ['Der hvor de snakker om det.', 'Hver dag.'], lead: 'Eksempler på emner, hvor dine annoncer kan vises.', words: ['løbesko', 'gaming-pc', 'gør det selv', 'kaffe', 'mekaniske tastaturer', 'hjemmebryg', 'fotografering', 'cykling', 'brætspil', 'software', 'madlavning', 'camping', 'strik', 'elbiler'] },
     compare: { kicker: 'Forskellen', h2: ['En bred annonce.', 'Og Reddit.'], lead: 'Det er de samme penge. Forskellen er, hvem der ser annoncen.', uden: 'Bred annonce', med: 'Reddit Ads', rows: [['Vises for alle i en aldersgruppe.', 'Vises i fællesskaber om netop dit emne.'], ['Lyder som reklame.', 'Skrevet i Reddits tone, så den bliver læst.'], ['Ingen holder øje med kommentarerne.', 'Vi følger med i kommentarerne og hjælper dig med at svare.'], ['Svært at se, hvad den gav.', 'Pixel og konverteringer sat op fra start.']] },
     band: { chips: ['Fællesskaber', 'Annoncer', 'Kommentarer', 'Måling'] }
@@ -1096,13 +1096,13 @@ export const pages = [
     slug: 'markedspladser',
     name: 'Salg på markedspladser',
     short: 'Dine produkter der, hvor kunderne leder',
-    description: 'Vi sætter dine produkter op på online markedspladser som Amazon, Zalando, eBay og CDON, holder lager og priser i sync med din webshop og styrer annoncerne på markedspladserne. Fast pris efter en snak.',
+    description: 'Vi sætter dine produkter op på online markedspladser som Amazon, Zalando, eBay, Etsy, CDON og Miinto, holder lager og priser i sync med din webshop og styrer annoncerne på markedspladserne. Fast pris efter en snak.',
     serviceType: 'Salg på online markedspladser',
     words: ['webshops', 'brands', 'producenter', 'grossister'],
     h1: { a: ['Sælg', 'der,', 'hvor', 'de'], hot: 'leder.', dim: 'Ikke kun i din egen', mark: 'shop.' },
     lead: 'Mange kunder starter deres søgning på en markedsplads, ikke på Google. Vi sætter dine produkter op på de markedspladser, der passer til dig, og holder lager og priser i sync med din webshop.',
-    floats: ['Amazon og Zalando', 'Lager i sync', 'Fast pris ↗'],
-    ring: 'MARKEDSPLADSER • AMAZON • ZALANDO • EBAY •',
+    floats: ['Amazon, Zalando, eBay …', 'Lager i sync', 'Fast pris ↗'],
+    ring: 'AMAZON • ZALANDO • EBAY • ETSY • CDON • MIINTO •',
     price: null,
     priceH2: ['Hele opsætningen.', 'Til en fast pris.'],
     priceLead: 'Markedspladsernes egne gebyrer betaler du direkte til dem. Vi gennemgår dem med dig, før vi går i gang.',
@@ -1122,15 +1122,15 @@ export const pages = [
       ['Drift', 'Vi holder øje med salg, lager og annoncer.', '↗']
     ],
     faqs: [
-      ['Hvilke markedspladser kan I hjælpe med?', 'Fx Amazon, Zalando, eBay og CDON. Vi finder dem, der passer til dine produkter, og de lande, du vil sælge i.'],
+      ['Hvilke markedspladser kan I hjælpe med?', 'Fx Amazon (Tyskland, Sverige, Holland, Polen og flere), Zalando (mode, sko og skønhed i store dele af Europa), Miinto (dansk markedsplads for mode), eBay (næsten alt, i hele verden), Etsy (håndlavet og vintage), CDON (Norden), Fruugo (over 40 lande), Bol.com (Holland og Belgien), Allegro (Polen og flere) og Kaufland (Tyskland og flere). Vi finder dem, der passer til dine produkter, og de lande, du vil sælge i.'],
       ['Hvad med lager og priser?', 'Vi kobler markedspladserne til din webshop, så lager og priser følger med, og du ikke sælger noget, du ikke har.'],
       ['Koster markedspladserne noget?', 'Ja. De tager typisk et gebyr pr. salg og nogle gange et fast beløb om måneden. Vi gennemgår det med dig, før vi går i gang.'],
       ['Kan det køre sammen med min Shopify-webshop?', 'Ja. Vi er Shopify Partner og kan koble mange markedspladser direkte til din Shopify.', ['/services/webshop', 'Læs om webshop']]
     ],
     contact: 'Fortæl os hvad du sælger, og hvilke lande du vil sælge i. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og hvor vil du gerne sælge det?',
-    layout: ['facts', 'statement', 'band', 'timeline', 'faqSplit', 'grid'],
-    facts: { kicker: 'Markedspladser, kort fortalt', items: [['Hvor', 'Fx Amazon', 'Og Zalando, eBay og CDON, efter hvad der passer.'], ['Lager', 'I sync', 'Med din webshop, så du ikke oversælger.'], ['Annoncer', 'På stedet', 'Sponsorerede produkter, hvor kunderne søger.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
+    layout: ['facts', 'statement', 'showcase', 'band', 'timeline', 'faqSplit', 'grid'],
+    facts: { kicker: 'Markedspladser, kort fortalt', items: [['Hvor', 'Fx Amazon', 'Og Zalando, eBay, Etsy, CDON, Miinto og flere, efter hvad der passer.'], ['Lager', 'I sync', 'Med din webshop, så du ikke oversælger.'], ['Annoncer', 'På stedet', 'Sponsorerede produkter, hvor kunderne søger.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     statement: { kicker: 'Kort sagt', pill: 'search', text: 'Mange søger på {Amazon} før Google. | _Vær der,_ *når de gør.*', sub: 'Vi sætter dine produkter op der, hvor dine kunder allerede leder.' },
     band: { chips: ['Valg af markedspladser', 'Produktfeed', 'Lager og priser', 'Annoncer på markedspladsen'] },
     flow: { h2: ['Fra opsætning.', 'Til ordrer.'], lead: 'Vi sætter det op, kobler det til din webshop og holder øje med salget.', end: 'Hver måned' }
@@ -1212,7 +1212,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du sælger, og hvem dine kunder er. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og hvem følger dine kunder?',
-    layout: ['statement', 'band', 'compare', 'timeline', 'faq', 'track'],
+    layout: ['showcase', 'band', 'statement', 'compare', 'timeline', 'faq', 'track'],
     statement: { kicker: 'Kort sagt', pill: 'spark', text: 'En {anbefaling} vejer tungere end en annonce. | _Når den kommer fra_ *den rigtige.*', sub: 'Vi finder skabere, som dine kunder allerede følger og stoler på.' },
     band: { chips: ['Udvælgelse', 'Aftaler', 'Markering', 'Rapport'] },
     compare: { kicker: 'Forskellen', h2: ['Selv.', 'Og med os.'], lead: 'Det er de samme skabere. Forskellen er arbejdet bag.', uden: 'Selv', med: 'Med Webleads', rows: [['Du skriver til skabere én ad gangen.', 'Vi finder og kontakter dem, der passer.'], ['Aftalen står i en besked.', 'Aftalen er på skrift med rettigheder og pris.'], ['Reklamen bliver ikke markeret rigtigt.', 'Alt bliver markeret efter reglerne.'], ['Ingen ved, hvad det gav.', 'Klik og salg bliver målt for hvert samarbejde.']] },
@@ -1255,7 +1255,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du sælger, og om du har partnere i dag. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad sælger du, og har du partnere i dag?',
-    layout: ['compare', 'statement', 'receipt', 'timeline', 'faqSplit', 'track'],
+    layout: ['compare', 'statement', 'showcase', 'receipt', 'timeline', 'faqSplit', 'track'],
     compare: { kicker: 'Forskellen', h2: ['Uden partnere.', 'Og med.'], lead: 'Det er dit salg. Forskellen er, hvor mange der hjælper dig med det.', uden: 'Uden partnere', med: 'Med partnere', rows: [['Kun dine egne kanaler.', 'Partnere, der anbefaler dig til deres følgere.'], ['Du betaler, før du ved, om det sælger.', 'Provision kun, når der kommer et salg.'], ['Ingen ved, hvem der sendte kunden.', 'Hvert salg spores til den partner, der sendte det.'], ['Én kanal, du selv skal holde i gang.', 'Mange partnere, der sælger for dig.']] },
     statement: { kicker: 'Kort sagt', pill: 'spark', text: 'Lad andre {anbefale} dig. | _Og betal kun,_ *når det sælger.*', sub: 'Vi sætter programmet op og sørger for, at hvert salg bliver målt.' },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'], notes: ['Provision til partnerne betales kun ved salg'] },
@@ -1298,7 +1298,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du laver, og hvordan din Instagram ser ud i dag. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad laver du, og hvad er din Instagram?',
-    layout: ['compare', 'marquee', 'band', 'timeline', 'faqSplit', 'track'],
+    layout: ['compare', 'showcase', 'marquee', 'band', 'timeline', 'faqSplit', 'track'],
     compare: { kicker: 'Forskellen', h2: ['Når du selv når det.', 'Og når det kører.'], lead: 'Det er den samme profil. Forskellen er, om den passer sig selv.', uden: 'Når du når det', med: 'Når det kører', rows: [['Et opslag, når der er tid.', 'En fast plan, der går ud af sig selv.'], ['Kommentarer bliver ikke besvaret.', 'Automatiske svar med det samme.'], ['Følgere, men ingen kunder.', 'Kampagner, der giver beskeder og henvendelser.'], ['Ingen ved, hvad der virker.', 'En rapport hver måned.']] },
     marquee: { sec: 'kampagner', icon: 'spark', tag: {  }, h2: ['Kommentér et ord.', 'Få svar med det samme.'], lead: 'Eksempler på organiske kampagner med automatiske svar.', words: ['Kommentér GUIDE', 'Skriv PRIS i en besked', 'Kommentér TID for at booke', 'Gratis tjekliste', 'Konkurrence', 'Ugens tilbud', 'Spørg om alt', 'Kommentér LINK', 'Før og efter', 'Bag kulissen', 'Kundens spørgsmål', 'Nyt i butikken'] },
     band: { chips: ['Opslagsplan', 'Automatisk udgivelse', 'Organiske kampagner', 'Automatiske svar'] },
@@ -1341,7 +1341,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du laver, og hvordan din Facebook-side ser ud i dag. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad laver du, og hvad hedder din Facebook-side?',
-    layout: ['facts', 'compare', 'band', 'cards', 'faqSplit', 'grid'],
+    layout: ['showcase', 'facts', 'compare', 'band', 'cards', 'faqSplit', 'grid'],
     facts: { kicker: 'Organisk Facebook, kort fortalt', items: [['Opslag', 'Af sig selv', 'En fast plan, der går ud automatisk.'], ['Beskeder', 'Døgnet rundt', 'Automatiske svar i Messenger på de faste spørgsmål.'], ['Kampagner', 'Uden annoncer', 'Organiske kampagner, der giver beskeder og kunder.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     compare: { kicker: 'Forskellen', h2: ['En side, der står stille.', 'Og en, der arbejder.'], lead: 'Kunderne kigger på din Facebook-side, før de skriver. Den skal svare og være levende.', uden: 'Står stille', med: 'Arbejder', rows: [['Sidste opslag er fra sidste år.', 'Nye opslag hver uge, der går ud af sig selv.'], ['Beskeder bliver besvaret næste dag.', 'Svar med det samme på de faste spørgsmål.'], ['Kommentarer forsvinder i mængden.', 'Kampagner, hvor kommentarer bliver til kontakter.'], ['Ingen anmeldelser.', 'Glade kunder bliver bedt om en anbefaling.']] },
     band: { chips: ['Opslagsplan', 'Automatisk udgivelse', 'Messenger-automatik', 'Organiske kampagner'] }
@@ -1383,7 +1383,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad du laver, og om du er på TikTok i dag. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad laver du, og er du på TikTok i dag?',
-    layout: ['marquee', 'facts', 'receipt', 'cards', 'faq', 'grid'],
+    layout: ['marquee', 'facts', 'showcase', 'receipt', 'cards', 'faq', 'grid'],
     marquee: { sec: 'formater', icon: 'spark', tag: {  }, h2: ['Serier, de følger med i.', 'Video efter video.'], lead: 'Eksempler på formater, vi kan lave.', words: ['Dagens opgave', 'Spørg håndværkeren', 'Før og efter', 'Pak med mig', 'Svar på kommentar', 'En dag i butikken', 'Myte eller fakta', 'Kundens spørgsmål', 'Bag disken', 'Ugens produkt', 'Sådan gør du', 'Den største fejl …'] },
     facts: { kicker: 'Organisk TikTok, kort fortalt', items: [['Plan', 'Hver måned', 'Serier og formater, der passer til dig.'], ['Optagelse', 'Mange på én gang', 'Så der kommer videoer jævnt.'], ['Udgivelse', 'Af sig selv', 'Videoerne går ud efter planen.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'] }
@@ -1425,7 +1425,7 @@ export const pages = [
     ],
     contact: 'Fortæl os hvad din virksomhed laver, og hvem dine kunder er. Vi svarer inden for 24 timer med en fast pris.',
     placeholder: 'Hvad laver din virksomhed, og hvad vil du gerne udstråle?',
-    layout: ['statement', 'facts', 'receipt', 'cards', 'faq', 'track'],
+    layout: ['showcase', 'statement', 'facts', 'receipt', 'cards', 'faq', 'track'],
     statement: { kicker: 'Kort sagt', pill: 'spark', text: 'Du får kun ét {førstehåndsindtryk}. | _Gør det til_ *dit eget.*', sub: 'Et logo, farver og skrifttyper, der hænger sammen overalt.' },
     facts: { kicker: 'Branding, kort fortalt', items: [['Logo', 'Dit eget', 'Når det er færdigt og betalt, er det dit.'], ['Brug', 'Overalt', 'Filer til skærm, print, bil og sociale medier.'], ['Guide', 'Brandguide', 'Så alle bruger det på samme måde.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'] }
@@ -1433,7 +1433,41 @@ export const pages = [
 ];
 
 // The front page
+// The services in groups, for the mega menu (lib.MEGA), /services and the order everywhere else.
+// Every service in `services` is in exactly one group. `short` is the line under the name in the menu.
+export const groups = [
+  { id: 'web', name: 'Hjemmeside og webshop', icon: 'web', slugs: ['hjemmesider', 'webshop', 'branding', 'cro', 'app-udvikling'] },
+  { id: 'annoncer', name: 'Annoncering', icon: 'ads', slugs: ['google-ads', 'meta-ads', 'google-shopping-ads', 'google-css', 'tiktok-ads', 'linkedin-ads', 'youtube-annoncering', 'snapchat-ads', 'pinterest-ads', 'bing-ads', 'reddit-ads'] },
+  { id: 'synlig', name: 'Synlig på Google og AI', icon: 'search', slugs: ['seo', 'lokal-seo', 'linkbuilding', 'geo'] },
+  { id: 'some', name: 'Sociale medier og indhold', icon: 'some', slugs: ['organisk-instagram', 'organisk-facebook', 'organisk-tiktok', 'video', 'ugc', 'influencer-marketing'] },
+  { id: 'salg', name: 'Mere salg', icon: 'sale', slugs: ['markedspladser', 'email-marketing', 'affiliate-marketing'] },
+  { id: 'auto', name: 'AI og automation', icon: 'auto', slugs: ['ai', 'automations', 'interne-systemer'] }
+];
+// The line under each name in the mega menu: a few words, plain and true
+export const short = {
+  hjemmesider: 'Tre pakker fra 2.995 kr.', webshop: 'Shopify med betaling og fragt', branding: 'Logo, farver og brandguide',
+  cro: 'Flere kunder af de besøgende', 'app-udvikling': 'Til iPhone og Android',
+  'google-ads': 'Øverst, når de søger', 'meta-ads': 'Facebook og Instagram', 'google-shopping-ads': 'Produkter med billede og pris',
+  'google-css': 'Billigere klik på Shopping', 'tiktok-ads': 'Video, der fanger med det samme', 'linkedin-ads': 'Til dem, der beslutter',
+  'youtube-annoncering': 'Før videoer og i Shorts', 'snapchat-ads': 'Fuld skærm mellem stories', 'pinterest-ads': 'Mens de planlægger og gemmer',
+  'bing-ads': 'Dem, der ikke bruger Google', 'reddit-ads': 'I de rigtige fællesskaber',
+  seo: 'Til webshops og brands', 'lokal-seo': 'Google Maps og dit område', linkbuilding: 'Links fra danske sider', geo: 'Nævnt af ChatGPT og AI',
+  'organisk-instagram': 'Plan, opslag og svar', 'organisk-facebook': 'Opslag og svar i Messenger', 'organisk-tiktok': 'Set uden annoncekroner',
+  video: 'Reklamer og explainers', ugc: 'Ligner noget fra en kunde', 'influencer-marketing': 'Skabere, der anbefaler dig',
+  markedspladser: 'Amazon, Zalando, eBay og flere', 'email-marketing': 'Nyhedsbreve og mailflows', 'affiliate-marketing': 'Provision, når der sælges',
+  ai: 'Chatbots og assistenter', automations: 'Rutiner, der klarer sig selv', 'interne-systemer': 'CRM, booking og dashboards'
+};
+
 export const front = {
+  // The services section: the most important first (without a chosen segment; segments.order sorts it otherwise)
+  featured: ['hjemmesider', 'google-ads', 'meta-ads', 'webshop', 'lokal-seo', 'seo'],
+  // "Til alle …": the band of words under the services. With a chosen segment its own label and words
+  trades: {
+    label: 'Til servicefag og webshops',
+    words: ['Håndværkere', 'Webshops', 'Klinikker', 'Tøj og mode', 'Frisører', 'Restauranter', 'Brands', 'Fysioterapeuter', 'Babyudstyr', 'Revisorer', 'Caféer', 'Kostumer'],
+    ydelser: { label: 'Til alle servicefag', words: ['Tømrer', 'Frisør', 'VVS', 'Fysioterapeut', 'Maler', 'Klinik', 'Elektriker', 'Restaurant', 'Revisor', 'Rengøring', 'Advokat', 'Personlig træner'] },
+    webshop: { label: 'Til alle slags webshops', words: ['Tøj og mode', 'Babyudstyr', 'Kostumer', 'Skønhed', 'Kaffe og køkken', 'Sport', 'Kæledyr', 'Møbler', 'Smykker', 'Gaver', 'Elektronik', 'Plakater'] }
+  },
   title: 'Webleads · Hjemmesider, Google Ads, Meta Ads, SEO og AI',
   description: 'Webleads hjælper virksomheder med at få flere kunder online: hjemmesider fra 2.995 kr., Google Ads, Meta Ads, Google Shopping, SEO, GEO, AI, automations, e-mail marketing og CRO. Ét team og direkte kontakt.',
   ogAlt: 'Webleads: flere kunder online. Hjemmesider, annoncer, SEO og AI under ét tag.',

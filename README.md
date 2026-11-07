@@ -44,8 +44,10 @@ assets/og/            Share images for the front page and the other service page
 ## Pages and services
 
 ```
-/                          Front page: hero, Services (all of them as cards), Vores løfte, Alt under ét tag,
+/                          Front page: hero, Dem har vi hjulpet, Services (a grid: the 3 most important, half of
+                           the next row, "Vis flere" for the rest), Vores løfte, Til …, Alt under ét tag,
                            Teamet, Spørgsmål, Kontakt
+/services                  Every service on one page, three on a line, nothing else (pages/services.mjs)
 /services/hjemmesider      Hjemmesider: three packages and a price calculator (Sådan virker det, Før og efter,
                            Pakker, Tilvalg, Beregn din pris …)
 /services/<slug>           Hero, Det får du (price and what is included), Sådan foregår det,
@@ -59,13 +61,17 @@ node scripts/services/build.mjs    # writes index.html and services/<slug>/index
 node scripts/services/og.mjs       # share images in assets/og/ (needs Playwright)
 ```
 
-Do not edit the generated files by hand; the next build overwrites them. `/services/hjemmesider` is edited by hand, except the list of services at the bottom (between `sitemap:start` and `sitemap:end`), which the build refreshes. A new service: add a card to `services` and a page to `pages` in `data.mjs`, then build, make the share image and add it to `sitemap.xml`.
+Do not edit the generated files by hand; the next build overwrites them. `/services/hjemmesider` is edited by hand, except the list of services at the bottom (between `sitemap:start` and `sitemap:end`) and the mega menu (`mega:start`/`mega:end`), which the build refreshes. A new service: add a card to `services`, a page to `pages`, its slug to one of the `groups` and a line to `short` in `data.mjs`, then build, make the share image and add it to `sitemap.xml`.
+
+- **Mega menu** ("Services" in the menu on every page; `lib.mega`, `assets/js/mega.js`, styles in main.css): the services in six groups (`groups` in data.mjs, four columns), each with a short line (`short`), the three most chosen for the visitor's segment, a way to a fixed price and a link to `/services`. It opens on hover with a mouse and on click or Enter everywhere; Escape, a click outside or leaving it closes it. On phones the button is ☰ next to Kontakt and the menu is a sheet. GA4: `menu_open` (`via` hover/klik, once a page); the links are `nav_click`/`cta_click` with `button` "Menu: …".
+- **Services on the front page** (`lib.frontServices`): the order is `front.featured` and then the groups (or `segments.order` once the visitor has chosen). The first three show, the next row is half visible under a soft blur, and "Vis flere" opens the rest; the cut follows the layout (main.js → `data-fsv`). "+ Tilføj" works as before.
+- **"Til …"** under the promises (`lib.trades`, `front.trades`): the label and the words in the band follow the visitor's segment (servicefag for Ydelser, kinds of webshops for Produkter online, both before a choice).
 
 Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO and Lokal SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak"; that is every service added on 5 Nov 2026 except Lokal SEO, until Mikkel sets their prices (the new ad channels too: LinkedIn, TikTok, Snapchat, Pinterest, YouTube, Bing and Reddit). Never invent numbers, results or customers in the copy.
 
 - On the cards, "+ Tilføj" puts the service in the contact form ("Du har valgt"), as the add-ons do on the website page. On a service page the form starts with that service (`data-base` on the form; `data-value` is its start price, used as the value of the Meta lead). With nothing chosen on the front page the e-mail says "Generel henvendelse".
 - Old links to the website offer on the front page (`/#saadan`, `/#pris`, `/#tilvalg`, `/#video`) are sent on to `/services/hjemmesider` with the same `?utm_…` and `#…` (script at the top of `index.html`). `/#kontakt`, `/#teamet`, `/#faq` and `/#bestil` stay on the front page.
-- `/services` redirects to `/#services` (vercel.json). `/services/SEO` and other paths with capitals are sent on to the lower-case page by `404.html` (a redirect in vercel.json would ignore case and loop).
+- `/services` is the page with every service (`scripts/services/pages/services.mjs`, styles `assets/css/alle-services.css`). `/services/SEO` and other paths with capitals are sent on to the lower-case page by `404.html` (a redirect in vercel.json would ignore case and loop).
 - The intro curtain is shown on the first page of a visit only (sessionStorage `wl-intro`, class `intro-seen` set in `<head>`); the hero then animates in at once.
 - Ads and posts about websites should link to `/services/hjemmesider`, not the front page.
 
@@ -108,7 +114,7 @@ A thin bar above the menu on every generated page and on `/services/hjemmesider`
 
 - **How it is set:** only by the visitor's own choice in the tabs (or the floating card). No links and no guessing from the page (Mikkel: we must be sure). Nothing is chosen in advance. The choice is kept in localStorage (`wl-seg`) and set before the page is drawn on the next pages (`lib.SEG_HEAD` in `<head>`).
 - **Until a choice is made** the visitor is asked: a dot pulses by the question, a light sweeps over the tabs and an orange bubble under them says "Vælg her, så viser vi det, der passer til dig." (`segments.nudge`; on at most 3 pages a visit, gone after 10 seconds, ✕ stops it; not on phones, where it would cover the menu). A floating card at the bottom asks the same after the first scroll or a few seconds and stays until a choice is made (✕ hides it for the visit; it waits while the cookie question is open).
-- **What changes** (`assets/js/segment.js`): the hero on the front page (badge words and lead, `segments.front`), and the order of the services in every list (`segments.order`, numbered again). Anything else can be shown for one segment with `data-seg-only="ydelser"`, `"webshop"` or `"neutral"`; main.css hides the rest.
+- **What changes** (`assets/js/segment.js`): the hero on the front page (badge words and lead, `segments.front`), the order of the services in every list (`segments.order`, numbered again), the "Mest valgt" in the mega menu and the "Til …" band on the front page (segment.js sends a `wl:seg` DOM event that main.js listens to). Anything else can be shown for one segment with `data-seg-only="ydelser"`, `"webshop"` or `"neutral"`; main.css hides the rest.
 - **GA4**: every event carries `segment` (`ydelser`, `webshop` or `ukendt`), so every report can be split by it, leads included. `segment_choice` (`segment`, `previous`, `segment_source` faner/bund, `nudge` ja/nej) logs each choice, and `segment_nudge` (`action` vist/lukket/skjult, `nudge_type` boble/bund) the bubble and the card. Register `segment`, `previous`, `segment_source`, `nudge`, `action` and `nudge_type` under Admin → Custom definitions (event scope).
 - `/services/hjemmesider` is edited by hand; the build keeps its tabs and head script (between `seg-head:start`/`seg-bar:start` markers) and its main.css/main.js versions in step.
 
@@ -154,6 +160,7 @@ Every event carries `page_type` (`forside`, `service_hjemmesider`, `service_<slu
 | `tab_return` | Back after 5+ seconds in another tab | `seconds_away` |
 | `exit_intent` | Computer: the mouse leaves through the top of the window | `seconds`, `max_scroll` |
 | `text_copy` | Text is copied | `copied_type` (mail/telefon/pris/tekst), `chars`, `section` |
+| `menu_open` | The mega menu under "Services" opens (once a page) | `via` (hover/klik) |
 | `form_start` · `form_field` · `form_field_done` · `form_submit` · `form_invalid` · `form_abandon` | The contact form: first field, each field used, each field filled, send pressed, stopped by a missing field, left without sending | `form_name`, `field_name`, `field_index`, `chars` (1-10/11-50/51-200/200+), `fields_filled`, `seconds` |
 | `js_error` · `resource_error` | A script on our site fails, or an image/file does not load | `error_message`, `source`, `line`, `link_domain` |
 | `web_vitals` | Loading speed: TTFB, FCP, LCP, CLS, INP | `metric_name`, `metric_value` (ms, CLS as a number), `metric_rating` (god/forbedres/daarlig) |
@@ -165,7 +172,7 @@ Every event carries `page_type` (`forside`, `service_hjemmesider`, `service_<slu
 
 **Customer drafts** (`udkast/_faelles/udkast.js`): `udkast_farve` (`colour` on hand-made drafts, `theme` on instant drafts), `udkast_faerdig_click` (back to webleads.dk), `udkast_bar_close`, `udkast_form_try`. **Cookie box** (`meta-pixel.js`, through a `wl:track` DOM event): `consent_view` (`trigger` automatisk/link), `consent_choice` (`choice` ja/nej, `seconds`). **Referencer:** `reference_filter` (`filter`, `results`).
 
-**In GA4:** mark `generate_lead` (both forms; `form_name` tells them apart, `form_page` and the `/tak/<side>` address tell the pages apart) and `contact_click` as key events. Register the parameters you want in reports under Admin → Custom definitions (event scope): `page_type`, `section`, `button`, `element_type`, `method`, `click_type`, `popup`, `popup_type`, `popup_name`, `addon`, `faq_question`, `step`, `step_name`, `choice_group`, `choice`, `choice_action`, `field_name`, `form_name`, `form_page`, `segment`, `previous`, `segment_source`, `nudge`, `nudge_type`, `fag`, `design`, `theme`, `trigger`, `contact_method`, `contact_time`, `metric_name`, `metric_rating`, `copied_type`, `input`, `ad_click`, `meta_consent`, and the metrics `seconds` (seconds) and `metric_value`. `link_text`, `link_url`, `link_domain`, `outbound` and `percent_scrolled` are built in.
+**In GA4:** mark `generate_lead` (both forms; `form_name` tells them apart, `form_page` and the `/tak/<side>` address tell the pages apart) and `contact_click` as key events. Register the parameters you want in reports under Admin → Custom definitions (event scope): `page_type`, `section`, `button`, `element_type`, `method`, `click_type`, `popup`, `popup_type`, `popup_name`, `addon`, `faq_question`, `step`, `step_name`, `choice_group`, `choice`, `choice_action`, `field_name`, `form_name`, `form_page`, `segment`, `previous`, `segment_source`, `nudge`, `nudge_type`, `via`, `fag`, `design`, `theme`, `trigger`, `contact_method`, `contact_time`, `metric_name`, `metric_rating`, `copied_type`, `input`, `ad_click`, `meta_consent`, and the metrics `seconds` (seconds) and `metric_value`. `link_text`, `link_url`, `link_domain`, `outbound` and `percent_scrolled` are built in.
 
 ## Meta Pixel and Conversions API (only with consent)
 

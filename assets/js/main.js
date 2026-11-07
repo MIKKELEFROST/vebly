@@ -2,6 +2,7 @@ import { track, leadDone } from './analytics.js';
 import { metaTrack, metaLeadFields } from './meta-pixel.js';
 import { openBestil, FAG } from './bestil.js';
 import './segment.js';
+import './mega.js';
 import { trades, flipWords, included, addons, addonPages, pakker, priser, KANAL, kanalPriser, kanalPlus, SEO_TIMER, comparisons, team, balls, ballInfo, faqs, palette, bandPalette } from './content.js';
 
 const motion = document.documentElement.classList.contains('motion');
@@ -20,11 +21,64 @@ const state = { addons: [] };
 /* Render lists                                                         */
 /* ------------------------------------------------------------------ */
 
-// Trades marquee (two copies so the loop is seamless)
-if ($('[data-track]')) {
-  const items = [...trades, ...trades].map(t => `<div class="track__item">${esc(t)}<i></i></div>`).join('');
+// Trades marquee (two copies so the loop is seamless). The words come from the section (lib.trades), with
+// words of their own for each segment where the page has them, and change when the visitor chooses (segment.js)
+const tradesEl = $('[data-trades]');
+const tradeWords = () => {
+  const d = tradesEl ? tradesEl.dataset : {}, seg = document.documentElement.dataset.seg;
+  const w = (seg && d['words' + seg.charAt(0).toUpperCase() + seg.slice(1)]) || d.words;
+  return w ? w.split('|') : trades;
+};
+const fillTrades = () => {
+  if (!$('[data-track]')) return;
+  const list = tradeWords(), items = [...list, ...list].map(t => `<div class="track__item">${esc(t)}<i></i></div>`).join('');
   $('[data-track]').innerHTML = items;
   $('[data-track2]').innerHTML = items;
+};
+fillTrades();
+document.addEventListener('wl:seg', fillTrades);
+
+// Front page services: the first three and half of the next row, until "Vis flere" (lib.frontServices).
+// The cut follows the layout (3, 2 or 1 per row) and the order (segment.js sorts the cards).
+const fsv = $('[data-fsv]');
+if (fsv) {
+  const box = $('[data-fsv-box]', fsv), grid = $('.fsv__grid', fsv), more = $('[data-fsv-more]', fsv), label = $('[data-fsv-label]', fsv);
+  let open = false;
+  const cut = () => {
+    const kids = [...grid.children];
+    if (open || kids.length < 5) { kids.forEach(k => { k.inert = false; }); return; }
+    const third = kids[2];
+    let i = 3;
+    while (i < kids.length && kids[i].offsetTop <= third.offsetTop + 2) i++;
+    const half = kids[i];
+    kids.forEach((k, n) => { k.inert = n >= i; });
+    if (!half) { box.style.maxHeight = ''; fsv.classList.add('is-all'); return; }
+    box.style.maxHeight = Math.round(half.offsetTop + half.offsetHeight * 0.5) + 'px';
+    box.style.setProperty('--fsv-fade', Math.round(half.offsetHeight * 0.5 + 60) + 'px');
+  };
+  const setOpen = on => {
+    open = on;
+    fsv.classList.toggle('is-open', on);
+    more.setAttribute('aria-expanded', String(on));
+    label.textContent = on ? 'Vis færre' : 'Vis flere';
+    if (on) {
+      box.style.maxHeight = box.scrollHeight + 'px';
+      [...grid.children].forEach(k => { k.inert = false; });
+      setTimeout(() => { if (open) box.style.maxHeight = 'none'; }, motion ? 700 : 0);
+    } else {
+      box.style.maxHeight = box.scrollHeight + 'px';
+      void box.offsetHeight;
+      cut();
+      const r = fsv.getBoundingClientRect();
+      if (r.top < 0) scrollTo({ top: scrollY + r.top - 80, behavior: motion ? 'smooth' : 'auto' });
+    }
+  };
+  more.addEventListener('click', () => setOpen(!open)); // analytics.js logs the click (data-event)
+  fsv.classList.add('is-ready');
+  cut();
+  addEventListener('resize', () => { if (!open) cut(); }, { passive: true });
+  document.addEventListener('wl:seg', () => { if (!open) cut(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!open) cut(); });
 }
 
 // Included list (service pages write their own list in the HTML)
@@ -798,11 +852,14 @@ function runEffects() {
   const scramble = () => {
     if (!scEl || scrRun) return; scrRun = true;
     const fin = scEl.dataset.text || scEl.textContent; scEl.dataset.text = fin;
+    // The word keeps its width while the letters change, so the heading never moves
+    scEl.style.width = scEl.offsetWidth + 'px'; scEl.style.textAlign = 'left'; scEl.style.whiteSpace = 'nowrap';
     const chars = 'abcdefghijklmnopqrstuvwxyzæøå#%&'; let f = 0;
-    const tick = () => { f++; scEl.textContent = fin.split('').map((c, i) => i < f / 2.2 || c === '.' ? c : chars[Math.floor(Math.random() * chars.length)]).join(''); if (f / 2.2 < fin.length) requestAnimationFrame(tick); else { scEl.textContent = fin; scrRun = false; } };
+    const tick = () => { f++; scEl.textContent = fin.split('').map((c, i) => i < f / 2.2 || c === '.' ? c : chars[Math.floor(Math.random() * chars.length)]).join(''); if (f / 2.2 < fin.length) requestAnimationFrame(tick); else { scEl.textContent = fin; scEl.style.width = ''; scrRun = false; } };
     tick();
   };
-  if (scEl) { setTimeout(scramble, D * 1000 + 800); scEl.addEventListener('mouseenter', scramble); }
+  // Once, when the page has loaded (not on hover: Mikkel found that irritating, 7 Nov 2026)
+  if (scEl) setTimeout(scramble, D * 1000 + 800);
 
   // Rotating word in the badge
   {
@@ -841,7 +898,7 @@ function runEffects() {
       if (Math.hypot(e.clientX - tlx, e.clientY - tly) < 80) return;
       tlx = e.clientX; tly = e.clientY;
       const [bg, fg] = palette[ti % palette.length], rot = (Math.random() - .5) * 24;
-      const d = document.createElement('div'); d.className = 'trail'; d.textContent = trades[ti % trades.length]; ti++;
+      const d = document.createElement('div'); d.className = 'trail'; const tw = tradeWords(); d.textContent = tw[ti % tw.length]; ti++;
       d.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;background:${bg};color:${fg};border:${bg === '#fff' ? '1.5px solid #111' : 'none'};transform:translate(-50%,-50%) rotate(${rot}deg) scale(0.3)`;
       document.body.appendChild(d);
       requestAnimationFrame(() => { d.style.transform = `translate(-50%,-50%) rotate(${rot}deg) scale(1)`; d.style.opacity = 1; });

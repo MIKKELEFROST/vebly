@@ -1,0 +1,191 @@
+<!-- Showcase for Influencer marketing: a "creator match deck". A stack of example creator cards (made-up people with
+     drawn initials and shapes as avatars, never real people) shows how much each creator's followers look like the
+     customers, as a match score. The visitor approves or skips (buttons, swipe or the arrow keys). An approved creator
+     lands on the campaign board: the agreement ticks off (Pris, Rettigheder til annoncer, Markeret som "Reklame",
+     Deadline) and is signed, the post appears with a clear "Reklame" label, and a small report shows what it gave.
+     The webshop Kravlezoo, the creators and every number are made up. The videos and photos are our own (assets/media).
+     Styles: assets/css/show/influencer-marketing.css, behaviour: assets/js/show/influencer-marketing.js -->
+<section id="eksempel" class="show show--influencer-marketing" data-sec="eksempel">
+  <svg class="im-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="im-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11m0-11-11 11"/></symbol>
+    <symbol id="im-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.6 4.6L19 7.5"/></symbol>
+    <symbol id="im-heart" viewBox="0 0 24 24"><path d="M12 20.3s-7.8-4.6-7.8-10.4A4.4 4.4 0 0 1 12 7.3a4.4 4.4 0 0 1 7.8 2.6c0 5.8-7.8 10.4-7.8 10.4z"/></symbol>
+    <symbol id="im-chat" viewBox="0 0 24 24"><path d="M20.2 11.6a8.2 8.2 0 0 1-11.9 7.3L3.8 20.2l1.3-4.4a8.2 8.2 0 1 1 15.1-4.2z"/></symbol>
+    <symbol id="im-send" viewBox="0 0 24 24"><path d="M21 3.5 10.2 13.8M21 3.5l-6.6 17-4.2-6.7-6.7-4.2z"/></symbol>
+    <symbol id="im-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></symbol>
+    <symbol id="im-pause" viewBox="0 0 24 24"><path d="M8.5 5.5v13m7-13v13"/></symbol>
+    <symbol id="im-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></symbol>
+    <symbol id="im-down" viewBox="0 0 24 24"><path d="M12 5v13m-5.5-5.5L12 18l5.5-5.5"/></symbol>
+    <symbol id="im-sq" viewBox="0 0 120 40"><path d="M4 26c10-18 20-18 26 0s16 18 26 0 16-18 26 0 16 18 26 0"/></symbol>
+  </svg>
+
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Prøv selv</div><h2 class="h2">Du siger ja eller nej.<br><span class="dim">Vi klarer resten.</span></h2></div>
+    <p class="sec-head__lead">Et eksempel for en webshop med dyredragter til børn. Vi viser dig skabere, hvis følgere ligner dine kunder. Du godkender dem, du kan lide. Vi laver aftalen, markerer opslaget som reklame og måler, hvad det gav.</p>
+  </div>
+
+  <p class="sr-only">Eksempel med opdigtede skabere og tal: Seks skabere bliver foreslået til Kravlezoo, en webshop med dyredragter til børn. Hver skaber har et match, der viser, hvor meget følgerne ligner webshoppens kunder. Godkender du en skaber, bliver aftalen lavet med pris, rettigheder til annoncer, markering som reklame og deadline. Derefter vises opslaget, tydeligt markeret som reklame, og en rapport med visninger, klik og salg.</p>
+
+  <div class="im" data-im>
+    <div class="im-l" data-reveal="1">
+      <div class="im-dhd">
+        <span class="im-dhd__t"><b>Forslag til Kravlezoo</b><small>Dyredragter til børn · <span data-im-left>6 forslag</span></small></span>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+
+      <div class="im-deck" data-im-deck tabindex="0" role="group" aria-label="Foreslåede skabere. Pil til højre godkender, pil til venstre springer over.">
+        <article class="im-c" data-im-c="0" style="--c1:#fbe3d6;--c2:#e0552b;--c3:#f2c14e;--a:#e0552b;--af:#fff">
+          <div class="im-cv im-cv--a" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Familieliv</span><i class="im-av">R</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Rikke</h3>
+            <p class="im-sub">Mor til tre i Odense</p>
+            <ul class="im-st"><li><b>18,4k</b><span>følgere</span></li><li><b>5,8&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:94"/></svg><span class="im-mt__t"><b>94&nbsp;%</b><small>match med dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.82"></i><b>82&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.79"></i><b>79&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.97"></i><b>97&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c im-c--lo" data-im-c="1" style="--c1:#e4e1f7;--c2:#7a6fd0;--c3:#f4b8c8;--a:#2f2a5c;--af:#f4b8c8">
+          <div class="im-cv im-cv--b" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Studieliv og mode</span><i class="im-av">S</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Sara</h3>
+            <p class="im-sub">Studerende i København</p>
+            <ul class="im-st"><li><b>73,2k</b><span>følgere</span></li><li><b>2,1&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:21"/></svg><span class="im-mt__t"><b>21&nbsp;%</b><small>Mange følgere, men ikke dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.06"></i><b>6&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.38"></i><b>38&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.91"></i><b>91&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c" data-im-c="2" style="--c1:#dcebdc;--c2:#2f9e5b;--c3:#f2c14e;--a:#14432b;--af:#c9f0a8">
+          <div class="im-cv im-cv--c" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Far og børn</span><i class="im-av">J</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Jonas</h3>
+            <p class="im-sub">Far på barsel i Aarhus</p>
+            <ul class="im-st"><li><b>31,6k</b><span>følgere</span></li><li><b>4,9&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:89"/></svg><span class="im-mt__t"><b>89&nbsp;%</b><small>match med dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.74"></i><b>74&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.83"></i><b>83&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.95"></i><b>95&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c" data-im-c="3" style="--c1:#fdeec4;--c2:#e8a317;--c3:#e0552b;--a:#111;--af:#f2c14e">
+          <div class="im-cv im-cv--d" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Tvillinger</span><i class="im-av">M</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Maja</h3>
+            <p class="im-sub">Tvillingemor i Roskilde</p>
+            <ul class="im-st"><li><b>9.800</b><span>følgere</span></li><li><b>7,2&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:91"/></svg><span class="im-mt__t"><b>91&nbsp;%</b><small>Færre følgere, men de rigtige</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.85"></i><b>85&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.72"></i><b>72&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.98"></i><b>98&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c im-c--lo" data-im-c="4" style="--c1:#d9e9f5;--c2:#1f6fb0;--c3:#7fd0c4;--a:#0f2f4d;--af:#9fe0d6">
+          <div class="im-cv im-cv--b" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Løb og træning</span><i class="im-av">L</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Line</h3>
+            <p class="im-sub">Løber i Vejle</p>
+            <ul class="im-st"><li><b>56,1k</b><span>følgere</span></li><li><b>2,6&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:38"/></svg><span class="im-mt__t"><b>38&nbsp;%</b><small>Følgerne passer ikke så godt</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.19"></i><b>19&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.61"></i><b>61&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.93"></i><b>93&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c" data-im-c="5" style="--c1:#f6dfe6;--c2:#c2456a;--c3:#f2c14e;--a:#5a1730;--af:#ffd3df">
+          <div class="im-cv im-cv--c" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Bolig og børn</span><i class="im-av">E</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Emil</h3>
+            <p class="im-sub">Far til Viggo i Aalborg</p>
+            <ul class="im-st"><li><b>12,7k</b><span>følgere</span></li><li><b>5,1&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:82"/></svg><span class="im-mt__t"><b>82&nbsp;%</b><small>match med dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.68"></i><b>68&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.77"></i><b>77&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.96"></i><b>96&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <div class="im-end" data-im-end hidden>
+          <b>Du har set alle forslag.</b>
+          <span>I virkeligheden finder vi flere, til du har nok.</span>
+          <button type="button" class="im-again" data-im-again>Start forfra</button>
+        </div>
+      </div>
+
+      <div class="im-acts">
+        <button type="button" class="im-b im-b--nej" data-im-act="nej"><svg class="im-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-x"/></svg>Spring over</button>
+        <button type="button" class="im-b im-b--ja" data-im-act="ja"><svg class="im-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-ok"/></svg>Godkend</button>
+      </div>
+      <p class="im-hint" data-im-hint>Træk kortet til siden, eller brug knapperne.</p>
+      <button type="button" class="im-toast" data-im-toast hidden><span data-im-toast-t>Godkendt.</span> Se aftalen<svg class="im-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-down"/></svg></button>
+    </div>
+
+    <div class="im-r" data-reveal="2">
+      <div class="im-bd" data-im-board>
+        <div class="im-bhd">
+          <span class="im-bhd__t"><b>Kampagne: Fastelavn</b><small>Godkendte skabere</small></span>
+          <span class="tag-eks">Eksempel</span>
+          <div class="im-chips" data-im-chips role="group" aria-label="Vis aftale og opslag for"><span class="im-chips__none">Ingen endnu. Godkend en skaber.</span></div>
+        </div>
+
+        <div class="im-bb">
+          <div class="im-deal" data-im-deal>
+            <div class="im-deal__h">
+              <i class="im-av im-av--s" data-im-av aria-hidden="true">R</i>
+              <span class="im-deal__t"><small>Aftale med</small><b data-im-n>Rikke</b></span>
+              <span class="im-pill" data-im-pill>Underskrevet</span>
+            </div>
+            <ul class="im-rows">
+              <li class="im-row" data-im-row><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Pris</span><span class="im-row__v" data-im-f="pris">4.500 kr. + 2 dragter</span></li>
+              <li class="im-row" data-im-row><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Rettigheder til annoncer</span><span class="im-row__v" data-im-f="ret">6 måneder</span></li>
+              <li class="im-row" data-im-row data-im-hl><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Markeret som "Reklame"</span><span class="im-row__v">I opslaget</span></li>
+              <li class="im-row" data-im-row><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Deadline</span><span class="im-row__v" data-im-f="dl">Ude senest 31. januar</span></li>
+            </ul>
+            <div class="im-sig" aria-hidden="true">
+              <span><svg viewBox="0 0 120 44"><path pathLength="1" d="M6 30c6-14 10-22 13-19 3 4-7 20-3 21 5 1 9-16 14-15 4 1-2 13 2 13s7-10 11-9c3 1 0 8 4 8 5 0 8-12 13-11 4 1 0 9 5 8 6-1 11-9 17-8s6 6 12 5c5-1 10-4 14-7"/></svg><small>Kravlezoo</small></span>
+              <span><svg viewBox="0 0 120 44"><path pathLength="1" d="M8 32c4-10 8-24 14-22 5 2-6 18 0 18 5 0 10-14 15-12 4 2-3 11 1 12 4 1 9-9 13-8 4 1 1 8 5 8 6 0 9-13 15-12 5 1-1 11 4 11 7 0 12-10 19-9 6 1 7 5 16 3"/></svg><small data-im-sn>Rikke</small></span>
+              <span class="im-seal"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg>På skrift</span>
+            </div>
+          </div>
+
+          <div class="im-rep" data-im-rep>
+            <p class="im-rep__h"><b>Rapport efter 14 dage</b><span>Målt for hvert samarbejde</span></p>
+            <ul class="im-tiles">
+              <li><small>Visninger</small><b data-im-k="0">26.480</b></li>
+              <li><small>Klik til shop</small><b data-im-k="1">1.214</b></li>
+              <li><small>Salg</small><b data-im-k="2">87</b><em data-im-f="kode">RIKKE15</em></li>
+            </ul>
+          </div>
+
+          <div class="im-phw">
+            <div class="im-ph">
+              <div class="im-scr" data-im-scr>
+                <i class="im-isl" aria-hidden="true"></i>
+                <div class="im-wait" aria-hidden="true"><span>Opslaget kommer her</span></div>
+                <div class="im-post" data-im-post>
+                  <video class="im-vid" data-im-vid muted loop playsinline preload="none" poster="/assets/media/ugc-nuttetbaby-mor.jpg" src="/assets/media/ugc-nuttetbaby-mor.mp4" aria-hidden="true"></video>
+                  <img class="im-img" data-im-img alt="" width="540" height="675" loading="lazy" decoding="async" hidden>
+                  <div class="im-top" aria-hidden="true"><b>Reels</b></div>
+                  <button type="button" class="im-pp" data-im-pp aria-label="Sæt videoen på pause"><svg class="im-i im-i--f" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-pause"/></svg><svg class="im-i im-i--f" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-play"/></svg></button>
+                  <div class="im-rail" aria-hidden="true">
+                    <span><svg class="im-i"><use href="#im-heart"/></svg><small data-im-f="likes">2.481</small></span>
+                    <span><svg class="im-i"><use href="#im-chat"/></svg><small data-im-f="kom">96</small></span>
+                    <span><svg class="im-i"><use href="#im-send"/></svg></span>
+                    <span><svg class="im-i"><use href="#im-more"/></svg></span>
+                  </div>
+                  <div class="im-info">
+                    <span class="im-who" aria-hidden="true"><i class="im-av im-av--xs" data-im-av>R</i><b data-im-n>Rikke</b><em>Følg</em></span>
+                    <span class="im-ad"><b class="im-ad__l">Reklame</b><span>Samarbejde med Kravlezoo</span></span>
+                    <p class="im-cap"><b>Reklame for Kravlezoo.</b> <span data-im-f="cap">Fastelavn er reddet. Ungerne vil ikke af med dem igen.</span> Brug koden <span data-im-f="kode">RIKKE15</span>.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only" aria-live="polite" data-im-live></p>
+</section>

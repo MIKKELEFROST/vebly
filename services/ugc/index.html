@@ -144,10 +144,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
-<link rel="stylesheet" href="/assets/css/show/ugc.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107a">
+<link rel="stylesheet" href="/assets/css/show/ugc.css?v=20261107a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -162,9 +162,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
-<script type="module" src="/assets/js/show/ugc.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107a"></script>
+<script type="module" src="/assets/js/show/ugc.js?v=20261107a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -200,7 +200,47 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" aria-current="page" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
         <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
@@ -255,13 +295,14 @@
     </section>
 
     <!-- Showcase for UGC-indhold: a wall of our own UGC, videos and photos. EVERYTHING shown here must be made by
-     us (Mikkel, 5 Nov 2026). Until the files arrive, each tile is a placeholder (data-ph). To put a real one in:
-       1. Put the file in /assets/ugc/: a video as .mp4 (H.264, 9:16, short and small) with a poster .jpg,
-          a photo as .jpg or .webp.
+     us (Mikkel, 5 Nov 2026). The files are ours, made on Higgsfield (assets/media/README.md, 7 Nov 2026).
+     A placeholder tile (data-ph, <div class="ug__ph">…</div>) can stand in for something on its way. To add one:
+       1. Put the file in /assets/media/ and list it in assets/media/README.md: a video as .mp4 (H.264, short
+          and small) with a poster .jpg, a photo as .jpg or .webp.
        2. In its tile, replace <div class="ug__ph">…</div> with
-            <video src="/assets/ugc/<navn>.mp4" poster="/assets/ugc/<navn>.jpg" muted loop playsinline preload="none"></video>
+            <video src="/assets/media/<navn>.mp4" poster="/assets/media/<navn>.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="<hvad videoen viser>. Tryk for lyd."></video>
           or
-            <img src="/assets/ugc/<navn>.jpg" alt="<hvad billedet viser>" loading="lazy" decoding="async">
+            <img src="/assets/media/<navn>.webp" alt="<hvad billedet viser>" loading="lazy" decoding="async">
        3. Remove data-ph from the <li>, and write in the caption what it is and where it was used.
      The ratio class on .ug__media (916, 45, 11) is the shape of the file: 9:16, 4:5 or 1:1. Add or remove tiles freely.
      Videos play without sound when they are on screen; a tap turns the sound on. With reduced motion they wait for a tap.
@@ -286,68 +327,92 @@
   </div>
 
   <ul class="ug__wall" data-ug>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:0">
+    <li class="ug__tile" data-kind="video" style="--i:0">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-nuttetbaby-mor.mp4" poster="/assets/media/ugc-nuttetbaby-mor.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En mor taler til kameraet, barnet i løvedragt bag hende. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Unboxing</b><span>TikTok · 9:16</span></figcaption>
+        <figcaption><b>Mor fortæller</b><span>Nuttet Baby · Reels</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="billede" data-ph style="--i:1">
+    <li class="ug__tile" data-kind="billede" style="--i:1">
       <figure>
         <div class="ug__media ug__media--45">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__pic"></span><span class="ug__ph-t">Billede kommer</span></div>
+          <img src="/assets/media/foto-nuttetbaby-dino.webp" alt="Et lille barn i en rød dragedragt" loading="lazy" decoding="async">
         </div>
-        <figcaption><b>Produkt i hverdagen</b><span>Instagram · 4:5</span></figcaption>
+        <figcaption><b>Dragedragt i stuen</b><span>Nuttet Baby · Instagram</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:2">
+    <li class="ug__tile" data-kind="video" style="--i:2">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-hundesele.mp4" poster="/assets/media/ugc-hundesele.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En kvinde viser en hundesele med sin hund ved siden af. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Anmeldelse</b><span>Reels · 9:16</span></figcaption>
+        <figcaption><b>Viser hundeselen</b><span>Hundesele · TikTok</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:3">
+    <li class="ug__tile" data-kind="video" style="--i:3">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-nuttetbaby-far.mp4" poster="/assets/media/ugc-nuttetbaby-far.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En far filmer sine to børn i dinosaurdragter. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Før og efter</b><span>Shorts · 9:16</span></figcaption>
+        <figcaption><b>Far filmer</b><span>Nuttet Baby · TikTok</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="billede" data-ph style="--i:4">
+    <li class="ug__tile" data-kind="billede" style="--i:4">
       <figure>
         <div class="ug__media ug__media--11">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__pic"></span><span class="ug__ph-t">Billede kommer</span></div>
+          <img src="/assets/media/foto-raglan.webp" alt="En raglan t-shirt fotograferet til en webshop" loading="lazy" decoding="async">
         </div>
-        <figcaption><b>Flat lay</b><span>Webshop · 1:1</span></figcaption>
+        <figcaption><b>Produktfoto</b><span>Herretøj · Webshop</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:5">
+    <li class="ug__tile" data-kind="video" style="--i:5">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-luftrenser.mp4" poster="/assets/media/ugc-luftrenser.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En baby i et roligt børneværelse med en luftrenser på kommoden. Tryk for lyd."></video>
         </div>
-        <figcaption><b>Sådan bruger du den</b><span>TikTok · 9:16</span></figcaption>
+        <figcaption><b>Rolig nat</b><span>Luftrenser · Reels</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="billede" data-ph style="--i:6">
+    <li class="ug__tile" data-kind="billede" style="--i:6">
       <figure>
         <div class="ug__media ug__media--45">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__pic"></span><span class="ug__ph-t">Billede kommer</span></div>
+          <img src="/assets/media/foto-goblender.webp" alt="En blender på et orange set med frugt" loading="lazy" decoding="async">
         </div>
-        <figcaption><b>Hænder og produkt</b><span>Annonce · 4:5</span></figcaption>
+        <figcaption><b>Blender på orange</b><span>GoBlender · Annonce</span></figcaption>
       </figure>
     </li>
-    <li class="ug__tile" data-kind="video" data-ph style="--i:7">
+    <li class="ug__tile" data-kind="video" style="--i:7">
       <figure>
         <div class="ug__media ug__media--916">
-          <div class="ug__ph" aria-hidden="true"><span class="ug__play">▶</span><span class="ug__ph-t">Video kommer</span></div>
+          <video src="/assets/media/ugc-nuttetbaby-raev.mp4" poster="/assets/media/ugc-nuttetbaby-raev.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="To små børn i ræve- og enhjørningedragt på et tæppe. Tryk for lyd."></video>
         </div>
-        <figcaption><b>En dag med …</b><span>Reels · 9:16</span></figcaption>
+        <figcaption><b>Ræv og enhjørning</b><span>Nuttet Baby · TikTok</span></figcaption>
+      </figure>
+    </li>
+    <li class="ug__tile" data-kind="video" style="--i:8">
+      <figure>
+        <div class="ug__media ug__media--11">
+          <video src="/assets/media/goblender-asmr.mp4" poster="/assets/media/goblender-asmr.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="En smoothie bliver lavet på et rødt bord. Tryk for lyd."></video>
+        </div>
+        <figcaption><b>Smoothie med lyd</b><span>GoBlender · Reels</span></figcaption>
+      </figure>
+    </li>
+    <li class="ug__tile" data-kind="video" style="--i:9">
+      <figure>
+        <div class="ug__media ug__media--916">
+          <video src="/assets/media/ugc-nuttetbaby-dino.mp4" poster="/assets/media/ugc-nuttetbaby-dino.jpg" muted loop playsinline preload="none" tabindex="0" aria-label="Et lille barn i en grøn dinosaurdragt. Tryk for lyd."></video>
+        </div>
+        <figcaption><b>Lille dino</b><span>Nuttet Baby · Shorts</span></figcaption>
+      </figure>
+    </li>
+    <li class="ug__tile" data-kind="billede" style="--i:10">
+      <figure>
+        <div class="ug__media ug__media--11">
+          <img src="/assets/media/foto-nuttetbaby-flok.webp" alt="Fem børn i dyredragter" loading="lazy" decoding="async">
+        </div>
+        <figcaption><b>Fem dragter</b><span>Nuttet Baby · Webshop</span></figcaption>
       </figure>
     </li>
   </ul>

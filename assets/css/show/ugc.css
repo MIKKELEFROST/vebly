@@ -1,5 +1,5 @@
-/* UGC showcase: a wall of our own videos and photos (scripts/services/showcase/ugc.html), placeholders until
-   the files arrive. ugc.js filters the wall and plays the videos. Every selector starts with .show--ugc. */
+/* UGC showcase: a wall of our own videos and photos (scripts/services/showcase/ugc.html, files in /assets/media).
+   ugc.js filters the wall and plays the videos. Every selector starts with .show--ugc. */
 .show--ugc { --ug-r: 20px; --ug-gap: 16px; position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 40px; }
 .show--ugc .sec-head { margin-bottom: 28px; }
 .show--ugc .sec-head__lead { max-width: 420px; }
@@ -19,6 +19,10 @@
 .show--ugc .ug__media--11 { aspect-ratio: 1; }
 .show--ugc .ug__media > video, .show--ugc .ug__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .show--ugc .ug__media > video { cursor: pointer; }
+.show--ugc .ug__media > video:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+/* A quiet hint on every video until its sound is on */
+.show--ugc .ug__media:has(> video)::after { content: "Tryk for lyd"; position: absolute; left: 10px; bottom: 10px; padding: 6px 10px; border-radius: 999px; background: rgba(17,17,17,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: #fff; font-size: 11.5px; font-weight: 700; pointer-events: none; transition: opacity .3s; }
+.show--ugc .ug__media:has(.ug__sound)::after { opacity: 0; }
 .show--ugc figcaption { display: flex; flex-direction: column; gap: 2px; padding: 10px 4px 0; }
 .show--ugc figcaption b { font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: -0.02em; color: var(--ink); }
 .show--ugc figcaption span { font-size: 12.5px; font-weight: 500; color: var(--muted); }

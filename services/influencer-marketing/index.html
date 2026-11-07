@@ -144,9 +144,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107a">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107a">
+<link rel="stylesheet" href="/assets/css/show/influencer-marketing.css?v=20261107a">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -161,8 +162,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107a"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107a"></script>
+<script type="module" src="/assets/js/show/influencer-marketing.js?v=20261107a"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -198,7 +200,48 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" aria-current="page" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -233,7 +276,7 @@
         <p class="hero__lead" data-reveal="3">Folk køber det, nogen de stoler på, anbefaler. Vi finder skabere, der passer til dig og dine kunder, laver aftalerne og sørger for, at samarbejdet bliver markeret rigtigt som reklame.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -249,11 +292,197 @@
       </div>
     </section>
 
-    <section class="sx sx-stm" data-sec="pointe" data-stm style="--n:13">
-      <div class="kicker sx-stm__k" data-reveal="0">Kort sagt</div>
-      <h2 class="sx-stm__text"><span class="sx-w" style="--i:0">En</span> <span class="sx-w sx-w--pill" style="--i:1"><span class="sx-pill sx-pill--spark"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg><span class="sx-pill__t">anbefaling</span></span></span> <span class="sx-w" style="--i:2">vejer</span> <span class="sx-w" style="--i:3">tungere</span> <span class="sx-w" style="--i:4">end</span> <span class="sx-w" style="--i:5">en</span> <span class="sx-w" style="--i:6">annonce.</span> <br class="sx-br"><span class="sx-w dim" style="--i:7">Når</span> <span class="sx-w dim" style="--i:8">den</span> <span class="sx-w dim" style="--i:9">kommer</span> <span class="sx-w dim" style="--i:10">fra</span> <span class="sx-w hot" style="--i:11">den</span> <span class="sx-w hot sx-u" style="--i:12">rigtige.<svg class="sx-u__l" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 20 C 60 6, 120 4, 170 12 S 260 26, 296 8"/></svg></span></h2>
-      <p class="sx-stm__sub" data-reveal="2">Vi finder skabere, som dine kunder allerede følger og stoler på.</p>
-    </section>
+    <!-- Showcase for Influencer marketing: a "creator match deck". A stack of example creator cards (made-up people with
+     drawn initials and shapes as avatars, never real people) shows how much each creator's followers look like the
+     customers, as a match score. The visitor approves or skips (buttons, swipe or the arrow keys). An approved creator
+     lands on the campaign board: the agreement ticks off (Pris, Rettigheder til annoncer, Markeret som "Reklame",
+     Deadline) and is signed, the post appears with a clear "Reklame" label, and a small report shows what it gave.
+     The webshop Kravlezoo, the creators and every number are made up. The videos and photos are our own (assets/media).
+     Styles: assets/css/show/influencer-marketing.css, behaviour: assets/js/show/influencer-marketing.js -->
+<section id="eksempel" class="show show--influencer-marketing" data-sec="eksempel">
+  <svg class="im-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="im-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11m0-11-11 11"/></symbol>
+    <symbol id="im-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.6 4.6L19 7.5"/></symbol>
+    <symbol id="im-heart" viewBox="0 0 24 24"><path d="M12 20.3s-7.8-4.6-7.8-10.4A4.4 4.4 0 0 1 12 7.3a4.4 4.4 0 0 1 7.8 2.6c0 5.8-7.8 10.4-7.8 10.4z"/></symbol>
+    <symbol id="im-chat" viewBox="0 0 24 24"><path d="M20.2 11.6a8.2 8.2 0 0 1-11.9 7.3L3.8 20.2l1.3-4.4a8.2 8.2 0 1 1 15.1-4.2z"/></symbol>
+    <symbol id="im-send" viewBox="0 0 24 24"><path d="M21 3.5 10.2 13.8M21 3.5l-6.6 17-4.2-6.7-6.7-4.2z"/></symbol>
+    <symbol id="im-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></symbol>
+    <symbol id="im-pause" viewBox="0 0 24 24"><path d="M8.5 5.5v13m7-13v13"/></symbol>
+    <symbol id="im-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></symbol>
+    <symbol id="im-down" viewBox="0 0 24 24"><path d="M12 5v13m-5.5-5.5L12 18l5.5-5.5"/></symbol>
+    <symbol id="im-sq" viewBox="0 0 120 40"><path d="M4 26c10-18 20-18 26 0s16 18 26 0 16-18 26 0 16 18 26 0"/></symbol>
+  </svg>
+
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Prøv selv</div><h2 class="h2">Du siger ja eller nej.<br><span class="dim">Vi klarer resten.</span></h2></div>
+    <p class="sec-head__lead">Et eksempel for en webshop med dyredragter til børn. Vi viser dig skabere, hvis følgere ligner dine kunder. Du godkender dem, du kan lide. Vi laver aftalen, markerer opslaget som reklame og måler, hvad det gav.</p>
+  </div>
+
+  <p class="sr-only">Eksempel med opdigtede skabere og tal: Seks skabere bliver foreslået til Kravlezoo, en webshop med dyredragter til børn. Hver skaber har et match, der viser, hvor meget følgerne ligner webshoppens kunder. Godkender du en skaber, bliver aftalen lavet med pris, rettigheder til annoncer, markering som reklame og deadline. Derefter vises opslaget, tydeligt markeret som reklame, og en rapport med visninger, klik og salg.</p>
+
+  <div class="im" data-im>
+    <div class="im-l" data-reveal="1">
+      <div class="im-dhd">
+        <span class="im-dhd__t"><b>Forslag til Kravlezoo</b><small>Dyredragter til børn · <span data-im-left>6 forslag</span></small></span>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+
+      <div class="im-deck" data-im-deck tabindex="0" role="group" aria-label="Foreslåede skabere. Pil til højre godkender, pil til venstre springer over.">
+        <article class="im-c" data-im-c="0" style="--c1:#fbe3d6;--c2:#e0552b;--c3:#f2c14e;--a:#e0552b;--af:#fff">
+          <div class="im-cv im-cv--a" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Familieliv</span><i class="im-av">R</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Rikke</h3>
+            <p class="im-sub">Mor til tre i Odense</p>
+            <ul class="im-st"><li><b>18,4k</b><span>følgere</span></li><li><b>5,8&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:94"/></svg><span class="im-mt__t"><b>94&nbsp;%</b><small>match med dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.82"></i><b>82&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.79"></i><b>79&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.97"></i><b>97&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c im-c--lo" data-im-c="1" style="--c1:#e4e1f7;--c2:#7a6fd0;--c3:#f4b8c8;--a:#2f2a5c;--af:#f4b8c8">
+          <div class="im-cv im-cv--b" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Studieliv og mode</span><i class="im-av">S</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Sara</h3>
+            <p class="im-sub">Studerende i København</p>
+            <ul class="im-st"><li><b>73,2k</b><span>følgere</span></li><li><b>2,1&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:21"/></svg><span class="im-mt__t"><b>21&nbsp;%</b><small>Mange følgere, men ikke dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.06"></i><b>6&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.38"></i><b>38&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.91"></i><b>91&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c" data-im-c="2" style="--c1:#dcebdc;--c2:#2f9e5b;--c3:#f2c14e;--a:#14432b;--af:#c9f0a8">
+          <div class="im-cv im-cv--c" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Far og børn</span><i class="im-av">J</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Jonas</h3>
+            <p class="im-sub">Far på barsel i Aarhus</p>
+            <ul class="im-st"><li><b>31,6k</b><span>følgere</span></li><li><b>4,9&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:89"/></svg><span class="im-mt__t"><b>89&nbsp;%</b><small>match med dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.74"></i><b>74&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.83"></i><b>83&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.95"></i><b>95&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c" data-im-c="3" style="--c1:#fdeec4;--c2:#e8a317;--c3:#e0552b;--a:#111;--af:#f2c14e">
+          <div class="im-cv im-cv--d" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Tvillinger</span><i class="im-av">M</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Maja</h3>
+            <p class="im-sub">Tvillingemor i Roskilde</p>
+            <ul class="im-st"><li><b>9.800</b><span>følgere</span></li><li><b>7,2&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:91"/></svg><span class="im-mt__t"><b>91&nbsp;%</b><small>Færre følgere, men de rigtige</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.85"></i><b>85&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.72"></i><b>72&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.98"></i><b>98&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c im-c--lo" data-im-c="4" style="--c1:#d9e9f5;--c2:#1f6fb0;--c3:#7fd0c4;--a:#0f2f4d;--af:#9fe0d6">
+          <div class="im-cv im-cv--b" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Løb og træning</span><i class="im-av">L</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Line</h3>
+            <p class="im-sub">Løber i Vejle</p>
+            <ul class="im-st"><li><b>56,1k</b><span>følgere</span></li><li><b>2,6&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:38"/></svg><span class="im-mt__t"><b>38&nbsp;%</b><small>Følgerne passer ikke så godt</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.19"></i><b>19&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.61"></i><b>61&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.93"></i><b>93&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <article class="im-c" data-im-c="5" style="--c1:#f6dfe6;--c2:#c2456a;--c3:#f2c14e;--a:#5a1730;--af:#ffd3df">
+          <div class="im-cv im-cv--c" aria-hidden="true"><svg class="im-sq"><use href="#im-sq"/></svg><span class="im-nch">Bolig og børn</span><i class="im-av">E</i></div>
+          <div class="im-cb">
+            <h3 class="im-nm">Emil</h3>
+            <p class="im-sub">Far til Viggo i Aalborg</p>
+            <ul class="im-st"><li><b>12,7k</b><span>følgere</span></li><li><b>5,1&nbsp;%</b><span>engagement</span></li><li><b>Reels</b><span>og stories</span></li></ul>
+            <div class="im-mt"><svg class="im-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle class="im-ring__v" cx="32" cy="32" r="27" pathLength="100" style="--v:82"/></svg><span class="im-mt__t"><b>82&nbsp;%</b><small>match med dine kunder</small></span></div>
+            <ul class="im-bars"><li><span>Har børn under 7 år</span><i style="--v:.68"></i><b>68&nbsp;%</b></li><li><span>Er 25 til 44 år</span><i style="--v:.77"></i><b>77&nbsp;%</b></li><li><span>Bor i Danmark</span><i style="--v:.96"></i><b>96&nbsp;%</b></li></ul>
+          </div>
+          <span class="im-stamp im-stamp--ja" aria-hidden="true">Godkend</span><span class="im-stamp im-stamp--nej" aria-hidden="true">Spring over</span>
+        </article>
+
+        <div class="im-end" data-im-end hidden>
+          <b>Du har set alle forslag.</b>
+          <span>I virkeligheden finder vi flere, til du har nok.</span>
+          <button type="button" class="im-again" data-im-again>Start forfra</button>
+        </div>
+      </div>
+
+      <div class="im-acts">
+        <button type="button" class="im-b im-b--nej" data-im-act="nej"><svg class="im-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-x"/></svg>Spring over</button>
+        <button type="button" class="im-b im-b--ja" data-im-act="ja"><svg class="im-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-ok"/></svg>Godkend</button>
+      </div>
+      <p class="im-hint" data-im-hint>Træk kortet til siden, eller brug knapperne.</p>
+      <button type="button" class="im-toast" data-im-toast hidden><span data-im-toast-t>Godkendt.</span> Se aftalen<svg class="im-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-down"/></svg></button>
+    </div>
+
+    <div class="im-r" data-reveal="2">
+      <div class="im-bd" data-im-board>
+        <div class="im-bhd">
+          <span class="im-bhd__t"><b>Kampagne: Fastelavn</b><small>Godkendte skabere</small></span>
+          <span class="tag-eks">Eksempel</span>
+          <div class="im-chips" data-im-chips role="group" aria-label="Vis aftale og opslag for"><span class="im-chips__none">Ingen endnu. Godkend en skaber.</span></div>
+        </div>
+
+        <div class="im-bb">
+          <div class="im-deal" data-im-deal>
+            <div class="im-deal__h">
+              <i class="im-av im-av--s" data-im-av aria-hidden="true">R</i>
+              <span class="im-deal__t"><small>Aftale med</small><b data-im-n>Rikke</b></span>
+              <span class="im-pill" data-im-pill>Underskrevet</span>
+            </div>
+            <ul class="im-rows">
+              <li class="im-row" data-im-row><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Pris</span><span class="im-row__v" data-im-f="pris">4.500 kr. + 2 dragter</span></li>
+              <li class="im-row" data-im-row><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Rettigheder til annoncer</span><span class="im-row__v" data-im-f="ret">6 måneder</span></li>
+              <li class="im-row" data-im-row data-im-hl><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Markeret som "Reklame"</span><span class="im-row__v">I opslaget</span></li>
+              <li class="im-row" data-im-row><i class="im-tk" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg></i><span class="im-row__k">Deadline</span><span class="im-row__v" data-im-f="dl">Ude senest 31. januar</span></li>
+            </ul>
+            <div class="im-sig" aria-hidden="true">
+              <span><svg viewBox="0 0 120 44"><path pathLength="1" d="M6 30c6-14 10-22 13-19 3 4-7 20-3 21 5 1 9-16 14-15 4 1-2 13 2 13s7-10 11-9c3 1 0 8 4 8 5 0 8-12 13-11 4 1 0 9 5 8 6-1 11-9 17-8s6 6 12 5c5-1 10-4 14-7"/></svg><small>Kravlezoo</small></span>
+              <span><svg viewBox="0 0 120 44"><path pathLength="1" d="M8 32c4-10 8-24 14-22 5 2-6 18 0 18 5 0 10-14 15-12 4 2-3 11 1 12 4 1 9-9 13-8 4 1 1 8 5 8 6 0 9-13 15-12 5 1-1 11 4 11 7 0 12-10 19-9 6 1 7 5 16 3"/></svg><small data-im-sn>Rikke</small></span>
+              <span class="im-seal"><svg viewBox="0 0 24 24"><use href="#im-ok"/></svg>På skrift</span>
+            </div>
+          </div>
+
+          <div class="im-rep" data-im-rep>
+            <p class="im-rep__h"><b>Rapport efter 14 dage</b><span>Målt for hvert samarbejde</span></p>
+            <ul class="im-tiles">
+              <li><small>Visninger</small><b data-im-k="0">26.480</b></li>
+              <li><small>Klik til shop</small><b data-im-k="1">1.214</b></li>
+              <li><small>Salg</small><b data-im-k="2">87</b><em data-im-f="kode">RIKKE15</em></li>
+            </ul>
+          </div>
+
+          <div class="im-phw">
+            <div class="im-ph">
+              <div class="im-scr" data-im-scr>
+                <i class="im-isl" aria-hidden="true"></i>
+                <div class="im-wait" aria-hidden="true"><span>Opslaget kommer her</span></div>
+                <div class="im-post" data-im-post>
+                  <video class="im-vid" data-im-vid muted loop playsinline preload="none" poster="/assets/media/ugc-nuttetbaby-mor.jpg" src="/assets/media/ugc-nuttetbaby-mor.mp4" aria-hidden="true"></video>
+                  <img class="im-img" data-im-img alt="" width="540" height="675" loading="lazy" decoding="async" hidden>
+                  <div class="im-top" aria-hidden="true"><b>Reels</b></div>
+                  <button type="button" class="im-pp" data-im-pp aria-label="Sæt videoen på pause"><svg class="im-i im-i--f" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-pause"/></svg><svg class="im-i im-i--f" viewBox="0 0 24 24" aria-hidden="true"><use href="#im-play"/></svg></button>
+                  <div class="im-rail" aria-hidden="true">
+                    <span><svg class="im-i"><use href="#im-heart"/></svg><small data-im-f="likes">2.481</small></span>
+                    <span><svg class="im-i"><use href="#im-chat"/></svg><small data-im-f="kom">96</small></span>
+                    <span><svg class="im-i"><use href="#im-send"/></svg></span>
+                    <span><svg class="im-i"><use href="#im-more"/></svg></span>
+                  </div>
+                  <div class="im-info">
+                    <span class="im-who" aria-hidden="true"><i class="im-av im-av--xs" data-im-av>R</i><b data-im-n>Rikke</b><em>Følg</em></span>
+                    <span class="im-ad"><b class="im-ad__l">Reklame</b><span>Samarbejde med Kravlezoo</span></span>
+                    <p class="im-cap"><b>Reklame for Kravlezoo.</b> <span data-im-f="cap">Fastelavn er reddet. Ungerne vil ikke af med dem igen.</span> Brug koden <span data-im-f="kode">RIKKE15</span>.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only" aria-live="polite" data-im-live></p>
+</section>
 
     <section id="pris" class="sx sx-band" data-sec="pris" data-band>
       <div class="sx-band__box" data-reveal="0">
@@ -284,6 +513,12 @@
           <div class="sx-band__cta"><a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-event="Pris: Få en fast pris">Få en fast pris →</a></div>
         </div>
       </div>
+    </section>
+
+    <section class="sx sx-stm" data-sec="pointe" data-stm style="--n:13">
+      <div class="kicker sx-stm__k" data-reveal="0">Kort sagt</div>
+      <h2 class="sx-stm__text"><span class="sx-w" style="--i:0">En</span> <span class="sx-w sx-w--pill" style="--i:1"><span class="sx-pill sx-pill--spark"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg><span class="sx-pill__t">anbefaling</span></span></span> <span class="sx-w" style="--i:2">vejer</span> <span class="sx-w" style="--i:3">tungere</span> <span class="sx-w" style="--i:4">end</span> <span class="sx-w" style="--i:5">en</span> <span class="sx-w" style="--i:6">annonce.</span> <br class="sx-br"><span class="sx-w dim" style="--i:7">Når</span> <span class="sx-w dim" style="--i:8">den</span> <span class="sx-w dim" style="--i:9">kommer</span> <span class="sx-w dim" style="--i:10">fra</span> <span class="sx-w hot" style="--i:11">den</span> <span class="sx-w hot sx-u" style="--i:12">rigtige.<svg class="sx-u__l" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 20 C 60 6, 120 4, 170 12 S 260 26, 296 8"/></svg></span></h2>
+      <p class="sx-stm__sub" data-reveal="2">Vi finder skabere, som dine kunder allerede følger og stoler på.</p>
     </section>
 
     <section id="forskel" class="sx sx-vs" data-sec="uden-med" data-vs>
