@@ -1,0 +1,145 @@
+<!-- Showcase for ChatGPT Ads: a relevance gate. A belt of example conversations glides through a gate that measures how
+     well each one fits the advertiser's description. The one in the gate drops into a phone with a chat of our own
+     drawing (plain text name, no logo): the question, the answer, and only when it fits, a line "Svaret ændres ikke af
+     annoncer" and a sponsored card for Mølleværk (a made-up webshop with hand grinders, our video kaffekvaern.mp4)
+     under the answer. Health and politics never get an ad. Left: what the advertiser controls (the description in
+     plain words, as toggles). Right: the auction, where relevance beats a higher bid, and the numbers the advertiser
+     sees (never the conversations). Everything is an example. Styles: assets/css/show/chatgpt-ads.css,
+     behaviour: assets/js/show/chatgpt-ads.js. Without motion or JS: the first conversation, finished, with its ad. -->
+<section id="eksempel" class="show show--chatgpt-ads" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Sådan bliver du vist</div><h2 class="h2">Kun når samtalen passer.<br><span class="dim">Altid under svaret.</span></h2></div>
+    <p class="sec-head__lead">Samtalerne glider forbi. Din annonce kommer kun med, når samtalen passer til det, du sælger. Skift beskrivelsen, og se, hvor den passer.</p>
+  </div>
+
+  <svg class="cg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="cg-i-cup" viewBox="0 0 24 24"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16M8.5 3.5c-.8 1 .8 2-.1 3M12 3.5c-.8 1 .8 2-.1 3"/></symbol>
+    <symbol id="cg-i-pot" viewBox="0 0 24 24"><path d="M4.5 10h15v6a4 4 0 0 1-4 4h-7a4 4 0 0 1-4-4zM2.5 10h19M9 6.5h6M12 6.5V10"/></symbol>
+    <symbol id="cg-i-gift" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M3 9h18M12 9v11M12 9c-1.5-3.5-5.5-4.5-5.5-2 0 1.4 2.3 2 5.5 2zM12 9c1.5-3.5 5.5-4.5 5.5-2 0 1.4-2.3 2-5.5 2z"/></symbol>
+    <symbol id="cg-i-med" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><path d="M12 8v8M8 12h8"/></symbol>
+    <symbol id="cg-i-tent" viewBox="0 0 24 24"><path d="M2.5 19.5h19M4 19.5 12 5l8 14.5M12 5v14.5M9.5 19.5 12 14l2.5 5.5"/></symbol>
+    <symbol id="cg-i-bike" viewBox="0 0 24 24"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16 9.5 8.5h6L18 16M9.5 8.5 12 16h-6M15 6h2.5"/></symbol>
+    <symbol id="cg-i-vote" viewBox="0 0 24 24"><path d="M4 12.5h16v7H4zM7 12.5 13 4l4 3-4 5.5M9.5 12.5h7"/></symbol>
+    <symbol id="cg-i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z"/><path d="M8.5 8.5l7 7"/></symbol>
+    <symbol id="cg-i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+    <symbol id="cg-i-crown" viewBox="0 0 24 24"><path d="M3 8.5l4.6 3.6L12 5l4.4 7.1L21 8.5l-1.8 10H4.8z"/></symbol>
+  </svg>
+
+  <div class="cg" data-cg>
+    <!-- The belt: example conversations glide through the gate, which measures how well each fits the description -->
+    <div class="cg-belt" data-reveal="1">
+      <div class="cg-lane is-match" data-cg-belt aria-hidden="true">
+        <div class="cg-track" data-cg-track>
+          <div class="cg-c is-seen is-sens" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-med"/></svg></span><span class="cg-c__q">Hvad hjælper mod hovedpine?</span><span class="cg-c__v">Ingen annoncer</span><i class="cg-c__bar"><i></i></i></div>
+          <div class="cg-c is-seen is-no" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-tent"/></svg></span><span class="cg-c__q">Hvad skal jeg pakke til en vandretur i Norge?</span><span class="cg-c__v">Passer ikke</span><i class="cg-c__bar"><i style="--r:.14"></i></i></div>
+          <div class="cg-c is-seen is-no" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-bike"/></svg></span><span class="cg-c__q">Hvordan lapper jeg et cykeldæk?</span><span class="cg-c__v">Passer ikke</span><i class="cg-c__bar"><i style="--r:.04"></i></i></div>
+          <div class="cg-c is-seen is-sens" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-vote"/></svg></span><span class="cg-c__q">Hvem skal jeg stemme på til valget?</span><span class="cg-c__v">Ingen annoncer</span><i class="cg-c__bar"><i></i></i></div>
+          <div class="cg-c is-seen is-match is-gate" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-cup"/></svg></span><span class="cg-c__q">Hvilken kaffekværn skal jeg vælge til espresso?</span><span class="cg-c__v">Annonce</span><i class="cg-c__bar"><i style="--r:.94"></i></i></div>
+          <div class="cg-c" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-pot"/></svg></span><span class="cg-c__q">Hvordan laver jeg en hurtig lasagne?</span><span class="cg-c__v"></span><i class="cg-c__bar"><i></i></i></div>
+          <div class="cg-c" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-gift"/></svg></span><span class="cg-c__q">Julegave til min far, der elsker kaffe?</span><span class="cg-c__v"></span><i class="cg-c__bar"><i></i></i></div>
+          <div class="cg-c" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-cup"/></svg></span><span class="cg-c__q">Hvorfor får min espresso ingen crema?</span><span class="cg-c__v"></span><i class="cg-c__bar"><i></i></i></div>
+          <div class="cg-c" data-cg-c><span class="cg-c__ic"><svg><use href="#cg-i-med"/></svg></span><span class="cg-c__q">Hvad hjælper mod hovedpine?</span><span class="cg-c__v"></span><i class="cg-c__bar"><i></i></i></div>
+        </div>
+        <div class="cg-gate"></div>
+        <div class="cg-read"><span class="cg-read__l">Relevans</span><i class="cg-read__m"><i data-cg-meter style="--r:.94"></i></i><b data-cg-pct>94 %</b><svg class="cg-read__sh" aria-hidden="true"><use href="#cg-i-shield"/></svg><span class="cg-read__v" data-cg-verdict>Passer. Annoncen vises.</span></div>
+      </div>
+      <div class="cg-bar">
+        <span class="cg-bar__t"><i class="cg-live" aria-hidden="true"></i><b>Samtaler i ChatGPT</b></span>
+        <span class="tag-eks">Eksempel</span>
+        <span class="cg-bar__ctl">
+          <button type="button" class="cg-btn" data-cg-play><svg class="cg-btn__pa" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2"/></svg><svg class="cg-btn__pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4c.6-.4.6-1.3 0-1.7l-10-6.4C8.9 4.3 8 4.8 8 5.6z"/></svg><span data-cg-play-t>Pause</span></button>
+          <button type="button" class="cg-btn cg-btn--next" data-cg-next>Næste samtale<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+        </span>
+      </div>
+    </div>
+
+    <div class="cg-main">
+      <!-- What the advertiser controls: the description of the conversations, in plain words -->
+      <div class="cg-ctl" data-reveal="2">
+        <p class="cg-lbl">Det, du styrer</p>
+        <div class="cg-who"><img src="/assets/media/kaffekvaern.jpg" width="960" height="540" alt="" loading="lazy" decoding="async"><span><b>Mølleværk</b><small>Webshop med håndkværne</small></span></div>
+        <p class="cg-ctl__h" id="cg-desc-h">Samtaler, din annonce passer til</p>
+        <div class="cg-desc" aria-hidden="true" data-cg-desc>
+          <span class="cg-desc__l is-on" data-cg-line="kvaern">Folk, der skal vælge en kaffekværn.</span>
+          <span class="cg-desc__l is-on" data-cg-line="espresso">Samtaler om espresso derhjemme.</span>
+          <span class="cg-desc__l" data-cg-line="gave">Gaveidéer til kaffeelskere.</span>
+          <span class="cg-desc__l" data-cg-line="tur">Kaffe på tur og camping.</span>
+          <span class="cg-desc__ph">Beskriv med almindelige ord, hvilke samtaler din annonce passer til.</span>
+        </div>
+        <div class="cg-chips" role="group" aria-labelledby="cg-desc-h">
+          <button type="button" class="cg-chip" data-cg-p="kvaern" aria-pressed="true"><i aria-hidden="true"></i>Valg af kaffekværn</button>
+          <button type="button" class="cg-chip" data-cg-p="espresso" aria-pressed="true"><i aria-hidden="true"></i>Espresso derhjemme</button>
+          <button type="button" class="cg-chip" data-cg-p="gave" aria-pressed="false"><i aria-hidden="true"></i>Gaver til kaffeelskere</button>
+          <button type="button" class="cg-chip" data-cg-p="tur" aria-pressed="false"><i aria-hidden="true"></i>Kaffe på tur</button>
+        </div>
+        <div class="cg-fit">
+          <span class="cg-dots" aria-hidden="true" data-cg-dots><i class="is-match is-cur"></i><i></i><i></i><i class="is-match"></i><i class="is-sens"></i><i></i><i></i><i class="is-sens"></i></span>
+          <span class="cg-fit__t">Passer til <b data-cg-fitn>2</b> af 8 samtaler</span>
+        </div>
+        <p class="cg-ctl__note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/></svg><span>I Europa vælges annoncen først og fremmest ud fra samtalen. Personlige annoncer kun, hvis brugeren selv har sagt ja.</span></p>
+      </div>
+
+      <!-- The phone: a chat of our own drawing. The answer first, then the sponsored card under it, only when it fits -->
+      <div class="cg-dev" data-reveal="1">
+        <span class="cg-beam" aria-hidden="true"><i data-cg-drop></i></span>
+        <div class="cg-ph" aria-hidden="true">
+          <div class="cg-scr">
+            <i class="cg-isl"></i>
+            <div class="cg-sb"><span>9.41</span><svg viewBox="0 0 66 12"><rect y="8" width="3" height="4" rx="1"/><rect x="4.5" y="6" width="3" height="6" rx="1"/><rect x="9" y="3.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="1" width="3" height="11" rx="1"/><path d="M28.2 4a8.6 8.6 0 0 1 11.6 0M30.4 6.6a5.3 5.3 0 0 1 7.2 0M32.6 9.2a2 2 0 0 1 2.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="45.5" y="1" width="17.5" height="10" rx="3" fill="none" stroke="currentColor" opacity=".45"/><rect x="47.2" y="2.7" width="12.8" height="6.6" rx="1.6"/></svg></div>
+            <div class="cg-app">
+              <svg viewBox="0 0 24 24"><path d="M4 8.5h16M4 15.5h10"/></svg>
+              <b>ChatGPT<svg viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></svg></b>
+              <svg viewBox="0 0 24 24"><path d="M12.5 4.5H7a2.5 2.5 0 0 0-2.5 2.5v10A2.5 2.5 0 0 0 7 19.5h10a2.5 2.5 0 0 0 2.5-2.5v-5.5"/><path d="m10 14 .6-3L18 3.6a1.5 1.5 0 0 1 2.4 2.4L13 13.4z"/></svg>
+            </div>
+            <div class="cg-view" data-cg-view>
+              <div class="cg-hi">Hvad kan jeg hjælpe med?</div>
+              <div class="cg-th st-q st-a st-done has-ad" data-cg-th>
+                <p class="cg-u" data-cg-u>Hvilken kaffekværn skal jeg vælge til espresso?</p>
+                <i class="cg-think"></i>
+                <div class="cg-a" data-cg-a><p>Til espresso skal kaffen males meget fint og helt ens. Se efter:</p><ul><li>Kværn med skiver, ikke med kniv</li><li>Fin justering, så du kan ramme smagen</li><li>En håndkværn, hvis du kun laver et par kopper om dagen</li></ul></div>
+                <div class="cg-acts"><svg viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></svg><svg viewBox="0 0 24 24"><path d="M7.5 10.5v9h-3v-9zM7.5 10.5l3.6-6.3c1.3 0 2.2 1.1 1.9 2.4l-.7 3.4h5.4a2 2 0 0 1 2 2.4l-1.3 5.8a2 2 0 0 1-2 1.3H7.5"/></svg><svg viewBox="0 0 24 24"><path d="M7.5 13.5v-9h-3v9zM7.5 13.5l3.6 6.3c1.3 0 2.2-1.1 1.9-2.4l-.7-3.4h5.4a2 2 0 0 0 2-2.4l-1.3-5.8a2 2 0 0 0-2-1.3H7.5"/></svg></div>
+                <div class="cg-div"><span><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>Svaret ændres ikke af annoncer</span></div>
+                <div class="cg-ad" data-cg-ad>
+                  <span class="cg-ad__sp">Sponsoreret</span>
+                  <div class="cg-ad__card">
+                    <div class="cg-ad__m"><video data-cg-vid src="/assets/media/kaffekvaern.mp4" poster="/assets/media/kaffekvaern.jpg" muted loop playsinline preload="none" tabindex="-1"></video></div>
+                    <div class="cg-ad__b">
+                      <span class="cg-ad__who"><i>M</i>Mølleværk</span>
+                      <b class="cg-ad__t">Mal kaffen selv. Smag forskellen.</b>
+                      <span class="cg-ad__d">Fri fragt over 499 kr.</span>
+                      <span class="cg-ad__cta">Se kværnene<svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="cg-note" data-cg-note><svg><use href="#cg-i-shield"/></svg><span data-cg-note-t></span></div>
+              </div>
+            </div>
+            <div class="cg-comp"><span class="cg-comp__plus">+</span><span class="cg-comp__f">Spørg om hvad som helst</span><svg viewBox="0 0 24 24"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></svg><span class="cg-comp__go"><svg viewBox="0 0 24 24"><path d="M7 10v4M10.3 7v10M13.7 9v6M17 11v2"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The auction and the numbers the advertiser sees -->
+      <div class="cg-auc spot" data-spot data-reveal="3">
+        <div class="cg-auc__hd"><h3 class="cg-auc__h">Auktionen</h3><span class="tag-eks">Eksempel</span></div>
+        <p class="cg-auc__sub">Hvem får pladsen under svaret?</p>
+        <div class="cg-rows-w">
+          <ol class="cg-rows" data-cg-rows>
+            <li class="cg-row is-you is-win" style="--y:0" data-cg-r="0"><span class="cg-row__av">M</span><span class="cg-row__n"><b>Mølleværk</b><small>Dig</small></span><span class="cg-row__bid"><b>40 kr.</b><small>bud</small></span><span class="cg-row__rel"><i><i style="--r:.94"></i></i><b>94 %</b></span><span class="cg-row__win"><svg><use href="#cg-i-crown"/></svg>Vises</span></li>
+            <li class="cg-row" style="--y:2" data-cg-r="1"><span class="cg-row__av">E</span><span class="cg-row__n"><b>Elektronikbutik</b></span><span class="cg-row__bid"><b>65 kr.</b><small>bud</small></span><span class="cg-row__rel"><i><i style="--r:.41"></i></i><b>41 %</b></span><span class="cg-row__win"><svg><use href="#cg-i-crown"/></svg>Vises</span><span class="cg-row__top">Højeste bud</span></li>
+            <li class="cg-row" style="--y:1" data-cg-r="2"><span class="cg-row__av">K</span><span class="cg-row__n"><b>Kaffeabonnement</b></span><span class="cg-row__bid"><b>50 kr.</b><small>bud</small></span><span class="cg-row__rel"><i><i style="--r:.55"></i></i><b>55 %</b></span><span class="cg-row__win"><svg><use href="#cg-i-crown"/></svg>Vises</span></li>
+          </ol>
+          <p class="cg-msg" data-cg-msg><svg><use href="#cg-i-shield"/></svg><span data-cg-msg-t>Du er ikke med. Samtalen passer ikke til din beskrivelse.</span></p>
+        </div>
+        <p class="cg-auc__note"><b>Højeste bud vinder ikke altid.</b> Relevans tæller også. <span>Forenklet. Bud pr. 1.000 visninger.</span></p>
+        <div class="cg-see">
+          <p class="cg-see__h">Det, du ser i dag</p>
+          <div class="cg-stats" aria-hidden="true"><span><b data-cg-v>8.412</b><small>Visninger</small></span><span><b data-cg-k>251</b><small>Klik</small></span><span><b data-cg-s>19</b><small>Salg</small></span></div>
+          <p class="cg-lock"><svg><use href="#cg-i-lock"/></svg>Samtalerne ser du aldrig. Kun tallene.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only">Eksempel på annoncer i ChatGPT for Mølleværk, en webshop med håndkværne til kaffe. Samtaler om forskellige emner glider forbi, og for hver samtale måles det, hvor godt den passer til Mølleværks beskrivelse. Når nogen spørger, hvilken kaffekværn de skal vælge til espresso, passer samtalen med 94 procent. Svaret kommer først, og under svaret står en tydeligt markeret, sponsoreret annonce fra Mølleværk med en video af en håndkværn. Annoncen ændrer ikke svaret. En samtale om lasagne passer ikke, så Mølleværk bliver ikke vist. Samtaler om helbred og politik får aldrig annoncer. I auktionen byder en elektronikbutik 65 kroner og et kaffeabonnement 50 kroner pr. 1.000 visninger, men Mølleværk vinder med et bud på 40 kroner, fordi annoncen passer bedst til samtalen. Mølleværk ser kun visninger, klik og salg, aldrig samtalerne. Brug knapperne for at vælge, hvilke samtaler annoncen passer til.</p>
+  <p class="sr-only" aria-live="polite" data-cg-live></p>
+</section>
