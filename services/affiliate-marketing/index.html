@@ -144,9 +144,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107b">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107b">
+<link rel="stylesheet" href="/assets/css/show/affiliate-marketing.css?v=20261107b">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -161,8 +162,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107b"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107b"></script>
+<script type="module" src="/assets/js/show/affiliate-marketing.js?v=20261107b"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -186,7 +188,7 @@
   <div class="orb" data-orb aria-hidden="true"></div>
 
   <header class="nav" data-nav>
-    <div class="segbar" data-seg-bar data-nudge="Vælg her, så viser vi det, der passer til dig." data-order-ydelser="hjemmesider,lokal-seo,google-ads,meta-ads,organisk-facebook,organisk-instagram,branding,linkedin-ads,seo,linkbuilding,geo,ai,automations,interne-systemer,video,youtube-annoncering,bing-ads,organisk-tiktok,tiktok-ads,snapchat-ads,email-marketing,cro,influencer-marketing,ugc,affiliate-marketing,app-udvikling,reddit-ads,pinterest-ads,webshop,google-shopping-ads,google-css,markedspladser" data-order-webshop="webshop,google-shopping-ads,google-css,seo,meta-ads,tiktok-ads,markedspladser,ugc,influencer-marketing,affiliate-marketing,email-marketing,cro,pinterest-ads,organisk-instagram,organisk-tiktok,snapchat-ads,youtube-annoncering,google-ads,bing-ads,reddit-ads,linkbuilding,branding,geo,ai,video,organisk-facebook,automations,interne-systemer,app-udvikling,linkedin-ads,lokal-seo,hjemmesider">
+    <div class="segbar" data-seg-bar data-nudge="Vælg her, så viser vi det, der passer til dig." data-order-ydelser="hjemmesider,lokal-seo,google-ads,meta-ads,organisk-facebook,organisk-instagram,branding,linkedin-ads,seo,linkbuilding,geo,chatgpt-ads,tracking,ai,automations,interne-systemer,video,youtube-annoncering,bing-ads,organisk-tiktok,tiktok-ads,snapchat-ads,email-marketing,cro,influencer-marketing,ugc,affiliate-marketing,app-udvikling,reddit-ads,pinterest-ads,webshop,google-shopping-ads,google-css,markedspladser" data-order-webshop="webshop,google-shopping-ads,google-css,seo,meta-ads,tracking,tiktok-ads,markedspladser,chatgpt-ads,ugc,influencer-marketing,affiliate-marketing,email-marketing,cro,pinterest-ads,organisk-instagram,organisk-tiktok,snapchat-ads,youtube-annoncering,google-ads,bing-ads,reddit-ads,linkbuilding,branding,geo,ai,video,organisk-facebook,automations,interne-systemer,app-udvikling,linkedin-ads,lokal-seo,hjemmesider">
       <div class="segbar__in">
         <span class="segbar__q" id="seg-q">Hvad sælger du?</span>
         <div class="segbar__tabs" role="group" aria-labelledby="seg-q">
@@ -198,7 +200,48 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" aria-current="page" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li><li><a href="/services/chatgpt-ads" data-event="Menu: ChatGPT Ads"><b>ChatGPT Ads</b><span>Annoncer under svaret</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>Data, AI og automation</div>
+                  <ul><li><a href="/services/tracking" data-event="Menu: Tracking"><b>Tracking</b><span>GA4, Meta og server-side</span></a></li><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 34 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -234,7 +277,7 @@
         <p class="hero__lead" data-reveal="3">Med affiliate og partnere får andre sider, skabere og samarbejdspartnere provision, når de sender dig et salg. Vi sætter programmet op, finder partnerne og måler hvert salg, så du ved, hvad du betaler for.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -285,6 +328,152 @@
       <h2 class="sx-stm__text"><span class="sx-w" style="--i:0">Lad</span> <span class="sx-w" style="--i:1">andre</span> <span class="sx-w sx-w--pill" style="--i:2"><span class="sx-pill sx-pill--spark"><svg viewBox="0 0 24 24" aria-hidden="true" class="is-fill"><path d="M12 2.5c.7 5 2.6 7.1 7.6 7.9-5 .8-6.9 2.9-7.6 7.9-.7-5-2.6-7.1-7.6-7.9 5-.8 6.9-2.9 7.6-7.9z"/><path d="M19 15.5c.3 2 1 2.8 3 3.1-2 .3-2.7 1.1-3 3.1-.3-2-1-2.8-3-3.1 2-.3 2.7-1.1 3-3.1z"/></svg><span class="sx-pill__t">anbefale</span></span></span> <span class="sx-w" style="--i:3">dig.</span> <br class="sx-br"><span class="sx-w dim" style="--i:4">Og</span> <span class="sx-w dim" style="--i:5">betal</span> <span class="sx-w dim" style="--i:6">kun,</span> <span class="sx-w hot" style="--i:7">når</span> <span class="sx-w hot" style="--i:8">det</span> <span class="sx-w hot sx-u" style="--i:9">sælger.<svg class="sx-u__l" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 20 C 60 6, 120 4, 170 12 S 260 26, 296 8"/></svg></span></h2>
       <p class="sx-stm__sub" data-reveal="2">Vi sætter programmet op og sørger for, at hvert salg bliver målt.</p>
     </section>
+
+    <!-- Showcase for Affiliate- og partnermarketing: a partner leaderboard and the payout. An example webshop (Lufteturen,
+     dog gear: made up, the same example shop as on /services/tiktok-ads) has four partners (a creator, a blog, a newsletter, a dog school: all made up). Through one day
+     tracked sales arrive as live pings with the code or link that brought them, the rows climb past each other, and the
+     payout on the right counts commission from sales only. Change the commission, add a partner, open a row to see
+     its tracked orders. The creator's video is our own (assets/media). All numbers are an example.
+     Styles: assets/css/show/affiliate-marketing.css, behaviour: assets/js/show/affiliate-marketing.js -->
+<section id="eksempel" class="show show--affiliate-marketing" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Partnerprogram i praksis</div>
+      <h2 class="h2">De sælger for dig.<br><span class="dim">Du betaler, når de gør.</span></h2>
+    </div>
+    <p class="sec-head__lead">Fire partnere sender kunder til en webshop med hundegrej. Hvert salg bliver sporet til den, der sendte det. Skru på provisionen, eller tilføj en partner.</p>
+  </div>
+  <p class="sr-only">Eksempel på et partnerprogram for Lufteturen, en webshop med hundegrej, som vi har fundet på. Fire partnere sælger for den: skaberen Maja med Bamse med rabatkoden BAMSE10, hundebloggen Logren og nyhedsbrevet Hundeugen med hver deres link, og Hundeskolen Snuden med koden SNUDEN. I løbet af en dag kommer der salg ind, og hvert salg bliver sporet til den partner, der sendte det. I november har de solgt for 23.248 kroner. Med 10 procent i provision betaler webshoppen 2.325 kroner. Klik fra partnerne koster ingenting, og en partner uden salg koster 0 kroner.</p>
+
+  <svg class="af-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="af-i-tag" viewBox="0 0 24 24"><path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1.5 1.5 0 0 1 0 2.1l-6.2 6.2a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8" cy="8" r="1.4"/></symbol>
+    <symbol id="af-i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3A4 4 0 0 0 13 5.3l-1.2 1.2"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.2-1.2"/></symbol>
+    <symbol id="af-i-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="af-i-bag" viewBox="0 0 24 24"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></symbol>
+    <symbol id="af-i-crown" viewBox="0 0 24 24"><path d="M3.5 8l4.6 3.8L12 5.5l3.9 6.3L20.5 8l-1.8 10H5.3z"/></symbol>
+  </svg>
+
+  <div class="af" data-af data-reveal="1">
+    <div class="af__bar">
+      <div class="af__id">
+        <span class="af__logo" aria-hidden="true">L</span>
+        <span class="af__nm"><b>Lufteturen</b><small>Partnerprogram · hundegrej</small></span>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+      <div class="af__ctl">
+        <div class="af-step" role="group" aria-label="Provision pr. salg">
+          <span class="af-step__l" aria-hidden="true">Provision</span>
+          <button type="button" data-af-pct="-1" aria-label="Lavere provision">−</button>
+          <output data-af-pctv aria-live="polite">10 %</output>
+          <button type="button" data-af-pct="1" aria-label="Højere provision">+</button>
+        </div>
+        <button type="button" class="af-add" data-af-add><span aria-hidden="true">+</span> Tilføj partner</button>
+      </div>
+    </div>
+
+    <div class="af__body">
+      <div class="af__main">
+        <div class="af-live">
+          <div class="af-live__h"><span class="af-live__dot" aria-hidden="true"></span><b data-af-state>Live</b><span>i dag kl. <time data-af-clock>21:27</time></span><button type="button" class="af-again" data-af-again>Afspil dagen igen</button></div>
+          <ol class="af-lane" data-af-lane aria-label="Seneste salg"></ol>
+        </div>
+
+        <div class="af-board">
+          <div class="af-board__h" aria-hidden="true"><span>#</span><span>Partner</span><span>Sporet via</span><span>Salg</span><span>Omsætning</span><span>Provision</span></div>
+          <ol class="af-board__list" data-af-board aria-label="Partnere i november, flest salg øverst">
+            <li class="af-row" data-af-p="bamse">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>1</b></span>
+                <span class="af-av af-av--pic"><img src="/assets/media/ugc-hundesele.jpg" alt="" width="540" height="960" loading="lazy" decoding="async"></span>
+                <span class="af-row__who"><b>Maja med Bamse</b><small>Skaber · video</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-tag"/></svg>BAMSE10</span>
+                <span class="af-row__n"><b data-af-n>18</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>8.062 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>806 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden>
+                <div class="af-vid"><video muted loop playsinline preload="none" poster="/assets/media/ugc-hundesele.jpg" aria-label="Majas video om en hundesele, med Bamse ved siden af"><source src="/assets/media/ugc-hundesele.mp4" type="video/mp4"></video><span class="af-vid__code">Kode BAMSE10 · 10 % rabat</span></div>
+                <div class="af-more__in"><p>Sporet via rabatkoden <b>BAMSE10</b> i hendes videoer.</p><ul class="af-ord" data-af-ord></ul></div>
+              </div>
+            </li>
+            <li class="af-row" data-af-p="logren">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>2</b></span>
+                <span class="af-av" style="--av:#111;--avc:#fff" aria-hidden="true">L</span>
+                <span class="af-row__who"><b>Logren</b><small>Hundeblog</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-link"/></svg>?p=logren</span>
+                <span class="af-row__n"><b data-af-n>15</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>7.107 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>711 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p>Sporet via linket <b>lufteturen.dk/?p=logren</b> i blogindlæggene.</p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+            <li class="af-row" data-af-p="ugen">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>3</b></span>
+                <span class="af-av" style="--av:#f2ede4;--avc:#111" aria-hidden="true">H</span>
+                <span class="af-row__who"><b>Hundeugen</b><small>Nyhedsbrev</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-link"/></svg>?p=hundeugen</span>
+                <span class="af-row__n"><b data-af-n>12</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>4.088 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>409 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p>Sporet via linket <b>lufteturen.dk/?p=hundeugen</b> i nyhedsbrevet.</p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+            <li class="af-row" data-af-p="snuden">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>4</b></span>
+                <span class="af-av" style="--av:#2f7d6d;--avc:#fff" aria-hidden="true">S</span>
+                <span class="af-row__who"><b>Hundeskolen Snuden</b><small>Partnervirksomhed</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-tag"/></svg>SNUDEN</span>
+                <span class="af-row__n"><b data-af-n>9</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>3.991 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>399 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p>Sporet via koden <b>SNUDEN</b>, som eleverne får på holdet.</p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+          </ol>
+          <div class="af-how">
+            <p><span class="af-how__i"><svg aria-hidden="true"><use href="#af-i-tag"/></svg></span><span><b>Rabatkode.</b> Kunden skriver koden ved betaling.</span></p>
+            <p><span class="af-how__i"><svg aria-hidden="true"><use href="#af-i-link"/></svg></span><span><b>Link.</b> Partnerens eget link husker, hvem der sendte kunden.</span></p>
+          </div>
+          <p class="af-tip">Klik på en partner for at se de sporede salg.</p>
+          <template data-af-tpl>
+            <li class="af-row is-new">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank></b></span>
+                <span class="af-av" aria-hidden="true"></span>
+                <span class="af-row__who"><b></b><small></small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-tag"/></svg><span></span></span>
+                <span class="af-row__n"><b data-af-n>0</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>0 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>0 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p></p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+          </template>
+        </div>
+      </div>
+
+      <aside class="af-pay spot" data-spot aria-label="Afregning for november">
+        <div class="af-pay__h"><span>Afregning · november</span><small>Udbetales 1. december</small></div>
+        <div class="af-pay__big"><b data-af-total>2.325 kr.</b><span>i provision</span></div>
+        <p class="af-pay__calc"><span data-af-pctx>10 %</span> af <b data-af-sales>23.248 kr.</b> i salg</p>
+        <ul class="af-pay__list" data-af-pay>
+          <li data-af-pl="bamse"><span class="af-pay__who"><i style="--av:#e0552b"></i>Maja med Bamse</span><small data-af-pn>18 salg</small><b data-af-pa>806 kr.</b></li>
+          <li data-af-pl="logren"><span class="af-pay__who"><i style="--av:#fff"></i>Logren</span><small data-af-pn>15 salg</small><b data-af-pa>711 kr.</b></li>
+          <li data-af-pl="ugen"><span class="af-pay__who"><i style="--av:#f2ede4"></i>Hundeugen</span><small data-af-pn>12 salg</small><b data-af-pa>409 kr.</b></li>
+          <li data-af-pl="snuden"><span class="af-pay__who"><i style="--av:#2f7d6d"></i>Hundeskolen Snuden</span><small data-af-pn>9 salg</small><b data-af-pa>399 kr.</b></li>
+        </ul>
+        <div class="af-pay__free">
+          <div><span>Klik fra partnere</span><b data-af-clicks>3.912</b></div>
+          <div><span>Det koster dig</span><b class="af-pay__zero">0 kr.</b></div>
+        </div>
+        <p class="af-pay__note"><svg aria-hidden="true"><use href="#af-i-ok"/></svg>Provision kun af salg. Ingen salg, ingen regning.</p>
+      </aside>
+    </div>
+  </div>
+</section>
 
     <section id="pris" class="sx sx-rcpt" data-sec="pris" data-rcpt>
       <div class="sx-rcpt__text" data-reveal="0">
@@ -707,10 +896,23 @@
               </div>
             </div>
           </div>
+          <div class="addon-slot" data-slug="chatgpt-ads">
+            <div class="addon" data-tilt data-addon="ChatGPT Ads" data-value="0">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">26</span>
+              <div class="addon__head"><h3>ChatGPT Ads</h3><p>Annoncer under svaret, når kunderne spørger ChatGPT om det, du sælger.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Kampagner i ChatGPT</li><li><span class="check" aria-hidden="true">✓</span>Målrettet ud fra samtalen</li><li><span class="check" aria-hidden="true">✓</span>Måling af klik og salg</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="ChatGPT Ads" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/chatgpt-ads" aria-label="Læs mere om ChatGPT Ads" data-event="Services: ChatGPT Ads">Læs mere →</a>
+              </div>
+            </div>
+          </div>
           <div class="addon-slot" data-slug="ai">
             <div class="addon" data-tilt data-addon="AI" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">26</span>
+              <span class="addon__n">27</span>
               <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
@@ -723,7 +925,7 @@
           <div class="addon-slot" data-slug="automations">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">27</span>
+              <span class="addon__n">28</span>
               <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
               <div class="addon__price">fra 4.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
@@ -736,7 +938,7 @@
           <div class="addon-slot" data-slug="interne-systemer">
             <div class="addon" data-tilt data-addon="Interne systemer og CRM" data-value="14999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">28</span>
+              <span class="addon__n">29</span>
               <div class="addon__head"><h3>Interne systemer og CRM</h3><p>CRM, booking og dashboards, der passer til jeres måde at arbejde på.</p></div>
               <div class="addon__price">fra 14.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>CRM og salgspipeline</li><li><span class="check" aria-hidden="true">✓</span>Booking og kalender</li><li><span class="check" aria-hidden="true">✓</span>Dashboards og portaler</li></ul>
@@ -749,7 +951,7 @@
           <div class="addon-slot" data-slug="app-udvikling">
             <div class="addon" data-tilt data-addon="App-udvikling" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">29</span>
+              <span class="addon__n">30</span>
               <div class="addon__head"><h3>App-udvikling</h3><p>Apps til iPhone og Android, bygget til din virksomhed.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>iPhone og Android</li><li><span class="check" aria-hidden="true">✓</span>Booking, medlemskab og point</li><li><span class="check" aria-hidden="true">✓</span>App Store og Google Play</li></ul>
@@ -762,7 +964,7 @@
           <div class="addon-slot" data-slug="email-marketing">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">30</span>
+              <span class="addon__n">31</span>
               <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
@@ -775,7 +977,7 @@
           <div class="addon-slot" data-slug="cro">
             <div class="addon" data-tilt data-addon="CRO" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">31</span>
+              <span class="addon__n">32</span>
               <div class="addon__head"><h3>CRO</h3><p>Flere kunder fra de besøgende, du allerede har.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Analyse og heatmaps</li><li><span class="check" aria-hidden="true">✓</span>A/B-test</li><li><span class="check" aria-hidden="true">✓</span>Kortere vej til kontakt</li></ul>
@@ -785,12 +987,25 @@
               </div>
             </div>
           </div>
+          <div class="addon-slot" data-slug="tracking">
+            <div class="addon" data-tilt data-addon="Tracking" data-value="0">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">33</span>
+              <div class="addon__head"><h3>Tracking</h3><p>Se, hvilke annoncer og sider der giver kunder, med GA4, Meta og server-side tracking.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Google Analytics 4 og Tag Manager</li><li><span class="check" aria-hidden="true">✓</span>Meta Conversions API</li><li><span class="check" aria-hidden="true">✓</span>Server-side og samtykke</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="Tracking" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/tracking" aria-label="Læs mere om Tracking" data-event="Services: Tracking">Læs mere →</a>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
         <div class="wrap addons__meter" style="width:100%">
           <span data-hnum>01</span>
           <div class="addons__bar"><div data-hbar></div></div>
-          <span>31</span>
+          <span>33</span>
         </div>
       </div>
     </section>
@@ -833,7 +1048,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/webshop" data-event="Bund: Webshop">Webshop</a><a href="/services/branding" data-event="Bund: Branding og logo">Branding og logo</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/linkedin-ads" data-event="Bund: LinkedIn Ads">LinkedIn Ads</a><a href="/services/tiktok-ads" data-event="Bund: TikTok Ads">TikTok Ads</a><a href="/services/snapchat-ads" data-event="Bund: Snapchat Ads">Snapchat Ads</a><a href="/services/pinterest-ads" data-event="Bund: Pinterest Ads">Pinterest Ads</a><a href="/services/youtube-annoncering" data-event="Bund: YouTube-annoncering">YouTube-annoncering</a><a href="/services/bing-ads" data-event="Bund: Bing Ads">Bing Ads</a><a href="/services/reddit-ads" data-event="Bund: Reddit Ads">Reddit Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/markedspladser" data-event="Bund: Salg på markedspladser">Salg på markedspladser</a><a href="/services/video" data-event="Bund: Video">Video</a><a href="/services/ugc" data-event="Bund: UGC-indhold">UGC-indhold</a><a href="/services/influencer-marketing" data-event="Bund: Influencer marketing">Influencer marketing</a><a href="/services/affiliate-marketing" aria-current="page" data-event="Bund: Affiliate- og partnermarketing">Affiliate- og partnermarketing</a><a href="/services/organisk-instagram" data-event="Bund: Organisk Instagram">Organisk Instagram</a><a href="/services/organisk-facebook" data-event="Bund: Organisk Facebook">Organisk Facebook</a><a href="/services/organisk-tiktok" data-event="Bund: Organisk TikTok">Organisk TikTok</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/lokal-seo" data-event="Bund: Lokal SEO">Lokal SEO</a><a href="/services/linkbuilding" data-event="Bund: Linkbuilding">Linkbuilding</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/interne-systemer" data-event="Bund: Interne systemer og CRM">Interne systemer og CRM</a><a href="/services/app-udvikling" data-event="Bund: App-udvikling">App-udvikling</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/webshop" data-event="Bund: Webshop">Webshop</a><a href="/services/branding" data-event="Bund: Branding og logo">Branding og logo</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/linkedin-ads" data-event="Bund: LinkedIn Ads">LinkedIn Ads</a><a href="/services/tiktok-ads" data-event="Bund: TikTok Ads">TikTok Ads</a><a href="/services/snapchat-ads" data-event="Bund: Snapchat Ads">Snapchat Ads</a><a href="/services/pinterest-ads" data-event="Bund: Pinterest Ads">Pinterest Ads</a><a href="/services/youtube-annoncering" data-event="Bund: YouTube-annoncering">YouTube-annoncering</a><a href="/services/bing-ads" data-event="Bund: Bing Ads">Bing Ads</a><a href="/services/reddit-ads" data-event="Bund: Reddit Ads">Reddit Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/markedspladser" data-event="Bund: Salg på markedspladser">Salg på markedspladser</a><a href="/services/video" data-event="Bund: Video">Video</a><a href="/services/ugc" data-event="Bund: UGC-indhold">UGC-indhold</a><a href="/services/influencer-marketing" data-event="Bund: Influencer marketing">Influencer marketing</a><a href="/services/affiliate-marketing" aria-current="page" data-event="Bund: Affiliate- og partnermarketing">Affiliate- og partnermarketing</a><a href="/services/organisk-instagram" data-event="Bund: Organisk Instagram">Organisk Instagram</a><a href="/services/organisk-facebook" data-event="Bund: Organisk Facebook">Organisk Facebook</a><a href="/services/organisk-tiktok" data-event="Bund: Organisk TikTok">Organisk TikTok</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/lokal-seo" data-event="Bund: Lokal SEO">Lokal SEO</a><a href="/services/linkbuilding" data-event="Bund: Linkbuilding">Linkbuilding</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/chatgpt-ads" data-event="Bund: ChatGPT Ads">ChatGPT Ads</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/interne-systemer" data-event="Bund: Interne systemer og CRM">Interne systemer og CRM</a><a href="/services/app-udvikling" data-event="Bund: App-udvikling">App-udvikling</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a><a href="/services/tracking" data-event="Bund: Tracking">Tracking</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>
