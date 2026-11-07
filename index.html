@@ -93,12 +93,14 @@
         "Lokal SEO",
         "Linkbuilding",
         "GEO",
+        "ChatGPT Ads",
         "AI",
         "Automations",
         "Interne systemer og CRM",
         "App-udvikling",
         "E-mail marketing",
         "CRO",
+        "Tracking",
         "Interne systemer"
       ],
       "hasOfferCatalog": {
@@ -399,6 +401,15 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "name": "ChatGPT Ads",
+              "description": "Annoncer under svaret, når kunderne spørger ChatGPT om det, du sælger.",
+              "url": "https://webleads.dk/services/chatgpt-ads"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
               "name": "AI",
               "description": "Chatbots, AI-annoncer og assistenter, der sparer dig tid.",
               "url": "https://webleads.dk/services/ai"
@@ -459,6 +470,15 @@
               "name": "CRO",
               "description": "Flere kunder fra de besøgende, du allerede har.",
               "url": "https://webleads.dk/services/cro"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Tracking",
+              "description": "Se, hvilke annoncer og sider der giver kunder, med GA4, Meta og server-side tracking.",
+              "url": "https://webleads.dk/services/tracking"
             }
           }
         ]
@@ -540,9 +560,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261107b">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107c">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/show/partnere.css?v=20261107b">
+<link rel="stylesheet" href="/assets/css/show/partnere.css?v=20261107c">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -557,8 +577,8 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261107b"></script>
-<script type="module" src="/assets/js/show/partnere.js?v=20261107b"></script>
+<script type="module" src="/assets/js/main.js?v=20261107c"></script>
+<script type="module" src="/assets/js/show/partnere.js?v=20261107c"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -582,7 +602,7 @@
   <div class="orb" data-orb aria-hidden="true"></div>
 
   <header class="nav" data-nav>
-    <div class="segbar" data-seg-bar data-nudge="Vælg her, så viser vi det, der passer til dig." data-order-ydelser="hjemmesider,lokal-seo,google-ads,meta-ads,organisk-facebook,organisk-instagram,branding,linkedin-ads,seo,linkbuilding,geo,ai,automations,interne-systemer,video,youtube-annoncering,bing-ads,organisk-tiktok,tiktok-ads,snapchat-ads,email-marketing,cro,influencer-marketing,ugc,affiliate-marketing,app-udvikling,reddit-ads,pinterest-ads,webshop,google-shopping-ads,google-css,markedspladser" data-order-webshop="webshop,google-shopping-ads,google-css,seo,meta-ads,tiktok-ads,markedspladser,ugc,influencer-marketing,affiliate-marketing,email-marketing,cro,pinterest-ads,organisk-instagram,organisk-tiktok,snapchat-ads,youtube-annoncering,google-ads,bing-ads,reddit-ads,linkbuilding,branding,geo,ai,video,organisk-facebook,automations,interne-systemer,app-udvikling,linkedin-ads,lokal-seo,hjemmesider">
+    <div class="segbar" data-seg-bar data-nudge="Vælg her, så viser vi det, der passer til dig." data-order-ydelser="hjemmesider,lokal-seo,google-ads,meta-ads,organisk-facebook,organisk-instagram,branding,linkedin-ads,seo,linkbuilding,geo,chatgpt-ads,tracking,ai,automations,interne-systemer,video,youtube-annoncering,bing-ads,organisk-tiktok,tiktok-ads,snapchat-ads,email-marketing,cro,influencer-marketing,ugc,affiliate-marketing,app-udvikling,reddit-ads,pinterest-ads,webshop,google-shopping-ads,google-css,markedspladser" data-order-webshop="webshop,google-shopping-ads,google-css,seo,meta-ads,tracking,tiktok-ads,markedspladser,chatgpt-ads,ugc,influencer-marketing,affiliate-marketing,email-marketing,cro,pinterest-ads,organisk-instagram,organisk-tiktok,snapchat-ads,youtube-annoncering,google-ads,bing-ads,reddit-ads,linkbuilding,branding,geo,ai,video,organisk-facebook,automations,interne-systemer,app-udvikling,linkedin-ads,lokal-seo,hjemmesider">
       <div class="segbar__in">
         <span class="segbar__q" id="seg-q">Hvad sælger du?</span>
         <div class="segbar__tabs" role="group" aria-labelledby="seg-q">
@@ -612,10 +632,10 @@
                 </div></div>
                 <div class="mega__col"><div class="mega__g">
                   <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
-                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li><li><a href="/services/chatgpt-ads" data-event="Menu: ChatGPT Ads"><b>ChatGPT Ads</b><span>Annoncer under svaret</span></a></li></ul>
                 </div><div class="mega__g">
-                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
-                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>Data, AI og automation</div>
+                  <ul><li><a href="/services/tracking" data-event="Menu: Tracking"><b>Tracking</b><span>GA4, Meta og server-side</span></a></li><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
                 </div></div>
                 <div class="mega__col"><div class="mega__g">
                   <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
@@ -630,7 +650,7 @@
                   <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
                   <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
                 </div>
-                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 34 services på én side →</a>
               </aside>
             </div>
           </div>
@@ -975,10 +995,23 @@
               </div>
             </div>
           </div>
+          <div class="addon-slot" data-slug="chatgpt-ads">
+            <div class="addon" data-tilt data-addon="ChatGPT Ads" data-value="0">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">21</span>
+              <div class="addon__head"><h3>ChatGPT Ads</h3><p>Annoncer under svaret, når kunderne spørger ChatGPT om det, du sælger.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Kampagner i ChatGPT</li><li><span class="check" aria-hidden="true">✓</span>Målrettet ud fra samtalen</li><li><span class="check" aria-hidden="true">✓</span>Måling af klik og salg</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="ChatGPT Ads" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/chatgpt-ads" aria-label="Læs mere om ChatGPT Ads" data-event="Services: ChatGPT Ads">Læs mere →</a>
+              </div>
+            </div>
+          </div>
           <div class="addon-slot" data-slug="organisk-instagram">
             <div class="addon" data-tilt data-addon="Organisk Instagram" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">21</span>
+              <span class="addon__n">22</span>
               <div class="addon__head"><h3>Organisk Instagram</h3><p>Fast plan, automatisk udgivelse, automatiske svar og organiske kampagner.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Opslagsplan</li><li><span class="check" aria-hidden="true">✓</span>Automatiske svar</li><li><span class="check" aria-hidden="true">✓</span>Organiske kampagner</li></ul>
@@ -991,7 +1024,7 @@
           <div class="addon-slot" data-slug="organisk-facebook">
             <div class="addon" data-tilt data-addon="Organisk Facebook" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">22</span>
+              <span class="addon__n">23</span>
               <div class="addon__head"><h3>Organisk Facebook</h3><p>En side, der poster og svarer af sig selv, også i Messenger.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Opslagsplan</li><li><span class="check" aria-hidden="true">✓</span>Messenger-automatik</li><li><span class="check" aria-hidden="true">✓</span>Organiske kampagner</li></ul>
@@ -1004,7 +1037,7 @@
           <div class="addon-slot" data-slug="organisk-tiktok">
             <div class="addon" data-tilt data-addon="Organisk TikTok" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">23</span>
+              <span class="addon__n">24</span>
               <div class="addon__head"><h3>Organisk TikTok</h3><p>Serier og videoer, der bliver set uden annoncekroner.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Videoplan</li><li><span class="check" aria-hidden="true">✓</span>Automatisk udgivelse</li><li><span class="check" aria-hidden="true">✓</span>Automatiske svar</li></ul>
@@ -1017,7 +1050,7 @@
           <div class="addon-slot" data-slug="video">
             <div class="addon" data-tilt data-addon="Video" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">24</span>
+              <span class="addon__n">25</span>
               <div class="addon__head"><h3>Video</h3><p>Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Reklamevideoer til sociale medier</li><li><span class="check" aria-hidden="true">✓</span>Explainer-videoer</li><li><span class="check" aria-hidden="true">✓</span>Motion graphics og logoanimation</li></ul>
@@ -1030,7 +1063,7 @@
           <div class="addon-slot" data-slug="ugc">
             <div class="addon" data-tilt data-addon="UGC-indhold" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">25</span>
+              <span class="addon__n">26</span>
               <div class="addon__head"><h3>UGC-indhold</h3><p>Videoer og billeder, der ligner noget fra en kunde. Lavet af os.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Lodrette videoer</li><li><span class="check" aria-hidden="true">✓</span>Hooks i flere versioner</li><li><span class="check" aria-hidden="true">✓</span>Ret til brug i annoncer</li></ul>
@@ -1043,7 +1076,7 @@
           <div class="addon-slot" data-slug="influencer-marketing">
             <div class="addon" data-tilt data-addon="Influencer marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">26</span>
+              <span class="addon__n">27</span>
               <div class="addon__head"><h3>Influencer marketing</h3><p>Skabere, der anbefaler dig til følgere, der ligner dine kunder.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Udvælgelse og aftaler</li><li><span class="check" aria-hidden="true">✓</span>Markeret som reklame</li><li><span class="check" aria-hidden="true">✓</span>Rapport pr. samarbejde</li></ul>
@@ -1056,7 +1089,7 @@
           <div class="addon-slot" data-slug="markedspladser">
             <div class="addon" data-tilt data-addon="Salg på markedspladser" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">27</span>
+              <span class="addon__n">28</span>
               <div class="addon__head"><h3>Salg på markedspladser</h3><p>Dine produkter på fx Amazon, Zalando, eBay og CDON, i sync med din webshop.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Opsætning og feed</li><li><span class="check" aria-hidden="true">✓</span>Lager og priser i sync</li><li><span class="check" aria-hidden="true">✓</span>Annoncer på markedspladsen</li></ul>
@@ -1069,7 +1102,7 @@
           <div class="addon-slot" data-slug="email-marketing">
             <div class="addon" data-tilt data-addon="E-mail marketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">28</span>
+              <span class="addon__n">29</span>
               <div class="addon__head"><h3>E-mail marketing</h3><p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Nyhedsbreve</li><li><span class="check" aria-hidden="true">✓</span>Automatiske mailflows</li><li><span class="check" aria-hidden="true">✓</span>Tilmelding efter reglerne</li></ul>
@@ -1082,7 +1115,7 @@
           <div class="addon-slot" data-slug="affiliate-marketing">
             <div class="addon" data-tilt data-addon="Affiliate- og partnermarketing" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">29</span>
+              <span class="addon__n">30</span>
               <div class="addon__head"><h3>Affiliate- og partnermarketing</h3><p>Partnere, der sælger for dig. Du betaler provision, når der kommer et salg.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Program og provision</li><li><span class="check" aria-hidden="true">✓</span>Partnere</li><li><span class="check" aria-hidden="true">✓</span>Sporing af hvert salg</li></ul>
@@ -1092,10 +1125,23 @@
               </div>
             </div>
           </div>
+          <div class="addon-slot" data-slug="tracking">
+            <div class="addon" data-tilt data-addon="Tracking" data-value="0">
+              <div class="glare" data-glare></div>
+              <span class="addon__n">31</span>
+              <div class="addon__head"><h3>Tracking</h3><p>Se, hvilke annoncer og sider der giver kunder, med GA4, Meta og server-side tracking.</p></div>
+              <div class="addon__price">Fast pris efter en snak</div>
+              <ul><li><span class="check" aria-hidden="true">✓</span>Google Analytics 4 og Tag Manager</li><li><span class="check" aria-hidden="true">✓</span>Meta Conversions API</li><li><span class="check" aria-hidden="true">✓</span>Server-side og samtykke</li></ul>
+              <div class="addon__actions">
+                <button type="button" class="addon__toggle" data-toggle="Tracking" data-burst aria-pressed="false">+ Tilføj</button>
+                <a class="addon__more" href="/services/tracking" aria-label="Læs mere om Tracking" data-event="Services: Tracking">Læs mere →</a>
+              </div>
+            </div>
+          </div>
           <div class="addon-slot" data-slug="ai">
             <div class="addon" data-tilt data-addon="AI" data-value="0">
               <div class="glare" data-glare></div>
-              <span class="addon__n">30</span>
+              <span class="addon__n">32</span>
               <div class="addon__head"><h3>AI</h3><p>Chatbots, AI-annoncer og assistenter, der sparer dig tid.</p></div>
               <div class="addon__price">Fast pris efter en snak</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>AI-chatbot døgnet rundt</li><li><span class="check" aria-hidden="true">✓</span>AI-annoncering</li><li><span class="check" aria-hidden="true">✓</span>AI-assistenter til rutinerne</li></ul>
@@ -1108,7 +1154,7 @@
           <div class="addon-slot" data-slug="automations">
             <div class="addon" data-tilt data-addon="Automations" data-value="4999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">31</span>
+              <span class="addon__n">33</span>
               <div class="addon__head"><h3>Automations</h3><p>Lad rutinerne klare sig selv.</p></div>
               <div class="addon__price">fra 4.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>Automatiske mails og sms</li><li><span class="check" aria-hidden="true">✓</span>Fakturaer og opfølgning</li><li><span class="check" aria-hidden="true">✓</span>Kobling mellem dine systemer</li></ul>
@@ -1121,7 +1167,7 @@
           <div class="addon-slot" data-slug="interne-systemer">
             <div class="addon" data-tilt data-addon="Interne systemer og CRM" data-value="14999">
               <div class="glare" data-glare></div>
-              <span class="addon__n">32</span>
+              <span class="addon__n">34</span>
               <div class="addon__head"><h3>Interne systemer og CRM</h3><p>CRM, booking og dashboards, der passer til jeres måde at arbejde på.</p></div>
               <div class="addon__price">fra 14.999 kr.</div>
               <ul><li><span class="check" aria-hidden="true">✓</span>CRM og salgspipeline</li><li><span class="check" aria-hidden="true">✓</span>Booking og kalender</li><li><span class="check" aria-hidden="true">✓</span>Dashboards og portaler</li></ul>
@@ -1136,7 +1182,7 @@
         </div>
         <div class="fsv__foot">
           <button type="button" class="fsv__more" data-fsv-more aria-expanded="false" aria-controls="fsv-grid" data-burst data-event="Services: Vis flere"><span data-fsv-label>Vis flere</span><i aria-hidden="true">↓</i></button>
-          <a class="fsv__all" href="/services" data-event="Services: Alle på én side">Alle 32 på én side →</a>
+          <a class="fsv__all" href="/services" data-event="Services: Alle på én side">Alle 34 på én side →</a>
         </div>
       </div>
     </section>
@@ -1276,7 +1322,7 @@
   </main>
 
   <!-- sitemap:start (fra scripts/services/build.mjs) -->
-  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/webshop" data-event="Bund: Webshop">Webshop</a><a href="/services/branding" data-event="Bund: Branding og logo">Branding og logo</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/linkedin-ads" data-event="Bund: LinkedIn Ads">LinkedIn Ads</a><a href="/services/tiktok-ads" data-event="Bund: TikTok Ads">TikTok Ads</a><a href="/services/snapchat-ads" data-event="Bund: Snapchat Ads">Snapchat Ads</a><a href="/services/pinterest-ads" data-event="Bund: Pinterest Ads">Pinterest Ads</a><a href="/services/youtube-annoncering" data-event="Bund: YouTube-annoncering">YouTube-annoncering</a><a href="/services/bing-ads" data-event="Bund: Bing Ads">Bing Ads</a><a href="/services/reddit-ads" data-event="Bund: Reddit Ads">Reddit Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/markedspladser" data-event="Bund: Salg på markedspladser">Salg på markedspladser</a><a href="/services/video" data-event="Bund: Video">Video</a><a href="/services/ugc" data-event="Bund: UGC-indhold">UGC-indhold</a><a href="/services/influencer-marketing" data-event="Bund: Influencer marketing">Influencer marketing</a><a href="/services/affiliate-marketing" data-event="Bund: Affiliate- og partnermarketing">Affiliate- og partnermarketing</a><a href="/services/organisk-instagram" data-event="Bund: Organisk Instagram">Organisk Instagram</a><a href="/services/organisk-facebook" data-event="Bund: Organisk Facebook">Organisk Facebook</a><a href="/services/organisk-tiktok" data-event="Bund: Organisk TikTok">Organisk TikTok</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/lokal-seo" data-event="Bund: Lokal SEO">Lokal SEO</a><a href="/services/linkbuilding" data-event="Bund: Linkbuilding">Linkbuilding</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/interne-systemer" data-event="Bund: Interne systemer og CRM">Interne systemer og CRM</a><a href="/services/app-udvikling" data-event="Bund: App-udvikling">App-udvikling</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a></nav>
+  <nav class="sitemap" aria-label="Alle services"><b>Services</b><a href="/services/hjemmesider" data-event="Bund: Hjemmesider">Hjemmesider</a><a href="/services/webshop" data-event="Bund: Webshop">Webshop</a><a href="/services/branding" data-event="Bund: Branding og logo">Branding og logo</a><a href="/services/google-ads" data-event="Bund: Google Ads">Google Ads</a><a href="/services/meta-ads" data-event="Bund: Meta Ads">Meta Ads</a><a href="/services/linkedin-ads" data-event="Bund: LinkedIn Ads">LinkedIn Ads</a><a href="/services/tiktok-ads" data-event="Bund: TikTok Ads">TikTok Ads</a><a href="/services/snapchat-ads" data-event="Bund: Snapchat Ads">Snapchat Ads</a><a href="/services/pinterest-ads" data-event="Bund: Pinterest Ads">Pinterest Ads</a><a href="/services/youtube-annoncering" data-event="Bund: YouTube-annoncering">YouTube-annoncering</a><a href="/services/bing-ads" data-event="Bund: Bing Ads">Bing Ads</a><a href="/services/reddit-ads" data-event="Bund: Reddit Ads">Reddit Ads</a><a href="/services/google-shopping-ads" data-event="Bund: Google Shopping Ads">Google Shopping Ads</a><a href="/services/google-css" data-event="Bund: Google CSS">Google CSS</a><a href="/services/markedspladser" data-event="Bund: Salg på markedspladser">Salg på markedspladser</a><a href="/services/video" data-event="Bund: Video">Video</a><a href="/services/ugc" data-event="Bund: UGC-indhold">UGC-indhold</a><a href="/services/influencer-marketing" data-event="Bund: Influencer marketing">Influencer marketing</a><a href="/services/affiliate-marketing" data-event="Bund: Affiliate- og partnermarketing">Affiliate- og partnermarketing</a><a href="/services/organisk-instagram" data-event="Bund: Organisk Instagram">Organisk Instagram</a><a href="/services/organisk-facebook" data-event="Bund: Organisk Facebook">Organisk Facebook</a><a href="/services/organisk-tiktok" data-event="Bund: Organisk TikTok">Organisk TikTok</a><a href="/services/seo" data-event="Bund: SEO">SEO</a><a href="/services/lokal-seo" data-event="Bund: Lokal SEO">Lokal SEO</a><a href="/services/linkbuilding" data-event="Bund: Linkbuilding">Linkbuilding</a><a href="/services/geo" data-event="Bund: GEO">GEO</a><a href="/services/chatgpt-ads" data-event="Bund: ChatGPT Ads">ChatGPT Ads</a><a href="/services/ai" data-event="Bund: AI">AI</a><a href="/services/automations" data-event="Bund: Automations">Automations</a><a href="/services/interne-systemer" data-event="Bund: Interne systemer og CRM">Interne systemer og CRM</a><a href="/services/app-udvikling" data-event="Bund: App-udvikling">App-udvikling</a><a href="/services/email-marketing" data-event="Bund: E-mail marketing">E-mail marketing</a><a href="/services/cro" data-event="Bund: CRO">CRO</a><a href="/services/tracking" data-event="Bund: Tracking">Tracking</a></nav>
   <!-- sitemap:end -->
   <footer class="footer">
     <span>© 2026 Webleads</span><a href="https://www.instagram.com/webleads.dk/" target="_blank" rel="noopener" data-event="Footer: Instagram">Instagram</a><a href="/privatliv">Privatlivspolitik</a><a href="/privatliv#meta" data-consent-open>Cookies</a><span>CVR 45737632</span>
