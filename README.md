@@ -14,7 +14,8 @@ services/<slug>/      One page per service (generated): google-ads, meta-ads, go
                       email-marketing, cro, and from 5 Nov 2026: linkbuilding, linkedin-ads, tiktok-ads,
                       snapchat-ads, pinterest-ads, youtube-annoncering, bing-ads, reddit-ads, markedspladser, ugc,
                       influencer-marketing, affiliate-marketing, organisk-instagram, organisk-facebook,
-                      organisk-tiktok, branding
+                      organisk-tiktok, branding, and from 7 Nov 2026: chatgpt-ads, tracking
+services/index.html   /services: every service on one page (scripts/services/pages/services.mjs)
 services/webshop/     Webshop on Shopify with its price calculator (scripts/services/pages/webshop.mjs)
 resultater/           Customers and reviews (scripts/services/pages/resultater.mjs; customers in partnere.mjs)
 scripts/services/     data.mjs (all copy for the front page and service pages), build.mjs, og.mjs
@@ -67,7 +68,7 @@ Do not edit the generated files by hand; the next build overwrites them. `/servi
 - **Services on the front page** (`lib.frontServices`): the order is `front.featured` and then the groups (or `segments.order` once the visitor has chosen). The first three show, the next row is half visible under a soft blur, and "Vis flere" opens the rest; the cut follows the layout (main.js → `data-fsv`). "+ Tilføj" works as before.
 - **"Til …"** under the promises (`lib.trades`, `front.trades`): the label and the words in the band follow the visitor's segment (servicefag for Ydelser, kinds of webshops for Produkter online, both before a choice).
 
-Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO and Lokal SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak"; that is every service added on 5 Nov 2026 except Lokal SEO, until Mikkel sets their prices (the new ad channels too: LinkedIn, TikTok, Snapchat, Pinterest, YouTube, Bing and Reddit). Never invent numbers, results or customers in the copy.
+Prices: only the ones we sell at. Hjemmesider: Simpel one page 2.995 kr., Normal hjemmeside 9.995 kr., SEO hjemmeside 29.995 kr. Advertising (Google Ads, Meta Ads, Google Shopping Ads): 8.000 kr./md. for the first channel and 5.000 kr./md. for each extra. SEO and Lokal SEO 995 kr. i timen. Automations fra 4.999 kr. + 499 kr./md. Interne systemer fra 14.999 kr. All ex. VAT. A service with `price: null` says "Fast pris efter en snak"; that is every service added on 5 Nov 2026 except Lokal SEO, and ChatGPT Ads and Tracking (added 7 Nov 2026), until Mikkel sets their prices (the new ad channels too: LinkedIn, TikTok, Snapchat, Pinterest, YouTube, Bing, Reddit and ChatGPT). Never invent numbers, results or customers in the copy.
 
 - On the cards, "+ Tilføj" puts the service in the contact form ("Du har valgt"), as the add-ons do on the website page. On a service page the form starts with that service (`data-base` on the form; `data-value` is its start price, used as the value of the Meta lead). With nothing chosen on the front page the e-mail says "Generel henvendelse".
 - Old links to the website offer on the front page (`/#saadan`, `/#pris`, `/#tilvalg`, `/#video`) are sent on to `/services/hjemmesider` with the same `?utm_…` and `#…` (script at the top of `index.html`). `/#kontakt`, `/#teamet`, `/#faq` and `/#bestil` stay on the front page.

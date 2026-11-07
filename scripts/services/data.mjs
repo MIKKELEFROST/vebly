@@ -37,12 +37,14 @@ export const services = [
   { slug: 'lokal-seo', t: 'Lokal SEO', price: '995 kr./time', value: 995, d: 'Bliv fundet på Google og Google Maps, når de søger i dit område.', ex: ['Google-virksomhedsprofil', 'Anmeldelser', 'Lokale sider'] },
   { slug: 'linkbuilding', t: 'Linkbuilding', price: 'Fast pris efter en snak', value: 0, d: 'Links fra rigtige danske sider, der giver din side tyngde på Google.', ex: ['Relevante danske sider', 'Ingen linkfarme', 'Hvert link i rapporten'] },
   { slug: 'geo', t: 'GEO', price: 'Fast pris efter en snak', value: 0, d: 'Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.', ex: ['Tjek af din synlighed i AI', 'Indhold, AI kan citere', 'Struktureret data'] },
+  { slug: 'chatgpt-ads', t: 'ChatGPT Ads', price: 'Fast pris efter en snak', value: 0, d: 'Annoncer under svaret, når kunderne spørger ChatGPT om det, du sælger.', ex: ['Kampagner i ChatGPT', 'Målrettet ud fra samtalen', 'Måling af klik og salg'] },
   { slug: 'ai', t: 'AI', price: 'Fast pris efter en snak', value: 0, d: 'Chatbots, AI-annoncer og assistenter, der sparer dig tid.', ex: ['AI-chatbot døgnet rundt', 'AI-annoncering', 'AI-assistenter til rutinerne'] },
   { slug: 'automations', t: 'Automations', price: 'fra 4.999 kr.', value: 4999, d: 'Lad rutinerne klare sig selv.', ex: ['Automatiske mails og sms', 'Fakturaer og opfølgning', 'Kobling mellem dine systemer'] },
   { slug: 'interne-systemer', t: 'Interne systemer og CRM', price: 'fra 14.999 kr.', value: 14999, d: 'CRM, booking og dashboards, der passer til jeres måde at arbejde på.', ex: ['CRM og salgspipeline', 'Booking og kalender', 'Dashboards og portaler'] },
   { slug: 'app-udvikling', t: 'App-udvikling', price: 'Fast pris efter en snak', value: 0, d: 'Apps til iPhone og Android, bygget til din virksomhed.', ex: ['iPhone og Android', 'Booking, medlemskab og point', 'App Store og Google Play'] },
   { slug: 'email-marketing', t: 'E-mail marketing', price: 'Fast pris efter en snak', value: 0, d: 'Nyhedsbreve og mailflows, der får kunderne til at komme igen.', ex: ['Nyhedsbreve', 'Automatiske mailflows', 'Tilmelding efter reglerne'] },
-  { slug: 'cro', t: 'CRO', price: 'Fast pris efter en snak', value: 0, d: 'Flere kunder fra de besøgende, du allerede har.', ex: ['Analyse og heatmaps', 'A/B-test', 'Kortere vej til kontakt'] }
+  { slug: 'cro', t: 'CRO', price: 'Fast pris efter en snak', value: 0, d: 'Flere kunder fra de besøgende, du allerede har.', ex: ['Analyse og heatmaps', 'A/B-test', 'Kortere vej til kontakt'] },
+  { slug: 'tracking', t: 'Tracking', price: 'Fast pris efter en snak', value: 0, d: 'Se, hvilke annoncer og sider der giver kunder, med GA4, Meta og server-side tracking.', ex: ['Google Analytics 4 og Tag Manager', 'Meta Conversions API', 'Server-side og samtykke'] }
 ];
 
 // Default words in the hero badge: "Til <word>"
@@ -1429,6 +1431,114 @@ export const pages = [
     statement: { kicker: 'Kort sagt', pill: 'spark', text: 'Du får kun ét {førstehåndsindtryk}. | _Gør det til_ *dit eget.*', sub: 'Et logo, farver og skrifttyper, der hænger sammen overalt.' },
     facts: { kicker: 'Branding, kort fortalt', items: [['Logo', 'Dit eget', 'Når det er færdigt og betalt, er det dit.'], ['Brug', 'Overalt', 'Filer til skærm, print, bil og sociale medier.'], ['Guide', 'Brandguide', 'Så alle bruger det på samme måde.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
     receipt: { h2: ['Alt det her.', 'Til én fast pris.'] }
+  },
+  {
+    slug: 'chatgpt-ads', name: 'ChatGPT Ads', short: 'Annoncer under svaret i ChatGPT',
+    description: 'Vi opsætter og styrer dine annoncer i ChatGPT, så du bliver vist under svaret, når nogen spørger om det, du sælger. Annoncerne kom til Danmark i august 2026. Fast pris efter en snak.',
+    serviceType: 'Annoncering i ChatGPT',
+    words: ['webshops', 'servicevirksomheder', 'brands', 'B2B'],
+    h1: { a: ['Annoncer', 'der,', 'hvor', 'de'], hot: 'spørger.', dim: 'Lige under', mark: 'svaret.' },
+    lead: 'Flere spørger ChatGPT, før de køber. Med ChatGPT Ads bliver du vist under svaret, når samtalen handler om det, du sælger. Annoncen er tydeligt markeret, og den ændrer ikke svaret.',
+    floats: ['Under svaret', 'Sponsoreret', 'Fast pris ↗'], ring: 'CHATGPT ADS • SPONSORERET • UNDER SVARET •',
+    price: null,
+    priceH2: ['Fast pris.', 'Efter en snak.'],
+    priceLead: 'Annoncebudgettet betaler du direkte til OpenAI. Vi giver dig en fast pris for opsætning og styring inden for 24 timer.',
+    items: [
+      ['Kampagner i ChatGPT', 'Sat op i ChatGPTs annoncesystem, med mål og budget.'],
+      ['Målrettet ud fra samtalen', 'Vi beskriver de samtaler, dit produkt passer til.'],
+      ['Annoncetekster', 'Korte, klare tekster, der passer til et svar.'],
+      ['Landingsside', 'Siden, de lander på, skal svare på det samme spørgsmål.'],
+      ['Måling', 'Klik, henvendelser og salg fra ChatGPT, målt på din side.'],
+      ['Løbende styring', 'Vi justerer tekster, målretning og bud hver uge.'],
+      ['Månedlig rapport', 'Kort og klart: hvad har det givet?'],
+      ['Direkte kontakt', 'Du taler med den, der laver arbejdet.']
+    ],
+    steps: [
+      ['Plan', 'Vi finder de spørgsmål, dine kunder stiller ChatGPT.', '?'],
+      ['Opsætning', 'Kampagner, tekster og måling bliver sat op.', '✓'],
+      ['Styring', 'Vi følger med hver uge og sender en rapport hver måned.', '↗']
+    ],
+    faqs: [
+      ['Hvad er ChatGPT Ads?', 'Annoncer i ChatGPT. De bliver vist under svaret, når samtalen passer til det, du sælger, og de er tydeligt markeret som sponsoreret.'],
+      ['Kan man annoncere i ChatGPT i Danmark?', 'Ja. OpenAI åbnede for annoncer i Danmark og en række andre europæiske lande i august 2026. Platformen er ny, så vi følger med i, hvad der ændrer sig.'],
+      ['Hvordan bliver annoncen målrettet?', 'Ud fra samtalen. I Europa bliver annoncerne først og fremmest vist ud fra det, samtalen handler om. Annoncører ser ikke brugernes samtaler.'],
+      ['Ændrer annoncen ChatGPTs svar?', 'Nej. Ifølge OpenAI påvirker annoncer ikke svaret. Annoncen står for sig selv under svaret.'],
+      ['Hvad er forskellen på GEO og ChatGPT Ads?', 'GEO handler om at blive nævnt i selve svaret, uden at betale for det. ChatGPT Ads er betalte annoncer under svaret. De virker godt sammen.', ['/services/geo', 'Læs om GEO']],
+      ['Hvad koster det?', 'Du får en fast pris for opsætning og styring efter en kort snak. Annoncebudgettet betaler du direkte til OpenAI.']
+    ],
+    contact: 'Fortæl os, hvad du sælger, og hvem du gerne vil nå. Vi svarer inden for 24 timer med en fast pris.',
+    placeholder: 'Hvad sælger du, og hvad spørger dine kunder om?',
+    layout: ['statement', 'compare', 'showcase', 'band', 'timeline', 'faqSplit', 'grid'],
+    statement: {
+      kicker: 'Kort sagt', pill: 'spark',
+      text: 'Når de spørger {ChatGPT}, hvad de skal vælge, | _kan du stå_ *lige under svaret.*',
+      sub: 'Annoncen er tydeligt markeret som sponsoreret og ændrer ikke svaret.'
+    },
+    compare: {
+      h2: ['Håbe på at blive nævnt.', 'Eller stå der.'],
+      lead: 'GEO får dig nævnt i svaret over tid. Annoncer sætter dig under svaret, når samtalen passer.',
+      uden: 'Uden annoncer', med: 'Med ChatGPT Ads',
+      rows: [
+        ['Du håber på at blive nævnt i svaret.', 'Du kan stå under svaret, når samtalen passer til dig.'],
+        ['En konkurrent kan stå der i stedet.', 'Du er der, hvor beslutningen bliver taget.'],
+        ['Ingen kan styre, hvad AI svarer.', 'Du bestemmer selv teksten i din annonce.'],
+        ['Du ved ikke, hvor mange der så dig.', 'Du kan se visninger, klik og salg.']
+      ]
+    },
+    band: { chips: ['Kampagner i ChatGPT', 'Målrettet ud fra samtalen', 'Måling', 'Månedlig rapport'] },
+    flow: { h2: ['Fra første snak.', 'Til annoncen kører.'], lead: 'Vi sætter kampagnerne op, følger med hver uge og sender dig en kort rapport hver måned.', end: 'Rapport hver måned' }
+  },
+  {
+    slug: 'tracking', name: 'Tracking', short: 'Se, hvad din markedsføring giver',
+    description: 'Vi sætter tracking op, så du kan se, hvad din hjemmeside og dine annoncer giver: Google Analytics 4, Google Tag Manager, Meta Pixel og Conversions API, server-side tracking og cookiesamtykke. Fast pris efter en snak.',
+    serviceType: 'Tracking og webanalyse',
+    words: ['webshops', 'servicevirksomheder', 'annoncører', 'brands'],
+    h1: { a: ['Se,', 'hvad', 'det'], hot: 'giver.', dim: 'Hver eneste', mark: 'krone.' },
+    lead: 'Når tracking er sat rigtigt op, kan du se, hvilke annoncer og sider der giver kunder. Og Google og Meta får de signaler, de skal bruge for at finde flere af dem.',
+    floats: ['Google Analytics 4', 'Meta Conversions API', 'Fast pris ↗'], ring: 'TRACKING • GA4 • SERVER-SIDE • SAMTYKKE •',
+    price: null,
+    priceH2: ['Fast pris.', 'Efter en snak.'],
+    priceLead: 'Vi ser på, hvad du måler i dag, og giver dig en fast pris inden for 24 timer.',
+    items: [
+      ['Tjek af din tracking', 'Vi ser, hvad der bliver målt i dag, og hvad der mangler.'],
+      ['Google Analytics 4', 'Sat op med de hændelser, der betyder noget for dig.'],
+      ['Google Tag Manager', 'Ét sted til alle tags, så det er nemt at holde styr på.'],
+      ['Konverteringer i Google Ads', 'Køb og henvendelser sendt tilbage til Google Ads.'],
+      ['Meta Pixel og Conversions API', 'Fra browseren og fra serveren, så færre signaler går tabt.'],
+      ['Server-side tracking', 'Data sendt fra din egen server og dit eget domæne.'],
+      ['Cookiesamtykke', 'Et samtykke, der virker, og Google Consent Mode.'],
+      ['Dashboard', 'De tal, du har brug for, samlet ét sted.']
+    ],
+    steps: [
+      ['Tjek', 'Vi gennemgår, hvad der bliver målt i dag.', '?'],
+      ['Opsætning', 'Tags, hændelser og samtykke bliver sat op og testet.', '✓'],
+      ['Kontrol', 'Vi tjekker, at tallene passer, og følger op.', '↗']
+    ],
+    faqs: [
+      ['Hvad er tracking?', 'At måle, hvad de besøgende gør på din side, og hvor de kommer fra. Så kan du se, hvilke annoncer og sider der giver kunder.'],
+      ['Hvad er server-side tracking?', 'Målingerne bliver sendt fra din egen server og ikke kun fra browseren. Så går færre af dem tabt på grund af adblockere og browsere, der blokerer. Det gælder stadig kun for besøgende, der har givet samtykke, hvor det kræves.'],
+      ['Hvad med cookies og samtykke?', 'Vi sætter et cookiebanner op, der virker, så der kun bliver målt det, de besøgende har sagt ja til. Google Consent Mode hjælper Google med at udfylde hullerne med beregnede tal.'],
+      ['Gør I det også selv?', 'Ja. webleads.dk måler selv med Google Analytics 4 og Meta Conversions API sendt fra vores egen server.'],
+      ['Hvad koster det?', 'Du får en fast pris efter en kort snak om, hvad du vil måle.']
+    ],
+    contact: 'Fortæl os, hvad du gerne vil kunne måle. Vi svarer inden for 24 timer med en fast pris.',
+    placeholder: 'Hvilke annoncer og systemer bruger du, og hvad vil du gerne kunne se?',
+    layout: ['compare', 'facts', 'showcase', 'receipt', 'cards', 'faqSplit', 'track'],
+    compare: {
+      kicker: 'Før og efter',
+      h2: ['Gætværk.', 'Eller tal, du kan stole på.'],
+      lead: 'Forskellen på at have en pixel liggende og at have tracking, der er sat ordentligt op.',
+      uden: 'Uden ordentlig tracking', med: 'Med Webleads',
+      rows: [
+        ['Du kan ikke se, hvilke annoncer der giver kunder.', 'Du kan se, hvilken annonce og side hver henvendelse kom fra.'],
+        ['Adblockere og browsere taber en del af målingerne.', 'Server-side tracking får flere af dem med.'],
+        ['Google og Meta optimerer i blinde.', 'De får signalerne om køb og henvendelser.'],
+        ['Cookiebanneret står der, men styrer ingenting.', 'Samtykket styrer, hvad der bliver målt.'],
+        ['Tallene ligger spredt i fem systemer.', 'Det vigtige er samlet i ét dashboard.']
+      ]
+    },
+    facts: { kicker: 'Tracking, kort fortalt', items: [['Værktøjer', 'GA4 og GTM', 'Plus Meta Pixel og Conversions API.'], ['Data', 'Server-side', 'Fra din egen server og dit eget domæne.'], ['Samtykke', 'Consent Mode', 'Kun det, de besøgende siger ja til.'], ['Svar', '24 timer', 'Skriv til os, så svarer vi inden for 24 timer.']] },
+    receipt: { h2: ['Alt det her.', 'Til én fast pris.'] }
   }
 ];
 
@@ -1438,10 +1548,10 @@ export const pages = [
 export const groups = [
   { id: 'web', name: 'Hjemmeside og webshop', icon: 'web', slugs: ['hjemmesider', 'webshop', 'branding', 'cro', 'app-udvikling'] },
   { id: 'annoncer', name: 'Annoncering', icon: 'ads', slugs: ['google-ads', 'meta-ads', 'google-shopping-ads', 'google-css', 'tiktok-ads', 'linkedin-ads', 'youtube-annoncering', 'snapchat-ads', 'pinterest-ads', 'bing-ads', 'reddit-ads'] },
-  { id: 'synlig', name: 'Synlig på Google og AI', icon: 'search', slugs: ['seo', 'lokal-seo', 'linkbuilding', 'geo'] },
+  { id: 'synlig', name: 'Synlig på Google og AI', icon: 'search', slugs: ['seo', 'lokal-seo', 'linkbuilding', 'geo', 'chatgpt-ads'] },
   { id: 'some', name: 'Sociale medier og indhold', icon: 'some', slugs: ['organisk-instagram', 'organisk-facebook', 'organisk-tiktok', 'video', 'ugc', 'influencer-marketing'] },
   { id: 'salg', name: 'Mere salg', icon: 'sale', slugs: ['markedspladser', 'email-marketing', 'affiliate-marketing'] },
-  { id: 'auto', name: 'AI og automation', icon: 'auto', slugs: ['ai', 'automations', 'interne-systemer'] }
+  { id: 'auto', name: 'Data, AI og automation', icon: 'auto', slugs: ['tracking', 'ai', 'automations', 'interne-systemer'] }
 ];
 // The line under each name in the mega menu: a few words, plain and true
 export const short = {
@@ -1455,6 +1565,7 @@ export const short = {
   'organisk-instagram': 'Plan, opslag og svar', 'organisk-facebook': 'Opslag og svar i Messenger', 'organisk-tiktok': 'Set uden annoncekroner',
   video: 'Reklamer og explainers', ugc: 'Ligner noget fra en kunde', 'influencer-marketing': 'Skabere, der anbefaler dig',
   markedspladser: 'Amazon, Zalando, eBay og flere', 'email-marketing': 'Nyhedsbreve og mailflows', 'affiliate-marketing': 'Provision, når der sælges',
+  'chatgpt-ads': 'Annoncer under svaret', tracking: 'GA4, Meta og server-side',
   ai: 'Chatbots og assistenter', automations: 'Rutiner, der klarer sig selv', 'interne-systemer': 'CRM, booking og dashboards'
 };
 
@@ -1503,8 +1614,8 @@ export const segments = {
   // The bubble under the tabs until the visitor has chosen
   nudge: 'Vælg her, så viser vi det, der passer til dig.',
   order: {
-    ydelser: ['hjemmesider', 'lokal-seo', 'google-ads', 'meta-ads', 'organisk-facebook', 'organisk-instagram', 'branding', 'linkedin-ads', 'seo', 'linkbuilding', 'geo', 'ai', 'automations', 'interne-systemer', 'video', 'youtube-annoncering', 'bing-ads', 'organisk-tiktok', 'tiktok-ads', 'snapchat-ads', 'email-marketing', 'cro', 'influencer-marketing', 'ugc', 'affiliate-marketing', 'app-udvikling', 'reddit-ads', 'pinterest-ads', 'webshop', 'google-shopping-ads', 'google-css', 'markedspladser'],
-    webshop: ['webshop', 'google-shopping-ads', 'google-css', 'seo', 'meta-ads', 'tiktok-ads', 'markedspladser', 'ugc', 'influencer-marketing', 'affiliate-marketing', 'email-marketing', 'cro', 'pinterest-ads', 'organisk-instagram', 'organisk-tiktok', 'snapchat-ads', 'youtube-annoncering', 'google-ads', 'bing-ads', 'reddit-ads', 'linkbuilding', 'branding', 'geo', 'ai', 'video', 'organisk-facebook', 'automations', 'interne-systemer', 'app-udvikling', 'linkedin-ads', 'lokal-seo', 'hjemmesider']
+    ydelser: ['hjemmesider', 'lokal-seo', 'google-ads', 'meta-ads', 'organisk-facebook', 'organisk-instagram', 'branding', 'linkedin-ads', 'seo', 'linkbuilding', 'geo', 'chatgpt-ads', 'tracking', 'ai', 'automations', 'interne-systemer', 'video', 'youtube-annoncering', 'bing-ads', 'organisk-tiktok', 'tiktok-ads', 'snapchat-ads', 'email-marketing', 'cro', 'influencer-marketing', 'ugc', 'affiliate-marketing', 'app-udvikling', 'reddit-ads', 'pinterest-ads', 'webshop', 'google-shopping-ads', 'google-css', 'markedspladser'],
+    webshop: ['webshop', 'google-shopping-ads', 'google-css', 'seo', 'meta-ads', 'tracking', 'tiktok-ads', 'markedspladser', 'chatgpt-ads', 'ugc', 'influencer-marketing', 'affiliate-marketing', 'email-marketing', 'cro', 'pinterest-ads', 'organisk-instagram', 'organisk-tiktok', 'snapchat-ads', 'youtube-annoncering', 'google-ads', 'bing-ads', 'reddit-ads', 'linkbuilding', 'branding', 'geo', 'ai', 'video', 'organisk-facebook', 'automations', 'interne-systemer', 'app-udvikling', 'linkedin-ads', 'lokal-seo', 'hjemmesider']
   },
   front: {
     ydelser: {
