@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { SITE, services, pages, front, segments, groups, short } from './data.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const V = { css: '20261107a', js: '20261107a' };
+export const V = { css: '20261107b', js: '20261107b' };
 export const GENERATED = '<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->';
 
 /* What the visitor sells: the tabs above the menu (data.mjs → segments, assets/js/segment.js) */

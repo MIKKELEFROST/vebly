@@ -209,6 +209,14 @@ html:not([data-seg]) .segbar__q::before { content: ""; display: inline-block; wi
 .segfloat__x:hover, .segfloat__x:focus-visible { color: #fff; background: rgba(255,255,255,0.12); }
 .segfloat.is-out { animation: segfloat-out .38s ease both; }
 body:has(.cc) .segfloat { opacity: 0; pointer-events: none; }
+/* After the choice (computers only, segment.js): a smaller bar that shows the choice, like the tabs in the menu */
+.segfloat.is-chosen { gap: 12px; padding: 6px 6px 6px 18px; }
+.segfloat.is-chosen .segfloat__q { font-size: 15px; color: rgba(255,255,255,0.7); }
+.segfloat.is-chosen .segfloat__btn { padding: 9px 16px; animation: none; }
+.segfloat__btn[aria-pressed="true"] { background: var(--accent); }
+.segfloat.is-chosen .segfloat__btn[aria-pressed="false"] { background: transparent; color: rgba(255,255,255,0.75); }
+.segfloat.is-chosen .segfloat__btn[aria-pressed="false"]:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.segfloat.is-tucked, html.mega-open .segfloat { opacity: 0; pointer-events: none; }
 @keyframes segfloat-in { from { opacity: 0; transform: translate(-50%, 28px) scale(.96); } }
 @keyframes segfloat-out { to { opacity: 0; transform: translate(-50%, 18px); } }
 @keyframes segfloat-glow { 50% { background: rgba(224,85,43,0.55); } }

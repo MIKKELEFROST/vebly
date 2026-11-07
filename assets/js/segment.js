@@ -7,7 +7,7 @@
 //   · keeps a choice in the tabs (localStorage 'wl-seg', the same key the <head> script reads)
 //   · until the visitor has chosen: a light sweep over the tabs and a bubble under them that asks for a
 //     choice (on at most 3 pages a visit; ✕ stops it for the visit; not on phones), and a floating card at the bottom with the
-//     same question, which stays until a choice is made (or ✕ for the visit).
+//     same question. On a computer the card stays after the choice, as a second set of tabs; on phones it goes (✕ for the visit).
 //     GA4: segment_nudge (action vist/lukket/skjult, nudge_type boble/bund)
 //   · tells GA4: segment_choice (segment, previous, segment_source faner/bund: where the choice was made,
 //     nudge ja/nej: the bubble was shown on this page). Every other event carries the segment too
@@ -92,38 +92,47 @@ function nudge() {
 }
 nudge();
 
-// The floating card at the bottom: the same question, until a choice is made. It comes after the first scroll
-// or a few seconds, waits while the cookie question is open, and ✕ hides it for the visit.
+// The floating card at the bottom: the same question as the tabs. Until a choice is made it asks on every screen;
+// on a computer it then stays, like the tabs in the menu, showing the choice and letting the visitor change it
+// (Mikkel, 7 Nov 2026). On phones it goes when the choice is made. It comes after the first scroll or a few
+// seconds, waits while the cookie question is open, steps aside at the contact form, and ✕ hides it for the visit.
 const FLOAT = 'wl-seg-float';
+const desk = matchMedia('(min-width: 900px) and (hover: hover)');
 let card = null;
 const hideCard = (action = '') => {
   if (!card) return;
   const c = card; card = null;
-  if (action) track('segment_nudge', { action, nudge_type: 'bund' });
+  if (action && !root.dataset.seg) track('segment_nudge', { action, nudge_type: 'bund' });
   c.classList.add('is-out');
   setTimeout(() => c.remove(), 380);
 };
 function floatCard() {
-  if (!bar || root.dataset.seg) return;
+  if (!bar) return;
   try { if (sessionStorage.getItem(FLOAT) === '-1') return; } catch (x) { /* fine */ }
   const q = (bar.querySelector('.segbar__q') || {}).textContent || 'Hvad sælger du?';
   const opts = [...bar.querySelectorAll('[data-seg-set]')].map(b => [b.dataset.segSet, b.textContent]);
   let shown = false;
   const show = () => {
-    if (shown || root.dataset.seg) return;
+    if (shown || (root.dataset.seg && !desk.matches)) return;
     if (document.querySelector('.cc')) { setTimeout(show, 1500); return; } // the cookie question first
     shown = true;
     removeEventListener('scroll', onScroll);
     card = document.createElement('div');
-    card.className = 'segfloat';
+    card.className = 'segfloat' + (root.dataset.seg ? ' is-chosen' : '');
     card.setAttribute('role', 'region');
     card.setAttribute('aria-label', q);
-    card.innerHTML = `<b class="segfloat__q"></b><div class="segfloat__btns">${opts.map(([s]) => `<button type="button" class="segfloat__btn" data-seg-set="${s}" data-seg-from="bund"></button>`).join('')}</div><button type="button" class="segfloat__x" aria-label="Luk">✕</button>`;
+    card.innerHTML = `<b class="segfloat__q"></b><div class="segfloat__btns">${opts.map(([s]) => `<button type="button" class="segfloat__btn" data-seg-set="${s}" data-seg-from="bund" aria-pressed="false"></button>`).join('')}</div><button type="button" class="segfloat__x" aria-label="Luk">✕</button>`;
     card.querySelector('.segfloat__q').textContent = q;
-    card.querySelectorAll('.segfloat__btn').forEach((b, i) => { b.textContent = opts[i][1]; });
+    card.querySelectorAll('.segfloat__btn').forEach((b, i) => { b.textContent = opts[i][1]; b.setAttribute('aria-pressed', String(b.dataset.segSet === root.dataset.seg)); });
     card.querySelector('.segfloat__x').addEventListener('click', () => { try { sessionStorage.setItem(FLOAT, '-1'); } catch (x) { /* fine */ } hideCard('lukket'); });
     document.body.append(card);
-    track('segment_nudge', { action: 'vist', nudge_type: 'bund' });
+    if (!root.dataset.seg) track('segment_nudge', { action: 'vist', nudge_type: 'bund' });
+    // Out of the way while the contact form is on screen
+    const form = document.querySelector('#kontakt');
+    if (form && 'IntersectionObserver' in window) {
+      const c = card;
+      new IntersectionObserver(es => es.forEach(e => c.classList.toggle('is-tucked', e.isIntersecting)), { threshold: 0.15 }).observe(form);
+    }
   };
   const onScroll = () => { if (scrollY > 200) show(); };
   addEventListener('scroll', onScroll, { passive: true });
@@ -137,7 +146,8 @@ document.addEventListener('click', e => {
   if (!b) return;
   const seg = b.dataset.segSet, prev = root.dataset.seg || 'ukendt', from = b.dataset.segFrom || 'faner';
   hideTip();
-  hideCard();
+  // On a computer the card at the bottom stays and shows the choice; on phones it goes
+  if (card && desk.matches) card.classList.add('is-chosen'); else hideCard();
   if (seg === prev) return;
   try { localStorage.setItem(KEY, JSON.stringify({ seg, src: 'faner' })); } catch (x) { /* private mode: it lasts for this page */ }
   apply(seg);
