@@ -177,7 +177,9 @@ export default async function ({ lib, data, showcase, read }) {
     ['Hvordan kommer mine produkter ind?', `Op til ${P.included} produkter opretter vi ud fra dine billeder og tekster, og det er med i prisen. Har du flere, opretter vi dem for ${P.perProduct} kr. pr. produkt, eller vi importerer dem fra en fil eller din gamle webshop for ${kr(P.import)} samlet. Beregneren viser, hvad der er billigst for dig.`],
     ['Hvor lang tid tager det?', 'Det afhænger af, hvor mange produkter du har, og hvad shoppen skal kunne. Når vi har talt sammen, får du en tidsplan sammen med prisen. Det, der oftest bestemmer tempoet, er, hvornår billeder og tekster er klar.'],
     ['Ejer jeg selv webshoppen?', 'Ja. Webshoppen og Shopify-kontoen står i dit navn, og produkter, kunder og ordrer er dine. Webshop-service er et valg, ikke et krav.'],
-    ['Kan jeg selv rette i shoppen?', 'Ja. Du kan selv lægge nye produkter ind, ændre priser og sende ordrer, også fra mobilen. Vi viser dig, hvordan det virker.']
+    ['Kan jeg selv rette i shoppen?', 'Ja. Du kan selv lægge nye produkter ind, ændre priser og sende ordrer, også fra mobilen. Vi viser dig, hvordan det virker.'],
+    ['Kan I flytte min nuværende webshop til Shopify?', 'Ja. Vi kan flytte dine produkter og kunder over fra de fleste andre platforme. Vi gennemgår, hvad der kan flyttes, før vi går i gang.'],
+    ['Kan I også skaffe kunder til shoppen?', 'Ja. Vi laver også Google Shopping, Meta Ads, SEO og e-mail marketing til webshops. Annoncerne koster 8.000 kr. om måneden, og SEO koster 995 kr. i timen.']
   ];
   const u = url('webshop');
   const title = `Webshop på Shopify fra ${kr(P.base)} · Beregn din pris · Webleads`;

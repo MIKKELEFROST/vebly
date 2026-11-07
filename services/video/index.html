@@ -151,6 +151,14 @@
             "@type": "Answer",
             "text": "Ja. Vi kan sætte videoen i gang på Facebook, Instagram og YouTube, så den bliver vist for de rigtige."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan I lægge tekst på videoen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Mange ser videoer uden lyd, så vi lægger tekst på, når det giver mening."
+          }
         }
       ]
     }
@@ -160,10 +168,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261107c">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107d">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261107c">
-<link rel="stylesheet" href="/assets/css/show/video.css?v=20261107c">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107d">
+<link rel="stylesheet" href="/assets/css/show/video.css?v=20261107d">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -178,9 +186,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261107c"></script>
-<script type="module" src="/assets/js/sections.js?v=20261107c"></script>
-<script type="module" src="/assets/js/show/video.js?v=20261107c"></script>
+<script type="module" src="/assets/js/main.js?v=20261107d"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107d"></script>
+<script type="module" src="/assets/js/show/video.js?v=20261107d"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -204,7 +212,7 @@
   <div class="orb" data-orb aria-hidden="true"></div>
 
   <header class="nav" data-nav>
-    <div class="segbar" data-seg-bar data-nudge="Vælg her, så viser vi det, der passer til dig." data-order-ydelser="hjemmesider,lokal-seo,google-ads,meta-ads,organisk-facebook,organisk-instagram,branding,linkedin-ads,seo,linkbuilding,geo,chatgpt-ads,tracking,ai,automations,interne-systemer,video,youtube-annoncering,bing-ads,organisk-tiktok,tiktok-ads,snapchat-ads,email-marketing,cro,influencer-marketing,ugc,affiliate-marketing,app-udvikling,reddit-ads,pinterest-ads,webshop,google-shopping-ads,google-css,markedspladser" data-order-webshop="webshop,google-shopping-ads,google-css,seo,meta-ads,tracking,tiktok-ads,markedspladser,chatgpt-ads,ugc,influencer-marketing,affiliate-marketing,email-marketing,cro,pinterest-ads,organisk-instagram,organisk-tiktok,snapchat-ads,youtube-annoncering,google-ads,bing-ads,reddit-ads,linkbuilding,branding,geo,ai,video,organisk-facebook,automations,interne-systemer,app-udvikling,linkedin-ads,lokal-seo,hjemmesider">
+    <div class="segbar" data-seg-bar data-nudge="Vælg her, så viser vi det, der passer til dig." data-order-ydelser="hjemmesider,meta-ads,google-ads,lokal-seo,organisk-facebook,organisk-instagram,branding,linkedin-ads,seo,linkbuilding,geo,chatgpt-ads,tracking,ai,automations,interne-systemer,video,youtube-annoncering,bing-ads,organisk-tiktok,tiktok-ads,snapchat-ads,email-marketing,cro,influencer-marketing,ugc,affiliate-marketing,app-udvikling,reddit-ads,pinterest-ads,webshop,google-shopping-ads,google-css,markedspladser" data-order-webshop="webshop,meta-ads,google-shopping-ads,google-css,seo,tracking,tiktok-ads,markedspladser,chatgpt-ads,ugc,influencer-marketing,affiliate-marketing,email-marketing,cro,pinterest-ads,organisk-instagram,organisk-tiktok,snapchat-ads,youtube-annoncering,google-ads,bing-ads,reddit-ads,linkbuilding,branding,geo,ai,video,organisk-facebook,automations,interne-systemer,app-udvikling,linkedin-ads,lokal-seo,hjemmesider">
       <div class="segbar__in">
         <span class="segbar__q" id="seg-q">Hvad sælger du?</span>
         <div class="segbar__tabs" role="group" aria-labelledby="seg-q">
@@ -246,7 +254,7 @@
               </div>
               <aside class="mega__aside">
                 <div class="mega__k">Mest valgt</div>
-                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">02</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">02</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">02</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">03</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div>
                 <div class="mega__cta">
                   <b>Ikke sikker på, hvad du skal bruge?</b>
                   <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
@@ -580,6 +588,10 @@
           <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-5">Kan I også køre den som annonce?<span class="faq__icon" aria-hidden="true">+</span></button>
           <div class="faq__a" id="faq-5"><div><p>Ja. Vi kan sætte videoen i gang på Facebook, Instagram og YouTube, så den bliver vist for de rigtige. <a class="faq__more" href="/services/meta-ads" data-event="Spørgsmål: Læs om Meta Ads">Læs om Meta Ads →</a></p></div></div>
         </div>
+        <div class="faq__item" data-reveal="6">
+          <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-6">Kan I lægge tekst på videoen?<span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a" id="faq-6"><div><p>Ja. Mange ser videoer uden lyd, så vi lægger tekst på, når det giver mening.</p></div></div>
+        </div>
       </div>
     </section>
 
@@ -635,56 +647,56 @@
             <a class="sx-gc__more" href="/services/meta-ads" aria-label="Læs mere om Meta Ads" data-event="Services: Meta Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="linkedin-ads" data-addon="LinkedIn Ads" data-value="0" data-reveal="0">
-          <div class="sx-gc__top"><h3>LinkedIn Ads</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="linkedin-ads" data-addon="LinkedIn Ads" data-value="8000" data-reveal="0">
+          <div class="sx-gc__top"><h3>LinkedIn Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Annoncer til dem, der træffer beslutningen, ud fra stilling og branche.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="LinkedIn Ads" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/linkedin-ads" aria-label="Læs mere om LinkedIn Ads" data-event="Services: LinkedIn Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="tiktok-ads" data-addon="TikTok Ads" data-value="0" data-reveal="1">
-          <div class="sx-gc__top"><h3>TikTok Ads</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="tiktok-ads" data-addon="TikTok Ads" data-value="8000" data-reveal="1">
+          <div class="sx-gc__top"><h3>TikTok Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Korte videoannoncer, der ligner TikTok og fanger i første sekund.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="TikTok Ads" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/tiktok-ads" aria-label="Læs mere om TikTok Ads" data-event="Services: TikTok Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="snapchat-ads" data-addon="Snapchat Ads" data-value="0" data-reveal="2">
-          <div class="sx-gc__top"><h3>Snapchat Ads</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="snapchat-ads" data-addon="Snapchat Ads" data-value="8000" data-reveal="2">
+          <div class="sx-gc__top"><h3>Snapchat Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Annoncer i fuld skærm mellem vennernes stories.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Snapchat Ads" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/snapchat-ads" aria-label="Læs mere om Snapchat Ads" data-event="Services: Snapchat Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="pinterest-ads" data-addon="Pinterest Ads" data-value="0" data-reveal="3">
-          <div class="sx-gc__top"><h3>Pinterest Ads</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="pinterest-ads" data-addon="Pinterest Ads" data-value="8000" data-reveal="3">
+          <div class="sx-gc__top"><h3>Pinterest Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Dine produkter, mens folk planlægger og gemmer idéer.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Pinterest Ads" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/pinterest-ads" aria-label="Læs mere om Pinterest Ads" data-event="Services: Pinterest Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="youtube-annoncering" data-addon="YouTube-annoncering" data-value="0" data-reveal="4">
-          <div class="sx-gc__top"><h3>YouTube-annoncering</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="youtube-annoncering" data-addon="YouTube-annoncering" data-value="8000" data-reveal="4">
+          <div class="sx-gc__top"><h3>YouTube-annoncering</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Videoannoncer før videoerne og mellem Shorts.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="YouTube-annoncering" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/youtube-annoncering" aria-label="Læs mere om YouTube-annoncering" data-event="Services: YouTube-annoncering">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="bing-ads" data-addon="Bing Ads" data-value="0" data-reveal="0">
-          <div class="sx-gc__top"><h3>Bing Ads</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="bing-ads" data-addon="Bing Ads" data-value="8000" data-reveal="0">
+          <div class="sx-gc__top"><h3>Bing Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Annoncer på Bing for dem, der ikke søger på Google.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Bing Ads" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/bing-ads" aria-label="Læs mere om Bing Ads" data-event="Services: Bing Ads">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="reddit-ads" data-addon="Reddit Ads" data-value="0" data-reveal="1">
-          <div class="sx-gc__top"><h3>Reddit Ads</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="reddit-ads" data-addon="Reddit Ads" data-value="8000" data-reveal="1">
+          <div class="sx-gc__top"><h3>Reddit Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Annoncer i de fællesskaber, dine kunder følger.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Reddit Ads" data-burst aria-pressed="false">+ Tilføj</button>
@@ -707,8 +719,8 @@
             <a class="sx-gc__more" href="/services/google-css" aria-label="Læs mere om Google CSS" data-event="Services: Google CSS">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="markedspladser" data-addon="Salg på markedspladser" data-value="0" data-reveal="4">
-          <div class="sx-gc__top"><h3>Salg på markedspladser</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="markedspladser" data-addon="Salg på markedspladser" data-value="8000" data-reveal="4">
+          <div class="sx-gc__top"><h3>Salg på markedspladser</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Dine produkter på fx Amazon, Zalando, eBay og CDON, i sync med din webshop.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Salg på markedspladser" data-burst aria-pressed="false">+ Tilføj</button>
@@ -723,40 +735,40 @@
             <a class="sx-gc__more" href="/services/ugc" aria-label="Læs mere om UGC-indhold" data-event="Services: UGC-indhold">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="influencer-marketing" data-addon="Influencer marketing" data-value="0" data-reveal="1">
-          <div class="sx-gc__top"><h3>Influencer marketing</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="influencer-marketing" data-addon="Influencer marketing" data-value="8000" data-reveal="1">
+          <div class="sx-gc__top"><h3>Influencer marketing</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Skabere, der anbefaler dig til følgere, der ligner dine kunder.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Influencer marketing" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/influencer-marketing" aria-label="Læs mere om Influencer marketing" data-event="Services: Influencer marketing">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="affiliate-marketing" data-addon="Affiliate- og partnermarketing" data-value="0" data-reveal="2">
-          <div class="sx-gc__top"><h3>Affiliate- og partnermarketing</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="affiliate-marketing" data-addon="Affiliate- og partnermarketing" data-value="8000" data-reveal="2">
+          <div class="sx-gc__top"><h3>Affiliate- og partnermarketing</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Partnere, der sælger for dig. Du betaler provision, når der kommer et salg.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Affiliate- og partnermarketing" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/affiliate-marketing" aria-label="Læs mere om Affiliate- og partnermarketing" data-event="Services: Affiliate- og partnermarketing">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="organisk-instagram" data-addon="Organisk Instagram" data-value="0" data-reveal="3">
-          <div class="sx-gc__top"><h3>Organisk Instagram</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="organisk-instagram" data-addon="Organisk Instagram" data-value="8000" data-reveal="3">
+          <div class="sx-gc__top"><h3>Organisk Instagram</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Fast plan, automatisk udgivelse, automatiske svar og organiske kampagner.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Organisk Instagram" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/organisk-instagram" aria-label="Læs mere om Organisk Instagram" data-event="Services: Organisk Instagram">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="organisk-facebook" data-addon="Organisk Facebook" data-value="0" data-reveal="4">
-          <div class="sx-gc__top"><h3>Organisk Facebook</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="organisk-facebook" data-addon="Organisk Facebook" data-value="8000" data-reveal="4">
+          <div class="sx-gc__top"><h3>Organisk Facebook</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>En side, der poster og svarer af sig selv, også i Messenger.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Organisk Facebook" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/organisk-facebook" aria-label="Læs mere om Organisk Facebook" data-event="Services: Organisk Facebook">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="organisk-tiktok" data-addon="Organisk TikTok" data-value="0" data-reveal="0">
-          <div class="sx-gc__top"><h3>Organisk TikTok</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="organisk-tiktok" data-addon="Organisk TikTok" data-value="8000" data-reveal="0">
+          <div class="sx-gc__top"><h3>Organisk TikTok</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Serier og videoer, der bliver set uden annoncekroner.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Organisk TikTok" data-burst aria-pressed="false">+ Tilføj</button>
@@ -779,24 +791,24 @@
             <a class="sx-gc__more" href="/services/lokal-seo" aria-label="Læs mere om Lokal SEO" data-event="Services: Lokal SEO">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="linkbuilding" data-addon="Linkbuilding" data-value="0" data-reveal="3">
-          <div class="sx-gc__top"><h3>Linkbuilding</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="linkbuilding" data-addon="Linkbuilding" data-value="995" data-reveal="3">
+          <div class="sx-gc__top"><h3>Linkbuilding</h3><span class="sx-gc__price">995 kr./time</span></div>
           <p>Links fra rigtige danske sider, der giver din side tyngde på Google.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Linkbuilding" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/linkbuilding" aria-label="Læs mere om Linkbuilding" data-event="Services: Linkbuilding">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="geo" data-addon="GEO" data-value="0" data-reveal="4">
-          <div class="sx-gc__top"><h3>GEO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="geo" data-addon="GEO" data-value="995" data-reveal="4">
+          <div class="sx-gc__top"><h3>GEO</h3><span class="sx-gc__price">995 kr./time</span></div>
           <p>Bliv nævnt, når kunderne spørger ChatGPT og Googles AI om råd.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="GEO" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/geo" aria-label="Læs mere om GEO" data-event="Services: GEO">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="chatgpt-ads" data-addon="ChatGPT Ads" data-value="0" data-reveal="0">
-          <div class="sx-gc__top"><h3>ChatGPT Ads</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="chatgpt-ads" data-addon="ChatGPT Ads" data-value="8000" data-reveal="0">
+          <div class="sx-gc__top"><h3>ChatGPT Ads</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Annoncer under svaret, når kunderne spørger ChatGPT om det, du sælger.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="ChatGPT Ads" data-burst aria-pressed="false">+ Tilføj</button>
@@ -835,24 +847,24 @@
             <a class="sx-gc__more" href="/services/app-udvikling" aria-label="Læs mere om App-udvikling" data-event="Services: App-udvikling">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="email-marketing" data-addon="E-mail marketing" data-value="0" data-reveal="0">
-          <div class="sx-gc__top"><h3>E-mail marketing</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="email-marketing" data-addon="E-mail marketing" data-value="8000" data-reveal="0">
+          <div class="sx-gc__top"><h3>E-mail marketing</h3><span class="sx-gc__price">8.000 kr./md.</span></div>
           <p>Nyhedsbreve og mailflows, der får kunderne til at komme igen.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="E-mail marketing" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/email-marketing" aria-label="Læs mere om E-mail marketing" data-event="Services: E-mail marketing">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="cro" data-addon="CRO" data-value="0" data-reveal="1">
-          <div class="sx-gc__top"><h3>CRO</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="cro" data-addon="CRO" data-value="995" data-reveal="1">
+          <div class="sx-gc__top"><h3>CRO</h3><span class="sx-gc__price">995 kr./time</span></div>
           <p>Flere kunder fra de besøgende, du allerede har.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="CRO" data-burst aria-pressed="false">+ Tilføj</button>
             <a class="sx-gc__more" href="/services/cro" aria-label="Læs mere om CRO" data-event="Services: CRO">Læs mere →</a>
           </div>
         </div>
-        <div class="sx-gc" data-slug="tracking" data-addon="Tracking" data-value="0" data-reveal="2">
-          <div class="sx-gc__top"><h3>Tracking</h3><span class="sx-gc__price">Fast pris efter en snak</span></div>
+        <div class="sx-gc" data-slug="tracking" data-addon="Tracking" data-value="995" data-reveal="2">
+          <div class="sx-gc__top"><h3>Tracking</h3><span class="sx-gc__price">995 kr./time</span></div>
           <p>Se, hvilke annoncer og sider der giver kunder, med GA4, Meta og server-side tracking.</p>
           <div class="sx-gc__actions">
             <button type="button" class="sx-gc__add" data-toggle="Tracking" data-burst aria-pressed="false">+ Tilføj</button>

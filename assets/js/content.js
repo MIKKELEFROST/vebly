@@ -136,7 +136,9 @@ export const faqs = [
   ['Hvor hurtigt er siden klar?', 'En Simpel one page er klar på 7 dage. En Normal hjemmeside og en SEO hjemmeside tager længere tid, og du får en fast tidsplan, før vi går i gang.'],
   ['Jeg har ikke tid til det. Hvad skal jeg lave?', 'Et opkald på 15 minutter og nogle billeder. Resten klarer vi, også teksterne.'],
   ['Kan kunderne finde mig på Google?', 'Ja. Vi sætter siden op, så du kan findes på dit fag og dit område, fx “frisør Roskilde” eller “tømrer Vejle”, og opretter din Google-profil.'],
-  ['Kan jeg selv rette i siden?', 'Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi viser dig hvordan.']
+  ['Kan jeg selv rette i siden?', 'Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi viser dig hvordan.'],
+  ['Kan jeg beholde mit domæne?', 'Ja. Har du allerede et domæne, bruger vi det, så kunderne finder dig på samme adresse.'],
+  ['Kan I også skaffe kunder til siden?', 'Ja. Mange starter med hjemmesiden og tager Google Ads, Meta Ads eller lokal SEO bagefter. Google Ads og Meta Ads koster 8.000 kr. om måneden, og lokal SEO 995 kr. i timen.']
 ];
 
 // Ball / trail palette [background, text]
