@@ -160,10 +160,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107b">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
-<link rel="stylesheet" href="/assets/css/show/video.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107b">
+<link rel="stylesheet" href="/assets/css/show/video.css?v=20261107b">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -178,9 +178,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
-<script type="module" src="/assets/js/show/video.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107b"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107b"></script>
+<script type="module" src="/assets/js/show/video.js?v=20261107b"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -216,7 +216,47 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" aria-current="page" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
         <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
@@ -281,17 +321,22 @@
       <p class="sr-only">Reklamevideo til Instagram, Explainer-video, Motion graphics, Produktvideo, Reels og TikTok, YouTube-annonce, Logoanimation, Video til forsiden, Stories, Kampagnevideo.</p>
     </section>
 
-    <section id="eksempel" class="show show--video" data-sec="eksempel">
+    <!-- Showcase for Video: "Klippebordet", our own drawing of a video editor. The preview plays three real videos we made
+     (assets/media: the commercial for Nuttet Baby, our own talking-head ad, the 3D product film for GoBlender) above a
+     timeline with video, text and music tracks that follows the video's currentTime. The format chips reframe the
+     video: a crop window follows the subject over the dimmed full frame. The titles on the text track are our own
+     overlay. Styles: assets/css/show/video.css, behaviour: assets/js/show/video.js -->
+<section id="eksempel" class="show show--video" data-sec="eksempel">
       <div class="sec-head" data-reveal="0">
         <div class="sec-head__title"><div class="kicker">Klippebordet</div><h2 class="h2">Sekund for sekund.<br><span class="dim">I alle formater.</span></h2></div>
-        <p class="sec-head__lead">Her er en video til Nordvik, en tømrer i København. Skift mellem reklamevideo, explainer og motion graphics, og se den lodret, kvadratisk eller bred.</p>
+        <p class="sec-head__lead">Tre videoer, vi har lavet, på vores klippebord. Skift mellem reklamevideo, explainer og motion graphics, og se, hvordan de bliver skåret til lodret, kvadratisk og bred.</p>
       </div>
-      <p class="sr-only">Eksempel på en video til Nordvik, en tømrer i København, vist i et redigeringsprogram. Øverst kører videoen, nederst er tidslinjen med tre spor: videoklip, tekst og musik. Reklamevideoen er 10 sekunder. Den starter med »Ny terrasse til sommer?« i store undertekster, så »Fast pris. Ingen overraskelser.« og »Klar på en uge.«, og slutter med Nordviks logo og »Få et tilbud«. Explaineren forklarer med ikoner og korte linjer: Du ringer eller skriver. Vi kommer og måler op. Du får en fast pris. Vi bygger, du nyder. I motion graphics bygger Nordviks logo sig selv op, og ordene Mål, Sav og Byg kommer ind et efter et. Videoen kan vises lodret i 9:16 til Reels, Stories og TikTok, kvadratisk i 1:1 til feedet eller bred i 16:9 til YouTube og hjemmesiden.</p>
-      <!-- The editor plays the example while it is in view (assets/js/show/video.js). data-k: keyframes "sek prop… ; …"
-           (o opacity, x/y translate in %, s scale, w/h scaleX/Y, r rotate, ~b ~l ~i easing), data-on: "fra til" in seconds. -->
+      <p class="sr-only">Tre videoer, vi har lavet, vist i et redigeringsprogram. Øverst kører videoen, nederst er tidslinjen med tre spor: videoklip, tekst og lyd. Reklamevideoen er reklamefilmen til Nuttet Baby på 30 sekunder: børn i dyredragter leger i en stue, der bliver til en savanne. Teksten siger »Klar til eventyr?«, »Fra stuen til savannen.«, »Dyredragter til de mindste.« og »Hele flokken er med.« og slutter med Nuttet Baby. Explaineren er vores egen annonce på 20 sekunder: en tømrer taler til kameraet på en byggeplads, og korte linjer med ikoner siger »Du fortæller, hvad du har brug for.«, »Du får en fast pris.« og »Ét team. Direkte kontakt.«. Motion graphics er en 3D-produktfilm på 10 sekunder til GoBlender med frugt, is og vand og ordene Frugt, Is og Blend. Hver video kan vises lodret i 9:16 til Reels, Stories og TikTok, kvadratisk i 1:1 til feedet eller bred i 16:9 til YouTube og hjemmesiden. Når formatet skifter, følger udsnittet det vigtigste i billedet. Du kan afspille og sætte på pause, slå lyden til og trække i tidslinjen.</p>
+      <!-- data-k on a title: keyframes "sek prop… ; …" (o opacity, x/y translate in %, s scale, w/h scaleX/Y, r rotate,
+           ~b ~l ~i easing); data-on: "fra til" in seconds. Times follow the video's currentTime. -->
       <div class="ved spot" data-spot data-ved data-cur="r" data-fmt="169" data-reveal="1">
         <div class="ved__top">
-          <div class="ved__file" aria-hidden="true"><span class="ved__dots"><i></i><i></i><i></i></span><span>Nordvik · Terrasse</span></div>
+          <div class="ved__file" aria-hidden="true"><span class="ved__dots"><i></i><i></i><i></i></span><span data-ved-file>Nuttet Baby · Reklamefilm</span></div>
           <div class="ved__tabs" role="group" aria-label="Vælg slags video">
             <button type="button" class="is-on" aria-pressed="true" data-ved-tab="r">Reklamevideo</button>
             <button type="button" aria-pressed="false" data-ved-tab="e">Explainer</button>
@@ -301,83 +346,70 @@
         </div>
         <div class="ved__mid">
           <div class="ved__stage" data-ved-stage aria-hidden="true">
-            <div class="ved__frame" data-ved-frame>
-              <div class="ved__pic" data-ved-pic>
+            <video class="ved__vid is-tab" data-tab="r" src="/assets/media/nuttetbaby-reklame.mp4" poster="/assets/media/nuttetbaby-reklame.jpg" width="960" height="540" muted loop playsinline preload="none"></video>
+            <video class="ved__vid" data-tab="e" src="/assets/media/webleads-toemrer.mp4" poster="/assets/media/webleads-toemrer.jpg" width="540" height="960" muted loop playsinline preload="none"></video>
+            <video class="ved__vid" data-tab="m" src="/assets/media/goblender-3d.mp4" poster="/assets/media/goblender-3d.jpg" width="960" height="540" muted loop playsinline preload="none"></video>
+            <div class="ved__win" data-ved-win>
+              <div class="ved__pic">
                 <div class="vs vs--r is-tab" data-tab="r">
-                  <div class="vs__scene is-on" data-on="0 2.6"><img class="vs__ph" src="/udkast/_faelles/billeder/toemrer/hero-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/hero-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/hero-1.webp 896w" sizes="(max-width: 699px) 340px, 700px" alt="" width="480" height="600" loading="lazy" decoding="async" data-k="0 s1.22 x-3;2.6 s1.08 x2 ~l"></div>
-                  <div class="vs__scene" data-on="2.6 5.2"><img class="vs__ph" src="/udkast/_faelles/billeder/toemrer/om-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/om-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/om-1.webp 896w" sizes="(max-width: 699px) 340px, 700px" alt="" width="480" height="600" loading="lazy" decoding="async" data-k="2.6 s1.14 x4;5.2 s1.14 x-4 ~l"></div>
-                  <div class="vs__scene" data-on="5.2 7.95"><img class="vs__ph" src="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp" srcset="/udkast/_faelles/billeder/toemrer/projekt-1-480.webp 480w, /udkast/_faelles/billeder/toemrer/projekt-1.webp 896w" sizes="(max-width: 699px) 340px, 700px" alt="" width="480" height="600" loading="lazy" decoding="async" data-k="5.2 s1.04;7.95 s1.2 ~l"></div>
-                  <div class="vs__scene vs__end" data-on="7.6 10" data-k="7.6 x100;8 x0">
-                    <span class="nv" data-k="7.75 o0 s.4 r-25;8.15 o1 s1 r0 ~b"><i></i><i></i><i></i></span>
-                    <b class="vs__nm" data-k="7.9 o0 y50;8.3 o1 y0">Nordvik</b>
-                    <span class="vs__ln" data-k="8.05 o0 y60;8.45 o1 y0">Tømrer i København</span>
-                    <span class="vs__cta" data-k="8.4 o0 s.5;8.8 o1 s1 ~b">Få et tilbud →</span>
+                  <p class="vs__sub" data-on=".3 2.9"><span data-k=".3 o0 s1.6;.5 o1 s1 ~b">Klar</span> <span data-k=".5 o0 s1.6;.7 o1 s1 ~b">til</span> <span class="hl" data-k=".75 o0 s1.8 r-6;1 o1 s1 r-3 ~b">eventyr?</span></p>
+                  <p class="vs__sub" data-on="3.2 5.9"><span data-k="3.2 o0 s1.6;3.4 o1 s1 ~b">Fra</span> <span data-k="3.4 o0 s1.6;3.6 o1 s1 ~b">stuen</span> <span data-k="3.65 o0 s1.6;3.85 o1 s1 ~b">til</span> <span class="hl" data-k="3.9 o0 s1.8 r5;4.15 o1 s1 r2 ~b">savannen.</span></p>
+                  <p class="vs__sub" data-on="10 13.6"><span data-k="10 o0 s1.6;10.2 o1 s1 ~b">Dyredragter</span> <span data-k="10.35 o0 s1.6;10.55 o1 s1 ~b">til</span> <span data-k="10.5 o0 s1.6;10.7 o1 s1 ~b">de</span> <span class="hl" data-k="10.7 o0 s1.8 r-5;10.95 o1 s1 r-2 ~b">mindste.</span></p>
+                  <p class="vs__sub" data-on="22.2 25.8"><span data-k="22.2 o0 s1.6;22.4 o1 s1 ~b">Hele</span> <span class="hl" data-k="22.4 o0 s1.8 r4;22.65 o1 s1 r2 ~b">flokken</span> <span data-k="22.7 o0 s1.6;22.9 o1 s1 ~b">er</span> <span data-k="22.85 o0 s1.6;23.05 o1 s1 ~b">med.</span></p>
+                  <div class="vs__end" data-on="26.4 30.1">
+                    <b class="vs__nm" data-k="26.5 o0 y60 s.8;26.95 o1 y0 s1 ~b">Nuttet Baby</b>
+                    <span class="vs__cta" data-k="26.9 o0 s.5;27.3 o1 s1 ~b">nuttetbaby.dk</span>
                   </div>
-                  <p class="vs__sub is-on" data-on="0 2.6"><span data-k=".05 o0 s1.6;.25 o1 s1 ~b">Ny</span> <span data-k=".25 o0 s1.6;.45 o1 s1 ~b">terrasse</span> <span data-k=".6 o0 s1.6;.8 o1 s1 ~b">til</span> <span class="hl" data-k=".8 o0 s1.8 r-6;1.05 o1 s1 r-3 ~b">sommer?</span></p>
-                  <p class="vs__sub" data-on="2.7 3.95"><span data-k="2.7 o0 s1.6;2.9 o1 s1 ~b">Fast</span> <span class="hl" data-k="2.9 o0 s1.8;3.15 o1 s1 ~b">pris.</span></p>
-                  <p class="vs__sub" data-on="3.95 5.2"><span data-k="3.95 o0 s1.6;4.15 o1 s1 ~b">Ingen</span> <span class="hl" data-k="4.15 o0 s1.8;4.4 o1 s1 ~b">overraskelser.</span></p>
-                  <p class="vs__sub" data-on="5.3 7.6"><span data-k="5.3 o0 s1.6;5.5 o1 s1 ~b">Klar</span> <span data-k="5.45 o0 s1.6;5.65 o1 s1 ~b">på</span> <span data-k="5.6 o0 s1.6;5.8 o1 s1 ~b">en</span> <span class="hl" data-k="5.75 o0 s1.8 r4;6 o1 s1 r2 ~b">uge.</span></p>
                 </div>
                 <div class="vs vs--e" data-tab="e">
-                  <span class="vs__brand"><span class="nv"><i></i><i></i><i></i></span>Nordvik</span>
-                  <div class="vs__ex" data-on="0 3">
-                    <span class="vs__ic" data-k="0 o0 s.3;.5 o1 s1 ~b;2.75 o1 s1;3 o0 s.9"><svg viewBox="0 0 48 48"><path d="M8 22 24 9l16 13M12 19v14h24V19M20 33v-8h8v8"/><path class="wd" d="M5 38h38M10 43h28" data-k=".4 o0 x-30;.9 o1 x0"/></svg></span>
-                    <p class="vs__tx"><span data-k=".3 o0 y40;.7 o1 y0;2.75 o1;3 o0">Sådan får du</span> <span data-k=".45 o0 y40;.85 o1 y0;2.75 o1;3 o0">en ny terrasse</span></p>
+                  <div class="vs__lt" data-on=".4 4.4" data-k=".4 o0 x-30;.85 o1 x0;4.1 o1 x0;4.4 o0 x-12">
+                    <i class="vs__ltb" data-k=".4 h0;.75 h1 ~b"></i>
+                    <span class="vs__ltt"><b>Webleads</b><span>Flere kunder online</span></span>
                   </div>
-                  <div class="vs__ex" data-on="3 6">
-                    <span class="vs__ic" data-k="3 o0 s.3;3.5 o1 s1 ~b;5.75 o1 s1;6 o0 s.9"><svg viewBox="0 0 48 48"><path d="M10 11h28a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H23l-8 7v-7h-5a4 4 0 0 1-4-4V15a4 4 0 0 1 4-4z"/><circle class="dt" cx="17" cy="22" r="2.4" data-k="3.6 y0;3.8 y-90;4 y0;4.6 y0;4.8 y-90;5 y0"/><circle class="dt" cx="24" cy="22" r="2.4" data-k="3.7 y0;3.9 y-90;4.1 y0;4.7 y0;4.9 y-90;5.1 y0"/><circle class="dt" cx="31" cy="22" r="2.4" data-k="3.8 y0;4 y-90;4.2 y0;4.8 y0;5 y-90;5.2 y0"/></svg></span>
-                    <p class="vs__tx"><span data-k="3.3 o0 y40;3.7 o1 y0;5.75 o1;6 o0">Du ringer</span> <span data-k="3.45 o0 y40;3.85 o1 y0;5.75 o1;6 o0">eller skriver.</span></p>
+                  <div class="vs__card" data-on="4.8 9.4" data-k="4.8 o0 y40 s.9;5.2 o1 y0 s1 ~b;9.1 o1 y0;9.4 o0 y12">
+                    <span class="vs__ic"><svg viewBox="0 0 48 48"><path d="M10 11h28a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H23l-8 7v-7h-5a4 4 0 0 1-4-4V15a4 4 0 0 1 4-4z"/><circle class="dt" cx="17" cy="22" r="2.4" data-k="5.4 y0;5.6 y-90;5.8 y0;6.6 y0;6.8 y-90;7 y0"/><circle class="dt" cx="24" cy="22" r="2.4" data-k="5.5 y0;5.7 y-90;5.9 y0;6.7 y0;6.9 y-90;7.1 y0"/><circle class="dt" cx="31" cy="22" r="2.4" data-k="5.6 y0;5.8 y-90;6 y0;6.8 y0;7 y-90;7.2 y0"/></svg></span>
+                    <p class="vs__tx"><span data-k="5 o0 y40;5.35 o1 y0">Du fortæller,</span> <span data-k="5.15 o0 y40;5.5 o1 y0">hvad du har brug for.</span></p>
                   </div>
-                  <div class="vs__ex" data-on="6 9">
-                    <span class="vs__ic" data-k="6 o0 s.3;6.5 o1 s1 ~b;8.75 o1 s1;9 o0 s.9"><svg viewBox="0 0 48 48"><rect x="5" y="15" width="19" height="19" rx="5"/><circle cx="14.5" cy="24.5" r="3.6"/><path class="wd tp" d="M24 28h19v-6H24M29 22v3M34 22v3M39 22v3" data-k="6.4 w0;7.2 w1 ~i"/></svg></span>
-                    <p class="vs__tx"><span data-k="6.3 o0 y40;6.7 o1 y0;8.75 o1;9 o0">Vi kommer</span> <span data-k="6.45 o0 y40;6.85 o1 y0;8.75 o1;9 o0">og måler op.</span></p>
+                  <div class="vs__card" data-on="9.8 14.4" data-k="9.8 o0 y40 s.9;10.2 o1 y0 s1 ~b;14.1 o1 y0;14.4 o0 y12">
+                    <span class="vs__ic"><svg viewBox="0 0 48 48"><g class="sw" data-k="10.1 r-28;10.9 r0 ~b"><path d="M25 7h12a4 4 0 0 1 4 4v12L24 40a3 3 0 0 1-4.2 0L8 28.2a3 3 0 0 1 0-4.2z"/><circle cx="34" cy="14" r="2.6"/><text x="19.5" y="30" transform="rotate(-45 22 27)">kr.</text></g></svg></span>
+                    <p class="vs__tx"><span data-k="10 o0 y40;10.35 o1 y0">Du får en</span> <span class="vs__em" data-k="10.15 o0 y40;10.5 o1 y0">fast pris.</span></p>
                   </div>
-                  <div class="vs__ex" data-on="9 12">
-                    <span class="vs__ic" data-k="9 o0 s.3;9.5 o1 s1 ~b;11.75 o1 s1;12 o0 s.9"><svg viewBox="0 0 48 48"><g class="sw" data-k="9.3 r-24;10.1 r0 ~b"><path d="M25 7h12a4 4 0 0 1 4 4v12L24 40a3 3 0 0 1-4.2 0L8 28.2a3 3 0 0 1 0-4.2z"/><circle cx="34" cy="14" r="2.6"/><text x="19.5" y="30" transform="rotate(-45 22 27)">kr.</text></g></svg></span>
-                    <p class="vs__tx"><span data-k="9.3 o0 y40;9.7 o1 y0;11.75 o1;12 o0">Du får en</span> <span data-k="9.45 o0 y40;9.85 o1 y0;11.75 o1;12 o0">fast pris.</span></p>
-                  </div>
-                  <div class="vs__ex" data-on="12 15">
-                    <span class="vs__ic" data-k="12 o0 s.3;12.5 o1 s1 ~b"><svg viewBox="0 0 48 48"><circle class="wd" cx="24" cy="24" r="8"/><g class="wd" data-k="12 r0;15 r90 ~l"><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11.3 11.3l3.5 3.5M33.2 33.2l3.5 3.5M11.3 36.7l3.5-3.5M33.2 14.8l3.5-3.5"/></g></svg></span>
-                    <p class="vs__tx"><span data-k="12.3 o0 y40;12.7 o1 y0">Vi bygger.</span> <span class="vs__em" data-k="12.6 o0 y40;13 o1 y0">Du nyder.</span><small data-k="13.2 o0;13.6 o1">nordvik.dk</small></p>
+                  <div class="vs__card" data-on="14.8 20.1" data-k="14.8 o0 y40 s.9;15.2 o1 y0 s1 ~b">
+                    <span class="vs__ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path class="wd tp" d="M16.5 24.5l5 5 10-11" data-k="15.2 w0;15.7 w1 ~i"/></svg></span>
+                    <p class="vs__tx"><span data-k="15 o0 y40;15.35 o1 y0">Ét team.</span> <span class="vs__em" data-k="15.2 o0 y40;15.55 o1 y0">Direkte kontakt.</span><small data-k="15.9 o0;16.3 o1">webleads.dk</small></p>
                   </div>
                 </div>
                 <div class="vs vs--m" data-tab="m">
-                  <div class="vs__mo" data-on="0 3"><div class="vs__lk" data-k="2.55 s1;3 s1.7 o0 ~i">
-                    <span class="nv nv--fly"><i data-k="0 o0 x-260 y-200 r-220;.7 o1 x0 y0 r-40 ~b"></i><i data-k=".15 o0 x260 y-200 r220;.85 o1 x0 y0 r40 ~b"></i><i data-k=".35 o0 y500;1 o1 y0 ~b"></i></span>
-                    <b class="vs__word"><span data-k="1 o0 y90;1.35 o1 y0 ~b">N</span><span data-k="1.07 o0 y90;1.42 o1 y0 ~b">o</span><span data-k="1.14 o0 y90;1.49 o1 y0 ~b">r</span><span data-k="1.21 o0 y90;1.56 o1 y0 ~b">d</span><span data-k="1.28 o0 y90;1.63 o1 y0 ~b">v</span><span data-k="1.35 o0 y90;1.7 o1 y0 ~b">i</span><span data-k="1.42 o0 y90;1.77 o1 y0 ~b">k</span></b>
-                    <span class="vs__tag" data-k="1.8 o0 y60;2.2 o1 y0">Tømrer · København</span>
-                  </div></div>
-                  <div class="vs__mo vs__kin" data-on="3 5.6">
-                    <i class="vs__orb" data-k="3 s0;3.5 s1 ~b;5.3 s1.1;5.6 s0 ~i"></i>
-                    <i class="vs__ring" data-k="3 o0 r0;3.3 o1;5.6 r140 ~l"></i>
-                    <b data-k="3.05 o0 s2.4 r-10;3.35 o1 s1 r-4 ~b;5.35 o1 x0;5.6 o0 x-40">Mål.</b>
-                    <b data-k="3.7 o0 s2.4 r10;4 o1 s1 r3 ~b;5.35 o1 x0;5.6 o0 x-40">Sav.</b>
-                    <b class="vs__em" data-k="4.35 o0 s2.6 r-8;4.65 o1 s1 r-2 ~b;5.35 o1 x0;5.6 o0 x-40">Byg.</b>
+                  <b class="vs__big" data-on=".1 1.75"><span data-k=".15 o0 y-120 r-12;.5 o1 y0 r0 ~b;1.5 o1 x0;1.75 o0 x-30">F</span><span data-k=".2 o0 y-120 r10;.55 o1 y0 r0 ~b;1.5 o1 x0;1.75 o0 x-30">r</span><span data-k=".25 o0 y-120 r-8;.6 o1 y0 r0 ~b;1.5 o1 x0;1.75 o0 x-30">u</span><span data-k=".3 o0 y-120 r12;.65 o1 y0 r0 ~b;1.5 o1 x0;1.75 o0 x-30">g</span><span data-k=".35 o0 y-120 r-6;.7 o1 y0 r0 ~b;1.5 o1 x0;1.75 o0 x-30">t</span><span class="vs__em" data-k=".45 o0 s0;.75 o1 s1 ~b;1.5 o1 x0;1.75 o0 x-30">.</span></b>
+                  <b class="vs__big vs__big--ice" data-on="1.85 3.45"><span data-k="1.85 o0 s2.6 r-14;2.15 o1 s1 r-4 ~b;3.2 o1 s1;3.45 o0 s1.3">Is</span><span class="vs__em" data-k="2.1 o0 s0;2.35 o1 s1 ~b;3.2 o1;3.45 o0">.</span></b>
+                  <div class="vs__mo" data-on="3.6 6.05">
+                    <i class="vs__ring" data-k="3.6 o0 s.4 r0;3.95 o1 s1 ~b;6.05 r200 ~l"></i>
+                    <b class="vs__big"><span data-k="3.65 o0 x-60;4 o1 x0 ~b;5.8 o1;6.05 o0 s.8">Blend</span><span class="vs__em" data-k="4 o0 s0;4.25 o1 s1 ~b;5.8 o1;6.05 o0">.</span></b>
                   </div>
-                  <div class="vs__mo" data-on="5.6 8"><div class="vs__lk" data-k="5.6 o0 s.7;6 o1 s1 ~b">
-                    <span class="nv"><i></i><i></i><i></i></span>
-                    <b class="vs__word">Nordvik<i class="vs__dot" data-k="6.3 o0 y-500;6.75 o1 y0 ~b"></i></b>
-                    <i class="vs__bar" data-k="6 w0;6.5 w1 ~i"></i>
-                    <span class="vs__tag" data-k="6.3 o0 y60;6.7 o1 y0">nordvik.dk</span>
-                  </div></div>
+                  <div class="vs__mo vs__pack" data-on="7.5 10.1">
+                    <b class="vs__word"><span data-k="7.5 o0 y90;7.85 o1 y0 ~b">G</span><span data-k="7.56 o0 y90;7.91 o1 y0 ~b">o</span><span data-k="7.62 o0 y90;7.97 o1 y0 ~b">B</span><span data-k="7.68 o0 y90;8.03 o1 y0 ~b">l</span><span data-k="7.74 o0 y90;8.09 o1 y0 ~b">e</span><span data-k="7.8 o0 y90;8.15 o1 y0 ~b">n</span><span data-k="7.86 o0 y90;8.21 o1 y0 ~b">d</span><span data-k="7.92 o0 y90;8.27 o1 y0 ~b">e</span><span data-k="7.98 o0 y90;8.33 o1 y0 ~b">r</span></b>
+                    <i class="vs__bar" data-k="8.2 w0;8.75 w1 ~i"></i>
+                    <span class="vs__tag" data-k="8.6 o0 y60;9 o1 y0">Frugt · Is · Blend</span>
+                  </div>
                 </div>
-                <div class="ved__guide"><span data-ved-glabel>16:9</span></div>
               </div>
+              <span class="ved__lbl"><b data-ved-glabel>16:9</b><span class="ved__lc" data-ved-gcrop></span></span>
             </div>
           </div>
           <div class="ved__insp" aria-hidden="true">
             <span class="ved__ih">Egenskaber</span>
-            <div class="ved__row"><span>Slags</span><b data-ved-i="kind">Reklamevideo</b></div>
-            <div class="ved__row"><span>Længde</span><b data-ved-i="len">0:10</b></div>
-            <div class="ved__row"><span data-ved-i="k1">Hook</span><b data-ved-i="v1">De første 2 sek.</b></div>
-            <div class="ved__row"><span data-ved-i="k2">Undertekster</span><b data-ved-i="v2">Brændt ind</b></div>
+            <div class="ved__row"><span>Kunde</span><b data-ved-i="kunde">Nuttet Baby</b></div>
+            <div class="ved__row"><span>Længde</span><b data-ved-i="len">0:30</b></div>
+            <div class="ved__row"><span data-ved-i="k1">Klip</span><b data-ved-i="v1">8 scener</b></div>
+            <div class="ved__row"><span>Udsnit</span><b data-ved-i="crop">Hele billedet</b></div>
             <div class="ved__row"><span>Format</span><b data-ved-i="fmt">16:9 · 1920 × 1080</b></div>
             <div class="ved__to"><span>Til</span><b data-ved-i="to">YouTube og din hjemmeside</b></div>
           </div>
         </div>
         <div class="ved__ctl">
           <button type="button" class="ved__play" data-ved-play aria-label="Sæt videoen på pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="ved__ip" d="M8 5.5v13l10.5-6.5z"/><path class="ved__iz" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button>
-          <span class="ved__tc" aria-hidden="true"><b data-ved-tc>00:00:00:00</b><span class="ved__dur"> / <span data-ved-dur>00:00:10:00</span></span></span>
+          <button type="button" class="ved__snd" data-ved-snd aria-pressed="false" aria-label="Lyd"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="ved__spk" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="ved__wv" d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="ved__mx" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+          <span class="ved__tc" aria-hidden="true"><b data-ved-tc>00:00:00:00</b><span class="ved__dur"> / <span data-ved-dur>00:00:30:00</span></span></span>
           <div class="ved__fmts" role="group" aria-label="Vælg format">
             <button type="button" aria-pressed="false" data-ved-fmt="916"><i class="ved__ar"></i>9:16</button>
             <button type="button" aria-pressed="false" data-ved-fmt="11"><i class="ved__ar"></i>1:1</button>
@@ -389,50 +421,54 @@
             <span></span>
             <span class="ved__hd"><i>V1</i><span>Video</span></span>
             <span class="ved__hd ved__hd--t"><i>T1</i><span>Tekst</span></span>
-            <span class="ved__hd ved__hd--a"><i>A1</i><span>Musik</span><span class="ved__vu"><b data-ved-vu></b><b data-ved-vu></b></span></span>
+            <span class="ved__hd ved__hd--a"><i>A1</i><span>Lyd</span><span class="ved__vu"><b data-ved-vu></b><b data-ved-vu></b></span></span>
           </div>
           <div class="ved__lanes" data-ved-lanes>
-            <div class="ved__ruler" data-ved-ruler><span class="ved__nums" data-ved-nums></span><i class="ved__clip ved__mark is-tab" data-tab="r" style="--s:0;--e:2"><b>Hook</b></i></div>
+            <div class="ved__ruler" data-ved-ruler><span class="ved__nums" data-ved-nums></span><i class="ved__clip ved__mark is-tab" data-tab="r" style="--s:0;--e:3"><b>Hook</b></i><i class="ved__clip ved__mark" data-tab="m" style="--s:7.4;--e:10"><b>Packshot</b></i></div>
             <div class="ved__lane">
-              <i class="ved__clip ved__clip--p is-tab" data-bg="hero-1" data-tab="r" style="--s:0;--e:2.6"><b>Byggeri.mp4</b></i>
-              <i class="ved__clip ved__clip--p is-tab" data-bg="om-1" data-tab="r" style="--s:2.6;--e:5.2"><b>Værksted.mp4</b></i>
-              <i class="ved__clip ved__clip--p is-tab" data-bg="projekt-1" data-tab="r" style="--s:5.2;--e:7.6"><b>Færdig.mp4</b></i>
-              <i class="ved__clip ved__clip--g is-tab" data-tab="r" style="--s:7.6;--e:10"><b>Slutkort</b></i>
-              <i class="ved__clip ved__clip--g" data-tab="e" style="--s:0;--e:3"><b>Intro</b></i>
-              <i class="ved__clip ved__clip--g" data-tab="e" style="--s:3;--e:6"><b>Kontakt</b></i>
-              <i class="ved__clip ved__clip--g" data-tab="e" style="--s:6;--e:9"><b>Opmåling</b></i>
-              <i class="ved__clip ved__clip--g" data-tab="e" style="--s:9;--e:12"><b>Fast pris</b></i>
-              <i class="ved__clip ved__clip--g" data-tab="e" style="--s:12;--e:15"><b>Outro</b></i>
-              <i class="ved__clip ved__clip--k" data-tab="m" style="--s:0;--e:3" data-kf=".7 .85 1 1.4 1.8 2.55"><b>Logo ind</b></i>
-              <i class="ved__clip ved__clip--k" data-tab="m" style="--s:3;--e:5.6" data-kf=".35 1 1.65 2.35"><b>Typografi</b></i>
-              <i class="ved__clip ved__clip--k" data-tab="m" style="--s:5.6;--e:8" data-kf=".4 .9 1.15"><b>Slutkort</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:0;--e:3"><b>Stuen</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:3;--e:6.17"><b>Savannen</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:6.17;--e:9.8"><b>Abe og zebra</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:9.8;--e:13.87"><b>Zebra og elefant</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:13.87;--e:18.03"><b>Elefant og giraf</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:18.03;--e:21.93"><b>Dansen</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:21.93;--e:26.1"><b>Flokken</b></i>
+              <i class="ved__clip ved__clip--p is-tab" data-tab="r" style="--s:26.1;--e:30"><b>Slut</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="e" style="--s:0;--e:20"><b>Byggepladsen.mp4</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="m" style="--s:0;--e:.7"><b>Lime</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="m" style="--s:.7;--e:1.77"><b>Mango</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="m" style="--s:1.77;--e:3.5"><b>Is</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="m" style="--s:3.5;--e:4.9"><b>Hvirvel</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="m" style="--s:4.9;--e:6.1"><b>Vand</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="m" style="--s:6.1;--e:7.4"><b>Flaske</b></i>
+              <i class="ved__clip ved__clip--p" data-tab="m" style="--s:7.4;--e:10"><b>Packshot</b></i>
             </div>
             <div class="ved__lane">
-              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:0;--e:2.6"><b>Ny terrasse til sommer?</b></i>
-              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:2.7;--e:3.95"><b>Fast pris.</b></i>
-              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:3.95;--e:5.2"><b>Ingen overraskelser.</b></i>
-              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:5.3;--e:7.6"><b>Klar på en uge.</b></i>
-              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:7.9;--e:10"><b>Få et tilbud</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:.3;--e:3"><b>Sådan får du en ny terrasse</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:3.3;--e:6"><b>Du ringer eller skriver.</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:6.3;--e:9"><b>Vi kommer og måler op.</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:9.3;--e:12"><b>Du får en fast pris.</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:12.3;--e:15"><b>Vi bygger. Du nyder.</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="m" style="--s:1;--e:3"><b>Nordvik</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="m" style="--s:3.05;--e:5.6"><b>Mål. Sav. Byg.</b></i>
-              <i class="ved__clip ved__clip--t" data-tab="m" style="--s:6;--e:8"><b>nordvik.dk</b></i>
+              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:.3;--e:2.9"><b>Klar til eventyr?</b></i>
+              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:3.2;--e:5.9"><b>Fra stuen til savannen.</b></i>
+              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:10;--e:13.6"><b>Dyredragter til de mindste.</b></i>
+              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:22.2;--e:25.8"><b>Hele flokken er med.</b></i>
+              <i class="ved__clip ved__clip--t is-tab" data-tab="r" style="--s:26.4;--e:30"><b>Nuttet Baby</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:.4;--e:4.4"><b>Navneskilt</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:4.8;--e:9.4"><b>Du fortæller, hvad du har brug for.</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:9.8;--e:14.4"><b>Du får en fast pris.</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="e" style="--s:14.8;--e:20"><b>Ét team. Direkte kontakt.</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="m" style="--s:.1;--e:1.75" data-kf=".05 .65 1.4"><b>Frugt.</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="m" style="--s:1.85;--e:3.45" data-kf=".3 1.35"><b>Is.</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="m" style="--s:3.6;--e:6.05" data-kf=".35 .65 2.2"><b>Blend.</b></i>
+              <i class="ved__clip ved__clip--t" data-tab="m" style="--s:7.5;--e:10" data-kf=".35 .83 1.25"><b>GoBlender</b></i>
             </div>
             <div class="ved__lane">
-              <i class="ved__clip ved__clip--a is-tab" data-tab="r" style="--s:0;--e:10"><svg data-ved-wave preserveAspectRatio="none"></svg><b>Musik · Sommerdag</b></i>
-              <i class="ved__clip ved__clip--a" data-tab="e" style="--s:0;--e:15"><svg data-ved-wave preserveAspectRatio="none"></svg><b>Speak og musik</b></i>
-              <i class="ved__clip ved__clip--a" data-tab="m" style="--s:0;--e:8"><svg data-ved-wave preserveAspectRatio="none"></svg><b>Musik · Puls</b></i>
+              <i class="ved__clip ved__clip--a is-tab" data-tab="r" style="--s:0;--e:30" data-wave="i99ci9786ed7dhb666863322ijc9hfcihxg88dcblfb8kfamib85dpb8gicahgafi8664345hcccirathhzlhaaeeaglcehefchecadbllfc8a85fbbc3221"><svg preserveAspectRatio="none"></svg><svg class="ved__wpl" preserveAspectRatio="none"></svg><b>Lydspor</b></i>
+              <i class="ved__clip ved__clip--a" data-tab="e" style="--s:0;--e:20" data-wave="23koj23lnh9223nnjrdqqqb32pqi92232227xv4upwwki7gtr82bjtrrj545nommg2323zqmrd332rmljd22222rssh2mwrfojc2"><svg preserveAspectRatio="none"></svg><svg class="ved__wpl" preserveAspectRatio="none"></svg><b>Tale</b></i>
+              <i class="ved__clip ved__clip--a ved__clip--mute" data-tab="m" style="--s:0;--e:10"><b>Uden lyd · til toppen af en hjemmeside</b></i>
             </div>
             <div class="ved__ph" data-ved-ph><i></i></div>
           </div>
         </div>
       </div>
       <div class="ved-cap" data-reveal="2">
-        <p><b data-ved-caph>Fanger på de første sekunder.</b><span data-ved-cap>En stærk start og store undertekster, så budskabet når frem uden lyd.</span></p>
+        <p><b data-ved-caph>En reklamefilm, der fanger.</b><span data-ved-cap>Reklamefilmen, vi lavede til Nuttet Baby. Teksten ligger på sit eget spor, og udsnittet følger børnene, når du skifter format.</span></p>
         <a href="#kontakt" class="btn btn--dark ved-cap__go" data-magnet data-burst data-event="Eksempel: Få en pris på video">Få en fast pris →</a>
       </div>
     </section>

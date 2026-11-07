@@ -1,0 +1,243 @@
+/* Showcase on /services/organisk-tiktok: a series profile. The plan, a phone with the profile and its series, and a chat
+   with automatic replies. Behaviour: assets/js/show/organisk-tiktok.js. Inside the phone sizes are in cqw
+   (1cqw = 1% of the screen width), so the screen scales as one piece. Keyframes are named otk*. */
+.show--organisk-tiktok { --pw: clamp(268px, calc((100vh - 210px) * .46), 326px); --bz: clamp(7px, calc(var(--pw) * .028), 9px); --e: cubic-bezier(.2,.8,.2,1); --spring: cubic-bezier(.2,1.5,.4,1); --gr: #f1f1f2; --tg: #8a8a8a;
+  position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 40px; }
+@supports (height: 100svh) { .show--organisk-tiktok { --pw: clamp(268px, calc((100svh - 210px) * .46), 326px); } }
+.show--organisk-tiktok .sec-head { margin-bottom: 52px; }
+.show--organisk-tiktok .sec-head__lead { max-width: 440px; }
+.show--organisk-tiktok .sp-defs { position: absolute; width: 0; height: 0; }
+.show--organisk-tiktok .sp { display: grid; grid-template-columns: minmax(0, 290px) var(--pw) minmax(0, 290px); grid-template-areas: "cal dev dm"; justify-content: center; align-items: center; gap: 40px clamp(32px, 4.6vw, 68px); }
+.show--organisk-tiktok .sp-side--cal { grid-area: cal; }
+.show--organisk-tiktok .sp__dev { grid-area: dev; }
+.show--organisk-tiktok .sp-side--dm { grid-area: dm; }
+
+/* ---------- The phone ---------- */
+.show--organisk-tiktok .sp__dev { position: relative; width: var(--pw); }
+.show--organisk-tiktok .sp__eks { position: absolute; z-index: 12; top: -12px; right: 22px; }
+.show--organisk-tiktok .sp-ph { position: relative; padding: var(--bz); border-radius: calc(var(--pw) * .16); background: #111; box-shadow: 0 50px 90px -40px rgba(17,17,17,.55), 0 0 0 1px #2e2e2e, inset 0 0 0 1.5px #333; }
+.show--organisk-tiktok .sp-scr { position: relative; aspect-ratio: 375 / 812; overflow: hidden; overflow: clip; border-radius: calc(var(--pw) * .16 - var(--bz)); background: #fff; color: #111; font-family: var(--body); container-type: inline-size; transform: translateZ(0); }
+.show--organisk-tiktok .sp-scr svg { flex-shrink: 0; }
+.show--organisk-tiktok .sp-isl { position: absolute; z-index: 11; top: 2.9cqw; left: 50%; width: 29cqw; height: 8.5cqw; margin-left: -14.5cqw; border-radius: 99px; background: #000; }
+.show--organisk-tiktok .sp-sb { position: absolute; z-index: 10; inset: 0 0 auto; height: 14cqw; display: flex; justify-content: space-between; align-items: center; padding: 0 7cqw 0 10cqw; font-size: 4.2cqw; font-weight: 700; transition: color .3s; }
+.show--organisk-tiktok .sp-sb svg { width: 17cqw; height: 3.2cqw; fill: currentColor; }
+.show--organisk-tiktok.is-open .sp-sb { color: #fff; }
+.show--organisk-tiktok .sp-bar { position: absolute; z-index: 6; inset: 0 0 auto; height: 25cqw; display: flex; justify-content: space-between; align-items: center; padding: 14cqw 4cqw 0; background: #fff; font-size: 4.4cqw; }
+.show--organisk-tiktok .sp-bar svg { width: 6cqw; height: 6cqw; fill: currentColor; }
+.show--organisk-tiktok .sp-page { position: absolute; inset: 0 0 auto; padding-top: 25cqw; transform: translateY(-31cqw); }
+.motion .show--organisk-tiktok .sp-page { transition: transform 1.3s cubic-bezier(.6,0,.2,1); }
+.motion .show--organisk-tiktok.is-top .sp-page { transform: none; }
+
+/* Profile head */
+.show--organisk-tiktok .sp-pro { display: flex; flex-direction: column; align-items: center; padding: 2cqw 5cqw 0; text-align: center; }
+.show--organisk-tiktok .sp-av svg { display: block; width: 21cqw; height: 21cqw; }
+.show--organisk-tiktok .sp-handle { margin-top: 2.2cqw; font-size: 4.4cqw; }
+.show--organisk-tiktok .sp-stats { display: flex; margin-top: 3cqw; }
+.show--organisk-tiktok .sp-stats span { display: flex; flex-direction: column; align-items: center; gap: .4cqw; padding: 0 5cqw; font-size: 3.3cqw; color: var(--tg); }
+.show--organisk-tiktok .sp-stats span + span { border-left: .3cqw solid #e8e8e8; }
+.show--organisk-tiktok .sp-stats b { font-size: 4.6cqw; color: #111; font-variant-numeric: tabular-nums; }
+.show--organisk-tiktok .sp-btns { display: flex; gap: 1.6cqw; height: 10.4cqw; margin-top: 3.6cqw; }
+.show--organisk-tiktok .sp-btns > * { display: flex; align-items: center; justify-content: center; border-radius: 1.8cqw; background: var(--gr); font-size: 4cqw; font-weight: 700; }
+.show--organisk-tiktok .sp-follow { position: relative; width: 36cqw; padding: 0; border: 0; background: var(--accent); color: #fff; font-family: inherit; cursor: pointer; transition: background .3s, color .3s; }
+.show--organisk-tiktok .sp-follow span + span, .show--organisk-tiktok .sp-follow[aria-pressed="true"] span:first-child { display: none; }
+.show--organisk-tiktok .sp-follow[aria-pressed="true"] { background: var(--gr); color: #111; }
+.show--organisk-tiktok .sp-follow[aria-pressed="true"] span + span { display: inline; }
+.show--organisk-tiktok .sp-follow:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.show--organisk-tiktok .sp-msg { width: 27cqw; }
+.show--organisk-tiktok .sp-more { width: 10.4cqw; }
+.show--organisk-tiktok .sp-more svg { width: 5cqw; height: 5cqw; }
+.show--organisk-tiktok .sp-bio { margin: 3.2cqw 0 0; font-size: 3.5cqw; line-height: 1.4; }
+.show--organisk-tiktok .sp-pls { display: flex; gap: 2cqw; padding: 3.6cqw 4cqw 0; overflow: hidden; }
+.show--organisk-tiktok .sp-pl { flex: none; display: flex; align-items: center; gap: 2cqw; padding: 2cqw 3.6cqw 2cqw 2.6cqw; border-radius: 2.4cqw; background: var(--gr); text-align: left; }
+.show--organisk-tiktok .sp-pl svg { width: 5.4cqw; height: 5.4cqw; fill: currentColor; }
+.show--organisk-tiktok .sp-pl > span { display: flex; flex-direction: column; line-height: 1.25; }
+.show--organisk-tiktok .sp-pl b { font-size: 3.4cqw; }
+.show--organisk-tiktok .sp-pl small { font-size: 2.9cqw; color: var(--tg); }
+.show--organisk-tiktok .sp-pl.is-on { background: #111; color: #fff; }
+.show--organisk-tiktok .sp-pl.is-on small { color: rgba(255,255,255,.65); }
+.show--organisk-tiktok .sp-tabs { display: flex; margin-top: 3cqw; border-bottom: .3cqw solid #ececec; }
+.show--organisk-tiktok .sp-tabs span { position: relative; flex: 1; display: flex; justify-content: center; padding: 2.4cqw 0; color: #a3a3a3; }
+.show--organisk-tiktok .sp-tabs svg { width: 5.4cqw; height: 5.4cqw; }
+.show--organisk-tiktok .sp-tabs .is-on { color: #111; }
+.show--organisk-tiktok .sp-tabs .is-on::after { content: ""; position: absolute; left: 34%; right: 34%; bottom: -.3cqw; height: .6cqw; background: #111; }
+
+/* The grid: the series, Del 1 pinned first, then the newest */
+.show--organisk-tiktok .sp-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55cqw; margin: .55cqw 0 0; padding: 0; list-style: none; }
+.show--organisk-tiktok .sp-grid li { aspect-ratio: 3 / 4; }
+.show--organisk-tiktok .sp-t { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; padding: 0; border: 0; background: #d9d5ce; color: #fff; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.show--organisk-tiktok :is(.sp-t, .sp-q__th) img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--op, 50% 50%); transform: scale(var(--z, 1)); transform-origin: var(--op, 50% 50%); transition: transform .6s var(--e); }
+.show--organisk-tiktok .sp-t:hover img { transform: scale(calc(var(--z, 1) * 1.06)); }
+/* A cover drawn from the film's own frame (organisk-tiktok.js), over the fallback crop */
+.show--organisk-tiktok :is(.sp-t, .sp-q__th) canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .6s, transform .6s var(--e); }
+.show--organisk-tiktok :is(.sp-t, .sp-q__th) canvas.is-on { opacity: 1; }
+.show--organisk-tiktok .sp-t:hover canvas { transform: scale(1.06); }
+/* Drawn covers: a colour, the name of the part and the tee */
+.show--organisk-tiktok .sp-t--card { background: var(--c); color: var(--f, #fff); }
+.show--organisk-tiktok .sp-t > .sp-t__name { top: 3.4cqw; left: 3cqw; right: 7cqw; font: 800 4.3cqw/1 var(--display); letter-spacing: -.03em; text-align: left; }
+.show--organisk-tiktok .sp-t > .sp-t__tee { left: 50%; bottom: 5.5cqw; width: 20cqw; height: 17.5cqw; transform: translateX(-50%) rotate(-6deg); transition: transform .6s var(--spring); }
+.show--organisk-tiktok .sp-t--card:hover .sp-t__tee { transform: translateX(-50%) rotate(4deg) scale(1.06); }
+.show--organisk-tiktok .sp-t--card .sp-t__v { text-shadow: none; }
+.show--organisk-tiktok .sp-t--card .sp-t__pics { color: var(--f, #fff); filter: none; }
+.show--organisk-tiktok .sp-t--card::after { background: linear-gradient(rgba(0,0,0,0) 70%, rgba(0,0,0,.28)); }
+.show--organisk-tiktok .sp-t::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0) 60%, rgba(0,0,0,.45)); pointer-events: none; }
+.show--organisk-tiktok .sp-t:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.show--organisk-tiktok .sp-t > span, .show--organisk-tiktok .sp-t > svg { position: absolute; z-index: 1; }
+.show--organisk-tiktok .sp-t__del { top: 38%; left: 50%; padding: .5cqw 1.8cqw; border-radius: 1.2cqw; background: #fff; color: #111; font: 700 4.4cqw/1.25 var(--body); white-space: nowrap; transform: translateX(-50%); box-shadow: 0 .6cqw 2cqw rgba(0,0,0,.18); }
+.show--organisk-tiktok .sp-t__v { left: 1.6cqw; bottom: 1.4cqw; display: flex; align-items: center; gap: .6cqw; font-size: 3.1cqw; font-weight: 700; text-shadow: 0 .2cqw 1cqw rgba(0,0,0,.4); font-variant-numeric: tabular-nums; }
+.show--organisk-tiktok .sp-t__v svg { width: 3.4cqw; height: 3.4cqw; }
+.show--organisk-tiktok .sp-t__v.is-tick { animation: otkTick .5s var(--e); }
+@keyframes otkTick { 30% { transform: translateY(-.8cqw); color: #ffd99a; } }
+.show--organisk-tiktok .sp-t__pin, .show--organisk-tiktok .sp-t__new { top: 1.4cqw; left: 1.4cqw; padding: .6cqw 1.4cqw; border-radius: .9cqw; font-size: 2.7cqw; font-weight: 700; }
+.show--organisk-tiktok .sp-t__pin { background: var(--accent); }
+.show--organisk-tiktok .sp-t__new { background: #fff; color: var(--accent); }
+.show--organisk-tiktok .sp-t__pics { top: 1.4cqw; right: 1.4cqw; width: 4.2cqw; height: 4.2cqw; color: #fff; filter: drop-shadow(0 .2cqw .6cqw rgba(0,0,0,.35)); }
+.show--organisk-tiktok .sp-li--new .sp-t::before { content: ""; position: absolute; z-index: 2; inset: 0; box-shadow: inset 0 0 0 .8cqw var(--accent); pointer-events: none; }
+.show--organisk-tiktok.is-pre .sp-li--new { display: none; }
+.motion .show--organisk-tiktok .sp-li--new.is-drop .sp-t__new { animation: otkPop .6s .5s var(--spring) both; }
+@keyframes otkPop { from { opacity: 0; transform: scale(.4) rotate(-10deg); } }
+
+/* A message comes in, and a note when a part goes out */
+.show--organisk-tiktok .sp-note { position: absolute; z-index: 8; top: 13cqw; left: 3cqw; right: 3cqw; display: flex; align-items: center; gap: 2.6cqw; padding: 2.8cqw 3.4cqw; border-radius: 4.4cqw; background: #1c1c1c; color: #fff; font-size: 3.4cqw; line-height: 1.35; box-shadow: 0 3cqw 8cqw -2cqw rgba(0,0,0,.45); opacity: 0; transform: translateY(-130%); transition: transform .6s var(--spring), opacity .3s; }
+.show--organisk-tiktok .sp-note > span:nth-child(2) { flex: 1; display: flex; flex-direction: column; }
+.show--organisk-tiktok .sp-note small { align-self: flex-start; font-size: 2.9cqw; color: rgba(255,255,255,.6); }
+.show--organisk-tiktok .sp-note__av, .show--organisk-tiktok .sp-chat__av { display: flex; align-items: center; justify-content: center; flex-shrink: 0; border-radius: 50%; background: #c9d6f2; color: #1f45b0; font-weight: 700; }
+.show--organisk-tiktok .sp-note__av { width: 9cqw; height: 9cqw; font-size: 4cqw; }
+.show--organisk-tiktok.is-note .sp-note { opacity: 1; transform: none; }
+.show--organisk-tiktok .sp-toast { position: absolute; z-index: 7; left: 50%; bottom: 9cqw; display: flex; align-items: center; gap: 1.6cqw; padding: 2.4cqw 4cqw 2.4cqw 3cqw; border-radius: 99px; background: rgba(17,17,17,.9); color: #fff; font-size: 3.5cqw; font-weight: 700; white-space: nowrap; opacity: 0; transform: translate(-50%, 4cqw); transition: opacity .3s, transform .5s var(--spring); pointer-events: none; }
+.show--organisk-tiktok .sp-toast svg { width: 4.6cqw; height: 4.6cqw; color: #5bd88f; }
+.show--organisk-tiktok.is-toast .sp-toast { opacity: 1; transform: translate(-50%, 0); }
+.show--organisk-tiktok .sp-home { position: absolute; z-index: 12; left: 50%; bottom: 2.2cqw; width: 36cqw; height: 1.3cqw; margin-left: -18cqw; border-radius: 99px; background: #111; transition: background .3s; }
+.show--organisk-tiktok.is-open .sp-home { background: #fff; }
+
+/* ---------- The player ---------- */
+.show--organisk-tiktok .sp-play { position: absolute; z-index: 9; inset: 0; overflow: hidden; background: #000; color: #fff; opacity: 0; visibility: hidden; transform: scale(.4); transform-origin: var(--ox, 50%) var(--oy, 60%); transition: opacity .25s, transform .45s var(--e), visibility 0s .45s; }
+.show--organisk-tiktok.is-open .sp-play { opacity: 1; visibility: visible; transform: none; transition: opacity .25s, transform .5s var(--e), visibility 0s; }
+.show--organisk-tiktok .sp-play__vid, .show--organisk-tiktok .sp-play__img { position: absolute; inset: 0 0 19cqw; width: 100%; height: calc(100% - 19cqw); object-fit: cover; }
+.show--organisk-tiktok .sp-play.is-wide .sp-play__vid { object-fit: contain; }
+.show--organisk-tiktok .sp-play__img { display: none; z-index: 1; }
+/* A photo post: the photo as a card on the part's own colour */
+.show--organisk-tiktok .sp-play.is-photo { background: var(--pc, #1d2a44); }
+.show--organisk-tiktok .sp-play.is-photo .sp-play__img { inset: 80cqw auto auto 7cqw; width: 74cqw; height: 74cqw; border-radius: 4cqw; background: #fff; box-shadow: 0 5cqw 12cqw -4cqw rgba(0,0,0,.55); }
+.show--organisk-tiktok .sp-play > :not(video, img, i) { z-index: 2; }
+.show--organisk-tiktok .sp-play.is-photo .sp-play__img { display: block; }
+.show--organisk-tiktok .sp-play.is-photo .sp-play__vid { display: none; }
+.motion .show--organisk-tiktok .sp-play.is-photo .sp-play__img { animation: otkKen 9s ease-in-out infinite alternate; }
+@keyframes otkKen { to { transform: scale(1.04) rotate(-1.5deg); } }
+.show--organisk-tiktok .sp-play__shade { position: absolute; z-index: 1; inset: 0 0 19cqw; background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,0) 22%, rgba(0,0,0,0) 55%, rgba(0,0,0,.6)); pointer-events: none; }
+.show--organisk-tiktok .sp-close { position: absolute; z-index: 2; top: 14cqw; left: 2cqw; display: flex; align-items: center; justify-content: center; width: 11cqw; height: 11cqw; padding: 0; border: 0; border-radius: 50%; background: none; color: #fff; cursor: pointer; }
+.show--organisk-tiktok .sp-close svg { width: 7cqw; height: 7cqw; filter: drop-shadow(0 .3cqw 1cqw rgba(0,0,0,.4)); }
+.show--organisk-tiktok .sp-close:focus-visible, .show--organisk-tiktok .sp-series__n:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.show--organisk-tiktok .sp-play__tx { position: absolute; z-index: 1; top: 26%; left: 8cqw; right: 18cqw; margin: 0; text-align: center; line-height: 1.5; }
+.show--organisk-tiktok .sp-play__tx span { padding: .15em .45em; border-radius: .35em; background: #fff; color: #111; font: 700 5.4cqw/1.5 var(--body); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.motion .show--organisk-tiktok.is-open .sp-play__tx { animation: otkIn .55s .25s var(--spring) both; }
+@keyframes otkIn { from { opacity: 0; transform: translateY(4cqw) scale(.75); } }
+.show--organisk-tiktok .sp-rail { position: absolute; z-index: 1; right: 2.4cqw; bottom: 46cqw; display: flex; flex-direction: column; align-items: center; gap: 4cqw; font-size: 3cqw; font-weight: 700; }
+.show--organisk-tiktok .sp-rail > span { display: flex; flex-direction: column; align-items: center; gap: .6cqw; }
+.show--organisk-tiktok .sp-rail > span > svg { width: 8.6cqw; height: 8.6cqw; fill: #fff; filter: drop-shadow(0 .3cqw 1cqw rgba(0,0,0,.3)); }
+.show--organisk-tiktok .sp-rail__av svg { width: 11cqw; height: 11cqw; border: .5cqw solid #fff; border-radius: 50%; }
+.show--organisk-tiktok .sp-info { position: absolute; z-index: 1; left: 4cqw; right: 20cqw; bottom: 22cqw; text-shadow: 0 .3cqw 1.2cqw rgba(0,0,0,.4); }
+.show--organisk-tiktok .sp-info b { font-size: 4.2cqw; }
+.show--organisk-tiktok .sp-info p { margin: 1.2cqw 0 0; font-size: 3.6cqw; line-height: 1.35; }
+.show--organisk-tiktok .sp-series { position: absolute; z-index: 1; left: 0; right: 0; bottom: 7cqw; height: 12cqw; display: flex; align-items: center; gap: 2.4cqw; padding: 0 2.6cqw 0 4cqw; background: #262626; }
+.show--organisk-tiktok .sp-series > svg { width: 5.4cqw; height: 5.4cqw; fill: currentColor; color: #fff; }
+.show--organisk-tiktok .sp-series__t { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.show--organisk-tiktok .sp-series__t b { font-size: 3.4cqw; }
+.show--organisk-tiktok .sp-series__t small { font-size: 2.9cqw; color: rgba(255,255,255,.65); }
+.show--organisk-tiktok .sp-series__n { display: flex; align-items: center; gap: .4cqw; padding: 1.8cqw 2.2cqw 1.8cqw 3.4cqw; border: 0; border-radius: 99px; background: #fff; color: #111; font: 700 3.3cqw/1 var(--body); cursor: pointer; }
+.show--organisk-tiktok .sp-series__n svg { width: 3.8cqw; height: 3.8cqw; }
+.show--organisk-tiktok .sp-prog { position: absolute; z-index: 1; left: 0; right: 0; bottom: 19cqw; height: .6cqw; background: rgba(255,255,255,.2); }
+.show--organisk-tiktok .sp-prog i { position: absolute; inset: 0; background: rgba(255,255,255,.9); transform: scaleX(0); transform-origin: 0 50%; }
+
+/* ---------- Beside the phone: the plan and the chat ---------- */
+.show--organisk-tiktok .sp-side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.show--organisk-tiktok .sp-lbl { display: flex; align-items: center; gap: 8px; margin: 0 0 0 4px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.show--organisk-tiktok .sp-lbl svg { width: 18px; height: 18px; }
+.show--organisk-tiktok .sp-card { padding: 18px; border: 1px solid var(--line); border-radius: 26px; background: #fff; box-shadow: 0 30px 60px -38px rgba(17,17,17,.3); }
+.show--organisk-tiktok .sp-cal__hd { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.show--organisk-tiktok .sp-cal__hd > span:first-child { display: flex; flex-direction: column; }
+.show--organisk-tiktok .sp-cal__hd b { font: 800 20px/1.1 var(--display); letter-spacing: -.03em; }
+.show--organisk-tiktok .sp-cal__hd small { margin-top: 3px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.show--organisk-tiktok .sp-auto { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.show--organisk-tiktok .sp-auto i { position: relative; width: 28px; height: 16px; border-radius: 99px; background: var(--green); }
+.show--organisk-tiktok .sp-auto i::after { content: ""; position: absolute; top: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; }
+.show--organisk-tiktok .sp-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; margin: 16px 0 14px; padding: 0; list-style: none; }
+.show--organisk-tiktok .sp-week li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 6px 0 10px; border-radius: 12px; }
+.show--organisk-tiktok .sp-week small { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--faint); }
+.show--organisk-tiktok .sp-week b { font-size: 15px; }
+.show--organisk-tiktok .sp-week .is-today { background: var(--ink); color: #fff; }
+.show--organisk-tiktok .sp-week .is-today small { color: var(--dark-muted); }
+.show--organisk-tiktok .sp-week .is-dot::after { content: ""; position: absolute; bottom: 4px; left: 50%; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--accent); }
+.show--organisk-tiktok .sp-qs { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.show--organisk-tiktok .sp-q { display: grid; grid-template-columns: 33px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 7px 9px 7px 7px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg); }
+.show--organisk-tiktok .sp-q__th { position: relative; overflow: hidden; aspect-ratio: 3 / 4; border-radius: 8px; background: #d9d5ce; }
+.show--organisk-tiktok .sp-q__t { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.show--organisk-tiktok .sp-q__t b { overflow: hidden; font-size: 14px; white-space: nowrap; text-overflow: ellipsis; }
+.show--organisk-tiktok .sp-q__t small { font-size: 12.5px; color: var(--muted); }
+.show--organisk-tiktok .sp-pill { display: inline-flex; align-items: center; gap: 4px; padding: 5px 9px 5px 6px; border-radius: 99px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.show--organisk-tiktok .sp-pill svg { width: 14px; height: 14px; }
+.show--organisk-tiktok .sp-pill--plan { border: 1px solid var(--line-strong); background: #fff; color: var(--muted); }
+.show--organisk-tiktok .sp-pill--ok { background: rgba(47,158,91,.13); color: var(--green); }
+.show--organisk-tiktok .sp-q.is-out .sp-pill--plan, .show--organisk-tiktok.is-pre .sp-q.is-out .sp-pill--ok { display: none; }
+.show--organisk-tiktok.is-pre .sp-q.is-out .sp-pill--plan { display: inline-flex; }
+.show--organisk-tiktok .sp-q.is-out { border-color: rgba(47,158,91,.35); }
+.show--organisk-tiktok.is-pre .sp-q.is-out { border-color: var(--line); }
+.motion .show--organisk-tiktok .sp-q.is-flash { animation: otkFlash 1.2s var(--e); }
+.motion .show--organisk-tiktok .sp-q.is-flash .sp-pill--ok { animation: otkPop .5s var(--spring) both; }
+@keyframes otkFlash { 0% { box-shadow: 0 0 0 0 rgba(47,158,91,.45); } 100% { box-shadow: 0 0 0 14px rgba(47,158,91,0); } }
+.show--organisk-tiktok .sp-sum { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.show--organisk-tiktok .sp-sum span { display: flex; flex-direction: column; font-size: 12px; line-height: 1.3; color: var(--muted); }
+.show--organisk-tiktok .sp-sum b { font: 800 21px/1.1 var(--display); letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.show--organisk-tiktok .sp-again { display: inline-flex; align-items: center; gap: 6px; margin: 12px 0 -4px; padding: 6px 2px; border: 0; background: none; color: var(--muted); font: 700 13px/1 var(--body); cursor: pointer; transition: color .2s; }
+.show--organisk-tiktok .sp-again:hover { color: var(--ink); }
+.show--organisk-tiktok .sp-again svg { width: 15px; height: 15px; }
+
+/* The chat */
+.show--organisk-tiktok .sp-chat { padding: 0; overflow: hidden; }
+.show--organisk-tiktok .sp-chat__hd { display: flex; align-items: center; gap: 10px; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+.show--organisk-tiktok .sp-chat__hd > svg { width: 18px; height: 18px; }
+.show--organisk-tiktok .sp-chat__av { width: 34px; height: 34px; font-size: 15px; }
+.show--organisk-tiktok .sp-chat__hd > span:last-child { display: flex; flex-direction: column; line-height: 1.25; }
+.show--organisk-tiktok .sp-chat__hd b { font-size: 14.5px; }
+.show--organisk-tiktok .sp-chat__hd small { font-size: 12px; color: var(--green); }
+.show--organisk-tiktok .sp-msgs { position: relative; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 16px 14px 10px; list-style: none; }
+.show--organisk-tiktok .sp-m { position: relative; display: flex; flex-direction: column; align-items: flex-start; max-width: 86%; }
+.show--organisk-tiktok .sp-m p { margin: 0; padding: 9px 13px; border-radius: 18px 18px 18px 6px; background: var(--gr); font-size: 14px; line-height: 1.4; }
+.show--organisk-tiktok .sp-m--out { align-self: flex-end; align-items: flex-end; }
+.show--organisk-tiktok .sp-m--out p { border-radius: 18px 18px 6px 18px; background: var(--ink); color: #fff; }
+.show--organisk-tiktok .sp-m small { display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; font-size: 11.5px; font-weight: 700; color: var(--accent); }
+.show--organisk-tiktok .sp-m small svg { width: 13px; height: 13px; fill: currentColor; }
+.show--organisk-tiktok .sp-typing { position: absolute; right: 14px; display: none; gap: 4px; padding: 12px 14px; border-radius: 18px 18px 6px 18px; background: var(--ink); }
+.show--organisk-tiktok .sp-typing i { width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: otkDot 1s ease-in-out infinite; }
+.show--organisk-tiktok .sp-typing i:nth-child(2) { animation-delay: .15s; }
+.show--organisk-tiktok .sp-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes otkDot { 0%, 60%, 100% { opacity: .35; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+.show--organisk-tiktok .sp-typing.is-on { display: flex; }
+.motion .show--organisk-tiktok .sp-m:not(.is-in) { visibility: hidden; }
+.motion .show--organisk-tiktok .sp-m.is-in { animation: otkMsg .5s var(--spring) both; }
+.motion .show--organisk-tiktok .sp-m--out.is-in { transform-origin: 100% 100%; }
+.motion .show--organisk-tiktok .sp-m--in.is-in { transform-origin: 0 100%; }
+@keyframes otkMsg { from { opacity: 0; transform: translateY(10px) scale(.85); } }
+.show--organisk-tiktok .sp-chat__in { display: flex; justify-content: space-between; align-items: center; margin: 4px 12px 12px; padding: 7px 7px 7px 16px; border-radius: 99px; background: var(--gr); font-size: 13.5px; color: var(--tg); }
+.show--organisk-tiktok .sp-chat__in i { width: 26px; height: 26px; border-radius: 50%; background: var(--line-strong); }
+
+/* Entrance */
+.motion .show--organisk-tiktok .sp-ph { opacity: 0; transform: translateY(40px) rotate(1.5deg); }
+.motion .show--organisk-tiktok .sp__eks { opacity: 0; transform: translateY(10px) scale(.8); }
+.motion .show--organisk-tiktok.is-in .sp-ph { opacity: 1; transform: none; transition: opacity .8s, transform 1.1s var(--e); }
+.motion .show--organisk-tiktok.is-in .sp__eks { opacity: 1; transform: none; transition: opacity .4s .9s, transform .6s var(--spring) .9s; }
+
+/* Tablets: the phone with the two cards beside it */
+@media (max-width: 1099px) {
+  .show--organisk-tiktok .sp { grid-template-columns: var(--pw) minmax(0, 380px); grid-template-areas: "dev cal" "dev dm"; align-items: start; gap: 28px 48px; }
+  .show--organisk-tiktok .sp__dev { align-self: center; }
+}
+/* Phones: the phone first, then the plan and the chat */
+@media (max-width: 759px) {
+  .show--organisk-tiktok { --pw: min(290px, 76vw); padding: 32px 20px 72px; }
+  .show--organisk-tiktok .sec-head { margin-bottom: 36px; }
+  .show--organisk-tiktok .sp { grid-template-columns: minmax(0, 1fr); grid-template-areas: "dev" "cal" "dm"; justify-items: center; gap: 36px; }
+  .show--organisk-tiktok .sp-side { width: 100%; max-width: 440px; }
+}
+/* Without motion: everything in place, nothing moves */
+html:not(.motion) .show--organisk-tiktok .sp-again { display: none; }
+html:not(.motion) .show--organisk-tiktok *, html:not(.motion) .show--organisk-tiktok *::before, html:not(.motion) .show--organisk-tiktok *::after { transition: none !important; animation: none !important; }

@@ -144,9 +144,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261107b">
 <link rel="stylesheet" href="/assets/css/bestil.css?v=3">
-<link rel="stylesheet" href="/assets/css/sections.css?v=20261105a">
+<link rel="stylesheet" href="/assets/css/sections.css?v=20261107b">
+<link rel="stylesheet" href="/assets/css/show/youtube-annoncering.css?v=20261107b">
 <script>
   // Turn on the motion layer before first paint so revealed content never flashes,
   // and skip the intro curtain when it has already been shown on this visit.
@@ -161,8 +162,9 @@
     if (s && s.src === 'faner' && (s.seg === 'ydelser' || s.seg === 'webshop')) document.documentElement.setAttribute('data-seg', s.seg);
   })();
 </script>
-<script type="module" src="/assets/js/main.js?v=20261105a"></script>
-<script type="module" src="/assets/js/sections.js?v=20261105a"></script>
+<script type="module" src="/assets/js/main.js?v=20261107b"></script>
+<script type="module" src="/assets/js/sections.js?v=20261107b"></script>
+<script type="module" src="/assets/js/show/youtube-annoncering.js?v=20261107b"></script>
 </head>
 <body>
 <div class="loader" data-loader aria-hidden="true">
@@ -198,7 +200,48 @@
     <div class="nav__in">
       <a href="/" class="logo" aria-label="Webleads, til forsiden"><img class="logo__icon" src="/assets/logo-icon.svg" alt="" width="24" height="24"><span>webleads<span class="logo__dot">.</span></span></a>
       <nav class="nav__links" aria-label="Hovedmenu">
-        <a href="/#services" data-roll>Services</a>
+        <div class="mega" data-mega>
+          <button type="button" class="mega__btn" data-mega-btn aria-expanded="false" aria-controls="mega-menu"><span class="mega__lbl">Services</span><svg class="mega__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg><svg class="mega__burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+          <div class="mega__panel" id="mega-menu" data-mega-panel hidden>
+            <div class="mega__in">
+              <div class="mega__groups">
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></svg></span>Hjemmeside og webshop</div>
+                  <ul><li><a href="/services/hjemmesider" data-event="Menu: Hjemmesider"><b>Hjemmesider</b><span>Tre pakker fra 2.995 kr.</span></a></li><li><a href="/services/webshop" data-event="Menu: Webshop"><b>Webshop</b><span>Shopify med betaling og fragt</span></a></li><li><a href="/services/branding" data-event="Menu: Branding og logo"><b>Branding og logo</b><span>Logo, farver og brandguide</span></a></li><li><a href="/services/cro" data-event="Menu: CRO"><b>CRO</b><span>Flere kunder af de besøgende</span></a></li><li><a href="/services/app-udvikling" data-event="Menu: App-udvikling"><b>App-udvikling</b><span>Til iPhone og Android</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>Mere salg</div>
+                  <ul><li><a href="/services/markedspladser" data-event="Menu: Salg på markedspladser"><b>Salg på markedspladser</b><span>Amazon, Zalando, eBay og flere</span></a></li><li><a href="/services/email-marketing" data-event="Menu: E-mail marketing"><b>E-mail marketing</b><span>Nyhedsbreve og mailflows</span></a></li><li><a href="/services/affiliate-marketing" data-event="Menu: Affiliate- og partnermarketing"><b>Affiliate- og partnermarketing</b><span>Provision, når der sælges</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></span>Annoncering</div>
+                  <ul><li><a href="/services/google-ads" data-event="Menu: Google Ads"><b>Google Ads</b><span>Øverst, når de søger</span></a></li><li><a href="/services/meta-ads" data-event="Menu: Meta Ads"><b>Meta Ads</b><span>Facebook og Instagram</span></a></li><li><a href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><b>Google Shopping Ads</b><span>Produkter med billede og pris</span></a></li><li><a href="/services/google-css" data-event="Menu: Google CSS"><b>Google CSS</b><span>Billigere klik på Shopping</span></a></li><li><a href="/services/tiktok-ads" data-event="Menu: TikTok Ads"><b>TikTok Ads</b><span>Video, der fanger med det samme</span></a></li><li><a href="/services/linkedin-ads" data-event="Menu: LinkedIn Ads"><b>LinkedIn Ads</b><span>Til dem, der beslutter</span></a></li><li><a href="/services/youtube-annoncering" aria-current="page" data-event="Menu: YouTube-annoncering"><b>YouTube-annoncering</b><span>Før videoer og i Shorts</span></a></li><li><a href="/services/snapchat-ads" data-event="Menu: Snapchat Ads"><b>Snapchat Ads</b><span>Fuld skærm mellem stories</span></a></li><li><a href="/services/pinterest-ads" data-event="Menu: Pinterest Ads"><b>Pinterest Ads</b><span>Mens de planlægger og gemmer</span></a></li><li><a href="/services/bing-ads" data-event="Menu: Bing Ads"><b>Bing Ads</b><span>Dem, der ikke bruger Google</span></a></li><li><a href="/services/reddit-ads" data-event="Menu: Reddit Ads"><b>Reddit Ads</b><span>I de rigtige fællesskaber</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>Synlig på Google og AI</div>
+                  <ul><li><a href="/services/seo" data-event="Menu: SEO"><b>SEO</b><span>Til webshops og brands</span></a></li><li><a href="/services/lokal-seo" data-event="Menu: Lokal SEO"><b>Lokal SEO</b><span>Google Maps og dit område</span></a></li><li><a href="/services/linkbuilding" data-event="Menu: Linkbuilding"><b>Linkbuilding</b><span>Links fra danske sider</span></a></li><li><a href="/services/geo" data-event="Menu: GEO"><b>GEO</b><span>Nævnt af ChatGPT og AI</span></a></li></ul>
+                </div><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span>AI og automation</div>
+                  <ul><li><a href="/services/ai" data-event="Menu: AI"><b>AI</b><span>Chatbots og assistenter</span></a></li><li><a href="/services/automations" data-event="Menu: Automations"><b>Automations</b><span>Rutiner, der klarer sig selv</span></a></li><li><a href="/services/interne-systemer" data-event="Menu: Interne systemer og CRM"><b>Interne systemer og CRM</b><span>CRM, booking og dashboards</span></a></li></ul>
+                </div></div>
+                <div class="mega__col"><div class="mega__g">
+                  <div class="mega__gh"><span class="mega__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>Sociale medier og indhold</div>
+                  <ul><li><a href="/services/organisk-instagram" data-event="Menu: Organisk Instagram"><b>Organisk Instagram</b><span>Plan, opslag og svar</span></a></li><li><a href="/services/organisk-facebook" data-event="Menu: Organisk Facebook"><b>Organisk Facebook</b><span>Opslag og svar i Messenger</span></a></li><li><a href="/services/organisk-tiktok" data-event="Menu: Organisk TikTok"><b>Organisk TikTok</b><span>Set uden annoncekroner</span></a></li><li><a href="/services/video" data-event="Menu: Video"><b>Video</b><span>Reklamer og explainers</span></a></li><li><a href="/services/ugc" data-event="Menu: UGC-indhold"><b>UGC-indhold</b><span>Ligner noget fra en kunde</span></a></li><li><a href="/services/influencer-marketing" data-event="Menu: Influencer marketing"><b>Influencer marketing</b><span>Skabere, der anbefaler dig</span></a></li></ul>
+                </div></div>
+              </div>
+              <aside class="mega__aside">
+                <div class="mega__k">Mest valgt</div>
+                <div class="mega__picks" data-seg-only="neutral"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">02</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/meta-ads" data-event="Menu: Meta Ads"><span class="mega__pn">03</span><b>Meta Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="ydelser"><a class="mega__pick" href="/services/hjemmesider" data-event="Menu: Hjemmesider"><span class="mega__pn">01</span><b>Hjemmesider</b><span>fra 2.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/lokal-seo" data-event="Menu: Lokal SEO"><span class="mega__pn">02</span><b>Lokal SEO</b><span>995 kr./time</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-ads" data-event="Menu: Google Ads"><span class="mega__pn">03</span><b>Google Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a></div><div class="mega__picks" data-seg-only="webshop"><a class="mega__pick" href="/services/webshop" data-event="Menu: Webshop"><span class="mega__pn">01</span><b>Webshop</b><span>fra 12.995 kr.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-shopping-ads" data-event="Menu: Google Shopping Ads"><span class="mega__pn">02</span><b>Google Shopping Ads</b><span>8.000 kr./md.</span><i aria-hidden="true">→</i></a><a class="mega__pick" href="/services/google-css" data-event="Menu: Google CSS"><span class="mega__pn">03</span><b>Google CSS</b><span>49 kr./md.</span><i aria-hidden="true">→</i></a></div>
+                <div class="mega__cta">
+                  <b>Ikke sikker på, hvad du skal bruge?</b>
+                  <p>Fortæl os om din virksomhed. Så får du et forslag med en fast pris inden for 24 timer.</p>
+                  <a href="#kontakt" class="mega__btn2" data-event="Menu: Få en fast pris">Få en fast pris →</a>
+                </div>
+                <a class="mega__all" href="/services" data-event="Menu: Alle services">Se alle 32 services på én side →</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a href="#eksempel" data-roll>Eksempel</a>
         <a href="#pris" data-roll>Det får du</a>
         <a href="#saadan" data-roll>Sådan foregår det</a>
         <a href="#faq" data-roll>Spørgsmål</a>
@@ -234,7 +277,7 @@
         <p class="hero__lead" data-reveal="3">På YouTube kan man springe annoncen over efter fem sekunder. Vi laver videoer, der siger det vigtigste med det samme, og styrer kampagnerne, så de bliver vist for dem, der kan blive dine kunder.</p>
         <div class="hero__ctas" data-reveal="4">
           <a href="#kontakt" class="btn btn--dark" data-magnet data-burst data-roll data-event="Hero: Få en fast pris">Få en fast pris</a>
-          <a href="#pris" class="hero__more" data-event="Hero: Se hvad du får">Se hvad du får <span>↓</span></a>
+          <a href="#eksempel" class="hero__more" data-event="Hero: Se et eksempel">Se et eksempel <span>↓</span></a>
         </div>
         <!-- Review badges. Fill in the real score, count and profile link; a badge without a score stays hidden. -->
         <div class="trust" data-reveal="5" data-trust hidden>
@@ -249,6 +292,144 @@
         </div>
       </div>
     </section>
+
+    <!-- Showcase for YouTube-annoncering: "Spring over om 5", a video page of our own drawing (in the style of YouTube, no
+     logos) where our commercial for Nuttet Baby plays as an ad before a video, with the skip countdown. Under the player
+     the first five seconds as a storyboard: each frame is taken from the video itself as that second passes.
+     Toggles: Før videoen (can be skipped after 5 s), Shorts (vertical, can be swiped away at once), Bumper (6 s, no
+     skip). The videos are ours (assets/media); the channels, videos and numbers around them are made up (Eksempel).
+     Styles: assets/css/show/youtube-annoncering.css, behaviour: assets/js/show/youtube-annoncering.js -->
+<section id="eksempel" class="show show--youtube-annoncering" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Spring over om 5</div><h2 class="h2">Fem sekunder.<br><span class="dim">Så kan de springe over.</span></h2></div>
+    <p class="sec-head__lead">Sådan ser en annonce ud på YouTube. Her kører reklamefilmen til Nuttet Baby før en video om lege. Se, hvad der når frem, før knappen dukker op, og prøv Shorts og bumper.</p>
+  </div>
+  <p class="sr-only">Eksempel på en annonce på YouTube, vist i vores egen tegning af en videoside. Reklamefilmen til Nuttet Baby kører før en video om lege til regnvejrsdage. I hjørnet står »Spring over om 5«, og tallet tæller ned. Under afspilleren bliver de første fem sekunder til et storyboard: tigerdragten fra første billede, en leg alle kender, hvor skal han hen, ind under tæppet, hvad gemmer sig. Efter fem sekunder kan man springe over. Du kan skifte til Shorts, hvor en lodret video mellem andre korte videoer kan swipes væk med det samme, og til en bumper-annonce på seks sekunder, som ikke kan springes over. Kanalerne, videoerne og tallene omkring annoncen er opdigtede eksempler.</p>
+
+  <svg class="yt-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="yt-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="yt-pause" viewBox="0 0 24 24"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></symbol>
+    <symbol id="yt-next" viewBox="0 0 24 24"><path d="M6 6.5v11l8-5.5zM16 6.5h2.2v11H16z"/></symbol>
+    <symbol id="yt-vol" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></symbol>
+    <symbol id="yt-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M16 9.5l5 5M21 9.5l-5 5"/></symbol>
+    <symbol id="yt-gear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></symbol>
+    <symbol id="yt-full" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>
+    <symbol id="yt-info" viewBox="0 0 24 24"><circle fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="12" r="8.5"/><path d="M11 10.5h2V17h-2zM11 7h2v2h-2z"/></symbol>
+    <symbol id="yt-skip" viewBox="0 0 24 24"><path d="M5 6v12l9-6zM16 6h2.6v12H16z"/></symbol>
+    <symbol id="yt-lock" viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="10" rx="2.2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+    <symbol id="yt-again" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v4h4"/></symbol>
+    <symbol id="yt-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 14.5l6-6 6 6"/></symbol>
+    <symbol id="yt-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9.5l6 6 6-6"/></symbol>
+    <symbol id="yt-like" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7.5 10.5v9h-3v-9zM7.5 10.5l3.8-6.2c1.2 0 2 1 1.8 2.2l-.6 3.2h5.2c1.2 0 2 1.1 1.7 2.2l-1.6 6.2c-.2.8-.9 1.4-1.7 1.4H7.5"/></symbol>
+    <symbol id="yt-msg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5h-7.5L7 21v-3.5H5A1.5 1.5 0 0 1 3.5 16V7A1.5 1.5 0 0 1 5 5.5z"/></symbol>
+    <symbol id="yt-share" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13.5 5l7 6.5-7 6.5v-4c-5 0-8 1.5-10 5 .5-6 3.5-10 10-10.5z"/></symbol>
+    <symbol id="yt-search" viewBox="0 0 24 24"><circle fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" cx="10.5" cy="10.5" r="6.5"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15.5 15.5 21 21"/></symbol>
+  </svg>
+
+  <div class="yt" data-yt data-mode="for" data-phase="ad">
+    <div class="yt__modes" data-reveal="1">
+      <div class="seg" role="group" aria-label="Vælg slags annonce">
+        <button type="button" class="is-on" aria-pressed="true" data-yt-mode="for">Før videoen</button>
+        <button type="button" aria-pressed="false" data-yt-mode="shorts">Shorts</button>
+        <button type="button" aria-pressed="false" data-yt-mode="bumper">Bumper<span class="yt__long"> · 6 sek.</span></button>
+      </div>
+      <p class="yt__note" data-yt-note>Før og under videoer. Kan springes over efter 5 sekunder.</p>
+    </div>
+
+    <div class="yt__page" data-reveal="2">
+      <div class="yt__top">
+        <span class="yt__burger" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="yt__search" aria-hidden="true"><span data-yt-q>lege til regnvejrsdage</span><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-search"/></svg></span>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+
+      <div class="yt__main">
+        <div class="yt__col">
+          <div class="yt__area">
+            <div class="yt__scr" data-yt-scr>
+              <video data-yt-v="for" src="/assets/media/nuttetbaby-jungle.mp4" poster="/assets/media/nuttetbaby-jungle.jpg" width="960" height="540" muted playsinline preload="none" aria-hidden="true"></video>
+              <video data-yt-v="shorts" src="/assets/media/ugc-nuttetbaby-mor.mp4" poster="/assets/media/ugc-nuttetbaby-mor.jpg" width="540" height="960" muted loop playsinline preload="none" aria-hidden="true"></video>
+              <video data-yt-v="bumper" src="/assets/media/nuttetbaby-reklame.mp4" poster="/assets/media/nuttetbaby-reklame.jpg" width="960" height="540" muted playsinline preload="none" aria-hidden="true"></video>
+
+              <!-- After the ad: the video they came for (made up) -->
+              <div class="yt__host yt__host--w" aria-hidden="true">
+                <span class="yt__hdrop"><i></i><i></i><i></i><i></i><i></i></span>
+                <b class="yt__htl" data-yt-ht>12 lege til regnvejrsdage</b>
+                <span class="yt__hch" data-yt-hch>Legetid med Liv</span>
+              </div>
+              <div class="yt__host yt__host--s" aria-hidden="true">
+                <b class="yt__htl">3 madpakker på 2 minutter</b>
+                <span class="yt__hch">@madmedmaja</span>
+              </div>
+
+              <!-- The ad, wide -->
+              <div class="yt__ad" aria-hidden="true">
+                <span class="yt__spons">Sponsoreret · <span data-yt-left>0:25</span><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-info"/></svg></span>
+                <span class="yt__adv"><i class="yt__av">NB</i><span class="yt__advt"><b>Nuttet Baby</b><small>nuttetbaby.dk</small></span><span class="yt__cta">Besøg website</span></span>
+              </div>
+              <button type="button" class="yt__skip" data-yt-skip disabled aria-label="Spring annoncen over"><span class="yt__cd" aria-hidden="true">Spring over om <b data-yt-cd>5</b></span><span class="yt__go" aria-hidden="true">Spring over<svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-skip"/></svg></span></button>
+              <span class="yt__lock" aria-hidden="true"><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-lock"/></svg>Kan ikke springes over</span>
+              <span class="yt__tip" aria-hidden="true">Nu kan de springe over</span>
+
+              <!-- The ad in Shorts -->
+              <div class="yt__sh" aria-hidden="true">
+                <span class="yt__rail"><i><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-like"/></svg></i><i class="yt__dis"><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-like"/></svg></i><i><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-msg"/></svg></i><i><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-share"/></svg></i></span>
+                <span class="yt__shb"><span class="yt__shw"><i class="yt__av">NB</i><b>Nuttet Baby</b><span class="yt__spons">Sponsoreret</span></span><span class="yt__shd">Dyredragter til de mindste</span><span class="yt__cta">Besøg website</span></span>
+              </div>
+
+              <!-- Progress and controls -->
+              <div class="yt__ctl">
+                <span class="yt__prog" aria-hidden="true"><i data-yt-prog></i></span>
+                <div class="yt__bar">
+                  <button type="button" class="yt__btn" data-yt-play aria-label="Sæt på pause"><svg class="yt-i yt__ip" viewBox="0 0 24 24" aria-hidden="true"><use href="#yt-play"/></svg><svg class="yt-i yt__iz" viewBox="0 0 24 24" aria-hidden="true"><use href="#yt-pause"/></svg></button>
+                  <span class="yt__btn yt__deco" aria-hidden="true"><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-next"/></svg></span>
+                  <button type="button" class="yt__btn" data-yt-snd aria-pressed="false" aria-label="Lyd"><svg class="yt-i yt__im" viewBox="0 0 24 24" aria-hidden="true"><use href="#yt-mute"/></svg><svg class="yt-i yt__iv" viewBox="0 0 24 24" aria-hidden="true"><use href="#yt-vol"/></svg></button>
+                  <span class="yt__time" aria-hidden="true" data-yt-time>0:00 / 0:25</span>
+                  <span class="yt__btn yt__deco yt__r" aria-hidden="true"><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-gear"/></svg></span>
+                  <span class="yt__btn yt__deco" aria-hidden="true"><svg class="yt-i" viewBox="0 0 24 24"><use href="#yt-full"/></svg></span>
+                </div>
+              </div>
+              <button type="button" class="yt__again" data-yt-again><svg class="yt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#yt-again"/></svg>Se annoncen igen</button>
+            </div>
+            <div class="yt__nav">
+              <button type="button" class="yt__nb" data-yt-prev aria-label="Forrige Short"><svg class="yt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#yt-up"/></svg></button>
+              <button type="button" class="yt__nb" data-yt-next aria-label="Næste Short"><svg class="yt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#yt-down"/></svg></button>
+            </div>
+          </div>
+          <div class="yt__info" aria-hidden="true">
+            <b class="yt__title" data-yt-title>12 lege til regnvejrsdage, der ikke kræver noget</b>
+            <span class="yt__chan"><i class="yt__av yt__av--c" data-yt-cav>L</i><span><b data-yt-chan>Legetid med Liv</b><small data-yt-subs>48.000 abonnenter</small></span><span class="yt__sub">Abonner</span></span>
+            <span class="yt__adrow"><i class="yt__av">NB</i><span class="yt__advt"><b>Nuttet Baby</b><small>Sponsoreret · nuttetbaby.dk</small></span><span class="yt__cta">Besøg website</span></span>
+          </div>
+          <!-- The storyboard: one frame per second, taken from the video as the second passes -->
+          <div class="yt__sb">
+            <div class="yt__sbh"><b data-yt-sbt>De første fem sekunder</b><span class="yt__sum" data-yt-sum>Før de kan springe over, har de set dragten, legen og spændingen.</span></div>
+            <ol class="yt__cells" data-yt-cells style="--n:5">
+              <li class="yt__cell"><span class="yt__fr"><canvas width="192" height="108" aria-hidden="true"></canvas><i class="yt__fill"></i></span><b class="yt__tc">0:01</b><span class="yt__ct">Tigerdragten fra første billede</span></li>
+              <li class="yt__cell"><span class="yt__fr"><canvas width="192" height="108" aria-hidden="true"></canvas><i class="yt__fill"></i></span><b class="yt__tc">0:02</b><span class="yt__ct">En leg, alle kender</span></li>
+              <li class="yt__cell"><span class="yt__fr"><canvas width="192" height="108" aria-hidden="true"></canvas><i class="yt__fill"></i></span><b class="yt__tc">0:03</b><span class="yt__ct">Hvor skal han hen?</span></li>
+              <li class="yt__cell"><span class="yt__fr"><canvas width="192" height="108" aria-hidden="true"></canvas><i class="yt__fill"></i></span><b class="yt__tc">0:04</b><span class="yt__ct">Ind under tæppet</span></li>
+              <li class="yt__cell"><span class="yt__fr"><canvas width="192" height="108" aria-hidden="true"></canvas><i class="yt__fill"></i></span><b class="yt__tc">0:05</b><span class="yt__ct">Hvad gemmer sig?</span></li>
+              <li class="yt__cell" hidden><span class="yt__fr"><canvas width="192" height="108" aria-hidden="true"></canvas><i class="yt__fill"></i></span><b class="yt__tc">0:06</b><span class="yt__ct"></span></li>
+              <li class="yt__flag" aria-hidden="true"><span data-yt-flag>Spring over</span></li>
+            </ol>
+            <p class="yt__now" aria-hidden="true"><b data-yt-nowt>0:01</b> <span data-yt-now>Tigerdragten fra første billede</span></p>
+          </div>
+        </div>
+
+        <ul class="yt__side" aria-hidden="true">
+          <li class="yt__nx">Næste</li>
+          <li><i class="yt__th" style="--a:#f2c14e;--b:#e0552b"><small>9:41</small></i><span><b>Børnefødselsdag: 10 lege, der virker</b><small>Legetid med Liv</small></span></li>
+          <li><i class="yt__th" style="--a:#cfe3d4;--b:#2f9e5b"><small>6:12</small></i><span><b>Fastelavn: kostumer, børnene selv vælger</b><small>Familiehverdag</small></span></li>
+          <li><i class="yt__th" style="--a:#c9d6f2;--b:#1f45b0"><small>12:03</small></i><span><b>Sådan falder de små til ro om aftenen</b><small>Søvn og små</small></span></li>
+          <li><i class="yt__th" style="--a:#f2ede4;--b:#6b6760"><small>4:55</small></i><span><b>Regnvejr? Byg en hule i stuen</b><small>Hjemme hos Hannah</small></span></li>
+          <li><i class="yt__th" style="--a:#f6d9c9;--b:#8a2f16"><small>8:30</small></i><span><b>Påskeklip med de mindste</b><small>Legetid med Liv</small></span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
 
     <section class="sx sx-stm" data-sec="pointe" data-stm style="--n:12">
       <div class="kicker sx-stm__k" data-reveal="0">Kort sagt</div>
