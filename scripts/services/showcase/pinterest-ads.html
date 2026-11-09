@@ -1,0 +1,76 @@
+<!-- Showcase for Pinterest Ads: a board and save. An idea board of our own drawing (no logos): a search field types idea
+     searches, the pins reshuffle, and the promoted pin for Mølleværk (an example coffee-gear webshop, its video is
+     assets/media/kaffekvaern.mp4) finds its place on every board and is saved again and again. The white dot on the pin
+     opens the product from the shop's catalogue with price and "Til shoppen". Mølleværk, the price and all numbers are
+     examples; the other pins are our example photos. Styles: assets/css/show/pinterest-ads.css,
+     behaviour: assets/js/show/pinterest-ads.js -->
+<section id="eksempel" class="show show--pinterest-ads" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Annonce-pins</div><h2 class="h2">De planlægger.<br><span class="dim">Din vare er på tavlen.</span></h2></div>
+    <p class="sec-head__lead">Sådan dukker dine varer op, når nogen søger efter idéer. Pinnen bliver gemt igen og igen, og et tryk på prikken viser varen med pris, direkte fra din webshop.</p>
+  </div>
+
+  <div class="pn" data-pn data-reveal="1">
+    <div class="pn-top">
+      <span class="pn-tabs" aria-hidden="true"><b>Start</b><span>Udforsk</span></span>
+      <div class="pn-q" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span class="pn-q__t"><span data-pn-q>nordisk køkken</span><i class="pn-caret"></i></span></div>
+      <i class="pn-me" aria-hidden="true">S</i>
+    </div>
+    <div class="pn-chips" role="group" aria-label="Vælg en søgning">
+      <button type="button" class="is-on" aria-pressed="true" data-pn-chip="0">nordisk køkken</button>
+      <button type="button" aria-pressed="false" data-pn-chip="1">gaveidéer til hende</button>
+      <button type="button" aria-pressed="false" data-pn-chip="2">kaffebar derhjemme</button>
+      <button type="button" aria-pressed="false" data-pn-chip="3">morgenrutine</button>
+      <button type="button" aria-pressed="false" data-pn-chip="4">julegaver til ham</button>
+    </div>
+
+    <div class="pn-board" data-pn-board>
+      <div class="pn-grid" data-pn-grid>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:1"><img src="/udkast/_faelles/billeder/rengoering/projekt-1-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t">Lyst køkken med ø</b></div>
+          <div class="pn-pin pn-pin--ad" data-pn-ad>
+            <span class="pn-pin__img" style="--r:.75">
+              <video src="/assets/media/kaffekvaern.mp4" poster="/assets/media/kaffekvaern.jpg" muted loop playsinline preload="none" aria-hidden="true" data-pn-vid></video>
+              <button type="button" class="pn-gem" aria-pressed="false" data-pn-gem>Gem</button>
+              <button type="button" class="pn-dot" aria-expanded="false" aria-controls="pn-prod" aria-label="Se varen: Håndkværn i sort stål" data-pn-dot><i></i></button>
+              <span class="pn-bursts" aria-hidden="true" data-pn-bursts></span>
+            </span>
+            <b class="pn-pin__t">Håndkværn i sort stål</b>
+            <span class="pn-by"><i class="pn-av" aria-hidden="true">M</i><span>Promoveret af <b>Mølleværk</b></span></span>
+          </div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:.75"><img src="/udkast/_faelles/billeder/rengoering/hero-1-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t"></b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:1.15"><img src="/udkast/_faelles/billeder/vvs/projekt-3-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t"></b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:.9"><img src="/udkast/_faelles/billeder/toemrer/projekt-5-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t">Fronter i lys eg</b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:1"><img src="/udkast/_faelles/billeder/klinik/om-2-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t"></b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:1.2"><img src="/udkast/_faelles/billeder/maler/projekt-2-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t">Stue i hvidt og træ</b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:1"><img src="/udkast/_faelles/billeder/klinik/projekt-1-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t"></b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:.8"><img src="/udkast/_faelles/billeder/rengoering/hero-2-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t"></b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:1.1"><img src="/udkast/_faelles/billeder/revisor/projekt-3-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t"></b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:.9"><img src="/udkast/_faelles/billeder/maler/projekt-5-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t">Salviegrøn væg</b></div>
+          <div class="pn-pin" data-pin aria-hidden="true"><span class="pn-pin__img" style="--r:1.25"><img src="/udkast/_faelles/billeder/rengoering/om-2-480.webp" alt="" width="480" height="362" loading="lazy" decoding="async" draggable="false"></span><b class="pn-pin__t"></b></div>
+      </div>
+
+      <!-- The product behind the dot: from the shop's catalogue -->
+      <div class="pn-prod" id="pn-prod" role="group" aria-label="Eksempel: vare fra Mølleværk" inert data-pn-prod>
+        <button type="button" class="pn-x" aria-label="Luk varen" data-pn-x><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+        <span class="pn-prod__img"><span class="tag-eks">Eksempel</span><img src="/assets/media/kaffekvaern.jpg" alt="Håndkværn til kaffe i sort stål med et håndtag i træ" width="960" height="540" loading="lazy" decoding="async" draggable="false"></span>
+        <span class="pn-prod__shop"><i class="pn-av" aria-hidden="true">M</i>Mølleværk</span>
+        <b class="pn-prod__t">Håndkværn i sort stål</b>
+        <span class="pn-prod__p">899 kr.</span>
+        <span class="pn-prod__s"><i aria-hidden="true"></i>På lager · Levering 1-2 dage</span>
+        <span class="pn-prod__cat">Fra webshoppens katalog. Pris og lager følger med af sig selv.</span>
+        <button type="button" class="pn-go" data-pn-go>Til shoppen<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></button>
+        <span class="pn-prod__ok" aria-live="polite" data-pn-ok></span>
+      </div>
+    </div>
+
+    <div class="pn-foot">
+      <span class="pn-foot__who"><span class="tag-eks">Eksempel</span><span>Mølleværk, en webshop med kaffeudstyr</span></span>
+      <div class="pn-stats">
+        <span class="pn-stat"><b data-pn-views>18.240</b><small>har set pinnen</small></span>
+        <span class="pn-stat pn-stat--hot"><b data-pn-saves>1.284</b><small>har gemt den</small></span>
+        <span class="pn-stat"><b data-pn-clicks>96</b><small>klik til shoppen</small></span>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only">Eksempel: en tavle med idéer, hvor søgningen "nordisk køkken" viser billeder af lyse køkkener. Imellem dem er en annonce-pin fra webshoppen Mølleværk: en video af en håndkværn til kaffe, med teksten "Promoveret af Mølleværk". Den samme pin kommer med, når der søges på gaveidéer til hende, kaffebar derhjemme, morgenrutine og julegaver til ham, og den bliver gemt igen og igen. Et tryk på prikken viser varen: Håndkværn i sort stål, 899 kroner, på lager, med knappen Til shoppen.</p>
+</section>

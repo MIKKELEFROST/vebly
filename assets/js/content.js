@@ -46,7 +46,8 @@ export const kanalPlus = (groups, g) => groups.includes(g) ? 0 : groups.length ?
 export const SEO_TIMER = { start: 4, min: 1, max: 40 };
 
 // What each thing costs, by the name used on the cards and in the form.
-// once = one-off, md = a month, kanal = an advertising channel and its group (priced with KANAL), fra = a "from" price
+// once = one-off, md = a month, kanal = an advertising channel and its group (priced with KANAL), fra = a "from" price,
+// gratis = free (Google CSS)
 export const priser = {
   'Simpel one page': { once: 2995 },
   'Normal hjemmeside': { once: 9995 },
@@ -56,13 +57,22 @@ export const priser = {
   'Google Ads': { kanal: 'google' },
   'Meta Ads': { kanal: 'meta' },
   'Google Shopping Ads': { kanal: 'google' },
-  'Google CSS': { md: 49 },
+  'Google CSS': { gratis: true },
   'Webshop': { once: 12995, fra: true },
   // SEO is sold by the hour; the calculator lets the visitor choose hours a month (SEO_TIMER)
   'SEO': { time: 995 },
   'Automations': { once: 4999, md: 499, fra: true },
   'Interne systemer': { once: 14999, fra: true },
-  'Interne systemer og CRM': { once: 14999, fra: true }
+  'Interne systemer og CRM': { once: 14999, fra: true },
+  // Mikkel, 7 Nov 2026: what is billed by the hour is 995 kr., what is billed monthly is 8.000 kr./md.
+  // The ad channels count as channels (the first 8.000, each extra 5.000, KANAL)
+  'Lokal SEO': { time: 995 }, 'Linkbuilding': { time: 995 }, 'GEO': { time: 995 }, 'CRO': { time: 995 }, 'Tracking': { time: 995 },
+  'LinkedIn Ads': { kanal: 'linkedin' }, 'TikTok Ads': { kanal: 'tiktok' }, 'Snapchat Ads': { kanal: 'snapchat' },
+  'Pinterest Ads': { kanal: 'pinterest' }, 'YouTube-annoncering': { kanal: 'youtube' }, 'Bing Ads': { kanal: 'bing' },
+  'Reddit Ads': { kanal: 'reddit' }, 'ChatGPT Ads': { kanal: 'chatgpt' },
+  'Organisk Instagram': { md: 8000 }, 'Organisk Facebook': { md: 8000 }, 'Organisk TikTok': { md: 8000 },
+  'E-mail marketing': { md: 8000 }, 'Salg på markedspladser': { md: 8000 },
+  'Affiliate- og partnermarketing': { md: 8000 }, 'Influencer marketing': { md: 8000 }
 };
 
 export const addonPages = {
@@ -115,7 +125,7 @@ export const ballInfo = {
   'Booking': ['Lad kunderne booke tid direkte på siden, døgnet rundt.', 'addon-systemer'],
   'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'link:/services/interne-systemer'],
   'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'link:/services/interne-systemer'],
-  'Google CSS': ['Lad dine Shopping-annoncer gå gennem Webleads som CSS, så hele dit bud tæller. 49 kr. om måneden.', 'link:/services/google-css'],
+  'Google CSS': ['Lad dine Shopping-annoncer gå gennem vores egen CSS, Webleads Shopping, så hele dit bud tæller. Det er gratis.', 'link:/services/google-css'],
   'Google-profil': ['Vi opretter eller opdaterer din profil, så du ses på Google Maps.', 'inc-Google-profil'],
   'Webshop': ['Webshop på Shopify fra 12.995 kr. Beregn selv prisen på din shop.', 'link:/services/webshop'],
   'Video': ['Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', 'link:/services/video'],
@@ -136,7 +146,9 @@ export const faqs = [
   ['Hvor hurtigt er siden klar?', 'En Simpel one page er klar på 7 dage. En Normal hjemmeside og en SEO hjemmeside tager længere tid, og du får en fast tidsplan, før vi går i gang.'],
   ['Jeg har ikke tid til det. Hvad skal jeg lave?', 'Et opkald på 15 minutter og nogle billeder. Resten klarer vi, også teksterne.'],
   ['Kan kunderne finde mig på Google?', 'Ja. Vi sætter siden op, så du kan findes på dit fag og dit område, fx “frisør Roskilde” eller “tømrer Vejle”, og opretter din Google-profil.'],
-  ['Kan jeg selv rette i siden?', 'Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi viser dig hvordan.']
+  ['Kan jeg selv rette i siden?', 'Ja. Du kan skifte billeder, tekster og priser, også direkte fra mobilen. Vi viser dig hvordan.'],
+  ['Kan jeg beholde mit domæne?', 'Ja. Har du allerede et domæne, bruger vi det, så kunderne finder dig på samme adresse.'],
+  ['Kan I også skaffe kunder til siden?', 'Ja. Mange starter med hjemmesiden og tager Google Ads, Meta Ads eller lokal SEO bagefter. Google Ads og Meta Ads koster 8.000 kr. om måneden, og lokal SEO 995 kr. i timen.']
 ];
 
 // Ball / trail palette [background, text]

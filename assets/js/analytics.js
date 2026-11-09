@@ -74,12 +74,16 @@ export function track(name, params = {}) {
   try {
     if (name === 'generate_lead') leadSent = true;
     fromAnalytics(name, params);
-    const p = { ...params, page_type: pageType, engagement_time_msec: takeEngagement() };
+    // What the visitor sells (segment.js): on every event, so all of GA4 can be split by it
+    const p = { segment: document.documentElement.dataset.seg || 'ukendt', ...params, page_type: pageType, engagement_time_msec: takeEngagement() };
     if (debug) { p.debug_mode = 1; console.info('[wl]', name, p); }
     queue.push({ name, params: p });
     if (!timer) timer = setTimeout(flush, 1500);
   } catch (x) { /* analytics must never break the page */ }
 }
+// The contact form hands its lead on to /tak/<side>, which counts it (assets/js/show/tak.js). This tells the
+// form page that the form was sent, so leaving it for the thank-you page is not a form_abandon.
+export function leadDone() { leadSent = true; }
 // For scripts that should not import this file: document.dispatchEvent(new CustomEvent('wl:track', { detail: { name, params } }))
 document.addEventListener('wl:track', e => { if (e.detail && e.detail.name) track(e.detail.name, e.detail.params || {}); });
 

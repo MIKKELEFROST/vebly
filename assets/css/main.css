@@ -97,7 +97,146 @@ button { font-family: inherit; }
 .nav__links { display: flex; gap: 28px; align-items: center; font-size: 15px; font-weight: 500; }
 .nav__cta { background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 999px; }
 .nav__cta:hover { background: var(--accent); color: #fff; }
-@media (max-width: 860px) { .nav__links a:not(.nav__cta) { display: none; } }
+@media (max-width: 860px) { .nav__links > a:not(.nav__cta) { display: none; } }
+
+/* ---------- Mega menu under "Services" (lib.mega, assets/js/mega.js) ---------- */
+.mega__btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+.mega__btn:hover, .mega__btn[aria-expanded="true"] { color: var(--accent); }
+.mega__chev { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.mega__btn[aria-expanded="true"] .mega__chev { transform: rotate(180deg); }
+.mega__burger { display: none; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.mega__panel { position: absolute; left: 0; right: 0; top: 100%; padding: 0 16px; pointer-events: none; }
+.mega__panel[hidden] { display: none; }
+.mega__in { max-width: 1200px; margin: 6px auto 0; display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 10px; padding: 10px; background: #fff; border: 1px solid var(--line); border-radius: 28px; box-shadow: 0 40px 80px -40px rgba(17,17,17,0.45), 0 12px 24px -18px rgba(17,17,17,0.25); opacity: 0; transform: translateY(-8px) scale(0.985); transform-origin: 50% 0; transition: opacity .22s, transform .32s cubic-bezier(.2,.8,.2,1); max-height: calc(100vh - 140px); overflow: auto; overscroll-behavior: contain; }
+.mega__panel.is-open { pointer-events: auto; }
+.mega__panel.is-open .mega__in { opacity: 1; transform: none; }
+.mega__groups { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 14px 6px 4px; }
+.mega__col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.mega__g { padding: 0 0 6px; }
+.mega__gh { display: flex; align-items: center; gap: 9px; margin: 0 0 6px; padding: 0 10px; font-family: var(--display); font-weight: 800; font-size: 14.5px; line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); }
+.mega__ic { display: inline-flex; align-items: center; justify-content: center; width: 27px; height: 27px; border-radius: 10px; background: var(--cream); color: var(--accent); flex-shrink: 0; }
+.mega__ic svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.mega__g ul { list-style: none; margin: 0; padding: 0; }
+.mega__g a { display: flex; flex-direction: column; gap: 1px; padding: 6px 10px; border-radius: 12px; color: var(--ink); line-height: 1.25; transition: background .2s, transform .25s cubic-bezier(.2,.8,.2,1); }
+.mega__g a b { font-size: 14.5px; font-weight: 700; }
+.mega__g a span { font-size: 12.5px; color: var(--muted); }
+.mega__g a:hover, .mega__g a:focus-visible { background: var(--bg); transform: translateX(3px); color: var(--ink); }
+.mega__g a:hover b { color: var(--accent); }
+.mega__g a[aria-current="page"] b { color: var(--accent); }
+.mega__aside { align-self: start; display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 20px; background: var(--ink); color: #fff; }
+.mega__k { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dark-muted); }
+.mega__picks { display: flex; flex-direction: column; gap: 6px; }
+.mega__pick { position: relative; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; column-gap: 12px; align-items: center; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.06); color: #fff; transition: background .25s; }
+.mega__pick:hover, .mega__pick:focus-visible { background: rgba(255,255,255,0.12); color: #fff; }
+.mega__pn { grid-row: 1 / 3; font-family: var(--display); font-weight: 800; font-size: 13px; color: var(--accent); }
+.mega__pick b { font-size: 15px; font-weight: 700; }
+.mega__pick span:not(.mega__pn) { grid-column: 2; font-size: 12.5px; color: var(--dark-muted); }
+.mega__pick i { grid-row: 1 / 3; grid-column: 3; font-style: normal; font-weight: 700; transition: transform .25s; }
+.mega__pick:hover i { transform: translateX(3px); color: var(--accent); }
+.mega__cta { margin-top: 6px; padding: 16px; border-radius: 16px; background: var(--accent); }
+.mega__cta b { display: block; font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; line-height: 1.1; }
+.mega__cta p { margin: 6px 0 12px; font-size: 13.5px; line-height: 1.4; color: rgba(255,255,255,0.88); }
+.mega__btn2 { display: inline-flex; padding: 10px 16px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 14px; font-weight: 700; transition: transform .25s; }
+.mega__btn2:hover { color: var(--ink); transform: translateY(-2px); }
+.mega__all { padding: 4px 2px 0; font-size: 13.5px; font-weight: 700; color: #fff; }
+.mega__all:hover { color: var(--accent); }
+@media (max-width: 1100px) { .mega__groups { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; } }
+/* While the menu is open, the floating buttons step aside */
+html.mega-open .ping, html.mega-open .totop { opacity: 0 !important; pointer-events: none !important; }
+@media (max-width: 860px) {
+  .mega__btn { padding: 9px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font-weight: 700; line-height: 1; }
+  .mega__btn[aria-expanded="true"] { background: var(--ink); color: #fff; }
+  .mega__panel { padding: 0 10px; }
+  .mega__in { grid-template-columns: 1fr; max-height: calc(100dvh - 128px); border-radius: 22px; }
+  .mega__aside { order: -1; }
+  .mega__groups { grid-template-columns: 1fr; padding: 6px 4px 0; }
+  .mega__cta { margin-top: 4px; }
+  html.mega-open { overflow: hidden; }
+}
+/* Small phones: the logo, Kontakt and a menu button, so the row fits */
+@media (max-width: 620px) {
+  .nav__links { gap: 8px; }
+  .nav__links .mega { order: 2; }
+  .mega__btn { justify-content: center; width: 42px; height: 42px; padding: 0; }
+  .mega__lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .mega__chev { display: none; }
+  .mega__burger { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .mega__in, .mega__chev, .mega__g a { transition: none; } }
+
+/* ---------- What the visitor sells: tabs above the menu (assets/js/segment.js) ---------- */
+.segbar { background: var(--ink); color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1; }
+.segbar__in { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 34px; display: flex; align-items: center; gap: 12px; }
+.segbar__q { font-weight: 500; white-space: nowrap; }
+.segbar__tabs { display: flex; height: 100%; }
+.segbar__tab { position: relative; height: 100%; padding: 0 10px; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; white-space: nowrap; cursor: pointer; transition: color .25s; }
+.segbar__tab::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 2px; border-radius: 2px 2px 0 0; background: var(--accent); transform: scaleX(0); transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.segbar__tab:hover, .segbar__tab:focus-visible { color: #fff; }
+.segbar__tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 6px; }
+html[data-seg="ydelser"] .segbar__tab[data-seg-set="ydelser"], html[data-seg="webshop"] .segbar__tab[data-seg-set="webshop"] { color: #fff; }
+html[data-seg="ydelser"] .segbar__tab[data-seg-set="ydelser"]::after, html[data-seg="webshop"] .segbar__tab[data-seg-set="webshop"]::after { transform: none; }
+/* Not chosen yet: a soft dot asks for an answer */
+html:not([data-seg]) .segbar__q::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: -2px 8px 0 0; border-radius: 50%; background: var(--accent); vertical-align: middle; animation: seg-pulse 1.8s ease-in-out infinite; }
+@keyframes seg-pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { html:not([data-seg]) .segbar__q::before { animation: none; } }
+@media (max-width: 380px) { .segbar__in { padding: 0 14px; gap: 6px; } .segbar__tab { padding: 0 8px; } .segbar__tab::after { left: 8px; right: 8px; } }
+/* The nudge until a choice is made (segment.js): a light sweep over the tabs and a bubble pointing at them */
+.segbar__in { position: relative; }
+.segbar__tabs { position: relative; overflow: hidden; }
+.segbar.is-nudging .segbar__tabs::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.28) 50%, transparent 80%); transform: translateX(-100%); animation: seg-sweep 1.6s ease-in-out .2s 3; pointer-events: none; }
+.segbar.is-nudging .segbar__tab { animation: seg-glow 1.6s ease-in-out .2s 3; }
+.segbar__tip { position: absolute; top: calc(100% + 11px); left: var(--tip-left, 24px); z-index: 5; display: flex; align-items: center; gap: 10px; width: max-content; max-width: min(340px, calc(100vw - 28px)); padding: 9px 9px 9px 14px; border-radius: 14px; background: var(--accent); color: #fff; font-size: 13.5px; font-weight: 700; line-height: 1.35; box-shadow: 0 16px 34px -14px rgba(224,85,43,0.75); animation: seg-tip-in .55s cubic-bezier(.2,1.5,.4,1) both, seg-tip-bob 2.2s ease-in-out .7s infinite; }
+.segbar__tip::before { content: ""; position: absolute; top: -5px; left: var(--tip-arrow, 40px); width: 12px; height: 12px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+.segbar__tip.is-out { animation: seg-tip-out .3s ease both; }
+.segbar__tip-x { flex: none; width: 26px; height: 26px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.2); color: #fff; font: inherit; font-size: 11px; cursor: pointer; transition: background .2s; }
+.segbar__tip-x:hover, .segbar__tip-x:focus-visible { background: rgba(255,255,255,0.35); }
+@keyframes seg-sweep { to { transform: translateX(100%); } }
+@keyframes seg-glow { 50% { color: #fff; text-shadow: 0 0 14px rgba(255,255,255,0.6); } }
+@keyframes seg-tip-in { from { opacity: 0; transform: translateY(-10px) scale(.94); } }
+@keyframes seg-tip-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes seg-tip-bob { 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) {
+  .segbar.is-nudging .segbar__tabs::before, .segbar.is-nudging .segbar__tab { animation: none; }
+  .segbar__tip, .segbar__tip.is-out { animation: none; }
+}
+/* The floating card at the bottom until a choice is made (segment.js) */
+.segfloat { position: fixed; left: 50%; bottom: 24px; z-index: 85; display: flex; align-items: center; gap: 14px; padding: 8px 8px 8px 20px; border-radius: 999px; background: var(--ink); color: #fff; box-shadow: 0 24px 48px -18px rgba(17,17,17,0.6); transform: translateX(-50%); animation: segfloat-in .65s cubic-bezier(.2,1.4,.4,1) both; transition: opacity .3s; }
+.segfloat__q { font-family: var(--display); font-weight: 800; font-size: 17px; letter-spacing: -0.02em; white-space: nowrap; }
+.segfloat__btns { display: flex; gap: 6px; }
+.segfloat__btn { border: 0; border-radius: 999px; padding: 11px 18px; background: rgba(255,255,255,0.12); color: #fff; font: inherit; font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: background .25s, transform .35s cubic-bezier(.2,1.5,.4,1); animation: segfloat-glow 1.8s ease-in-out .8s 2; }
+.segfloat__btn:hover, .segfloat__btn:focus-visible { background: var(--accent); transform: translateY(-2px); }
+.segfloat__x { flex: none; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: rgba(255,255,255,0.6); font: inherit; font-size: 12px; cursor: pointer; transition: color .2s, background .2s; }
+.segfloat__x:hover, .segfloat__x:focus-visible { color: #fff; background: rgba(255,255,255,0.12); }
+.segfloat.is-out { animation: segfloat-out .38s ease both; }
+body:has(.cc) .segfloat { opacity: 0; pointer-events: none; }
+/* After the choice (computers only, segment.js): a smaller bar that shows the choice, like the tabs in the menu */
+.segfloat.is-chosen { gap: 12px; padding: 6px 6px 6px 18px; }
+.segfloat.is-chosen .segfloat__q { font-size: 15px; color: rgba(255,255,255,0.7); }
+.segfloat.is-chosen .segfloat__btn { padding: 9px 16px; animation: none; }
+.segfloat__btn[aria-pressed="true"] { background: var(--accent); }
+.segfloat.is-chosen .segfloat__btn[aria-pressed="false"] { background: transparent; color: rgba(255,255,255,0.75); }
+.segfloat.is-chosen .segfloat__btn[aria-pressed="false"]:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.segfloat.is-tucked, html.mega-open .segfloat { opacity: 0; pointer-events: none; }
+@keyframes segfloat-in { from { opacity: 0; transform: translate(-50%, 28px) scale(.96); } }
+@keyframes segfloat-out { to { opacity: 0; transform: translate(-50%, 18px); } }
+@keyframes segfloat-glow { 50% { background: rgba(224,85,43,0.55); } }
+/* Above the round buttons in the corners when the screen is narrower */
+@media (max-width: 1099px) { .segfloat { bottom: 96px; } }
+@media (max-width: 620px) {
+  .segfloat { left: 12px; right: 12px; flex-wrap: wrap; gap: 10px; padding: 14px 12px 12px 18px; border-radius: 22px; transform: none; animation-name: segfloat-in-m; }
+  .segfloat.is-out { animation-name: segfloat-out-m; }
+  .segfloat__q { flex: 1; font-size: 16px; }
+  .segfloat__btns { order: 3; width: 100%; }
+  .segfloat__btn { flex: 1; padding: 12px 10px; }
+  .segfloat__x { margin: -4px -2px -4px 0; }
+}
+@keyframes segfloat-in-m { from { opacity: 0; transform: translateY(28px); } }
+@keyframes segfloat-out-m { to { opacity: 0; transform: translateY(18px); } }
+@media (prefers-reduced-motion: reduce) { .segfloat, .segfloat.is-out, .segfloat__btn { animation: none; } }
+/* Copy for one segment only (data-seg-only="ydelser" | "webshop" | "neutral") */
+html:not([data-seg="ydelser"]) [data-seg-only="ydelser"], html:not([data-seg="webshop"]) [data-seg-only="webshop"], html[data-seg] [data-seg-only="neutral"] { display: none !important; }
+/* The note on draft pages sits under the menu, which the tabs make taller */
+html:has(.segbar) .draft-bar { top: 116px; }
 
 /* Rolling hover text (applied by JS) */
 .roll { display: inline-block; overflow: hidden; vertical-align: bottom; height: 1.25em; line-height: 1.25em; }
@@ -365,6 +504,29 @@ html:not(.motion) .build__sticky { position: relative; height: auto; padding-bot
 .addon.is-added .addon__toggle { border-color: var(--accent); background: var(--accent); color: #fff; }
 .addon__more { text-align: center; padding: 10px; font-size: 15px; font-weight: 700; color: inherit; background: none; border: none; cursor: pointer; }
 .addon__more:hover { color: var(--accent); }
+
+/* ---------- Front page services: a grid that opens with "Vis flere" (lib.frontServices, main.js) ---------- */
+.fsv { position: relative; z-index: 1; padding: 64px 0 110px; }
+.fsv .sec-head { margin-bottom: 44px; }
+.show--partnere + .fsv { padding-top: 12px; }
+.fsv__box { position: relative; margin: -8px; padding: 8px; transition: max-height .7s cubic-bezier(.2,.8,.2,1); }
+.fsv.is-ready .fsv__box { overflow: hidden; }
+.fsv__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.fsv .addon-slot { width: auto; }
+.fsv__fade { position: absolute; left: 0; right: 0; bottom: 0; height: var(--fsv-fade, 260px); pointer-events: none; background: linear-gradient(to bottom, rgba(251,250,248,0) 0%, rgba(251,250,248,0.75) 50%, var(--bg) 94%); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 58%); mask-image: linear-gradient(to bottom, transparent 0%, #000 58%); transition: opacity .45s; }
+.fsv:not(.is-ready) .fsv__fade, .fsv.is-open .fsv__fade, .fsv.is-all .fsv__fade { opacity: 0; }
+.fsv__foot { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: -34px; transition: margin .5s cubic-bezier(.2,.8,.2,1); }
+.fsv:not(.is-ready) .fsv__foot, .fsv.is-open .fsv__foot, .fsv.is-all .fsv__foot { margin-top: 36px; }
+.fsv:not(.is-ready) .fsv__more, .fsv.is-all .fsv__more { display: none; }
+.fsv__more { display: inline-flex; align-items: center; gap: 12px; padding: 18px 30px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 22px 40px -22px rgba(17,17,17,0.7); transition: transform .3s cubic-bezier(.2,.8,.2,1), background .25s; }
+.fsv__more:hover { background: var(--accent); transform: translateY(-2px); }
+.fsv__more i { font-style: normal; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.fsv.is-open .fsv__more i { transform: rotate(180deg); }
+.fsv__all { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+.fsv__all:hover { color: var(--accent); }
+@media (max-width: 1000px) { .fsv__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+@media (max-width: 699px) { .fsv { padding: 44px 0 80px; } .fsv__grid { grid-template-columns: 1fr; gap: 12px; } }
+@media (prefers-reduced-motion: reduce) { .fsv__box, .fsv__foot, .fsv__more i { transition: none; } }
 .addons__meter { display: flex; align-items: center; gap: 18px; }
 .addons__meter span { font-family: var(--display); font-weight: 800; font-size: 18px; min-width: 28px; }
 .addons__meter span:last-child { color: var(--faint); }

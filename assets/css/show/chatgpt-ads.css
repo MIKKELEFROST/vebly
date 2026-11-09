@@ -1,0 +1,289 @@
+/* ChatGPT Ads showcase: a relevance gate (scripts/services/showcase/chatgpt-ads.html).
+   A belt of example conversations glides through a gate; the one in the gate drops into a phone with a chat of our own
+   drawing, and only when it fits, the sponsored card slides in under the answer. Left: the description the advertiser
+   controls. Right: the auction and the numbers the advertiser sees. Static (no motion or no JS): the first conversation,
+   finished, with its ad. */
+.show--chatgpt-ads { --e: cubic-bezier(.2,.8,.2,1); --spring: cubic-bezier(.2,1.4,.4,1); --cw: 214px; --ch: 76px; --cgap: 14px; --pw: 336px; --sh: 560px; --gx: 44px; --beam: 30px;
+  position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 30px; }
+.show--chatgpt-ads .cg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.show--chatgpt-ads .sec-head { margin-bottom: 36px; }
+.show--chatgpt-ads .sec-head__lead { max-width: 340px; }
+.show--chatgpt-ads svg { flex: none; }
+
+/* The bar: inside the belt, beside the read-out on wide screens, above the lane on smaller ones */
+.show--chatgpt-ads .cg-bar { position: absolute; z-index: 4; left: 22px; right: 22px; bottom: 12px; display: flex; align-items: center; gap: 10px 14px; pointer-events: none; }
+.show--chatgpt-ads .cg-bar > * { pointer-events: auto; }
+.show--chatgpt-ads .cg-bar__t { display: flex; align-items: center; gap: 9px; min-width: 0; font-size: 14.5px; white-space: nowrap; }
+.show--chatgpt-ads .cg-live { position: relative; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.show--chatgpt-ads .cg-bar__ctl { display: flex; gap: 8px; margin-left: auto; }
+.show--chatgpt-ads .cg-btn { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; height: 34px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; transition: border-color .25s, transform .35s var(--spring), background .25s; }
+.show--chatgpt-ads .cg-btn:hover { border-color: var(--ink); transform: translateY(-1px); }
+.show--chatgpt-ads .cg-btn svg { width: 14px; height: 14px; fill: currentColor; }
+.show--chatgpt-ads .cg-btn--next svg { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-btn__pl, .show--chatgpt-ads.is-paused .cg-btn__pa { display: none; }
+.show--chatgpt-ads.is-paused .cg-btn__pl { display: block; }
+html:not(.motion) .show--chatgpt-ads [data-cg-play] { display: none; }
+
+/* The belt and its cards */
+.show--chatgpt-ads .cg-belt { position: relative; overflow: hidden; border-radius: 28px; background: var(--cream) radial-gradient(rgba(17,17,17,.07) 1px, transparent 1.3px) 0 0 / 18px 18px; }
+.show--chatgpt-ads .cg-lane { position: relative; height: 164px; }
+.show--chatgpt-ads .cg-lane::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(90deg, var(--cream), rgba(242,237,228,0) 13%, rgba(242,237,228,0) 87%, var(--cream)); }
+.show--chatgpt-ads .cg-track { position: absolute; top: 24px; left: 0; display: flex; gap: var(--cgap); will-change: transform; }
+.show--chatgpt-ads .cg-c { position: relative; flex: none; display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: 10px; width: var(--cw); height: var(--ch); padding: 8px 14px 12px 12px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 12px 24px -18px rgba(17,17,17,.35); transition: transform .7s var(--e), box-shadow .5s, opacity .5s; }
+.show--chatgpt-ads .cg-c__ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: var(--bg); }
+.show--chatgpt-ads .cg-c__ic svg { width: 17px; height: 17px; fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-c__q { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 13.5px; font-weight: 500; line-height: 1.3; }
+.show--chatgpt-ads .cg-c__v { position: absolute; top: -10px; right: 12px; padding: 4px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; line-height: 1.2; white-space: nowrap; opacity: 0; transform: translateY(5px) scale(.85); transition: opacity .3s, transform .45s var(--spring); }
+.show--chatgpt-ads .cg-c__bar { position: absolute; left: 14px; right: 14px; bottom: 7px; height: 3px; overflow: hidden; border-radius: 3px; background: var(--line); }
+.show--chatgpt-ads .cg-c__bar i { display: block; height: 100%; border-radius: inherit; background: var(--faint); transform: scaleX(0); transform-origin: 0 50%; transition: transform .8s var(--e), background .3s; }
+.show--chatgpt-ads .cg-c.is-seen .cg-c__v { opacity: 1; transform: none; }
+.show--chatgpt-ads .cg-c.is-seen .cg-c__bar i { transform: scaleX(var(--r, 0)); }
+.show--chatgpt-ads .cg-c.is-match .cg-c__v { background: var(--accent); color: #fff; }
+.show--chatgpt-ads .cg-c.is-match .cg-c__bar i { background: var(--accent); }
+.show--chatgpt-ads .cg-c.is-no .cg-c__v { border: 1px solid var(--line-strong); background: #fff; color: var(--muted); }
+.show--chatgpt-ads .cg-c.is-sens .cg-c__v { background: var(--ink); color: #fff; }
+.show--chatgpt-ads .cg-c.is-sens .cg-c__bar { background: repeating-linear-gradient(-45deg, var(--line-strong) 0 3px, transparent 3px 6px); }
+.show--chatgpt-ads .cg-c.is-seen:not(.is-gate):not(.is-match) { opacity: .62; }
+.show--chatgpt-ads .cg-c.is-gate { transform: scale(1.08); box-shadow: 0 24px 40px -22px rgba(17,17,17,.5); }
+.show--chatgpt-ads .cg-c.is-gate.is-match { box-shadow: 0 24px 46px -18px rgba(224,85,43,.6), 0 0 0 2px var(--accent); }
+
+/* The gate: corner marks, a scan that sweeps through, and the read-out under it */
+.show--chatgpt-ads .cg-gate { --k: var(--ink); --l: 18px; --t: 2.5px; position: absolute; z-index: 3; top: calc(24px + var(--ch) / 2); left: 50%; width: calc(var(--cw) * 1.08 + 26px); height: calc(var(--ch) * 1.08 + 24px); transform: translate(-50%, -50%); pointer-events: none;
+  background: linear-gradient(var(--k) 0 0) 0 0 / var(--l) var(--t), linear-gradient(var(--k) 0 0) 0 0 / var(--t) var(--l), linear-gradient(var(--k) 0 0) 100% 0 / var(--l) var(--t), linear-gradient(var(--k) 0 0) 100% 0 / var(--t) var(--l), linear-gradient(var(--k) 0 0) 0 100% / var(--l) var(--t), linear-gradient(var(--k) 0 0) 0 100% / var(--t) var(--l), linear-gradient(var(--k) 0 0) 100% 100% / var(--l) var(--t), linear-gradient(var(--k) 0 0) 100% 100% / var(--t) var(--l);
+  background-repeat: no-repeat; }
+.show--chatgpt-ads .cg-lane.is-match .cg-gate { --k: var(--accent); }
+.show--chatgpt-ads .cg-lane.is-no .cg-gate { --k: var(--faint); }
+.show--chatgpt-ads .cg-gate::after { content: ""; position: absolute; inset: 7px 9px; border-radius: 16px; background: linear-gradient(90deg, rgba(224,85,43,0), rgba(224,85,43,.32) 42%, rgba(255,255,255,.95) 50%, rgba(224,85,43,.32) 58%, rgba(224,85,43,0)) no-repeat; background-size: 46% 100%; background-position: -80% 0; opacity: 0; }
+.show--chatgpt-ads .cg-read { position: absolute; z-index: 3; bottom: 13px; left: 50%; display: flex; align-items: center; gap: 9px; height: 32px; padding: 0 14px; border-radius: 999px; background: #fff; box-shadow: 0 10px 24px -14px rgba(17,17,17,.4); font-size: 13px; white-space: nowrap; transform: translateX(-50%); }
+.show--chatgpt-ads .cg-read__l { color: var(--muted); font-weight: 500; }
+.show--chatgpt-ads .cg-read__m { width: 64px; height: 5px; overflow: hidden; border-radius: 5px; background: var(--line); }
+.show--chatgpt-ads .cg-read__m i { display: block; height: 100%; border-radius: inherit; background: var(--faint); transform: scaleX(var(--r, 0)); transform-origin: 0 50%; }
+.show--chatgpt-ads .cg-read b { min-width: 34px; font-variant-numeric: tabular-nums; }
+.show--chatgpt-ads .cg-read__sh { display: none; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-read__v { padding-left: 9px; border-left: 1px solid var(--line); font-weight: 700; transition: opacity .3s; }
+.show--chatgpt-ads .cg-lane:not(.is-match):not(.is-no):not(.is-sens) .cg-read__v { opacity: 0; }
+.show--chatgpt-ads .cg-lane.is-match .cg-read__m i { background: var(--accent); }
+.show--chatgpt-ads .cg-lane.is-match .cg-read__v { color: var(--accent); }
+.show--chatgpt-ads .cg-lane.is-no .cg-read__v { color: var(--muted); }
+.show--chatgpt-ads .cg-lane.is-sens .cg-read { background: var(--ink); color: #fff; }
+.show--chatgpt-ads .cg-lane.is-sens :is(.cg-read__l, .cg-read__m, .cg-read b) { display: none; }
+.show--chatgpt-ads .cg-lane.is-sens .cg-read__sh { display: block; }
+.show--chatgpt-ads .cg-lane.is-sens .cg-read__v { padding-left: 0; border: 0; }
+
+/* The three columns */
+.show--chatgpt-ads .cg-main { display: grid; grid-template-columns: minmax(0, 1fr) var(--pw) minmax(0, 1fr); align-items: center; gap: var(--gx); margin-top: var(--beam); }
+.show--chatgpt-ads .cg-dev { position: relative; width: var(--pw); }
+.show--chatgpt-ads .cg-beam { position: absolute; bottom: 100%; left: 50%; width: 2px; height: var(--beam); margin-left: -1px; background: repeating-linear-gradient(var(--line-strong) 0 4px, transparent 4px 8px); }
+.show--chatgpt-ads .cg-beam i { position: absolute; top: 0; left: 50%; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(224,85,43,.2); opacity: 0; }
+
+/* The phone and the chat of our own drawing */
+.show--chatgpt-ads .cg-ph { position: relative; padding: 9px; border-radius: 54px; background: #111; box-shadow: 0 50px 90px -40px rgba(17,17,17,.55), 0 0 0 1px #2e2e2e, inset 0 0 0 1.5px #333; }
+.show--chatgpt-ads .cg-scr { position: relative; display: flex; flex-direction: column; height: var(--sh); overflow: hidden; border-radius: 45px; background: #fff; color: #0d0d0d; transform: translateZ(0); user-select: none; -webkit-user-select: none; }
+.show--chatgpt-ads .cg-isl { position: absolute; z-index: 5; top: 11px; left: 50%; width: 96px; height: 28px; margin-left: -48px; border-radius: 99px; background: #000; }
+.show--chatgpt-ads .cg-sb { flex: none; display: flex; justify-content: space-between; align-items: center; height: 46px; padding: 0 24px 0 34px; font-size: 14px; font-weight: 700; }
+.show--chatgpt-ads .cg-sb svg { width: 58px; height: 11px; fill: currentColor; }
+.show--chatgpt-ads .cg-app { flex: none; display: flex; justify-content: space-between; align-items: center; height: 40px; padding: 0 18px; }
+.show--chatgpt-ads .cg-app svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-app b { display: flex; align-items: center; gap: 2px; font-size: 17px; letter-spacing: -.01em; }
+.show--chatgpt-ads .cg-app b svg { width: 17px; height: 17px; color: #8f8f8f; }
+.show--chatgpt-ads .cg-view { position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; }
+.show--chatgpt-ads .cg-hi { position: absolute; inset: 0 24px 12%; display: none; place-items: center; text-align: center; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.show--chatgpt-ads .cg-view.is-empty .cg-hi { display: grid; }
+.show--chatgpt-ads .cg-view.is-empty .cg-th { visibility: hidden; }
+.show--chatgpt-ads .cg-th { display: flex; flex-direction: column; gap: 11px; padding: 6px 16px 12px; transition: transform .7s var(--e), opacity .3s; }
+.show--chatgpt-ads .cg-th.is-out { opacity: 0; }
+.show--chatgpt-ads .cg-th > * { display: none; }
+.show--chatgpt-ads .cg-u { align-self: flex-end; max-width: 82%; margin: 0; padding: 9px 15px; border-radius: 20px; background: #f1f1f1; font-size: 14.5px; line-height: 1.38; }
+.show--chatgpt-ads .cg-think { width: 12px; height: 12px; border-radius: 50%; background: #0d0d0d; }
+.show--chatgpt-ads .cg-a { font-size: 14.5px; line-height: 1.5; }
+.show--chatgpt-ads .cg-a p { margin: 0 0 5px; }
+.show--chatgpt-ads .cg-a p:last-child { margin: 0; }
+.show--chatgpt-ads .cg-a ul { display: grid; gap: 3px; margin: 0; padding: 0; list-style: none; }
+.show--chatgpt-ads .cg-a li { position: relative; padding-left: 17px; }
+.show--chatgpt-ads .cg-a li::before { content: ""; position: absolute; top: .62em; left: 4px; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.show--chatgpt-ads .cg-a.is-stream .w { opacity: 0; transition: opacity .35s; }
+.show--chatgpt-ads .cg-a.is-stream .w.is-on { opacity: 1; }
+.show--chatgpt-ads .cg-a.is-stream li:not(.is-on)::before { opacity: 0; }
+.show--chatgpt-ads .cg-acts { gap: 15px; margin-top: -4px; color: #8f8f8f; }
+.show--chatgpt-ads .cg-acts svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-th.st-q .cg-u, .show--chatgpt-ads .cg-th.st-think .cg-think, .show--chatgpt-ads .cg-th.st-a .cg-a, .show--chatgpt-ads .cg-th.has-ad :is(.cg-div, .cg-ad) { display: block; }
+.show--chatgpt-ads .cg-th.st-done .cg-acts, .show--chatgpt-ads .cg-th.has-note .cg-note { display: flex; }
+
+/* Our note between the answer and the ad (not part of the chat), then the sponsored card */
+.show--chatgpt-ads .cg-div { position: relative; text-align: center; }
+.show--chatgpt-ads .cg-div::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 1.5px dashed rgba(224,85,43,.5); transform-origin: 50% 50%; }
+.show--chatgpt-ads .cg-div span { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border: 1px solid rgba(224,85,43,.4); border-radius: 999px; background: #fff; color: var(--accent); font-size: 11.5px; font-weight: 700; line-height: 1.2; }
+.show--chatgpt-ads .cg-div svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-ad__sp { display: block; margin: 0 0 5px 3px; color: #8f8f8f; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; }
+.show--chatgpt-ads .cg-ad__card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 9px; border: 1px solid #e6e6e6; border-radius: 18px; background: #fff; box-shadow: 0 16px 30px -22px rgba(0,0,0,.4); }
+.show--chatgpt-ads .cg-ad__m { height: 114px; overflow: hidden; border-radius: 12px; background: #2b1f17 url(/assets/media/kaffekvaern.jpg) 51% 50% / cover; }
+.show--chatgpt-ads .cg-ad__m video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 51% 50%; }
+.show--chatgpt-ads .cg-ad__b { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; padding: 2px 2px 1px 0; }
+.show--chatgpt-ads .cg-ad__who { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; }
+.show--chatgpt-ads .cg-ad__who i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: #1d1b19; color: #fff; font-size: 11px; font-style: normal; }
+.show--chatgpt-ads .cg-ad__t { margin-top: 3px; font-size: 14.5px; line-height: 1.25; }
+.show--chatgpt-ads .cg-ad__d { color: #5d5d5d; font-size: 12.5px; line-height: 1.4; }
+.show--chatgpt-ads .cg-ad__cta { display: inline-flex; align-items: center; gap: 5px; margin-top: auto; padding: 7px 12px; border-radius: 999px; background: #0d0d0d; color: #fff; font-size: 12.5px; font-weight: 700; }
+.show--chatgpt-ads .cg-ad__cta { white-space: nowrap; }
+.show--chatgpt-ads .cg-ad__cta svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-note { align-items: flex-start; gap: 9px; padding: 11px 13px; border: 1.5px dashed var(--line-strong); border-radius: 14px; color: var(--muted); font-size: 12.5px; font-weight: 500; line-height: 1.4; }
+.show--chatgpt-ads .cg-note svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-th.note-sens .cg-note { border-style: solid; border-color: #0d0d0d; background: #0d0d0d; color: #fff; }
+.show--chatgpt-ads .cg-comp { flex: none; display: flex; align-items: center; gap: 10px; margin: 0 12px 16px; padding: 7px 7px 7px 15px; border: 1px solid #e3e3e3; border-radius: 26px; background: #fff; box-shadow: 0 8px 20px -14px rgba(0,0,0,.3); color: #8f8f8f; font-size: 14.5px; }
+.show--chatgpt-ads .cg-comp__plus { color: #0d0d0d; font-size: 22px; font-weight: 300; line-height: 1; }
+.show--chatgpt-ads .cg-comp__f { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.show--chatgpt-ads .cg-comp svg { width: 20px; height: 20px; fill: none; stroke: #0d0d0d; stroke-width: 1.8; stroke-linecap: round; }
+.show--chatgpt-ads .cg-comp__go { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #0d0d0d; }
+.show--chatgpt-ads .cg-comp__go svg { stroke: #fff; stroke-width: 2.2; }
+
+/* Left: what the advertiser controls */
+.show--chatgpt-ads .cg-ctl { padding: 24px 22px 20px; border: 1px solid var(--line); border-radius: 28px; background: #fff; box-shadow: 0 40px 80px -40px rgba(17,17,17,.2); }
+.show--chatgpt-ads .cg-lbl { margin: 0 0 12px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.show--chatgpt-ads .cg-who { display: flex; align-items: center; gap: 12px; }
+.show--chatgpt-ads .cg-who img { flex: none; width: 44px; height: 44px; border-radius: 15px; object-fit: cover; object-position: 50% 40%; }
+.show--chatgpt-ads .cg-who span { display: grid; gap: 1px; }
+.show--chatgpt-ads .cg-who b { font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+.show--chatgpt-ads .cg-who small { color: var(--muted); font-size: 13.5px; }
+.show--chatgpt-ads .cg-ctl__h { margin: 18px 0 8px; font-size: 14px; font-weight: 700; }
+.show--chatgpt-ads .cg-desc { min-height: 70px; padding: 11px 14px; border: 1px solid var(--line-strong); border-radius: 16px; background: var(--bg); font-size: 14.5px; line-height: 1.5; }
+.show--chatgpt-ads .cg-desc__l { display: none; }
+.show--chatgpt-ads .cg-desc__l.is-on { display: inline; }
+.show--chatgpt-ads .cg-desc__ph { display: none; color: var(--faint); }
+.show--chatgpt-ads .cg-desc.is-empty .cg-desc__ph { display: inline; }
+.show--chatgpt-ads .cg-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+.show--chatgpt-ads .cg-chip { display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 13px 0 8px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; color: var(--ink); font-size: 13.5px; font-weight: 700; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .35s var(--spring), box-shadow .3s; }
+.show--chatgpt-ads .cg-chip:hover { border-color: var(--ink); transform: translateY(-1px); }
+.show--chatgpt-ads .cg-chip i { position: relative; flex: none; width: 19px; height: 19px; border: 1.5px solid var(--line-strong); border-radius: 50%; transition: background .25s, border-color .25s; }
+.show--chatgpt-ads .cg-chip i::before, .show--chatgpt-ads .cg-chip i::after { content: ""; position: absolute; top: 50%; left: 50%; width: 9px; height: 1.6px; margin: -.8px 0 0 -4.5px; border-radius: 2px; background: var(--muted); transition: transform .35s var(--spring), width .25s, background .25s; }
+.show--chatgpt-ads .cg-chip i::after { transform: rotate(90deg); }
+.show--chatgpt-ads .cg-chip[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+.show--chatgpt-ads .cg-chip[aria-pressed="true"] i { border-color: var(--accent); background: var(--accent); }
+.show--chatgpt-ads .cg-chip[aria-pressed="true"] i::before { width: 5px; background: #fff; transform: translate(-1.6px, 1.4px) rotate(45deg); }
+.show--chatgpt-ads .cg-chip[aria-pressed="true"] i::after { width: 9px; background: #fff; transform: translate(1.4px, 0) rotate(-50deg); }
+.show--chatgpt-ads .cg-chip.is-nudge { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,85,43,.18); }
+.show--chatgpt-ads .cg-fit { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 16px; font-size: 14px; }
+.show--chatgpt-ads .cg-dots { display: flex; gap: 5px; }
+.show--chatgpt-ads .cg-dots i { width: 11px; height: 11px; border-radius: 50%; background: var(--line-strong); transition: background .35s, transform .4s var(--spring), box-shadow .3s; }
+.show--chatgpt-ads .cg-dots i.is-match { background: var(--accent); }
+.show--chatgpt-ads .cg-dots i.is-sens { background: var(--ink); }
+.show--chatgpt-ads .cg-dots i.is-cur { box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--ink); }
+.show--chatgpt-ads .cg-fit__t { color: var(--muted); }
+.show--chatgpt-ads .cg-fit__t b { color: var(--ink); }
+.show--chatgpt-ads .cg-ctl__note { display: flex; gap: 10px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.45; }
+.show--chatgpt-ads .cg-ctl__note svg { width: 18px; height: 18px; margin-top: 1px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+/* Right: the auction (relevance beats a higher bid) and the numbers */
+.show--chatgpt-ads .cg-auc { padding: 24px 22px 22px; border-radius: 28px; box-shadow: 0 40px 80px -36px rgba(17,17,17,.45); }
+.show--chatgpt-ads .cg-auc__hd { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.show--chatgpt-ads .cg-auc__h { margin: 0; font-family: var(--display); font-size: 28px; font-weight: 800; letter-spacing: -.035em; line-height: 1; }
+.show--chatgpt-ads .cg-auc__sub { margin: 6px 0 16px; color: var(--dark-muted); font-size: 14px; }
+.show--chatgpt-ads .cg-rows-w { position: relative; height: 188px; }
+.show--chatgpt-ads .cg-rows { position: relative; height: 100%; margin: 0; padding: 0; list-style: none; }
+.show--chatgpt-ads .cg-row { position: absolute; top: 0; left: 0; right: 0; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; align-items: center; gap: 4px 11px; height: 58px; padding: 8px 13px; border: 1px solid rgba(255,255,255,.09); border-radius: 16px; background: rgba(255,255,255,.06); transform: translateY(calc(var(--y, 0) * 65px)); transition: transform .75s var(--spring), background .4s, border-color .4s, opacity .4s; }
+.show--chatgpt-ads .cg-row__av { grid-row: span 2; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fff; color: var(--ink); font-size: 14px; font-weight: 700; }
+.show--chatgpt-ads .cg-row.is-you .cg-row__av { background: var(--accent); color: #fff; }
+.show--chatgpt-ads .cg-row__n { min-width: 0; overflow: hidden; font-size: 14.5px; white-space: nowrap; text-overflow: ellipsis; }
+.show--chatgpt-ads .cg-row__n small, .show--chatgpt-ads .cg-row__bid small { margin-left: 6px; color: var(--dark-muted); font-size: 11.5px; }
+.show--chatgpt-ads .cg-row__bid { font-size: 14.5px; white-space: nowrap; transition: color .3s; }
+.show--chatgpt-ads .cg-row__rel { grid-column: 2 / 4; display: flex; align-items: center; gap: 10px; transition: opacity .3s; }
+.show--chatgpt-ads .cg-row__rel > i { flex: 1; height: 5px; overflow: hidden; border-radius: 5px; background: rgba(255,255,255,.12); }
+.show--chatgpt-ads .cg-row__rel > i i { display: block; height: 100%; border-radius: inherit; background: rgba(255,255,255,.75); transform: scaleX(var(--r, 0)); transform-origin: 0 50%; transition: transform .85s var(--e); }
+.show--chatgpt-ads .cg-row.is-you .cg-row__rel > i i { background: var(--accent); }
+.show--chatgpt-ads .cg-row__rel b { min-width: 38px; font-size: 12.5px; text-align: right; font-variant-numeric: tabular-nums; }
+.show--chatgpt-ads .cg-row__rel b::before { content: "Relevans "; color: var(--dark-muted); font-weight: 500; }
+.show--chatgpt-ads .cg-row__win, .show--chatgpt-ads .cg-row__top { position: absolute; top: -10px; right: 12px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; line-height: 1.2; opacity: 0; transform: translateY(5px) scale(.85); transition: opacity .3s, transform .45s var(--spring); }
+.show--chatgpt-ads .cg-row__win { background: var(--accent); color: #fff; }
+.show--chatgpt-ads .cg-row__win svg { width: 12px; height: 12px; fill: currentColor; }
+.show--chatgpt-ads .cg-row__top { background: #fff; color: var(--ink); }
+.show--chatgpt-ads .cg-row.is-win { border-color: var(--accent); background: rgba(224,85,43,.16); }
+.show--chatgpt-ads .cg-row.is-win .cg-row__win, .show--chatgpt-ads .cg-auc.is-bids .cg-row__top { opacity: 1; transform: none; }
+.show--chatgpt-ads .cg-auc.is-bids .cg-row__bid { color: var(--yellow); }
+.show--chatgpt-ads .cg-auc.is-bids .cg-row__rel { opacity: .35; }
+.show--chatgpt-ads .cg-msg { position: absolute; inset: -4px; display: flex; justify-content: center; align-items: center; gap: 10px; margin: 0; padding: 0 22px; border-radius: 18px; background: rgba(17,17,17,.82); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); color: #fff; font-size: 14.5px; font-weight: 500; line-height: 1.4; text-align: left; opacity: 0; pointer-events: none; transition: opacity .4s; }
+.show--chatgpt-ads .cg-msg svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--chatgpt-ads .cg-auc.is-out .cg-msg { opacity: 1; }
+.show--chatgpt-ads .cg-auc.is-out .cg-row { opacity: .5; }
+.show--chatgpt-ads .cg-auc__note { margin: 14px 0 0; color: rgba(255,255,255,.82); font-size: 13.5px; line-height: 1.45; }
+.show--chatgpt-ads .cg-auc__note b { color: #fff; }
+.show--chatgpt-ads .cg-auc__note span { display: block; margin-top: 2px; color: var(--dark-muted); font-size: 12px; }
+.show--chatgpt-ads .cg-see { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--dark-line); }
+.show--chatgpt-ads .cg-see__h { margin: 0 0 10px; color: var(--dark-muted); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.show--chatgpt-ads .cg-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.show--chatgpt-ads .cg-stats span { display: grid; gap: 2px; }
+.show--chatgpt-ads .cg-stats b { display: inline-block; justify-self: start; font-family: var(--display); font-size: 27px; font-weight: 800; letter-spacing: -.035em; line-height: 1; font-variant-numeric: tabular-nums; }
+.show--chatgpt-ads .cg-stats small { color: var(--dark-muted); font-size: 12.5px; }
+.show--chatgpt-ads .cg-lock { display: flex; align-items: center; gap: 9px; margin: 14px 0 0; color: rgba(255,255,255,.85); font-size: 13.5px; }
+.show--chatgpt-ads .cg-lock svg { width: 17px; height: 17px; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; }
+
+/* Motion (html.motion only); without it nothing glides */
+html:not(.motion) .show--chatgpt-ads .cg *, html:not(.motion) .show--chatgpt-ads .cg *::before, html:not(.motion) .show--chatgpt-ads .cg *::after { transition: none !important; }
+.motion .show--chatgpt-ads .cg-live::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent); animation: cgPing 1.8s ease-out infinite; }
+.motion .show--chatgpt-ads.is-paused .cg-live::after { animation: none; opacity: 0; }
+.motion .show--chatgpt-ads.is-paused .cg-live { background: var(--faint); }
+.motion .show--chatgpt-ads .cg-lane.is-scan .cg-gate::after { animation: cgScan .7s var(--e) both; }
+.motion .show--chatgpt-ads .cg-beam i.is-go { animation: cgDrop .45s ease-in both; }
+.motion .show--chatgpt-ads .cg-th.st-q .cg-u { animation: cgPop .45s var(--spring) both; transform-origin: 100% 100%; }
+.motion .show--chatgpt-ads .cg-th.st-think .cg-think { animation: cgBreath 1s ease-in-out infinite; }
+.motion .show--chatgpt-ads .cg-th.st-done .cg-acts { animation: cgFade .5s both; }
+.motion .show--chatgpt-ads .cg-th.has-ad .cg-div::before { animation: cgLine .6s var(--e) both; }
+.motion .show--chatgpt-ads .cg-th.has-ad .cg-div span { animation: cgPop .5s var(--spring) .15s both; }
+.motion .show--chatgpt-ads .cg-th.has-ad .cg-ad { animation: cgAdIn .8s var(--spring) .3s both; }
+.motion .show--chatgpt-ads .cg-th.has-ad .cg-ad__card { animation: cgRing 1.6s ease-out .7s both; }
+.motion .show--chatgpt-ads .cg-th.has-note .cg-note { animation: cgUp .45s var(--e) both; }
+.motion .show--chatgpt-ads .cg-chip.is-nudge { animation: cgNudge 1.3s ease-in-out infinite; }
+.motion .show--chatgpt-ads .cg-desc.is-typing::after { content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -.15em; background: var(--accent); animation: cgBlink .8s steps(1) infinite; }
+.motion .show--chatgpt-ads .cg-stats b.is-bump { animation: cgBump .5s var(--spring); }
+@keyframes cgPing { from { opacity: .55; transform: scale(1); } to { opacity: 0; transform: scale(2.8); } }
+@keyframes cgScan { 0% { opacity: 0; background-position: -80% 0; } 18%, 82% { opacity: 1; } 100% { opacity: 0; background-position: 180% 0; } }
+@keyframes cgDrop { 0% { opacity: 0; transform: translateY(-4px) scale(.6); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(var(--beam)) scale(1); } }
+@keyframes cgPop { from { opacity: 0; transform: translateY(10px) scale(.92); } to { opacity: 1; transform: none; } }
+@keyframes cgBreath { 50% { transform: scale(.65); opacity: .5; } }
+@keyframes cgFade { from { opacity: 0; } }
+@keyframes cgLine { from { transform: scaleX(0); } }
+@keyframes cgAdIn { from { opacity: 0; transform: translateY(46px) scale(.95); } to { opacity: 1; transform: none; } }
+@keyframes cgRing { 0% { box-shadow: 0 0 0 0 rgba(224,85,43,.45), 0 16px 30px -22px rgba(0,0,0,.4); } 100% { box-shadow: 0 0 0 14px rgba(224,85,43,0), 0 16px 30px -22px rgba(0,0,0,.4); } }
+@keyframes cgUp { from { opacity: 0; transform: translateY(12px); } }
+@keyframes cgNudge { 50% { box-shadow: 0 0 0 8px rgba(224,85,43,.08); } }
+@keyframes cgBlink { 50% { opacity: 0; } }
+@keyframes cgBump { 40% { transform: scale(1.14); color: var(--accent); } }
+
+@media (max-width: 1199px) { .show--chatgpt-ads { --gx: 26px; } }
+
+/* Tablet: the bar above the lane, the phone under the belt, the two panels side by side under it */
+@media (max-width: 1099px) {
+  .show--chatgpt-ads .cg-belt { display: flex; flex-direction: column; }
+  .show--chatgpt-ads .cg-bar { position: relative; order: -1; left: auto; right: auto; bottom: auto; flex-wrap: wrap; padding: 16px 20px 0; pointer-events: auto; }
+  .show--chatgpt-ads .cg-bar__ctl { margin-left: auto; }
+  .show--chatgpt-ads .cg-lane { height: 156px; }
+  .show--chatgpt-ads .cg-main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "dev dev" "ctl auc"; align-items: stretch; gap: 28px 20px; }
+  .show--chatgpt-ads .cg-dev { grid-area: dev; justify-self: center; margin-bottom: 8px; }
+  .show--chatgpt-ads .cg-ctl { grid-area: ctl; }
+  .show--chatgpt-ads .cg-auc { grid-area: auc; }
+}
+
+/* Phone */
+@media (max-width: 759px) {
+  .show--chatgpt-ads { --cw: 188px; --ch: 74px; --cgap: 12px; --pw: min(336px, 100%); --sh: 580px; --beam: 26px; padding: 32px 20px 72px; }
+  .show--chatgpt-ads .sec-head { margin-bottom: 28px; }
+  .show--chatgpt-ads .cg-belt { border-radius: 24px; }
+  .show--chatgpt-ads .cg-bar { gap: 10px; padding: 14px 14px 0; }
+  .show--chatgpt-ads .cg-bar__t { flex: 1 1 auto; }
+  .show--chatgpt-ads .cg-bar__ctl { order: 3; width: 100%; margin: 0; }
+  .show--chatgpt-ads .cg-btn { flex: 1; justify-content: center; padding: 0 12px; background: rgba(255,255,255,.7); }
+  .show--chatgpt-ads .cg-lane { height: 150px; }
+  .show--chatgpt-ads .cg-track { top: 20px; }
+  .show--chatgpt-ads .cg-gate { top: calc(20px + var(--ch) / 2); }
+  .show--chatgpt-ads .cg-c__q { font-size: 13px; }
+  .show--chatgpt-ads .cg-read { bottom: 10px; gap: 7px; padding: 0 12px; font-size: 12.5px; }
+  .show--chatgpt-ads .cg-read__m { width: 36px; }
+  .show--chatgpt-ads .cg-main { grid-template-columns: minmax(0, 1fr); grid-template-areas: "dev" "ctl" "auc"; gap: 22px; }
+  .show--chatgpt-ads .cg-ph { padding: 8px; border-radius: 50px; }
+  .show--chatgpt-ads .cg-scr { border-radius: 42px; }
+  .show--chatgpt-ads .cg-ctl, .show--chatgpt-ads .cg-auc { padding: 22px 18px 20px; border-radius: 24px; }
+  .show--chatgpt-ads .cg-row { padding: 8px 11px; gap: 4px 9px; }
+  .show--chatgpt-ads .cg-stats b { font-size: 24px; }
+}
+@media (max-width: 400px) {
+  .show--chatgpt-ads .cg-read__m { display: none; }
+  .show--chatgpt-ads .cg-btn { gap: 6px; padding: 0 8px; font-size: 13.5px; }
+}

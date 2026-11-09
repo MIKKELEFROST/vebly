@@ -1,0 +1,266 @@
+/* Showcase: Salg på markedspladser. A sync hub: your product in the middle, ten marketplaces around it, lines and
+   packets drawn by markedspladser.js, and a dark panel that collects the orders. Without html.motion: the finished
+   state, nothing moves */
+.show--markedspladser { --cw: 158px; --e: cubic-bezier(.2,.8,.2,1); --spring: cubic-bezier(.2,1.5,.4,1);
+  position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 40px; }
+.show--markedspladser .sec-head { margin-bottom: 34px; }
+.show--markedspladser .sec-head__lead { max-width: 400px; }
+.show--markedspladser :where(.mp-m, .mp-sale, .mp-refill) { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+
+/* ---------- The bar: what you sell ---------- */
+.show--markedspladser .mp-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 18px; }
+.show--markedspladser .mp-bar__q { font-size: 15px; font-weight: 700; }
+.show--markedspladser .mp-seg button { padding: 9px 20px; }
+.show--markedspladser .mp-bar__fit { margin-left: auto; font-size: 14px; color: var(--muted); }
+.show--markedspladser .mp-bar__fit b { color: var(--ink); }
+
+/* ---------- Board and orders side by side ---------- */
+.show--markedspladser .mp-main { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; align-items: stretch; }
+.show--markedspladser .mp-board { position: relative; display: grid; grid-template-columns: calc(var(--cw) + 30px) minmax(0, 1fr) calc(var(--cw) + 30px); align-items: center; padding: 22px; border: 1px solid var(--line); border-radius: 30px; background: radial-gradient(ellipse 34% 46% at 50% 50%, rgba(224,85,43,.07), transparent 70%), #fff; box-shadow: 0 40px 80px -50px rgba(17,17,17,.3); }
+.show--markedspladser .mp-board::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(circle at 1px 1px, rgba(17,17,17,.13) 1px, transparent 1.5px) 0 0 / 20px 20px; -webkit-mask: radial-gradient(ellipse 60% 62% at 50% 50%, #000 20%, transparent 100%); mask: radial-gradient(ellipse 60% 62% at 50% 50%, #000 20%, transparent 100%); pointer-events: none; }
+.show--markedspladser .mp-svg { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.show--markedspladser .mp-fx { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+
+/* Lines: grey when the marketplace is not picked, ink with orange dots running out when it is */
+.show--markedspladser .mp-ln { fill: none; stroke: #ddd9d2; stroke-width: 1.2; transition: stroke .5s, stroke-width .5s; }
+.show--markedspladser .mp-ln.is-on { stroke: rgba(17,17,17,.32); stroke-width: 1.6; }
+.show--markedspladser .mp-ln.is-on.is-hot { stroke: var(--accent); stroke-width: 2.2; }
+.show--markedspladser .mp-fl { fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: .1 11; opacity: 0; transition: opacity .5s; }
+.show--markedspladser .mp-fl.is-on { opacity: .5; }
+.motion .show--markedspladser .mp-fl.is-on { animation: mpFlow 1.1s linear infinite; }
+@keyframes mpFlow { to { stroke-dashoffset: -11.1; } }
+.show--markedspladser .mp-port { fill: #fff; stroke: var(--accent); stroke-width: 2; }
+.show--markedspladser .mp-porth { fill: var(--accent); opacity: .16; transform-box: fill-box; transform-origin: center; }
+.motion .show--markedspladser .mp-porth { animation: mpPort 2.4s var(--e) infinite; }
+@keyframes mpPort { 0% { transform: scale(.6); opacity: .3; } 70%, 100% { transform: scale(2.2); opacity: 0; } }
+
+/* Packets on their way along a line (placed by the JS) */
+.show--markedspladser .mp-pk { position: absolute; left: 0; top: 0; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(224,85,43,.18), 0 0 14px 2px rgba(224,85,43,.55); will-change: transform; }
+.show--markedspladser .mp-pk--s { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; background: #fff; box-shadow: 0 0 0 2px var(--accent), 0 0 12px 2px rgba(224,85,43,.5); }
+.show--markedspladser .mp-pk--o { width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; background: var(--green); box-shadow: 0 0 0 4px rgba(47,158,91,.2), 0 0 16px 3px rgba(47,158,91,.5); }
+
+/* ---------- The marketplaces: plain names, the countries they sell in, and their state ---------- */
+.show--markedspladser .mp-col { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.show--markedspladser .mp-col li { --o: 0px; display: flex; }
+.show--markedspladser .mp-col li:is(:first-child, :last-child) { --o: 30px; }
+.show--markedspladser .mp-col li:is(:nth-child(2), :nth-child(4)) { --o: 11px; }
+.show--markedspladser .mp-col--l li { padding-left: var(--o); }
+.show--markedspladser .mp-col--r li { justify-content: flex-end; padding-right: var(--o); }
+.show--markedspladser .mp-m { --sx: 1; position: relative; display: flex; flex-direction: column; gap: 5px; width: var(--cw); padding: 9px 12px 9px 13px; border: 1px solid var(--line); border-radius: 18px; background: #fff; text-align: left; cursor: pointer; box-shadow: 0 16px 30px -22px rgba(17,17,17,.38); transition: transform .45s var(--e), box-shadow .35s, border-color .35s, background .35s, opacity .35s; }
+.show--markedspladser .mp-col--r .mp-m { --sx: -1; }
+.show--markedspladser .mp-m__hd { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.show--markedspladser .mp-m__n { font-size: 15.5px; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; transition: color .35s; }
+.show--markedspladser .mp-m__dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #d9d5ce; transition: background .35s, box-shadow .35s; }
+.show--markedspladser .mp-m__c { display: flex; align-items: center; gap: 3px; height: 12px; transition: filter .35s, opacity .35s; }
+.show--markedspladser .mp-m__c small { margin-left: 3px; color: var(--muted); font-size: 11px; font-weight: 500; white-space: nowrap; }
+.show--markedspladser .mp-globe { width: 12px; height: 12px; fill: none; stroke: var(--muted); stroke-width: 1.3; }
+.show--markedspladser .mp-globe + small { margin-left: 1px; }
+/* The state line: three layers in the same place, one shown at a time */
+.show--markedspladser .mp-m__st { position: relative; display: block; height: 21px; }
+.show--markedspladser .mp-m__st > span { position: absolute; inset: 0; display: flex; align-items: center; gap: 4px; white-space: nowrap; opacity: 0; visibility: hidden; transform: translateY(5px); transition: opacity .3s, transform .4s var(--e), visibility 0s .4s; }
+.show--markedspladser :is(.is-live .mp-m__live, .is-send .mp-m__send, .is-off .mp-m__no) { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.show--markedspladser .mp-chip { padding: 3px 7px; border-radius: 999px; background: #f4f2ee; font-size: 11.5px; font-weight: 700; line-height: 15px; transition: background .3s, color .3s; }
+.show--markedspladser .mp-chip.is-sale { background: #fff0e9; color: var(--accent); }
+.show--markedspladser .mp-chip.is-zero { background: #fdecea; color: var(--red); }
+.show--markedspladser .mp-chip.is-flash { animation: mpFlash 1s var(--e); }
+@keyframes mpFlash { 0% { background: #ffe39a; transform: scale(1.12); } 60% { background: #ffe39a; transform: none; } }
+.show--markedspladser .mp-m__send i { display: flex; align-items: center; gap: 3px; color: var(--faint); font-size: 11px; font-weight: 700; font-style: normal; transition: color .25s; }
+.show--markedspladser .mp-m__send i::before { content: ""; width: 7px; height: 7px; border: 1.5px solid currentColor; border-radius: 50%; transition: background .25s, border-color .25s; }
+.show--markedspladser :is(.s1 .mp-m__send i:nth-child(1), .s2 .mp-m__send i:nth-child(-n+2), .s3 .mp-m__send i) { color: var(--ink); }
+.show--markedspladser :is(.s1 .mp-m__send i:nth-child(1), .s2 .mp-m__send i:nth-child(-n+2), .s3 .mp-m__send i)::before { border-color: var(--accent); background: var(--accent); }
+.show--markedspladser .mp-m__no { color: var(--muted); font-size: 12px; font-weight: 500; }
+
+/* Picked and on its way */
+.show--markedspladser .mp-m.is-send { border-color: rgba(224,85,43,.55); }
+.show--markedspladser .mp-m.is-send .mp-m__dot { background: var(--accent); box-shadow: 0 0 0 3px rgba(224,85,43,.18); }
+/* Live */
+.show--markedspladser .mp-m.is-live .mp-m__dot { background: var(--green); box-shadow: 0 0 0 3px rgba(47,158,91,.16); }
+.motion .show--markedspladser .mp-m.is-live .mp-m__dot { animation: mpLive 2.2s ease-in-out infinite; }
+@keyframes mpLive { 50% { box-shadow: 0 0 0 5px rgba(47,158,91,.06); } }
+@media (hover: hover) { .show--markedspladser .mp-m.is-live:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 22px 36px -22px rgba(17,17,17,.45); } }
+/* Not picked for this product */
+.show--markedspladser .mp-m.is-off { border-style: dashed; border-color: var(--line-strong); background: rgba(251,250,248,.86); box-shadow: none; cursor: default; }
+.show--markedspladser .mp-m.is-off .mp-m__n { color: var(--muted); }
+.show--markedspladser .mp-m.is-off .mp-m__c { filter: grayscale(1); opacity: .45; }
+/* An order comes in: a green ring and a label */
+.show--markedspladser .mp-m::after { content: ""; position: absolute; inset: -1px; border: 2px solid var(--green); border-radius: inherit; opacity: 0; pointer-events: none; }
+.show--markedspladser .mp-m.is-ping::after { animation: mpRing .9s var(--e); }
+@keyframes mpRing { 0% { opacity: 1; transform: none; } 100% { opacity: 0; transform: scale(1.12, 1.3); } }
+.show--markedspladser .mp-m__pop { position: absolute; top: -11px; right: 10px; padding: 4px 9px; border-radius: 999px; background: var(--green); color: #fff; font-size: 11px; font-weight: 700; line-height: 1.2; white-space: nowrap; box-shadow: 0 8px 16px -8px rgba(47,158,91,.9); opacity: 0; pointer-events: none; }
+.show--markedspladser .mp-m.is-ping .mp-m__pop { animation: mpPop 1.5s var(--e); }
+@keyframes mpPop { 0% { opacity: 0; transform: translateY(8px) scale(.7); } 18%, 70% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-8px); } }
+.show--markedspladser .mp-m.is-nope { animation: mpNope .45s; }
+@keyframes mpNope { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+
+/* Flags, drawn small with gradients */
+.show--markedspladser .mp-f { flex: none; display: inline-block; width: 15px; height: 10px; border-radius: 2px; box-shadow: inset 0 0 0 .6px rgba(17,17,17,.2); }
+.show--markedspladser .mp-f--dk { background: linear-gradient(90deg, transparent 4.5px, #fff 0 6.5px, transparent 0), linear-gradient(transparent 4px, #fff 0 6px, transparent 0), #c8102e; }
+.show--markedspladser .mp-f--se { background: linear-gradient(90deg, transparent 4.5px, #fecc02 0 6.6px, transparent 0), linear-gradient(transparent 4px, #fecc02 0 6px, transparent 0), #006aa7; }
+.show--markedspladser .mp-f--no { background: linear-gradient(90deg, transparent 4.8px, #00205b 0 6.2px, transparent 0), linear-gradient(transparent 4.3px, #00205b 0 5.7px, transparent 0), linear-gradient(90deg, transparent 4px, #fff 0 7px, transparent 0), linear-gradient(transparent 3.5px, #fff 0 6.5px, transparent 0), #ba0c2f; }
+.show--markedspladser .mp-f--fi { background: linear-gradient(90deg, transparent 4.2px, #002f6c 0 6.8px, transparent 0), linear-gradient(transparent 3.7px, #002f6c 0 6.3px, transparent 0), #fff; }
+.show--markedspladser .mp-f--de { background: linear-gradient(#111 33.3%, #dd0000 0 66.6%, #ffce00 0); }
+.show--markedspladser .mp-f--nl { background: linear-gradient(#ae1c28 33.3%, #fff 0 66.6%, #21468b 0); }
+.show--markedspladser .mp-f--be { background: linear-gradient(90deg, #111 33.3%, #fdda24 0 66.6%, #ef3340 0); }
+.show--markedspladser .mp-f--pl { background: linear-gradient(#fff 50%, #dc143c 0); }
+.show--markedspladser .mp-f--hu { background: linear-gradient(#cd2a3e 33.3%, #fff 0 66.6%, #436f4d 0); }
+.show--markedspladser .mp-f--at { background: linear-gradient(#c8102e 33.3%, #fff 0 66.6%, #c8102e 0); }
+.show--markedspladser .mp-f--cz { background: linear-gradient(to top right, #11457e 50%, transparent 0) 0 0 / 50% 50% no-repeat, linear-gradient(to bottom right, #11457e 50%, transparent 0) 0 100% / 50% 50% no-repeat, linear-gradient(#fff 50%, #d7141a 0); }
+
+/* ---------- The hub: your product in your own webshop ---------- */
+.show--markedspladser .mp-hub { position: relative; z-index: 2; justify-self: center; display: flex; flex-direction: column; width: min(100%, 240px); padding: 12px 12px 12px; border: 1px solid var(--line); border-radius: 26px; background: #fff; box-shadow: 0 44px 80px -36px rgba(17,17,17,.42), 0 0 0 6px rgba(255,255,255,.7); transition: opacity .9s, transform 1.1s var(--e); }
+.show--markedspladser .mp-hub::after { content: ""; position: absolute; inset: -1px; border: 2px solid var(--accent); border-radius: inherit; opacity: 0; pointer-events: none; }
+.show--markedspladser .mp-hub.is-wave::after { animation: mpWave .9s var(--e); }
+@keyframes mpWave { 0% { opacity: .7; transform: none; } 100% { opacity: 0; transform: scale(1.08); } }
+.show--markedspladser .mp-hub__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; padding: 2px 4px 10px; }
+.show--markedspladser .mp-hub__k { display: flex; align-items: center; gap: 5px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.show--markedspladser .mp-hub__k svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.show--markedspladser .mp-hub__shop { min-width: 0; overflow: hidden; font-size: 12.5px; text-overflow: ellipsis; white-space: nowrap; transition: opacity .25s, transform .35s var(--e); }
+.show--markedspladser .mp-hub__img { position: relative; aspect-ratio: 1 / .76; overflow: hidden; border-radius: 18px; background: #f3f1ec; }
+.show--markedspladser .mp-hub__img > * { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.08); transition: opacity .5s, transform .9s var(--e); }
+.show--markedspladser .mp-hub__img > .is-on { opacity: 1; transform: none; }
+.show--markedspladser .mp-hub__img [data-mp-pic="koekken"] { object-position: 47% 50%; }
+.show--markedspladser :is(.mp-hub__t, .mp-hub__sub, .mp-hub__price) { padding: 0 4px; transition: opacity .25s, transform .35s var(--e); }
+.show--markedspladser .mp-hub.is-swap :is(.mp-hub__t, .mp-hub__sub, .mp-hub__price, .mp-hub__shop) { opacity: 0; transform: translateY(6px); }
+.show--markedspladser .mp-hub__t { margin-top: 11px; font-size: 16px; line-height: 1.25; }
+.show--markedspladser .mp-nw { white-space: nowrap; }
+.show--markedspladser .mp-hub__sub { margin-top: 2px; color: var(--muted); font-size: 12.5px; }
+.show--markedspladser .mp-hub__price { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 8px; margin-top: 10px; }
+.show--markedspladser .mp-price { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.show--markedspladser .mp-price b { font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: -.03em; transition: color .3s; }
+.show--markedspladser .mp-price s { color: var(--muted); font-size: 12.5px; }
+.show--markedspladser .mp-price.is-sale b { color: var(--accent); }
+.show--markedspladser .mp-sale { display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 11px 0 5px; border: 1.5px solid var(--line-strong); border-radius: 999px; background: #fff; font-size: 12.5px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: border-color .25s, background .25s; }
+.show--markedspladser .mp-sale:hover { border-color: var(--ink); }
+.show--markedspladser .mp-sale i { position: relative; flex: none; width: 28px; height: 18px; border-radius: 999px; background: #e7e4de; transition: background .3s; }
+.show--markedspladser .mp-sale i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(17,17,17,.3); transition: transform .45s var(--spring); }
+.show--markedspladser .mp-sale[aria-pressed="true"] { border-color: var(--accent); background: #fff6f2; }
+.show--markedspladser .mp-sale[aria-pressed="true"] i { background: var(--accent); }
+.show--markedspladser .mp-sale[aria-pressed="true"] i::after { transform: translateX(10px); }
+.show--markedspladser .mp-stock { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 8px; margin-top: 12px; padding: 9px 10px 9px 13px; border-radius: 16px; background: #f6f4f0; }
+.show--markedspladser .mp-stock__n { grid-area: 1 / 1; display: block; height: 30px; overflow: hidden; font-family: var(--display); font-size: 30px; font-weight: 800; line-height: 30px; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.show--markedspladser .mp-stock__n span { display: block; }
+.show--markedspladser .mp-stock__d { position: absolute; left: 34px; top: -6px; padding: 2px 7px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; opacity: 0; pointer-events: none; }
+.show--markedspladser .mp-stock__d.is-go { animation: mpDelta 1.1s var(--e); }
+@keyframes mpDelta { 0% { opacity: 0; transform: translateY(8px) scale(.7); } 20%, 65% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-12px); } }
+.show--markedspladser .mp-stock__l { grid-area: 2 / 1; color: var(--muted); font-size: 12px; line-height: 1.3; white-space: nowrap; }
+.show--markedspladser .mp-sync { grid-area: 1 / 2 / 3; justify-self: end; display: flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 999px; background: #e3f4ea; color: var(--green); font-size: 11px; font-weight: 700; white-space: nowrap; transition: background .3s, color .3s; }
+.show--markedspladser .mp-sync i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.show--markedspladser .mp-sync.is-pulse { animation: mpSync .8s var(--e); }
+@keyframes mpSync { 30% { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(47,158,91,.14); } }
+.show--markedspladser .mp-sync.is-zero { background: #fdecea; color: var(--red); }
+.show--markedspladser .mp-refill { height: 36px; margin-top: 8px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; transition: background .25s; }
+.show--markedspladser .mp-refill:hover { background: var(--accent); }
+.show--markedspladser .mp-refill[hidden] { display: none; }
+
+/* ---------- Orders, one list ---------- */
+.show--markedspladser .mp-ord { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 22px 20px 18px; overflow: hidden; border-radius: 30px; }
+.show--markedspladser .mp-ord__hd { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.show--markedspladser .mp-ord__h { margin: 0; font-family: var(--display); font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -.04em; }
+.show--markedspladser .mp-ord__h span { color: #6f6a63; }
+.show--markedspladser .mp-ord__sub { display: flex; align-items: center; gap: 8px; margin: 10px 0 16px; color: var(--dark-muted); font-size: 13.5px; line-height: 1.4; }
+.show--markedspladser .mp-ord__live { display: flex; align-items: center; gap: 6px; flex: none; color: #8fdcae; font-size: 12px; font-weight: 700; }
+.show--markedspladser .mp-ord__live i { width: 7px; height: 7px; border-radius: 50%; background: #3fbf73; box-shadow: 0 0 0 3px rgba(63,191,115,.22); }
+.motion .show--markedspladser .mp-ord__live i { animation: mpLive 1.8s ease-in-out infinite; }
+.show--markedspladser .mp-ord__list { position: relative; flex: 1 1 0; min-height: 0; margin: 0; padding: 0; overflow: hidden; list-style: none; -webkit-mask: linear-gradient(#000 72%, transparent); mask: linear-gradient(#000 72%, transparent); }
+.show--markedspladser .mp-o { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 10px; margin-bottom: 6px; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.05); }
+.show--markedspladser .mp-o.is-new { animation: mpRow .9s var(--e); }
+@keyframes mpRow { 0% { opacity: 0; transform: translateY(-14px) scale(.97); background: rgba(224,85,43,.4); } 30% { opacity: 1; transform: none; background: rgba(224,85,43,.32); } }
+.show--markedspladser .mp-o__a { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.show--markedspladser .mp-o__a b { overflow: hidden; color: #fff; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.show--markedspladser .mp-o__a em { padding: 2px 6px; border-radius: 999px; background: rgba(242,193,78,.16); color: var(--yellow); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.show--markedspladser .mp-o__kr { color: #fff; font-size: 14px; font-weight: 700; text-align: right; white-space: nowrap; }
+.show--markedspladser :is(.mp-o__b, .mp-o__t) { color: var(--dark-muted); font-size: 12.5px; white-space: nowrap; }
+.show--markedspladser .mp-o__b { overflow: hidden; text-overflow: ellipsis; }
+.show--markedspladser .mp-o__t { text-align: right; font-variant-numeric: tabular-nums; }
+.show--markedspladser .mp-ord__sum { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--dark-line); }
+.show--markedspladser .mp-ord__sum span { display: flex; flex-direction: column; gap: 3px; color: var(--dark-muted); font-size: 11.5px; }
+.show--markedspladser .mp-ord__sum b { color: #fff; font-family: var(--display); font-size: 20px; font-weight: 800; line-height: 1; letter-spacing: -.03em; white-space: nowrap; }
+.show--markedspladser .mp-ord__sum b.is-tick { animation: mpTick .6s var(--e); }
+@keyframes mpTick { 30% { color: var(--yellow); transform: translateY(-2px); } }
+
+.show--markedspladser .mp-note { margin: 18px 0 0; color: var(--muted); font-size: 14px; text-align: center; }
+.show--markedspladser .mp-note__tap { color: var(--ink); font-weight: 700; }
+
+/* ---------- Entrance (html.motion): the hub rises, the cards fly out of it, the lines draw ---------- */
+.motion .show--markedspladser .mp-ln { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.motion .show--markedspladser.is-in .mp-ln { stroke-dashoffset: 0; transition: stroke-dashoffset .8s cubic-bezier(.4,.1,.2,1) var(--d, 0s), stroke .5s, stroke-width .5s; }
+.motion .show--markedspladser:not(.is-in) .mp-hub { opacity: 0; transform: translateY(34px) scale(.94); }
+.motion .show--markedspladser:not(.is-in) .mp-m { opacity: 0; transform: translateX(calc(var(--sx) * 46px)) scale(.86); }
+.motion .show--markedspladser.is-in:not(.is-done) .mp-m { transition-delay: calc(.3s + var(--i) * 80ms); }
+.motion .show--markedspladser:not(.is-in) :is(.mp-port, .mp-porth) { opacity: 0; }
+.motion .show--markedspladser :is(.mp-port, .mp-porth) { transition: opacity .4s .5s; }
+
+/* Without motion: everything in place, nothing moves */
+html:not(.motion) .show--markedspladser *, html:not(.motion) .show--markedspladser *::before, html:not(.motion) .show--markedspladser *::after { transition: none !important; animation: none !important; }
+
+/* ---------- Narrower: the orders under the board ---------- */
+@media (max-width: 1099px) {
+  .show--markedspladser .mp-main { grid-template-columns: minmax(0, 1fr); }
+  .show--markedspladser .mp-ord__list { flex: none; height: 268px; }
+}
+/* Tablets: the totals beside the list */
+@media (max-width: 1099px) and (min-width: 760px) {
+  .show--markedspladser .mp-ord { display: grid; grid-template-columns: minmax(0, 1fr) 190px; column-gap: 28px; padding: 26px 26px 22px; }
+  .show--markedspladser :is(.mp-ord__hd, .mp-ord__sub) { grid-column: 1 / -1; }
+  .show--markedspladser .mp-ord__sum { grid-column: 2; grid-row: 3; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 22px; margin: 0; padding: 4px 0 0 26px; border-top: 0; border-left: 1px solid var(--dark-line); }
+  .show--markedspladser .mp-ord__sum b { font-size: 28px; }
+}
+@media (max-width: 899px) and (min-width: 760px) {
+  .show--markedspladser { --cw: 148px; }
+  .show--markedspladser .mp-board { grid-template-columns: calc(var(--cw) + 14px) minmax(0, 1fr) calc(var(--cw) + 14px); padding: 24px 16px; }
+  .show--markedspladser .mp-col li:is(:first-child, :last-child) { --o: 14px; }
+  .show--markedspladser .mp-col li:is(:nth-child(2), :nth-child(4)) { --o: 5px; }
+  .show--markedspladser .mp-hub { width: min(100%, 220px); }
+  .show--markedspladser .mp-hub__top { flex-direction: column; align-items: flex-start; gap: 2px; }
+}
+
+/* ---------- Phones: the product on top, the marketplaces in two columns on a spine ---------- */
+@media (max-width: 759px) {
+  .show--markedspladser { --cw: 100%; padding: 32px 20px 72px; }
+  .show--markedspladser .sec-head { margin-bottom: 26px; }
+  .show--markedspladser .mp-bar { gap: 10px; margin-bottom: 14px; }
+  .show--markedspladser .mp-bar__q { order: 0; }
+  .show--markedspladser .mp-bar .tag-eks { order: 1; margin-left: auto; }
+  .show--markedspladser .mp-seg { order: 2; width: 100%; }
+  .show--markedspladser .mp-seg button { flex: 1; padding: 9px 6px; }
+  .show--markedspladser .mp-bar__fit { order: 3; margin: 0; font-size: 13.5px; }
+  .show--markedspladser .mp-board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "hub hub" "l r"; gap: 26px 28px; padding: 12px 12px 16px; border-radius: 24px; }
+  .show--markedspladser .mp-board::before { -webkit-mask: linear-gradient(transparent, #000 30%, #000 80%, transparent); mask: linear-gradient(transparent, #000 30%, #000 80%, transparent); }
+  .show--markedspladser .mp-col { gap: 12px; }
+  .show--markedspladser .mp-col--l { grid-area: l; }
+  .show--markedspladser .mp-col--r { grid-area: r; }
+  .show--markedspladser .mp-col li { padding: 0 !important; }
+  .show--markedspladser .mp-m { gap: 5px; padding: 9px 9px 9px 10px; border-radius: 15px; }
+  .show--markedspladser .mp-m__n { font-size: 14.5px; }
+  .show--markedspladser .mp-f { width: 14px; height: 9px; }
+  .show--markedspladser .mp-m__c small { font-size: 10.5px; }
+  .show--markedspladser .mp-chip { padding: 2px 6px; font-size: 11px; }
+  .show--markedspladser .mp-m__send { gap: 3px !important; }
+  .show--markedspladser .mp-m__send i { font-size: 10.5px; }
+  .show--markedspladser .mp-m__no { font-size: 11.5px; }
+  .show--markedspladser .mp-m__pop { right: 6px; }
+  .motion .show--markedspladser:not(.is-in) .mp-m { transform: translateY(-24px) scale(.9); }
+  .show--markedspladser .mp-hub { grid-area: hub; display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-areas: "img top" "img t" "img sub" "img price" "stock stock" "refill refill"; align-content: start; column-gap: 12px; width: 100%; padding: 10px; border-radius: 22px; }
+  .show--markedspladser .mp-hub__img { grid-area: img; aspect-ratio: auto; min-height: 132px; border-radius: 14px; }
+  .show--markedspladser .mp-hub__top { grid-area: top; flex-direction: column; align-items: flex-start; gap: 2px; padding: 2px 0 4px; }
+  .show--markedspladser .mp-hub__k { font-size: 10px; }
+  .show--markedspladser .mp-hub__k svg { width: 13px; height: 13px; }
+  .show--markedspladser .mp-hub__shop { max-width: 100%; }
+  .show--markedspladser :is(.mp-hub__t, .mp-hub__sub, .mp-hub__price) { padding: 0; }
+  .show--markedspladser .mp-hub__t { grid-area: t; margin-top: 2px; font-size: 14.5px; }
+  .show--markedspladser .mp-hub__sub { grid-area: sub; font-size: 12px; }
+  .show--markedspladser .mp-hub__price { grid-area: price; align-self: end; justify-content: flex-start; margin-top: 8px; }
+  .show--markedspladser .mp-price b { font-size: 20px; }
+  .show--markedspladser .mp-sale { height: 30px; font-size: 12px; }
+  .show--markedspladser .mp-stock { grid-area: stock; margin-top: 10px; }
+  .show--markedspladser .mp-refill { grid-area: refill; }
+  .show--markedspladser .mp-ord { padding: 20px 16px 16px; border-radius: 24px; }
+  .show--markedspladser .mp-ord__h { font-size: 28px; }
+  .show--markedspladser .mp-ord__sum b { font-size: 17px; }
+  .show--markedspladser .mp-note { font-size: 13.5px; }
+  .show--markedspladser .mp-note__tap { display: block; }
+}
+@media (max-width: 359px) {
+  .show--markedspladser .mp-board { column-gap: 20px; padding: 10px 8px 14px; }
+  .show--markedspladser .mp-m__c small { display: none; }
+}

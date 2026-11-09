@@ -20,9 +20,11 @@ const EVENTS = new Set([
   'page_view', 'preview_view', 'page_not_found', 'campaign_details', 'user_engagement', 'time_on_page', 'tab_return', 'exit_intent',
   'scroll', 'section_view', 'section_time', 'text_copy',
   // Clicks
-  'cta_click', 'nav_click', 'outbound_click', 'contact_click', 'ui_click', 'rage_click', 'dead_click',
+  'cta_click', 'nav_click', 'outbound_click', 'contact_click', 'ui_click', 'rage_click', 'dead_click', 'menu_open',
   // Forms and leads
   'form_start', 'form_field', 'form_field_done', 'form_submit', 'form_invalid', 'form_abandon', 'form_error', 'generate_lead',
+  // What the visitor sells (the tabs above the menu)
+  'segment_choice', 'segment_nudge',
   // Quality
   'js_error', 'resource_error', 'web_vitals', 'consent_view', 'consent_choice',
   // Front page

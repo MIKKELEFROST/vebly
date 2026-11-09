@@ -68,7 +68,7 @@ const NOTE = '<p class="sr-only">Virksomhederne er opdigtede eksempler.</p>';
 
 // The band under the hero: one list of every customer. Without motion it stands still: a tidy grid,
 // and on phones a row you swipe (two rows from 10 customers, data-pt-rows). With motion, partnere.js
-// lets the list drift inside the page width, in two rows the other way round when there are many.
+// turns it into an infinity scroll: one endless row across the whole width of the screen.
 // 1–4 customers always stand still (data-pt-still).
 export function partnerSection({ list, eksempel = false } = {}) {
   const items = clean(list);

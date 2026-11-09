@@ -1,0 +1,251 @@
+/* Influencer marketing showcase: a creator match deck beside a campaign board (deal, post, report). Behaviour in influencer-marketing.js */
+.show--influencer-marketing { --e: cubic-bezier(.2,.8,.2,1); --spring: cubic-bezier(.2,1.45,.4,1); --ch: 482px;
+  position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 40px; }
+.show--influencer-marketing .sec-head { margin-bottom: 44px; }
+.show--influencer-marketing .sec-head__lead { max-width: 440px; }
+.show--influencer-marketing .im-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.show--influencer-marketing .im-i { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.show--influencer-marketing .im-i--f { fill: currentColor; stroke-width: 1.4; }
+.show--influencer-marketing .im { position: relative; display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 40px; align-items: start; }
+.show--influencer-marketing .im-l { position: relative; display: flex; flex-direction: column; }
+
+/* Deck head */
+.show--influencer-marketing .im-dhd { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; padding: 0 4px; }
+.show--influencer-marketing .im-dhd__t { display: flex; flex-direction: column; gap: 2px; }
+.show--influencer-marketing .im-dhd__t b { font-size: 17px; }
+.show--influencer-marketing .im-dhd__t small { font-size: 13.5px; color: var(--muted); }
+
+/* The deck: cards on top of each other, --p is the place in the stack (0 is on top) */
+.show--influencer-marketing .im-deck { position: relative; height: calc(var(--ch) + 32px); border-radius: 30px; outline: none; }
+.show--influencer-marketing .im-deck:focus-visible { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent); }
+.show--influencer-marketing .im-c { position: absolute; z-index: calc(10 - var(--p, 0)); inset: 0 0 auto; height: var(--ch); overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 28px;
+  box-shadow: 0 30px 60px -32px rgba(17,17,17,.3); transform: translateY(calc(var(--p, 0) * 16px)) scale(calc(1 - var(--p, 0) * .05)); transform-origin: 50% 100%;
+  transition: transform .55s var(--spring), opacity .35s, box-shadow .3s; user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: grab; }
+.show--influencer-marketing .im-c[data-p="3"] { opacity: 0; }
+.show--influencer-marketing .im-c:not(.is-top) .im-cb, .show--influencer-marketing .im-c:not(.is-top) .im-cv > * { opacity: .5; }
+.show--influencer-marketing .im-c.is-drag { transition: none; cursor: grabbing; box-shadow: 0 40px 70px -30px rgba(17,17,17,.38); }
+.show--influencer-marketing .im-c.is-out { z-index: 20; pointer-events: none; transition: transform .5s cubic-bezier(.3,.5,.4,1), opacity .3s .06s; }
+.show--influencer-marketing .im-c.is-gone { display: none; }
+.motion .show--influencer-marketing .im-c.is-wiggle { animation: imWig .9s var(--e); }
+@keyframes imWig { 20% { transform: translateX(-14px) rotate(-2.4deg); } 50% { transform: translateX(12px) rotate(2deg); } 78% { transform: translateX(-4px) rotate(-.6deg); } }
+
+/* Cover: shapes from the card's own colours, the initial as avatar */
+.show--influencer-marketing .im-cv { position: relative; height: 134px; background: var(--c1); }
+.show--influencer-marketing .im-cv--a { background: radial-gradient(circle at 84% 14%, var(--c2) 0 54px, transparent 55px), radial-gradient(circle at 56% 132%, var(--c3) 0 74px, transparent 75px), var(--c1); }
+.show--influencer-marketing .im-cv--b { background: radial-gradient(circle at 100% 100%, var(--c2) 0 96px, transparent 97px), radial-gradient(circle at 46% -12%, var(--c3) 0 50px, transparent 51px), var(--c1); }
+.show--influencer-marketing .im-cv--c { background: linear-gradient(128deg, transparent 0 58%, var(--c3) 58% 70%, transparent 70%), radial-gradient(circle at 82% 58%, var(--c2) 0 40px, transparent 41px), var(--c1); }
+.show--influencer-marketing .im-cv--d { background: radial-gradient(circle at 66% 34%, var(--c3) 0 30px, transparent 31px), radial-gradient(circle at 90% 78%, var(--c2) 0 60px, transparent 61px), repeating-linear-gradient(-45deg, transparent 0 14px, rgba(255,255,255,.4) 14px 17px), var(--c1); }
+.show--influencer-marketing .im-sq { position: absolute; right: 26px; bottom: 16px; width: 96px; height: 32px; fill: none; stroke: #fff; stroke-width: 6; stroke-linecap: round; }
+.show--influencer-marketing .im-cv--b .im-sq { right: auto; left: 128px; top: 22px; bottom: auto; stroke: var(--c2); }
+.show--influencer-marketing .im-cv--c .im-sq { right: 120px; bottom: 30px; stroke: var(--c2); }
+.show--influencer-marketing .im-nch { position: absolute; top: 14px; left: 16px; padding: 6px 11px; border-radius: 999px; background: rgba(255,255,255,.88); font-size: 12.5px; font-weight: 700; }
+.show--influencer-marketing .im-av { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+  background: radial-gradient(circle at 80% 84%, var(--c3) 0 24%, transparent 25%), var(--a); color: var(--af); font: normal 800 18px/1 var(--display); letter-spacing: -.04em; }
+.show--influencer-marketing .im-cv .im-av { position: absolute; left: 20px; bottom: -36px; width: 78px; height: 78px; border: 4px solid #fff; font-size: 34px; box-shadow: 0 10px 22px -12px rgba(17,17,17,.45); }
+.show--influencer-marketing .im-av--xs { width: 28px; height: 28px; font-size: 13px; }
+
+/* Card body */
+.show--influencer-marketing .im-cb { padding: 46px 22px 0; }
+.show--influencer-marketing .im-nm { margin: 0; font: 800 28px/1 var(--display); letter-spacing: -.035em; }
+.show--influencer-marketing .im-sub { margin: 5px 0 0; font-size: 14.5px; color: var(--muted); }
+.show--influencer-marketing .im-st { display: grid; grid-template-columns: repeat(3, 1fr); margin: 14px 0 0; padding: 11px 0; list-style: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.show--influencer-marketing .im-st li { display: flex; flex-direction: column; gap: 1px; }
+.show--influencer-marketing .im-st li + li { padding-left: 14px; border-left: 1px solid var(--line); }
+.show--influencer-marketing .im-st b { font-size: 16px; }
+.show--influencer-marketing .im-st span { font-size: 12px; color: var(--muted); }
+.show--influencer-marketing .im-mt { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.show--influencer-marketing .im-ring { width: 58px; height: 58px; flex-shrink: 0; transform: rotate(-90deg); }
+.show--influencer-marketing .im-ring circle { fill: none; stroke: var(--line); stroke-width: 6.5; }
+.show--influencer-marketing .im-ring .im-ring__v { stroke: var(--green); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: calc(100 - var(--v)); }
+.show--influencer-marketing .im-c--lo .im-ring__v { stroke: var(--red); }
+.show--influencer-marketing .im-mt__t { display: flex; flex-direction: column; gap: 3px; }
+.show--influencer-marketing .im-mt__t b { font: 800 27px/1 var(--display); letter-spacing: -.035em; }
+.show--influencer-marketing .im-mt__t small { font-size: 13px; color: var(--muted); }
+.show--influencer-marketing .im-c--lo .im-mt__t small { color: var(--red); font-weight: 500; }
+.show--influencer-marketing .im-bars { display: grid; gap: 7px; margin: 14px 0 0; padding: 0; list-style: none; }
+.show--influencer-marketing .im-bars li { display: grid; grid-template-columns: minmax(0, 1fr) 84px 38px; align-items: center; gap: 10px; font-size: 12.5px; }
+.show--influencer-marketing .im-bars span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #45423d; }
+.show--influencer-marketing .im-bars i { position: relative; height: 6px; overflow: hidden; border-radius: 999px; background: var(--line); }
+.show--influencer-marketing .im-bars i::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--ink); transform: scaleX(var(--v)); transform-origin: 0 50%; }
+.show--influencer-marketing .im-bars b { text-align: right; }
+/* The top card fills its ring and bars when it comes up */
+.motion .show--influencer-marketing .im-c:not(.is-top) .im-ring__v, .motion .show--influencer-marketing:not(.is-in) .im-ring__v { stroke-dashoffset: 100; }
+.motion .show--influencer-marketing .im-c:not(.is-top) .im-bars i::after, .motion .show--influencer-marketing:not(.is-in) .im-bars i::after { transform: scaleX(0); }
+.motion .show--influencer-marketing.is-in .im-c.is-top .im-ring__v { transition: stroke-dashoffset 1.1s var(--e) .25s; }
+.motion .show--influencer-marketing.is-in .im-c.is-top .im-bars i::after { transition: transform .8s var(--e) .35s; }
+.motion .show--influencer-marketing.is-in .im-c.is-top .im-bars li + li i::after { transition-delay: .45s; }
+.motion .show--influencer-marketing.is-in .im-c.is-top .im-bars li + li + li i::after { transition-delay: .55s; }
+
+/* Stamps that show while the card is dragged (--sy and --sn from the script) */
+.show--influencer-marketing .im-stamp { position: absolute; z-index: 3; top: 24px; padding: 7px 13px 6px; border: 3px solid; border-radius: 12px; background: rgba(255,255,255,.92); font: 800 21px/1 var(--display); letter-spacing: -.01em; text-transform: uppercase; pointer-events: none; transition: opacity .2s; }
+.show--influencer-marketing .im-stamp--ja { left: 18px; color: var(--green); transform: rotate(-12deg); opacity: var(--sy, 0); }
+.show--influencer-marketing .im-stamp--nej { right: 18px; color: var(--muted); transform: rotate(12deg); opacity: var(--sn, 0); }
+.show--influencer-marketing .is-drag .im-stamp { transition: none; }
+
+/* When every card is used */
+.show--influencer-marketing .im-end { position: absolute; inset: 0 0 auto; height: var(--ch); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 30px; border: 2px dashed var(--line-strong); border-radius: 28px; text-align: center; }
+.show--influencer-marketing .im-end[hidden] { display: none; }
+.show--influencer-marketing .im-end b { font: 800 26px/1.05 var(--display); letter-spacing: -.035em; }
+.show--influencer-marketing .im-end span { max-width: 260px; font-size: 15px; line-height: 1.45; color: var(--muted); }
+.show--influencer-marketing .im-again { margin-top: 8px; height: 46px; padding: 0 22px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 700 15px var(--body); cursor: pointer; transition: background .2s; }
+.motion .show--influencer-marketing .im-end:not([hidden]) { animation: imUp .6s var(--e); }
+@keyframes imUp { from { opacity: 0; transform: translateY(18px) scale(.97); } }
+
+/* Buttons under the deck */
+.show--influencer-marketing .im-acts { display: flex; justify-content: center; gap: 12px; margin-top: 18px; }
+.show--influencer-marketing .im-b { display: inline-flex; align-items: center; gap: 9px; height: 58px; padding: 0 26px 0 20px; border-radius: 999px; font: 700 16px var(--body); cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .2s var(--spring), background .2s, border-color .2s, color .2s, box-shadow .2s; }
+.show--influencer-marketing .im-b--nej { background: #fff; border: 1px solid var(--line-strong); color: var(--ink); }
+.show--influencer-marketing .im-b--ja { background: var(--ink); border: 1px solid var(--ink); color: #fff; box-shadow: 0 16px 30px -16px rgba(17,17,17,.6); }
+.show--influencer-marketing .im-b:active { transform: scale(.95); }
+.show--influencer-marketing .im-b:focus-visible, .show--influencer-marketing .im-chip:focus-visible, .show--influencer-marketing .im-pp:focus-visible, .show--influencer-marketing .im-toast:focus-visible, .show--influencer-marketing .im-again:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.show--influencer-marketing .im-b:disabled { opacity: .35; cursor: default; transform: none; }
+.show--influencer-marketing .im-b--nej .im-i { color: var(--red); }
+.motion .show--influencer-marketing.is-hint .im-b--ja { animation: imBreathe 1.6s var(--e) 3; }
+@keyframes imBreathe { 50% { box-shadow: 0 0 0 9px rgba(224,85,43,.16), 0 16px 30px -16px rgba(17,17,17,.6); transform: scale(1.04); } }
+.show--influencer-marketing .im-hint { margin: 14px 0 0; text-align: center; font-size: 13.5px; color: var(--muted); }
+.show--influencer-marketing .im-toast { position: absolute; z-index: 30; left: 50%; bottom: -12px; display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 16px 0 18px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; font: 700 14.5px var(--body); white-space: nowrap; cursor: pointer; transform: translateX(-50%); box-shadow: 0 16px 30px -14px rgba(224,85,43,.8); }
+.show--influencer-marketing .im-toast[hidden] { display: none; }
+.show--influencer-marketing .im-toast .im-i { width: 17px; height: 17px; }
+.motion .show--influencer-marketing .im-toast:not([hidden]) { animation: imToast .5s var(--spring); }
+@keyframes imToast { from { opacity: 0; transform: translate(-50%, 14px) scale(.9); } }
+
+@media (hover: hover) {
+  .show--influencer-marketing .im-b--nej:not(:disabled):hover, .show--influencer-marketing .im-chip:not(.is-on):hover { border-color: var(--ink); }
+  .show--influencer-marketing .im-b--ja:not(:disabled):hover, .show--influencer-marketing .im-again:hover { background: var(--accent); border-color: var(--accent); }
+}
+
+/* Moving initial: from the card to its chip on the board */
+.show--influencer-marketing .im-tok { position: absolute; z-index: 50; margin: 0; pointer-events: none; box-shadow: 0 14px 30px -12px rgba(17,17,17,.5); }
+
+/* The campaign board */
+.show--influencer-marketing .im-bd { background: #fff; border: 1px solid var(--line); border-radius: 32px; padding: 24px 26px 26px; box-shadow: 0 40px 80px -40px rgba(17,17,17,.22); }
+.show--influencer-marketing .im-bhd { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px 16px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.show--influencer-marketing .im-bhd__t { display: flex; flex-direction: column; gap: 2px; }
+.show--influencer-marketing .im-bhd__t b { font: 800 22px/1.1 var(--display); letter-spacing: -.03em; }
+.show--influencer-marketing .im-bhd__t small { font-size: 13.5px; color: var(--muted); }
+.show--influencer-marketing .im-chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 42px; }
+.show--influencer-marketing .im-chips__none { display: inline-flex; align-items: center; height: 42px; padding: 0 16px; border: 1.5px dashed var(--line-strong); border-radius: 999px; font-size: 14px; color: var(--muted); }
+.show--influencer-marketing .im-chips__none[hidden] { display: none; }
+.show--influencer-marketing .im-chip { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px 0 6px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink); font: 700 14.5px var(--body); cursor: pointer; transition: background .25s, color .25s, border-color .25s; }
+.show--influencer-marketing .im-chip.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+.show--influencer-marketing .im-chip .im-av { width: 30px; height: 30px; font-size: 14px; }
+.motion .show--influencer-marketing .im-chip.is-new { animation: imPop .55s var(--spring) both; }
+@keyframes imPop { from { opacity: 0; transform: scale(.5); } }
+
+.show--influencer-marketing .im-bb { display: grid; grid-template-columns: minmax(0, 1fr) 268px; grid-template-areas: "deal ph" "rep ph"; gap: 22px 28px; align-items: start; transition: opacity .4s, filter .4s; }
+.show--influencer-marketing .im-bd:not(.is-on) .im-bb { opacity: .5; filter: saturate(0); }
+.show--influencer-marketing .im-bd:not(.is-on) .im-row__v, .show--influencer-marketing .im-bd:not(.is-on) .im-sig small, .show--influencer-marketing .im-bd:not(.is-on) .im-tiles b, .show--influencer-marketing .im-bd:not(.is-on) .im-tiles em, .show--influencer-marketing .im-bd:not(.is-on) .im-deal__t, .show--influencer-marketing .im-bd:not(.is-on) .im-deal .im-av { visibility: hidden; }
+
+/* The deal: four points tick off, both sign, a seal */
+.show--influencer-marketing .im-deal { grid-area: deal; position: relative; padding: 18px 20px 20px; border: 1px solid var(--line); border-radius: 22px; background: var(--bg); }
+.show--influencer-marketing .im-deal__h { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1.5px dashed var(--line-strong); }
+.show--influencer-marketing .im-deal__t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.show--influencer-marketing .im-deal__t small { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.show--influencer-marketing .im-deal__t b { font: 800 21px/1 var(--display); letter-spacing: -.03em; }
+.show--influencer-marketing .im-pill { margin-left: auto; padding: 7px 11px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; font-size: 12.5px; font-weight: 700; color: var(--muted); white-space: nowrap; transition: background .3s, color .3s, border-color .3s; }
+.show--influencer-marketing .is-signed .im-pill { background: #e8f5ed; border-color: #bfe3cc; color: #1f7a45; }
+.show--influencer-marketing .im-rows { margin: 4px 0 0; padding: 0; list-style: none; }
+.show--influencer-marketing .im-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.show--influencer-marketing .im-row__k { font-weight: 700; }
+.show--influencer-marketing .im-row__v { font-size: 13.5px; color: var(--muted); text-align: right; transition: color .3s; }
+.show--influencer-marketing .im-row.is-ok .im-row__v { color: var(--ink); }
+.show--influencer-marketing .im-tk { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 1.5px solid var(--line-strong); border-radius: 50%; background: #fff; transition: background .25s, border-color .25s; }
+.show--influencer-marketing .im-tk svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; transform: scale(0); transition: transform .45s var(--spring); }
+.show--influencer-marketing .im-row.is-ok .im-tk { background: var(--accent); border-color: var(--accent); }
+.show--influencer-marketing .im-row.is-ok .im-tk svg { transform: none; }
+.motion .show--influencer-marketing .im-row.is-ok { animation: imFlash .7s var(--e); }
+@keyframes imFlash { 30% { background: rgba(224,85,43,.08); } }
+.show--influencer-marketing .im-sig { display: grid; grid-template-columns: 1fr 1fr 62px; align-items: end; gap: 16px; margin-top: 14px; }
+.show--influencer-marketing .im-sig > span:not(.im-seal) { display: flex; flex-direction: column; min-width: 0; }
+.show--influencer-marketing .im-sig svg { width: 100%; height: 40px; border-bottom: 1.5px solid var(--ink); }
+.show--influencer-marketing .im-sig path { fill: none; stroke: #1c2b5a; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 2; stroke-dashoffset: 1; }
+.show--influencer-marketing .is-signed .im-sig path { stroke-dashoffset: 0; transition: stroke-dashoffset .8s cubic-bezier(.5,.1,.3,1); }
+.show--influencer-marketing .is-signed .im-sig > span + span path { transition-delay: .55s; }
+.show--influencer-marketing .im-sig small { margin-top: 5px; font-size: 12px; color: var(--muted); }
+.show--influencer-marketing .im-seal { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; width: 62px; height: 62px; margin-bottom: 8px; border: 2px solid var(--green); border-radius: 50%; box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4px rgba(47,158,91,.5); color: var(--green); font-size: 9px; font-weight: 800; letter-spacing: .06em; line-height: 1; text-transform: uppercase; opacity: .18; filter: saturate(0); transform: rotate(-12deg); }
+.show--influencer-marketing .im-seal svg { width: 22px; height: 22px; border: 0; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.show--influencer-marketing .is-signed .im-seal { opacity: 1; filter: none; }
+.motion .show--influencer-marketing .is-signed .im-seal { animation: imStamp .5s cubic-bezier(.3,1.5,.5,1) 1.2s backwards; }
+@keyframes imStamp { from { opacity: 0; transform: rotate(-12deg) scale(1.8); } }
+
+/* Report */
+.show--influencer-marketing .im-rep { grid-area: rep; transition: opacity .5s; }
+.show--influencer-marketing .im-bd.is-on:not(.is-rep) .im-rep { opacity: .4; }
+.show--influencer-marketing .im-rep__h { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin: 0 0 10px; padding: 0 2px; }
+.show--influencer-marketing .im-rep__h b { font-size: 15px; }
+.show--influencer-marketing .im-rep__h span { font-size: 12.5px; color: var(--muted); }
+.show--influencer-marketing .im-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.show--influencer-marketing .im-tiles li { display: flex; flex-direction: column; gap: 4px; padding: 13px 14px 14px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+.show--influencer-marketing .im-tiles small { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.show--influencer-marketing .im-tiles b { font: 800 26px/1 var(--display); letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+.show--influencer-marketing .im-tiles em { align-self: flex-start; margin-top: 3px; padding: 3px 8px; border-radius: 999px; background: var(--cream); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .04em; }
+.show--influencer-marketing .im-tiles li:last-child { background: var(--ink); border-color: var(--ink); color: #fff; }
+.show--influencer-marketing .im-tiles li:last-child small { color: var(--dark-muted); }
+.show--influencer-marketing .im-tiles li:last-child em { background: #2c2c2c; color: #fff; }
+
+/* The post on a phone: a reel, marked as advertising */
+.show--influencer-marketing .im-phw { grid-area: ph; position: relative; justify-self: center; }
+.show--influencer-marketing .im-ph { position: relative; width: 268px; padding: 7px; border-radius: 44px; background: var(--ink); box-shadow: 0 50px 90px -40px rgba(17,17,17,.55), inset 0 0 0 1.5px #333; }
+.show--influencer-marketing .im-scr { position: relative; height: 520px; overflow: hidden; border-radius: 37px; background: #1a1a1a; color: #fff; isolation: isolate; }
+.show--influencer-marketing .im-isl { position: absolute; z-index: 6; top: 9px; left: 50%; width: 78px; height: 22px; margin-left: -39px; border-radius: 999px; background: #000; }
+.show--influencer-marketing .im-wait { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: radial-gradient(120% 70% at 50% 30%, #2c2c2c, #141414); }
+.show--influencer-marketing .im-wait span { padding: 10px 16px; border: 1.5px dashed #4a4a4a; border-radius: 999px; font-size: 13.5px; color: #8d877f; }
+.show--influencer-marketing .im-post { position: absolute; inset: 0; opacity: 0; transform: translateY(40px) scale(.97); transition: opacity .5s, transform .8s var(--e); }
+.show--influencer-marketing .is-live .im-post { opacity: 1; transform: none; }
+.show--influencer-marketing .im-vid, .show--influencer-marketing .im-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #222; }
+.show--influencer-marketing .im-vid[hidden], .show--influencer-marketing .im-img[hidden] { display: none; }
+.show--influencer-marketing .im-post::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,0) 46%), linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,0) 22%); pointer-events: none; }
+.show--influencer-marketing .im-top, .show--influencer-marketing .im-pp, .show--influencer-marketing .im-rail, .show--influencer-marketing .im-info { position: absolute; z-index: 2; }
+.show--influencer-marketing .im-top { top: 42px; left: 16px; font-size: 17px; }
+.show--influencer-marketing .im-pp { top: 36px; right: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: rgba(17,17,17,.4); color: #fff; cursor: pointer; }
+.show--influencer-marketing .im-pp[hidden] { display: none; }
+.show--influencer-marketing .im-pp .im-i { width: 16px; height: 16px; }
+.show--influencer-marketing .im-pp .im-i + .im-i, .show--influencer-marketing .is-paused .im-pp .im-i:first-child { display: none; }
+.show--influencer-marketing .is-paused .im-pp .im-i + .im-i { display: block; }
+.show--influencer-marketing .im-rail { right: 9px; bottom: 120px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.show--influencer-marketing .im-rail span { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.show--influencer-marketing .im-rail .im-i { width: 25px; height: 25px; stroke-width: 1.9; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+.show--influencer-marketing .im-rail small { font-size: 11px; font-weight: 700; }
+.show--influencer-marketing .im-info { left: 14px; right: 54px; bottom: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.show--influencer-marketing .im-who { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.show--influencer-marketing .im-who .im-av { box-shadow: 0 0 0 1.5px #fff; }
+.show--influencer-marketing .im-who em { padding: 3px 9px; border: 1px solid rgba(255,255,255,.75); border-radius: 8px; font-size: 12px; font-style: normal; font-weight: 700; }
+.show--influencer-marketing .im-ad { display: flex; align-items: center; gap: 7px; font-size: 12px; text-shadow: 0 1px 2px rgba(0,0,0,.4); }
+.show--influencer-marketing .im-ad__l { position: relative; padding: 4px 8px 3px; border-radius: 6px; background: #fff; color: var(--ink); font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; text-shadow: none; }
+.show--influencer-marketing .im-ad__l::after { content: ""; position: absolute; inset: -4px; border-radius: 9px; box-shadow: 0 0 0 2px var(--accent); opacity: 0; }
+.motion .show--influencer-marketing .is-live .im-ad__l::after { animation: imRing 1.1s var(--e) .7s 3; }
+.show--influencer-marketing .im-bd.is-hl .im-ad__l::after { opacity: 1; }
+@keyframes imRing { 0% { opacity: 0; transform: scale(.8); } 35% { opacity: 1; transform: none; } 100% { opacity: 0; transform: scale(1.25); } }
+.show--influencer-marketing .im-cap { display: -webkit-box; margin: 0; overflow: hidden; font-size: 12.5px; line-height: 1.38; -webkit-line-clamp: 3; -webkit-box-orient: vertical; text-shadow: 0 1px 2px rgba(0,0,0,.4); }
+.show--influencer-marketing .im-cap b { font-weight: 700; }
+
+/* Tablets: the deck above the board */
+@media (max-width: 1080px) {
+  .show--influencer-marketing .im { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+  .show--influencer-marketing .im-l { width: 100%; max-width: 420px; margin: 0 auto; }
+}
+@media (max-width: 759px) {
+  .show--influencer-marketing { --ch: 474px; padding: 32px 20px 72px; }
+  .show--influencer-marketing .sec-head { margin-bottom: 30px; }
+  .show--influencer-marketing .im { gap: 44px; }
+  .show--influencer-marketing .im-bd { padding: 18px 16px 18px; border-radius: 26px; }
+  .show--influencer-marketing .im-bhd { margin-bottom: 16px; padding-bottom: 14px; }
+  .show--influencer-marketing .im-bhd__t b { font-size: 20px; }
+}
+@media (max-width: 699px) {
+  .show--influencer-marketing .im-bb { grid-template-columns: minmax(0, 1fr); grid-template-areas: "deal" "ph" "rep"; gap: 26px; }
+  .show--influencer-marketing .im-deal { padding: 16px 16px 18px; }
+  .show--influencer-marketing .im-tiles { gap: 8px; }
+  .show--influencer-marketing .im-tiles li { padding: 11px 10px 12px; border-radius: 16px; }
+  .show--influencer-marketing .im-tiles b { font-size: 21px; }
+  .show--influencer-marketing .im-tiles small { font-size: 11px; }
+}
+@media (max-width: 400px) {
+  .show--influencer-marketing .im-b { height: 54px; padding: 0 20px 0 16px; font-size: 15px; }
+  .show--influencer-marketing .im-cb { padding: 44px 18px 0; }
+  .show--influencer-marketing .im-bars li { grid-template-columns: minmax(0, 1fr) 64px 36px; gap: 8px; }
+  .show--influencer-marketing .im-row { gap: 10px; font-size: 14px; }
+  .show--influencer-marketing .im-row__k { line-height: 1.25; }
+}
+/* Without motion: everything in place, nothing moves */
+html:not(.motion) .show--influencer-marketing *, html:not(.motion) .show--influencer-marketing *::before, html:not(.motion) .show--influencer-marketing *::after { transition: none !important; animation: none !important; }

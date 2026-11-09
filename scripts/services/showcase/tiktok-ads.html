@@ -1,0 +1,124 @@
+<!-- Showcase for TikTok Ads: a hook lab. A phone of our own drawing plays one of our vertical videos (ugc-hundesele) as an
+     ad for Lufteturen (an example webshop with dog gear) with a hook text on top. Beside it three hooks for the same video
+     as cards, each with a retention curve that draws itself. Hook B wins, and the budget slider moves its share up, so the
+     same budget gives more sales. Tap a hook to see it on the phone. Our own drawing: no platform marks.
+     All numbers are an example. Styles: assets/css/show/tiktok-ads.css, behaviour: assets/js/show/tiktok-ads.js -->
+<section id="eksempel" class="show show--tiktok-ads is-done is-paused" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title"><div class="kicker">Hook-test</div><h2 class="h2">Tre første sekunder.<br><span class="dim">Én vinder.</span></h2></div>
+    <p class="sec-head__lead">Her er den samme video for en webshop med hundeudstyr, med tre forskellige hooks. De kører mod hinanden, og budgettet flytter til den, der holder på folk. Tryk på en hook for at se den på telefonen.</p>
+  </div>
+
+  <div class="hl" data-hl>
+    <svg class="hl-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <symbol id="hl-heart" viewBox="0 0 24 24"><path d="M12 20.6s-7.6-4.6-9.4-9.3C1.3 7.9 3.4 4.4 6.9 4.4c2.1 0 3.6 1.2 5.1 3 1.5-1.8 3-3 5.1-3 3.5 0 5.6 3.5 4.3 6.9-1.8 4.7-9.4 9.3-9.4 9.3z"/></symbol>
+      <symbol id="hl-com" viewBox="0 0 24 24"><path d="M12 3.4c5.3 0 9.4 3.5 9.4 7.9s-4.1 7.9-9.4 7.9c-1.2 0-2.3-.2-3.3-.5L4 20.6l1.3-4.1C3.8 15 2.6 13.3 2.6 11.3c0-4.4 4.1-7.9 9.4-7.9z"/><g fill="#161616"><circle cx="8" cy="11.4" r="1.15"/><circle cx="12" cy="11.4" r="1.15"/><circle cx="16" cy="11.4" r="1.15"/></g></symbol>
+      <symbol id="hl-save" viewBox="0 0 24 24"><path d="M6.6 3.4h10.8c.7 0 1.2.5 1.2 1.2v16l-6.6-4.3-6.6 4.3v-16c0-.7.5-1.2 1.2-1.2z"/></symbol>
+      <symbol id="hl-share" viewBox="0 0 24 24"><path d="M13.4 4.2 21.2 11.6l-7.8 7.3v-4.3c-5.2 0-8.5 1.6-10.8 5.3.8-5.8 4.1-10.3 10.8-11.2z"/></symbol>
+      <symbol id="hl-note" viewBox="0 0 24 24"><path d="M9 17.6V6.2l10-2.1v11.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="6.6" cy="17.8" r="2.6"/><circle cx="16.6" cy="15.6" r="2.6"/></symbol>
+      <symbol id="hl-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10.6-6.8c.6-.4.6-1.4 0-1.8L9.6 4.3C8.9 3.9 8 4.4 8 5.2z"/></symbol>
+      <symbol id="hl-pause" viewBox="0 0 24 24"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4"/></symbol>
+    </svg>
+
+    <!-- The phone: a For you feed of our own drawing, the ad with the chosen hook on top -->
+    <div class="hl__dev" data-reveal="1">
+      <span class="hl__eks"><span class="tag-eks">Eksempel</span></span>
+      <span class="hl-clock" aria-hidden="true">
+        <svg viewBox="0 0 36 36"><circle class="hl-clock__bg" cx="18" cy="18" r="14"/><circle class="hl-clock__fg" data-hl-ring cx="18" cy="18" r="14" pathLength="1"/></svg>
+        <span class="hl-clock__t"><b data-hl-phase>Hook</b><small><span data-hl-sec>De første 3</span> sek.</small></span>
+      </span>
+      <div class="hl-ph">
+        <div class="hl-scr" data-hl-scr>
+          <video class="hl-vid" data-hl-vid src="/assets/media/ugc-hundesele.mp4" poster="/assets/media/ugc-hundesele.jpg" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <i class="hl-shade" aria-hidden="true"></i>
+          <i class="hl-isl" aria-hidden="true"></i>
+          <div class="hl-sb" aria-hidden="true"><span>9.41</span><svg viewBox="0 0 66 12"><rect y="8" width="3" height="4" rx="1"/><rect x="4.5" y="6" width="3" height="6" rx="1"/><rect x="9" y="3.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="1" width="3" height="11" rx="1"/><path d="M28.2 4a8.6 8.6 0 0 1 11.6 0M30.4 6.6a5.3 5.3 0 0 1 7.2 0M32.6 9.2a2 2 0 0 1 2.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="45.5" y="1" width="17.5" height="10" rx="3" fill="none" stroke="currentColor" opacity=".45"/><rect x="47.2" y="2.7" width="12.8" height="6.6" rx="1.6"/></svg></div>
+          <div class="hl-top" aria-hidden="true"><span>Følger</span><b>For dig</b><svg class="hl-top__s" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20.5 20.5"/></svg></div>
+
+          <button type="button" class="hl-tap" data-hl-pause aria-label="Pause videoen"><span class="hl-tap__i" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#hl-play"/></svg></span></button>
+
+          <p class="hl-hook" aria-hidden="true"><span data-hl-hook class="hl-tx hl-tx--box">Vi prøvede 5 seler, så du ikke skal</span></p>
+
+          <div class="hl-rail" aria-hidden="true">
+            <span class="hl-av">L<i>+</i></span>
+            <span class="hl-act"><svg><use href="#hl-heart"/></svg><small data-hl-likes>12,4k</small></span>
+            <span class="hl-act"><svg><use href="#hl-com"/></svg><small>318</small></span>
+            <span class="hl-act"><svg><use href="#hl-save"/></svg><small>1.204</small></span>
+            <span class="hl-act"><svg><use href="#hl-share"/></svg><small>Del</small></span>
+            <span class="hl-disc"><i>L</i></span>
+          </div>
+
+          <div class="hl-info" aria-hidden="true">
+            <b class="hl-info__u">lufteturen</b>
+            <p class="hl-info__c">Selen, han ikke kan vride sig ud af. #hund #gåtur #hundeliv</p>
+            <span class="hl-info__sp">Sponsoreret</span>
+            <span class="hl-info__m"><svg><use href="#hl-note"/></svg><span><span>Original lyd · lufteturen</span></span></span>
+            <span class="hl-cta" data-hl-cta>Køb nu<svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span>
+          </div>
+          <i class="hl-prog" aria-hidden="true"><i data-hl-prog></i></i>
+          <div class="hl-nav" aria-hidden="true">
+            <span class="is-on"><svg viewBox="0 0 24 24"><path d="M3.5 11 12 3.8l8.5 7.2v8.6c0 .5-.4.9-.9.9h-4.8v-6h-5.6v6H4.4a.9.9 0 0 1-.9-.9z"/></svg>Hjem</span>
+            <span><svg viewBox="0 0 24 24" class="hl-o"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 19.5c.6-3.4 3.1-5.4 6.2-5.4s5.6 2 6.2 5.4"/><path d="M15.6 4.9a3.3 3.3 0 0 1 0 6.3M17.6 14.4c2 .7 3.3 2.5 3.6 5.1"/></svg>Venner</span>
+            <span class="hl-plus"><i>+</i></span>
+            <span><svg viewBox="0 0 24 24" class="hl-o"><path d="M4 5.5h16v10.8h-6.3L12 19l-1.7-2.7H4z"/></svg>Indbakke</span>
+            <span><svg viewBox="0 0 24 24" class="hl-o"><circle cx="12" cy="8.2" r="3.8"/><path d="M4.6 20c.8-3.8 3.7-6 7.4-6s6.6 2.2 7.4 6"/></svg>Profil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The lab: three hooks for the same video, their retention curves, and the budget -->
+    <div class="hl__lab">
+      <div class="hl-head" data-reveal="1">
+        <span class="hl-head__st"><i class="hl-live" aria-hidden="true"></i><b data-hl-state>Testen kører</b><span class="hl-head__d">Dag <b data-hl-day>7</b> af 7</span></span>
+        <button type="button" class="hl-again" data-hl-again><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 13A7.5 7.5 0 1 1 17 6.6"/><path d="M18.5 3v4.5H14"/></svg>Kør testen igen</button>
+      </div>
+      <p class="hl-axis" aria-hidden="true"><span>Hvor mange ser stadig med</span><span>0 til 15 sek.</span></p>
+
+      <ul class="hl-cards" role="list">
+        <li data-reveal="2"><button type="button" class="hl-card" data-hl-k="0" aria-pressed="false" aria-label="Vis hook A på telefonen: Sådan fik vi stoppet trækket i snoren. 38 procent ser de første 3 sekunder. 186 kroner pr. køb.">
+          <span class="hl-card__th" aria-hidden="true"><img src="/assets/media/ugc-hundesele.jpg" alt="" width="540" height="960" loading="lazy" decoding="async"><span class="hl-tx hl-tx--plain">Sådan fik vi stoppet trækket i snoren</span></span>
+          <span class="hl-card__body" aria-hidden="true">
+            <span class="hl-card__top"><span class="hl-card__k">Hook A</span><span class="hl-card__win">Vinder</span></span>
+            <span class="hl-card__q">Sådan fik vi stoppet trækket i snoren</span>
+            <svg class="hl-chart" viewBox="0 0 300 50" focusable="false"><line class="hl-chart__base" x1="4" y1="46" x2="296" y2="46"/><line class="hl-chart__m" x1="62.4" y1="2" x2="62.4" y2="46"/><text class="hl-chart__lbl" x="67" y="10">3 sek.</text><path class="hl-chart__area" d="M4.0 4.0C10.5 9.2 17.0 15.8 23.5 19.5C30.0 23.3 36.4 24.9 42.9 26.7C49.4 28.4 55.9 29.2 62.4 30.0C75.4 31.7 88.4 32.5 101.3 33.4C120.8 34.7 140.3 35.5 159.7 36.3C179.2 37.2 198.7 37.9 218.1 38.4C244.1 39.2 270.0 39.6 296.0 40.1V46H4Z"/><path class="hl-chart__ln" data-hl-ln pathLength="1" d="M4.0 4.0C10.5 9.2 17.0 15.8 23.5 19.5C30.0 23.3 36.4 24.9 42.9 26.7C49.4 28.4 55.9 29.2 62.4 30.0C75.4 31.7 88.4 32.5 101.3 33.4C120.8 34.7 140.3 35.5 159.7 36.3C179.2 37.2 198.7 37.9 218.1 38.4C244.1 39.2 270.0 39.6 296.0 40.1"/><circle class="hl-chart__d3" cx="62.4" cy="30.0" r="3.4"/><g class="hl-chart__ph" data-hl-ph><line x1="0" y1="2" x2="0" y2="46"/><circle r="4"/></g></svg>
+          </span>
+          <span class="hl-card__st" aria-hidden="true"><span class="hl-st"><b data-hl-n="38">38 %</b><small>ser 3 sek.</small></span><span class="hl-st hl-st--s"><b>186 kr.</b><small>pr. køb</small></span></span>
+        </button></li>
+        <li data-reveal="3"><button type="button" class="hl-card is-win is-on" data-hl-k="1" aria-pressed="true" aria-label="Vis hook B på telefonen: Vi prøvede 5 seler, så du ikke skal. 64 procent ser de første 3 sekunder. 72 kroner pr. køb. Vinderen.">
+          <span class="hl-card__th" aria-hidden="true"><img src="/assets/media/ugc-hundesele.jpg" alt="" width="540" height="960" loading="lazy" decoding="async"><span class="hl-tx hl-tx--box">Vi prøvede 5 seler, så du ikke skal</span></span>
+          <span class="hl-card__body" aria-hidden="true">
+            <span class="hl-card__top"><span class="hl-card__k">Hook B</span><span class="hl-card__win"><svg viewBox="0 0 24 24"><path d="M3 8.5l4.6 3.6L12 5l4.4 7.1L21 8.5l-1.8 10H4.8z"/></svg>Vinder</span></span>
+            <span class="hl-card__q">Vi prøvede 5 seler, så du ikke skal</span>
+            <svg class="hl-chart" viewBox="0 0 300 50" focusable="false"><line class="hl-chart__base" x1="4" y1="46" x2="296" y2="46"/><line class="hl-chart__m" x1="62.4" y1="2" x2="62.4" y2="46"/><text class="hl-chart__lbl" x="67" y="10">3 sek.</text><path class="hl-chart__area" d="M4.0 4.0C10.5 6.0 17.0 8.0 23.5 9.9C30.0 11.8 36.4 13.8 42.9 15.3C49.4 16.9 55.9 18.2 62.4 19.1C75.4 21.0 88.4 21.9 101.3 22.9C120.8 24.5 140.3 25.6 159.7 26.7C179.2 27.7 198.7 28.5 218.1 29.2C244.1 30.1 270.0 30.6 296.0 31.3V46H4Z"/><path class="hl-chart__ln" data-hl-ln pathLength="1" d="M4.0 4.0C10.5 6.0 17.0 8.0 23.5 9.9C30.0 11.8 36.4 13.8 42.9 15.3C49.4 16.9 55.9 18.2 62.4 19.1C75.4 21.0 88.4 21.9 101.3 22.9C120.8 24.5 140.3 25.6 159.7 26.7C179.2 27.7 198.7 28.5 218.1 29.2C244.1 30.1 270.0 30.6 296.0 31.3"/><circle class="hl-chart__d3" cx="62.4" cy="19.1" r="3.4"/><g class="hl-chart__ph" data-hl-ph><line x1="0" y1="2" x2="0" y2="46"/><circle r="4"/></g></svg>
+          </span>
+          <span class="hl-card__st" aria-hidden="true"><span class="hl-st"><b data-hl-n="64">64 %</b><small>ser 3 sek.</small></span><span class="hl-st hl-st--s"><b>72 kr.</b><small>pr. køb</small></span></span>
+        </button></li>
+        <li data-reveal="4"><button type="button" class="hl-card" data-hl-k="2" aria-pressed="false" aria-label="Vis hook C på telefonen: POV: din hund ser selen for første gang. 47 procent ser de første 3 sekunder. 129 kroner pr. køb.">
+          <span class="hl-card__th" aria-hidden="true"><img src="/assets/media/ugc-hundesele.jpg" alt="" width="540" height="960" loading="lazy" decoding="async"><span class="hl-tx hl-tx--dark">POV: din hund ser selen for første gang</span></span>
+          <span class="hl-card__body" aria-hidden="true">
+            <span class="hl-card__top"><span class="hl-card__k">Hook C</span><span class="hl-card__win">Vinder</span></span>
+            <span class="hl-card__q">POV: din hund ser selen for første gang</span>
+            <svg class="hl-chart" viewBox="0 0 300 50" focusable="false"><line class="hl-chart__base" x1="4" y1="46" x2="296" y2="46"/><line class="hl-chart__m" x1="62.4" y1="2" x2="62.4" y2="46"/><text class="hl-chart__lbl" x="67" y="10">3 sek.</text><path class="hl-chart__area" d="M4.0 4.0C10.5 7.9 17.0 12.7 23.5 15.8C30.0 18.8 36.4 20.7 42.9 22.5C49.4 24.2 55.9 25.3 62.4 26.3C75.4 28.2 88.4 29.0 101.3 30.0C120.8 31.5 140.3 32.5 159.7 33.4C179.2 34.3 198.7 34.9 218.1 35.5C244.1 36.2 270.0 36.6 296.0 37.2V46H4Z"/><path class="hl-chart__ln" data-hl-ln pathLength="1" d="M4.0 4.0C10.5 7.9 17.0 12.7 23.5 15.8C30.0 18.8 36.4 20.7 42.9 22.5C49.4 24.2 55.9 25.3 62.4 26.3C75.4 28.2 88.4 29.0 101.3 30.0C120.8 31.5 140.3 32.5 159.7 33.4C179.2 34.3 198.7 34.9 218.1 35.5C244.1 36.2 270.0 36.6 296.0 37.2"/><circle class="hl-chart__d3" cx="62.4" cy="26.3" r="3.4"/><g class="hl-chart__ph" data-hl-ph><line x1="0" y1="2" x2="0" y2="46"/><circle r="4"/></g></svg>
+          </span>
+          <span class="hl-card__st" aria-hidden="true"><span class="hl-st"><b data-hl-n="47">47 %</b><small>ser 3 sek.</small></span><span class="hl-st hl-st--s"><b>129 kr.</b><small>pr. køb</small></span></span>
+        </button></li>
+      </ul>
+
+      <div class="hl-bud spot" data-spot data-reveal="2">
+        <div class="hl-bud__l">
+          <p class="hl-bud__h">Budgettet følger vinderen.</p>
+          <label class="hl-bud__lbl" for="hl-range"><span>Andel til hook B</span><b data-hl-pct>70 %</b></label>
+          <input class="hl-range" type="range" id="hl-range" min="33" max="90" step="1" value="70" data-hl-range aria-valuetext="70 procent">
+          <div class="hl-split" aria-hidden="true"><i data-hl-seg="0" style="--w:15"><span>A</span></i><i data-hl-seg="1" style="--w:70"><span>B</span></i><i data-hl-seg="2" style="--w:15"><span>C</span></i></div>
+        </div>
+        <div class="hl-bud__r" aria-live="polite">
+          <small>Køb om ugen</small>
+          <b class="hl-bud__n" data-hl-buy>42</b>
+          <small class="hl-bud__was">Lige fordelt: 32. Samme budget: 3.600 kr. om ugen.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only">Eksempel på en hook-test i TikTok-annoncer for Lufteturen, en webshop med udstyr til hunde. Den samme video, hvor en kvinde viser en hundesele med sin hund ved siden af, kører med tre forskellige tekster i starten. Hook A: »Sådan fik vi stoppet trækket i snoren«, 38 procent ser de første 3 sekunder, 186 kroner pr. køb. Hook B: »Vi prøvede 5 seler, så du ikke skal«, 64 procent ser de første 3 sekunder, 72 kroner pr. køb. Hook C: »POV: din hund ser selen for første gang«, 47 procent ser de første 3 sekunder, 129 kroner pr. køb. Hook B vinder. Når 70 procent af budgettet går til hook B, giver det samme budget på 3.600 kroner om ugen 42 køb i stedet for 32.</p>
+</section>

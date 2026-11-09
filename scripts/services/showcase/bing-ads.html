@@ -1,0 +1,94 @@
+<!-- Showcase for Bing Ads: import and mirror. Two ad accounts of our own drawing side by side: a Google Ads-like
+     campaign list and an empty Microsoft Advertising-like one. "Importér" sends the campaign rows flying across;
+     they land, get budgets that fit Bing and go live, and a Bing-like results page below shows the same ad for the
+     same search. Pick a campaign on the right to see its ad. No logos, plain text names only. Klarvask and every
+     number are examples. Styles: assets/css/show/bing-ads.css, behaviour: assets/js/show/bing-ads.js -->
+<section id="eksempel" class="show show--bing-ads" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Import fra Google</div>
+      <h2 class="h2">Samme kampagner.<br><span class="dim">Nu også på Bing.</span></h2>
+    </div>
+    <p class="sec-head__lead">Annoncerer du allerede på Google, starter du ikke forfra. Tryk på Importér, og se kampagnerne flytte over og blive vist på Bing.</p>
+  </div>
+
+  <div class="im" data-im>
+    <div class="im__desk" data-im-desk>
+      <span class="im__eks" data-reveal="1"><span class="tag-eks">Eksempel</span></span>
+      <!-- The account on Google: four search campaigns. They stay there; the import copies them -->
+      <div class="im-win im-win--g" data-reveal="1" aria-hidden="true">
+        <div class="im-win__bar"><span class="dots3"><i></i><i></i><i></i></span><b>Google Ads</b><span class="im-acc">Klarvask</span></div>
+        <div class="im-win__hd"><b>Kampagner</b><span class="im-new">+ Ny kampagne</span></div>
+        <div class="im-th"><span>Kampagne</span><span>Dagsbudget</span></div>
+        <ul class="im-rows">
+          <li class="im-r im-r--g" data-im-g><i class="im-ck"></i><i class="im-dot"></i><span class="im-r__n"><b>Kontorrengøring Aarhus</b><small>Søgning · 64 søgeord</small></span><span class="im-r__b">300 kr.</span></li>
+          <li class="im-r im-r--g" data-im-g><i class="im-ck"></i><i class="im-dot"></i><span class="im-r__n"><b>Vinduespudsning erhverv</b><small>Søgning · 38 søgeord</small></span><span class="im-r__b">150 kr.</span></li>
+          <li class="im-r im-r--g" data-im-g><i class="im-ck"></i><i class="im-dot"></i><span class="im-r__n"><b>Trappevask</b><small>Søgning · 22 søgeord</small></span><span class="im-r__b">100 kr.</span></li>
+          <li class="im-r im-r--g" data-im-g><i class="im-ck"></i><i class="im-dot"></i><span class="im-r__n"><b>Klarvask (navn)</b><small>Søgning · 6 søgeord</small></span><span class="im-r__b">50 kr.</span></li>
+        </ul>
+      </div>
+
+      <div class="im__mid" data-reveal="2">
+        <button type="button" class="im-go" data-im-go><span data-im-gol>Importér</span><svg class="im-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12h14m-5.5-6 6 6-6 6"/></svg></button>
+        <span class="im__sub">Kampagner, annoncer og søgeord</span>
+      </div>
+
+      <!-- The account on Microsoft Advertising: empty until the import -->
+      <div class="im-win im-win--m" data-reveal="2" role="region" aria-label="Eksempel: kontoen på Microsoft Advertising">
+        <div class="im-win__bar"><b>Microsoft Advertising</b><span class="im-acc">Klarvask</span></div>
+        <div class="im-win__hd"><b>Kampagner</b><span class="im-st" data-im-st aria-live="polite">Ingen kampagner endnu</span></div>
+        <i class="im-prog" data-im-prog aria-hidden="true"></i>
+        <div class="im-th" aria-hidden="true"><span>Kampagne</span><span>Status</span><span>Dagsbudget</span></div>
+        <ul class="im-rows">
+          <li class="im-slot" data-im-slot><button type="button" class="im-r im-r--m" aria-pressed="false"><span class="im-r__n"><b>Kontorrengøring Aarhus</b><small>Søgning · 64 søgeord</small></span><span class="im-chip"><span>Importeret</span><span>Aktiv</span></span><span class="im-r__b"><s>300 kr.</s><b>120 kr.</b></span></button></li>
+          <li class="im-slot" data-im-slot><button type="button" class="im-r im-r--m" aria-pressed="false"><span class="im-r__n"><b>Vinduespudsning erhverv</b><small>Søgning · 38 søgeord</small></span><span class="im-chip"><span>Importeret</span><span>Aktiv</span></span><span class="im-r__b"><s>150 kr.</s><b>60 kr.</b></span></button></li>
+          <li class="im-slot" data-im-slot><button type="button" class="im-r im-r--m" aria-pressed="false"><span class="im-r__n"><b>Trappevask</b><small>Søgning · 22 søgeord</small></span><span class="im-chip"><span>Importeret</span><span>Aktiv</span></span><span class="im-r__b"><s>100 kr.</s><b>40 kr.</b></span></button></li>
+          <li class="im-slot" data-im-slot><button type="button" class="im-r im-r--m" aria-pressed="false"><span class="im-r__n"><b>Klarvask (navn)</b><small>Søgning · 6 søgeord</small></span><span class="im-chip"><span>Importeret</span><span>Aktiv</span></span><span class="im-r__b"><s>50 kr.</s><b>25 kr.</b></span></button></li>
+        </ul>
+        <div class="im-empty" data-im-empty aria-hidden="true"><svg class="im-i" viewBox="0 0 24 24"><path d="M12 4v10m-4-4 4 4 4-4"/><path d="M4.5 14.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/></svg><b>Ingen kampagner endnu</b><span>Importér dem fra Google Ads</span></div>
+      </div>
+    </div>
+
+    <p class="im__tip" aria-hidden="true">Tryk på en kampagne hos Microsoft, og se dens annonce på Bing.</p>
+    <!-- The same search on Bing: the ad shows up once the campaigns are live -->
+    <div class="im-serp" data-im-serp data-reveal="3" aria-hidden="true">
+      <div class="im-serp__top">
+        <div class="im-sq"><span data-im-q>kontorrengøring aarhus</span><svg class="im-i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></div>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+      <div class="im-tabs"><b>Alle</b><span>Billeder</span><span>Videoer</span><span>Kort</span><span>Nyheder</span></div>
+      <div class="im-serp__body">
+        <small class="im-cnt">Ca. 48.300 resultater</small>
+        <div class="im-spot">
+          <div class="im-hole"><span>Her står din annonce, når kampagnerne kører på Bing</span></div>
+          <div class="im-ad" data-im-ad>
+            <span class="im-same">Samme annonce som på Google</span>
+            <div class="im-site"><i class="im-fav im-fav--k">K</i><span><b>Klarvask</b><small><em>Annonce</em><span data-im-u>klarvask.dk › erhverv</span></small></span></div>
+            <span class="im-ad__h" data-im-h>Kontorrengøring i Aarhus | Fast pris pr. måned</span>
+            <p class="im-ad__t" data-im-t>Rengøring af kontorer og klinikker i Aarhus. Faste folk, fast pris og ingen binding. Få et tilbud i dag.</p>
+            <div class="im-ad__sl" data-im-sl><span>Få et tilbud</span><span>Priser</span><span>Vinduespudsning</span><span>Om os</span></div>
+          </div>
+        </div>
+        <div class="im-org">
+          <div class="im-site"><i class="im-fav">R</i><span><b>Rengøringsguiden</b><small><span>rengoeringsguiden.dk › aarhus</span></small></span></div>
+          <span class="im-org__h">Find et rengøringsfirma i Aarhus · Sammenlign firmaer</span>
+          <p>Se firmaer til kontor, trapper og vinduer i Aarhus, og indhent tilbud fra flere på én gang.</p>
+        </div>
+        <div class="im-ph"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <!-- A pointer that presses Importér if the visitor has not done it after a while -->
+    <span class="im-cur" data-im-cur aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 3.2v16.2l4.3-4.2 2.8 6.3 3.1-1.4-2.8-6.2h6z"/></svg></span>
+  </div>
+  <p class="sr-only">Eksempel med Klarvask, et tænkt rengøringsfirma i Aarhus. Til venstre står fire søgekampagner i Google Ads. Når du trykker på Importér, flytter de over i en tom konto på Microsoft Advertising, får et budget, der passer til Bing, og bliver aktive. Under dem ses en søgning på Bing efter »kontorrengøring aarhus«, hvor den samme annonce nu står øverst. Vælg en kampagne for at se dens annonce.</p>
+
+  <!-- The ad of each campaign on Bing: q the search, u the address line, h the headline, t the text, s the links -->
+  <script type="application/json" data-im-data>
+[
+  {"q":"kontorrengøring aarhus","u":"klarvask.dk › erhverv","h":"Kontorrengøring i Aarhus | Fast pris pr. måned","t":"Rengøring af kontorer og klinikker i Aarhus. Faste folk, fast pris og ingen binding. Få et tilbud i dag.","s":["Få et tilbud","Priser","Vinduespudsning","Om os"]},
+  {"q":"vinduespudsning erhverv","u":"klarvask.dk › vinduer","h":"Vinduespudsning til erhverv | Aarhus og omegn","t":"Butikker, kontorer og klinikker. Vi kommer fast hver måned og giver besked dagen før.","s":["Få et tilbud","Priser","Kontorrengøring","Om os"]},
+  {"q":"trappevask aarhus","u":"klarvask.dk › trapper","h":"Trappevask i Aarhus | Til foreninger og udlejere","t":"Fast trappevask hver uge med de samme folk. Vi tager også vinduer og måtter, hvis du vil.","s":["Få et tilbud","Priser","Vinduespudsning","Om os"]},
+  {"q":"klarvask","u":"klarvask.dk","h":"Klarvask | Rengøring til erhverv i Aarhus","t":"Kontorer, klinikker og trapper i Aarhus. Ring, eller få et tilbud på din opgave i dag.","s":["Få et tilbud","Kontorrengøring","Trappevask","Kontakt"]}
+]
+  </script>
+</section>

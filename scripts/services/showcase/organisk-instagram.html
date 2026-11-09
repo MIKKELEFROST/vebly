@@ -1,0 +1,91 @@
+<!-- Showcase for Organisk Instagram: "Comment to DM". An example post for Kravlezoo (a made-up shop for children's
+     costumes in Aalborg, never a real business) with our own UGC video. Comments with the keyword pop in one by
+     one, a paper plane flies each one to the DM inbox, where the automatic reply with the link lands within a
+     second, and the counter of new contacts ticks. Pick another campaign (GUIDE, PRIS, BOOK) and the post, the
+     comments and the reply change. Our own drawing: no platform marks. The HTML is the finished GUIDE state, so it
+     reads the same without motion. Styles: assets/css/show/organisk-instagram.css, behaviour: assets/js/show/organisk-instagram.js -->
+<section id="eksempel" class="show show--organisk-instagram" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Organisk kampagne</div>
+      <h2 class="h2">Ét ord i en kommentar.<br><span class="dim">Linket i indbakken.</span></h2>
+    </div>
+    <p class="sec-head__lead">Folk skriver et ord under opslaget og får svar i en besked med det samme. Hver kommentar bliver til en kontakt. Vælg en kampagne, og se det ske.</p>
+  </div>
+
+  <div class="ig spot" data-spot data-ig data-reveal="1">
+    <div class="ig__bar">
+      <div class="ig-pick" role="group" aria-label="Vælg en kampagne">
+        <button type="button" class="ig-pick__b is-on" aria-pressed="true" data-ig-camp="guide"><b>GUIDE</b><span>Størrelsesguide</span></button>
+        <button type="button" class="ig-pick__b" aria-pressed="false" data-ig-camp="pris"><b>PRIS</b><span>Pris og rabatkode</span></button>
+        <button type="button" class="ig-pick__b" aria-pressed="false" data-ig-camp="book"><b>BOOK</b><span>Tid til fotodag</span></button>
+      </div>
+      <span class="tag-eks">Eksempel</span>
+    </div>
+
+    <div class="ig__stage" data-ig-stage>
+      <svg class="ig-defs" width="0" height="0" aria-hidden="true" focusable="false">
+        <symbol id="ig-i-heart" viewBox="0 0 24 24"><path d="M12 20.3S3.6 15.4 3.6 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.4 2.6c0 6-8.4 10.9-8.4 10.9z"/></symbol>
+        <symbol id="ig-i-cmt" viewBox="0 0 24 24"><path d="M20.4 12a8.4 8.4 0 1 1-3.5-6.8A8.4 8.4 0 0 1 20.4 12zm0 0 .9 8.3-4.7-2.2"/></symbol>
+        <symbol id="ig-i-send" viewBox="0 0 24 24"><path d="M21.2 3 9.8 13.6M21.2 3 14.4 21l-4.6-7.4L2.8 9.6z"/></symbol>
+        <symbol id="ig-i-save" viewBox="0 0 24 24"><path d="M18.6 20.6 12 15l-6.6 5.6V3.6h13.2z"/></symbol>
+        <symbol id="ig-i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.4 4.4L19 7.3"/></symbol>
+        <symbol id="ig-i-doc" viewBox="0 0 24 24"><path d="M6 2.8h8.2L19 7.6v13.6H6z"/><path d="M14 2.8v5h5M9 12h6.5M9 15.5h6.5M9 8.6h2.6"/></symbol>
+        <symbol id="ig-i-tag" viewBox="0 0 24 24"><path d="M3.2 12.6V3.2h9.4l8.4 8.4-9.4 9.4z"/><circle cx="7.8" cy="7.8" r="1.6"/></symbol>
+        <symbol id="ig-i-cal" viewBox="0 0 24 24"><rect x="3.4" y="4.8" width="17.2" height="15.6" rx="2.6"/><path d="M3.4 9.6h17.2M8 2.8v4M16 2.8v4"/></symbol>
+      </svg>
+
+      <!-- The post, the way it looks on a computer: the media on the left, the comments on the right -->
+      <div class="ig-post">
+        <div class="ig-hd" aria-hidden="true"><i class="ig-av ig-av--me">K</i><span class="ig-hd__n"><b>kravlezoo</b><small>Aalborg</small></span><span class="ig-hd__f">Følg</span><i class="ig-hd__m"><i></i><i></i><i></i></i></div>
+        <div class="ig-media" aria-hidden="true">
+          <video data-ig-media="guide" class="is-on" muted loop playsinline preload="none" poster="/assets/media/ugc-nuttetbaby-raev.jpg" width="540" height="960"><source src="/assets/media/ugc-nuttetbaby-raev.mp4" type="video/mp4"></video>
+          <video data-ig-media="pris" muted loop playsinline preload="none" poster="/assets/media/ugc-nuttetbaby-dino.jpg" width="540" height="960"><source src="/assets/media/ugc-nuttetbaby-dino.mp4" type="video/mp4"></video>
+          <img data-ig-media="book" src="/assets/media/foto-nuttetbaby-dino.webp" alt="" width="720" height="900" loading="lazy" decoding="async">
+          <span class="ig-media__st">Kommentér <b data-ig-kw>GUIDE</b></span>
+          <span class="ig-media__rl" data-ig-reel><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg>Reel</span>
+        </div>
+        <div class="ig-side" aria-hidden="true">
+          <div class="ig-cap"><i class="ig-av ig-av--me">K</i><p><b>kravlezoo</b> <span data-ig-cap>Ræv eller enhjørning? Kommentér <mark>GUIDE</mark>, så sender vi vores størrelsesguide i en besked.</span><small>2 t.</small></p></div>
+          <ol class="ig-list" data-ig-list>
+            <li class="ig-c is-sent"><i class="ig-av" style="--h:24">J</i><div class="ig-c__b"><p><b>jonas.far</b> <mark>Guide</mark> tak</p><small><span>nu</span><span class="ig-c__dm"><svg><use href="#ig-i-ok"/></svg>Besked sendt · 0,7 sek.</span></small></div><svg class="ig-c__h"><use href="#ig-i-heart"/></svg></li>
+            <li class="ig-c"><i class="ig-av" style="--h:150">L</i><div class="ig-c__b"><p><b>line_og_ida</b> Så søde!</p><small><span>nu</span><span class="ig-c__r">Svar</span></small></div><svg class="ig-c__h"><use href="#ig-i-heart"/></svg></li>
+            <li class="ig-c is-sent"><i class="ig-av" style="--h:330">M</i><div class="ig-c__b"><p><b>mette.bk</b> <mark>GUIDE</mark> til min datter</p><small><span>nu</span><span class="ig-c__dm"><svg><use href="#ig-i-ok"/></svg>Besked sendt · 0,9 sek.</span></small></div><svg class="ig-c__h"><use href="#ig-i-heart"/></svg></li>
+            <li class="ig-c is-sent"><i class="ig-av" style="--h:200">A</i><div class="ig-c__b"><p><b>anna.lund</b> <mark>guide</mark></p><small><span>nu</span><span class="ig-c__dm"><svg><use href="#ig-i-ok"/></svg>Besked sendt · 0,6 sek.</span></small></div><svg class="ig-c__h"><use href="#ig-i-heart"/></svg></li>
+          </ol>
+          <div class="ig-acts"><svg><use href="#ig-i-heart"/></svg><svg><use href="#ig-i-cmt"/></svg><svg><use href="#ig-i-send"/></svg><svg class="ig-acts__s"><use href="#ig-i-save"/></svg></div>
+          <b class="ig-likes"><span data-ig-likes>1.204</span> synes godt om</b>
+        </div>
+        <div class="ig-add">
+          <span class="ig-add__ph" aria-hidden="true">Tilføj en kommentar …</span>
+          <button type="button" class="ig-try" data-ig-try>Prøv selv: kommentér <b data-ig-kw>GUIDE</b></button>
+          <span class="sr-only" aria-live="polite" data-ig-live></span>
+        </div>
+      </div>
+
+      <!-- Paper planes fly from each comment to the inbox (organisk-instagram.js) -->
+      <div class="ig-fly" data-ig-fly aria-hidden="true"></div>
+
+      <!-- The inbox: the newest automatic reply on top, the other conversations under it -->
+      <div class="ig-inbox" aria-hidden="true">
+        <div class="ig-ib__hd"><b>Beskeder</b><span>kravlezoo</span></div>
+        <div class="ig-count"><b data-ig-n>38</b><span>nye kontakter<br>fra opslaget</span><i class="ig-count__p" data-ig-plus>+1</i></div>
+        <div class="ig-open" data-ig-open>
+          <div class="ig-open__wait"><i><svg><use href="#ig-i-send"/></svg></i>Svarene lander her, når nogen kommenterer.</div>
+          <div class="ig-open__ctx"><i class="ig-av" style="--h:200">A</i><span><b>anna.lund</b><small>Kommenterede »<span data-ig-kw>GUIDE</span>« på dit opslag</small></span></div>
+          <div class="ig-open__msg">
+            <p class="ig-bub" data-ig-bub>Hej Anna! Her er vores størrelsesguide. Mål fra skulder til fod, så finder du den rigtige dragt.</p>
+            <div class="ig-card" data-ig-card><span class="ig-card__ic"><svg><use href="#ig-i-doc"/></svg></span><span class="ig-card__t"><b>Størrelsesguide</b><small>Fra 1 til 6 år</small></span><span class="ig-card__go">Åbn guiden</span></div>
+          </div>
+          <small class="ig-open__t"><svg><use href="#ig-i-ok"/></svg>Sendt automatisk · <span data-ig-sec>0,6</span> sek.</small>
+        </div>
+        <ul class="ig-threads" data-ig-threads>
+          <li class="ig-th"><i class="ig-av" style="--h:330">M</i><span class="ig-th__t"><b>mette.bk</b><small><span>Du: Hej Mette! Her er vores størrelsesguide. Mål fra skulder til fod, så finder du den rigtige dragt.</span><i> · nu</i></small></span><i class="ig-th__dot"></i></li>
+          <li class="ig-th"><i class="ig-av" style="--h:24">J</i><span class="ig-th__t"><b>jonas.far</b><small><span>Du: Hej Jonas! Her er vores størrelsesguide. Mål fra skulder til fod, så finder du den rigtige dragt.</span><i> · 1 min.</i></small></span><i class="ig-th__dot"></i></li>
+          <li class="ig-th"><i class="ig-av" style="--h:270">S</i><span class="ig-th__t"><b>sofie.mor</b><small><span>Du: Hej Sofie! Her er vores størrelsesguide. Mål fra skulder til fod, så finder du den rigtige dragt.</span><i> · 2 min.</i></small></span><i class="ig-th__dot"></i></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only" data-ig-sr>Eksempel på en organisk kampagne på Instagram for Kravlezoo, en butik med udklædning til børn i Aalborg. Opslaget er en video af to børn i ræve- og enhjørningsdragt med teksten: Kommentér GUIDE, så sender vi vores størrelsesguide i en besked. Hver gang nogen kommenterer GUIDE, får de automatisk en besked med guiden inden for et sekund, og tælleren over nye kontakter stiger. Kampagnerne PRIS og BOOK sender i stedet prisen med en rabatkode eller en tid til en fotodag.</p>
+</section>

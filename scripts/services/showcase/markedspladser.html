@@ -1,0 +1,120 @@
+<!-- Showcase for Salg på markedspladser: a marketplace sync hub. One product from "Din webshop" in the middle, ten real
+     marketplaces around it as plain text names (no logos) with the countries they sell in. Pick a kind of product: the
+     ones that fit light up and get the product, the price and the stock down the lines. Orders ping in from the
+     marketplaces, the stock drops everywhere at once, and the dark panel collects every order in one list. The shops,
+     products, prices, stock and orders are examples. Styles: assets/css/show/markedspladser.css,
+     behaviour: assets/js/show/markedspladser.js -->
+<section id="eksempel" class="show show--markedspladser" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Markedspladser i praksis</div>
+      <h2 class="h2">Ét lager.<br><span class="dim">Ti markedspladser.</span></h2>
+    </div>
+    <p class="sec-head__lead">Vælg en vare, og se den gå ud på de markedspladser, der passer. Ordrerne lander ét sted, og lageret følger med overalt.</p>
+  </div>
+
+  <div class="mp" data-mp>
+    <div class="mp-bar" data-reveal="1">
+      <span class="mp-bar__q" id="mp-q">Vælg en vare</span>
+      <div class="seg mp-seg" role="group" aria-labelledby="mp-q">
+        <button type="button" class="is-on" aria-pressed="true" data-mp-kind="toej">Tøj</button>
+        <button type="button" aria-pressed="false" data-mp-kind="koekken">Køkken</button>
+        <button type="button" aria-pressed="false" data-mp-kind="haand">Håndlavet</button>
+      </div>
+      <span class="mp-bar__fit"><b data-mp-fitn>4</b> af 10 passer til <span data-mp-fitw>tøj</span></span>
+      <span class="tag-eks">Eksempel</span>
+    </div>
+
+    <div class="mp-main">
+      <!-- The hub: lines and packets are drawn by markedspladser.js from where the cards sit -->
+      <div class="mp-board" data-mp-board data-reveal="2">
+        <svg class="mp-svg" data-mp-svg aria-hidden="true" focusable="false"></svg>
+        <div class="mp-fx" data-mp-fx aria-hidden="true"></div>
+
+        <ul class="mp-col mp-col--l" aria-label="Markedspladser">
+          <li style="--i:0"><button type="button" class="mp-m is-live" data-mp-m="amazon"><span class="mp-m__hd"><b class="mp-m__n">Amazon</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="de se nl pl"><i class="mp-f mp-f--de" title="Tyskland"></i><i class="mp-f mp-f--se" title="Sverige"></i><i class="mp-f mp-f--nl" title="Holland"></i><i class="mp-f mp-f--pl" title="Polen"></i><small>m.fl.</small><span class="sr-only">Tyskland, Sverige, Holland, Polen og flere lande.</span></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Ikke valgt</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:1"><button type="button" class="mp-m is-live" data-mp-m="miinto"><span class="mp-m__hd"><b class="mp-m__n">Miinto</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="dk se no nl"><i class="mp-f mp-f--dk" title="Danmark"></i><i class="mp-f mp-f--se" title="Sverige"></i><i class="mp-f mp-f--no" title="Norge"></i><i class="mp-f mp-f--nl" title="Holland"></i><small>m.fl.</small><span class="sr-only">Danmark, Sverige, Norge, Holland og flere lande.</span></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Mode</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:2"><button type="button" class="mp-m is-off" data-mp-m="etsy"><span class="mp-m__hd"><b class="mp-m__n">Etsy</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="de nl se dk fi"><svg class="mp-globe" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.9 1.8 2.8 3.9 2.8 6.4S9.9 12.6 8 14.4C6.1 12.6 5.2 10.5 5.2 8S6.1 3.4 8 1.6z"/></svg><small>Hele verden</small></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Håndlavet og vintage</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:3"><button type="button" class="mp-m is-off" data-mp-m="allegro"><span class="mp-m__hd"><b class="mp-m__n">Allegro</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="pl cz hu"><i class="mp-f mp-f--pl" title="Polen"></i><i class="mp-f mp-f--cz" title="Tjekkiet"></i><i class="mp-f mp-f--hu" title="Ungarn"></i><small>m.fl.</small><span class="sr-only">Polen, Tjekkiet, Ungarn og flere lande.</span></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Ikke valgt</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:4"><button type="button" class="mp-m is-off" data-mp-m="fruugo"><span class="mp-m__hd"><b class="mp-m__n">Fruugo</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="de nl se fi at"><svg class="mp-globe" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.9 1.8 2.8 3.9 2.8 6.4S9.9 12.6 8 14.4C6.1 12.6 5.2 10.5 5.2 8S6.1 3.4 8 1.6z"/></svg><small>40+ lande</small></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Ikke valgt</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+        </ul>
+
+        <!-- Your product, as it sits in your own webshop -->
+        <div class="mp-hub" data-mp-hub>
+          <div class="mp-hub__top"><span class="mp-hub__k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5 5.6 4h12.8L20 9.5M4 9.5h16M4 9.5c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3M5.5 12.2V20h13v-7.8M10 20v-4.5h4V20"/></svg>Din webshop</span><b class="mp-hub__shop" data-mp-shop>Strøg &amp; Søm</b></div>
+          <div class="mp-hub__img">
+            <img class="is-on" data-mp-pic="toej" src="/assets/media/foto-raglan.webp" width="720" height="720" alt="Langærmet raglan T-shirt, hvid med navy ærmer" loading="lazy" decoding="async">
+            <img data-mp-pic="koekken" aria-hidden="true" src="/assets/media/kaffekvaern.jpg" width="960" height="540" alt="Sort håndkværn til kaffe med træhåndtag på et bord" loading="lazy" decoding="async">
+            <svg data-mp-pic="haand" aria-hidden="true" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Tegning af en salviegrøn vase i stentøj med tørrede strå">
+              <defs>
+                <linearGradient id="mp-vbg" x2="0" y2="1"><stop offset="0" stop-color="#f3ede3"/><stop offset=".72" stop-color="#ebe3d6"/><stop offset=".73" stop-color="#e2d8c8"/><stop offset="1" stop-color="#d9cebc"/></linearGradient>
+                <radialGradient id="mp-vsh"><stop offset="0" stop-color="#5a4a36" stop-opacity=".45"/><stop offset="1" stop-color="#5a4a36" stop-opacity="0"/></radialGradient>
+                <linearGradient id="mp-vgl" x2="0" y2="1"><stop offset="0" stop-color="#a9bca4"/><stop offset=".6" stop-color="#8ea78a"/><stop offset="1" stop-color="#6f8a6c"/></linearGradient>
+                <linearGradient id="mp-vlt"><stop offset="0" stop-color="#2d2a22" stop-opacity=".28"/><stop offset=".18" stop-color="#fff" stop-opacity=".08"/><stop offset=".3" stop-color="#fff" stop-opacity=".34"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/><stop offset=".78" stop-color="#2d2a22" stop-opacity=".12"/><stop offset="1" stop-color="#2d2a22" stop-opacity=".38"/></linearGradient>
+                <path id="mp-vb" d="M106 66c0 14 4 22 2 30-4 12-40 22-40 54 0 26 18 42 26 46h52c8-4 26-20 26-46 0-32-36-42-40-54-2-8 2-16 2-30z"/>
+                <clipPath id="mp-vc"><use href="#mp-vb"/></clipPath>
+              </defs>
+              <rect width="240" height="240" fill="url(#mp-vbg)"/>
+              <ellipse cx="124" cy="197" rx="70" ry="9" fill="url(#mp-vsh)"/>
+              <g fill="none" stroke-linecap="round" stroke="#a7916a" stroke-width="1.6"><path d="M117 66C112 46 104 30 92 16"/><path d="M122 66c3-22 10-40 22-56"/><path d="M120 66c-1-24 0-42 4-60"/><path d="M118 66c-10-14-22-22-36-26"/></g>
+              <g fill="#bba57a"><ellipse cx="91" cy="15" rx="3.2" ry="7" transform="rotate(-38 91 15)"/><ellipse cx="145" cy="9" rx="3" ry="7.5" transform="rotate(36 145 9)"/><ellipse cx="124" cy="6" rx="2.8" ry="7" transform="rotate(6 124 6)"/><ellipse cx="81" cy="40" rx="2.6" ry="6.4" transform="rotate(-74 81 40)"/></g>
+              <use href="#mp-vb" fill="#c9a888"/>
+              <g clip-path="url(#mp-vc)">
+                <path fill="url(#mp-vgl)" d="M60 50h120v126c-6 2-9 8-14 4-5-3-9 4-15 1-6-4-10 6-17 2-6-4-10 5-17 1-7-4-11 4-17 0-6-3-10 3-16 0-6-3-10 1-14 0z"/>
+                <rect x="60" y="50" width="120" height="150" fill="url(#mp-vlt)"/>
+                <g fill="#3f4f3c" opacity=".35"><circle cx="96" cy="128" r="1"/><circle cx="132" cy="114" r=".9"/><circle cx="110" cy="150" r="1.1"/><circle cx="146" cy="142" r=".8"/><circle cx="88" cy="160" r=".9"/><circle cx="124" cy="170" r="1"/><circle cx="152" cy="160" r=".8"/><circle cx="117" cy="98" r=".8"/><circle cx="103" cy="186" r=".9"/></g>
+              </g>
+              <ellipse cx="120" cy="66" rx="14.5" ry="4.2" fill="#9db29a"/>
+              <ellipse cx="120" cy="66.6" rx="10.6" ry="2.8" fill="#3d4a3a"/>
+            </svg>
+          </div>
+          <b class="mp-hub__t" data-mp-title>Langærmet raglan <span class="mp-nw">T-shirt</span></b>
+          <span class="mp-hub__sub" data-mp-sub>Hvid og navy · S til XXL</span>
+          <div class="mp-hub__price">
+            <span class="mp-price" data-mp-price><b>299 kr.</b></span>
+            <button type="button" class="mp-sale" data-mp-sale aria-pressed="false"><i aria-hidden="true"></i>Tilbud −20 %</button>
+          </div>
+          <div class="mp-stock">
+            <span class="mp-stock__n"><span data-mp-stock>148</span></span>
+            <span class="mp-stock__l">på lager</span>
+            <span class="mp-stock__d" data-mp-delta aria-hidden="true">−1</span>
+            <span class="mp-sync" data-mp-sync><i aria-hidden="true"></i><span data-mp-syncw>Lager i sync</span></span>
+          </div>
+          <button type="button" class="mp-refill" data-mp-refill hidden>Fyld lageret op</button>
+        </div>
+
+        <ul class="mp-col mp-col--r" aria-label="Flere markedspladser">
+          <li style="--i:0"><button type="button" class="mp-m is-live" data-mp-m="zalando"><span class="mp-m__hd"><b class="mp-m__n">Zalando</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="dk se no de"><i class="mp-f mp-f--dk" title="Danmark"></i><i class="mp-f mp-f--se" title="Sverige"></i><i class="mp-f mp-f--no" title="Norge"></i><i class="mp-f mp-f--de" title="Tyskland"></i><small>m.fl.</small><span class="sr-only">Danmark, Sverige, Norge, Tyskland og flere lande.</span></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Mode og sko</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:1"><button type="button" class="mp-m is-off" data-mp-m="ebay"><span class="mp-m__hd"><b class="mp-m__n">eBay</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="de nl at se"><svg class="mp-globe" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.9 1.8 2.8 3.9 2.8 6.4S9.9 12.6 8 14.4C6.1 12.6 5.2 10.5 5.2 8S6.1 3.4 8 1.6z"/></svg><small>Hele verden</small></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Ikke valgt</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:2"><button type="button" class="mp-m is-live" data-mp-m="cdon"><span class="mp-m__hd"><b class="mp-m__n">CDON</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="dk se no fi"><i class="mp-f mp-f--dk" title="Danmark"></i><i class="mp-f mp-f--se" title="Sverige"></i><i class="mp-f mp-f--no" title="Norge"></i><i class="mp-f mp-f--fi" title="Finland"></i><small>Norden</small><span class="sr-only">Danmark, Sverige, Norge og Finland.</span></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Ikke valgt</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:3"><button type="button" class="mp-m is-off" data-mp-m="bol"><span class="mp-m__hd"><b class="mp-m__n">Bol.com</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="nl be"><i class="mp-f mp-f--nl" title="Holland"></i><i class="mp-f mp-f--be" title="Belgien"></i><span class="sr-only">Holland og Belgien.</span></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Ikke valgt</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+          <li style="--i:4"><button type="button" class="mp-m is-off" data-mp-m="kaufland"><span class="mp-m__hd"><b class="mp-m__n">Kaufland</b><i class="mp-m__dot" aria-hidden="true"></i></span><span class="mp-m__c" data-mp-c="de at pl cz"><i class="mp-f mp-f--de" title="Tyskland"></i><i class="mp-f mp-f--at" title="Østrig"></i><i class="mp-f mp-f--pl" title="Polen"></i><i class="mp-f mp-f--cz" title="Tjekkiet"></i><small>m.fl.</small><span class="sr-only">Tyskland, Østrig, Polen, Tjekkiet og flere lande.</span></span><span class="mp-m__st"><span class="mp-m__live"><span class="sr-only">Live:</span><b class="mp-chip" data-mp-cp>299 kr.</b><b class="mp-chip" data-mp-cs>148 stk.</b></span><span class="mp-m__send" aria-hidden="true"><i>Vare</i><i>Pris</i><i>Lager</i></span><span class="mp-m__no">Ikke valgt</span></span><span class="mp-m__pop" aria-hidden="true">Ny ordre</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Every order in one list, wherever it was bought -->
+      <aside class="mp-ord spot" data-spot data-reveal="3" aria-label="Ordrer fra alle markedspladser, eksempel">
+        <div class="mp-ord__hd">
+          <h3 class="mp-ord__h">Alle ordrer<br><span>ét sted.</span></h3>
+          <span class="tag-eks">Eksempel</span>
+        </div>
+        <p class="mp-ord__sub"><span class="mp-ord__live"><i aria-hidden="true"></i>Live</span>Fra markedspladserne og din webshop.</p>
+        <ol class="mp-ord__list" data-mp-list>
+          <li class="mp-o"><span class="mp-o__a"><b>Zalando</b><i class="mp-f mp-f--se" title="Sverige"></i></span><span class="mp-o__kr">299 kr.</span><span class="mp-o__b">Raglan T-shirt · 1 stk.</span><span class="mp-o__t">10.39</span></li>
+          <li class="mp-o"><span class="mp-o__a"><b>Webshop</b><i class="mp-f mp-f--dk" title="Danmark"></i></span><span class="mp-o__kr">899 kr.</span><span class="mp-o__b">Kaffekværn · 1 stk.</span><span class="mp-o__t">10.36</span></li>
+          <li class="mp-o"><span class="mp-o__a"><b>Amazon</b><i class="mp-f mp-f--de" title="Tyskland"></i><em>Annonce</em></span><span class="mp-o__kr">899 kr.</span><span class="mp-o__b">Kaffekværn · 1 stk.</span><span class="mp-o__t">10.31</span></li>
+          <li class="mp-o"><span class="mp-o__a"><b>Etsy</b><i class="mp-f mp-f--nl" title="Holland"></i></span><span class="mp-o__kr">395 kr.</span><span class="mp-o__b">Vase i stentøj · 1 stk.</span><span class="mp-o__t">10.27</span></li>
+          <li class="mp-o"><span class="mp-o__a"><b>CDON</b><i class="mp-f mp-f--no" title="Norge"></i></span><span class="mp-o__kr">598 kr.</span><span class="mp-o__b">Raglan T-shirt · 2 stk.</span><span class="mp-o__t">10.22</span></li>
+        </ol>
+        <div class="mp-ord__sum">
+          <span><b data-mp-n>23</b>ordrer i dag</span>
+          <span><b data-mp-kr>8.146 kr.</b>omsætning</span>
+          <span><b data-mp-ad>6</b>fra annoncer</span>
+        </div>
+      </aside>
+    </div>
+    <p class="mp-note"><span class="mp-note__tap">Tryk på en markedsplads, der er live, og send en ordre.</span> Priserne er vist i kroner. Vi sætter dem op pr. land.</p>
+    <p class="sr-only" aria-live="polite" data-mp-say></p>
+  </div>
+  <p class="sr-only">Eksempel: en langærmet raglan T-shirt fra en webshop til 299 kr. med 148 på lager. Den er sat til salg på Amazon, Miinto, Zalando og CDON, som passer til tøj. Etsy, Allegro, Fruugo, eBay, Bol.com og Kaufland er ikke valgt til tøj. Når der kommer en ordre fra en markedsplads, falder lageret samme sted og på alle de andre markedspladser på én gang, og ordren lander i én samlet liste sammen med ordrerne fra webshoppen. Vælg Køkken eller Håndlavet for at se, hvilke markedspladser der passer til en kaffekværn eller en håndlavet vase.</p>
+</section>

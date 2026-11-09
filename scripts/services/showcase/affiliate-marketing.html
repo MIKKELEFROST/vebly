@@ -1,0 +1,145 @@
+<!-- Showcase for Affiliate- og partnermarketing: a partner leaderboard and the payout. An example webshop (Lufteturen,
+     dog gear: made up, the same example shop as on /services/tiktok-ads) has four partners (a creator, a blog, a newsletter, a dog school: all made up). Through one day
+     tracked sales arrive as live pings with the code or link that brought them, the rows climb past each other, and the
+     payout on the right counts commission from sales only. Change the commission, add a partner, open a row to see
+     its tracked orders. The creator's video is our own (assets/media). All numbers are an example.
+     Styles: assets/css/show/affiliate-marketing.css, behaviour: assets/js/show/affiliate-marketing.js -->
+<section id="eksempel" class="show show--affiliate-marketing" data-sec="eksempel">
+  <div class="sec-head" data-reveal="0">
+    <div class="sec-head__title">
+      <div class="kicker">Partnerprogram i praksis</div>
+      <h2 class="h2">De sælger for dig.<br><span class="dim">Du betaler, når de gør.</span></h2>
+    </div>
+    <p class="sec-head__lead">Fire partnere sender kunder til en webshop med hundegrej. Hvert salg bliver sporet til den, der sendte det. Skru på provisionen, eller tilføj en partner.</p>
+  </div>
+  <p class="sr-only">Eksempel på et partnerprogram for Lufteturen, en webshop med hundegrej, som vi har fundet på. Fire partnere sælger for den: skaberen Maja med Bamse med rabatkoden BAMSE10, hundebloggen Logren og nyhedsbrevet Hundeugen med hver deres link, og Hundeskolen Snuden med koden SNUDEN. I løbet af en dag kommer der salg ind, og hvert salg bliver sporet til den partner, der sendte det. I november har de solgt for 23.248 kroner. Med 10 procent i provision betaler webshoppen 2.325 kroner. Klik fra partnerne koster ingenting, og en partner uden salg koster 0 kroner.</p>
+
+  <svg class="af-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="af-i-tag" viewBox="0 0 24 24"><path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1.5 1.5 0 0 1 0 2.1l-6.2 6.2a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8" cy="8" r="1.4"/></symbol>
+    <symbol id="af-i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3A4 4 0 0 0 13 5.3l-1.2 1.2"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.2-1.2"/></symbol>
+    <symbol id="af-i-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="af-i-bag" viewBox="0 0 24 24"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></symbol>
+    <symbol id="af-i-crown" viewBox="0 0 24 24"><path d="M3.5 8l4.6 3.8L12 5.5l3.9 6.3L20.5 8l-1.8 10H5.3z"/></symbol>
+  </svg>
+
+  <div class="af" data-af data-reveal="1">
+    <div class="af__bar">
+      <div class="af__id">
+        <span class="af__logo" aria-hidden="true">L</span>
+        <span class="af__nm"><b>Lufteturen</b><small>Partnerprogram · hundegrej</small></span>
+        <span class="tag-eks">Eksempel</span>
+      </div>
+      <div class="af__ctl">
+        <div class="af-step" role="group" aria-label="Provision pr. salg">
+          <span class="af-step__l" aria-hidden="true">Provision</span>
+          <button type="button" data-af-pct="-1" aria-label="Lavere provision">−</button>
+          <output data-af-pctv aria-live="polite">10 %</output>
+          <button type="button" data-af-pct="1" aria-label="Højere provision">+</button>
+        </div>
+        <button type="button" class="af-add" data-af-add><span aria-hidden="true">+</span> Tilføj partner</button>
+      </div>
+    </div>
+
+    <div class="af__body">
+      <div class="af__main">
+        <div class="af-live">
+          <div class="af-live__h"><span class="af-live__dot" aria-hidden="true"></span><b data-af-state>Live</b><span>i dag kl. <time data-af-clock>21:27</time></span><button type="button" class="af-again" data-af-again>Afspil dagen igen</button></div>
+          <ol class="af-lane" data-af-lane aria-label="Seneste salg"></ol>
+        </div>
+
+        <div class="af-board">
+          <div class="af-board__h" aria-hidden="true"><span>#</span><span>Partner</span><span>Sporet via</span><span>Salg</span><span>Omsætning</span><span>Provision</span></div>
+          <ol class="af-board__list" data-af-board aria-label="Partnere i november, flest salg øverst">
+            <li class="af-row" data-af-p="bamse">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>1</b></span>
+                <span class="af-av af-av--pic"><img src="/assets/media/ugc-hundesele.jpg" alt="" width="540" height="960" loading="lazy" decoding="async"></span>
+                <span class="af-row__who"><b>Maja med Bamse</b><small>Skaber · video</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-tag"/></svg>BAMSE10</span>
+                <span class="af-row__n"><b data-af-n>18</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>8.062 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>806 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden>
+                <div class="af-vid"><video muted loop playsinline preload="none" poster="/assets/media/ugc-hundesele.jpg" aria-label="Majas video om en hundesele, med Bamse ved siden af"><source src="/assets/media/ugc-hundesele.mp4" type="video/mp4"></video><span class="af-vid__code">Kode BAMSE10 · 10 % rabat</span></div>
+                <div class="af-more__in"><p>Sporet via rabatkoden <b>BAMSE10</b> i hendes videoer.</p><ul class="af-ord" data-af-ord></ul></div>
+              </div>
+            </li>
+            <li class="af-row" data-af-p="logren">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>2</b></span>
+                <span class="af-av" style="--av:#111;--avc:#fff" aria-hidden="true">L</span>
+                <span class="af-row__who"><b>Logren</b><small>Hundeblog</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-link"/></svg>?p=logren</span>
+                <span class="af-row__n"><b data-af-n>15</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>7.107 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>711 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p>Sporet via linket <b>lufteturen.dk/?p=logren</b> i blogindlæggene.</p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+            <li class="af-row" data-af-p="ugen">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>3</b></span>
+                <span class="af-av" style="--av:#f2ede4;--avc:#111" aria-hidden="true">H</span>
+                <span class="af-row__who"><b>Hundeugen</b><small>Nyhedsbrev</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-link"/></svg>?p=hundeugen</span>
+                <span class="af-row__n"><b data-af-n>12</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>4.088 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>409 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p>Sporet via linket <b>lufteturen.dk/?p=hundeugen</b> i nyhedsbrevet.</p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+            <li class="af-row" data-af-p="snuden">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank>4</b></span>
+                <span class="af-av" style="--av:#2f7d6d;--avc:#fff" aria-hidden="true">S</span>
+                <span class="af-row__who"><b>Hundeskolen Snuden</b><small>Partnervirksomhed</small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-tag"/></svg>SNUDEN</span>
+                <span class="af-row__n"><b data-af-n>9</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>3.991 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>399 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p>Sporet via koden <b>SNUDEN</b>, som eleverne får på holdet.</p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+          </ol>
+          <div class="af-how">
+            <p><span class="af-how__i"><svg aria-hidden="true"><use href="#af-i-tag"/></svg></span><span><b>Rabatkode.</b> Kunden skriver koden ved betaling.</span></p>
+            <p><span class="af-how__i"><svg aria-hidden="true"><use href="#af-i-link"/></svg></span><span><b>Link.</b> Partnerens eget link husker, hvem der sendte kunden.</span></p>
+          </div>
+          <p class="af-tip">Klik på en partner for at se de sporede salg.</p>
+          <template data-af-tpl>
+            <li class="af-row is-new">
+              <button type="button" class="af-row__b" aria-expanded="false">
+                <span class="af-row__r"><b data-af-rank></b></span>
+                <span class="af-av" aria-hidden="true"></span>
+                <span class="af-row__who"><b></b><small></small></span>
+                <span class="af-via"><svg aria-hidden="true"><use href="#af-i-tag"/></svg><span></span></span>
+                <span class="af-row__n"><b data-af-n>0</b><small> salg</small></span>
+                <span class="af-row__kr" data-af-kr>0 kr.</span>
+                <span class="af-row__pr"><b data-af-pr>0 kr.</b></span>
+              </button>
+              <div class="af-row__more" hidden><div class="af-more__in"><p></p><ul class="af-ord" data-af-ord></ul></div></div>
+            </li>
+          </template>
+        </div>
+      </div>
+
+      <aside class="af-pay spot" data-spot aria-label="Afregning for november">
+        <div class="af-pay__h"><span>Afregning · november</span><small>Udbetales 1. december</small></div>
+        <div class="af-pay__big"><b data-af-total>2.325 kr.</b><span>i provision</span></div>
+        <p class="af-pay__calc"><span data-af-pctx>10 %</span> af <b data-af-sales>23.248 kr.</b> i salg</p>
+        <ul class="af-pay__list" data-af-pay>
+          <li data-af-pl="bamse"><span class="af-pay__who"><i style="--av:#e0552b"></i>Maja med Bamse</span><small data-af-pn>18 salg</small><b data-af-pa>806 kr.</b></li>
+          <li data-af-pl="logren"><span class="af-pay__who"><i style="--av:#fff"></i>Logren</span><small data-af-pn>15 salg</small><b data-af-pa>711 kr.</b></li>
+          <li data-af-pl="ugen"><span class="af-pay__who"><i style="--av:#f2ede4"></i>Hundeugen</span><small data-af-pn>12 salg</small><b data-af-pa>409 kr.</b></li>
+          <li data-af-pl="snuden"><span class="af-pay__who"><i style="--av:#2f7d6d"></i>Hundeskolen Snuden</span><small data-af-pn>9 salg</small><b data-af-pa>399 kr.</b></li>
+        </ul>
+        <div class="af-pay__free">
+          <div><span>Klik fra partnere</span><b data-af-clicks>3.912</b></div>
+          <div><span>Det koster dig</span><b class="af-pay__zero">0 kr.</b></div>
+        </div>
+        <p class="af-pay__note"><svg aria-hidden="true"><use href="#af-i-ok"/></svg>Provision kun af salg. Ingen salg, ingen regning.</p>
+      </aside>
+    </div>
+  </div>
+</section>

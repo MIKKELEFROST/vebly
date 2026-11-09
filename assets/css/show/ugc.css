@@ -1,0 +1,53 @@
+/* UGC showcase: a wall of our own videos and photos (scripts/services/showcase/ugc.html, files in /assets/media).
+   ugc.js filters the wall and plays the videos. Every selector starts with .show--ugc. */
+.show--ugc { --ug-r: 20px; --ug-gap: 16px; position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; scroll-margin-top: 40px; }
+.show--ugc .sec-head { margin-bottom: 28px; }
+.show--ugc .sec-head__lead { max-width: 420px; }
+.show--ugc .ug__bar { margin: 0 0 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; }
+.show--ugc .ug__note { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.show--ugc .ug__note[hidden] { display: none; }
+.show--ugc .ug__note i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: ug-pulse 1.8s ease-in-out infinite; }
+
+/* The wall: columns, so tall videos and lower photos sit together without gaps */
+.show--ugc .ug__wall { list-style: none; margin: 0; padding: 0; columns: 4; column-gap: var(--ug-gap); }
+.show--ugc .ug__tile { break-inside: avoid; margin: 0 0 var(--ug-gap); }
+.show--ugc .ug__tile[hidden] { display: none; }
+.show--ugc figure { margin: 0; }
+.show--ugc .ug__media { position: relative; overflow: hidden; border-radius: var(--ug-r); background: var(--cream); box-shadow: 0 0 0 1px rgba(17,17,17,.06), 0 22px 40px -28px rgba(17,17,17,.4); transform: translateY(0); transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; }
+.show--ugc .ug__media--916 { aspect-ratio: 9 / 16; }
+.show--ugc .ug__media--45 { aspect-ratio: 4 / 5; }
+.show--ugc .ug__media--11 { aspect-ratio: 1; }
+.show--ugc .ug__media > video, .show--ugc .ug__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.show--ugc .ug__media > video { cursor: pointer; }
+.show--ugc .ug__media > video:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+/* A quiet hint on every video until its sound is on */
+.show--ugc .ug__media:has(> video)::after { content: "Tryk for lyd"; position: absolute; left: 10px; bottom: 10px; padding: 6px 10px; border-radius: 999px; background: rgba(17,17,17,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: #fff; font-size: 11.5px; font-weight: 700; pointer-events: none; transition: opacity .3s; }
+.show--ugc .ug__media:has(.ug__sound)::after { opacity: 0; }
+.show--ugc figcaption { display: flex; flex-direction: column; gap: 2px; padding: 10px 4px 0; }
+.show--ugc figcaption b { font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: -0.02em; color: var(--ink); }
+.show--ugc figcaption span { font-size: 12.5px; font-weight: 500; color: var(--muted); }
+@media (hover: hover) { .show--ugc .ug__tile:hover .ug__media { transform: translateY(-4px) rotate(-.6deg); box-shadow: 0 0 0 1px rgba(17,17,17,.08), 0 30px 50px -28px rgba(17,17,17,.5); } }
+
+/* Sound on (ugc.js): a small badge in the corner */
+.show--ugc .ug__sound { position: absolute; right: 10px; bottom: 10px; z-index: 1; padding: 6px 10px; border-radius: 999px; background: rgba(17,17,17,.7); color: #fff; font-size: 12px; font-weight: 700; pointer-events: none; }
+
+/* Placeholder: a quiet striped card that says what is coming */
+.show--ugc .ug__ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: repeating-linear-gradient(135deg, var(--cream) 0 16px, #ece5d9 16px 32px); color: var(--muted); }
+.show--ugc .ug__ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%); transform: translateX(-100%); }
+html.motion .show--ugc .ug__ph::after { animation: ug-sheen 3.2s ease-in-out calc(var(--i, 0) * .25s) infinite; }
+.show--ugc .ug__play { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding-left: 4px; background: var(--accent); color: #fff; font-size: 18px; box-shadow: 0 12px 24px -12px rgba(224,85,43,.8); }
+.show--ugc .ug__pic { width: 52px; height: 42px; border-radius: 10px; border: 3px solid var(--muted); position: relative; opacity: .55; }
+.show--ugc .ug__pic::before { content: ""; position: absolute; left: 6px; bottom: 6px; width: 30px; height: 14px; background: var(--muted); clip-path: polygon(0 100%, 35% 20%, 60% 70%, 78% 45%, 100% 100%); }
+.show--ugc .ug__pic::after { content: ""; position: absolute; right: 7px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.show--ugc .ug__ph-t { font-size: 13px; font-weight: 700; letter-spacing: .02em; }
+
+@keyframes ug-sheen { 0%, 55% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+@keyframes ug-pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .show--ugc .ug__note i { animation: none; } }
+
+@media (max-width: 1000px) { .show--ugc .ug__wall { columns: 3; } }
+@media (max-width: 699px) {
+  .show--ugc { --ug-r: 16px; --ug-gap: 12px; padding: 28px 20px 72px; }
+  .show--ugc .ug__wall { columns: 2; }
+  .show--ugc figcaption b { font-size: 14.5px; }
+}

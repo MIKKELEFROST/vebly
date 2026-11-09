@@ -17,28 +17,30 @@
 //
 // The front page shows the band as soon as there is one customer here: node scripts/services/build.mjs forside
 //   1–4 customers   a calm row that stands still
-//   5 or more       drifts sideways inside the page width; visitors can grab it and throw it. It only moves
-//                   when the list is wider than the band, so nobody is on screen twice (on a wide screen a
-//                   short list stands still). From 10, two rows the other way round, when both rows are
-//                   still wider than the band.
+//   5 or more       an infinity scroll: one endless row across the whole width of the screen; visitors can
+//                   grab it and throw it. It only moves when the list is wider than the screen, so nobody is
+//                   on screen twice (on a very wide screen a short list stands still).
 //   Reduced motion: a grid, and on phones a row you swipe.
-// The customers Mikkel listed on 4 Nov 2026. Their sites could not be opened from the build machine, so the
-// names are their domains and fag/by are only set where they were checked (public company listings).
-// Add logo: '/assets/partnere/<file>' when we have their logos.
+// The customers Mikkel listed on 4 Nov 2026. On 5 Nov the logos were taken from each customer's own site
+// (assets/partnere/), and navn, fag and by from the same site (the name the site uses, the address by its CVR;
+// Holms Maler is in Hvidovre, as Mikkel confirmed, although the CVR address on its site is in Brøndby).
+// Holms Maler and Carelax use a white logo on their sites, so the files here are their dark versions: Carelax's
+// own dark logo and Holms' wordmark in dark ink. Uniq's logo is a JPG on white; the white around it is made
+// transparent. mikkelbranth.dk could not be reached, so it has no logo, fag or by yet.
 export const partnere = [
-  { navn: 'nuttetbaby.dk', url: 'https://nuttetbaby.dk' },
-  { navn: 'byminella.dk', url: 'https://byminella.dk' },
-  { navn: 'iwao.dk', url: 'https://iwao.dk' },
-  { navn: 'recoverym8.dk', url: 'https://recoverym8.dk' },
-  { navn: 'carelaxdanmark.dk', fag: 'Massagestole', by: 'Glostrup', url: 'https://carelaxdanmark.dk' },
-  { navn: 'gladteknik.dk', fag: 'IT og elektronik', by: 'Hvidovre', url: 'https://gladteknik.dk' },
-  { navn: 'uniqvvs.dk', fag: 'VVS', url: 'https://uniqvvs.dk' },
-  { navn: 'holmsmaler.dk', fag: 'Maler', url: 'https://holmsmaler.dk' },
+  { navn: 'Nuttet Baby', fag: 'Babytøj og legetøj', by: 'Hvidovre', url: 'https://nuttetbaby.dk', logo: '/assets/partnere/nuttetbaby.png' },
+  { navn: 'By Minella', fag: 'Hoftesæder', by: 'Køge', url: 'https://byminella.dk', logo: '/assets/partnere/byminella.png' },
+  { navn: 'IWAO', fag: 'Massagestole', by: 'Glostrup', url: 'https://iwao.dk', logo: '/assets/partnere/iwao.svg' },
+  { navn: 'RecoveryM8', fag: 'Recovery-udstyr', by: 'Glostrup', url: 'https://recoverym8.dk', logo: '/assets/partnere/recoverym8.png' },
+  { navn: 'Carelax Danmark', fag: 'Massagestole', by: 'Glostrup', url: 'https://carelaxdanmark.dk', logo: '/assets/partnere/carelax.svg' },
+  { navn: 'GladTeknik', fag: 'IT-support', by: 'Hvidovre', url: 'https://gladteknik.dk', logo: '/assets/partnere/gladteknik.png' },
+  { navn: 'Uniq VVS-Teknik', fag: 'VVS', by: 'Stenløse', url: 'https://uniqvvs.dk', logo: '/assets/partnere/uniqvvs.png' },
+  { navn: 'Holms Maler Entreprise', fag: 'Maler', by: 'Hvidovre', url: 'https://holmsmaler.dk', logo: '/assets/partnere/holmsmaler.png' },
   { navn: 'mikkelbranth.dk', url: 'https://mikkelbranth.dk' },
-  { navn: 'raadvadkro.dk', fag: 'Kro og restaurant', by: 'Kongens Lyngby', url: 'https://raadvadkro.dk' },
-  { navn: 'fastelavnskostumer.dk', fag: 'Kostumer', url: 'https://fastelavnskostumer.dk' },
-  { navn: 'halloweenkostumer.dk', fag: 'Kostumer', url: 'https://halloweenkostumer.dk' },
-  { navn: '3match.dk', url: 'https://3match.dk' }
+  { navn: 'Raadvad Kro', fag: 'Kro og restaurant', by: 'Kongens Lyngby', url: 'https://raadvadkro.dk', logo: '/assets/partnere/raadvadkro.png' },
+  { navn: 'Fastelavnskostumer.dk', fag: 'Kostumer', by: 'Hvidovre', url: 'https://fastelavnskostumer.dk', logo: '/assets/partnere/fastelavnskostumer.png' },
+  { navn: 'Halloweenkostumer.dk', fag: 'Kostumer', by: 'Hvidovre', url: 'https://halloweenkostumer.dk', logo: '/assets/partnere/halloweenkostumer.png' },
+  { navn: '3Match', fag: 'Tilbud fra håndværkere', by: 'Hvidovre', url: 'https://3match.dk', logo: '/assets/partnere/3match.png' }
 ];
 
 // Made-up businesses, for a local look only: PARTNERE_EKSEMPEL=1 node scripts/services/build.mjs forside
