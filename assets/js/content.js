@@ -125,7 +125,7 @@ export const ballInfo = {
   'Booking': ['Lad kunderne booke tid direkte på siden, døgnet rundt.', 'addon-systemer'],
   'CRM': ['Samlet overblik over dine kunder, aftaler og historik.', 'link:/services/interne-systemer'],
   'Dashboards': ['Se de vigtigste tal for din virksomhed på én skærm.', 'link:/services/interne-systemer'],
-  'Google CSS': ['Lad dine Shopping-annoncer gå gennem Webleads som CSS, så hele dit bud tæller. Det er gratis.', 'link:/services/google-css'],
+  'Google CSS': ['Lad dine Shopping-annoncer gå gennem vores egen CSS, Webleads Shopping, så hele dit bud tæller. Det er gratis.', 'link:/services/google-css'],
   'Google-profil': ['Vi opretter eller opdaterer din profil, så du ses på Google Maps.', 'inc-Google-profil'],
   'Webshop': ['Webshop på Shopify fra 12.995 kr. Beregn selv prisen på din shop.', 'link:/services/webshop'],
   'Video': ['Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', 'link:/services/video'],

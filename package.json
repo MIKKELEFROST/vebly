@@ -5,6 +5,9 @@
   "description": "Webleads.dk — hjemmesider til servicefag",
   "scripts": {
     "dev": "npx --yes vercel dev",
-    "serve": "npx --yes http-server . -p 8080 -c-1"
+    "serve": "npx --yes http-server . -p 8080 -c-1",
+    "local": "node scripts/dev/server.mjs 8790",
+    "check": "node scripts/dev/check-pages.mjs",
+    "check:prices": "node scripts/dev/check-prices.mjs"
   }
 }

@@ -51,11 +51,15 @@ assets/og/            Share images for the front page and the other service page
 /services                  Every service on one page, three on a line, nothing else (pages/services.mjs)
 /services/hjemmesider      Hjemmesider: three packages and a price calculator (Sådan virker det, Før og efter,
                            Pakker, Tilvalg, Beregn din pris …)
-/services/<slug>           Hero, Det får du (price and what is included), Sådan foregår det,
+/services/<slug>           Hero, then the page's own `layout` (data.mjs): its showcase, price section, process,
                            Andre services, Spørgsmål, Kontakt
+/services/webshop          Webshop on Shopify with the price calculator (scripts/services/pages/webshop.mjs)
+/resultater                Review scores and the real customers; real cases when there are some
+                           (scripts/services/pages/resultater.mjs)
 ```
 
-The copy for the front page and the service pages is in `scripts/services/data.mjs`. After a change:
+The copy for the front page and the service pages is in `scripts/services/data.mjs` (each page's showcase is in
+`scripts/services/showcase/`, see the README there). After a change:
 
 ```
 node scripts/services/build.mjs    # writes index.html and services/<slug>/index.html
@@ -81,6 +85,15 @@ Prices: only the ones we sell at (Mikkel, 7 Nov 2026: everything billed by the h
 ```
 npx http-server . -p 8080      # static only, the contact form shows its error fallback
 npx vercel dev                 # includes /api/contact
+node scripts/dev/server.mjs    # small stand-in for Vercel (static + /api), http://127.0.0.1:8790
+```
+
+Checks (need Playwright with Chromium and a running server):
+
+```
+node scripts/dev/check-pages.mjs [--click]   # every page × desktop/phone/reduced motion: JS errors, failed
+                                             # requests, overflow, menu links; --click presses the showcase buttons
+node scripts/dev/check-prices.mjs            # price rules in the contact form and the webshop calculator
 ```
 
 The demo is loaded in an iframe and controlled from the parent page, so open the site over http, not `file://`.

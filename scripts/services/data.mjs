@@ -24,7 +24,7 @@ export const services = [
   { slug: 'bing-ads', t: 'Bing Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Bing for dem, der ikke søger på Google.', ex: ['Søgeannoncer', 'Import fra Google', 'Shopping på Bing'] },
   { slug: 'reddit-ads', t: 'Reddit Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer i de fællesskaber, dine kunder følger.', ex: ['Fællesskaber og emner', 'Kommentarer fulgt', 'Retargeting'] },
   { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Google Ads med i prisen', 'Ekstra kanal: 5.000 kr./md.'] },
-  { slug: 'google-css', t: 'Google CSS', price: 'Gratis', value: 0, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Webleads som din CSS', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
+  { slug: 'google-css', t: 'Google CSS', price: 'Gratis', value: 0, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Vores egen CSS: Webleads Shopping', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
   { slug: 'markedspladser', t: 'Salg på markedspladser', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter på fx Amazon, Zalando, eBay og CDON, i sync med din webshop.', ex: ['Opsætning og feed', 'Lager og priser i sync', 'Annoncer på markedspladsen'] },
   { slug: 'video', t: 'Video', price: 'Fast pris efter en snak', value: 0, d: 'Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', ex: ['Reklamevideoer til sociale medier', 'Explainer-videoer', 'Motion graphics og logoanimation'] },
   { slug: 'ugc', t: 'UGC-indhold', price: 'Fast pris efter en snak', value: 0, d: 'Videoer og billeder, der ligner noget fra en kunde. Lavet af os.', ex: ['Lodrette videoer', 'Hooks i flere versioner', 'Ret til brug i annoncer'] },
@@ -204,7 +204,7 @@ export const pages = [
       ['Hvad er et produktfeed?', 'En liste over dine produkter med titel, billede, pris og lagerstatus, som Google bruger til at vise dine annoncer. Vi sætter den op, så den holder sig opdateret af sig selv.'],
       ['Virker det med min webshop?', 'De fleste webshopsystemer kan sende produkter til Google. Bruger du Shopify, er vi Shopify Partner.'],
       ['Hvad er forskellen på Shopping og almindelige Google Ads?', 'Almindelige annoncer er tekst. Shopping-annoncer viser produktet med billede og pris direkte i søgningen, så kunden ved, hvad de klikker på.'],
-      ['Kan klikket blive billigere?', 'Ofte, ja. Går dine Shopping-annoncer gennem Webleads som CSS i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn.', ['/services/google-css', 'Læs om Google CSS']],
+      ['Kan klikket blive billigere?', 'Ofte, ja. Går dine Shopping-annoncer gennem vores egen CSS, Webleads Shopping, i stedet for Googles egen CSS, tæller hele dit bud i auktionen, og klikket kan blive op til ca. 20% billigere. Google oplyser ikke marginens størrelse; 20% er branchens skøn.', ['/services/google-css', 'Læs om Google CSS']],
       ['Hvad er Performance Max?', 'En kampagnetype i Google Ads, hvor dine produkter kan blive vist i Shopping, på YouTube, i Gmail og på andre sider ud fra det samme feed og budget. Vi bruger den sammen med almindelige Shopping-kampagner, når det giver mening.'],
       ['Hvor meget skal jeg bruge på annoncer?', 'Det afhænger af dine produkter og din avance. Vi foreslår et budget, før vi går i gang, og du kan altid skrue op eller ned. Budgettet betaler du direkte til Google.']
     ],
@@ -226,19 +226,20 @@ export const pages = [
     // Checked against Google's help pages and the market (4 Nov 2026). The 20% is the industry's estimate of the
     // margin Google's own CSS takes from the bid: Google does not publish it, so every "20%" needs the estimate
     // sentence on the same page. Never "rabat", "garanteret" or "Ingen binding" (no binding terms are set).
-    // Webleads is the CSS (Mikkel, 4 Nov 2026), the ad label reads "Af Webleads". It is free (Mikkel, 9 Nov 2026), as on
-    // shopping.webleads.dk/webshops: we earn on the price comparison (affiliate links), not on the CSS.
+    // Webleads has its own CSS, Webleads Shopping (shopping.webleads.dk, Mikkel 5 Nov 2026), and the ad label reads
+    // "Af Webleads Shopping". It is free (Mikkel, 9 Nov 2026), as on shopping.webleads.dk/webshops: we earn on the price
+    // comparison (affiliate links), not on the CSS.
     slug: 'google-css', name: 'Google CSS', short: 'Op til 20% billigere klik på Google Shopping',
-    description: 'Lad dine Google Shopping-annoncer gå gennem Webleads som CSS i stedet for Googles egen. Så tæller hele dit bud, og klikket kan blive op til 20% billigere. Det er gratis.',
+    description: 'Lad dine Google Shopping-annoncer gå gennem vores egen CSS, Webleads Shopping, i stedet for Googles egen. Så tæller hele dit bud, og klikket kan blive op til 20% billigere. Det er gratis.',
     serviceType: 'CSS (Comparison Shopping Service) til Google Shopping',
     words: ['webshops', 'netbutikker', 'Shopify-butikker', 'butikker med varer'],
     h1: { a: ['Op', 'til'], hot: '20%', dim: 'billigere', mark: 'klik.' },
-    lead: 'Lad dine Shopping-annoncer gå gennem Webleads som CSS i stedet for Googles egen. Så tæller hele dit bud i auktionen, og det samme klik kan blive op til 20% billigere. Vi klarer skiftet.',
-    floats: ['Af Webleads', 'Hele buddet tæller', 'Gratis ↗'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
+    lead: 'Lad dine Shopping-annoncer gå gennem vores egen CSS, Webleads Shopping, i stedet for Googles egen. Så tæller hele dit bud i auktionen, og det samme klik kan blive op til 20% billigere. Vi klarer skiftet.',
+    floats: ['Af Webleads Shopping', 'Hele buddet tæller', 'Gratis ↗'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
     price: { amount: 'Gratis', pre: '', post: '', note: 'Intet abonnement · intet gebyr pr. klik · annoncebudgettet betaler du som i dag direkte til Google' },
     priceH2: ['Det er gratis.', 'Hele buddet tæller.'],
     cta: 'Kom i gang gratis',
-    priceLead: 'Det koster ikke noget at have Webleads som CSS: intet abonnement og intet gebyr pr. klik. Vi klarer skiftet, og dit annoncebudget betaler du som i dag direkte til Google.',
+    priceLead: 'Det koster ikke noget at bruge Webleads Shopping som CSS: intet abonnement og intet gebyr pr. klik. Vi klarer skiftet, og dit annoncebudget betaler du som i dag direkte til Google.',
     items: [
       ['Tjek af din konto', 'Vi ser på din Merchant Center, dine kampagner og de lande, du sælger til.'],
       ['Lande og placeringer', 'Vi tjekker, at alle de lande, du sælger til, er med, og hvor dine annoncer bliver vist.'],
@@ -251,20 +252,20 @@ export const pages = [
     ],
     steps: [
       ['Tjek', 'Vi ser på din konto, dine lande og dit budget og siger ærligt, om det kan betale sig.', '?'],
-      ['Skift', 'Vi kobler din Merchant Center på Webleads som CSS, og du godkender skiftet.', '%'],
+      ['Skift', 'Vi kobler din Merchant Center på Webleads Shopping, og du godkender skiftet.', '%'],
       ['Opfølgning', 'Vi sammenligner klikpris, klik og salg før og efter og sender dig tallene.', '↓']
     ],
     faqs: [
-      ['Hvad er en CSS?', 'CSS står for Comparison Shopping Service, på dansk en prissammenligningstjeneste. Efter EU’s sag mod Google i 2017 bliver Shopping-annoncer i Danmark altid vist gennem en CSS. Har du ikke valgt en anden, er det Googles egen, Google Shopping. Webleads er en CSS, du kan vælge i stedet.'],
-      ['Hvorfor bliver klikket billigere?', 'Googles egen CSS, Google Shopping, trækker en fast procentdel fra dit bud, før det kommer med i auktionen. Med Webleads som CSS tæller hele buddet, så det samme klik kan blive billigere, eller du kan få flere klik for samme budget. Google oplyser ikke procentdelen, men branchen anslår den til op til ca. 20%.'],
-      ['Skal jeg lave mine kampagner om?', 'Som regel ikke. Vi kobler den Merchant Center-konto, du har i dag, på Webleads som CSS, så din Google Ads-konto, dine kampagner og dit feed er de samme. Kræver det en ny konto, siger vi det, før vi går i gang.'],
+      ['Hvad er en CSS?', 'CSS står for Comparison Shopping Service, på dansk en prissammenligningstjeneste. Efter EU’s sag mod Google i 2017 bliver Shopping-annoncer i Danmark altid vist gennem en CSS. Har du ikke valgt en anden, er det Googles egen, Google Shopping. Webleads har sin egen CSS, Webleads Shopping, som du kan vælge i stedet.', ['https://shopping.webleads.dk', 'Se Webleads Shopping']],
+      ['Hvorfor bliver klikket billigere?', 'Googles egen CSS, Google Shopping, trækker en fast procentdel fra dit bud, før det kommer med i auktionen. Med Webleads Shopping tæller hele buddet, så det samme klik kan blive billigere, eller du kan få flere klik for samme budget. Google oplyser ikke procentdelen, men branchen anslår den til op til ca. 20%.'],
+      ['Skal jeg lave mine kampagner om?', 'Som regel ikke. Vi kobler den Merchant Center-konto, du har i dag, på Webleads Shopping, så din Google Ads-konto, dine kampagner og dit feed er de samme. Kræver det en ny konto, siger vi det, før vi går i gang.'],
       ['Hvilke annoncer gælder det?', 'Dine Shopping-annoncer, også produkterne i Performance Max. Almindelige tekstannoncer påvirkes ikke. Hvor produkterne ellers kan blive vist, fx på YouTube, gennemgår vi med dig før skiftet.'],
       ['Gælder det i alle lande?', 'Det gælder i Danmark og en række andre lande i Europa, fx Sverige, Norge og Tyskland. Uden for de lande giver det ingen fordel. Sælger du til flere lande, tjekker vi, at de alle er med.'],
       ['Hvad koster det?', 'Ingenting. Der er intet abonnement og intet gebyr pr. klik. Dit annoncebudget betaler du som i dag direkte til Google.'],
       ['Hvorfor er det gratis?', 'Vi tjener penge på prissammenligningen på Webleads Shopping, hvor nogle af linkene er affiliatelinks, og ikke på CSS-tjenesten. Jo flere butikker der er med, jo bedre bliver sammenligningen.', ['https://shopping.webleads.dk', 'Se Webleads Shopping']],
-      ['Kommer mine produkter med i prissammenligningen?', 'Ja. Bruger du Webleads som CSS, kommer dine produkter med på Webleads Shopping, med link direkte til dine produktsider. Placeringen kan ikke købes, så rækkefølgen er den samme for alle butikker.'],
+      ['Kommer mine produkter med i prissammenligningen?', 'Ja. Bruger du Webleads Shopping som CSS, kommer dine produkter med i prissammenligningen på shopping.webleads.dk, med link direkte til dine produktsider. Placeringen kan ikke købes, så rækkefølgen er den samme for alle butikker.'],
       ['Kan jeg skifte tilbage?', 'Ja. Du kan til enhver tid vælge en anden CSS eller gå tilbage til Googles egen.'],
-      ['Skal jeg skifte bureau for at bruge Webleads som CSS?', 'Nej. Det er din Merchant Center-konto, der bliver koblet på Webleads som CSS. Dine kampagner kan blive styret, som de bliver i dag.']
+      ['Skal jeg skifte bureau for at bruge Webleads Shopping som CSS?', 'Nej. Det er din Merchant Center-konto, der bliver koblet på Webleads Shopping. Dine kampagner kan blive styret, som de bliver i dag.']
     ],
     contact: 'Fortæl os om din webshop, så ser vi, om det kan betale sig, og svarer inden for 24 timer.',
     placeholder: 'Hvilken webshop har du, og hvad bruger du på Google Shopping om måneden?',
@@ -272,15 +273,15 @@ export const pages = [
     compare: {
       h2: ['Samme annoncer.', 'Billigere klik.'],
       lead: 'Det eneste, der skifter, er den CSS, dine annoncer bliver vist gennem.',
-      uden: 'Med Googles egen CSS', med: 'Med Webleads som CSS',
+      uden: 'Med Googles egen CSS', med: 'Med Webleads Shopping',
       rows: [
-        ['Googles egen CSS trækker en margin fra dit bud, før det kommer med i auktionen.', 'Med Webleads som CSS tæller hele buddet.'],
+        ['Googles egen CSS trækker en margin fra dit bud, før det kommer med i auktionen.', 'Med Webleads Shopping tæller hele buddet.'],
         ['Marginen er med i hvert eneste klik.', 'Det samme klik kan koste op til 20% mindre. Google oplyser ikke marginens størrelse; 20% er branchens skøn.'],
         ['Et skifte lyder som et stort arbejde.', 'Vi klarer skiftet. Som regel kører dine kampagner videre.'],
         ['Du ved ikke, hvad du kunne spare.', 'Vi måler klikpriserne før og efter.']
       ]
     },
-    band: { chips: ['Samme annoncer', 'Shopping og Performance Max', 'Måling før og efter', 'Af Webleads'], sticker: 'Hele buddet tæller' }
+    band: { chips: ['Samme annoncer', 'Shopping og Performance Max', 'Måling før og efter', 'Af Webleads Shopping'], sticker: 'Hele buddet tæller' }
   },
   {
     slug: 'seo', name: 'SEO', short: 'Bliv fundet på Google, når de søger efter det, du sælger',

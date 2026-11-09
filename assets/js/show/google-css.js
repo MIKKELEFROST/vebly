@@ -1,5 +1,5 @@
 // Google CSS showcase (/services/google-css): a calculator. The same Shopping ad with and without a CSS
-// partner: the small "Af Google" on the card turns over to "Af Webleads", the click price rolls down and
+// partner: the small "Af Google" on the card turns over to "Af Webleads Shopping", the click price rolls down and
 // a −20% sticker lands on it, and a budget slider shows what that means in clicks or kroner.
 // With motion it starts on "Uden CSS" and flips by itself once when the price and the card are in view,
 // unless the visitor has already chosen. Without motion it shows the finished state and switches instantly.
@@ -87,13 +87,13 @@ function init(root) {
     liveT = setTimeout(() => {
       const r = calc();
       put(liveEl, med
-        ? `Med Webleads som CSS: ${kr(P1)} kr. pr. klik i stedet for ${kr(P0)} kr. Med et budget på ${dot(r.b)} kr. om måneden giver det op til ${dot(r.k1)} klik i stedet for ${dot(r.k0)}, eller op til ${dot(r.s)} kr. sparet om måneden for de samme klik.`
-        : `Med Googles egen CSS: ${kr(P0)} kr. pr. klik. Med et budget på ${dot(r.b)} kr. om måneden giver det ${dot(r.k0)} klik. Med Webleads som CSS kunne det blive op til ${dot(r.k1)} klik, eller op til ${dot(r.s)} kr. sparet om måneden.`);
+        ? `Med Webleads Shopping: ${kr(P1)} kr. pr. klik i stedet for ${kr(P0)} kr. Med et budget på ${dot(r.b)} kr. om måneden giver det op til ${dot(r.k1)} klik i stedet for ${dot(r.k0)}, eller op til ${dot(r.s)} kr. sparet om måneden for de samme klik.`
+        : `Med Googles egen CSS: ${kr(P0)} kr. pr. klik. Med et budget på ${dot(r.b)} kr. om måneden giver det ${dot(r.k0)} klik. Med Webleads Shopping kunne det blive op til ${dot(r.k1)} klik, eller op til ${dot(r.s)} kr. sparet om måneden.`);
     }, 450);
   };
   const heard = () => liveEl.setAttribute('aria-live', 'polite');
 
-  /* ---------- Uden CSS / Med Webleads ---------- */
+  /* ---------- Googles egen / Webleads Shopping ---------- */
   const btns = $$('[data-gcss-mode]'), seg = $('[data-gcss-seg]'), sticker = $('[data-gcss-sticker]'), num = $('[data-gcss-num]');
   let med = true, landT = 0, bumpT = 0, flipT = 0;
   // chose: the visitor has touched the switch, so the automatic flip never happens; done: it has happened
@@ -103,7 +103,7 @@ function init(root) {
     btns.forEach(b => { const on = (b.dataset.gcssMode === 'med') === med; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
     roll(med, animate);
     clearTimeout(landT); clearTimeout(bumpT); clearTimeout(flipT);
-    // The label on the card gives a small ping as it lands on "Af Webleads"
+    // The label on the card gives a small ping as it lands on "Af Webleads Shopping"
     box.classList.remove('is-flip');
     if (med && animate) { void box.offsetWidth; box.classList.add('is-flip'); flipT = setTimeout(() => box.classList.remove('is-flip'), 1600); }
     sticker.classList.remove('is-land');

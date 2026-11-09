@@ -17,7 +17,7 @@ polished.
 | Page | Format | What the visitor sees |
 | --- | --- | --- |
 | google-shopping-ads | Live carousel and feed editor | The "Sponsoreret · Shopping" carousel you can drag, your card in it, and a product feed row that rewrites your card |
-| google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af Webleads" (Webleads is a CSS), the click price rolls down, a budget slider shows what it means |
+| google-css | Calculator | The same kind of Shopping card: "Af Google" becomes "Af Webleads Shopping" (our own CSS), the click price rolls down, a budget slider shows what it means |
 | lokal-seo | Annotated anatomy | A Google business profile in the middle, labels with thin leader lines pointing at its parts (it was the SEO page's until 5 Nov 2026, when SEO became the page for webshops) |
 | ugc | Media wall | A wall of our own UGC, tall videos and lower photos in columns, filter Alt / Video / Billeder; videos play muted on screen and a tap turns the sound on. Our own Higgsfield videos and photos from assets/media (Nuttet Baby, GoBlender and more; how to add one: the comment at the top of ugc.html). Everything on it must be made by us |
 | google-ads | Live search loop | A big search field that types local searches; the sponsored text ad on top rewrites itself to each query |
@@ -52,10 +52,10 @@ polished.
 ## Facts for Google mockups (checked 4 Nov 2026)
 
 - Every Shopping ad in Denmark ends with a small link line under shop, price, delivery and rating: »Af Google«
-  (or »Af <CSS-navn>« when another CSS placed it, for Webleads »Af Webleads«). Draw it on Shopping cards.
+  (or »Af <CSS-navn>« when another CSS placed it, for Webleads »Af Webleads Shopping«). Draw it on Shopping cards.
 - Never show free listings or a »populære produkter« block, and leave »Shopping« out of mock tab rows
   (use Alle, Billeder, Videoer, Nyheder): both changed in the EEA in September 2026.
-- Google CSS: the facts and the exact wording are in the scratchpad file ws/google-css/FAKTA.md.
+- Google CSS: the facts and the exact wording are in `google-css-fakta.md` next to this file.
 
 ## Files (one set per service, nothing else)
 
