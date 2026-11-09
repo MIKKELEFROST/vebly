@@ -148,7 +148,7 @@ for (const p of pages) {
     css: [...(own ? [`/assets/css/sections.css?v=${V.css}`] : []), ...sc.css],
     js: [...(own ? [`/assets/js/sections.js?v=${V.js}`] : []), ...sc.js]
   }, [
-    hero({ ...p, badge: `${esc(p.name)} · til`, cta: 'Få en fast pris', more: sc.html ? ['Se et eksempel', '#eksempel'] : ['Se hvad du får', '#pris'] }),
+    hero({ ...p, badge: `${esc(p.name)} · til`, cta: p.cta || 'Få en fast pris', more: sc.html ? ['Se et eksempel', '#eksempel'] : ['Se hvad du får', '#pris'] }),
     ...L.map(k => render[k](p, sc)),
     contact({ lead: p.contact, base: p.name, value: s.value, placeholder: p.placeholder })
   ].filter(Boolean)));

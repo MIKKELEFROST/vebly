@@ -188,7 +188,7 @@ const fallbackValue = form && form.dataset.value !== undefined ? (+form.dataset.
 const beregn = names => {
   const r = { once: 0, md: 0, kanaler: 0, fraOnce: false, fraMd: false, timepris: [] }, groups = [];
   names.forEach(n => {
-    const p = priser[n]; if (!p) return;
+    const p = priser[n]; if (!p || p.gratis) return;
     if (p.time) { if (hours()) r.md += p.time * hours(); else r.timepris.push([n, kr(p.time) + '/time']); return; }
     if (p.kanal) groups.push(p.kanal);
     r.once += p.once || 0; r.md += p.md || 0;
@@ -206,6 +206,7 @@ const priceLines = names => {
   const groups = [];
   return names.map(n => {
     const p = priser[n]; if (!p) return [n, 'Pris efter en snak'];
+    if (p.gratis) return [n, 'Gratis'];
     if (p.time) return hours() ? [`${n} · ${timerTxt(hours())}`, kr(p.time * hours()) + '/md.'] : [n, kr(p.time) + '/time'];
     if (p.kanal) { groups.push(p.kanal); const v = kanalPriser(groups).at(-1); return [n, v ? kr(v) + '/md.' : 'Uden ekstra pris']; }
     return [n, (p.fra ? 'fra ' : '') + [p.once ? kr(p.once) : '', p.md ? kr(p.md) + '/md.' : ''].filter(Boolean).join(' + ')];

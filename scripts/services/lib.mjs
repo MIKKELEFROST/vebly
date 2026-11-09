@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { SITE, services, pages, front, segments, groups, short } from './data.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const V = { css: '20261107d', js: '20261107d' };
+export const V = { css: '20261109a', js: '20261109a' };
 export const GENERATED = '<!-- Genereret af scripts/services/build.mjs (indhold i scripts/services/). Ret der, ikke her. -->';
 
 /* What the visitor sells: the tabs above the menu (data.mjs → segments, assets/js/segment.js) */
@@ -570,7 +570,8 @@ export function facts(p) {
 
 // The price's small print split into lines: "Pr. kanal · hver ekstra kanal … · ekskl. moms"
 const noteLines = a => a ? a.note.split(' · ').filter(x => !/moms/.test(x)).map(cap) : [];
-const priceCta = (where, cls = 'btn btn--dark') => `<a href="#kontakt" class="${cls}" data-magnet data-burst data-event="${where}: Få en fast pris">Få en fast pris →</a>`;
+// The button under a price: "Få en fast pris", or the page's own words (p.cta, fx "Kom i gang gratis" for Google CSS)
+const priceCta = (where, cls = 'btn btn--dark', label = 'Få en fast pris') => `<a href="#kontakt" class="${cls}" data-magnet data-burst data-event="${where}: ${esc(label)}">${esc(label)} →</a>`;
 
 // receipt: the price drawn as a receipt that prints when it comes into view. Every item is "inkl.",
 // the total rolls (data-odo in main.js). Without a price the total says "Fast pris efter en snak".
@@ -605,7 +606,7 @@ export function receipt(p) {
       </div>
       <div class="sx-rcpt__after" data-reveal="1">
         <p class="sx-rcpt__lead">${esc(p.priceLead)}</p>
-        ${priceCta('Pris')}
+        ${priceCta('Pris', undefined, p.cta)}
       </div>
     </section>`;
 }
@@ -636,7 +637,7 @@ export function band(p) {
           ${rest > 0 ? `<div class="sx-band__all" id="sx-band-all" data-band-all><div><ul>
             ${p.items.map(([t, d]) => `<li><span class="check" aria-hidden="true">✓</span><span><b>${esc(t)}</b>${esc(d)}</span></li>`).join('\n            ')}
           </ul></div></div>` : ''}
-          <div class="sx-band__cta">${priceCta('Pris')}</div>
+          <div class="sx-band__cta">${priceCta('Pris', undefined, p.cta)}</div>
         </div>
       </div>
     </section>`;

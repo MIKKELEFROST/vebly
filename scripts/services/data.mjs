@@ -24,7 +24,7 @@ export const services = [
   { slug: 'bing-ads', t: 'Bing Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer på Bing for dem, der ikke søger på Google.', ex: ['Søgeannoncer', 'Import fra Google', 'Shopping på Bing'] },
   { slug: 'reddit-ads', t: 'Reddit Ads', price: '8.000 kr./md.', value: 8000, d: 'Annoncer i de fællesskaber, dine kunder følger.', ex: ['Fællesskaber og emner', 'Kommentarer fulgt', 'Retargeting'] },
   { slug: 'google-shopping-ads', t: 'Google Shopping Ads', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter med billede og pris øverst på Google.', ex: ['Produktfeed og Merchant Center', 'Shopping og Performance Max', 'Google Ads med i prisen', 'Ekstra kanal: 5.000 kr./md.'] },
-  { slug: 'google-css', t: 'Google CSS', price: '49 kr./md.', value: 49, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Webleads som din CSS', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
+  { slug: 'google-css', t: 'Google CSS', price: 'Gratis', value: 0, d: 'Op til 20% billigere klik på dine Google Shopping-annoncer.', ex: ['Webleads som din CSS', 'Hele buddet tæller i auktionen', 'Shopping og Performance Max'] },
   { slug: 'markedspladser', t: 'Salg på markedspladser', price: '8.000 kr./md.', value: 8000, d: 'Dine produkter på fx Amazon, Zalando, eBay og CDON, i sync med din webshop.', ex: ['Opsætning og feed', 'Lager og priser i sync', 'Annoncer på markedspladsen'] },
   { slug: 'video', t: 'Video', price: 'Fast pris efter en snak', value: 0, d: 'Reklamevideoer, explainer-videoer og motion graphics, der fanger på sekunder.', ex: ['Reklamevideoer til sociale medier', 'Explainer-videoer', 'Motion graphics og logoanimation'] },
   { slug: 'ugc', t: 'UGC-indhold', price: 'Fast pris efter en snak', value: 0, d: 'Videoer og billeder, der ligner noget fra en kunde. Lavet af os.', ex: ['Lodrette videoer', 'Hooks i flere versioner', 'Ret til brug i annoncer'] },
@@ -52,6 +52,7 @@ const SERVICEFAG = ['servicevirksomheder', 'håndværkere', 'klinikker', 'frisø
 
 // h1: line one is `a` + the scrambled orange word `hot`; line two is the grey `dim` + the underlined `mark`.
 // price: { amount, pre, post, note } shows the rolling number; null shows "Fast pris efter en snak".
+// cta: the words on the main buttons (hero and price) when "Få en fast pris" does not fit, fx "Kom i gang gratis".
 // steps become the stacked cards or the timeline (glyph: one or two characters the display font has).
 //
 // layout: the sections after the hero, in order (the contact form always comes last). Every page has its
@@ -225,17 +226,19 @@ export const pages = [
     // Checked against Google's help pages and the market (4 Nov 2026). The 20% is the industry's estimate of the
     // margin Google's own CSS takes from the bid: Google does not publish it, so every "20%" needs the estimate
     // sentence on the same page. Never "rabat", "garanteret" or "Ingen binding" (no binding terms are set).
-    // Webleads is the CSS (Mikkel, 4 Nov 2026): 49 kr./md., and the ad label reads "Af Webleads".
+    // Webleads is the CSS (Mikkel, 4 Nov 2026), the ad label reads "Af Webleads". It is free (Mikkel, 9 Nov 2026), as on
+    // shopping.webleads.dk/webshops: we earn on the price comparison (affiliate links), not on the CSS.
     slug: 'google-css', name: 'Google CSS', short: 'Op til 20% billigere klik på Google Shopping',
-    description: 'Lad dine Google Shopping-annoncer gå gennem Webleads som CSS i stedet for Googles egen. Så tæller hele dit bud, og klikket kan blive op til 20% billigere. 49 kr. om måneden.',
+    description: 'Lad dine Google Shopping-annoncer gå gennem Webleads som CSS i stedet for Googles egen. Så tæller hele dit bud, og klikket kan blive op til 20% billigere. Det er gratis.',
     serviceType: 'CSS (Comparison Shopping Service) til Google Shopping',
     words: ['webshops', 'netbutikker', 'Shopify-butikker', 'butikker med varer'],
     h1: { a: ['Op', 'til'], hot: '20%', dim: 'billigere', mark: 'klik.' },
     lead: 'Lad dine Shopping-annoncer gå gennem Webleads som CSS i stedet for Googles egen. Så tæller hele dit bud i auktionen, og det samme klik kan blive op til 20% billigere. Vi klarer skiftet.',
-    floats: ['Af Webleads', 'Hele buddet tæller', '49 kr./md.'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
-    price: { amount: '49', pre: '', post: 'kr./md.', note: 'Ekskl. moms · annoncebudgettet betaler du som i dag direkte til Google' },
-    priceH2: ['49 kr. om måneden.', 'Hele buddet tæller.'],
-    priceLead: 'Du betaler 49 kr. om måneden for at have Webleads som CSS. Vi klarer skiftet, og dit annoncebudget betaler du som i dag direkte til Google.',
+    floats: ['Af Webleads', 'Hele buddet tæller', 'Gratis ↗'], ring: 'GOOGLE CSS • SHOPPING • KLIKPRIS • BUD •',
+    price: { amount: 'Gratis', pre: '', post: '', note: 'Intet abonnement · intet gebyr pr. klik · annoncebudgettet betaler du som i dag direkte til Google' },
+    priceH2: ['Det er gratis.', 'Hele buddet tæller.'],
+    cta: 'Kom i gang gratis',
+    priceLead: 'Det koster ikke noget at have Webleads som CSS: intet abonnement og intet gebyr pr. klik. Vi klarer skiftet, og dit annoncebudget betaler du som i dag direkte til Google.',
     items: [
       ['Tjek af din konto', 'Vi ser på din Merchant Center, dine kampagner og de lande, du sælger til.'],
       ['Lande og placeringer', 'Vi tjekker, at alle de lande, du sælger til, er med, og hvor dine annoncer bliver vist.'],
@@ -257,7 +260,10 @@ export const pages = [
       ['Skal jeg lave mine kampagner om?', 'Som regel ikke. Vi kobler den Merchant Center-konto, du har i dag, på Webleads som CSS, så din Google Ads-konto, dine kampagner og dit feed er de samme. Kræver det en ny konto, siger vi det, før vi går i gang.'],
       ['Hvilke annoncer gælder det?', 'Dine Shopping-annoncer, også produkterne i Performance Max. Almindelige tekstannoncer påvirkes ikke. Hvor produkterne ellers kan blive vist, fx på YouTube, gennemgår vi med dig før skiftet.'],
       ['Gælder det i alle lande?', 'Det gælder i Danmark og en række andre lande i Europa, fx Sverige, Norge og Tyskland. Uden for de lande giver det ingen fordel. Sælger du til flere lande, tjekker vi, at de alle er med.'],
-      ['Hvad koster det?', '49 kr. om måneden, ekskl. moms. Dit annoncebudget betaler du som i dag direkte til Google.'],
+      ['Hvad koster det?', 'Ingenting. Der er intet abonnement og intet gebyr pr. klik. Dit annoncebudget betaler du som i dag direkte til Google.'],
+      ['Hvorfor er det gratis?', 'Vi tjener penge på prissammenligningen på Webleads Shopping, hvor nogle af linkene er affiliatelinks, og ikke på CSS-tjenesten. Jo flere butikker der er med, jo bedre bliver sammenligningen.', ['https://shopping.webleads.dk', 'Se Webleads Shopping']],
+      ['Kommer mine produkter med i prissammenligningen?', 'Ja. Bruger du Webleads som CSS, kommer dine produkter med på Webleads Shopping, med link direkte til dine produktsider. Placeringen kan ikke købes, så rækkefølgen er den samme for alle butikker.'],
+      ['Kan jeg skifte tilbage?', 'Ja. Du kan til enhver tid vælge en anden CSS eller gå tilbage til Googles egen.'],
       ['Skal jeg skifte bureau for at bruge Webleads som CSS?', 'Nej. Det er din Merchant Center-konto, der bliver koblet på Webleads som CSS. Dine kampagner kan blive styret, som de bliver i dag.']
     ],
     contact: 'Fortæl os om din webshop, så ser vi, om det kan betale sig, og svarer inden for 24 timer.',
