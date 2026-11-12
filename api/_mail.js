@@ -66,21 +66,23 @@ export const firstName = navn => {
 
 // A short receipt in Webleads' style: greeting, paragraphs, one button, signature.
 // Only our own text goes in: the visitor's message is never repeated back.
-export function receipt({ navn, paras, button }) {
-  const hej = firstName(navn) ? `Hej ${firstName(navn)}` : 'Hej';
-  const text = [hej, ...paras, button ? `${button.label}: ${button.href}` : '', 'Venlig hilsen\nWebleads', 'hej@webleads.dk · 41 82 67 99 · webleads.dk']
+// `words` translates the fixed parts for a receipt in another language (api/css.js); Danish by default.
+export function receipt({ navn, paras, button }, words = {}) {
+  const { lang = 'da', hello = 'Hej', regards = 'Venlig hilsen', phone = '41 82 67 99' } = words;
+  const hej = firstName(navn) ? `${hello} ${firstName(navn)}` : hello;
+  const text = [hej, ...paras, button ? `${button.label}: ${button.href}` : '', `${regards}\nWebleads`, `hej@webleads.dk · ${phone} · webleads.dk`]
     .filter(Boolean).join('\n\n');
   const p = s => `<p style="margin:0 0 16px;font-size:16px;line-height:1.55;color:#111">${esc(s)}</p>`;
-  const html = `<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+  const html = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#fbfaf8">
 <div style="max-width:520px;margin:0 auto;padding:36px 24px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111">
 <p style="margin:0 0 28px;font-size:22px;font-weight:800;letter-spacing:-0.5px">webleads<span style="color:#e0552b">.</span></p>
 ${p(hej)}
 ${paras.map(p).join('\n')}
 ${button ? `<p style="margin:24px 0 28px"><a href="${esc(button.href)}" style="display:inline-block;background:#e0552b;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:14px 24px;border-radius:999px">${esc(button.label)} →</a></p>` : ''}
-<p style="margin:0 0 28px;font-size:16px;line-height:1.55;color:#111">Venlig hilsen<br>Webleads</p>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.55;color:#111">${regards}<br>Webleads</p>
 <p style="margin:0;padding-top:18px;border-top:1px solid #ecebe7;font-size:13px;line-height:1.6;color:#6b6760">
-<a href="mailto:hej@webleads.dk" style="color:#6b6760">hej@webleads.dk</a> · <a href="sms:+4541826799" style="color:#6b6760">41 82 67 99</a> · <a href="${SITE}" style="color:#6b6760">webleads.dk</a><br>Webleads (Frost Digital ApS) · CVR 45737632</p>
+<a href="mailto:hej@webleads.dk" style="color:#6b6760">hej@webleads.dk</a> · <a href="sms:+4541826799" style="color:#6b6760">${phone}</a> · <a href="${SITE}" style="color:#6b6760">webleads.dk</a><br>Webleads (Frost Digital ApS) · CVR 45737632</p>
 </div>
 </body></html>`;
   return { html, text };
