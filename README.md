@@ -27,6 +27,7 @@ assets/js/main.js     Rendering, pop-ups, contact form and all effects, on every
 assets/partnere/      Customer logos for the front page band and the results wall (taken from each customer's site)
 demo/                 The "Nordvik" sample site that builds itself in "Sådan virker det" (window.__build, window.__set)
 api/contact.js        Vercel function that emails contact-form submissions via Resend
+api/css.js            Vercel function for the sign-up form on shopping.webleads.dk (CSS sign-ups; CORS for that site only)
 api/collect.js        Vercel function that forwards analytics events to GA4
 api/meta.js           Vercel function that passes Meta events on with the Conversions API
 api/bestil.js         Vercel function for "Bestil en hjemmeside" (e-mails the order, returns the draft link)
