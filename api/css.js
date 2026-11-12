@@ -73,6 +73,7 @@ export default async function handler(req, res) {
 
   const s = (v, n) => String(v ?? '').trim().slice(0, n);
   const navn = s(body.navn, 200);
+  const butik = s(body.butik, 200); // the shop's name (the form on /webshops/ asks for it instead of a person)
   const email = s(body.email, 200);
   const webshop = s(body.webshop, 200);
   const telefon = s(body.telefon, 40);
@@ -81,7 +82,7 @@ export default async function handler(req, res) {
   const lande = (Array.isArray(body.lande) ? body.lande : [body.lande]).map(x => s(x, 2).toUpperCase()).filter(x => LANDE[x]);
   const lang = R[body.lang] ? body.lang : 'da';
 
-  if (!navn || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !/^(https?:\/\/)?[^\s/.]+(\.[^\s/.]+)+(\/\S*)?$/i.test(webshop)) {
+  if (!(navn || butik) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !/^(https?:\/\/)?[^\s/.]+(\.[^\s/.]+)+(\/\S*)?$/i.test(webshop)) {
     return res.status(400).json({ error: 'Navn, e-mail og webshop er påkrævet.' });
   }
   if (merchant && !/^\d{5,15}$/.test(merchant)) {
@@ -89,14 +90,14 @@ export default async function handler(req, res) {
   }
 
   const rows = [
-    ['Navn', navn], ['E-mail', email], ['Telefon', telefon || '–'], ['Webshop', webshop],
+    ...(butik ? [['Butik', butik]] : []), ['Navn', navn || '–'], ['E-mail', email], ['Telefon', telefon || '–'], ['Webshop', webshop],
     ['Merchant Center-ID', merchant || '–'], ['Lande', lande.map(x => LANDE[x]).join(', ') || '–'],
-    ['Side', SHOPPING + R[lang].path]
+    ['Side', SHOPPING + (s(body.side, 40).match(/^\/[a-z/]*$/) ? s(body.side, 40) : R[lang].path)]
   ];
   const ok = await sendMail({
     to: [TO],
     reply_to: email,
-    subject: `CSS-tilmelding: ${webshop} (${navn})`,
+    subject: `CSS-tilmelding: ${webshop} (${navn || butik})`,
     text: rows.map(([k, v]) => `${k}: ${v}`).join('\n') + (besked ? `\n\n${besked}` : ''),
     html: `<p>${rows.map(([k, v]) => `<b>${k}:</b> ${esc(v)}`).join('<br>')}</p>` + (besked ? `<p style="white-space:pre-wrap">${esc(besked)}</p>` : '')
   }, { toUs: true, tag: 'css' });
